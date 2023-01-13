@@ -23,7 +23,7 @@ jobs:
         PORT: ${{ secrets.PORT }}
         KEY: ${{ secrets.SSHKEY }}
       with:
-        source: "/client/main/**"
+        source: "client/main/**"
         target: ${{ secrets.SOURCEDIR }}/client/main-src
         strip_components: 1
         rm: true
