@@ -32,7 +32,7 @@ jobs:
         PORT: ${{ secrets.PORT }}
         KEY: ${{ secrets.SSHKEY }}
       with:
-        source: "api/*"
+        source: "api/**"
         target: ${{ secrets.SOURCEDIR }}/api-src
 
     - name: Build, Target Cleanup, Copy
