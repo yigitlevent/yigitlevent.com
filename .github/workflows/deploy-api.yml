@@ -14,17 +14,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
 
-    - name: Source Cleanup
-      uses: appleboy/ssh-action@master
-      with:
-        HOST: ${{ secrets.HOST }}
-        USERNAME: ${{ secrets.USERNAME }}
-        PORT: ${{ secrets.PORT }}
-        KEY: ${{ secrets.SSHKEY }}
-        script: |
-          rm -rf ${{ secrets.SOURCEDIR }}/api-src
-
-    - name: Copy
+    - name: Clean, Copy
       uses: appleboy/scp-action@master
       env:
         HOST: ${{ secrets.HOST }}
@@ -34,8 +24,10 @@ jobs:
       with:
         source: "api/**"
         target: ${{ secrets.SOURCEDIR }}/api-src
+        strip_components: 1
+        rm: true
 
-    - name: Build, Target Cleanup, Copy
+    - name: Build, Clean, Copy
       uses: appleboy/ssh-action@master
       with:
         HOST: ${{ secrets.HOST }}
