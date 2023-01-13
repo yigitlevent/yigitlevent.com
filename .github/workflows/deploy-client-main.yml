@@ -25,7 +25,7 @@ jobs:
       with:
         source: "client/main/**"
         target: ${{ secrets.SOURCEDIR }}/client/main-src
-        strip_components: 1
+        strip_components: 2
         rm: true
 
     - name: Build, Target Cleanup, Copy
