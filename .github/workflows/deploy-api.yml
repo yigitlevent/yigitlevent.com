@@ -5,6 +5,7 @@ on:
     branches:
       - main
     paths:
+      - ".github/workflows/deploy-api.yml"
       - "api/**"
 
 jobs:
@@ -41,5 +42,5 @@ jobs:
           nvm use 19.4.0
           npm i
           npm run build
-          rm -rf ${{ secrets.TARGETDIR }}/client/main
-          sudo cp -R ${{ secrets.SOURCEDIR }}/api-src/dist ${{ secrets.TARGETDIR }}/client/bwgrtools
+          rm -rf ${{ secrets.TARGETDIR }}/api
+          sudo cp -R ${{ secrets.SOURCEDIR }}/api-src/dist ${{ secrets.TARGETDIR }}/api
