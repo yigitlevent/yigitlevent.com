@@ -1,34 +1,41 @@
 import express from "express";
 import session from "express-session";
-import dotenv from "dotenv";
+import cors from "cors";
+import Pg from "pg";
+import pgsimple from "connect-pg-simple";
 
-import { PgClient } from "./connections/postgres";
-import { UserAuth, UserSignup, UserSignin, UserSignout, UserEnable, UserDisable, UserDelete } from "./routes/user";
+import { PORT } from "./constants.js";
+import { CorsConfig, PgConfig, SessionConfig } from "./configs.js";
+import { UserFetch, UserSignUp, UserSignIn, UserSignOut } from "./routes/user.js";
 
+export const App = express();
 
-dotenv.config();
-const SECRET = process.env.SECRET as string;
-const PORT = process.env.PORT as string;
+const Printthings = (aa: any) => {
+	console.log("and the winner is");
+	console.log(aa);
+};
 
-const App = express();
+Printthings(PgConfig);
+
+export const PgPool = new Pg.Pool(PgConfig);
+
+const Aa = await PgPool.query(
+	`select * 
+	from dbo."Users"`
+);
+Printthings(Aa.rows);
+
+const SessionStore = new (pgsimple(session))({ pool: PgPool, schemaName: "dbo", tableName: "UserSessions" });
+
 App.use(express.json());
 App.use(express.urlencoded({ extended: true }));
-App.use(session({ secret: SECRET, resave: true, saveUninitialized: true }));
+App.use(cors(CorsConfig));
+App.use(session({ store: SessionStore, ...SessionConfig }));
 
-PgClient.connect();
+App.post("/user", UserFetch);
+App.post("/user/signup", UserSignUp);
+App.post("/user/signin", UserSignIn);
+App.post("/user/signout", UserSignOut);
 
-// POST
-// GET 
-// DELETE 
-// PUT 
+App.listen(PORT, () => console.log(`App started on port ${PORT}`));
 
-App.get("/user", UserAuth);
-App.post("/user/auth", UserAuth);
-App.post("/user/signup", UserSignup);
-App.post("/user/signin", UserSignin);
-App.post("/user/signout", UserSignout);
-App.post("/user/enable", UserEnable);
-App.post("/user/disable", UserDisable);
-App.delete("/user/delete", UserDelete);
-
-App.listen(PORT, () => console.log(`API listening on port ${PORT}`));
