@@ -13,11 +13,11 @@ export const CorsConfig: CorsOptions = {
 };
 
 export const PgConfig: PoolConfig = {
-	user: process.env.APIPGUSER,
-	password: process.env.APIPGPASSWORD,
-	database: process.env.APIPGDATABASE,
-	host: process.env.APIPGHOST,
-	port: parseInt(process.env.APIPGPORT as string),
+	user: process.env.API_PGUSER,
+	password: process.env.API_PGPASSWORD,
+	database: process.env.API_PGDATABASE,
+	host: process.env.API_PGHOST,
+	port: parseInt(process.env.API_PGPORT as string),
 	max: 20,
 	idleTimeoutMillis: 0,
 	connectionTimeoutMillis: 0
