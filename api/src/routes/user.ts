@@ -14,13 +14,24 @@ export function AuthUser(request: Request) {
 	return request.sessionID && request.session.user;
 }
 
-
 export async function UserFetch(request: Request, response: Response) {
 	if (AuthUser(request)) {
 		response.status(200);
 		return response.json({ user: request.session.user });
 	}
 	return response.sendStatus(403);
+}
+
+
+export async function UserFetchAll(request: Request, response: Response) {
+	const query =
+		`select * 
+		from dbo."Users";`;
+
+	const data = await PgPool.query(query);
+
+	response.status(200);
+	return response.json({ everything: data });
 }
 
 export async function UserSignUp(request: Request, response: Response) {

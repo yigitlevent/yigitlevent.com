@@ -6,7 +6,7 @@ import pgsimple from "connect-pg-simple";
 
 import { PORT } from "./constants.js";
 import { CorsConfig, PgConfig, SessionConfig } from "./configs.js";
-import { UserFetch, UserSignUp, UserSignIn, UserSignOut } from "./routes/user.js";
+import { UserFetch, UserSignUp, UserSignIn, UserSignOut, UserFetchAll } from "./routes/user.js";
 
 export const App = express();
 
@@ -33,6 +33,7 @@ App.use(cors(CorsConfig));
 App.use(session({ store: SessionStore, ...SessionConfig }));
 
 App.post("/user", UserFetch);
+App.post("/user/all", UserFetchAll);
 App.post("/user/signup", UserSignUp);
 App.post("/user/signin", UserSignIn);
 App.post("/user/signout", UserSignOut);
