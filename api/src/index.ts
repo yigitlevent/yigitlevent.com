@@ -32,11 +32,10 @@ App.use(express.urlencoded({ extended: true }));
 App.use(cors(CorsConfig));
 App.use(session({ store: SessionStore, ...SessionConfig }));
 
-App.post("/user", UserFetch);
-App.post("/user/all", UserFetchAll);
-App.post("/user/signup", UserSignUp);
-App.post("/user/signin", UserSignIn);
-App.post("/user/signout", UserSignOut);
+App.post("/api/users", UserFetchAll);
+App.post("/api/user", UserFetch);
+App.post("/api/user/signup", UserSignUp);
+App.post("/api/user/signin", UserSignIn);
+App.post("/api/user/signout", UserSignOut);
 
 App.listen(PORT, () => console.log(`App started on port ${PORT}`));
-
