@@ -14,10 +14,10 @@
 		"url": "https://github.com/yigitlevent/yigitlevent-api/issues"
 	},
 	"scripts": {
-		"build": "tsc",
+		"build": "npx tsc",
 		"start": "node dist/index.js",
-		"bstart": "tsc && node dist/index.js",
-		"dev": "concurrently \"tsc --watch\" \"nodemon -q dist/index.js\""
+		"bstart": "npx tsc && node dist/index.js",
+		"dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/index.js\""
 	},
 	"dependencies": {
 		"bcrypt": "^5.1.0",
