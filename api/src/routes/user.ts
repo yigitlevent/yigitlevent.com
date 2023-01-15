@@ -30,7 +30,7 @@ export async function UserFetchAll(request: Request, response: Response) {
 	const data = await PgPool.query(query);
 
 	response.status(200);
-	return response.json({ alltheusers: data });
+	return response.json({ bloop: data });
 }
 
 export async function UserSignUp(request: Request, response: Response) {
