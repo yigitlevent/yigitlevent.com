@@ -44,3 +44,4 @@ jobs:
           npm run build
           sudo rm -rf ${{ secrets.TARGETDIR }}/api
           sudo cp -R ${{ secrets.SOURCEDIR }}/api-src ${{ secrets.TARGETDIR }}/api
+          pm2 restart api
