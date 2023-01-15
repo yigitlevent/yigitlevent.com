@@ -1,8 +1,8 @@
 import { createTheme } from "@mui/material/styles";
 import { blue, green, grey, lightBlue, orange, purple, red } from "@mui/material/colors";
 
-import text from "/src/assets/fonts/AlegreyaSans-Regular.woff"; 
-import code from "/src/assets/fonts/PTMono-Regular.woff"; 
+import text from "/src/assets/fonts/AlegreyaSans-Regular.woff";
+import code from "/src/assets/fonts/PTMono-Regular.woff";
 
 
 const White = "#ffffff";
@@ -96,59 +96,19 @@ export const THEME = createTheme({
 	typography: {
 		htmlFontSize: 16,
 		fontFamily: "text",
-		fontSize: 14,
+		fontSize: 15,
 		fontWeightLight: 300,
 		fontWeightRegular: 400,
 		fontWeightMedium: 500,
 		fontWeightBold: 700,
-		h1: {
-			fontFamily: "title"
-		},
-		h2: {
-			fontFamily: "title"
-		},
-		h3: {
-			fontFamily: "title"
-		},
-		h4: {
-			fontFamily: "title"
-		},
-		h5: {
-			fontFamily: "title"
-		},
-		h6: {
-			fontFamily: "title"
-		},
 		subtitle1: {
 			fontFamily: "code"
 		},
-		subtitle2: {
-			fontFamily: "code",
-			textIndent: "8px",
-			textAlign: "justify",
-			lineHeight: "20px",
-			textJustify: "inter-word",
-			marginTop: "3px",
-			fontSize: "18px"
-		},
 		body1: {
-			fontFamily: "text"
+			fontSizeAdjust: "200%"
 		},
 		body2: {
-			fontFamily: "text",
-			textIndent: "8px",
-			textAlign: "justify",
-			textJustify: "inter-word",
-			marginTop: "3px"
-		},
-		button: {
-			fontFamily: "text"
-		},
-		caption: {
-			fontFamily: "text"
-		},
-		overline: {
-			fontFamily: "text"
+			marginTop: "8px"
 		}
 	}
 });
