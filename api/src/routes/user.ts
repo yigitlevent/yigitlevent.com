@@ -22,7 +22,6 @@ export async function UserFetch(request: Request, response: Response) {
 	return response.sendStatus(403);
 }
 
-
 export async function UserFetchAll(request: Request, response: Response) {
 	const query =
 		`select * 
