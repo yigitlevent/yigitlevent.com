@@ -1,0 +1,14 @@
+!.vscode/extensions.json
+.DS_Store
+.env
+.idea
+.vscode
+*.local
+*.njsproj
+*.ntvs*
+*.sln
+*.suo
+*.sw?
+dist
+dist-ssr
+node_modules
