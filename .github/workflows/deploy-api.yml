@@ -42,5 +42,4 @@ jobs:
           nvm use 19.4.0
           npm i
           npm run build
-          sudo rm -rf ${{ secrets.TARGETDIR }}/api
           sudo cp -R ${{ secrets.SOURCEDIR }}/api-src ${{ secrets.TARGETDIR }}/api
