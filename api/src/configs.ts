@@ -27,10 +27,12 @@ export const SessionConfig: SessionOptions = {
 	secret: SECRET,
 	saveUninitialized: false,
 	resave: false,
+	proxy: process.env.API_ENV === "production",
+	//rolling: true,
 	cookie: {
-		secure: process.env.API_ENV === "development" ? false : true,
+		secure: process.env.API_ENV === "production",
 		httpOnly: true,
-		sameSite: true,
+		sameSite: "strict",
 		maxAge: 1000 * 60 * 60 * 24
 	}
 };

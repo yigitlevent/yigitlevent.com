@@ -24,4 +24,41 @@ App.post("/user/signup", UserSignUp);
 App.post("/user/signin", UserSignIn);
 App.post("/user/signout", UserSignOut);
 
+/*
+GET /campaigns get basic details of campaigns that you are created or a part of
+GET /campaign -- get all details of a campaign
+GET /campaign/players -- get basic details of all players for a given campaign
+GET /campaign/player -- get all details of a player for a given campaign
+
+POST /campaign/invite 
+	-- invite a player to your campaign
+	-- can't invite a player that is already invited 
+	-- can't invite a player that is already in the campaign
+
+POST /campaign/kick 
+	-- remove a player from your campaign
+
+POST /player/invite/accept 
+	-- accept a campaign invitation
+	-- delete campaign invitation
+	-- add campaignplayers entry
+
+POST /player/invite/reject 
+	-- reject a campaign invitation
+	-- delete campaign invitation
+
+POST /player/leave 
+	-- leave a campaign that you are already in
+	-- delete campaignplayers entry
+
+POST /campaign -- create a campaign
+POST /campaign/journal -- create a campaign journal entry
+
+PUT /campaign -- edit a campaign
+PUT /campaign/journal -- edit a campaign journal entry
+
+DELETE /campaign -- delete a campaign
+DELETE /campaign/journal -- delete a campaign journal entry
+*/
+
 App.listen(PORT, () => console.log(`App started on port ${PORT}`));
