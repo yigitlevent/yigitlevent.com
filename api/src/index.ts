@@ -6,24 +6,11 @@ import pgsimple from "connect-pg-simple";
 
 import { PORT } from "./constants.js";
 import { CorsConfig, PgConfig, SessionConfig } from "./configs.js";
-import { UserFetch, UserSignUp, UserSignIn, UserSignOut, UserFetchAll } from "./routes/user.js";
+import { UserAuth, UserSignUp, UserSignIn, UserSignOut } from "./routes/user.js";
+
 
 export const App = express();
-
-const Printthings = (aa: any) => {
-	console.log("and the winner is");
-	console.log(aa);
-};
-
-Printthings(PgConfig);
-
 export const PgPool = new Pg.Pool(PgConfig);
-
-const Aa = await PgPool.query(
-	`select * 
-	from dbo."Users"`
-);
-Printthings(Aa.rows);
 
 const SessionStore = new (pgsimple(session))({ pool: PgPool, schemaName: "dbo", tableName: "UserSessions" });
 
@@ -32,8 +19,7 @@ App.use(express.urlencoded({ extended: true }));
 App.use(cors(CorsConfig));
 App.use(session({ store: SessionStore, ...SessionConfig }));
 
-App.post("/users", UserFetchAll);
-App.post("/user", UserFetch);
+App.post("/user/auth", UserAuth);
 App.post("/user/signup", UserSignUp);
 App.post("/user/signin", UserSignIn);
 App.post("/user/signout", UserSignOut);

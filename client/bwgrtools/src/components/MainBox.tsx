@@ -1,5 +1,6 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 
+import useMediaQuery from "@mui/material/useMediaQuery";
 import Container from "@mui/material/Container";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
@@ -17,12 +18,15 @@ import { FightPlanner } from "./FightPlanner/FightPlanner";
 import { ResourcesList } from "./ResourcesList/ResourcesList";
 import { CharacterBurner } from "./CharacterBurner/CharacterBurner";
 import { Drawers } from "./Menu/Drawers";
+import { THEME } from "../theme/theme";
 
 
 export function MainBox() {
+	const breakpoint = useMediaQuery(THEME.breakpoints.down("md"));
+
 	return (
 		<Container maxWidth="lg" sx={{ margin: "10px auto" }}>
-			<Box sx={{ margin: "0 0 16px 0" }}>
+			<Box sx={{ margin: breakpoint ? "64px 0 16px 0" : "0 0 16px 0" }}>
 				<Typography variant="h1">BWGR Tools</Typography>
 			</Box>
 

@@ -6,7 +6,7 @@ import { SECRET } from "./constants.js";
 
 
 export const CorsConfig: CorsOptions = {
-	origin: "*",//"http://yigitlevent.com",
+	origin: process.env.API_ENV === "development" ? "*" : ["https://yigitlevent.com", /\.yigitlevent\.com$/],
 	methods: ["POST", "GET", "PUT", "DELETE", "OPTIONS", "HEAD"],
 	credentials: true
 	//allowedHeaders: ["Content-Type", "Authorization"]
@@ -28,9 +28,9 @@ export const SessionConfig: SessionOptions = {
 	saveUninitialized: false,
 	resave: false,
 	cookie: {
-		secure: false,
+		secure: process.env.API_ENV === "development" ? false : true,
 		httpOnly: true,
-		sameSite: false,
+		sameSite: true,
 		maxAge: 1000 * 60 * 60 * 24
 	}
 };

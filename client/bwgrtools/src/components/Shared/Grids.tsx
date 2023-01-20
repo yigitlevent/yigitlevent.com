@@ -16,8 +16,8 @@ export function GenericGrid({ children, columns, center, spacing, sx, hasBackgro
 	if (center === true) centered = { justifyContent: "space-between", alignItems: "center" };
 	else if (center === "h") centered = { justifyContent: "space-between" };
 	else if (center === "v") centered = { alignItems: "center" };
-	else if (center === "c") centered = { justifyContent: "center", alignItems: "center", flexFlow: "row" };
-	else if (center === "l") centered = { justifyContent: "start", alignItems: "center", flexFlow: "row" };
+	else if (center === "c") centered = { justifyContent: "center", alignItems: "center", flexflow: "row" };
+	else if (center === "l") centered = { justifyContent: "start", alignItems: "center", flexflow: "row" };
 
 	const bg: { [key: string]: string | number; } = {};
 	if (hasBackground) {
