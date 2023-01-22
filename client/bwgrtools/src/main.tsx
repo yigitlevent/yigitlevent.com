@@ -1,6 +1,6 @@
 import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
-import { HashRouter } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material/styles";
@@ -15,9 +15,9 @@ ReactDOM
 		<StrictMode>
 			<ThemeProvider theme={THEME}>
 				<CssBaseline />
-				<HashRouter>
+				<BrowserRouter>
 					<App />
-				</HashRouter>
+				</BrowserRouter>
 			</ThemeProvider >
 		</StrictMode>
 	);
