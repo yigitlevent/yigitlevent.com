@@ -1,5 +1,4 @@
 import { Fragment } from "react";
-import { useNavigate } from "react-router-dom";
 
 import Paper from "@mui/material/Paper";
 import IconButton from "@mui/material/IconButton";
@@ -29,7 +28,6 @@ function DrawerIconButton({ title, icon, onClick }: { title: string; icon: JSX.E
 }
 
 export function MenuButtons({ openSignin, openSignup }: { openSignin: () => void; openSignup: () => void; }) {
-	const navigate = useNavigate();
 	const { user, signout } = useUserStore();
 	const { openDrawer } = useDrawerStore();
 
@@ -47,7 +45,7 @@ export function MenuButtons({ openSignin, openSignup }: { openSignin: () => void
 			</Grid>
 
 			{user
-				? <DrawerIconButton title={"Sign out"} icon={<LogoutOutlinedIcon color="primary" />} onClick={() => signout(navigate)} />
+				? <DrawerIconButton title={"Sign out"} icon={<LogoutOutlinedIcon color="primary" />} onClick={signout} />
 				: <Fragment>
 					<DrawerIconButton title={"Sign in"} icon={<LoginOutlinedIcon color="primary" />} onClick={openSignin} />
 					<DrawerIconButton title={"Sign up"} icon={<OpenInBrowserOutlinedIcon color="primary" />} onClick={openSignup} />

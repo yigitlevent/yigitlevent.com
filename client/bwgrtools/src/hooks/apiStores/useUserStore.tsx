@@ -1,7 +1,7 @@
-import { NavigateFunction } from "react-router-dom";
 import produce from "immer";
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
+
 import { GenericPost } from "../stores/_genericRequests";
 
 
@@ -10,10 +10,10 @@ interface UserState {
 	fetching: boolean;
 	setUser: (user: User | undefined) => void;
 	toggleFetching: () => void;
-	auth: (navigate: NavigateFunction) => void;
+	auth: () => void;
 	signup: (formData: SignupForm, handleClose: (open: boolean) => void) => void;
-	signin: (formData: SigninForm, navigate: NavigateFunction, handleClose: (open: boolean) => void) => void;
-	signout: (navigate: NavigateFunction) => void;
+	signin: (formData: SigninForm, handleClose: (open: boolean) => void) => void;
+	signout: () => void;
 }
 
 
@@ -31,7 +31,7 @@ export const useUserStore = create<UserState>()(
 				set(produce<UserState>((state) => { state.fetching = !state.fetching; }));
 			},
 
-			auth: (navigate: NavigateFunction) => {
+			auth: () => {
 				const setUser = get().setUser;
 				const toggleFetching = get().toggleFetching;
 
@@ -45,7 +45,6 @@ export const useUserStore = create<UserState>()(
 					.catch(reason => {
 						setUser(undefined);
 						console.error(reason);
-						navigate("/");
 					})
 					.finally(() => toggleFetching());
 			},
@@ -70,7 +69,7 @@ export const useUserStore = create<UserState>()(
 					.finally(() => toggleFetching());
 			},
 
-			signin: (formData: SigninForm, navigate: NavigateFunction, handleClose: (open: boolean) => void) => {
+			signin: (formData: SigninForm, handleClose: (open: boolean) => void) => {
 				const setUser = get().setUser;
 				const toggleFetching = get().toggleFetching;
 
@@ -86,12 +85,11 @@ export const useUserStore = create<UserState>()(
 					})
 					.catch(reason => {
 						console.error(reason);
-						navigate("/");
 					})
 					.finally(() => toggleFetching());
 			},
 
-			signout: (navigate: NavigateFunction) => {
+			signout: () => {
 				const setUser = get().setUser;
 				const toggleFetching = get().toggleFetching;
 
@@ -104,7 +102,6 @@ export const useUserStore = create<UserState>()(
 					})
 					.catch(reason => {
 						console.error(reason);
-						navigate("/");
 					})
 					.finally(() => toggleFetching());
 			}

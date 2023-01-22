@@ -1,5 +1,4 @@
 import { useCallback, useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
@@ -24,7 +23,6 @@ import { GenericGrid } from "../../Shared/Grids";
 
 
 export function Signin({ open, handleClose }: { open: boolean; handleClose: (open: boolean) => void; }) {
-	const navigate = useNavigate();
 	const { fetching, signin } = useUserStore();
 
 	const [email, setEmail] = useState("");
@@ -56,7 +54,7 @@ export function Signin({ open, handleClose }: { open: boolean; handleClose: (ope
 		if (password.length === 0) setPasswordError("Please enter your password.");
 		else setPasswordError(undefined);
 
-		if (isFilled && !hasErrors) signin({ email, password }, navigate, handleClose);
+		if (isFilled && !hasErrors) signin({ email, password }, handleClose);
 	};
 
 	return (
