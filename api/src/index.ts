@@ -6,7 +6,8 @@ import pgsimple from "connect-pg-simple";
 
 import { PORT } from "./constants.js";
 import { CorsConfig, PgConfig, SessionConfig } from "./configs.js";
-import { UserAuth, UserSignUp, UserSignIn, UserSignOut } from "./routes/user.js";
+import { UserAuth, UserSignUp, UserSignIn, UserSignOut, CheckAuth } from "./routes/user.js";
+import { CampaignInvite, CreateCampaign, DeleteCampaign, EditCampaign, GetCampaign, GetCampaigns } from "./routes/campaign.js";
 
 
 export const App = express();
@@ -19,10 +20,18 @@ App.use(express.urlencoded({ extended: true }));
 App.use(cors(CorsConfig));
 App.use(session({ store: SessionStore, ...SessionConfig }));
 
-App.post("/user/auth", UserAuth);
+App.post("/user/auth", CheckAuth, UserAuth);
 App.post("/user/signup", UserSignUp);
 App.post("/user/signin", UserSignIn);
 App.post("/user/signout", UserSignOut);
+
+App.get("/campaigns", CheckAuth, GetCampaigns);
+App.get("/campaign", CheckAuth, GetCampaign)
+	.post("/campaign", CheckAuth, CreateCampaign)
+	.put("/campaign", CheckAuth, EditCampaign)
+	.delete("/campaign", CheckAuth, DeleteCampaign);
+App.post("/campaign/invite", CheckAuth, CampaignInvite);
+
 
 /*
 GET /campaigns get basic details of campaigns that you are created or a part of

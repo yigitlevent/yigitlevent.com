@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { DataDebug } from "./utils/dataDebug";
 
 import { MainBox } from "./components/MainBox";
-import { useUserStore } from "./hooks/stores/useUserStore";
+import { useUserStore } from "./hooks/apiStores/useUserStore";
 
 
 let TriedAuth = false;

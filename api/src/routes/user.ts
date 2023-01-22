@@ -1,14 +1,8 @@
-import { Request, Response } from "express";
+import { Request, Response, NextFunction } from "express";
 import bcrypt from "bcrypt";
 
 import { PgPool } from "../index.js";
 
-
-declare module "express-session" {
-	interface SessionData {
-		user: User;
-	}
-}
 
 async function CleanSessions() {
 	const query =
@@ -17,14 +11,18 @@ async function CleanSessions() {
 	PgPool.query(query);
 }
 
+export function CheckAuth(request: Request, response: Response, next: NextFunction) {
+	if (request.sessionID && request.session.user) {
+		return next();
+	}
+	return response.sendStatus(401);
+}
+
 export async function UserAuth(request: Request, response: Response) {
 	CleanSessions();
 
-	if (request.sessionID && request.session.user) {
-		response.status(200);
-		return response.json({ user: request.session.user });
-	}
-	return response.sendStatus(403);
+	console.log(request.session.user);
+	return response.json({ user: request.session.user });
 }
 
 export async function UserSignUp(request: Request, response: Response) {
@@ -97,6 +95,7 @@ export async function UserSignIn(request: Request, response: Response) {
 export async function UserSignOut(request: Request, response: Response) {
 	try {
 		request.session.destroy(() => { /* console.log("session destroyed") */ });
+		response.clearCookie("connect.sid");
 		return response.sendStatus(200);
 	}
 	catch (e) {

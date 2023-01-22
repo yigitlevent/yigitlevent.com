@@ -5,6 +5,7 @@ import { SessionOptions } from "express-session";
 import { SECRET } from "./constants.js";
 
 
+
 export const CorsConfig: CorsOptions = {
 	origin: process.env.API_ENV === "development" ? "*" : ["https://yigitlevent.com", /\.yigitlevent\.com$/],
 	methods: ["POST", "GET", "PUT", "DELETE", "OPTIONS", "HEAD"],
@@ -22,6 +23,12 @@ export const PgConfig: PoolConfig = {
 	idleTimeoutMillis: 0,
 	connectionTimeoutMillis: 0
 };
+
+declare module "express-session" {
+	interface SessionData {
+		user: User;
+	}
+}
 
 export const SessionConfig: SessionOptions = {
 	secret: SECRET,

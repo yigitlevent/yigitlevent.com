@@ -1,36 +1,27 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 
-import useMediaQuery from "@mui/material/useMediaQuery";
 import Container from "@mui/material/Container";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 
-import { DiceRoller } from "./DiceRoller/DiceRoller";
-import { LifepathLists } from "./LifepathLists/LifepathLists";
-import { SkillLists } from "./SkillLists/SkillLists";
-import { TraitLists } from "./TraitLists/TraitLists";
-import { PracticePlanner } from "./PracticePlanner/PracticePlanner";
-import { MagicWheel } from "./MagicWheel/MagicWheel";
-import { DuelOfWitsPlanner } from "./DuelOfWitsPlanner/DuelOfWitsPlanner";
-import { RangeAndCoverPlanner } from "./RangeAndCoverPlanner/RangeAndCoverPlanner";
-import { FightPlanner } from "./FightPlanner/FightPlanner";
-import { ResourcesList } from "./ResourcesList/ResourcesList";
-import { CharacterBurner } from "./CharacterBurner/CharacterBurner";
-import { Drawers } from "./Menu/Drawers";
-import { THEME } from "../theme/theme";
+import { DiceRoller } from "./Tools/DiceRoller/DiceRoller";
+import { LifepathLists } from "./Tools/LifepathLists/LifepathLists";
+import { SkillLists } from "./Tools/SkillLists/SkillLists";
+import { TraitLists } from "./Tools/TraitLists/TraitLists";
+import { PracticePlanner } from "./Tools/PracticePlanner/PracticePlanner";
+import { MagicWheel } from "./Tools/MagicWheel/MagicWheel";
+import { DuelOfWitsPlanner } from "./Tools/DuelOfWitsPlanner/DuelOfWitsPlanner";
+import { RangeAndCoverPlanner } from "./Tools/RangeAndCoverPlanner/RangeAndCoverPlanner";
+import { FightPlanner } from "./Tools/FightPlanner/FightPlanner";
+import { ResourcesList } from "./Tools/ResourcesList/ResourcesList";
+import { CharacterBurner } from "./Tools/CharacterBurner/CharacterBurner";
+import { Menu } from "./Menu/Menu";
 
 
 export function MainBox() {
-	const breakpoint = useMediaQuery(THEME.breakpoints.down("md"));
-
 	return (
 		<Container maxWidth="lg" sx={{ margin: "10px auto" }}>
-			<Box sx={{ margin: breakpoint ? "64px 0 16px 0" : "0 0 16px 0" }}>
-				<Typography variant="h1">BWGR Tools</Typography>
-			</Box>
-
-			<Drawers />
+			<Menu />
 
 			<Paper sx={{ padding: "10px 20px" }}>
 				<Routes>

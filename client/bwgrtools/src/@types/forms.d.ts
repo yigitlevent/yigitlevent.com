@@ -8,3 +8,7 @@ interface SignupForm {
 	email: string;
 	password: string;
 }
+
+interface CampaignCreateForm {
+	name: string;
+}
