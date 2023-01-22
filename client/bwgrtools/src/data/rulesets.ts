@@ -22,13 +22,13 @@ export const CoreRulesets: CoreRuleset[] = [
 		name: "Burning Wheel Gold Revised",
 		isOffical: true,
 		expansions: ["bwc", "antv1", "amw"]
-	},
-	{
+	}
+	/*{
 		id: "bs",
 		name: "Burning Sun",
 		isOffical: false,
 		expansions: ["amw"]
-	}
+	}*/
 ];
 
 export const ExpansionRulesets: ExpansionRuleset[] = [
