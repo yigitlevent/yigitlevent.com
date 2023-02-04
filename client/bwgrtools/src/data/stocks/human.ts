@@ -327,7 +327,7 @@ export const Human: Stock = {
 									]
 								},
 								{
-									type: "OR", // NOTE: Just for Burning Sun
+									type: "OR", // TODO: Burning Sun: Requirement
 									items: [
 										"Human➞Noble➞Squire",
 										"Human➞Noble Court➞Squire",
@@ -1375,7 +1375,7 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR", // TODO: Burning Sun
+							type: "OR", // TODO: Burning Sun: Requirement
 							items: [
 								"Human➞Religious➞1*ANY"
 							]
@@ -1964,7 +1964,7 @@ export const Human: Stock = {
 									]
 								},
 								{
-									type: "OR", // TODO: Burning Sun
+									type: "OR", // TODO: Burning Sun: Requirement
 									items: [
 										"Human➞City Dweller➞City Guard",
 										"Human➞City Dweller➞Guard Captain",
@@ -2398,6 +2398,7 @@ export const Human: Stock = {
 										"Human➞Villager➞Town Official",
 										"Human➞City Dweller➞Scholar",
 										"Human➞Religious➞Priest",
+										"Human➞Religious➞Templar",
 										"Human➞City Dweller➞Bishop",
 										"Human➞Religious➞Bishop",
 										"Human➞Professional Soldier➞Captain",
@@ -2412,7 +2413,7 @@ export const Human: Stock = {
 									]
 								},
 								{
-									type: "OR", // TODO: Burning Sun
+									type: "OR", // TODO: Burning Sun: Requirement
 									items: [
 										"Human➞Religious➞Templar",
 										"Human➞Villager➞Tax Collector",
@@ -2682,6 +2683,7 @@ export const Human: Stock = {
 								"Human➞College of Magic➞Master Summoner",
 								"Human➞Outcast➞Mad Summoner",
 								"Human➞Outcast➞Crazy Witch",
+								"Human➞Outcast➞Oasis Witch",
 								"Human➞Seafaring➞Weather Witch"
 							]
 						}
@@ -5005,6 +5007,7 @@ export const Human: Stock = {
 							items: [
 								"Human➞Religious➞Military Order",
 								"Human➞Religious➞Priest",
+								"Human➞Religious➞Templar",
 								"Human➞Religious➞Archpriest",
 								"Human➞City Dweller➞Temple Priest",
 								"Human➞Outcast➞Heretic Priest",
@@ -5138,7 +5141,8 @@ export const Human: Stock = {
 								"Human➞Noble Court➞Student",
 								"Human➞Religious➞Itinerant Monk",
 								"Human➞Religious➞Cloistered Nun",
-								"Human➞Religious➞Priest"
+								"Human➞Religious➞Priest",
+								"Human➞Religious➞Templar"
 							]
 						}
 					},
@@ -5307,6 +5311,7 @@ export const Human: Stock = {
 								"Human➞Noble Court➞Chaplain",
 								"Human➞Professional Soldier➞Chaplain",
 								"Human➞Religious➞Priest",
+								"Human➞Religious➞Templar",
 								"Human➞Noble➞Religious Acolyte"
 							]
 						}
@@ -7363,7 +7368,7 @@ export const Human: Stock = {
 					allowed: ["bs"]
 				},
 				{
-					name: "Oasis Witch", // TODO: Qualifies for crazy witch / weather witch
+					name: "Oasis Witch",
 					born: false,
 					years: 5,
 					resources: 20,
@@ -7769,6 +7774,7 @@ export const Human: Stock = {
 								"Human➞Religious➞Cloistered Nun",
 								"Human➞Religious➞Abbot/Abbess",
 								"Human➞Outcast➞Crazy Witch",
+								"Human➞Outcast➞Oasis Witch",
 								"Human➞Peasant➞Farmer",
 								"Human➞Peasant➞Itinerant Priest"
 							]
@@ -8309,6 +8315,7 @@ export const Human: Stock = {
 							items: [
 								"Human➞Peasant➞Augur",
 								"Human➞Outcast➞Crazy Witch",
+								"Human➞Outcast➞Oasis Witch",
 								"Human➞City Dweller➞Neophyte Sorcerer",
 								"Human➞Villager➞Wizard's Apprentice",
 								"Human➞Peasant➞Elder"
@@ -8725,7 +8732,7 @@ export const Human: Stock = {
 									]
 								},
 								{
-									type: "OR", // TODO: Burning Sun
+									type: "OR", // TODO: Burning Sun: Requirement
 									items: [
 										"Human➞Religious➞Templar",
 										"Human➞Noble Court➞Squire",
@@ -8990,7 +8997,9 @@ export const Human: Stock = {
 							type: "OR",
 							items: [
 								"Human➞Religious➞Priest",
+								"Human➞Religious➞Templar",
 								"Human➞Religious➞Archpriest",
+								"Human➞Religious➞High Templar",
 								"Human➞City Dweller➞Temple Priest",
 								"Human➞Outcast➞Heretic Priest",
 								"Human➞Death Cult➞Death Priest",
@@ -9190,7 +9199,7 @@ export const Human: Stock = {
 									]
 								},
 								{
-									type: "OR", // TODO: Burning Sun
+									type: "OR", // TODO: Burning Sun: Requirement
 									items: [
 										"Human➞Religious➞High Templar",
 										"Human➞Noble➞Knight",
@@ -9801,6 +9810,7 @@ export const Human: Stock = {
 								"Human➞City Dweller➞Temple Priest",
 								"Human➞Peasant➞Itinerant Priest",
 								"Human➞Religious➞Priest",
+								"Human➞Religious➞Templar",
 								"Human➞Noble Court➞Court Priest",
 								"Human➞Religious➞Archivist"
 							]
@@ -9851,7 +9861,7 @@ export const Human: Stock = {
 								"Human➞City Dweller➞Temple Priest",
 								"Human➞Peasant➞Itinerant Priest",
 								"Human➞Religious➞Priest",
-								"Human➞Religious➞Priest",
+								"Human➞Religious➞Templar",
 								"Human➞Noble Court➞Court Priest",
 								"Human➞City Dweller➞Judge",
 								"Human➞Noble Court➞Justiciar"
@@ -9901,6 +9911,7 @@ export const Human: Stock = {
 								"Human➞Religious➞Custodian",
 								"Human➞Religious➞Interpreter",
 								"Human➞Religious➞Priest",
+								"Human➞Religious➞Templar",
 								"Human➞City Dweller➞Bishop",
 								"Human➞Religious➞Bishop"
 							]
@@ -9950,6 +9961,7 @@ export const Human: Stock = {
 								"Human➞City Dweller➞Temple Priest",
 								"Human➞Peasant➞Itinerant Priest",
 								"Human➞Religious➞Priest",
+								"Human➞Religious➞Templar",
 								"Human➞Noble Court➞Court Priest",
 								"Human➞Noble Court➞Chaplain",
 								"Human➞Professional Soldier➞Chaplain"
@@ -10170,7 +10182,7 @@ export const Human: Stock = {
 					}
 				},
 				{
-					stock: "Human", setting: "Religious", allowed: ["bs"], // TODO: Counts as Priest for requirements
+					stock: "Human", setting: "Religious", allowed: ["bs"],
 					name: "Templar", born: false, years: 5, resources: 18, mentalPool: 1, physicalPool: 0, eitherPool: 0, generalSkillPool: 0, skillPool: 7, traitPool: 2,
 					leads: ["Human➞Villager", "Human➞City Dweller", "Human➞Noble Court", "Human➞Professional Soldier", "Human➞Outcast"],
 					skills: [
@@ -11638,7 +11650,7 @@ export const Human: Stock = {
 				},
 				{
 					allowed: ["bs"], stock: "Human", setting: "Servitude and Captive",
-					name: "Born Mule", // TODO: Born Mule counts as Born Slave for requirements
+					name: "Born Mule",
 					born: true,
 					years: 10,
 					resources: 3,
@@ -13022,7 +13034,7 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR", // TODO: Burning Sun
+							type: "OR", // TODO: Burning Sun: Requirement
 							items: [
 								"Human➞Religious➞1*ANY"
 							]
@@ -13709,13 +13721,14 @@ export const Human: Stock = {
 										"Human➞City Dweller➞Clerk",
 										"Human➞Villager➞Clerk",
 										"Human➞Religious➞Priest",
+										"Human➞Religious➞Templar",
 										"Human➞City Dweller➞Student",
 										"Human➞Noble➞Student",
 										"Human➞Noble Court➞Student"
 									]
 								},
 								{
-									type: "OR", // TODO: Burning Sun
+									type: "OR", // TODO: Burning Sun: Requirement
 									items: [
 										"Human➞Religious➞1*ANY"
 									]
