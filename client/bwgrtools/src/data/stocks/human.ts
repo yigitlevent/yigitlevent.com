@@ -14,7 +14,7 @@ export const Human: Stock = {
 		{ max: 79, min: 66, m: 7, p: 10 },
 		{ max: 99999, min: 80, m: 6, p: 9 }
 	],
-	allowed: ["bwgr"],
+	allowed: ["bwgr", "bs"],
 	hasSetting: true,
 	hasSubsetting: true,
 	name: "Human",
@@ -22,14 +22,14 @@ export const Human: Stock = {
 	stride: 7,
 	settings: {
 		"City Dweller": {
-			allowed: ["bwgr"],
+			allowed: ["bwgr", "bs"],
 			name: "City Dweller",
 			short: "City",
 			stock: "Human",
 			type: "Setting",
 			lifepaths: [
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: true,
 					eitherPool: 0,
 					generalSkillPool: 4,
@@ -82,7 +82,7 @@ export const Human: Stock = {
 					years: 9
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -107,7 +107,7 @@ export const Human: Stock = {
 					years: 3
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -143,7 +143,7 @@ export const Human: Stock = {
 					years: 2
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -179,7 +179,7 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -205,7 +205,7 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -235,7 +235,7 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -266,7 +266,7 @@ export const Human: Stock = {
 					years: 2
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -299,7 +299,7 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -315,12 +315,29 @@ export const Human: Stock = {
 						conditions: {
 							type: "OR",
 							items: [
-								"Human➞Noble➞Squire",
-								"Human➞Noble Court➞Squire",
-								"Human➞Outcast➞1*ANY",
-								"Human➞Professional Soldier➞1*ANY",
-								"Human➞City Dweller➞City Guard",
-								"Human➞City Dweller➞Guard Captain"
+								{
+									type: "OR",
+									items: [
+										"Human➞Noble➞Squire",
+										"Human➞Noble Court➞Squire",
+										"Human➞Outcast➞1*ANY",
+										"Human➞Professional Soldier➞1*ANY",
+										"Human➞City Dweller➞City Guard",
+										"Human➞City Dweller➞Guard Captain"
+									]
+								},
+								{
+									type: "OR", // NOTE: Just for Burning Sun
+									items: [
+										"Human➞Noble➞Squire",
+										"Human➞Noble Court➞Squire",
+										"Human➞Outcast➞1*ANY",
+										"Human➞Professional Soldier➞1*ANY",
+										"Human➞City Dweller➞City Guard",
+										"Human➞City Dweller➞Guard Captain",
+										"Human➞Servitude and Captive➞Gladiator"
+									]
+								}
 							]
 						}
 					},
@@ -346,7 +363,7 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -377,7 +394,7 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -407,7 +424,7 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -438,7 +455,7 @@ export const Human: Stock = {
 					years: 3
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
@@ -472,7 +489,7 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -501,7 +518,7 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -569,7 +586,7 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -613,7 +630,7 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -646,7 +663,7 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -746,7 +763,7 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
@@ -777,7 +794,7 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
@@ -809,7 +826,7 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -841,7 +858,7 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -871,7 +888,7 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -904,7 +921,7 @@ export const Human: Stock = {
 					years: 3
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -931,7 +948,7 @@ export const Human: Stock = {
 					years: 7
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -962,7 +979,7 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -992,7 +1009,7 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1020,7 +1037,7 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1047,7 +1064,7 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1076,7 +1093,7 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1111,7 +1128,7 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1143,7 +1160,7 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1216,7 +1233,7 @@ export const Human: Stock = {
 					years: 7
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1315,7 +1332,7 @@ export const Human: Stock = {
 					years: 10
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1344,7 +1361,7 @@ export const Human: Stock = {
 					years: 8
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1357,6 +1374,12 @@ export const Human: Stock = {
 					name: "Tax Collector",
 					physicalPool: 0,
 					requirements: {
+						conditions: {
+							type: "OR", // TODO: Burning Sun
+							items: [
+								"Human➞Religious➞1*ANY"
+							]
+						},
 						limits: [
 							"LP➞MIN➞3"
 						]
@@ -1378,7 +1401,7 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
@@ -1458,7 +1481,7 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1488,7 +1511,7 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1533,7 +1556,7 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1576,7 +1599,7 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1610,7 +1633,7 @@ export const Human: Stock = {
 					years: 7
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1640,7 +1663,7 @@ export const Human: Stock = {
 					years: 8
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
@@ -1684,7 +1707,7 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1721,7 +1744,7 @@ export const Human: Stock = {
 					years: 7
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
@@ -1760,7 +1783,7 @@ export const Human: Stock = {
 					years: 8
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1800,7 +1823,7 @@ export const Human: Stock = {
 					years: 10
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1838,7 +1861,7 @@ export const Human: Stock = {
 					years: 7
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1874,7 +1897,7 @@ export const Human: Stock = {
 					years: 8
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1912,7 +1935,7 @@ export const Human: Stock = {
 					years: 9
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1929,12 +1952,26 @@ export const Human: Stock = {
 						conditions: {
 							type: "OR",
 							items: [
-								"Human➞Noble➞Born Noble",
-								"Human➞City Dweller➞Merchant",
-								"Human➞Villager➞Merchant",
-								"Human➞Professional Soldier➞Sergeant",
-								"Human➞Noble Court➞Man-at-Arms",
-								"Human➞City Dweller➞Judge"
+								{
+									type: "OR",
+									items: [
+										"Human➞Noble➞Born Noble",
+										"Human➞City Dweller➞Merchant",
+										"Human➞Villager➞Merchant",
+										"Human➞Professional Soldier➞Sergeant",
+										"Human➞Noble Court➞Man-at-Arms",
+										"Human➞City Dweller➞Judge"
+									]
+								},
+								{
+									type: "OR", // TODO: Burning Sun
+									items: [
+										"Human➞City Dweller➞City Guard",
+										"Human➞City Dweller➞Guard Captain",
+										"Human➞Professional Soldier➞1*ANY",
+										"Human➞Religious➞1*ANY"
+									]
+								}
 							]
 						}
 					},
@@ -1953,7 +1990,7 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -2249,7 +2286,7 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -2298,7 +2335,7 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -2339,7 +2376,7 @@ export const Human: Stock = {
 					years: 10
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -2355,20 +2392,36 @@ export const Human: Stock = {
 						conditions: {
 							type: "OR",
 							items: [
-								"Human➞Villager➞Town Official",
-								"Human➞City Dweller➞Scholar",
-								"Human➞Religious➞Priest",
-								"Human➞City Dweller➞Bishop",
-								"Human➞Religious➞Bishop",
-								"Human➞Professional Soldier➞Captain",
-								"Human➞Seafaring➞Ship's Captain",
-								"Human➞City Dweller➞Artisan",
-								"Human➞City Dweller➞Master Craftsman",
-								"Human➞Villager➞Master Craftsman",
-								"Human➞Noble➞Knight",
-								"Human➞Noble Court➞Knight",
-								"Human➞Noble Court➞Courtier",
-								"Human➞Noble Court➞Master of Horses"
+								{
+									type: "OR",
+									items: [
+										"Human➞Villager➞Town Official",
+										"Human➞City Dweller➞Scholar",
+										"Human➞Religious➞Priest",
+										"Human➞City Dweller➞Bishop",
+										"Human➞Religious➞Bishop",
+										"Human➞Professional Soldier➞Captain",
+										"Human➞Seafaring➞Ship's Captain",
+										"Human➞City Dweller➞Artisan",
+										"Human➞City Dweller➞Master Craftsman",
+										"Human➞Villager➞Master Craftsman",
+										"Human➞Noble➞Knight",
+										"Human➞Noble Court➞Knight",
+										"Human➞Noble Court➞Courtier",
+										"Human➞Noble Court➞Master of Horses"
+									]
+								},
+								{
+									type: "OR", // TODO: Burning Sun
+									items: [
+										"Human➞Religious➞Templar",
+										"Human➞Villager➞Tax Collector",
+										"Human➞City Dweller➞Tax Collector",
+										"Human➞Noble➞Knight",
+										"Human➞Noble Court➞Knight",
+										"Human➞Noble Court➞Courtier"
+									]
+								}
 							]
 						}
 					},
@@ -2389,7 +2442,7 @@ export const Human: Stock = {
 					years: 9
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -2429,7 +2482,7 @@ export const Human: Stock = {
 					years: 10
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 3,
@@ -2578,7 +2631,7 @@ export const Human: Stock = {
 					years: 12
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -3403,14 +3456,14 @@ export const Human: Stock = {
 			]
 		},
 		"Noble": {
-			allowed: ["bwgr"],
+			allowed: ["bwgr", "bs"],
 			name: "Noble",
 			short: "Noble",
 			stock: "Human",
 			type: "Setting",
 			lifepaths: [
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: true,
 					eitherPool: 0,
 					generalSkillPool: 5,
@@ -3444,7 +3497,7 @@ export const Human: Stock = {
 					years: 8
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
@@ -3482,7 +3535,7 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -3517,7 +3570,7 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -3547,7 +3600,7 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -3621,7 +3674,7 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -3653,7 +3706,7 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -3692,7 +3745,7 @@ export const Human: Stock = {
 					years: 10
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -3733,7 +3786,7 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -3783,7 +3836,7 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 1,
@@ -3821,7 +3874,7 @@ export const Human: Stock = {
 					years: 7
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 2,
@@ -3860,7 +3913,7 @@ export const Human: Stock = {
 					years: 7
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 1,
@@ -3915,7 +3968,7 @@ export const Human: Stock = {
 					years: 8
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 2,
@@ -3967,7 +4020,7 @@ export const Human: Stock = {
 					years: 9
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 3,
@@ -4018,7 +4071,7 @@ export const Human: Stock = {
 					years: 10
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 3,
@@ -4159,7 +4212,7 @@ export const Human: Stock = {
 			]
 		},
 		"Noble Court": {
-			allowed: ["bwgr"],
+			allowed: ["bwgr", "bs"],
 			name: "Noble Court",
 			short: "Court",
 			stock: "Human",
@@ -4204,7 +4257,7 @@ export const Human: Stock = {
 					years: 3
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -4233,7 +4286,7 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -4265,7 +4318,7 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -4306,7 +4359,7 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -4336,7 +4389,7 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -4367,7 +4420,7 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -4397,7 +4450,7 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -4432,7 +4485,7 @@ export const Human: Stock = {
 					years: 10
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -4462,7 +4515,7 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
@@ -4498,7 +4551,7 @@ export const Human: Stock = {
 					years: 7
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -4531,7 +4584,7 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -4565,7 +4618,7 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -4607,7 +4660,7 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
@@ -4638,7 +4691,7 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
@@ -4669,7 +4722,7 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -4699,7 +4752,7 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -4726,7 +4779,7 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -4776,7 +4829,7 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -4815,7 +4868,7 @@ export const Human: Stock = {
 					years: 9
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -4855,7 +4908,7 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -4888,7 +4941,7 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -4934,7 +4987,7 @@ export const Human: Stock = {
 					years: 8
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
@@ -4981,7 +5034,7 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -5023,7 +5076,7 @@ export const Human: Stock = {
 					years: 8
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -5065,7 +5118,7 @@ export const Human: Stock = {
 					years: 8
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -5109,7 +5162,7 @@ export const Human: Stock = {
 					years: 8
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -5158,7 +5211,7 @@ export const Human: Stock = {
 					years: 10
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -5198,7 +5251,7 @@ export const Human: Stock = {
 					years: 7
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -5235,7 +5288,7 @@ export const Human: Stock = {
 					years: 10
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -5277,7 +5330,7 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -5364,7 +5417,7 @@ export const Human: Stock = {
 					years: 8
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -5409,7 +5462,7 @@ export const Human: Stock = {
 					years: 7
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -5452,7 +5505,7 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
@@ -5494,7 +5547,7 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
@@ -5537,7 +5590,7 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -5582,7 +5635,7 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -5626,7 +5679,7 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -5677,7 +5730,7 @@ export const Human: Stock = {
 					years: 7
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 1,
@@ -5727,7 +5780,7 @@ export const Human: Stock = {
 					years: 7
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: "1/yr",
@@ -5881,7 +5934,7 @@ export const Human: Stock = {
 			]
 		},
 		"Outcast": {
-			allowed: ["bwgr"],
+			allowed: ["bwgr", "bs"],
 			name: "Outcast",
 			short: "Outcast",
 			stock: "Human",
@@ -5925,7 +5978,7 @@ export const Human: Stock = {
 					years: 3
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -5989,7 +6042,7 @@ export const Human: Stock = {
 					years: 3
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -6021,7 +6074,7 @@ export const Human: Stock = {
 					years: 3
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -6052,7 +6105,7 @@ export const Human: Stock = {
 					years: 3
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -6083,7 +6136,7 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -6111,7 +6164,7 @@ export const Human: Stock = {
 					years: 3
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -6141,7 +6194,7 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
@@ -6170,7 +6223,7 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -6201,7 +6254,7 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
@@ -6232,7 +6285,7 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
@@ -6279,7 +6332,7 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -6310,7 +6363,7 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -6336,7 +6389,7 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -6366,7 +6419,7 @@ export const Human: Stock = {
 					years: 3
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: -1,
 					generalSkillPool: 0,
@@ -6398,7 +6451,7 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -6431,7 +6484,7 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -6477,7 +6530,7 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -6511,7 +6564,7 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -6542,7 +6595,7 @@ export const Human: Stock = {
 					years: 3
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -6576,7 +6629,7 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -6606,7 +6659,7 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -6636,7 +6689,7 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -6668,7 +6721,7 @@ export const Human: Stock = {
 					years: 3
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -6731,7 +6784,7 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -6764,7 +6817,7 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -6817,7 +6870,7 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -6846,6 +6899,7 @@ export const Human: Stock = {
 					skillPool: 9,
 					skills: [
 						"Any Wise➞Forest-wise",
+						"Any Wise➞Desert-wise",
 						"Any General➞Orienteering",
 						"Any General➞Foraging",
 						"Any General➞Tracking",
@@ -6906,7 +6960,7 @@ export const Human: Stock = {
 					years: 8
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -6955,7 +7009,7 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
@@ -6999,7 +7053,7 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -7047,7 +7101,7 @@ export const Human: Stock = {
 					years: 7
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 1,
@@ -7169,18 +7223,393 @@ export const Human: Stock = {
 						"Human Special➞Evil"
 					],
 					years: 10
+				},
+				{
+					name: "Neophyte Sorcerer",
+					born: false,
+					years: 6,
+					resources: 12,
+					mentalPool: 1,
+					physicalPool: 0,
+					eitherPool: 0,
+					generalSkillPool: 0,
+					skillPool: 6,
+					traitPool: 1,
+					leads: [
+						"Human➞City Dweller",
+						"Human➞Professional Soldier",
+						"Human➞College of Magic"
+					],
+					skills: [
+						"Any General➞Read",
+						"Any General➞Write",
+						"Any General➞Symbology",
+						"Human Magical➞Sorcery",
+						"Any General➞Research"
+					],
+					traits: [
+						"Any Character➞Lust for Power",
+						"Any Character➞Bitter",
+						"Any Character➞Gifted"
+					],
+					requirements: {},
+					stock: "Human",
+					setting: "Outcast",
+					allowed: ["bs"]
+				},
+				{
+					name: "Defiler",
+					born: false,
+					years: 5,
+					resources: 32,
+					mentalPool: 1,
+					physicalPool: 1,
+					eitherPool: 0,
+					generalSkillPool: 0,
+					skillPool: 7,
+					traitPool: 2,
+					leads: [
+						"Human➞City Dweller",
+						"Human➞Noble Court",
+						"Human➞Professional Soldier"
+					],
+					skills: [
+						"Human Magical➞Sorcery",
+						"Human Magical➞Enchanting",
+						"Any General➞Intimidation",
+						"Any Wise➞Fertile Land-wise"
+					],
+					traits: [
+						"Any Character➞Ashen Stink",
+						"Any Character➞Addicted to Power",
+						"Any Character➞Willfully Destructive",
+						"Any Character➞Mad"
+					],
+					requirements: {
+						conditions: {
+							type: "OR",
+							items: [
+								"Human➞Outcast➞Neophyte Sorcerer"
+							]
+						}
+					},
+					stock: "Human",
+					setting: "Outcast",
+					allowed: ["bs"]
+				},
+				{
+					name: "Preserver",
+					born: false,
+					years: 7,
+					resources: 28,
+					mentalPool: 1,
+					physicalPool: 1,
+					eitherPool: 0,
+					generalSkillPool: 0,
+					skillPool: 6,
+					traitPool: 2,
+					leads: [
+						"Human➞City Dweller",
+						"Human➞Villager",
+						"Human➞Peasant",
+						"Human➞Professional Soldier"
+					],
+					skills: [
+						"Human Magical➞Sorcery",
+						"Human Magical➞Enchanting",
+						"Any Wise➞Defiler-wise",
+						"Any General➞Inconspicuous"
+					],
+					traits: ["Any Character➞Frugal"],
+					requirements: {
+						conditions: {
+							type: "OR",
+							items: [
+								"Human➞Outcast➞Neophyte Sorcerer"
+							]
+						}
+					},
+					stock: "Human",
+					setting: "Outcast",
+					allowed: ["bs"]
+				},
+				{
+					name: "Desert Hermit",
+					born: false,
+					years: 6,
+					resources: 4,
+					mentalPool: 0,
+					physicalPool: 0,
+					eitherPool: 0,
+					generalSkillPool: 0,
+					skillPool: 5,
+					traitPool: 3,
+					leads: ["Human➞Peasant", "Human➞Villager", "Human➞Nomad"],
+					skills: [
+						"Any Wise➞Desert-wise",
+						"Any General➞Survival",
+						"Any General➞Meditation",
+						"Any Wise➞Mountain-wise",
+						"Any General➞Philosophy"
+					],
+					traits: [
+						"Any Character➞Sun-Crazed",
+						"Any Character➞Pickled",
+						"Any Character➞Weather Sense"
+					],
+					requirements: {},
+					stock: "Human",
+					setting: "Outcast",
+					allowed: ["bs"]
+				},
+				{
+					name: "Oasis Witch", // TODO: Qualifies for crazy witch / weather witch
+					born: false,
+					years: 5,
+					resources: 20,
+					mentalPool: 0,
+					physicalPool: 0,
+					eitherPool: 1,
+					generalSkillPool: 0,
+					skillPool: 6,
+					traitPool: 2,
+					leads: [],
+					skills: [
+						"Any Wise➞Oasis-wise",
+						"Any Wise➞Superstition-wise",
+						"Human Special➞Astrology",
+						"Any Wise➞Desert-wise",
+						"Human Magical➞Spirit Binding"
+					],
+					traits: ["Any Character➞Weather Sense"],
+					requirements: {},
+					stock: "Human",
+					setting: "Outcast",
+					allowed: ["bs"]
+				},
+				{
+					name: "Bandit Lord",
+					born: false,
+					years: 6,
+					resources: 15,
+					mentalPool: 0,
+					physicalPool: 0,
+					eitherPool: 1,
+					generalSkillPool: 0,
+					skillPool: 7,
+					traitPool: 2,
+					leads: [
+						"Human➞City Dweller",
+						"Human➞Noble Court",
+						"Human➞Servitude and Captive",
+						"Human➞Nomad"
+					],
+					skills: [
+						"Any General➞Intimidation",
+						"Any General➞Command",
+						"Any General➞Orienteering",
+						"Any Wise➞Bandit-wise",
+						"Any Wise➞Caravan-wise",
+						"Any General➞Appropriate Weapons",
+						"Any Wise➞Defiler-wise",
+						"Any Wise➞Duststorm-wise"
+					],
+					traits: [
+						"Any Character➞Brutal",
+						"Any Character➞Sadistic",
+						"Any Character➞Bitter",
+						"Any Character➞Scheming"
+					],
+					requirements: {
+						conditions: {
+							type: "OR",
+							items: [
+								"Human➞Outcast➞Freebooter",
+								"Human➞Outcast➞Ravager",
+								"Human➞Nomad➞Ravager",
+								"Human➞Outcast➞Bandit",
+								"Human➞Nomad➞Bandit",
+								"Human➞Noble➞Knight",
+								"Human➞Noble Court➞Knight",
+								"Human➞Professional Soldier➞Captain",
+								"Human➞Villager➞Village Sergeant",
+								"Human➞Villager➞Corrupt Sergeant",
+								"Human➞Professional Soldier➞Sergeant"
+							]
+						}
+					},
+					stock: "Human",
+					setting: "Outcast",
+					allowed: ["bs"]
+				},
+				{
+					name: "Scavenger",
+					born: false,
+					years: 4,
+					resources: 3,
+					mentalPool: 0,
+					physicalPool: 0,
+					eitherPool: 1,
+					generalSkillPool: 0,
+					skillPool: 5,
+					traitPool: 2,
+					leads: ["Human➞Peasant", "Human➞Servitude and Captive"],
+					skills: [
+						"Any General➞Scavenging",
+						"Any Wise➞Ruins-wise",
+						"Any Wise➞Waste-wise",
+						"Any General➞Survival",
+						"Any General➞Brawling"
+					],
+					traits: [
+						"Any Character➞Misanthropic",
+						"Any Character➞Scavenger",
+						"Any Character➞Obsessed",
+						"Any Character➞Nasty Cough"
+					],
+					requirements: {},
+					stock: "Human",
+					setting: "Outcast",
+					allowed: ["bs"]
+				},
+				{
+					name: "Monster Hunter",
+					born: false,
+					years: 4,
+					resources: 6,
+					mentalPool: 0,
+					physicalPool: 0,
+					eitherPool: 0,
+					generalSkillPool: 0,
+					skillPool: 7,
+					traitPool: 2,
+					leads: [
+						"Human➞Servitude and Captive",
+						"Human➞Professional Soldier",
+						"Human➞Noble Court"
+					],
+					skills: [
+						"Any Wise➞Fell Beast-wise",
+						"Any Wise➞Unspeakable Horror-wise",
+						"Any General➞Appropriate Weapons",
+						"Any General➞Stealthy",
+						"Any Wise➞Ruins-wise",
+						"Any General➞Hunting",
+						"Any General➞Survival"
+					],
+					traits: [
+						"Any Character➞Disturbingly Confident",
+						"Any Character➞Fearless",
+						"Any Character➞Light Sleeper",
+						"Any Character➞Hearty",
+						"Any Character➞Mad"
+					],
+					requirements: {
+						conditions: {
+							type: "OR",
+							items: [
+								"Human➞Nomad➞Bandit Hunter",
+								"Human➞Peasant➞Hunter",
+								"Human➞Peasant➞Hunter",
+								"Human➞Nomad➞Hunter",
+								"Human➞Servitude and Captive➞Champion",
+								"Human➞Noble➞Knight",
+								"Human➞Noble Court➞Knight",
+								"Human➞Professional Soldier➞1*ANY"
+							]
+						}
+					},
+					stock: "Human",
+					setting: "Outcast",
+					allowed: ["bs"]
+				},
+				{
+					name: "Ravager",
+					born: false,
+					years: 6,
+					resources: 25,
+					mentalPool: 0,
+					physicalPool: 0,
+					eitherPool: 1,
+					generalSkillPool: 0,
+					skillPool: 5,
+					traitPool: 2,
+					leads: ["Human➞Nomad", "Human➞Villager"],
+					skills: [
+						"Any General➞Intimidation",
+						"Any General➞Command",
+						"Any General➞Extortion",
+						"Any Wise➞Tribute-wise"
+					],
+					traits: [
+						"Any Character➞Swath of Destruction",
+						"Any Character➞Paranoid",
+						"Any Character➞Complacent",
+						"Any Character➞Aura of Fear"
+					],
+					requirements: {
+						conditions: {
+							type: "OR",
+							items: [
+								"Human➞Outcast➞Defiler"
+							]
+						}
+					},
+					stock: "Human",
+					setting: "Outcast",
+					allowed: ["bs"]
+				},
+				{
+					name: "Bonecaster",
+					born: false,
+					years: 10,
+					resources: 20,
+					mentalPool: 1,
+					physicalPool: 1,
+					eitherPool: 0,
+					generalSkillPool: 0,
+					skillPool: 7,
+					traitPool: 3,
+					leads: ["Human➞Servitude and Captive", "Human➞Nomad"],
+					skills: [
+						"Any Wise➞Bone-wise",
+						"Human Magical➞Death Art",
+						"Any General➞Folklore",
+						"Any General➞Symbology",
+						"Any General➞Obscure History",
+						"Human Special➞Astrology",
+						"Any Wise➞Omen-wise"
+					],
+					traits: [
+						"Any Character➞Flint-Eyed",
+						"Any Character➞Lunatic",
+						"Any Character➞Mind Over Matter",
+						"Any Character➞Penetrating Gaze"
+					],
+					requirements: {
+						conditions: {
+							type: "OR",
+							items: [
+								"Human➞Outcast➞Rogue Wizard",
+								"Human➞Nomad➞Shaman"
+							]
+						}
+					},
+					stock: "Human",
+					setting: "Outcast",
+					allowed: ["bs"]
 				}
 			]
 		},
 		"Peasant": {
-			allowed: ["bwgr"],
+			allowed: ["bwgr", "bs"],
 			name: "Peasant",
 			short: "Peasant",
 			stock: "Human",
 			type: "Setting",
 			lifepaths: [
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: true,
 					eitherPool: 0,
 					generalSkillPool: 3,
@@ -7233,7 +7662,7 @@ export const Human: Stock = {
 					years: 9
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -7271,7 +7700,7 @@ export const Human: Stock = {
 					years: 8
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -7309,7 +7738,7 @@ export const Human: Stock = {
 					years: 15
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -7362,7 +7791,7 @@ export const Human: Stock = {
 					years: 10
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -7392,7 +7821,7 @@ export const Human: Stock = {
 					years: 7
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -7421,7 +7850,7 @@ export const Human: Stock = {
 					years: 1
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -7451,7 +7880,7 @@ export const Human: Stock = {
 					years: 3
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -7511,7 +7940,7 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -7541,7 +7970,7 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -7570,7 +7999,7 @@ export const Human: Stock = {
 					years: 3
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -7600,7 +8029,7 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -7632,7 +8061,7 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -7668,7 +8097,7 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -7702,7 +8131,7 @@ export const Human: Stock = {
 					years: 15
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -7748,7 +8177,7 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -7794,7 +8223,7 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -7835,7 +8264,7 @@ export const Human: Stock = {
 					years: 15
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -7908,7 +8337,7 @@ export const Human: Stock = {
 			]
 		},
 		"Professional Soldier": {
-			allowed: ["bwgr"],
+			allowed: ["bwgr", "bs"],
 			name: "Professional Soldier",
 			short: "Soldier",
 			stock: "Human",
@@ -7952,7 +8381,7 @@ export const Human: Stock = {
 					years: 3
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -7985,7 +8414,7 @@ export const Human: Stock = {
 					years: 3
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -8019,7 +8448,7 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -8047,7 +8476,7 @@ export const Human: Stock = {
 					years: 3
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -8078,7 +8507,7 @@ export const Human: Stock = {
 					years: 3
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -8108,7 +8537,7 @@ export const Human: Stock = {
 					years: 3
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -8175,7 +8604,7 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -8205,7 +8634,7 @@ export const Human: Stock = {
 					years: 3
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -8238,7 +8667,7 @@ export const Human: Stock = {
 					years: 3
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -8268,7 +8697,7 @@ export const Human: Stock = {
 					years: 3
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
@@ -8285,11 +8714,27 @@ export const Human: Stock = {
 						conditions: {
 							type: "OR",
 							items: [
-								"Human➞Noble➞Squire",
-								"Human➞Noble Court➞Squire",
-								"Human➞Villager➞Village Tough",
-								"Human➞City Dweller➞City Guard",
-								"Human➞Professional Soldier➞Foot Soldier"
+								{
+									type: "OR",
+									items: [
+										"Human➞Noble➞Squire",
+										"Human➞Noble Court➞Squire",
+										"Human➞Villager➞Village Tough",
+										"Human➞City Dweller➞City Guard",
+										"Human➞Professional Soldier➞Foot Soldier"
+									]
+								},
+								{
+									type: "OR", // TODO: Burning Sun
+									items: [
+										"Human➞Religious➞Templar",
+										"Human➞Noble Court➞Squire",
+										"Human➞Villager➞Village Tough",
+										"Human➞City Dweller➞City Guard",
+										"Human➞Professional Soldier➞Foot Soldier"
+
+									]
+								}
 							]
 						}
 					},
@@ -8308,7 +8753,7 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -8351,7 +8796,7 @@ export const Human: Stock = {
 					years: 8
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -8408,7 +8853,7 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
@@ -8446,7 +8891,7 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -8486,7 +8931,7 @@ export const Human: Stock = {
 					years: 8
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -8525,7 +8970,7 @@ export const Human: Stock = {
 					years: 10
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
@@ -8576,7 +9021,7 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -8664,7 +9109,7 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -8712,7 +9157,7 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -8734,11 +9179,27 @@ export const Human: Stock = {
 						conditions: {
 							type: "OR",
 							items: [
-								"Human➞Noble➞Knight",
-								"Human➞Noble Court➞Knight",
-								"Human➞Noble➞Lord",
-								"Human➞Noble Court➞Constable",
-								"Human➞Outcast➞2*Freebooter"
+								{
+									type: "OR",
+									items: [
+										"Human➞Noble➞Knight",
+										"Human➞Noble Court➞Knight",
+										"Human➞Noble➞Lord",
+										"Human➞Noble Court➞Constable",
+										"Human➞Outcast➞2*Freebooter"
+									]
+								},
+								{
+									type: "OR", // TODO: Burning Sun
+									items: [
+										"Human➞Religious➞High Templar",
+										"Human➞Noble➞Knight",
+										"Human➞Noble Court➞Knight",
+										"Human➞Noble➞Lord",
+										"Human➞Noble Court➞Constable",
+										"Human➞Outcast➞2*Freebooter"
+									]
+								}
 							]
 						}
 					},
@@ -8765,7 +9226,7 @@ export const Human: Stock = {
 			]
 		},
 		"Religious": {
-			allowed: ["bwgr"],
+			allowed: ["bwgr", "bs"],
 			name: "Religious",
 			short: "Religious",
 			stock: "Human",
@@ -8810,7 +9271,7 @@ export const Human: Stock = {
 					years: 3
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -8844,7 +9305,7 @@ export const Human: Stock = {
 					years: 7
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -8876,7 +9337,7 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -8909,7 +9370,7 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -8957,7 +9418,7 @@ export const Human: Stock = {
 					years: 3
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -8989,7 +9450,7 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -9020,7 +9481,7 @@ export const Human: Stock = {
 					years: 3
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -9048,7 +9509,7 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -9148,7 +9609,7 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -9321,7 +9782,7 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -9370,7 +9831,7 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
@@ -9389,6 +9850,7 @@ export const Human: Stock = {
 							items: [
 								"Human➞City Dweller➞Temple Priest",
 								"Human➞Peasant➞Itinerant Priest",
+								"Human➞Religious➞Priest",
 								"Human➞Religious➞Priest",
 								"Human➞Noble Court➞Court Priest",
 								"Human➞City Dweller➞Judge",
@@ -9416,7 +9878,7 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -9518,7 +9980,7 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
@@ -9558,7 +10020,7 @@ export const Human: Stock = {
 					years: 10
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 2,
@@ -9646,6 +10108,156 @@ export const Human: Stock = {
 						"Human Lifepath➞Domineering Presence"
 					],
 					years: 8
+				},
+				{
+					stock: "Human", setting: "Religious", allowed: ["bs"],
+					name: "Acolyte", born: false, years: 6, resources: 5, mentalPool: 1, physicalPool: 0, eitherPool: 0, generalSkillPool: 0, skillPool: 5, traitPool: 1,
+					leads: [],
+					skills: [
+						"Any General➞Read",
+						"Any General➞Write",
+						"Any General➞Bureaucracy",
+						"Any General➞Doctrine",
+						"Any General➞Rule of Law"
+					],
+					traits: [
+						"Human Lifepath➞Tonsured",
+						"Any Character➞Ambitious",
+						"Any Die➞Scheming"
+					],
+					requirements: {}
+				},
+				{
+					stock: "Human", setting: "Religious", allowed: ["bs"],
+					name: "Clerk", born: false, years: 4, resources: 9, mentalPool: 1, physicalPool: 0, eitherPool: 0, generalSkillPool: 0, skillPool: 4, traitPool: 1,
+					leads: ["Human➞Villager", "Human➞Professional Soldier", "Human➞Outcast"],
+					skills: [
+						"Any General➞Bureaucracy",
+						"Any General➞Read",
+						"Any General➞Write",
+						"Any General➞Accounting",
+						"Any Wise➞Bribe-wise",
+						"Any Wise➞Paperwork-wise"
+					],
+					traits: [],
+					requirements: {
+						conditions: {
+							type: "OR",
+							items: [
+								"Human➞Religious➞Acolyte"
+							]
+						}
+					}
+				},
+				{
+					stock: "Human", setting: "Religious", allowed: ["bs"],
+					name: "Scribe", born: false, years: 7, resources: 10, mentalPool: 1, physicalPool: 0, eitherPool: 0, generalSkillPool: 0, skillPool: 5, traitPool: 1,
+					leads: ["Human➞Villager", "Human➞Peasant", "Human➞Merchant House"],
+					skills: [
+						"Any General➞Write",
+						"Any General➞Illuminations",
+						"Any General➞Read",
+						"Any Wise➞Handwriting-wise"
+					],
+					traits: ["Human Lifepath➞Near-Sighted", "Any Character➞Cramped Hands"],
+					requirements: {
+						conditions: {
+							type: "OR",
+							items: [
+								"Human➞Religious➞Acolyte"
+							]
+						}
+					}
+				},
+				{
+					stock: "Human", setting: "Religious", allowed: ["bs"], // TODO: Counts as Priest for requirements
+					name: "Templar", born: false, years: 5, resources: 18, mentalPool: 1, physicalPool: 0, eitherPool: 0, generalSkillPool: 0, skillPool: 7, traitPool: 2,
+					leads: ["Human➞Villager", "Human➞City Dweller", "Human➞Noble Court", "Human➞Professional Soldier", "Human➞Outcast"],
+					skills: [
+						"Any General➞Oratory",
+						"Any General➞Doctrine",
+						"Any General➞Symbology",
+						"Any General➞Intimidation",
+						"Any General➞Read",
+						"Any General➞Write",
+						"Any Wise➞Templar Politics-wise",
+						"Any General➞Official History"
+					],
+					traits: [
+						"Human Lifepath➞Vested",
+						"Any Character➞Imperious",
+						"Any Character➞Strong Willed",
+						"Any Die➞Favored"
+					],
+					requirements: {
+						conditions: {
+							type: "OR",
+							items: [
+								"Human➞Religious➞Acolyte"
+							]
+						}
+					}
+				},
+				{
+					stock: "Human", setting: "Religious", allowed: ["bs"],
+					name: "High Templar", born: false, years: 5, resources: 25, mentalPool: 0, physicalPool: 0, eitherPool: 1, generalSkillPool: 0, skillPool: 10, traitPool: 2,
+					leads: ["Human➞Villager", "Human➞Outcast", "Human➞Noble Court"],
+					skills: [
+						"Any General➞Oratory",
+						"Any General➞Read",
+						"Any General➞Write",
+						"Any General➞Doctrine",
+						"Any General➞History",
+						"Any General➞Ritual",
+						"Any Wise➞Tithe-wise",
+						"Any Wise➞City-wise",
+						"Any Wise➞Sorcerer-King-wise",
+						"Any General➞Official History",
+						"Any General➞Persuasion"
+					],
+					traits: ["Human Lifepath➞Imperious Demeanor"],
+					requirements: {
+						conditions: {
+							type: "OR",
+							items: [
+								"Human➞City Dweller➞Temple Priest",
+								"Human➞Peasant➞Itinerant Priest",
+								"Human➞Religious➞Templar",
+								"Human➞Noble Court➞Court Priest",
+								"Human➞Noble Court➞Chaplain",
+								"Human➞Professional Soldier➞Chaplain"
+							]
+						}
+					}
+				},
+				{
+					stock: "Human", setting: "Religious", allowed: ["bs"],
+					name: "Royal Advisor", born: false, years: 8, resources: 45, mentalPool: 0, physicalPool: 0, eitherPool: 0, generalSkillPool: 0, skillPool: 7, traitPool: 2,
+					leads: ["Human➞Villager", "Human➞Outcast", "Human➞Noble Court"],
+					skills: [
+						"Any General➞Official History",
+						"Any General➞Soothing Platitudes",
+						"Any General➞Intimidation",
+						"Any General➞Ritual",
+						"Any General➞Symbology",
+						"Any General➞History",
+						"Any General➞Obscure History"
+					],
+					traits: ["Human Lifepath➞Domineering Presence"],
+					requirements: {
+						conditions: {
+							type: "OR",
+							items: [
+								"Human➞City Dweller➞Temple Priest",
+								"Human➞Peasant➞Itinerant Priest",
+								"Human➞Religious➞High Templar",
+								"Human➞Noble➞Baron",
+								"Human➞Noble➞Viscount",
+								"Human➞Noble➞Count",
+								"Human➞Noble➞Duke"
+							]
+						}
+					}
 				}
 			]
 		},
@@ -10754,14 +11366,14 @@ export const Human: Stock = {
 			]
 		},
 		"Servitude and Captive": {
-			allowed: ["bwgr"],
+			allowed: ["bwgr", "bs"],
 			name: "Servitude and Captive",
 			short: "Servitude",
 			stock: "Human",
 			type: "Setting",
 			lifepaths: [
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: true,
 					eitherPool: -1,
 					generalSkillPool: 2,
@@ -10818,7 +11430,7 @@ export const Human: Stock = {
 					years: 9
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -10847,7 +11459,7 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -10878,7 +11490,7 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -10909,7 +11521,7 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -10939,7 +11551,7 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -10968,7 +11580,7 @@ export const Human: Stock = {
 					years: 3
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -10996,7 +11608,7 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -11023,18 +11635,666 @@ export const Human: Stock = {
 						"Human Lifepath➞Lucky"
 					],
 					years: 7
+				},
+				{
+					allowed: ["bs"], stock: "Human", setting: "Servitude and Captive",
+					name: "Born Mule", // TODO: Born Mule counts as Born Slave for requirements
+					born: true,
+					years: 10,
+					resources: 3,
+					mentalPool: 0,
+					physicalPool: 1,
+					eitherPool: 0,
+					generalSkillPool: 2,
+					skillPool: 0,
+					traitPool: 2,
+					leads: ["Human➞Nomad", "Human➞Merchant House"],
+					skills: [],
+					traits: [
+						"Any Character➞Mule",
+						"Any Character➞Stubborn",
+						"Any Character➞Tough"
+					],
+					requirements: {
+						texts: ["Mules cannot enter Noble or Templar subsettings."]
+					}
+				},
+				{
+					allowed: ["bs"], stock: "Human", setting: "Servitude and Captive",
+					name: "Slave Soldier",
+					born: false,
+					years: 4,
+					resources: 5,
+					mentalPool: 0,
+					physicalPool: 1,
+					eitherPool: 0,
+					generalSkillPool: 0,
+					skillPool: 4,
+					traitPool: 2,
+					leads: ["Human➞Merchant House"],
+					skills: [
+						"Any General➞Soldiering",
+						"Any Wise➞Cruel and Unusual Punishment-wise",
+						"Any General➞Appropriate Weapons",
+						"Any General➞Shield Training"
+					],
+					traits: [
+						"Any Character➞Tasting the Lash",
+						"Any Character➞Expendable",
+						"Any Character➞Branded"
+					],
+					requirements: {
+						conditions: {
+							type: "OR",
+							items: [
+								"Human➞Servitude and Captive➞1*ANY"
+							]
+						}
+					}
+				},
+				{
+					allowed: ["bs"], stock: "Human", setting: "Servitude and Captive",
+					name: "Mamluk",
+					born: false,
+					years: 5,
+					resources: 10,
+					mentalPool: 0,
+					physicalPool: 0,
+					eitherPool: 1,
+					generalSkillPool: 0,
+					skillPool: 5,
+					traitPool: 1,
+					leads: ["Human➞Outcast", "Human➞Professional Soldier", "Human➞Nomad"],
+					skills: [
+						"Any General➞Spear",
+						"Any General➞Soldiering",
+						"Any General➞Intimidation",
+						"Any Wise➞Master-wise"
+					],
+					traits: [],
+					requirements: {
+						conditions: {
+							type: "OR",
+							items: [
+								"Human➞Servitude and Captive➞Bondsman",
+								"Human➞Servitude and Captive➞Slave Soldier"
+							]
+						}
+					}
+				},
+				{
+					allowed: ["bs"], stock: "Human", setting: "Servitude and Captive",
+					name: "Child Attendant",
+					born: false,
+					years: 2,
+					resources: 5,
+					mentalPool: 0,
+					physicalPool: 0,
+					eitherPool: 0,
+					generalSkillPool: 0,
+					skillPool: 3,
+					traitPool: 2,
+					leads: ["Human➞Outcast", "Human➞Religious"],
+					skills: [
+						"Any General➞Soothing Platitudes",
+						"Any Wise➞Templar-wise",
+						"Any Wise➞Noble-wise"
+					],
+					traits: [
+						"Any Character➞Servile",
+						"Any Character➞Abused",
+						"Any Character➞Haunted Beauty"
+					],
+					requirements: {
+						limits: ["LP➞MAX➞2"]
+					}
+				},
+				{
+					allowed: ["bs"], stock: "Human", setting: "Servitude and Captive",
+					name: "Slave Doctor",
+					born: false,
+					years: 8,
+					resources: 8,
+					mentalPool: 1,
+					physicalPool: 0,
+					eitherPool: 0,
+					generalSkillPool: 0,
+					skillPool: 4,
+					traitPool: 2,
+					leads: ["Human➞Outcast", "Human➞City Dweller", "Human➞Noble Court"],
+					skills: [
+						"Any Wise➞Sickness-wise",
+						"Any General➞Herbalism",
+						"Any General➞Midwifery",
+						"Any Wise➞Family Secret-wise"
+					],
+					traits: [
+						"Any Character➞Obedient",
+						"Any Character➞Humble",
+						"Any Character➞Bedside Manner"
+					],
+					requirements: {
+						conditions: {
+							type: "OR",
+							items: [
+								"Human➞Religious➞Castrati",
+								"Human➞Servitude and Captive➞Beast Handler"
+							]
+						}
+					}
+				},
+				{
+					allowed: ["bs"], stock: "Human", setting: "Servitude and Captive",
+					name: "Slave Artist",
+					born: false,
+					years: 5,
+					resources: 6,
+					mentalPool: 1,
+					physicalPool: 0,
+					eitherPool: 0,
+					generalSkillPool: 0,
+					skillPool: 4,
+					traitPool: 2,
+					leads: ["Human➞Outcast", "Human➞Nomad"],
+					skills: [
+						"Any Wise➞Bad Taste-wise",
+						"Any General➞Painting",
+						"Any General➞Sculpture"
+					],
+					traits: [
+						"Any Character➞Veneer of Obedience",
+						"Any Character➞Perspective",
+						"Any Character➞Keen Sight"
+					],
+					requirements: {}
+				},
+				{
+					allowed: ["bs"], stock: "Human", setting: "Servitude and Captive",
+					name: "Slave Performer",
+					born: false,
+					years: 4,
+					resources: 3,
+					mentalPool: 1,
+					physicalPool: 0,
+					eitherPool: 0,
+					generalSkillPool: 0,
+					skillPool: 3,
+					traitPool: 2,
+					leads: ["Human➞Outcast"],
+					skills: [
+						"Any General➞Sing",
+						"Any General➞Acting",
+						"Any General➞Musical Instrument"
+					],
+					traits: ["Any Character➞Bitter", "Any Character➞Ear for Voices"],
+					requirements: {}
+				},
+				{
+					allowed: ["bs"], stock: "Human", setting: "Servitude and Captive",
+					name: "Slave Musician",
+					born: false,
+					years: 7,
+					resources: 5,
+					mentalPool: 1,
+					physicalPool: 0,
+					eitherPool: 0,
+					generalSkillPool: 0,
+					skillPool: 4,
+					traitPool: 3,
+					leads: ["Human➞Outcast"],
+					skills: ["Any General➞Musical Instrument", "Any General➞Sing"],
+					traits: [
+						"Any Character➞Blind",
+						"Any Character➞Lame",
+						"Any Character➞Perfect Pitch"
+					],
+					requirements: {
+						conditions: {
+							type: "OR",
+							items: [
+								"Skill➞Any General➞Sing"
+							]
+						}
+					}
+				},
+				{
+					allowed: ["bs"], stock: "Human", setting: "Servitude and Captive",
+					name: "Slave Scribe",
+					born: false,
+					years: 7,
+					resources: 5,
+					mentalPool: 0,
+					physicalPool: 0,
+					eitherPool: 0,
+					generalSkillPool: 0,
+					skillPool: 4,
+					traitPool: 2,
+					leads: ["Human➞Outcast", "Human➞Merchant House"],
+					skills: [
+						"Any General➞Write",
+						"Any General➞Illuminations",
+						"Any General➞Cartography"
+					],
+					traits: [
+						"Any Character➞Near-Sighted",
+						"Any Character➞Cramped Hands",
+						"Any Character➞Mind-Numbing Work"
+					],
+					requirements: {}
+				},
+				{
+					allowed: ["bs"], stock: "Human", setting: "Servitude and Captive",
+					name: "Quarry Slave",
+					born: false,
+					years: 8,
+					resources: 4,
+					mentalPool: 0,
+					physicalPool: 1,
+					eitherPool: 0,
+					generalSkillPool: 0,
+					skillPool: 3,
+					traitPool: 2,
+					leads: ["Human➞Outcast", "Human➞Merchant House"],
+					skills: [
+						"Any General➞Hauling",
+						"Any Wise➞Stone-wise",
+						"Any Wise➞Obsidian-wise",
+						"Any Wise➞Salt-wise"
+					],
+					traits: [
+						"Any Character➞Tasting the Lash",
+						"Any Character➞Hacking Cough",
+						"Any Character➞Maimed",
+						"Any Character➞Lame"
+					],
+					requirements: {}
+				},
+				{
+					allowed: ["bs"], stock: "Human", setting: "Servitude and Captive",
+					name: "Foreman",
+					born: false,
+					years: 10,
+					resources: 8,
+					mentalPool: 0,
+					physicalPool: 0,
+					eitherPool: 1,
+					generalSkillPool: 0,
+					skillPool: 5,
+					traitPool: 2,
+					leads: ["Human➞Outcast", "Human➞City Dweller"],
+					skills: [
+						"Any Wise➞Slave-wise",
+						"Any Wise➞Grandiose Scheme-wise",
+						"Any General➞Soothing Platitudes",
+						"Any General➞Field Dressing",
+						"Any General➞Command"
+					],
+					traits: [
+						"Any Character➞Yes Boss",
+						"Any Character➞Pitiless",
+						"Any Character➞Booming Voice",
+						"Any Character➞Familiar Face"
+					],
+					requirements: {
+						conditions: {
+							type: "OR",
+							items: [
+								"Human➞Servitude and Captive➞Taskmaster",
+								"Human➞Servitude and Captive➞Beast Handler"
+							]
+						}
+					}
+				},
+				{
+					allowed: ["bs"], stock: "Human", setting: "Servitude and Captive",
+					name: "Arena Slave",
+					born: false,
+					years: 3,
+					resources: 5,
+					mentalPool: 0,
+					physicalPool: 1,
+					eitherPool: 0,
+					generalSkillPool: 0,
+					skillPool: 2,
+					traitPool: 2,
+					leads: ["Human➞Outcast"],
+					skills: ["Any Wise➞Arena-wise", "Any Wise➞Outlandish Beast-wise"],
+					traits: [
+						"Any Character➞Broken",
+						"Any Character➞Desperate",
+						"Any Character➞Scarred",
+						"Any Character➞Maimed"
+					],
+					requirements: {}
+				},
+				{
+					allowed: ["bs"], stock: "Human", setting: "Servitude and Captive",
+					name: "Gladiator",
+					born: false,
+					years: 5,
+					resources: 8,
+					mentalPool: 0,
+					physicalPool: 1,
+					eitherPool: 0,
+					generalSkillPool: 0,
+					skillPool: 5,
+					traitPool: 2,
+					leads: ["Human➞Outcast", "Human➞Professional Soldier", "Human➞Merchant House"],
+					skills: [
+						"Any General➞Brawling",
+						"Any General➞Appropriate Weapons",
+						"Any General➞Acting",
+						"Any General➞Drinking",
+						"Any Wise➞Champion-wise"
+					],
+					traits: [
+						"Any Character➞Life is Cheap",
+						"Any Character➞Drunk",
+						"Any Character➞Gloryhound"
+					],
+					requirements: {
+						conditions: {
+							type: "OR",
+							items: [
+								"Human➞Servitude and Captive➞Arena Slave",
+								"Human➞Servitude and Captive➞Slave Soldier"
+							]
+						}
+					}
+				},
+				{
+					allowed: ["bs"], stock: "Human", setting: "Servitude and Captive",
+					name: "Champion",
+					born: false,
+					years: 6,
+					resources: 10,
+					mentalPool: 0,
+					physicalPool: 1,
+					eitherPool: 0,
+					generalSkillPool: 0,
+					skillPool: 6,
+					traitPool: 2,
+					leads: ["Human➞Outcast", "Human➞Nomad"],
+					skills: [
+						"Any General➞Conspicuous",
+						"Any General➞Appropriate Weapons",
+						"Any General➞Shield Training",
+						"Any General➞Brawling",
+						"Any General➞Tactics"
+					],
+					traits: [
+						"Any Character➞Popular Hero",
+						"Any Character➞A Little Fat",
+						"Any Character➞Spartacus"
+					],
+					requirements: {}
+				},
+				{
+					allowed: ["bs"], stock: "Human", setting: "Servitude and Captive",
+					name: "Enslaved",
+					born: false,
+					years: 3,
+					resources: 3,
+					mentalPool: 0,
+					physicalPool: 0,
+					eitherPool: 0,
+					generalSkillPool: 0,
+					skillPool: 2,
+					traitPool: 2,
+					leads: ["Human➞Outcast", "Human➞Merchant House"],
+					skills: ["Any Wise➞Shackles-wise", "Any General➞Ditch Digging"],
+					traits: [
+						"Any Character➞Branded",
+						"Any Character➞Back-Breaking Labor",
+						"Any Character➞Yearning",
+						"Any Character➞Cool Hand"
+					],
+					requirements: {}
+				},
+				{
+					allowed: ["bs"], stock: "Human", setting: "Servitude and Captive",
+					name: "Tortured",
+					born: false,
+					years: 2,
+					resources: 2,
+					mentalPool: 0,
+					physicalPool: -1,
+					eitherPool: 0,
+					generalSkillPool: 0,
+					skillPool: 2,
+					traitPool: 3,
+					leads: ["Human➞Outcast"],
+					skills: ["Any Wise➞Screaming-wise", "Any Wise➞Torture Devices-wise"],
+					traits: [
+						"Any Character➞Broken",
+						"Any Character➞Maimed",
+						"Any Character➞Tongueless",
+						"Any Character➞Hoarse",
+						"Any Character➞Numb",
+						"Any Character➞Thousand-Yard Stare"
+					],
+					requirements: {}
+				},
+				{
+					allowed: ["bs"], stock: "Human", setting: "Servitude and Captive",
+					name: "Drover",
+					born: false,
+					years: 3,
+					resources: 5,
+					mentalPool: 0,
+					physicalPool: 1,
+					eitherPool: 0,
+					generalSkillPool: 0,
+					skillPool: 4,
+					traitPool: 2,
+					leads: ["Human➞Outcast"],
+					skills: [
+						"Any General➞Driving",
+						"Any General➞Mending",
+						"Any Wise➞Domestic Animals-wise"
+					],
+					traits: ["Any Character➞Dusty", "Any Character➞Thirsty"],
+					requirements: {}
+				},
+				{
+					allowed: ["bs"], stock: "Human", setting: "Servitude and Captive",
+					name: "Beast Handler",
+					born: false,
+					years: 6,
+					resources: 8,
+					mentalPool: 0,
+					physicalPool: 0,
+					eitherPool: 1,
+					generalSkillPool: 0,
+					skillPool: 5,
+					traitPool: 2,
+					leads: ["Human➞Outcast", "Human➞City Dweller", "Human➞Merchant House"],
+					skills: [
+						"Any Wise➞Outlandish Beast-wise",
+						"Any General➞Animal Husbandry",
+						"Any Wise➞Chains-wise",
+						"Any General➞Intimidation"
+					],
+					traits: [
+						"Any Character➞Gnawed",
+						"Any Character➞Missing Eye",
+						"Any Character➞Missing Digit",
+						"Any Character➞Maimed",
+						"Any Character➞Soft Spot",
+						"Any Character➞Low Speech"
+					],
+					requirements: {
+						conditions: {
+							type: "OR",
+							items: [
+								"Human➞Servitude and Captive➞Arena Slave",
+								"Human➞Servitude and Captive➞Drover"
+							]
+						}
+					}
+				},
+				{
+					allowed: ["bs"], stock: "Human", setting: "Servitude and Captive",
+					name: "Laborer",
+					born: false,
+					years: 4,
+					resources: 2,
+					mentalPool: 0,
+					physicalPool: 0,
+					eitherPool: 0,
+					generalSkillPool: 0,
+					skillPool: 2,
+					traitPool: 2,
+					leads: ["Human➞Outcast", "Human➞Nomad"],
+					skills: ["Any General➞Hauling", "Any General➞Ditch Digging"],
+					traits: [
+						"Any Character➞Starved",
+						"Any Character➞Callous",
+						"Any Character➞Hardened",
+						"Any Character➞Back-Breaking Labor"
+					],
+					requirements: {}
+				},
+				{
+					allowed: ["bs"], stock: "Human", setting: "Servitude and Captive",
+					name: "Farmer",
+					born: false,
+					years: 8,
+					resources: 5,
+					mentalPool: 0,
+					physicalPool: 1,
+					eitherPool: 0,
+					generalSkillPool: 0,
+					skillPool: 8,
+					traitPool: 1,
+					leads: ["Human➞Villager", "Human➞Professional Soldier"],
+					skills: [
+						"Any General➞Farming",
+						"Any General➞Mending",
+						"Any General➞Animal Husbandry",
+						"Any General➞Weaving",
+						"Any General➞Cooking",
+						"Any General➞Sewing",
+						"Any General➞Firebuilding",
+						"Any General➞Sing"
+					],
+					traits: ["Any Character➞Hoarding"],
+					requirements: {
+						conditions: {
+							type: "OR",
+							items: [
+								"Human➞Servitude and Captive➞Field Laborer"
+							]
+						}
+					}
+				},
+				{
+					allowed: ["bs"], stock: "Human", setting: "Servitude and Captive",
+					name: "Shepherd",
+					born: false,
+					years: 4,
+					resources: 4,
+					mentalPool: 0,
+					physicalPool: 1,
+					eitherPool: 0,
+					generalSkillPool: 0,
+					skillPool: 5,
+					traitPool: 1,
+					leads: ["Human➞Villager", "Human➞Professional Soldier", "Human➞Nomad"],
+					skills: [
+						"Any General➞Animal Husbandry",
+						"Any General➞Sing",
+						"Any General➞Climbing",
+						"Any General➞Flute"
+					],
+					traits: ["Any Character➞Cry Wolf"],
+					requirements: {
+						conditions: {
+							type: "OR",
+							items: [
+								"Human➞Servitude and Captive➞Field Laborer"
+							]
+						}
+					}
+				},
+				{
+					allowed: ["bs"], stock: "Human", setting: "Servitude and Captive",
+					name: "Taskmaster",
+					born: false,
+					years: 6,
+					resources: 7,
+					mentalPool: 1,
+					physicalPool: 0,
+					eitherPool: 0,
+					generalSkillPool: 0,
+					skillPool: 4,
+					traitPool: 2,
+					leads: ["Human➞Outcast", "Human➞Merchant House"],
+					skills: [
+						"Any General➞Intimidation",
+						"Any General➞Brawling",
+						"Any General➞Interrogation",
+						"Any General➞Torture"
+					],
+					traits: [
+						"Any Character➞Reviled",
+						"Any Character➞Hard-Hearted",
+						"Any Character➞Cruel"
+					],
+					requirements: {
+						conditions: {
+							type: "OR",
+							items: [
+								"Human➞Servitude and Captive➞2*ANY"
+							]
+						}
+					}
+				},
+				{
+					allowed: ["bs"], stock: "Human", setting: "Servitude and Captive",
+					name: "Concubine",
+					born: false,
+					years: 5,
+					resources: 10,
+					mentalPool: 0,
+					physicalPool: 0,
+					eitherPool: 0,
+					generalSkillPool: 0,
+					skillPool: 5,
+					traitPool: 2,
+					leads: ["Human➞Outcast", "Human➞Noble Court", "Human➞Merchant House"],
+					skills: [
+						"Any General➞Soothing Platitudes",
+						"Any General➞Seduction",
+						"Any General➞Falsehood",
+						"Any Wise➞Dirty Secret-wise",
+						"Any General➞Persuasion"
+					],
+					traits: [
+						"Any Character➞Veneer of Obedience",
+						"Any Character➞Favorite",
+						"Any Character➞Vain"
+					],
+					requirements: {
+						conditions: {
+							type: "OR",
+							items: [
+								"Human➞Servitude and Captive➞Harem Slave"
+							]
+						}
+					}
 				}
 			]
 		},
 		"Villager": {
-			allowed: ["bwgr"],
+			allowed: ["bwgr", "bs"],
 			name: "Villager",
 			short: "Villager",
 			stock: "Human",
 			type: "Setting",
 			lifepaths: [
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: true,
 					eitherPool: 0,
 					generalSkillPool: 3,
@@ -11087,7 +12347,7 @@ export const Human: Stock = {
 					years: 9
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -11127,7 +12387,7 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -11159,7 +12419,7 @@ export const Human: Stock = {
 					years: 10
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -11191,7 +12451,7 @@ export const Human: Stock = {
 					years: 2
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -11218,7 +12478,7 @@ export const Human: Stock = {
 					years: 1
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -11247,7 +12507,7 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -11277,7 +12537,7 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -11311,7 +12571,7 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -11338,7 +12598,7 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -11404,7 +12664,7 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -11437,7 +12697,7 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -11481,7 +12741,7 @@ export const Human: Stock = {
 					years: 3
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -11523,7 +12783,7 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -11560,7 +12820,7 @@ export const Human: Stock = {
 					years: 3
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -11595,7 +12855,7 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -11628,7 +12888,7 @@ export const Human: Stock = {
 					years: 3
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
@@ -11675,7 +12935,7 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
@@ -11720,7 +12980,7 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -11748,7 +13008,7 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -11761,6 +13021,12 @@ export const Human: Stock = {
 					name: "Tax Collector",
 					physicalPool: 0,
 					requirements: {
+						conditions: {
+							type: "OR", // TODO: Burning Sun
+							items: [
+								"Human➞Religious➞1*ANY"
+							]
+						},
 						limits: [
 							"LP➞MIN➞3"
 						]
@@ -11783,7 +13049,7 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -11822,7 +13088,7 @@ export const Human: Stock = {
 					years: 8
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -11860,7 +13126,7 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -11893,7 +13159,7 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -11925,7 +13191,7 @@ export const Human: Stock = {
 					years: 7
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -11956,7 +13222,7 @@ export const Human: Stock = {
 					years: 8
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -11993,7 +13259,7 @@ export const Human: Stock = {
 					years: 7
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -12023,7 +13289,7 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -12065,7 +13331,7 @@ export const Human: Stock = {
 					years: 8
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -12113,7 +13379,7 @@ export const Human: Stock = {
 					years: 9
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -12147,7 +13413,7 @@ export const Human: Stock = {
 					years: 7
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
@@ -12187,7 +13453,7 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -12226,7 +13492,7 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -12266,7 +13532,7 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -12307,7 +13573,7 @@ export const Human: Stock = {
 					years: 10
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -12342,7 +13608,7 @@ export const Human: Stock = {
 					years: 10
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -12373,7 +13639,7 @@ export const Human: Stock = {
 					years: 8
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -12421,7 +13687,7 @@ export const Human: Stock = {
 					years: 8
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -12437,12 +13703,23 @@ export const Human: Stock = {
 						conditions: {
 							type: "OR",
 							items: [
-								"Human➞City Dweller➞Clerk",
-								"Human➞Villager➞Clerk",
-								"Human➞Religious➞Priest",
-								"Human➞City Dweller➞Student",
-								"Human➞Noble➞Student",
-								"Human➞Noble Court➞Student"
+								{
+									type: "OR",
+									items: [
+										"Human➞City Dweller➞Clerk",
+										"Human➞Villager➞Clerk",
+										"Human➞Religious➞Priest",
+										"Human➞City Dweller➞Student",
+										"Human➞Noble➞Student",
+										"Human➞Noble Court➞Student"
+									]
+								},
+								{
+									type: "OR", // TODO: Burning Sun
+									items: [
+										"Human➞Religious➞1*ANY"
+									]
+								}
 							]
 						}
 					},
@@ -12465,7 +13742,7 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -12510,7 +13787,7 @@ export const Human: Stock = {
 					years: 7
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -12632,6 +13909,1297 @@ export const Human: Stock = {
 						"Human Special➞Never a Moment of Peace"
 					],
 					years: 8
+				}
+			]
+		},
+		"Nomad": {
+			allowed: ["bs"],
+			name: "Nomad",
+			short: "Nomad",
+			stock: "Human",
+			type: "Setting",
+			lifepaths: [
+				{
+					name: "Born Free",
+					born: true,
+					years: 8,
+					resources: 3,
+					mentalPool: 0,
+					physicalPool: 0,
+					eitherPool: 0,
+					generalSkillPool: 2,
+					skillPool: 2,
+					traitPool: 2,
+					leads: ["Human➞Outcast", "Human➞Servitude and Captive"],
+					skills: ["Any Wise➞Migration-wise", "Any General➞Riding"],
+					traits: ["Any Character➞Weathered", "Any Character➞Sense of Direction"],
+					requirements: {},
+					stock: "Human",
+					setting: "Nomad",
+					allowed: ["bs"]
+				},
+				{
+					name: "Forager",
+					born: false,
+					years: 5,
+					resources: 5,
+					mentalPool: 0,
+					physicalPool: 0,
+					eitherPool: 1,
+					generalSkillPool: 0,
+					skillPool: 5,
+					traitPool: 2,
+					leads: ["Human➞Outcast", "Human➞Servitude and Captive"],
+					skills: [
+						"Any General➞Foraging",
+						"Any General➞Scavenging",
+						"Any General➞Survival",
+						"Any General➞Cooking",
+						"Any Wise➞Bone-wise"
+					],
+					traits: ["Any Character➞Hoarding"],
+					requirements: {},
+					stock: "Human",
+					setting: "Nomad",
+					allowed: ["bs"]
+				},
+				{
+					name: "Hunter",
+					born: false,
+					years: 5,
+					resources: 5,
+					mentalPool: 1,
+					physicalPool: 1,
+					eitherPool: 0,
+					generalSkillPool: 0,
+					skillPool: 7,
+					traitPool: 1,
+					leads: ["Human➞Peasant", "Human➞Outcast", "Human➞Servitude and Captive"],
+					skills: [
+						"Any General➞Hunting",
+						"Any General➞Tracking",
+						"Any General➞Stealthy",
+						"Any General➞Cooking",
+						"Any General➞Orienteering",
+						"Any General➞Throwing",
+						"Any General➞Bow"
+					],
+					traits: ["Any Character➞Lean"],
+					requirements: {},
+					stock: "Human",
+					setting: "Nomad",
+					allowed: ["bs"]
+				},
+				{
+					name: "Apprentice",
+					born: false,
+					years: 6,
+					resources: 6,
+					mentalPool: 0,
+					physicalPool: 1,
+					eitherPool: 0,
+					generalSkillPool: 0,
+					skillPool: 6,
+					traitPool: 1,
+					leads: ["Human➞Villager", "Human➞Outcast", "Human➞Servitude and Captive"],
+					skills: [
+						"Any General➞Mending",
+						"Any General➞Carving",
+						"Any General➞Tanner",
+						"Any General➞Firebuilding",
+						"Any General➞Potter",
+						"Any General➞Weaving"
+					],
+					traits: ["Any Character➞Back-Breaking Labor"],
+					requirements: {},
+					stock: "Human",
+					setting: "Nomad",
+					allowed: ["bs"]
+				},
+				{
+					name: "Herder",
+					born: false,
+					years: 4,
+					resources: 4,
+					mentalPool: 0,
+					physicalPool: 1,
+					eitherPool: 0,
+					generalSkillPool: 0,
+					skillPool: 5,
+					traitPool: 1,
+					leads: ["Human➞Peasant", "Human➞Outcast", "Human➞Servitude and Captive"],
+					skills: [
+						"Any General➞Animal Husbandry",
+						"Any General➞Sing",
+						"Any General➞Climbing",
+						"Any Wise➞Predator-wise",
+						"Any General➞Riding"
+					],
+					traits: ["Any Character➞Smelly"],
+					requirements: {},
+					stock: "Human",
+					setting: "Nomad",
+					allowed: ["bs"]
+				},
+				{
+					name: "Lost in the Desert",
+					born: false,
+					years: 1,
+					resources: 2,
+					mentalPool: 0,
+					physicalPool: 0,
+					eitherPool: 0,
+					generalSkillPool: 0,
+					skillPool: 3,
+					traitPool: 2,
+					leads: [
+						"Human➞Villager",
+						"Human➞Outcast",
+						"Human➞Servitude and Captive",
+						"Human➞Merchant House"
+					],
+					skills: [
+						"Any General➞Survival",
+						"Any General➞Foraging",
+						"Any Wise➞Hidey Hole-wise"
+					],
+					traits: [
+						"Any Character➞Lost",
+						"Any Character➞Unlucky",
+						"Any Character➞Never Out of Sight"
+					],
+					requirements: {},
+					stock: "Human",
+					setting: "Nomad",
+					allowed: ["bs"]
+				},
+				{
+					name: "Strange",
+					born: false,
+					years: 4,
+					resources: 3,
+					mentalPool: 1,
+					physicalPool: 0,
+					eitherPool: 0,
+					generalSkillPool: 0,
+					skillPool: 3,
+					traitPool: 3,
+					leads: ["Human➞Religious", "Human➞Outcast", "Human➞Servitude and Captive"],
+					skills: ["Any General➞Inconspicuous", "Any General➞Foraging"],
+					traits: [
+						"Any Character➞Strange",
+						"Any Character➞Problems",
+						"Any Character➞Meticulous",
+						"Any Character➞Dreamer",
+						"Any Character➞Second Sight",
+						"Any Character➞Affinity for Bugs"
+					],
+					requirements: {},
+					stock: "Human",
+					setting: "Nomad",
+					allowed: ["bs"]
+				},
+				{
+					name: "Pathfinder",
+					born: false,
+					years: 5,
+					resources: 6,
+					mentalPool: 0,
+					physicalPool: 0,
+					eitherPool: 1,
+					generalSkillPool: 0,
+					skillPool: 6,
+					traitPool: 1,
+					leads: [
+						"Human➞Professional Soldier",
+						"Human➞Outcast",
+						"Human➞Servitude and Captive"
+					],
+					skills: [
+						"Any General➞Orienteering",
+						"Any General➞Observation",
+						"Any General➞Climbing",
+						"Any General➞Riding",
+						"Any General➞Survival",
+						"Any Wise➞Oasis-wise"
+					],
+					traits: [],
+					requirements: {
+						conditions: {
+							type: "OR",
+							items: [
+								"Human➞Nomad➞Forager",
+								"Human➞Peasant➞Hunter",
+								"Human➞Nomad➞Hunter"
+							]
+						}
+					},
+					stock: "Human",
+					setting: "Nomad",
+					allowed: ["bs"]
+				},
+				{
+					name: "Guide",
+					born: false,
+					years: 4,
+					resources: 10,
+					mentalPool: 1,
+					physicalPool: 0,
+					eitherPool: 0,
+					generalSkillPool: 0,
+					skillPool: 4,
+					traitPool: 1,
+					leads: [
+						"Human➞Peasant",
+						"Human➞Villager",
+						"Human➞City Dweller",
+						"Human➞Noble",
+						"Human➞Servitude and Captive",
+						"Human➞Nomad",
+						"Human➞Noble Court",
+						"Human➞Religious",
+						"Human➞Professional Soldier",
+						"Human➞Outcast",
+						"Human➞Merchant House"
+					],
+					skills: [
+						"Any Wise➞Desert-wise",
+						"Any General➞Haggling",
+						"Any General➞Soothing Platitudes",
+						"Any General➞Survival"
+					],
+					traits: ["Any Character➞Superstitious", "Any Character➞Tell Tale Teller"],
+					requirements: {
+						limits: ["LP➞MIN➞3"]
+					},
+					stock: "Human",
+					setting: "Nomad",
+					allowed: ["bs"]
+				},
+				{
+					name: "Peddler",
+					born: false,
+					years: 6,
+					resources: 12,
+					mentalPool: 1,
+					physicalPool: 0,
+					eitherPool: 0,
+					generalSkillPool: 0,
+					skillPool: 5,
+					traitPool: 2,
+					leads: [
+						"Human➞Peasant",
+						"Human➞Villager",
+						"Human➞City Dweller",
+						"Human➞Outcast",
+						"Human➞Servitude and Captive"
+					],
+					skills: [
+						"Any General➞Haggling",
+						"Any General➞Sing",
+						"Any General➞Falsehood",
+						"Any General➞Sleight of Hand"
+					],
+					traits: ["Any Character➞Prone to Exaggeration", "Any Character➞Glib"],
+					requirements: {
+						conditions: {
+							type: "OR",
+							items: [
+								"Human➞City Dweller➞Apprentice",
+								"Human➞Villager➞Apprentice",
+								"Human➞City Dweller➞Apprentice",
+								"Human➞Nomad➞Apprentice",
+								"Human➞Nomad➞Forager",
+								"Human➞Nomad➞Herder"
+							]
+						}
+					},
+					stock: "Human",
+					setting: "Nomad",
+					allowed: ["bs"]
+				},
+				{
+					name: "Herd Overseer",
+					born: false,
+					years: 9,
+					resources: 20,
+					mentalPool: 1,
+					physicalPool: 0,
+					eitherPool: 0,
+					generalSkillPool: 0,
+					skillPool: 6,
+					traitPool: 1,
+					leads: ["Human➞Outcast", "Human➞Servitude and Captive", "Human➞Merchant House"],
+					skills: [
+						"Any General➞Appraisal",
+						"Any General➞Brewer",
+						"Any General➞Bloodletting",
+						"Any General➞Haggling",
+						"Any Wise➞Kank-wise",
+						"Any Wise➞Erdlu-wise"
+					],
+					traits: ["Any Character➞Grasping", "Any Character➞Rainman"],
+					requirements: {
+						conditions: {
+							type: "OR",
+							items: [
+								"Human➞Nomad➞Herder"
+							]
+						}
+					},
+					stock: "Human",
+					setting: "Nomad",
+					allowed: ["bs"]
+				},
+				{
+					name: "Artisan",
+					born: false,
+					years: 8,
+					resources: 12,
+					mentalPool: 0,
+					physicalPool: 0,
+					eitherPool: 1,
+					generalSkillPool: 0,
+					skillPool: 7,
+					traitPool: 1,
+					leads: [
+						"Human➞Villager",
+						"Human➞City Dweller",
+						"Human➞Outcast",
+						"Human➞Servitude and Captive"
+					],
+					skills: [
+						"Any General➞Haggling",
+						"Any General➞Embroidery",
+						"Any General➞Saddlery",
+						"Any General➞Bowyer",
+						"Any General➞Fletcher",
+						"Any General➞Weaponsmith",
+						"Any General➞Armorer"
+					],
+					traits: ["Any Character➞Made Man", "Any Character➞Improvisation"],
+					requirements: {
+						conditions: {
+							type: "OR",
+							items: [
+								"Human➞City Dweller➞Apprentice",
+								"Human➞Villager➞Apprentice",
+								"Human➞City Dweller➞Apprentice",
+								"Human➞Nomad➞Apprentice"
+							]
+						}
+					},
+					stock: "Human",
+					setting: "Nomad",
+					allowed: ["bs"]
+				},
+				{
+					name: "Warrior",
+					born: false,
+					years: 7,
+					resources: 6,
+					mentalPool: 0,
+					physicalPool: 1,
+					eitherPool: 0,
+					generalSkillPool: 0,
+					skillPool: 7,
+					traitPool: 1,
+					leads: [
+						"Human➞Servitude and Captive",
+						"Human➞Outcast",
+						"Human➞Professional Soldier"
+					],
+					skills: [
+						"Any General➞Conspicuous",
+						"Any General➞Brawling",
+						"Any General➞Spear",
+						"Any General➞Bow",
+						"Any General➞Knives",
+						"Any General➞Intimidation",
+						"Any General➞Mounted Combat Training"
+					],
+					traits: ["Any Character➞Proud"],
+					requirements: {
+						conditions: {
+							type: "OR",
+							items: [
+								"Human➞Peasant➞Hunter",
+								"Human➞Nomad➞Hunter",
+								"Human➞Nomad➞Herder",
+								"Human➞Outcast➞Scavenger",
+								"Human➞Nomad➞Scavenger"
+							]
+						}
+					},
+					stock: "Human",
+					setting: "Nomad",
+					allowed: ["bs"]
+				},
+				{
+					name: "Performer",
+					born: false,
+					years: 4,
+					resources: 5,
+					mentalPool: 1,
+					physicalPool: 0,
+					eitherPool: 0,
+					generalSkillPool: 0,
+					skillPool: 6,
+					traitPool: 2,
+					leads: ["Human➞Servitude and Captive", "Human➞Outcast", "Human➞City Dweller"],
+					skills: [
+						"Any General➞Sing",
+						"Any General➞Dance",
+						"Any General➞Persuasion",
+						"Any General➞Musical Instrument",
+						"Any General➞Falsehood",
+						"Any General➞Sleight of Hand"
+					],
+					traits: ["Any Character➞Colorful", "Any Character➞Exotic"],
+					requirements: {
+						limits: ["LP➞MIN➞3"]
+					},
+					stock: "Human",
+					setting: "Nomad",
+					allowed: ["bs"]
+				},
+				{
+					name: "Storyteller",
+					born: false,
+					years: 5,
+					resources: 8,
+					mentalPool: 1,
+					physicalPool: 0,
+					eitherPool: 0,
+					generalSkillPool: 0,
+					skillPool: 5,
+					traitPool: 1,
+					leads: ["Human➞Servitude and Captive", "Human➞Outcast", "Human➞City Dweller"],
+					skills: [
+						"Any General➞Folklore",
+						"Any General➞Poetry",
+						"Any General➞Acting",
+						"Any General➞Oratory",
+						"Any General➞Conspicuous"
+					],
+					traits: ["Any Character➞Dramatic"],
+					requirements: {
+						conditions: {
+							type: "OR",
+							items: [
+								"Human➞Nomad➞Performer",
+								"Human➞Servitude and Captive➞Performer",
+								"Human➞Outcast➞Performer",
+								"Human➞City Dweller➞Performer",
+								"Human➞Nomad➞Veteran",
+								"Human➞Professional Soldier➞Veteran",
+								"Human➞Nomad➞Elder",
+								"Human➞Peasant➞Elder"
+							]
+						}
+					},
+					stock: "Human",
+					setting: "Nomad",
+					allowed: ["bs"]
+				},
+				{
+					name: "Tribal Wife",
+					born: false,
+					years: 9,
+					resources: 4,
+					mentalPool: 1,
+					physicalPool: 1,
+					eitherPool: 0,
+					generalSkillPool: 0,
+					skillPool: 2,
+					traitPool: 2,
+					leads: ["Human➞Servitude and Captive", "Human➞Outcast"],
+					skills: ["Any General➞Child-Rearing", "Any General➞Cooking"],
+					traits: ["Any Character➞Burdened"],
+					requirements: {
+						limits: ["LP➞MIN➞3"]
+					},
+					stock: "Human",
+					setting: "Nomad",
+					allowed: ["bs"]
+				},
+				{
+					name: "Healer",
+					born: false,
+					years: 8,
+					resources: 9,
+					mentalPool: 1,
+					physicalPool: 0,
+					eitherPool: 0,
+					generalSkillPool: 0,
+					skillPool: 5,
+					traitPool: 2,
+					leads: ["Human➞Servitude and Captive", "Human➞Outcast"],
+					skills: [
+						"Any General➞Soothing Platitudes",
+						"Any General➞Herbalism",
+						"Any General➞Bloodletting",
+						"Any General➞Midwifery",
+						"Any Wise➞Omen-wise"
+					],
+					traits: [
+						"Any Character➞Sick of Death",
+						"Any Character➞Superstitious",
+						"Any Character➞Bedside Manner"
+					],
+					requirements: {
+						conditions: {
+							type: "OR",
+							items: [
+								"Human➞Nomad➞Herder",
+								"Human➞Nomad➞Shaman",
+								"Human➞Professional Soldier➞Veteran",
+								"Human➞Nomad➞Veteran"
+							]
+						}
+					},
+					stock: "Human",
+					setting: "Nomad",
+					allowed: ["bs"]
+				},
+				{
+					name: "Trader",
+					born: false,
+					years: 8,
+					resources: 25,
+					mentalPool: 1,
+					physicalPool: 0,
+					eitherPool: 0,
+					generalSkillPool: 0,
+					skillPool: 6,
+					traitPool: 2,
+					leads: [
+						"Human➞Servitude and Captive",
+						"Human➞Outcast",
+						"Human➞Villager",
+						"Human➞City Dweller",
+						"Human➞Merchant House"
+					],
+					skills: [
+						"Any General➞Appraisal",
+						"Any General➞Haggling",
+						"Any Wise➞Goods-wise",
+						"Any Wise➞Trade Route-wise",
+						"Any Wise➞City Dweller-wise",
+						"Any Wise➞Caravan-wise"
+					],
+					traits: [],
+					requirements: {
+						conditions: {
+							type: "OR",
+							items: [
+								"Human➞Nomad➞Herd Overseer",
+								"Human➞Nomad➞Artisan",
+								"Human➞City Dweller➞Artisan",
+								"Human➞Nomad➞Raider",
+								"Human➞City Dweller➞City Peddler",
+								"Human➞Peasant➞Peddler",
+								"Human➞Village➞Village Peddler"
+							]
+						}
+					},
+					stock: "Human",
+					setting: "Nomad",
+					allowed: ["bs"]
+				},
+				{
+					name: "Raider",
+					born: false,
+					years: 6,
+					resources: 9,
+					mentalPool: 0,
+					physicalPool: 1,
+					eitherPool: 0,
+					generalSkillPool: 0,
+					skillPool: 5,
+					traitPool: 2,
+					leads: [
+						"Human➞Servitude and Captive",
+						"Human➞Outcast",
+						"Human➞Professional Soldier"
+					],
+					skills: [
+						"Any General➞Appropriate Weapons",
+						"Any General➞Stealthy",
+						"Any General➞Intimidation",
+						"Any Wise➞Town-wise",
+						"Any Wise➞Caravan-wise",
+						"Any Wise➞Loot-wise"
+					],
+					traits: [
+						"Any Character➞Desperate",
+						"Any Character➞Cold Blooded",
+						"Any Character➞Quiet",
+						"Any Character➞Boaster"
+					],
+					requirements: {
+						conditions: {
+							type: "OR",
+							items: [
+								"Human➞Nomad➞Warrior",
+								"Human➞Nomad➞Scout",
+								"Human➞Nomad➞Trader"
+							]
+						}
+					},
+					stock: "Human",
+					setting: "Nomad",
+					allowed: ["bs"]
+				},
+				{
+					name: "Veteran",
+					born: false,
+					years: 10,
+					resources: 14,
+					mentalPool: 0,
+					physicalPool: 0,
+					eitherPool: 1,
+					generalSkillPool: 0,
+					skillPool: 5,
+					traitPool: 2,
+					leads: [
+						"Human➞Servitude and Captive",
+						"Human➞Outcast",
+						"Human➞Professional Soldier"
+					],
+					skills: [
+						"Any Wise➞Battle-wise",
+						"Any General➞Field Dressing",
+						"Any General➞Shield Training",
+						"Any General➞Soldiering",
+						"Any General➞Command"
+					],
+					traits: ["Any Character➞Stubborn", "Any Character➞Maimed"],
+					requirements: {
+						conditions: {
+							type: "OR",
+							items: [
+								"Human➞Nomad➞Warrior",
+								"Human➞Nomad➞Raider"
+							]
+						}
+					},
+					stock: "Human",
+					setting: "Nomad",
+					allowed: ["bs"]
+				},
+				{
+					name: "Shaman",
+					born: false,
+					years: 8,
+					resources: 9,
+					mentalPool: 1,
+					physicalPool: 0,
+					eitherPool: 0,
+					generalSkillPool: 0,
+					skillPool: 6,
+					traitPool: 2,
+					leads: ["Human➞Outcast", "Human➞Servitude and Captive", "Human➞Religious"],
+					skills: [
+						"Any General➞Folklore",
+						"Human Special➞Astrology",
+						"Any General➞Tribal History",
+						"Any Wise➞Ancestor-wise",
+						"Any Wise➞Ghost-wise",
+						"Any General➞Oratory"
+					],
+					traits: [
+						"Any Character➞Revered",
+						"Any Character➞Eccentric",
+						"Any Character➞Empty Faith"
+					],
+					requirements: {
+						conditions: {
+							type: "OR",
+							items: [
+								"Human➞Religious➞1*ANY",
+								"Human➞Nomad➞Strange"
+							]
+						}
+					},
+					stock: "Human",
+					setting: "Nomad",
+					allowed: ["bs"]
+				},
+				{
+					name: "Patriarch/Matriarch",
+					born: false,
+					years: 15,
+					resources: 18,
+					mentalPool: 1,
+					physicalPool: 0,
+					eitherPool: 0,
+					generalSkillPool: 0,
+					skillPool: 8,
+					traitPool: 2,
+					leads: ["Human➞Outcast", "Human➞Servitude and Captive"],
+					skills: [
+						"Any Wise➞Family-wise",
+						"Any Wise➞Ancestor-wise",
+						"Any Wise➞Tribe-wise",
+						"Any General➞Persuasion",
+						"Any General➞Almanac"
+					],
+					traits: ["Any Character➞Honored", "Any Character➞Conservative"],
+					requirements: {
+						conditions: {
+							type: "OR",
+							items: [
+								"Human➞Nomad➞Herd Overseer",
+								"Human➞Professional Soldier➞Veteran",
+								"Human➞Nomad➞Veteran",
+								"Human➞Nomad➞Artisan",
+								"Human➞City Dweller➞Artisan"
+							]
+						}
+					},
+					stock: "Human",
+					setting: "Nomad",
+					allowed: ["bs"]
+				},
+				{
+					name: "Warleader",
+					born: false,
+					years: 7,
+					resources: 15,
+					mentalPool: 1,
+					physicalPool: 1,
+					eitherPool: 0,
+					generalSkillPool: 0,
+					skillPool: 8,
+					traitPool: 2,
+					leads: [
+						"Human➞Outcast",
+						"Human➞Servitude and Captive",
+						"Human➞Professional Soldier"
+					],
+					skills: [
+						"Any General➞Command",
+						"Any General➞Appropriate Weapons",
+						"Any General➞Oratory",
+						"Any General➞Riding",
+						"Any General➞Tactics",
+						"Any General➞Field Dressing",
+						"Any General➞Skirmish Tactics Training"
+					],
+					traits: [
+						"Any Character➞Scarred",
+						"Any Character➞Cool Headed",
+						"Any Character➞Commanding Aura"
+					],
+					requirements: {
+						conditions: {
+							type: "OR",
+							items: [
+								"Human➞Nomad➞Headman",
+								"Human➞Professional Soldier➞Veteran",
+								"Human➞Nomad➞Veteran"
+							]
+						}
+					},
+					stock: "Human",
+					setting: "Nomad",
+					allowed: ["bs"]
+				},
+				{
+					name: "Headman",
+					born: false,
+					years: 10,
+					resources: 20,
+					mentalPool: 0,
+					physicalPool: 0,
+					eitherPool: 1,
+					generalSkillPool: 2,
+					skillPool: 4,
+					traitPool: 1,
+					leads: ["Human➞Outcast", "Human➞Servitude and Captive"],
+					skills: [
+						"Any Wise➞Tribe-wise",
+						"Any General➞Oratory",
+						"Any General➞Administration",
+						"Any Wise➞Waste-wise"
+					],
+					traits: ["Any Character➞Savvy"],
+					requirements: {
+						conditions: {
+							type: "OR",
+							items: [
+								"Human➞Nomad➞Patriarch/Matriarch",
+								"Human➞Nomad➞Trader",
+								"Human➞Nomad➞Warleader",
+								"Human➞Nomad➞Ravager"
+							]
+						}
+					},
+					stock: "Human",
+					setting: "Nomad",
+					allowed: ["bs"]
+				},
+				{
+					name: "Elder",
+					born: false,
+					years: 15,
+					resources: 10,
+					mentalPool: 1,
+					physicalPool: 0,
+					eitherPool: 0,
+					generalSkillPool: 0,
+					skillPool: 6,
+					traitPool: 2,
+					leads: ["Human➞Peasant", "Human➞Servitude and Captive"],
+					skills: [
+						"Any General➞Local History",
+						"Any Wise➞Tribe-wise",
+						"Any General➞Observation",
+						"Any General➞Ugly Truth",
+						"Any Wise➞Tradition-wise",
+						"Any General➞Persuasion"
+					],
+					traits: [
+						"Any Character➞Traditional",
+						"Any Character➞Toothless",
+						"Any Character➞Eccentric"
+					],
+					requirements: {
+						limits: ["LP➞MIN➞45"]
+					},
+					stock: "Human",
+					setting: "Nomad",
+					allowed: ["bs"]
+				},
+				{
+					name: "Wanderer",
+					born: false,
+					years: 4,
+					resources: 3,
+					mentalPool: 0,
+					physicalPool: 0,
+					eitherPool: 1,
+					generalSkillPool: 0,
+					skillPool: 6,
+					traitPool: 2,
+					leads: ["Human➞Villager"],
+					skills: [
+						"Any General➞Survival",
+						"Any Wise➞Waste-wise",
+						"Any General➞Foraging",
+						"Any General➞Firebuilding",
+						"Any Wise➞Ruins-wise",
+						"Any Wise➞Bandit-wise"
+					],
+					traits: [
+						"Any Character➞Weathered",
+						"Any Character➞Light Sleeper",
+						"Any Character➞Strange"
+					],
+					requirements: {},
+					stock: "Human",
+					setting: "Nomad",
+					allowed: ["bs"]
+				},
+				{
+					name: "Bandit",
+					born: false,
+					years: 4,
+					resources: 8,
+					mentalPool: 0,
+					physicalPool: 1,
+					eitherPool: 0,
+					generalSkillPool: 0,
+					skillPool: 6,
+					traitPool: 1,
+					leads: ["Human➞Outcast", "Human➞Peasant"],
+					skills: [
+						"Any General➞Appropriate Weapons",
+						"Any General➞Stealthy",
+						"Any Wise➞Caravan-wise",
+						"Any General➞Survival",
+						"Any Wise➞Waste-wise",
+						"Any General➞Intimidation"
+					],
+					traits: [],
+					requirements: {},
+					stock: "Human",
+					setting: "Nomad",
+					allowed: ["bs"]
+				},
+				{
+					name: "Bandit King",
+					born: false,
+					years: 6,
+					resources: 15,
+					mentalPool: 0,
+					physicalPool: 0,
+					eitherPool: 1,
+					generalSkillPool: 0,
+					skillPool: 7,
+					traitPool: 2,
+					leads: ["Human➞Outcast", "Human➞City Dweller", "Human➞Noble Court"],
+					skills: [
+						"Any General➞Intimidation",
+						"Any General➞Command",
+						"Any General➞Orienteering",
+						"Any Wise➞Bandit-wise",
+						"Any Wise➞Duststorm-wise",
+						"Any Wise➞Caravan-wise",
+						"Any General➞Appropriate Weapons",
+						"Any General➞Two-Fisted Fighting Training"
+					],
+					traits: [
+						"Any Character➞Scheming",
+						"Any Character➞Sadistic",
+						"Any Character➞Bitter"
+					],
+					requirements: {
+						conditions: {
+							type: "OR",
+							items: [
+								"Human➞Outcast➞Bandit",
+								"Human➞Nomad➞Bandit",
+								"Human➞Villager➞Village Sergeant",
+								"Human➞Villager➞Corrupt Sergeant",
+								"Human➞Professional Soldier➞Sergeant",
+								"Human➞Noble➞Knight",
+								"Human➞Noble Court➞Knight",
+								"Human➞Professional Soldier➞Captain"
+							]
+						}
+					},
+					stock: "Human",
+					setting: "Nomad",
+					allowed: ["bs"]
+				},
+				{
+					name: "Monster Hunter",
+					born: false,
+					years: 4,
+					resources: 6,
+					mentalPool: 0,
+					physicalPool: 0,
+					eitherPool: 1,
+					generalSkillPool: 0,
+					skillPool: 7,
+					traitPool: 2,
+					leads: ["Human➞Outcast", "Human➞Peasant"],
+					skills: [
+						"Any General➞Stealthy",
+						"Any Wise➞Fell Beast-wise",
+						"Any Wise➞Unspeakable Horror-wise",
+						"Any Wise➞Half-Giant-wise",
+						"Any General➞Appropriate Weapons",
+						"Any General➞Survival",
+						"Any Wise➞Waste-wise"
+					],
+					traits: [
+						"Any Character➞Disturbingly Confident",
+						"Any Character➞Fearless",
+						"Any Character➞Hearty",
+						"Any Character➞Mad"
+					],
+					requirements: {
+						conditions: {
+							type: "OR",
+							items: [
+								"Human➞Outcast➞1*ANY"
+							]
+						}
+					},
+					stock: "Human",
+					setting: "Nomad",
+					allowed: ["bs"]
+				},
+				{
+					name: "Bandit Hunter",
+					born: false,
+					years: 4,
+					resources: 8,
+					mentalPool: 0,
+					physicalPool: 1,
+					eitherPool: 0,
+					generalSkillPool: 0,
+					skillPool: 7,
+					traitPool: 2,
+					leads: [
+						"Human➞Outcast",
+						"Human➞City Dweller",
+						"Human➞Professional Soldier"
+					],
+					skills: [
+						"Any Wise➞Bandit-wise",
+						"Any General➞Tracking",
+						"Any General➞Appropriate Weapons",
+						"Any General➞Stealthy",
+						"Any General➞Observation",
+						"Any General➞Orienteering",
+						"Any General➞Survival"
+					],
+					traits: [
+						"Any Character➞Taciturn",
+						"Any Character➞Light Sleeper",
+						"Any Character➞Callous"
+					],
+					requirements: {},
+					stock: "Human",
+					setting: "Nomad",
+					allowed: ["bs"]
+				},
+				{
+					name: "Scavenger",
+					born: false,
+					years: 4,
+					resources: 3,
+					mentalPool: 1,
+					physicalPool: 0,
+					eitherPool: 0,
+					generalSkillPool: 0,
+					skillPool: 6,
+					traitPool: 2,
+					leads: [
+						"Human➞Outcast",
+						"Human➞City Dweller",
+						"Human➞Peasant",
+						"Human➞Merchant House"
+					],
+					skills: [
+						"Any General➞Scavenging",
+						"Any Wise➞Ruins-wise",
+						"Any Wise➞Waste-wise",
+						"Any General➞Survival",
+						"Any General➞Brawling",
+						"Any General➞Hunting"
+					],
+					traits: [
+						"Any Character➞Scavenger",
+						"Any Character➞Misanthropic",
+						"Any Character➞Odd",
+						"Any Character➞Nasty Cough"
+					],
+					requirements: {},
+					stock: "Human",
+					setting: "Nomad",
+					allowed: ["bs"]
+				},
+				{
+					name: "Ruin Explorer",
+					born: false,
+					years: 5,
+					resources: 15,
+					mentalPool: 1,
+					physicalPool: 0,
+					eitherPool: 0,
+					generalSkillPool: 0,
+					skillPool: 8,
+					traitPool: 3,
+					leads: [
+						"Human➞Outcast",
+						"Human➞City Dweller",
+						"Human➞Noble Court",
+						"Human➞Merchant House"
+					],
+					skills: [
+						"Any Wise➞Ruins-wise",
+						"Any Wise➞Loot-wise",
+						"Any Wise➞Traps-wise",
+						"Any General➞Stealthy",
+						"Any General➞Climbing",
+						"Any General➞Ancient History",
+						"Any General➞Symbology",
+						"Any General➞Scavenging"
+					],
+					traits: [
+						"Any Character➞Driven",
+						"Any Character➞Obsessed",
+						"Any Character➞Mad",
+						"Any Character➞Touch of Ages"
+					],
+					requirements: {
+						conditions: {
+							type: "OR",
+							items: [
+								"Human➞Outcast➞Scavenger",
+								"Human➞Nomad➞Scavenger"
+							]
+						}
+					},
+					stock: "Human",
+					setting: "Nomad",
+					allowed: ["bs"]
+				}
+			]
+		},
+		"Merchant House": {
+			allowed: ["bs"],
+			name: "Merchant House",
+			short: "Merchant",
+			stock: "Human",
+			type: "Subsetting",
+			lifepaths: [
+				{
+					name: "Caravaneer",
+					born: false,
+					years: 4,
+					resources: 5,
+					mentalPool: 0,
+					physicalPool: 0,
+					eitherPool: 0,
+					generalSkillPool: 0,
+					skillPool: 5,
+					traitPool: 2,
+					leads: ["Human➞City Dweller", "Human➞Outcast"],
+					skills: [
+						"Any General➞Driving",
+						"Any General➞Mending",
+						"Any Wise➞Waste-wise",
+						"Any Wise➞Caravan-wise",
+						"Any General➞Brawling"
+					],
+					traits: ["Any Character➞Dusty", "Any Character➞Tired"],
+					requirements: {},
+					stock: "Human",
+					setting: "Merchant House",
+					allowed: ["bs"]
+				},
+				{
+					name: "Caravan Guard",
+					born: false,
+					years: 5,
+					resources: 6,
+					mentalPool: 0,
+					physicalPool: 1,
+					eitherPool: 0,
+					generalSkillPool: 0,
+					skillPool: 6,
+					traitPool: 1,
+					leads: ["Human➞City Dweller", "Human➞Outcast"],
+					skills: [
+						"Any General➞Intimidation",
+						"Any General➞Brawling",
+						"Any General➞Appropriate Weapons",
+						"Any General➞Shield Training",
+						"Any Wise➞Waste-wise",
+						"Any Wise➞Bandit-wise"
+					],
+					traits: [],
+					requirements: {
+						conditions: {
+							type: "OR",
+							items: [
+								"Human➞City Dweller➞City Guard",
+								"Human➞Professional Soldier➞1*ANY",
+								"Human➞Outcast➞Bandit",
+								"Human➞Nomad➞Bandit"
+							]
+						}
+					},
+					stock: "Human",
+					setting: "Merchant House",
+					allowed: ["bs"]
+				},
+				{
+					name: "Caravan Outrider",
+					born: false,
+					years: 5,
+					resources: 7,
+					mentalPool: 0,
+					physicalPool: 1,
+					eitherPool: 0,
+					generalSkillPool: 0,
+					skillPool: 8,
+					traitPool: 1,
+					leads: ["Human➞Professional Soldier", "Human➞Outcast"],
+					skills: [
+						"Any General➞Mounted Combat Training",
+						"Any General➞Riding",
+						"Any General➞Appropriate Weapons",
+						"Any General➞Shield Training",
+						"Any General➞Observation",
+						"Any Wise➞Horse-wise",
+						"Any Wise➞Waste-wise",
+						"Any Wise➞Bandit-wise"
+					],
+					traits: [],
+					requirements: {
+						conditions: {
+							type: "OR",
+							items: [
+								"Skill➞Any General➞Ride",
+								"Human➞Merchant House➞Caravan Guard"
+							]
+						}
+					},
+					stock: "Human",
+					setting: "Merchant House",
+					allowed: ["bs"]
+				},
+				{
+					name: "Caravan Master",
+					born: false,
+					years: 5,
+					resources: 20,
+					mentalPool: 1,
+					physicalPool: 0,
+					eitherPool: 0,
+					generalSkillPool: 0,
+					skillPool: 7,
+					traitPool: 2,
+					leads: ["Human➞City Dweller", "Human➞Noble Court", "Human➞Outcast"],
+					skills: [
+						"Any General➞Caravan Management",
+						"Any General➞Foreign Languages",
+						"Any General➞Persuasion",
+						"Any General➞Command",
+						"Any General➞Haggling",
+						"Any Wise➞Waste-wise",
+						"Any Wise➞Duststorm-wise"
+					],
+					traits: [],
+					requirements: {
+						conditions: {
+							type: "OR",
+							items: [
+								"Skill➞Any General➞Ride",
+								"Human➞Merchant House➞Caravan Guard"
+							]
+						}
+					},
+					stock: "Human",
+					setting: "Merchant House",
+					allowed: ["bs"]
+				},
+				{
+					name: "Camp Follower",
+					born: false,
+					years: 5,
+					resources: 4,
+					mentalPool: 1,
+					physicalPool: 0,
+					eitherPool: 0,
+					generalSkillPool: 0,
+					skillPool: 5,
+					traitPool: 2,
+					leads: ["Human➞City Dweller", "Human➞Outcast"],
+					skills: [
+						"Any General➞Conspicuous",
+						"Any General➞Persuasion",
+						"Any General➞Falsehood",
+						"Any General➞Soothing Platitudes",
+						"Any General➞Mending",
+						"Any General➞Haggling"
+					],
+					traits: [
+						"Any Character➞Tolerant",
+						"Any Character➞Bitter",
+						"Any Character➞Broken"
+					],
+					requirements: {},
+					stock: "Human",
+					setting: "Merchant House",
+					allowed: ["bs"]
 				}
 			]
 		}

@@ -25,7 +25,7 @@ export const Dwarf: Stock = {
 	stride: 6,
 	settings: {
 		"Artificer": {
-			allowed: ["bwgr"],
+			allowed: ["bwgr", "bs"],
 			name: "Artificer",
 			short: "Artificer",
 			stock: "Dwarf",
@@ -106,6 +106,7 @@ export const Dwarf: Stock = {
 								"Dwarf➞Guilder➞Journeyman"
 							]
 						}
+
 					},
 					resources: 20,
 					setting: "Artificer",
@@ -142,6 +143,7 @@ export const Dwarf: Stock = {
 								"Dwarf➞Guilder➞Craftsman"
 							]
 						}
+
 					},
 					resources: 35,
 					setting: "Artificer",
@@ -301,18 +303,55 @@ export const Dwarf: Stock = {
 					traitPool: 1,
 					traits: [],
 					years: 100
+				},
+				{
+					allowed: ["bs"],
+					born: false,
+					eitherPool: 0,
+					generalSkillPool: 0,
+					leads: [
+						"Dwarf➞Guilder",
+						"Dwarf➞Outcast",
+						"Dwarf➞Templar"
+					],
+					mentalPool: 1,
+					name: "Earthbender",
+					physicalPool: 0,
+					requirements: {
+						conditions: {
+							type: "OR",
+							items: [
+								"Dwarf➞Artificer➞Artificer",
+								"Dwarf➞Artificer➞Tyro Artificer"
+							]
+						}
+					},
+					resources: 20,
+					setting: "Artificer",
+					skillPool: 4,
+					skills: [
+						"Any General➞Psionics",
+						"Any Wise➞Craft-wise",
+						"Any Wise➞Metals-wise"
+					],
+					stock: "Dwarf",
+					traitPool: 2,
+					traits: [
+						"Any Call-on➞Meticulous"
+					],
+					years: 24
 				}
 			]
 		},
 		"Clansman": {
-			allowed: ["bwgr"],
+			allowed: ["bwgr", "bs"],
 			name: "Clansman",
 			short: "Clansman",
 			stock: "Dwarf",
 			type: "Setting",
 			lifepaths: [
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: true,
 					eitherPool: 0,
 					generalSkillPool: 3,
@@ -333,7 +372,7 @@ export const Dwarf: Stock = {
 					years: 20
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -361,7 +400,7 @@ export const Dwarf: Stock = {
 					years: 20
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -391,7 +430,7 @@ export const Dwarf: Stock = {
 					years: 15
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -420,7 +459,7 @@ export const Dwarf: Stock = {
 					years: 35
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -448,7 +487,7 @@ export const Dwarf: Stock = {
 					years: 20
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -476,7 +515,7 @@ export const Dwarf: Stock = {
 					years: 30
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -515,7 +554,7 @@ export const Dwarf: Stock = {
 					years: 40
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -551,7 +590,7 @@ export const Dwarf: Stock = {
 					years: 35
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -586,7 +625,7 @@ export const Dwarf: Stock = {
 					years: 70
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -631,14 +670,14 @@ export const Dwarf: Stock = {
 			]
 		},
 		"Guilder": {
-			allowed: ["bwgr"],
+			allowed: ["bwgr", "bs"],
 			name: "Guilder",
 			short: "Guilder",
 			stock: "Dwarf",
 			type: "Setting",
 			lifepaths: [
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: true,
 					eitherPool: 0,
 					generalSkillPool: 4,
@@ -659,7 +698,7 @@ export const Dwarf: Stock = {
 					years: 21
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -690,7 +729,7 @@ export const Dwarf: Stock = {
 					years: 15
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -719,7 +758,7 @@ export const Dwarf: Stock = {
 					years: 10
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -750,7 +789,7 @@ export const Dwarf: Stock = {
 					years: 20
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -779,7 +818,7 @@ export const Dwarf: Stock = {
 					years: 15
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -808,7 +847,7 @@ export const Dwarf: Stock = {
 					years: 15
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
@@ -848,7 +887,7 @@ export const Dwarf: Stock = {
 					years: 25
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 1,
@@ -884,7 +923,7 @@ export const Dwarf: Stock = {
 					years: 45
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: ["bwgr", "bs"],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -919,11 +958,124 @@ export const Dwarf: Stock = {
 					traitPool: 1,
 					traits: [],
 					years: 45
+				},
+				{
+					allowed: ["bs"],
+					born: false,
+					eitherPool: 0,
+					generalSkillPool: 1,
+					leads: [
+						"Dwarf➞Artificer",
+						"Dwarf➞Outcast",
+						"Dwarf➞Host"
+					],
+					mentalPool: 1,
+					name: "Disciple",
+					physicalPool: 0,
+					requirements: {},
+					resources: 5,
+					setting: "Guilder",
+					skillPool: 8,
+					skills: [
+						"Any General➞Research",
+						"Any General➞Psionics",
+						"Dwarf Art➞Lithography",
+						"Dwarf Art➞Reason of Old Stone",
+						"Any General➞History",
+						"Any Wise➞Runes-wise",
+						"Any Wise➞Dwarf-wise"
+					],
+					stock: "Dwarf",
+					traitPool: 1,
+					traits: [
+						"Any Die➞Bookworm"
+					],
+					years: 16
+				},
+				{
+					allowed: ["bs"],
+					born: false,
+					eitherPool: 0,
+					generalSkillPool: 0,
+					leads: [],
+					mentalPool: 1,
+					name: "Caravan Supplier",
+					physicalPool: 0,
+					requirements: {
+						conditions: {
+							type: "OR",
+							items: [
+								"Dwarf➞Outcast➞Gambler",
+								"Dwarf➞Guilder➞Hawker",
+								"Dwarf➞Guilder➞Journeyman",
+								"Dwarf➞Outcast➞Adventurer",
+								"Dwarf➞Clansman➞Husband/Wife"
+							]
+						}
+					},
+					resources: 16,
+					setting: "Guilder",
+					skillPool: 5,
+					skills: [
+						"Dwarf Art➞Stentorious Debate",
+						"Any General➞Administration",
+						"Dwarf Special➞Games of Chance",
+						"Any Wise➞Caravan-wise",
+						"Any Wise➞Staff-wise"
+					],
+					stock: "Dwarf",
+					traitPool: 2,
+					traits: [
+						"Any Die➞Stubborn"
+					],
+					years: 20
+				},
+				{
+					allowed: ["bs"],
+					born: false,
+					eitherPool: 0,
+					generalSkillPool: 0,
+					leads: [
+						"Dwarf➞Outcast"
+					],
+					mentalPool: 1,
+					name: "Wholesaler",
+					physicalPool: 0,
+					requirements: {
+						conditions: {
+							type: "OR",
+							items: [
+								"Dwarf➞Guilder➞Hawker",
+								"Dwarf➞Guilder➞Journeyman",
+								"Dwarf➞Outcast➞Adventurer",
+								"Dwarf➞Clansman➞Husband/Wife"
+							]
+						}
+					},
+					resources: 25,
+					setting: "Guilder",
+					skillPool: 7,
+					skills: [
+						"Dwarf Art➞Shrewd Appraisal",
+						"Any General➞Accounting",
+						"Any General➞Logistics",
+						"Any General➞Falsehood",
+						"Any Wise➞Merchant-wise",
+						"Any Wise➞Goods-wise",
+						"Any Wise➞Rip off-wise"
+					],
+					stock: "Dwarf",
+					traitPool: 1,
+					traits: [
+						"Any Character➞Compulsive Liar",
+						"Any Die➞Tenacious"
+					],
+					years: 26
 				}
 			]
 		},
 		"Host": {
-			allowed: ["bwgr"],
+			allowed: ["bwgr", "bs"],
 			name: "Host",
 			short: "Host",
 			stock: "Dwarf",
@@ -1366,6 +1518,87 @@ export const Dwarf: Stock = {
 						"Dwarf Lifepath➞Hard as Nails"
 					],
 					years: 75
+				},
+				{
+					allowed: ["bs"],
+					born: false,
+					eitherPool: 0,
+					generalSkillPool: 0,
+					leads: [
+						"Dwarf➞Templar"
+					],
+					mentalPool: 0,
+					name: "Kineticist",
+					physicalPool: 1,
+					requirements: {
+						conditions: {
+							type: "OR",
+							items: [
+								"Skill➞Any General➞Psionics",
+								"Skill➞Any General➞Psionics (Psychobolics)",
+								"Skill➞Any General➞Psionics (Metapsionics)",
+								"Skill➞Any General➞Psionics (Psychonetics)",
+								"Dwarf➞Host➞1*ANY"
+							]
+						}
+					},
+					resources: 14,
+					setting: "Host",
+					skillPool: 6,
+					skills: [
+						"Any General➞Psionics (Psychonetics)",
+						"Any General➞Appropriate Weapons",
+						"Any General➞Hunting",
+						"Any General➞Tactics",
+						"Any General➞Skirmish Tactics Training"
+					],
+					stock: "Dwarf",
+					traitPool: 2,
+					traits: [
+						"Any Character➞Dutiful"
+					],
+					years: 18
+				},
+				{
+					allowed: ["bs"],
+					born: false,
+					eitherPool: 0,
+					generalSkillPool: 0,
+					leads: [
+						"Dwarf➞Outcast"
+					],
+					mentalPool: 1,
+					name: "Shaper",
+					physicalPool: 0,
+					requirements: {
+						conditions: {
+							type: "OR",
+							items: [
+								"Skill➞Any General➞Psionics",
+								"Skill➞Any General➞Psionics (Psychobolics)",
+								"Skill➞Any General➞Psionics (Metapsionics)",
+								"Skill➞Any General➞Psionics (Psychonetics)",
+								"Dwarf➞Host➞1*ANY"
+							]
+						}
+					},
+					resources: 8,
+					setting: "Host",
+					skillPool: 6,
+					skills: [
+						"Any General➞Psionics (Metapsionics)",
+						"Any General➞Appropriate Weapons",
+						"Any General➞Tactics",
+						"Any General➞Orienteering",
+						"Any General➞Tracking",
+						"Any General➞Research"
+					],
+					stock: "Dwarf",
+					traitPool: 2,
+					traits: [
+						"Any Character➞Educated"
+					],
+					years: 20
 				}
 			]
 		},
@@ -1708,7 +1941,7 @@ export const Dwarf: Stock = {
 			]
 		},
 		"Outcast": {
-			allowed: ["bwgr"],
+			allowed: ["bwgr", "bs"],
 			name: "Outcast",
 			short: "Outcast",
 			stock: "Dwarf",
@@ -1895,6 +2128,153 @@ export const Dwarf: Stock = {
 						"Dwarf Lifepath➞Slave to Fate"
 					],
 					years: 20
+				},
+
+				{
+					stock: "Dwarf", setting: "Outcast", allowed: ["bs"],
+					name: "Torturer", born: false, years: 16, resources: 16, mentalPool: 1, physicalPool: 0, eitherPool: 0, generalSkillPool: 0, skillPool: 6, traitPool: 2,
+					leads: ["Dwarf➞Clansman", "Dwarf➞Templar"],
+					skills: [
+						"Any General➞Torture",
+						"Any General➞Interrogation",
+						"Any General➞Intimidation",
+						"Any General➞Anatomy",
+						"Dwarf Special➞Khirurgy",
+						"Any Wise➞Shameful Secret-wise"
+					],
+					traits: ["Any Character➞Ashamed", "Any Character➞Dirty Secret"],
+					requirements: {}
+				},
+				{
+					stock: "Dwarf", setting: "Outcast", allowed: ["bs"],
+					name: "Drunk Psionic", born: false, years: 10, resources: 4, mentalPool: 0, physicalPool: 0, eitherPool: 1, generalSkillPool: 0, skillPool: 5, traitPool: 1,
+					leads: [],
+					skills: [
+						"Dwarf Art➞Drunking",
+						"Dwarf Art➞Stentorious Singing",
+						"Any General➞Psionics",
+						"Any Wise➞Beer-wise",
+						"Any Wise➞Tavern-wise",
+						"Any Wise➞Drunk fighting-wise"
+					],
+					traits: ["Any Character➞Drunk", "Any Character➞Lucky"],
+					requirements: {}
+				},
+				{
+					stock: "Dwarf", setting: "Outcast", allowed: ["bs"],
+					name: "Stonemen", born: false, years: 20, resources: 3, mentalPool: 1, physicalPool: 0, eitherPool: 0, generalSkillPool: 0, skillPool: 8, traitPool: 1,
+					leads: ["Dwarf➞Host", "Dwarf➞Templar"],
+					skills: [
+						"Any General➞Psionics (Psychobolics)",
+						"Any General➞Psionics (Metapsionics)",
+						"Any General➞Meditation",
+						"Any General➞Herbalism",
+						"Any General➞Animal Husbandry",
+						"Any General➞Observation",
+						"Any General➞Religious History"
+					],
+					traits: ["Any Character➞Patient", "Dwarf Special➞Affinity for Psionics"],
+					requirements: {
+						conditions: {
+							type: "OR",
+							items: [
+								"Skill➞Any General➞Psionics",
+								"Skill➞Any General➞Psionics (Psychobolics)",
+								"Skill➞Any General➞Psionics (Metapsionics)",
+								"Skill➞Any General➞Psionics (Psychonetics)",
+								"Dwarf➞Host➞1*ANY"
+							]
+						}
+					}
+				},
+				{
+					stock: "Dwarf", setting: "Outcast", allowed: ["bs"],
+					name: "Palisade", born: false, years: 18, resources: 18, mentalPool: 0, physicalPool: 0, eitherPool: 0, generalSkillPool: 0, skillPool: 8, traitPool: 1,
+					leads: ["Dwarf➞Guilder"],
+					skills: [
+						"Any General➞Falsehood",
+						"Any General➞Forgery",
+						"Any General➞Inconspicuous",
+						"Any General➞Disguise",
+						"Any General➞Hauling",
+						"Any Wise➞Smuggling-wise",
+						"Any Wise➞Bad feeling-wise",
+						"Dwarf Special➞Fence Building"
+					],
+					traits: ["Any Character➞Shady"],
+					requirements: {}
+				}
+			]
+		},
+		"Templar": {
+			allowed: ["bs"],
+			name: "Templar",
+			short: "Templar",
+			stock: "Dwarf",
+			type: "Subsetting",
+			lifepaths: [
+				{
+					stock: "Dwarf", setting: "Templar", allowed: ["bs"],
+					name: "Temple Acolyte", born: false, years: 10, resources: 12, mentalPool: 0, physicalPool: 0, eitherPool: 0, generalSkillPool: 0, skillPool: 5, traitPool: 2,
+					leads: ["Dwarf➞Host"],
+					skills: ["Any General➞Read", "Any General➞Write", "Any General➞Doctrine", "Any Wise➞Temple-wise", "Any Wise➞Obscure text-wise"],
+					traits: ["Any Character➞Holier", "Any Die➞Favored"],
+					requirements: {}
+				},
+				{
+					stock: "Dwarf", setting: "Templar", allowed: ["bs"],
+					name: "Fanatic", born: false, years: 6, resources: 6, mentalPool: 0, physicalPool: 0, eitherPool: 0, generalSkillPool: 0, skillPool: 7, traitPool: 1,
+					leads: ["Dwarf➞Outcast"],
+					skills: ["Any General➞Religious Diatribe", "Any General➞Doctrine", "Any General➞Mace", "Any General➞Streetwise", "Any Wise➞Outnumbered Fight-wise", "Any Wise➞Heathen-wise", "Any Wise➞Pitchfork-wise"],
+					traits: ["Any Character➞Flagellant"],
+					requirements: {}
+				},
+				{
+					stock: "Dwarf", setting: "Templar", allowed: ["bs"],
+					name: "Templar", born: false, years: 14, resources: 18, mentalPool: 1, physicalPool: 0, eitherPool: 0, generalSkillPool: 0, skillPool: 7, traitPool: 2,
+					leads: ["Dwarf➞Host"],
+					skills: ["Any General➞Oratory", "Any General➞Conspicuous", "Any General➞Appropriate Weapons", "Any General➞Soothing Platitudes", "Any General➞Rule of Law", "Any Wise➞Bad Discrict-wise", "Any Wise➞Bad Alley-wise"],
+					traits: ["Any Character➞Dutiful", "Dwarf Lifepath➞Stentorious Voice"],
+					requirements: {
+						conditions: {
+							type: "AND",
+							items: [
+								"Dwarf➞Templar➞Temple Acolyte"
+							]
+						}
+					}
+				},
+				{
+					stock: "Dwarf", setting: "Templar", allowed: ["bs"],
+					name: "Inquisitor", born: false, years: 20, resources: 24, mentalPool: 0, physicalPool: 1, eitherPool: 0, generalSkillPool: 0, skillPool: 8, traitPool: 1,
+					leads: ["Dwarf➞Clansman", "Dwarf➞Outcast"],
+					skills: ["Any General➞Intimidation", "Any General➞Interrogation", "Any General➞Observation", "Any General➞Rule of Law", "Any Wise➞Defiling-wise", "Any Wise➞Criminal-wise", "Any Wise➞Murder-wise", "Any Wise➞Torture-wise"],
+					traits: ["Any Die➞Stoic", "Any Character➞Pragmatic"],
+					requirements: {
+						conditions: {
+							type: "OR",
+							items: [
+								"Dwarf➞Templar➞Fanatic",
+								"Dwarf➞Templar➞Temple Acolyte"
+							]
+						}
+					}
+				},
+				{
+					stock: "Dwarf", setting: "Templar", allowed: ["bs"],
+					name: "White Warden", born: false, years: 40, resources: 40, mentalPool: 0, physicalPool: 0, eitherPool: 1, generalSkillPool: 1, skillPool: 6, traitPool: 1,
+					leads: ["Dwarf➞Host", "Dwarf➞Outcast"],
+					skills: ["Any General➞Command", "Any General➞Appropriate Weapons", "Dwarf Special➞Links", "Any General➞Etiquette", "Any Wise➞Racist-wise", "Any Wise➞Authority-wise"],
+					traits: ["Any Die➞Thick Skin", "Any Character➞Seasoned", "Any Character➞Scarred"],
+					requirements: {
+						conditions: {
+							type: "OR",
+							items: [
+								"Dwarf➞Templar➞Inquisitor",
+								"Dwarf➞Templar➞Templar"
+							]
+						}
+					}
 				}
 			]
 		}
