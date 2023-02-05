@@ -210,7 +210,7 @@ export const AnyGeneral: SkillCategory = {
 				""
 			],
 			training: false,
-			type: [],
+			type: "Special",
 
 			subskills: [
 				"Any General➞Axe",
@@ -1460,7 +1460,7 @@ export const AnyGeneral: SkillCategory = {
 				""
 			],
 			training: false,
-			type: []
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -1910,7 +1910,7 @@ export const AnyGeneral: SkillCategory = {
 				""
 			],
 			training: false,
-			type: []
+			type: "Martial"
 		},
 		{
 			allowed: ["bwgr", "bs"],

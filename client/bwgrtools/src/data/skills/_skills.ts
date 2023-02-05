@@ -19,7 +19,7 @@ export interface Skill {
 	root: StatsAndAttributesList[];
 	tools: [ToolsList, string];
 	training: boolean;
-	type: SkillTypesList | [];
+	type: SkillTypesList;
 
 	subskills?: SkillPath[];
 }

@@ -669,7 +669,7 @@ export const ElfSpellSong: SkillCategory = {
 				""
 			],
 			training: false,
-			type: []
+			type: "Sorcerous"
 		},
 		{
 			allowed: ["bwgr"],
@@ -684,7 +684,7 @@ export const ElfSpellSong: SkillCategory = {
 				""
 			],
 			training: false,
-			type: []
+			type: "Sorcerous"
 		},
 		{
 			allowed: ["bwgr"],
@@ -699,7 +699,7 @@ export const ElfSpellSong: SkillCategory = {
 				""
 			],
 			training: false,
-			type: []
+			type: "Sorcerous"
 		},
 		{
 			allowed: ["bwgr"],
@@ -714,7 +714,7 @@ export const ElfSpellSong: SkillCategory = {
 				""
 			],
 			training: false,
-			type: []
+			type: "Sorcerous"
 		},
 		{
 			allowed: ["bwgr"],
@@ -729,7 +729,7 @@ export const ElfSpellSong: SkillCategory = {
 				""
 			],
 			training: false,
-			type: []
+			type: "Sorcerous"
 		},
 		{
 			allowed: ["bwgr"],
@@ -744,7 +744,7 @@ export const ElfSpellSong: SkillCategory = {
 				""
 			],
 			training: false,
-			type: []
+			type: "Sorcerous"
 		},
 		{
 			allowed: ["bwgr"],
@@ -759,7 +759,7 @@ export const ElfSpellSong: SkillCategory = {
 				""
 			],
 			training: false,
-			type: []
+			type: "Sorcerous"
 		},
 		{
 			allowed: ["bwgr"],
@@ -774,7 +774,7 @@ export const ElfSpellSong: SkillCategory = {
 				""
 			],
 			training: false,
-			type: []
+			type: "Sorcerous"
 		},
 		{
 			allowed: ["bwgr"],
@@ -789,7 +789,7 @@ export const ElfSpellSong: SkillCategory = {
 				""
 			],
 			training: false,
-			type: []
+			type: "Sorcerous"
 		},
 		{
 			allowed: ["bwgr"],
@@ -804,7 +804,7 @@ export const ElfSpellSong: SkillCategory = {
 				""
 			],
 			training: false,
-			type: []
+			type: "Sorcerous"
 		},
 		{
 			allowed: ["bwgr"],
@@ -819,7 +819,7 @@ export const ElfSpellSong: SkillCategory = {
 				""
 			],
 			training: false,
-			type: []
+			type: "Sorcerous"
 		},
 		{
 			allowed: ["bwgr"],
@@ -834,7 +834,7 @@ export const ElfSpellSong: SkillCategory = {
 				""
 			],
 			training: false,
-			type: []
+			type: "Sorcerous"
 		},
 		{
 			allowed: ["bwgr"],
@@ -849,7 +849,7 @@ export const ElfSpellSong: SkillCategory = {
 				""
 			],
 			training: false,
-			type: []
+			type: "Sorcerous"
 		},
 		{
 			allowed: ["bwgr"],
@@ -864,7 +864,7 @@ export const ElfSpellSong: SkillCategory = {
 				""
 			],
 			training: false,
-			type: []
+			type: "Sorcerous"
 		},
 		{
 			allowed: ["bwgr"],
@@ -879,7 +879,7 @@ export const ElfSpellSong: SkillCategory = {
 				""
 			],
 			training: false,
-			type: []
+			type: "Sorcerous"
 		},
 		{
 			allowed: ["bwgr"],
@@ -894,7 +894,7 @@ export const ElfSpellSong: SkillCategory = {
 				""
 			],
 			training: false,
-			type: []
+			type: "Sorcerous"
 		},
 		{
 			allowed: ["bwgr"],
@@ -909,7 +909,7 @@ export const ElfSpellSong: SkillCategory = {
 				""
 			],
 			training: false,
-			type: []
+			type: "Sorcerous"
 		},
 		{
 			allowed: ["bwgr"],
@@ -924,7 +924,7 @@ export const ElfSpellSong: SkillCategory = {
 				""
 			],
 			training: false,
-			type: []
+			type: "Sorcerous"
 		},
 		{
 			allowed: ["bwgr"],
@@ -939,7 +939,7 @@ export const ElfSpellSong: SkillCategory = {
 				""
 			],
 			training: false,
-			type: []
+			type: "Sorcerous"
 		},
 		{
 			allowed: ["bwgr"],
@@ -954,7 +954,7 @@ export const ElfSpellSong: SkillCategory = {
 				""
 			],
 			training: false,
-			type: []
+			type: "Sorcerous"
 		},
 		{
 			allowed: ["bwgr"],
@@ -969,7 +969,7 @@ export const ElfSpellSong: SkillCategory = {
 				""
 			],
 			training: false,
-			type: []
+			type: "Sorcerous"
 		},
 		{
 			allowed: ["bwgr"],
@@ -984,7 +984,7 @@ export const ElfSpellSong: SkillCategory = {
 				""
 			],
 			training: false,
-			type: []
+			type: "Sorcerous"
 		},
 		{
 			allowed: ["bwgr"],
@@ -999,7 +999,7 @@ export const ElfSpellSong: SkillCategory = {
 				""
 			],
 			training: false,
-			type: []
+			type: "Sorcerous"
 		},
 		{
 			allowed: ["bwgr"],
@@ -1014,7 +1014,7 @@ export const ElfSpellSong: SkillCategory = {
 				""
 			],
 			training: false,
-			type: []
+			type: "Sorcerous"
 		},
 		{
 			allowed: ["bwgr"],
@@ -1029,7 +1029,7 @@ export const ElfSpellSong: SkillCategory = {
 				""
 			],
 			training: false,
-			type: []
+			type: "Sorcerous"
 		},
 		{
 			allowed: ["bwgr"],
@@ -1044,7 +1044,7 @@ export const ElfSpellSong: SkillCategory = {
 				""
 			],
 			training: false,
-			type: []
+			type: "Sorcerous"
 		},
 		{
 			allowed: ["bwgr"],
@@ -1059,7 +1059,7 @@ export const ElfSpellSong: SkillCategory = {
 				""
 			],
 			training: false,
-			type: []
+			type: "Sorcerous"
 		},
 		{
 			allowed: ["bwgr"],
@@ -1074,7 +1074,7 @@ export const ElfSpellSong: SkillCategory = {
 				""
 			],
 			training: false,
-			type: []
+			type: "Sorcerous"
 		},
 		{
 			allowed: ["bwgr"],
@@ -1089,7 +1089,7 @@ export const ElfSpellSong: SkillCategory = {
 				""
 			],
 			training: false,
-			type: []
+			type: "Sorcerous"
 		},
 		{
 			allowed: ["bwgr"],
@@ -1104,7 +1104,7 @@ export const ElfSpellSong: SkillCategory = {
 				""
 			],
 			training: false,
-			type: []
+			type: "Sorcerous"
 		},
 		{
 			allowed: ["bwgr"],
@@ -1119,7 +1119,7 @@ export const ElfSpellSong: SkillCategory = {
 				""
 			],
 			training: false,
-			type: []
+			type: "Sorcerous"
 		},
 		{
 			allowed: ["bwgr"],
@@ -1134,7 +1134,7 @@ export const ElfSpellSong: SkillCategory = {
 				""
 			],
 			training: false,
-			type: []
+			type: "Sorcerous"
 		},
 		{
 			allowed: ["bwgr"],
@@ -1149,7 +1149,7 @@ export const ElfSpellSong: SkillCategory = {
 				""
 			],
 			training: false,
-			type: []
+			type: "Sorcerous"
 		},
 		{
 			allowed: ["bwgr"],
@@ -1164,7 +1164,7 @@ export const ElfSpellSong: SkillCategory = {
 				""
 			],
 			training: false,
-			type: []
+			type: "Sorcerous"
 		},
 		{
 			allowed: ["bwgr"],
@@ -1179,7 +1179,7 @@ export const ElfSpellSong: SkillCategory = {
 				""
 			],
 			training: false,
-			type: []
+			type: "Sorcerous"
 		},
 		{
 			allowed: ["bwgr"],
@@ -1194,7 +1194,7 @@ export const ElfSpellSong: SkillCategory = {
 				""
 			],
 			training: false,
-			type: []
+			type: "Sorcerous"
 		},
 		{
 			allowed: ["bwgr"],
@@ -1209,7 +1209,7 @@ export const ElfSpellSong: SkillCategory = {
 				""
 			],
 			training: false,
-			type: []
+			type: "Sorcerous"
 		},
 		{
 			allowed: ["bwgr"],
@@ -1224,7 +1224,7 @@ export const ElfSpellSong: SkillCategory = {
 				""
 			],
 			training: false,
-			type: []
+			type: "Sorcerous"
 		},
 		{
 			allowed: ["bwgr"],
@@ -1239,7 +1239,7 @@ export const ElfSpellSong: SkillCategory = {
 				""
 			],
 			training: false,
-			type: []
+			type: "Sorcerous"
 		},
 		{
 			allowed: ["bwgr"],
@@ -1254,7 +1254,7 @@ export const ElfSpellSong: SkillCategory = {
 				""
 			],
 			training: false,
-			type: []
+			type: "Sorcerous"
 		},
 		{
 			allowed: ["bwgr"],
@@ -1269,7 +1269,7 @@ export const ElfSpellSong: SkillCategory = {
 				""
 			],
 			training: false,
-			type: []
+			type: "Sorcerous"
 		}
 	]
 };
@@ -1291,7 +1291,7 @@ export const DarkElfSpellSong: SkillCategory = {
 				""
 			],
 			training: false,
-			type: []
+			type: "Sorcerous"
 		},
 		{
 			allowed: ["bwc"],
@@ -1306,7 +1306,7 @@ export const DarkElfSpellSong: SkillCategory = {
 				""
 			],
 			training: false,
-			type: []
+			type: "Sorcerous"
 		},
 		{
 			allowed: ["bwc"],
@@ -1321,7 +1321,7 @@ export const DarkElfSpellSong: SkillCategory = {
 				""
 			],
 			training: false,
-			type: []
+			type: "Sorcerous"
 		},
 		{
 			allowed: ["bwc"],
@@ -1336,7 +1336,7 @@ export const DarkElfSpellSong: SkillCategory = {
 				""
 			],
 			training: false,
-			type: []
+			type: "Sorcerous"
 		},
 		{
 			allowed: ["bwc"],
@@ -1351,7 +1351,7 @@ export const DarkElfSpellSong: SkillCategory = {
 				""
 			],
 			training: false,
-			type: []
+			type: "Sorcerous"
 		},
 		{
 			allowed: ["bwc"],
@@ -1366,7 +1366,7 @@ export const DarkElfSpellSong: SkillCategory = {
 				""
 			],
 			training: false,
-			type: []
+			type: "Sorcerous"
 		},
 		{
 			allowed: ["bwc"],
@@ -1381,7 +1381,7 @@ export const DarkElfSpellSong: SkillCategory = {
 				""
 			],
 			training: false,
-			type: []
+			type: "Sorcerous"
 		},
 		{
 			allowed: ["bwc"],
@@ -1396,7 +1396,7 @@ export const DarkElfSpellSong: SkillCategory = {
 				""
 			],
 			training: false,
-			type: []
+			type: "Sorcerous"
 		},
 		{
 			allowed: ["bwc"],
@@ -1411,7 +1411,7 @@ export const DarkElfSpellSong: SkillCategory = {
 				""
 			],
 			training: false,
-			type: []
+			type: "Sorcerous"
 		}
 	]
 };
