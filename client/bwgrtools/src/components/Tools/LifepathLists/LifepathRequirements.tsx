@@ -21,10 +21,17 @@ export function LifepathRequirements({ lifepath }: { lifepath: Lifepath; }) {
 				else if (condition.startsWith("Trait") && checkRulesets(GetTraitFromPath(condition).allowed)) {
 					tempSet.add(MakeName(condition, 2, ["trait", "traits"]));
 				}
-				else if (!condition.endsWith("ANY") && checkRulesets(GetLifepathFromPath(condition).allowed)) {
+				else if (condition.includes("ANY") && checkRulesets(GetSettingFromPath(condition).allowed)) {
 					tempSet.add(MakeName(condition, 2, ["lifepath", "lifepaths"]));
 				}
-				else if (condition.endsWith("ANY") && checkRulesets(GetSettingFromPath(condition).allowed)) {
+				else if (condition.includes("*")) {
+					const split = condition.split("➞");
+					split[2] = split[2].split("*")[1];
+					if (checkRulesets(GetLifepathFromPath(split.join("➞")).allowed)) {
+						tempSet.add(MakeName(condition, 2, ["lifepath", "lifepaths"]));
+					}
+				}
+				else if (!condition.includes("ANY") && checkRulesets(GetLifepathFromPath(condition).allowed)) {
 					tempSet.add(MakeName(condition, 2, ["lifepath", "lifepaths"]));
 				}
 			}
