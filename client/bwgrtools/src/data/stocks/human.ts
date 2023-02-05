@@ -1935,26 +1935,12 @@ export const Human: Stock = {
 						conditions: {
 							type: "OR",
 							items: [
-								{
-									type: "OR",
-									items: [
-										"Human➞Noble➞Born Noble",
-										"Human➞City Dweller➞Merchant",
-										"Human➞Villager➞Merchant",
-										"Human➞Professional Soldier➞Sergeant",
-										"Human➞Noble Court➞Man-at-Arms",
-										"Human➞City Dweller➞Judge"
-									]
-								},
-								{
-									type: "OR", // TODO: Burning Sun: Requirement
-									items: [
-										"Human➞City Dweller➞City Guard",
-										"Human➞City Dweller➞Guard Captain",
-										"Human➞Professional Soldier➞1*ANY",
-										"Human➞Religious➞1*ANY"
-									]
-								}
+								"Human➞Noble➞Born Noble",
+								"Human➞City Dweller➞Merchant",
+								"Human➞Villager➞Merchant",
+								"Human➞Professional Soldier➞Sergeant",
+								"Human➞Noble Court➞Man-at-Arms",
+								"Human➞City Dweller➞Judge"
 							]
 						}
 					},
@@ -2375,37 +2361,21 @@ export const Human: Stock = {
 						conditions: {
 							type: "OR",
 							items: [
-								{
-									type: "OR",
-									items: [
-										"Human➞Villager➞Town Official",
-										"Human➞City Dweller➞Scholar",
-										"Human➞Religious➞Priest",
-										"Human➞Religious➞Templar",
-										"Human➞City Dweller➞Bishop",
-										"Human➞Religious➞Bishop",
-										"Human➞Professional Soldier➞Captain",
-										"Human➞Seafaring➞Ship's Captain",
-										"Human➞City Dweller➞Artisan",
-										"Human➞City Dweller➞Master Craftsman",
-										"Human➞Villager➞Master Craftsman",
-										"Human➞Noble➞Knight",
-										"Human➞Noble Court➞Knight",
-										"Human➞Noble Court➞Courtier",
-										"Human➞Noble Court➞Master of Horses"
-									]
-								},
-								{
-									type: "OR", // TODO: Burning Sun: Requirement
-									items: [
-										"Human➞Religious➞Templar",
-										"Human➞Villager➞Tax Collector",
-										"Human➞City Dweller➞Tax Collector",
-										"Human➞Noble➞Knight",
-										"Human➞Noble Court➞Knight",
-										"Human➞Noble Court➞Courtier"
-									]
-								}
+								"Human➞Villager➞Town Official",
+								"Human➞City Dweller➞Scholar",
+								"Human➞Religious➞Priest",
+								"Human➞Religious➞Templar",
+								"Human➞City Dweller➞Bishop",
+								"Human➞Religious➞Bishop",
+								"Human➞Professional Soldier➞Captain",
+								"Human➞Seafaring➞Ship's Captain",
+								"Human➞City Dweller➞Artisan",
+								"Human➞City Dweller➞Master Craftsman",
+								"Human➞Villager➞Master Craftsman",
+								"Human➞Noble➞Knight",
+								"Human➞Noble Court➞Knight",
+								"Human➞Noble Court➞Courtier",
+								"Human➞Noble Court➞Master of Horses"
 							]
 						}
 					},
@@ -13670,24 +13640,13 @@ export const Human: Stock = {
 						conditions: {
 							type: "OR",
 							items: [
-								{
-									type: "OR",
-									items: [
-										"Human➞City Dweller➞Clerk",
-										"Human➞Villager➞Clerk",
-										"Human➞Religious➞Priest",
-										"Human➞Religious➞Templar",
-										"Human➞City Dweller➞Student",
-										"Human➞Noble➞Student",
-										"Human➞Noble Court➞Student"
-									]
-								},
-								{
-									type: "OR", // TODO: Burning Sun: Requirement
-									items: [
-										"Human➞Religious➞1*ANY"
-									]
-								}
+								"Human➞City Dweller➞Clerk",
+								"Human➞Villager➞Clerk",
+								"Human➞Religious➞Priest",
+								"Human➞Religious➞Templar",
+								"Human➞City Dweller➞Student",
+								"Human➞Noble➞Student",
+								"Human➞Noble Court➞Student"
 							]
 						}
 					},
