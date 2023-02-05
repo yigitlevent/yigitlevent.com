@@ -21,14 +21,18 @@ export function MakeName(name: string, index: number, extension?: [singular: str
 
 	if (split[index].includes("*")) {
 		const numberStr = parseInt(split[index][0]);
-		const categoryStr = (split[index - 1].includes(" ")) ? split[index - 1].split(" ")[1].toLowerCase() : split[index - 1];
+		const categoryStr = split[index - 1].toLocaleLowerCase();
 		const extensionStr = (extension) ? (numberStr > 1) ? ` ${extension[1]}` : ` ${extension[0]}` : "";
+
+		console.log(numberStr);
+		console.log(categoryStr);
+		console.log(extensionStr);
 
 		if (split[index].includes("*-")) {
 			return `${numberStr} ${categoryStr}-type${extensionStr}`;
 		}
 		else if (split[index].includes("*ANY")) {
-			return `any ${numberStr} ${categoryStr}${extensionStr}`;
+			return `Any ${numberStr} ${categoryStr}${extensionStr}`;
 		}
 		else if (split[index].includes("*")) {
 			return `${numberStr} ${split[index].split("*")[1]}${extensionStr}`;
