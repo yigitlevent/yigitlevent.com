@@ -2,8 +2,6 @@ import { Lifepath, Stock } from "../data/stocks/_stocks";
 
 
 function CheckString(chosenLifepaths: Lifepath[], conditionString: string): boolean {
-
-	
 	if (conditionString.startsWith("Skill")) {
 		const hasSkill = chosenLifepaths.some(lifepath => lifepath.skills.includes((conditionString as any).slice(6)));
 		if (!hasSkill) return false;

@@ -9,7 +9,7 @@ import Autocomplete from "@mui/material/Autocomplete";
 
 import { useRulesetStore } from "../../../../hooks/stores/useRulesetStore";
 import { useCharacterBurnerStore } from "../../../../hooks/stores/useCharacterBurnerStore";
-import { Lifepath, Stocks } from "../../../../data/stocks/_stocks";
+import { Stocks } from "../../../../data/stocks/_stocks";
 import { GetLifepathFromPath, GetPathFromLifepath } from "../../../../utils/pathFinder";
 import { FilterLifepaths } from "../../../../utils/lifepathFilter";
 
@@ -27,7 +27,7 @@ export function LifepathModal({ openLp, openLpModal }: { openLp: boolean; openLp
 		const possibilities =
 			lifepathPaths.length === 0
 				? Object.values(Stocks[stock].settings).map(setting => setting.lifepaths.filter(lp => lp.born)).flat().filter(v => checkRulesets(v.allowed))
-				: FilterLifepaths(Stocks[stock], lifepathPaths.map((lp) => GetLifepathFromPath(lp) as Lifepath), Infinity, 0, checkRulesets);
+				: FilterLifepaths(Stocks[stock], lifepathPaths.map((lp) => GetLifepathFromPath(lp)), Infinity, 0, checkRulesets);
 
 		return possibilities.sort((a, b) => a.name.localeCompare(b.name));
 	}, [checkRulesets, lifepathPaths, stock]);
@@ -65,7 +65,7 @@ export function LifepathModal({ openLp, openLpModal }: { openLp: boolean; openLp
 
 					{(chosenLP.length > 0)
 						? <Grid item xs={1}>
-							<LifepathBox lifepath={GetLifepathFromPath(chosenLP) as Lifepath} />
+							<LifepathBox lifepath={GetLifepathFromPath(chosenLP)} />
 						</Grid>
 						: null
 					}

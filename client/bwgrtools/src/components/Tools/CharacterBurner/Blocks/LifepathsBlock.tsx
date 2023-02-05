@@ -5,7 +5,6 @@ import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 
 import { useCharacterBurnerStore } from "../../../../hooks/stores/useCharacterBurnerStore";
-import { Lifepath } from "../../../../data/stocks/_stocks";
 import { SpecialLifepaths } from "../../../../data/stocks/_specialLifepaths";
 import { SpecialSkills } from "../../../../data/skills/_specialSkills";
 import { GetLifepathFromPath } from "../../../../utils/pathFinder";
@@ -40,7 +39,7 @@ export function LifepathsBlock({ openLpModal, openRlModal, openQuModal, openSlMo
 			<Fragment>
 				{lifepathPaths.map((lpPath, i) =>
 					<Grid key={i} item xs={4}>
-						<LifepathBox lifepath={GetLifepathFromPath(lpPath) as Lifepath} />
+						<LifepathBox lifepath={GetLifepathFromPath(lpPath)} />
 					</Grid>
 				)}
 			</Fragment>

@@ -1,19 +1,38 @@
 import { Fragment } from "react";
 
-import type { Lifepath } from "../../../data/stocks/_stocks";
+import { Lifepath } from "../../../data/stocks/_stocks";
+import { useRulesetStore } from "../../../hooks/stores/useRulesetStore";
 import { GetOrdinalSuffix, MakeName } from "../../../utils/misc";
+import { GetLifepathFromPath, GetSettingFromPath, GetSkillFromPath, GetTraitFromPath } from "../../../utils/pathFinder";
 
 
 export function LifepathRequirements({ lifepath }: { lifepath: Lifepath; }) {
+	const { checkRulesets } = useRulesetStore();
+
 	const requirementsResolver = (conditionsBlock: Condition): string => {
+
 		const tempSet = new Set<string>();
 
 		conditionsBlock.items.forEach(condition => {
-			if (typeof condition === "string") tempSet.add(MakeName(condition, 2, ["lifepath", "lifepaths"]));
+			if (typeof condition === "string") {
+				if (condition.startsWith("Skill") && checkRulesets(GetSkillFromPath(condition).allowed)) {
+					tempSet.add(MakeName(condition, 2, ["skill", "skills"]));
+				}
+				else if (condition.startsWith("Trait") && checkRulesets(GetTraitFromPath(condition).allowed)) {
+					tempSet.add(MakeName(condition, 2, ["trait", "traits"]));
+				}
+				else if (!condition.endsWith("ANY") && checkRulesets(GetLifepathFromPath(condition).allowed)) {
+					tempSet.add(MakeName(condition, 2, ["lifepath", "lifepaths"]));
+				}
+				else if (condition.endsWith("ANY") && checkRulesets(GetSettingFromPath(condition).allowed)) {
+					tempSet.add(MakeName(condition, 2, ["lifepath", "lifepaths"]));
+				}
+			}
 			else tempSet.add(requirementsResolver(condition));
 		});
 
 		const array = [...tempSet];
+
 		if (array.length > 1 && conditionsBlock.type !== "NOT") {
 			array[array.length - 1] = `${conditionsBlock.type.toLowerCase()} ${array[array.length - 1]}`;
 		}
