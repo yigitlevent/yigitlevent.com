@@ -15,7 +15,6 @@ export function GetPathFromLifepath(lp: Lifepath): LifepathPath {
 }
 
 export function GetLifepathFromPath(path: string): Lifepath {
-	console.log(path);
 	const spl = path.split("➞");
 	const lifepath = Stocks[spl[0]].settings[spl[1]].lifepaths.find(lp => lp.name === spl[2]);
 	if (lifepath) return lifepath;

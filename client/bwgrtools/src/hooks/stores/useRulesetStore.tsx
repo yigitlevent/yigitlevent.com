@@ -54,19 +54,19 @@ export const useRulesetStore = create<RulesetState>()(
 			(set, get) => ({
 				rulesets: ["bwgr"],
 
-				lifepathStock: Object.values(Stocks).filter(v => CheckRulesets(["bwgr", "bwc"], v.allowed))[0].name,
-				lifepathSetting: Object.values(Stocks["Dwarf"].settings).filter(v => CheckRulesets(["bwgr", "bwc"], v.allowed))[0].name,
-				allowedStocks: Object.values(Stocks).filter(v => CheckRulesets(["bwgr", "bwc"], v.allowed)),
-				allowedSettings: Object.values(Stocks["Dwarf"].settings).filter(v => CheckRulesets(["bwgr", "bwc"], v.allowed)),
+				lifepathStock: Object.values(Stocks).filter(v => CheckRulesets(["bwgr"], v.allowed))[0].name,
+				lifepathSetting: Object.values(Stocks["Dwarf"].settings).filter(v => CheckRulesets(["bwgr"], v.allowed))[0].name,
+				allowedStocks: Object.values(Stocks).filter(v => CheckRulesets(["bwgr"], v.allowed)),
+				allowedSettings: Object.values(Stocks["Dwarf"].settings).filter(v => CheckRulesets(["bwgr"], v.allowed)),
 
-				skillCategory: Object.values(SkillCategories).filter(v => CheckRulesets(["bwgr", "bwc"], v.allowed))[0].name,
-				allowedSkillCategories: Object.values(SkillCategories).filter(v => CheckRulesets(["bwgr", "bwc"], v.allowed)),
+				skillCategory: Object.values(SkillCategories).filter(v => CheckRulesets(["bwgr"], v.allowed))[0].name,
+				allowedSkillCategories: Object.values(SkillCategories).filter(v => CheckRulesets(["bwgr"], v.allowed)),
 
-				traitCategory: Object.values(TraitCategories).filter(v => CheckRulesets(["bwgr", "bwc"], v.allowed))[0].name,
-				allowedTraitCategories: Object.values(TraitCategories).filter(v => CheckRulesets(["bwgr", "bwc"], v.allowed)),
+				traitCategory: Object.values(TraitCategories).filter(v => CheckRulesets(["bwgr"], v.allowed))[0].name,
+				allowedTraitCategories: Object.values(TraitCategories).filter(v => CheckRulesets(["bwgr"], v.allowed)),
 
-				resourceStock: Object.values(Resources).filter(v => CheckRulesets(["bwgr", "bwc"], v.allowed))[0].name,
-				allowedResourceStocks: Object.values(Resources).filter(v => CheckRulesets(["bwgr", "bwc"], v.allowed)),
+				resourceStock: Object.values(Resources).filter(v => CheckRulesets(["bwgr"], v.allowed))[0].name,
+				allowedResourceStocks: Object.values(Resources).filter(v => CheckRulesets(["bwgr"], v.allowed)),
 
 				toggleDataset: (ruleset: RulesetId) => {
 					set(produce<RulesetState>((state) => {
@@ -102,7 +102,7 @@ export const useRulesetStore = create<RulesetState>()(
 					set(produce<RulesetState>((state) => {
 						state.allowedStocks = Object.values(Stocks).filter(v => state.checkRulesets(v.allowed));
 						const isAllowed = state.allowedStocks.some(v => v.name === stock);
-						if (!isAllowed) state.lifepathStock = state.allowedStocks[0].name;
+						if (isAllowed) state.lifepathStock = state.allowedStocks[0].name;
 					}));
 				},
 				refreshAllowedSettingsList: (setting: string) => {
