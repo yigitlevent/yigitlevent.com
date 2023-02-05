@@ -11799,7 +11799,7 @@ export const Human: Stock = {
 						"Any General➞Acting",
 						"Any General➞Musical Instrument"
 					],
-					traits: ["Any Character➞Bitter", "Any Character➞Ear for Voices"],
+					traits: ["Any Character➞Bitter", "Any Die➞Ear for Voices"],
 					requirements: {}
 				},
 				{
@@ -11819,7 +11819,7 @@ export const Human: Stock = {
 					traits: [
 						"Any Die➞Blind",
 						"Any Die➞Lame",
-						"Any Character➞Perfect Pitch"
+						"Any Call-on➞Perfect Pitch"
 					],
 					requirements: {
 						conditions: {
@@ -11849,9 +11849,9 @@ export const Human: Stock = {
 						"Any General➞Cartography"
 					],
 					traits: [
-						"Any Character➞Near-Sighted",
+						"Human Lifepath➞Near-Sighted",
 						"Any Character➞Cramped Hands",
-						"Any Character➞Mind-Numbing Work"
+						"Human Lifepath➞Mind-Numbing Work"
 					],
 					requirements: {}
 				},
@@ -11905,8 +11905,8 @@ export const Human: Stock = {
 					traits: [
 						"Any Character➞Yes Boss",
 						"Any Character➞Pitiless",
-						"Any Character➞Booming Voice",
-						"Any Character➞Familiar Face"
+						"Any Call-on➞Booming Voice",
+						"Any Call-on➞Familiar Face"
 					],
 					requirements: {
 						conditions: {
@@ -11933,7 +11933,7 @@ export const Human: Stock = {
 					leads: ["Human➞Outcast"],
 					skills: ["Any Wise➞Arena-wise", "Any Wise➞Outlandish Beast-wise"],
 					traits: [
-						"Any Die➞Broken",
+						"Human Lifepath➞Broken",
 						"Any Character➞Desperate",
 						"Any Character➞Scarred",
 						"Human Lifepath➞Maimed"
@@ -11963,7 +11963,7 @@ export const Human: Stock = {
 					traits: [
 						"Any Character➞Life is Cheap",
 						"Any Character➞Drunk",
-						"Any Character➞Gloryhound"
+						"Any Die➞Gloryhound"
 					],
 					requirements: {
 						conditions: {
@@ -11998,7 +11998,7 @@ export const Human: Stock = {
 					traits: [
 						"Any Character➞Popular Hero",
 						"Any Character➞A Little Fat",
-						"Any Character➞Spartacus"
+						"Any Die➞Spartacus"
 					],
 					requirements: {}
 				},
@@ -12039,12 +12039,12 @@ export const Human: Stock = {
 					leads: ["Human➞Outcast"],
 					skills: ["Any Wise➞Screaming-wise", "Any Wise➞Torture Devices-wise"],
 					traits: [
-						"Any Die➞Broken",
+						"Human Lifepath➞Broken",
 						"Human Lifepath➞Maimed",
-						"Any Character➞Tongueless",
+						"Any Die➞Tongueless",
 						"Any Character➞Hoarse",
-						"Any Die➞Numb",
-						"Any Character➞Thousand-Yard Stare"
+						"Human Lifepath➞Numb",
+						"Any Die➞Thousand-Yard Stare"
 					],
 					requirements: {}
 				},
@@ -12090,11 +12090,11 @@ export const Human: Stock = {
 					],
 					traits: [
 						"Any Character➞Gnawed",
-						"Any Character➞Missing Eye",
+						"Any Die➞Missing Eye",
 						"Any Character➞Missing Digit",
 						"Human Lifepath➞Maimed",
 						"Any Character➞Soft Spot",
-						"Any Character➞Low Speech"
+						"Any Die➞Low Speech"
 					],
 					requirements: {
 						conditions: {
@@ -12123,7 +12123,7 @@ export const Human: Stock = {
 					traits: [
 						"Any Character➞Starved",
 						"Any Character➞Callous",
-						"Any Character➞Hardened",
+						"Human Lifepath➞Hardened",
 						"Human Lifepath➞Back-Breaking Labor"
 					],
 					requirements: {}
@@ -12211,7 +12211,7 @@ export const Human: Stock = {
 					],
 					traits: [
 						"Any Character➞Reviled",
-						"Any Character➞Hard-Hearted",
+						"Human Lifepath➞Hard-Hearted",
 						"Any Character➞Cruel"
 					],
 					requirements: {
@@ -13900,7 +13900,7 @@ export const Human: Stock = {
 					traitPool: 2,
 					leads: ["Human➞Outcast", "Human➞Servitude and Captive"],
 					skills: ["Any Wise➞Migration-wise", "Any General➞Riding"],
-					traits: ["Any Character➞Weathered", "Any Character➞Sense of Direction"],
+					traits: ["Any Character➞Weathered", "Any Call-on➞Sense of Direction"],
 					requirements: {},
 					stock: "Human",
 					setting: "Nomad",
@@ -14032,8 +14032,8 @@ export const Human: Stock = {
 						"Any Wise➞Hidey Hole-wise"
 					],
 					traits: [
-						"Any Character➞Lost",
-						"Any Character➞Unlucky",
+						"Any Die➞Lost",
+						"Any Die➞Unlucky",
 						"Any Character➞Never Out of Sight"
 					],
 					requirements: {},
@@ -14056,11 +14056,11 @@ export const Human: Stock = {
 					skills: ["Any General➞Inconspicuous", "Any General➞Foraging"],
 					traits: [
 						"Any Character➞Strange",
-						"Any Character➞Problems",
-						"Any Character➞Meticulous",
-						"Any Character➞Dreamer",
-						"Any Character➞Second Sight",
-						"Any Character➞Affinity for Bugs"
+						"Human Lifepath➞Problems",
+						"Any Call-on➞Meticulous",
+						"Any Die➞Dreamer",
+						"Any Die➞Second Sight",
+						"Any Die➞Affinity for Bugs"
 					],
 					requirements: {},
 					stock: "Human",
@@ -14136,7 +14136,7 @@ export const Human: Stock = {
 						"Any General➞Soothing Platitudes",
 						"Any General➞Survival"
 					],
-					traits: ["Any Character➞Superstitious", "Any Character➞Tell Tale Teller"],
+					traits: ["Any Character➞Superstitious", "Human Lifepath➞Tall Tale Teller"],
 					requirements: {
 						limits: ["LP➞MIN➞3"]
 					},
@@ -14168,7 +14168,7 @@ export const Human: Stock = {
 						"Any General➞Falsehood",
 						"Any General➞Sleight of Hand"
 					],
-					traits: ["Any Character➞Prone to Exaggeration", "Any Character➞Glib"],
+					traits: ["Any Character➞Prone to Exaggeration", "Any Call-on➞Glib"],
 					requirements: {
 						conditions: {
 							type: "OR",
@@ -14245,7 +14245,7 @@ export const Human: Stock = {
 						"Any General➞Weaponsmith",
 						"Any General➞Armorer"
 					],
-					traits: ["Any Character➞Made Man", "Any Character➞Improvisation"],
+					traits: ["Human Lifepath➞Made Man", "Any Character➞Improvisation"],
 					requirements: {
 						conditions: {
 							type: "OR",
@@ -14350,7 +14350,7 @@ export const Human: Stock = {
 						"Any General➞Oratory",
 						"Any General➞Conspicuous"
 					],
-					traits: ["Any Character➞Dramatic"],
+					traits: ["Any Call-on➞Dramatic"],
 					requirements: {
 						conditions: {
 							type: "OR",
@@ -14467,7 +14467,7 @@ export const Human: Stock = {
 								"Human➞Nomad➞Raider",
 								"Human➞City Dweller➞City Peddler",
 								"Human➞Peasant➞Peddler",
-								"Human➞Village➞Village Peddler"
+								"Human➞Villager➞Village Peddler"
 							]
 						}
 					},
@@ -14501,8 +14501,8 @@ export const Human: Stock = {
 					],
 					traits: [
 						"Any Character➞Desperate",
-						"Any Character➞Cold Blooded",
-						"Any Character➞Quiet",
+						"Any Die➞Cold Blooded",
+						"Any Call-on➞Quiet",
 						"Any Character➞Boaster"
 					],
 					requirements: {
@@ -14510,7 +14510,7 @@ export const Human: Stock = {
 							type: "OR",
 							items: [
 								"Human➞Nomad➞Warrior",
-								"Human➞Nomad➞Scout",
+								"Human➞Professional Soldier➞Scout",
 								"Human➞Nomad➞Trader"
 							]
 						}
@@ -14542,7 +14542,7 @@ export const Human: Stock = {
 						"Any General➞Soldiering",
 						"Any General➞Command"
 					],
-					traits: ["Any Character➞Stubborn", "Human Lifepath➞Maimed"],
+					traits: ["Any Die➞Stubborn", "Human Lifepath➞Maimed"],
 					requirements: {
 						conditions: {
 							type: "OR",
@@ -14577,9 +14577,9 @@ export const Human: Stock = {
 						"Any General➞Oratory"
 					],
 					traits: [
-						"Any Character➞Revered",
+						"Human Lifepath➞Revered",
 						"Any Character➞Eccentric",
-						"Any Character➞Empty Faith"
+						"Any Call-on➞Empty Faith"
 					],
 					requirements: {
 						conditions: {
@@ -14657,7 +14657,7 @@ export const Human: Stock = {
 					],
 					traits: [
 						"Any Character➞Scarred",
-						"Any Character➞Cool Headed",
+						"Any Die➞Cool Headed",
 						"Any Die➞Commanding Aura"
 					],
 					requirements: {
@@ -14692,7 +14692,7 @@ export const Human: Stock = {
 						"Any General➞Administration",
 						"Any Wise➞Waste-wise"
 					],
-					traits: ["Any Character➞Savvy"],
+					traits: ["Human Lifepath➞Savvy"],
 					requirements: {
 						conditions: {
 							type: "OR",
@@ -14980,10 +14980,10 @@ export const Human: Stock = {
 						"Any General➞Scavenging"
 					],
 					traits: [
-						"Any Character➞Driven",
+						"Any Call-on➞Driven",
 						"Any Character➞Obsessed",
 						"Any Character➞Mad",
-						"Any Character➞Touch of Ages"
+						"Any Die➞Touch of Ages"
 					],
 					requirements: {
 						conditions: {
@@ -15162,7 +15162,7 @@ export const Human: Stock = {
 					traits: [
 						"Any Character➞Tolerant",
 						"Any Character➞Bitter",
-						"Any Die➞Broken"
+						"Human Lifepath➞Broken"
 					],
 					requirements: {},
 					stock: "Human",
