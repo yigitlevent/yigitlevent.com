@@ -323,17 +323,6 @@ export const Human: Stock = {
 										"Human➞Outcast➞1*ANY",
 										"Human➞Professional Soldier➞1*ANY",
 										"Human➞City Dweller➞City Guard",
-										"Human➞City Dweller➞Guard Captain"
-									]
-								},
-								{
-									type: "OR", // TODO: Burning Sun: Requirement
-									items: [
-										"Human➞Noble➞Squire",
-										"Human➞Noble Court➞Squire",
-										"Human➞Outcast➞1*ANY",
-										"Human➞Professional Soldier➞1*ANY",
-										"Human➞City Dweller➞City Guard",
 										"Human➞City Dweller➞Guard Captain",
 										"Human➞Servitude and Captive➞Gladiator"
 									]
@@ -1374,12 +1363,6 @@ export const Human: Stock = {
 					name: "Tax Collector",
 					physicalPool: 0,
 					requirements: {
-						conditions: {
-							type: "OR", // TODO: Burning Sun: Requirement
-							items: [
-								"Human➞Religious➞1*ANY"
-							]
-						},
 						limits: [
 							"LP➞MIN➞3"
 						]
@@ -7255,7 +7238,7 @@ export const Human: Stock = {
 					traits: [
 						"Any Character➞Lust for Power",
 						"Any Character➞Bitter",
-						"Any Character➞Gifted"
+						"Human Special➞Gifted"
 					],
 					requirements: {},
 					stock: "Human",
@@ -7285,9 +7268,9 @@ export const Human: Stock = {
 						"Any Wise➞Fertile Land-wise"
 					],
 					traits: [
-						"Any Character➞Ashen Stink",
+						"Human Lifepath➞Ashen Stink",
 						"Any Character➞Addicted to Power",
-						"Any Character➞Willfully Destructive",
+						"Human Lifepath➞Willfully Destructive",
 						"Any Character➞Mad"
 					],
 					requirements: {
@@ -7359,8 +7342,8 @@ export const Human: Stock = {
 					],
 					traits: [
 						"Any Character➞Sun-Crazed",
-						"Any Character➞Pickled",
-						"Any Character➞Weather Sense"
+						"Any Die➞Pickled",
+						"Any Die➞Weather Sense"
 					],
 					requirements: {},
 					stock: "Human",
@@ -7386,7 +7369,7 @@ export const Human: Stock = {
 						"Any Wise➞Desert-wise",
 						"Human Magical➞Spirit Binding"
 					],
-					traits: ["Any Character➞Weather Sense"],
+					traits: ["Any Die➞Weather Sense"],
 					requirements: {},
 					stock: "Human",
 					setting: "Outcast",
@@ -7423,7 +7406,7 @@ export const Human: Stock = {
 						"Any Character➞Brutal",
 						"Any Character➞Sadistic",
 						"Any Character➞Bitter",
-						"Any Character➞Scheming"
+						"Any Die➞Scheming"
 					],
 					requirements: {
 						conditions: {
@@ -7431,7 +7414,6 @@ export const Human: Stock = {
 							items: [
 								"Human➞Outcast➞Freebooter",
 								"Human➞Outcast➞Ravager",
-								"Human➞Nomad➞Ravager",
 								"Human➞Outcast➞Bandit",
 								"Human➞Nomad➞Bandit",
 								"Human➞Noble➞Knight",
@@ -7504,8 +7486,8 @@ export const Human: Stock = {
 					],
 					traits: [
 						"Any Character➞Disturbingly Confident",
-						"Any Character➞Fearless",
-						"Any Character➞Light Sleeper",
+						"Any Die➞Fearless",
+						"Any Die➞Light Sleeper",
 						"Any Character➞Hearty",
 						"Any Character➞Mad"
 					],
@@ -7547,10 +7529,10 @@ export const Human: Stock = {
 						"Any Wise➞Tribute-wise"
 					],
 					traits: [
-						"Any Character➞Swath of Destruction",
+						"Human Lifepath➞Swath of Destruction",
 						"Any Character➞Paranoid",
 						"Any Character➞Complacent",
-						"Any Character➞Aura of Fear"
+						"Any Die➞Aura of Fear"
 					],
 					requirements: {
 						conditions: {
@@ -7589,7 +7571,7 @@ export const Human: Stock = {
 						"Any Character➞Flint-Eyed",
 						"Any Character➞Lunatic",
 						"Any Character➞Mind Over Matter",
-						"Any Character➞Penetrating Gaze"
+						"Any Die➞Penetrating Gaze"
 					],
 					requirements: {
 						conditions: {
@@ -8724,22 +8706,12 @@ export const Human: Stock = {
 								{
 									type: "OR",
 									items: [
+										"Human➞Religious➞Templar",
 										"Human➞Noble➞Squire",
 										"Human➞Noble Court➞Squire",
 										"Human➞Villager➞Village Tough",
 										"Human➞City Dweller➞City Guard",
 										"Human➞Professional Soldier➞Foot Soldier"
-									]
-								},
-								{
-									type: "OR", // TODO: Burning Sun: Requirement
-									items: [
-										"Human➞Religious➞Templar",
-										"Human➞Noble Court➞Squire",
-										"Human➞Villager➞Village Tough",
-										"Human➞City Dweller➞City Guard",
-										"Human➞Professional Soldier➞Foot Soldier"
-
 									]
 								}
 							]
@@ -9190,16 +9162,6 @@ export const Human: Stock = {
 							items: [
 								{
 									type: "OR",
-									items: [
-										"Human➞Noble➞Knight",
-										"Human➞Noble Court➞Knight",
-										"Human➞Noble➞Lord",
-										"Human➞Noble Court➞Constable",
-										"Human➞Outcast➞2*Freebooter"
-									]
-								},
-								{
-									type: "OR", // TODO: Burning Sun: Requirement
 									items: [
 										"Human➞Religious➞High Templar",
 										"Human➞Noble➞Knight",
@@ -11663,9 +11625,9 @@ export const Human: Stock = {
 					leads: ["Human➞Nomad", "Human➞Merchant House"],
 					skills: [],
 					traits: [
-						"Any Character➞Mule",
-						"Any Character➞Stubborn",
-						"Any Character➞Tough"
+						"Human Lifepath➞Mule",
+						"Any Die➞Stubborn",
+						"Any Die➞Tough"
 					],
 					requirements: {
 						texts: ["Mules cannot enter Noble or Templar subsettings."]
@@ -11691,7 +11653,7 @@ export const Human: Stock = {
 						"Any General➞Shield Training"
 					],
 					traits: [
-						"Any Character➞Tasting the Lash",
+						"Human Lifepath➞Tasting the Lash",
 						"Any Character➞Expendable",
 						"Any Character➞Branded"
 					],
@@ -11815,8 +11777,7 @@ export const Human: Stock = {
 					],
 					traits: [
 						"Any Character➞Veneer of Obedience",
-						"Any Character➞Perspective",
-						"Any Character➞Keen Sight"
+						"Any Call-on➞Perspective"
 					],
 					requirements: {}
 				},
@@ -11856,8 +11817,8 @@ export const Human: Stock = {
 					leads: ["Human➞Outcast"],
 					skills: ["Any General➞Musical Instrument", "Any General➞Sing"],
 					traits: [
-						"Any Character➞Blind",
-						"Any Character➞Lame",
+						"Any Die➞Blind",
+						"Any Die➞Lame",
 						"Any Character➞Perfect Pitch"
 					],
 					requirements: {
@@ -11914,10 +11875,10 @@ export const Human: Stock = {
 						"Any Wise➞Salt-wise"
 					],
 					traits: [
-						"Any Character➞Tasting the Lash",
+						"Human Lifepath➞Tasting the Lash",
 						"Any Character➞Hacking Cough",
-						"Any Character➞Maimed",
-						"Any Character➞Lame"
+						"Human Lifepath➞Maimed",
+						"Any Die➞Lame"
 					],
 					requirements: {}
 				},
@@ -11972,10 +11933,10 @@ export const Human: Stock = {
 					leads: ["Human➞Outcast"],
 					skills: ["Any Wise➞Arena-wise", "Any Wise➞Outlandish Beast-wise"],
 					traits: [
-						"Any Character➞Broken",
+						"Any Die➞Broken",
 						"Any Character➞Desperate",
 						"Any Character➞Scarred",
-						"Any Character➞Maimed"
+						"Human Lifepath➞Maimed"
 					],
 					requirements: {}
 				},
@@ -12057,7 +12018,7 @@ export const Human: Stock = {
 					skills: ["Any Wise➞Shackles-wise", "Any General➞Ditch Digging"],
 					traits: [
 						"Any Character➞Branded",
-						"Any Character➞Back-Breaking Labor",
+						"Human Lifepath➞Back-Breaking Labor",
 						"Any Character➞Yearning",
 						"Any Character➞Cool Hand"
 					],
@@ -12078,11 +12039,11 @@ export const Human: Stock = {
 					leads: ["Human➞Outcast"],
 					skills: ["Any Wise➞Screaming-wise", "Any Wise➞Torture Devices-wise"],
 					traits: [
-						"Any Character➞Broken",
-						"Any Character➞Maimed",
+						"Any Die➞Broken",
+						"Human Lifepath➞Maimed",
 						"Any Character➞Tongueless",
 						"Any Character➞Hoarse",
-						"Any Character➞Numb",
+						"Any Die➞Numb",
 						"Any Character➞Thousand-Yard Stare"
 					],
 					requirements: {}
@@ -12131,7 +12092,7 @@ export const Human: Stock = {
 						"Any Character➞Gnawed",
 						"Any Character➞Missing Eye",
 						"Any Character➞Missing Digit",
-						"Any Character➞Maimed",
+						"Human Lifepath➞Maimed",
 						"Any Character➞Soft Spot",
 						"Any Character➞Low Speech"
 					],
@@ -12163,7 +12124,7 @@ export const Human: Stock = {
 						"Any Character➞Starved",
 						"Any Character➞Callous",
 						"Any Character➞Hardened",
-						"Any Character➞Back-Breaking Labor"
+						"Human Lifepath➞Back-Breaking Labor"
 					],
 					requirements: {}
 				},
@@ -13033,12 +12994,6 @@ export const Human: Stock = {
 					name: "Tax Collector",
 					physicalPool: 0,
 					requirements: {
-						conditions: {
-							type: "OR", // TODO: Burning Sun: Requirement
-							items: [
-								"Human➞Religious➞1*ANY"
-							]
-						},
 						limits: [
 							"LP➞MIN➞3"
 						]
@@ -14023,7 +13978,7 @@ export const Human: Stock = {
 						"Any General➞Potter",
 						"Any General➞Weaving"
 					],
-					traits: ["Any Character➞Back-Breaking Labor"],
+					traits: ["Human Lifepath➞Back-Breaking Labor"],
 					requirements: {},
 					stock: "Human",
 					setting: "Nomad",
@@ -14251,7 +14206,7 @@ export const Human: Stock = {
 						"Any Wise➞Kank-wise",
 						"Any Wise➞Erdlu-wise"
 					],
-					traits: ["Any Character➞Grasping", "Any Character➞Rainman"],
+					traits: ["Any Character➞Grasping", "Any Die➞Rainman"],
 					requirements: {
 						conditions: {
 							type: "OR",
@@ -14401,8 +14356,8 @@ export const Human: Stock = {
 							type: "OR",
 							items: [
 								"Human➞Nomad➞Performer",
-								"Human➞Servitude and Captive➞Performer",
-								"Human➞Outcast➞Performer",
+								"Human➞Servitude and Captive➞Slave Performer",
+								"Human➞Outcast➞Itinerant Performer",
 								"Human➞City Dweller➞Performer",
 								"Human➞Nomad➞Veteran",
 								"Human➞Professional Soldier➞Veteran",
@@ -14587,7 +14542,7 @@ export const Human: Stock = {
 						"Any General➞Soldiering",
 						"Any General➞Command"
 					],
-					traits: ["Any Character➞Stubborn", "Any Character➞Maimed"],
+					traits: ["Any Character➞Stubborn", "Human Lifepath➞Maimed"],
 					requirements: {
 						conditions: {
 							type: "OR",
@@ -14703,7 +14658,7 @@ export const Human: Stock = {
 					traits: [
 						"Any Character➞Scarred",
 						"Any Character➞Cool Headed",
-						"Any Character➞Commanding Aura"
+						"Any Die➞Commanding Aura"
 					],
 					requirements: {
 						conditions: {
@@ -14745,7 +14700,7 @@ export const Human: Stock = {
 								"Human➞Nomad➞Patriarch/Matriarch",
 								"Human➞Nomad➞Trader",
 								"Human➞Nomad➞Warleader",
-								"Human➞Nomad➞Ravager"
+								"Human➞Outcast➞Ravager"
 							]
 						}
 					},
@@ -14807,7 +14762,7 @@ export const Human: Stock = {
 					],
 					traits: [
 						"Any Character➞Weathered",
-						"Any Character➞Light Sleeper",
+						"Any Die➞Light Sleeper",
 						"Any Character➞Strange"
 					],
 					requirements: {},
@@ -14864,7 +14819,7 @@ export const Human: Stock = {
 						"Any General➞Two-Fisted Fighting Training"
 					],
 					traits: [
-						"Any Character➞Scheming",
+						"Any Die➞Scheming",
 						"Any Character➞Sadistic",
 						"Any Character➞Bitter"
 					],
@@ -14910,7 +14865,7 @@ export const Human: Stock = {
 					],
 					traits: [
 						"Any Character➞Disturbingly Confident",
-						"Any Character➞Fearless",
+						"Any Die➞Fearless",
 						"Any Character➞Hearty",
 						"Any Character➞Mad"
 					],
@@ -14953,7 +14908,7 @@ export const Human: Stock = {
 					],
 					traits: [
 						"Any Character➞Taciturn",
-						"Any Character➞Light Sleeper",
+						"Any Die➞Light Sleeper",
 						"Any Character➞Callous"
 					],
 					requirements: {},
@@ -15140,7 +15095,7 @@ export const Human: Stock = {
 						conditions: {
 							type: "OR",
 							items: [
-								"Skill➞Any General➞Ride",
+								"Skill➞Any General➞Riding",
 								"Human➞Merchant House➞Caravan Guard"
 							]
 						}
@@ -15175,7 +15130,7 @@ export const Human: Stock = {
 						conditions: {
 							type: "OR",
 							items: [
-								"Skill➞Any General➞Ride",
+								"Skill➞Any General➞Riding",
 								"Human➞Merchant House➞Caravan Guard"
 							]
 						}
@@ -15207,7 +15162,7 @@ export const Human: Stock = {
 					traits: [
 						"Any Character➞Tolerant",
 						"Any Character➞Bitter",
-						"Any Character➞Broken"
+						"Any Die➞Broken"
 					],
 					requirements: {},
 					stock: "Human",
