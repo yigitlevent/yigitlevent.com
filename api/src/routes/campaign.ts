@@ -10,7 +10,7 @@ export async function GetCampaigns(request: Request, response: Response) {
 		const query =
 			`select "Id", "Name", "GamemasterId", "Enabled", "CreatedAt", "UpdatedAt"
 			from dbo."Campaigns" 
-			where "GamemasterId" = '${user.Id}';`;
+			where "GamemasterId" = '${user.id}';`;
 
 		const data = await PgPool.query(query);
 

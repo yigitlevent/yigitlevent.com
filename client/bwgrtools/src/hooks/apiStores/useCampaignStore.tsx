@@ -46,7 +46,7 @@ export const useCampaignStore = create<CampaignState>()(
 					.finally(() => toggleFetching());
 			},
 
-			createCampaign: (formData: CampaignCreateForm) => {
+			createCampaign: (formData: CreateCampaignRequest) => {
 				const getCampaigns = get().getCampaigns;
 
 				GenericPost("/campaign", formData)

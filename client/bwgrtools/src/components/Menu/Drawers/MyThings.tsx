@@ -36,7 +36,7 @@ function Campaigns() {
 			<Suspense fallback={<Skeleton variant="rounded" height="64px" sx={{ margin: "8px 0" }} />}>
 				{campaigns && campaigns.length > 0
 					? campaigns.map((v, i) =>
-						<Box key={i}>{v.Id}</Box>
+						<Box key={i}>{v.id}</Box>
 					)
 					: <Typography variant="body2" sx={{ textAlign: "center", margin: "16px 0" }}>— empty list —</Typography>
 				}

@@ -6,13 +6,13 @@ import { GenericPost } from "../stores/_genericRequests";
 
 
 interface UserState {
-	user: User | undefined;
+	user: UserSession | undefined;
 	fetching: boolean;
-	setUser: (user: User | undefined) => void;
+	setUser: (user: UserSession | undefined) => void;
 	toggleFetching: () => void;
 	auth: () => void;
-	signup: (formData: SignupForm, handleClose: (open: boolean) => void) => void;
-	signin: (formData: SigninForm, handleClose: (open: boolean) => void) => void;
+	signup: (formData: UserSignupRequest, handleClose: (open: boolean) => void) => void;
+	signin: (formData: UserSigninRequest, handleClose: (open: boolean) => void) => void;
 	signout: () => void;
 }
 
@@ -23,7 +23,7 @@ export const useUserStore = create<UserState>()(
 			user: undefined,
 			fetching: false,
 
-			setUser: (user: User | undefined) => {
+			setUser: (user: UserSession | undefined) => {
 				set(produce<UserState>((state) => { state.user = user; }));
 			},
 
@@ -49,7 +49,7 @@ export const useUserStore = create<UserState>()(
 					.finally(() => toggleFetching());
 			},
 
-			signup: (formData: SignupForm, handleClose: (open: boolean) => void) => {
+			signup: (formData: UserSignupRequest, handleClose: (open: boolean) => void) => {
 				const setUser = get().setUser;
 				const toggleFetching = get().toggleFetching;
 
@@ -69,7 +69,7 @@ export const useUserStore = create<UserState>()(
 					.finally(() => toggleFetching());
 			},
 
-			signin: (formData: SigninForm, handleClose: (open: boolean) => void) => {
+			signin: (formData: UserSigninRequest, handleClose: (open: boolean) => void) => {
 				const setUser = get().setUser;
 				const toggleFetching = get().toggleFetching;
 

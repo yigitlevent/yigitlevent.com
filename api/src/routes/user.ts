@@ -6,7 +6,7 @@ import { PgPool } from "../index.js";
 
 async function CleanSessions() {
 	const query =
-		`delete from dbo."UserSessions"
+		`delete from usr."UserSessions"
 		where ("expire"::date + '7 day'::interval) < now();`;
 	PgPool.query(query);
 }
@@ -34,7 +34,7 @@ export async function UserSignUp(request: Request, response: Response) {
 		const hashedPassword = bcrypt.hashSync(request.body.password, 10);
 
 		const query =
-			`insert into dbo."Users"("Username", "Email", "Password") 
+			`insert into usr."Users"("Username", "Email", "Password") 
 			values ($1, $2, $3) 
 			RETURNING *;`;
 
@@ -44,7 +44,7 @@ export async function UserSignUp(request: Request, response: Response) {
 
 		const user = data.rows[0];
 
-		request.session.user = { Id: user.Id, Username: user.username, Email: user.email };
+		request.session.user = { id: user.Id, username: user.username, email: user.email };
 
 		response.status(200);
 		return response.json({ user: request.session.user });
@@ -63,7 +63,7 @@ export async function UserSignIn(request: Request, response: Response) {
 	try {
 		const query =
 			`select "Id", "Username", "Email", "Password"
-			from dbo."Users" 
+			from usr."Users" 
 			where "Email" = '${email}';`;
 
 		const data = await PgPool.query(query);
@@ -74,12 +74,12 @@ export async function UserSignIn(request: Request, response: Response) {
 		const matches = bcrypt.compareSync(password, data.rows[0].Password);
 		if (!matches) { return response.sendStatus(403); }
 
-		request.session.user = { Id: user.Id, Username: user.Username, Email: user.Email };
+		request.session.user = { id: user.id, username: user.username, email: user.email };
 
 		const updateQuery =
-			`UPDATE dbo."Users" 
+			`UPDATE usr."Users" 
 				SET "LastSigninAt" = (to_timestamp(${Date.now()} / 1000.0))
-				WHERE "Id" = '${user.Id}';`;
+				WHERE "Id" = '${user.id}';`;
 
 		PgPool.query(updateQuery);
 

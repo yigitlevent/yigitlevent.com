@@ -2,10 +2,10 @@ import axios from "axios";
 
 
 type UserRoutes = `/user${"/auth" | "/signin" | "/signup" | "/signout"}`;
-type UserForms = SigninForm | SignupForm;
+type UserForms = UserSigninRequest | UserSignupRequest;
 
 type CampaignRoutes = `/campaign${"" | "s" | "/" | "invite"}`;
-type CampaignForms = CampaignCreateForm;
+type CampaignForms = CreateCampaignRequest;
 
 type Routes = UserRoutes | CampaignRoutes;
 type Forms = UserForms | CampaignForms;
