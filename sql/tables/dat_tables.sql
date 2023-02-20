@@ -17,18 +17,11 @@ CREATE TABLE dat."Rulesets"
     "IsOfficial" boolean NOT NULL,
     "IsPublic" boolean NOT NULL,
 	"IsExpansion" boolean NOT NULL,
-	"ParentRulesetId" character varying(15),
     "User" uuid,
     PRIMARY KEY ("Id"),
     UNIQUE ("Id"),
-	CHECK (NOT ("IsExpansion" AND "ParentRulesetId" IS NULL)),
     FOREIGN KEY ("User")
         REFERENCES usr."Users" ("Id") MATCH SIMPLE
-        ON UPDATE RESTRICT
-        ON DELETE RESTRICT
-        NOT VALID,
-    FOREIGN KEY ("ParentRulesetId")
-        REFERENCES dat."Rulesets" ("Id") MATCH SIMPLE
         ON UPDATE RESTRICT
         ON DELETE RESTRICT
         NOT VALID
@@ -36,6 +29,34 @@ CREATE TABLE dat."Rulesets"
 
 ALTER TABLE IF EXISTS dat."Rulesets"
     OWNER to apiuser;
+
+
+-- Table: dat.RulesetsExpansions
+
+-- DROP TABLE IF EXISTS dat."RulesetExpansions";
+
+CREATE TABLE dat."RulesetExpansions"
+(
+    "Id" serial NOT NULL,
+	"RulesetId" character varying(15) NOT NULL,
+	"ExpansionId" character varying(15) NOT NULL,
+    PRIMARY KEY ("Id"),
+    UNIQUE ("Id"),
+    FOREIGN KEY ("ParentRulesetId")
+        REFERENCES dat."Rulesets" ("Id") MATCH SIMPLE
+        ON UPDATE RESTRICT
+        ON DELETE RESTRICT
+        NOT VALID,
+    FOREIGN KEY ("ExpansionId")
+        REFERENCES dat."Rulesets" ("Id") MATCH SIMPLE
+        ON UPDATE RESTRICT
+        ON DELETE RESTRICT
+        NOT VALID
+);
+
+ALTER TABLE IF EXISTS dat."RulesetExpansions"
+    OWNER to apiuser;
+
 
 -- Table: dat.Stocks
 
