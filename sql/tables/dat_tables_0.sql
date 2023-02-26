@@ -66,7 +66,6 @@ CREATE TABLE dat."Stocks"
 (
 	"Id" serial NOT NULL,
 	"Name" character varying(255) NOT NULL,
-	"NameShort" character varying(255) NOT NULL,
 	"NamePlural" character varying(255) NOT NULL,
 	"Stride" integer NOT NULL
 )
@@ -166,93 +165,5 @@ CREATE TABLE dat."RulesetSettings"
 )
 
 ALTER TABLE IF EXISTS dat."RulesetSettings"
-    OWNER to apiuser;
-
-
--- Table: dat.SkillGroups
-
--- DROP TABLE IF EXISTS dat."SkillGroups";
-
-CREATE TABLE dat."SkillGroups"
-(
-	"Id" serial NOT NULL,
-	"StockId" integer,
-    FOREIGN KEY ("StockId")
-        REFERENCES dat."Stocks" ("Id") MATCH SIMPLE
-        ON UPDATE RESTRICT
-        ON DELETE RESTRICT
-        NOT VALID,
-)
-
-ALTER TABLE IF EXISTS dat."SkillGroups"
-    OWNER to apiuser;
-
-
--- Table: dat.TraitGroups
-
--- DROP TABLE IF EXISTS dat."TraitGroups";
-
-CREATE TABLE dat."TraitGroups"
-(
-	"Id" serial NOT NULL,
-	"StockId" integer,
-    FOREIGN KEY ("StockId")
-        REFERENCES dat."Stocks" ("Id") MATCH SIMPLE
-        ON UPDATE RESTRICT
-        ON DELETE RESTRICT
-        NOT VALID,
-)
-
-ALTER TABLE IF EXISTS dat."TraitGroups"
-    OWNER to apiuser;
-
-
--- Table: dat.RulesetSkillGroups
-
--- DROP TABLE IF EXISTS dat."RulesetSkillGroups";
-
-CREATE TABLE dat."RulesetSkillGroups"
-(
-	"SkillGroupId" integer NOT NULL,
-	"RulesetId" integer NOT NULL,
-    PRIMARY KEY ("SkillGroupId", "RulesetId"),
-    FOREIGN KEY ("SkillGroupId")
-        REFERENCES dat."SkillGroups" ("Id") MATCH SIMPLE
-        ON UPDATE RESTRICT
-        ON DELETE RESTRICT
-        NOT VALID,
-    FOREIGN KEY ("RulesetId")
-        REFERENCES dat."Rulesets" ("Id") MATCH SIMPLE
-        ON UPDATE RESTRICT
-        ON DELETE RESTRICT
-        NOT VALID
-)
-
-ALTER TABLE IF EXISTS dat."RulesetTraitGroups"
-    OWNER to apiuser;
-
-
--- Table: dat.RulesetTraitGroups
-
--- DROP TABLE IF EXISTS dat."RulesetTraitGroups";
-
-CREATE TABLE dat."RulesetTraitGroups"
-(
-	"TraitGroupId" integer NOT NULL,
-	"RulesetId" integer NOT NULL,
-    PRIMARY KEY ("TraitGroupId", "RulesetId"),
-    FOREIGN KEY ("TraitGroupId")
-        REFERENCES dat."TraitGroups" ("Id") MATCH SIMPLE
-        ON UPDATE RESTRICT
-        ON DELETE RESTRICT
-        NOT VALID,
-    FOREIGN KEY ("RulesetId")
-        REFERENCES dat."Rulesets" ("Id") MATCH SIMPLE
-        ON UPDATE RESTRICT
-        ON DELETE RESTRICT
-        NOT VALID
-)
-
-ALTER TABLE IF EXISTS dat."RulesetTraitGroups"
     OWNER to apiuser;
 
