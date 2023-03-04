@@ -167,3 +167,29 @@ CREATE TABLE dat."RulesetSkills"
 
 ALTER TABLE IF EXISTS dat."RulesetSkills"
     OWNER to apiuser;
+
+
+-- Table: dat.SkillSubskills
+
+-- DROP TABLE IF EXISTS dat."SkillSubskills";
+
+CREATE TABLE dat."SkillSubskills"
+(
+	"SkillId" integer NOT NULL,
+	"SubskillId" integer NOT NULL,
+    PRIMARY KEY ("SkillId", "SubskillId"),
+    FOREIGN KEY ("SkillId")
+        REFERENCES dat."Skills" ("Id") MATCH SIMPLE
+        ON UPDATE RESTRICT
+        ON DELETE RESTRICT
+        NOT VALID,
+    FOREIGN KEY ("SubskillId")
+        REFERENCES dat."Skills" ("Id") MATCH SIMPLE
+        ON UPDATE RESTRICT
+        ON DELETE RESTRICT
+        NOT VALID,
+	CHECK ("SkillId" <> "SubskillId")
+)
+
+ALTER TABLE IF EXISTS dat."SkillSubskills"
+    OWNER to apiuser;

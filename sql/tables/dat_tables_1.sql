@@ -26,7 +26,7 @@ CREATE TABLE dat."Abilities"
         REFERENCES dat."AbilityTypes" ("Id") MATCH SIMPLE
         ON UPDATE RESTRICT
         ON DELETE RESTRICT
-        NOT VALID,
+        NOT VALID
 )
 
 ALTER TABLE IF EXISTS dat."Abilities"

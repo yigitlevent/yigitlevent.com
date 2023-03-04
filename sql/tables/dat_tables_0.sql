@@ -37,11 +37,9 @@ ALTER TABLE IF EXISTS dat."Rulesets"
 
 CREATE TABLE dat."RulesetExpansions"
 (
-    "Id" serial NOT NULL,
 	"RulesetId" character varying(15) NOT NULL,
 	"ExpansionId" character varying(15) NOT NULL,
-    PRIMARY KEY ("Id"),
-    UNIQUE ("Id"),
+    PRIMARY KEY ("RulesetId", "ExpansionId"),
     FOREIGN KEY ("ParentRulesetId")
         REFERENCES dat."Rulesets" ("Id") MATCH SIMPLE
         ON UPDATE RESTRICT

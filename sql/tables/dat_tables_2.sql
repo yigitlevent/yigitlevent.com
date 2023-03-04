@@ -43,7 +43,12 @@ CREATE TABLE dat."TraitGroups"
         REFERENCES dat."TraitCategories" ("Id") MATCH SIMPLE
         ON UPDATE RESTRICT
         ON DELETE RESTRICT
-        NOT VALID
+        NOT VALID,
+	CHECK (CASE "StockId" 
+		WHEN (not null and not 2) 	THEN "CategoryId" IN (5, 6)
+		WHEN (not null) 			THEN "CategoryId" IN (4)
+		WHEN null 					THEN "CategoryId" IN (0, 1, 2, 3)
+		ELSE false END)
 )
 
 ALTER TABLE IF EXISTS dat."TraitGroups"
