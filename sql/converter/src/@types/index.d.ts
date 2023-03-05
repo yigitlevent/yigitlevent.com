@@ -1,6 +1,10 @@
-interface Processed {
-	references: { [key: string]: Reference[]; };
-	data: string[];
+type Reference = [id: number, name: string];
+
+interface References {
+	[key: string]: Reference[];
 }
 
-type Reference = [id: number, name: string];
+interface Processed {
+	references: References;
+	data: string[];
+}

@@ -1,6 +1,6 @@
 import { Stocks, Setting } from "../../../../client/bwgrtools/src/data/stocks/_stocks";
 import { arrayToSQL } from "../util/arrayToSql";
-import { findIndex } from "../util/findIndex";
+import { findIndex } from "../util/findRef";
 
 
 export function processStocks(): Processed {

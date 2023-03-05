@@ -1,30 +1,31 @@
 import fs from "fs";
 
-import { processRulesets } from "./groups/g1_rulesets";
-import { processStocks } from "./groups/g2_stocks";
-import { processAbilities } from "./groups/g3_abilities";
+import { processRulesets } from "./groups/q1_rulesets";
+import { processStocks } from "./groups/q2_stocks";
+import { processAbilities } from "./groups/q3_abilities";
+import { processTraits } from "./groups/q4_traits";
 
 
-// REFERENCES 
-let refs: { [key: string]: Reference[]; } = {};
+// REFERENCE AND DATA
+let refs: References = {};
+const outputs: string[] = [];
 
-// PROCESS OLD DATA
-const { data: RulesetData } = processRulesets();
-const { references: StockRefs, data: StockData } = processStocks();
-refs = { ...refs, ...StockRefs };
-const { references: AbilityRefs, data: AbilityData } = processAbilities();
-refs = { ...refs, ...AbilityRefs };
-
-
-// ADD AN ARRAY OF SQL STRINGS
-const outputs = [
-	...RulesetData,
-	...StockData,
-	...AbilityData
+// PROCESS
+const process = [
+	() => processRulesets(),
+	() => processStocks(),
+	() => processAbilities(),
+	(refs: References) => processTraits(refs)
 ];
 
-// WRITE DATA INTO A FILE
-const outputPath = "../data";
+process.forEach(func => {
+	const { references, data } = func(refs);
+	refs = { ...refs, ...references };
+	outputs.push(...data);
+});
+
+// OUTPUT
+const outputPath = "../data_dat";
 if (fs.existsSync(outputPath)) fs.rmSync(outputPath, { recursive: true });
 fs.mkdirSync(outputPath);
 fs.writeFileSync(`${outputPath}/data.sql`, outputs.map(v => `${v};`).join("\n\n") + "\n");
