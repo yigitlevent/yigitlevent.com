@@ -1,13 +1,16 @@
 import fs from "fs";
 
-import { processRulesets } from "./groups/g1_rulesets.js";
+import { processRulesets } from "./groups/g1_rulesets";
+import { processStocks } from "./groups/g2_stocks";
 
 // PROCESS OLD DATA
-const rulesets = processRulesets();
+const { data: RulesetData } = processRulesets();
+const { references: StockRefs, data: StockData } = processStocks();
 
 // ADD AN ARRAY OF SQL STRINGS
 const outputs = [
-	...rulesets
+	...RulesetData,
+	...StockData
 ];
 
 // WRITE DATA INTO A FILE

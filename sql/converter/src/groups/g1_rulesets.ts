@@ -1,8 +1,8 @@
-import { CoreRulesets, ExpansionRulesets } from "../../../../client/bwgrtools/src/data/rulesets.js";
-import { arrayToSQL } from "../util/arrayToSql.js";
+import { CoreRulesets, ExpansionRulesets } from "../../../../client/bwgrtools/src/data/rulesets";
+import { arrayToSQL } from "../util/arrayToSql";
 
 
-export function processRulesets() {
+export function processRulesets(): Processed {
 	const DatRulesets: string[] = [];
 	const DatRulesetExpansions: string[] = [];
 
@@ -29,5 +29,8 @@ export function processRulesets() {
 		DatRulesetExpansions.filter(v => !v.includes("amw"))
 	);
 
-	return [rulesets, rulesetExpansions];
+	return {
+		references: {},
+		data: [rulesets, rulesetExpansions]
+	};
 }
