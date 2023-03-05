@@ -38,6 +38,28 @@ export const ElfSpecial: SkillCategory = {
 	]
 };
 
+const DarkElfSkillSong: SkillCategory = {
+	allowed: ["bwc"],
+	name: "Dark Elf Skill Song",
+	skills: [
+		{
+			allowed: ["bwc"],
+			description: "The song Litany of Fools speaks gently of the terrible fate of those who don't see the truth in what the Dark Elf is saying. This song counts as Ugly Truth or Intimidation -chose which before testing the skill. The Dark Elf player must incorporate a barbed rhyme of verse into his roleplay.",
+			magical: true,
+			name: "Litany of Fools",
+			noList: false,
+			restriction: "ONLY➞Elf➞WITH➞Spite",
+			root: ["Will"],
+			tools: [
+				"No",
+				""
+			],
+			training: false,
+			type: "Social"
+		}
+	]
+};
+
 export const ElfSkillSong: SkillCategory = {
 	allowed: ["bwgr"],
 	name: "Elf Skill Song",
@@ -626,19 +648,20 @@ export const ElfSkillSong: SkillCategory = {
 			],
 			training: false,
 			type: "Craftsman"
-		}
+		},
+		...DarkElfSkillSong.skills
 	]
 };
 
-export const DarkElfSkillSong: SkillCategory = {
+const DarkElfSpellSong: SkillCategory = {
 	allowed: ["bwc"],
-	name: "Dark Elf Skill Song",
+	name: "Dark Elf Spell Song",
 	skills: [
 		{
 			allowed: ["bwc"],
-			description: "The song Litany of Fools speaks gently of the terrible fate of those who don't see the truth in what the Dark Elf is saying. This song counts as Ugly Truth or Intimidation -chose which before testing the skill. The Dark Elf player must incorporate a barbed rhyme of verse into his roleplay.",
+			description: "It is all but impossible to argue with a Dark Elf. They turn each argument against their interlocutor, proving their point with each denial and reproach.<br>This song allows the Dark Elf to switch the function of social skills. He can switch from a skill he has to one he doesn't: Falsehood becomes Persuasion, Ugly Truth becomes Oratory, etc.",
 			magical: true,
-			name: "Litany of Fools",
+			name: "Cut of the Quickened Mind",
 			noList: false,
 			restriction: "ONLY➞Elf➞WITH➞Spite",
 			root: ["Will"],
@@ -647,7 +670,127 @@ export const DarkElfSkillSong: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Social"
+			type: "Sorcerous"
+		},
+		{
+			allowed: ["bwc"],
+			description: "Shadows lengthen and deepen to an impossible shade of darkness. This spell counteracts any sight-boosting trait or spell like Keen Sight or Eye of the Engle. In addition anyone searching the shadows or darkness suffers a + 1 Ob penalty. Dirge of Night can only be sung at night or a place or shadows -an ancient forest, indoors, etc.",
+			magical: true,
+			name: "Dirge of Night",
+			noList: false,
+			restriction: "ONLY➞Elf➞WITH➞Spite",
+			root: ["Will"],
+			tools: [
+				"No",
+				""
+			],
+			training: false,
+			type: "Sorcerous"
+		},
+		{
+			allowed: ["bwc"],
+			description: "When sung this song interrupts spells and songs being cast. It acts as a distraction to any song or spell currently being sustained. The area of effect is the Dark Elf's presence. If a character attempts to sing or cast while a Fugue of Discord is in effect, they must add the Dark Elf's extra successes from the Fugue of Discord to their obstacle.",
+			magical: true,
+			name: "Fugue of Discord",
+			noList: false,
+			restriction: "ONLY➞Elf➞WITH➞Spite",
+			root: ["Spite"],
+			tools: [
+				"No",
+				""
+			],
+			training: false,
+			type: "Sorcerous"
+		},
+		{
+			allowed: ["bwc"],
+			description: "When this dirge is sung, any character without the Spite or Hatred attribute within the presence of the caster must test his Steel. Extra song successes increase the obstacle for the Steel test. Use the hesitation options as described under Intense Sorrow.",
+			magical: true,
+			name: "Keen of Terror",
+			noList: false,
+			restriction: "ONLY➞Elf➞WITH➞Spite",
+			root: ["Will"],
+			tools: [
+				"No",
+				""
+			],
+			training: false,
+			type: "Sorcerous"
+		},
+		{
+			allowed: ["bwc"],
+			description: "When sung properly this terrible song shows the singer's true form -a shifting and distorted visage that none can look upon without growing dizzy or faint. At its base level, the spell gives all who look upon the Dark Elf +1 Ob to any act directed against him -attacking him, intimidating him, convincing him, etc. Extra successes over the spell obstacle add to the obstacle penalty.",
+			magical: true,
+			name: "Paean to the Dark Fire",
+			noList: false,
+			restriction: "ONLY➞Elf➞WITH➞Spite",
+			root: ["Spite"],
+			tools: [
+				"No",
+				""
+			],
+			training: false,
+			type: "Sorcerous"
+		},
+		{
+			allowed: ["bwc"],
+			description: "This devilish song causes havoc around the singer: Knots untie, wax cracks, mortar loosens, thread unwinds and seams unravel.",
+			magical: true,
+			name: "Rhyme of the Unraveler",
+			noList: false,
+			restriction: "ONLY➞Elf➞WITH➞Spite",
+			root: ["Will"],
+			tools: [
+				"No",
+				""
+			],
+			training: false,
+			type: "Sorcerous"
+		},
+		{
+			allowed: ["bwc"],
+			description: "This mournful song speaks of leaving sorrow behind, putting it to sleep and waking a new fire within -a flame of spite.<br>Elves who are confronted with this song (if it is successfully sung), may choose to change their Grief to Spite. Their eyes are open to this new truth.",
+			magical: true,
+			name: "Sorrow of Truth",
+			noList: false,
+			restriction: "ONLY➞Elf➞WITH➞Spite",
+			root: ["Spite"],
+			tools: [
+				"No",
+				""
+			],
+			training: false,
+			type: "Sorcerous"
+		},
+		{
+			allowed: ["bwc"],
+			description: "The shadows hold no secrets or sorrows from us. This supplication adds +1D to Stealthy. Successes over the obstacle count as additinonal advantage dice. It can only be sung and used in an area of shadow or darkness.",
+			magical: true,
+			name: "Supplication to Shadows",
+			noList: false,
+			restriction: "ONLY➞Elf➞WITH➞Spite",
+			root: ["Will"],
+			tools: [
+				"No",
+				""
+			],
+			training: false,
+			type: "Sorcerous"
+		},
+		{
+			allowed: ["bwc"],
+			description: "When singing into the ear of an unwitting victim, the Dark Elf bends him to his will. This song is used to enhance the Dark Elf's social prowess.",
+			magical: true,
+			name: "Twisted Tongue",
+			noList: false,
+			restriction: "ONLY➞Elf➞WITH➞Spite",
+			root: ["Spite"],
+			tools: [
+				"No",
+				""
+			],
+			training: false,
+			type: "Sorcerous"
 		}
 	]
 };
@@ -1270,148 +1413,7 @@ export const ElfSpellSong: SkillCategory = {
 			],
 			training: false,
 			type: "Sorcerous"
-		}
-	]
-};
-
-export const DarkElfSpellSong: SkillCategory = {
-	allowed: ["bwc"],
-	name: "Dark Elf Spell Song",
-	skills: [
-		{
-			allowed: ["bwc"],
-			description: "It is all but impossible to argue with a Dark Elf. They turn each argument against their interlocutor, proving their point with each denial and reproach.<br>This song allows the Dark Elf to switch the function of social skills. He can switch from a skill he has to one he doesn't: Falsehood becomes Persuasion, Ugly Truth becomes Oratory, etc.",
-			magical: true,
-			name: "Cut of the Quickened Mind",
-			noList: false,
-			restriction: "ONLY➞Elf➞WITH➞Spite",
-			root: ["Will"],
-			tools: [
-				"No",
-				""
-			],
-			training: false,
-			type: "Sorcerous"
 		},
-		{
-			allowed: ["bwc"],
-			description: "Shadows lengthen and deepen to an impossible shade of darkness. This spell counteracts any sight-boosting trait or spell like Keen Sight or Eye of the Engle. In addition anyone searching the shadows or darkness suffers a + 1 Ob penalty. Dirge of Night can only be sung at night or a place or shadows -an ancient forest, indoors, etc.",
-			magical: true,
-			name: "Dirge of Night",
-			noList: false,
-			restriction: "ONLY➞Elf➞WITH➞Spite",
-			root: ["Will"],
-			tools: [
-				"No",
-				""
-			],
-			training: false,
-			type: "Sorcerous"
-		},
-		{
-			allowed: ["bwc"],
-			description: "When sung this song interrupts spells and songs being cast. It acts as a distraction to any song or spell currently being sustained. The area of effect is the Dark Elf's presence. If a character attempts to sing or cast while a Fugue of Discord is in effect, they must add the Dark Elf's extra successes from the Fugue of Discord to their obstacle.",
-			magical: true,
-			name: "Fugue of Discord",
-			noList: false,
-			restriction: "ONLY➞Elf➞WITH➞Spite",
-			root: ["Spite"],
-			tools: [
-				"No",
-				""
-			],
-			training: false,
-			type: "Sorcerous"
-		},
-		{
-			allowed: ["bwc"],
-			description: "When this dirge is sung, any character without the Spite or Hatred attribute within the presence of the caster must test his Steel. Extra song successes increase the obstacle for the Steel test. Use the hesitation options as described under Intense Sorrow.",
-			magical: true,
-			name: "Keen of Terror",
-			noList: false,
-			restriction: "ONLY➞Elf➞WITH➞Spite",
-			root: ["Will"],
-			tools: [
-				"No",
-				""
-			],
-			training: false,
-			type: "Sorcerous"
-		},
-		{
-			allowed: ["bwc"],
-			description: "When sung properly this terrible song shows the singer's true form -a shifting and distorted visage that none can look upon without growing dizzy or faint. At its base level, the spell gives all who look upon the Dark Elf +1 Ob to any act directed against him -attacking him, intimidating him, convincing him, etc. Extra successes over the spell obstacle add to the obstacle penalty.",
-			magical: true,
-			name: "Paean to the Dark Fire",
-			noList: false,
-			restriction: "ONLY➞Elf➞WITH➞Spite",
-			root: ["Spite"],
-			tools: [
-				"No",
-				""
-			],
-			training: false,
-			type: "Sorcerous"
-		},
-		{
-			allowed: ["bwc"],
-			description: "This devilish song causes havoc around the singer: Knots untie, wax cracks, mortar loosens, thread unwinds and seams unravel.",
-			magical: true,
-			name: "Rhyme of the Unraveler",
-			noList: false,
-			restriction: "ONLY➞Elf➞WITH➞Spite",
-			root: ["Will"],
-			tools: [
-				"No",
-				""
-			],
-			training: false,
-			type: "Sorcerous"
-		},
-		{
-			allowed: ["bwc"],
-			description: "This mournful song speaks of leaving sorrow behind, putting it to sleep and waking a new fire within -a flame of spite.<br>Elves who are confronted with this song (if it is successfully sung), may choose to change their Grief to Spite. Their eyes are open to this new truth.",
-			magical: true,
-			name: "Sorrow of Truth",
-			noList: false,
-			restriction: "ONLY➞Elf➞WITH➞Spite",
-			root: ["Spite"],
-			tools: [
-				"No",
-				""
-			],
-			training: false,
-			type: "Sorcerous"
-		},
-		{
-			allowed: ["bwc"],
-			description: "The shadows hold no secrets or sorrows from us. This supplication adds +1D to Stealthy. Successes over the obstacle count as additinonal advantage dice. It can only be sung and used in an area of shadow or darkness.",
-			magical: true,
-			name: "Supplication to Shadows",
-			noList: false,
-			restriction: "ONLY➞Elf➞WITH➞Spite",
-			root: ["Will"],
-			tools: [
-				"No",
-				""
-			],
-			training: false,
-			type: "Sorcerous"
-		},
-		{
-			allowed: ["bwc"],
-			description: "When singing into the ear of an unwitting victim, the Dark Elf bends him to his will. This song is used to enhance the Dark Elf's social prowess.",
-			magical: true,
-			name: "Twisted Tongue",
-			noList: false,
-			restriction: "ONLY➞Elf➞WITH➞Spite",
-			root: ["Spite"],
-			tools: [
-				"No",
-				""
-			],
-			training: false,
-			type: "Sorcerous"
-		}
+		...DarkElfSpellSong.skills
 	]
 };

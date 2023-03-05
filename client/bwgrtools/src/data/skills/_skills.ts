@@ -1,6 +1,6 @@
 import { AnyGeneral, AnyMonstrous, AnyWise } from "./any";
 import { DwarfArt, DwarfSpecial } from "./dwarf";
-import { DarkElfSkillSong, DarkElfSpellSong, ElfSkillSong, ElfSpecial, ElfSpellSong } from "./elf";
+import { ElfSkillSong, ElfSpecial, ElfSpellSong } from "./elf";
 import { GreatWolfSpecial, GreatWolfSpiritHunterSong } from "./greatwolf";
 import { HumanMagical, HumanSpecial } from "./human";
 import { OrcSpecial } from "./orc";
@@ -16,7 +16,7 @@ export interface Skill {
 	magical: boolean;
 	noList: boolean;
 	restriction: "N/A" | `${"ONLY" | "ONLYBURN"}➞${StocksList}${"" | `➞WITH➞${AttributesList}`}`;
-	root: StatsAndAttributesList[];
+	root: [] | [StatsAndAttributesList] | [StatsAndAttributesList, StatsAndAttributesList];
 	tools: [ToolsList, string];
 	training: boolean;
 	type: SkillTypesList;
@@ -42,9 +42,7 @@ export const SkillCategories: SkillCategories = {
 	"Dwarf Special": DwarfSpecial,
 	"Elf Special": ElfSpecial,
 	"Elf Skill Song": ElfSkillSong,
-	"Dark Elf Skill Song": DarkElfSkillSong,
 	"Elf Spell Song": ElfSpellSong,
-	"Dark Elf Spell Song": DarkElfSpellSong,
 	"Human Magical": HumanMagical,
 	"Human Special": HumanSpecial,
 	"Orc Special": OrcSpecial,
