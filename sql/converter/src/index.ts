@@ -1,9 +1,10 @@
 import fs from "fs";
 
-import { processRulesets } from "./groups/q1_rulesets";
-import { processStocks } from "./groups/q2_stocks";
-import { processAbilities } from "./groups/q3_abilities";
-import { processTraits } from "./groups/q4_traits";
+import { processRulesets } from "./groups/p1_rulesets";
+import { processStocks } from "./groups/p2_stocks";
+import { processAbilities } from "./groups/p3_abilities";
+import { processTraits } from "./groups/p4_traits";
+import { processSkills } from "./groups/p5_skills";
 
 
 // REFERENCE AND DATA
@@ -15,7 +16,8 @@ const process = [
 	() => processRulesets(),
 	() => processStocks(),
 	() => processAbilities(),
-	(refs: References) => processTraits(refs)
+	(refs: References) => processTraits(refs),
+	(refs: References) => processSkills(refs)
 ];
 
 process.forEach(func => {

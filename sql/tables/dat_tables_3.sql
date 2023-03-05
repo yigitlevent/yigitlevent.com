@@ -1,17 +1,16 @@
--- Table: dat.SkillTools
+-- Table: dat.SkillToolTypes
 
--- DROP TABLE IF EXISTS dat."SkillTools";
+-- DROP TABLE IF EXISTS dat."SkillToolTypes";
 
-CREATE TABLE dat."SkillTools"
+CREATE TABLE dat."SkillToolTypes"
 (
 	"Id" serial NOT NULL,
 	"Name" character varying(255) NOT NULL
 )
 
-ALTER TABLE IF EXISTS dat."SkillTools"
+ALTER TABLE IF EXISTS dat."SkillToolTypes"
     OWNER to apiuser;
 	
-
 -- Table: dat.SkillTypes
 
 -- DROP TABLE IF EXISTS dat."SkillTypes";
@@ -38,16 +37,25 @@ CREATE TABLE dat."SkillCategories"
 ALTER TABLE IF EXISTS dat."SkillCategories"
     OWNER to apiuser;
 
+-- Table: dat.Skills
 
--- Table: dat.SkillGroups
+-- DROP TABLE IF EXISTS dat."Skills";
 
--- DROP TABLE IF EXISTS dat."SkillGroups";
-
-CREATE TABLE dat."SkillGroups"
+CREATE TABLE dat."Skills"
 (
 	"Id" serial NOT NULL,
+	"Name" character varying(255) NOT NULL,
 	"StockId" integer,
 	"CategoryId" integer NOT NULL,
+	"TypeId" integer NOT NULL,
+	"IsMagical" boolean NOT NULL,
+	"IsTraining" boolean NOT NULL,
+	"DontList" boolean NOT NULL,
+	"Root1Id" integer,
+	"Root2Id" integer,
+	"Description" character varying(325124), -- 10485760?
+	"ToolTypeId" integer,
+	"ToolDescription" character varying(255),
     FOREIGN KEY ("StockId")
         REFERENCES dat."Stocks" ("Id") MATCH SIMPLE
         ON UPDATE RESTRICT
@@ -57,63 +65,8 @@ CREATE TABLE dat."SkillGroups"
         REFERENCES dat."SkillCategories" ("Id") MATCH SIMPLE
         ON UPDATE RESTRICT
         ON DELETE RESTRICT
-        NOT VALID
-)
-
-ALTER TABLE IF EXISTS dat."SkillGroups"
-    OWNER to apiuser;
-	
-
--- Table: dat.RulesetSkillGroups
-
--- DROP TABLE IF EXISTS dat."RulesetSkillGroups";
-
-CREATE TABLE dat."RulesetSkillGroups"
-(
-	"SkillGroupId" integer NOT NULL,
-	"RulesetId" integer NOT NULL,
-    PRIMARY KEY ("SkillGroupId", "RulesetId"),
-    FOREIGN KEY ("SkillGroupId")
-        REFERENCES dat."SkillGroups" ("Id") MATCH SIMPLE
-        ON UPDATE RESTRICT
-        ON DELETE RESTRICT
         NOT VALID,
-    FOREIGN KEY ("RulesetId")
-        REFERENCES dat."Rulesets" ("Id") MATCH SIMPLE
-        ON UPDATE RESTRICT
-        ON DELETE RESTRICT
-        NOT VALID
-)
-
-ALTER TABLE IF EXISTS dat."RulesetSkillGroups"
-    OWNER to apiuser;
-
-
--- Table: dat.Skills
-
--- DROP TABLE IF EXISTS dat."Skills";
-
-CREATE TABLE dat."Skills"
-(
-	"Id" serial NOT NULL,
-	"Name" character varying(255) NOT NULL,
-	"SkillGroupId" integer NOT NULL,
-	"SkillTypeId" integer NOT NULL,
-	"IsMagical" boolean NOT NULL,
-	"IsTraining" boolean NOT NULL,
-	"DontList" boolean NOT NULL,
-	"Root1Id" integer,
-	"Root2Id" integer,
-	"Root3Id" integer,
-	"Description" character varying(325124), -- 10485760?
-	"ToolsTypeId" integer,
-	"ToolsDescription" character varying(255),
-    FOREIGN KEY ("SkillGroupId")
-        REFERENCES dat."SkillGroups" ("Id") MATCH SIMPLE
-        ON UPDATE RESTRICT
-        ON DELETE RESTRICT
-        NOT VALID,
-    FOREIGN KEY ("SkillTypeId")
+    FOREIGN KEY ("TypeId")
         REFERENCES dat."SkillTypes" ("Id") MATCH SIMPLE
         ON UPDATE RESTRICT
         ON DELETE RESTRICT
@@ -128,13 +81,8 @@ CREATE TABLE dat."Skills"
         ON UPDATE RESTRICT
         ON DELETE RESTRICT
         NOT VALID,
-    FOREIGN KEY ("Root3Id")
-        REFERENCES dat."Abilities" ("Id") MATCH SIMPLE
-        ON UPDATE RESTRICT
-        ON DELETE RESTRICT
-        NOT VALID,
-    FOREIGN KEY ("ToolsTypeId")
-        REFERENCES dat."SkillTools" ("Id") MATCH SIMPLE
+    FOREIGN KEY ("ToolTypeId")
+        REFERENCES dat."SkillToolTypes" ("Id") MATCH SIMPLE
         ON UPDATE RESTRICT
         ON DELETE RESTRICT
         NOT VALID
@@ -142,7 +90,6 @@ CREATE TABLE dat."Skills"
 
 ALTER TABLE IF EXISTS dat."Skills"
     OWNER to apiuser;
-
 
 -- Table: dat.RulesetSkills
 

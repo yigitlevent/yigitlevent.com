@@ -30,7 +30,7 @@ function processTraitCategories(): Processed {
 		traitCategoryRefs.push([i, v]);
 	});
 
-	const traitCategories = arrayToSQL("dat", "TraitTypes", '"Id", "Name"', datTraitCategories);
+	const traitCategories = arrayToSQL("dat", "TraitCategories", '"Id", "Name"', datTraitCategories);
 
 	return {
 		references: { TraitCategories: traitCategoryRefs },
@@ -58,10 +58,9 @@ export function processTraits(refs: References): Processed {
 			const categoryId = findIndex("TraitCategories", trait.categoryName, TraitCategoriesRefs);
 			const typeId = findIndex("TraitTypes", trait.type, TraitTypesRefs);
 			const desc = trait.description ? `'${escapeTick(trait.description)}'` : null;
+
 			DatTraits.push(`(${traitIndex}, '${escapeTick(trait.name)}', ${stockId === null ? null : stockId[0]}, ${categoryId[0]}, ${typeId[0]}, ${trait.cost}, ${desc})`);
 			traitRefs.push([traitIndex, trait.name]);
-
-			trait.allowed;
 
 			trait.allowed.forEach(rulesetId => {
 				DatRulesetTraits.push(`(${traitIndex}, '${rulesetId}')`);
@@ -72,7 +71,7 @@ export function processTraits(refs: References): Processed {
 	const rulesetTraits = arrayToSQL("dat", "RulesetTraits", '"TraitId", "RulesetId"', DatRulesetTraits);
 
 	return {
-		references: { TraitTypes: TraitTypesRefs[0], TraitCategories: TraitCategoriesRefs[0] },
+		references: { TraitTypes: TraitTypesRefs[0], TraitCategories: TraitCategoriesRefs[0], Traits: traitRefs },
 		data: [...traitTypes, ...traitCategories, traits, rulesetTraits]
 	};
 }
