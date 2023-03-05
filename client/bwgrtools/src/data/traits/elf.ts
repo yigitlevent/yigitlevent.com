@@ -57,6 +57,85 @@ export const ElfCommon: TraitCategory = {
 	]
 };
 
+const DarkElfLifepath: TraitCategory = {
+	allowed: ["bwc"],
+	name: "Dark Elf Lifepath",
+	traits: [
+		{
+			allowed: ["bwc"],
+			cost: 0,
+			description: "In a Duel of Wits where kindness, compassion, Grief or passion are involved, the Eremite may double his Will for the purposes of the body of argument. This effect can be triggered mid-conflict, increasing the Eremite's body of argument immediately.",
+			name: "Cold",
+			stock: "Elf",
+			type: "Die"
+		},
+		{
+			allowed: ["bwc"],
+			cost: 0,
+			description: "The Deceptive trait acts as a call-on for Sleight of Hand and Falsehood. However this trait so infuses the liar, he has a hard time telling the truth. Deceptive also incurs a +1 Ob penalty to all Oratory, Command tests and +2 Ob to Ugly Truth or Litany of Fools.",
+			name: "Deceptive",
+			stock: "Elf",
+			type: "Call-on and Die"
+		},
+		{
+			allowed: ["bwc"],
+			cost: 0,
+			description: "Call-on for Seduction.",
+			name: "Femme Fatale/Homme Fatal",
+			stock: "Elf",
+			type: "Call-on"
+		},
+		{
+			allowed: ["bwc"],
+			cost: 0,
+			description: "Wastrels lose themselves to their animal instincts, living for decades at a time without contact with civilization —living as animals do. The Feral trait reduces overall hesitation by one, but adds +1 Ob to all social skill tests. Also, Feral negates the bonus to Circles from any Elven lifepath trait such as Etharchal, Lord of Ages, etc.",
+			name: "Feral",
+			stock: "Elf",
+			type: "Die"
+		},
+		{
+			allowed: ["bwc"],
+			cost: 0,
+			name: "Filthy",
+			stock: "Elf",
+			type: "Character"
+		},
+		{
+			allowed: ["bwc"],
+			cost: 0,
+			description: "If any other player attempts to influence a character with the Saturnine trait with passion, motivation, joy or love, the Saturnine Dark Elf player gets a +1D advantage to all tests for one scene when confronting, hunting or poisoning that character.",
+			name: "Saturnine",
+			stock: "Elf",
+			type: "Die"
+		},
+		{
+			allowed: ["bwc"],
+			cost: 0,
+			description: "Dark Elves trade their Grief for a burning Spite. Something has snapped inside the Dark Elf's soul -Grief seems folly to him. Whatever the truth of an immortal life is, Dark Elves know that it does not lay silently grieving with his Elven brothers.",
+			name: "Spite",
+			stock: "Elf",
+			type: "Die"
+		},
+		{
+			allowed: ["bwc"],
+			cost: 0,
+			description: "The Thief trait requires that the player note a mandatory theft-related Instinct: 'When visiting home, always steal Mother's valuables.' for example. So long as that Instinct is in play, it acts as a call-on for Sleight of Hand.",
+			name: "Thief",
+			stock: "Elf",
+			type: "Call-on"
+		},
+		{
+			allowed: ["bwc"],
+			cost: 0,
+			description: "If the Dark Elf character is defeated in a Duel of With or a Fight and lives to tell the tale, he may FoRK his Spite into all rolls bent on avenging himself against his enemy. Humiliating or murdering the enemy —getting revenge upon them— immediately earns the player a bonus persona point, for a total of two: one for a personal goal and one for Vengeful.<br>The Vengeful trait also requires that the Dark Elf have a close relationship with a non-spiteful Elf or a mortal human. It can be familial, romantic or fraternal in nature —but it must be close. It must rankle the Dark Elf that they still live that way.",
+			name: "Vengeful",
+			stock: "Elf",
+			type: "Die"
+			
+		}
+	]
+};
+
 export const ElfLifepath: TraitCategory = {
 	allowed: ["bwgr"],
 	name: "Elf Lifepath",
@@ -197,88 +276,11 @@ export const ElfLifepath: TraitCategory = {
 			stock: "Elf",
 			type: "Call-on"
 			
-		}
+		},
+		...DarkElfLifepath.traits
 	]
 };
 
-export const DarkElfLifepath: TraitCategory = {
-	allowed: ["bwc"],
-	name: "Dark Elf Lifepath",
-	traits: [
-		{
-			allowed: ["bwc"],
-			cost: 0,
-			description: "In a Duel of Wits where kindness, compassion, Grief or passion are involved, the Eremite may double his Will for the purposes of the body of argument. This effect can be triggered mid-conflict, increasing the Eremite's body of argument immediately.",
-			name: "Cold",
-			stock: "Elf",
-			type: "Die"
-		},
-		{
-			allowed: ["bwc"],
-			cost: 0,
-			description: "The Deceptive trait acts as a call-on for Sleight of Hand and Falsehood. However this trait so infuses the liar, he has a hard time telling the truth. Deceptive also incurs a +1 Ob penalty to all Oratory, Command tests and +2 Ob to Ugly Truth or Litany of Fools.",
-			name: "Deceptive",
-			stock: "Elf",
-			type: "Call-on and Die"
-		},
-		{
-			allowed: ["bwc"],
-			cost: 0,
-			description: "Call-on for Seduction.",
-			name: "Femme Fatale/Homme Fatal",
-			stock: "Elf",
-			type: "Call-on"
-		},
-		{
-			allowed: ["bwc"],
-			cost: 0,
-			description: "Wastrels lose themselves to their animal instincts, living for decades at a time without contact with civilization —living as animals do. The Feral trait reduces overall hesitation by one, but adds +1 Ob to all social skill tests. Also, Feral negates the bonus to Circles from any Elven lifepath trait such as Etharchal, Lord of Ages, etc.",
-			name: "Feral",
-			stock: "Elf",
-			type: "Die"
-		},
-		{
-			allowed: ["bwc"],
-			cost: 0,
-			name: "Filthy",
-			stock: "Elf",
-			type: "Character"
-		},
-		{
-			allowed: ["bwc"],
-			cost: 0,
-			description: "If any other player attempts to influence a character with the Saturnine trait with passion, motivation, joy or love, the Saturnine Dark Elf player gets a +1D advantage to all tests for one scene when confronting, hunting or poisoning that character.",
-			name: "Saturnine",
-			stock: "Elf",
-			type: "Die"
-		},
-		{
-			allowed: ["bwc"],
-			cost: 0,
-			description: "Dark Elves trade their Grief for a burning Spite. Something has snapped inside the Dark Elf's soul -Grief seems folly to him. Whatever the truth of an immortal life is, Dark Elves know that it does not lay silently grieving with his Elven brothers.",
-			name: "Spite",
-			stock: "Elf",
-			type: "Die"
-		},
-		{
-			allowed: ["bwc"],
-			cost: 0,
-			description: "The Thief trait requires that the player note a mandatory theft-related Instinct: 'When visiting home, always steal Mother's valuables.' for example. So long as that Instinct is in play, it acts as a call-on for Sleight of Hand.",
-			name: "Thief",
-			stock: "Elf",
-			type: "Call-on"
-		},
-		{
-			allowed: ["bwc"],
-			cost: 0,
-			description: "If the Dark Elf character is defeated in a Duel of With or a Fight and lives to tell the tale, he may FoRK his Spite into all rolls bent on avenging himself against his enemy. Humiliating or murdering the enemy —getting revenge upon them— immediately earns the player a bonus persona point, for a total of two: one for a personal goal and one for Vengeful.<br>The Vengeful trait also requires that the Dark Elf have a close relationship with a non-spiteful Elf or a mortal human. It can be familial, romantic or fraternal in nature —but it must be close. It must rankle the Dark Elf that they still live that way.",
-			name: "Vengeful",
-			stock: "Elf",
-			type: "Die"
-			
-		}
-	]
-};
 
 export const ElfSpecial: TraitCategory = {
 	allowed: ["bwgr"],

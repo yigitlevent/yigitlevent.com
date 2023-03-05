@@ -1,6 +1,6 @@
 import { AnyCallon, AnyCharacter, AnyDie, AnyMonstrous } from "./any";
 import { DwarfCommon, DwarfLifepath, DwarfSpecial } from "./dwarf";
-import { DarkElfLifepath, ElfCommon, ElfLifepath, ElfSpecial } from "./elf";
+import { ElfCommon, ElfLifepath, ElfSpecial } from "./elf";
 import { GreatWolfCommon, GreatWolfLifepath, GreatWolfSpecial } from "./greatwolf";
 import { HumanLifepath, HumanSpecial } from "./human";
 import { OrcCommon, OrcLifepath, OrcSpecial } from "./orc";
@@ -127,7 +127,6 @@ export const TraitCategories: TraitCategories = {
 
 	"Elf Common": ElfCommon,
 	"Elf Lifepath": ElfLifepath,
-	"Dark Elf Lifepath": DarkElfLifepath,
 	"Elf Special": ElfSpecial,
 
 	"Human Lifepath": HumanLifepath,
