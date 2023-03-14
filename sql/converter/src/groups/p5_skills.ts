@@ -57,6 +57,31 @@ function processSkillCategories(): Processed {
 	};
 }
 
+function processSubskills(skillRefs: Reference[]): Processed {
+	const datSubskills: string[] = [];
+
+	Object.values(SkillCategories)
+		.map(cat => cat.skills)
+		.flat()
+		.filter(skill => skill.subskills !== undefined)
+		.forEach(skill => {
+			if (skill.subskills) {
+				skill.subskills.forEach(subskill => {
+					const skillRef = findIndex("Skills", skill.name, { "Skills": skillRefs });
+					const subskillRef = findIndex("Skills", subskill.split("➞")[1], { "Skills": skillRefs });
+					datSubskills.push(`(${skillRef[0]}, ${subskillRef[0]})`);
+				});
+			}
+		});
+
+	const subskills = arrayToSQL("dat", "SkillSubskills", '"SkillId", "SubskillId"', datSubskills);
+
+	return {
+		references: {},
+		data: [subskills]
+	};
+}
+
 export function processSkills(refs: References): Processed {
 	const { references: SkillToolTypesRefs, data: skillToolTypes } = processSkillToolTypes();
 	const { references: SkillTypesRefs, data: skillTypes } = processSkillTypes();
@@ -100,17 +125,22 @@ export function processSkills(refs: References): Processed {
 			DatSkills.push(`(${skillIndex}, '${escapeTick(skill.name)}', ${stockId === null ? null : stockId[0]}, ${categoryId[0]}, ${typeId[0]}, ${skill.magical}, ${skill.training}, ${skill.noList}, ${root1}, ${root2}, ${desc}, ${toolTypeId[0]}, ${toolsDesc})`);
 			skillRefs.push([skillIndex, skill.name]);
 
-			skill.allowed.forEach(rulesetId => {
-				DatRulesetSkills.push(`(${skillIndex}, '${rulesetId}')`);
-			});
-
+			skill.allowed.forEach(rulesetId => DatRulesetSkills.push(`(${skillIndex}, '${rulesetId}')`));
 		});
 
-	const skills = arrayToSQL("dat", "Skills", '"Id", "Name", "StockId", "CategoryId", "TypeId", "IsMagical", "IsTraining", "DontList", "Root1Id", "Root2Id", "Description", "ToolTypeId", "ToolsDescription"', DatSkills);
+	const { data: subskills } = processSubskills(skillRefs);
+
+	const skills = arrayToSQL(
+		"dat",
+		"Skills",
+		'"Id", "Name", "StockId", "CategoryId", "TypeId", "IsMagical", "IsTraining", "DontList", "Root1Id", "Root2Id", "Description", "ToolTypeId", "ToolsDescription"',
+		DatSkills
+	);
+
 	const rulesetSkills = arrayToSQL("dat", "RulesetSkills", '"SkillId", "RulesetId"', DatRulesetSkills);
 
 	return {
 		references: { SkillToolTypes: SkillToolTypesRefs[0], SkillTypes: SkillTypesRefs[0], SkillCategories: SkillCategoriesRefs[0], Skills: skillRefs },
-		data: [...skillToolTypes, ...skillTypes, ...skillCategories, skills, rulesetSkills]
+		data: [...skillToolTypes, ...skillTypes, ...skillCategories, skills, rulesetSkills, ...subskills]
 	};
 }
