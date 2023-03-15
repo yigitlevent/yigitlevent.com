@@ -1,4 +1,4 @@
-type ReferenceKeys = "Stocks" | "Settings" | "Abilities" | "TraitTypes" | "TraitCategories" | "Traits" | "SkillToolTypes" | "SkillTypes" | "SkillCategories" | "Skills";
+type ReferenceKeys = "Stocks" | "Settings" | "Lifepaths" | "Abilities" | "TraitTypes" | "TraitCategories" | "Traits" | "SkillToolTypes" | "SkillTypes" | "SkillCategories" | "Skills";
 
 export function findIndex(type: ReferenceKeys, name: string, references: { [key: string]: Reference[]; }) {
 	if (type in references) {

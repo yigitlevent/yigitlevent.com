@@ -130,12 +130,7 @@ export function processSkills(refs: References): Processed {
 
 	const { data: subskills } = processSubskills(skillRefs);
 
-	const skills = arrayToSQL(
-		"dat",
-		"Skills",
-		'"Id", "Name", "StockId", "CategoryId", "TypeId", "IsMagical", "IsTraining", "DontList", "Root1Id", "Root2Id", "Description", "ToolTypeId", "ToolsDescription"',
-		DatSkills
-	);
+	const skills = arrayToSQL("dat", "Skills", '"Id", "Name", "StockId", "CategoryId", "TypeId", "IsMagical", "IsTraining", "DontList", "Root1Id", "Root2Id", "Description", "ToolTypeId", "ToolsDescription"', DatSkills);
 
 	const rulesetSkills = arrayToSQL("dat", "RulesetSkills", '"SkillId", "RulesetId"', DatRulesetSkills);
 
