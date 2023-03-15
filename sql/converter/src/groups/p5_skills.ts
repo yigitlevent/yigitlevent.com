@@ -61,14 +61,29 @@ function processSubskills(skillRefs: Reference[]): Processed {
 	const datSubskills: string[] = [];
 
 	Object.values(SkillCategories)
-		.map(cat => cat.skills)
+		.map(category => category.skills.map(t => {
+			const categorySplit = category.name.split(" ");
+			let cat = categorySplit[categorySplit.length - 1];
+
+			if (categorySplit[categorySplit.length - 3] === "Spirit") cat = categorySplit.slice(categorySplit.length - 3).join(" ");
+			else if (categorySplit[categorySplit.length - 1] === "Song") cat = categorySplit.slice(categorySplit.length - 2).join(" ");
+			else if (categorySplit[categorySplit.length - 1] === "Art") cat = "Dwarven Art";
+
+			return {
+				...t,
+				categoryName: cat,
+				stockName: (categorySplit[0] === "Great")
+					? "Great Wolf"
+					: categorySplit[0]
+			};
+		}))
 		.flat()
 		.filter(skill => skill.subskills !== undefined)
 		.forEach(skill => {
 			if (skill.subskills) {
 				skill.subskills.forEach(subskill => {
-					const skillRef = findIndex("Skills", skill.name, { "Skills": skillRefs });
-					const subskillRef = findIndex("Skills", subskill.split("➞")[1], { "Skills": skillRefs });
+					const skillRef = findIndex("Skills", `${skill.stockName} ${skill.categoryName}➞${skill.name}`, { "Skills": skillRefs });
+					const subskillRef = findIndex("Skills", subskill, { "Skills": skillRefs });
 					datSubskills.push(`(${skillRef[0]}, ${subskillRef[0]})`);
 				});
 			}
@@ -123,7 +138,7 @@ export function processSkills(refs: References): Processed {
 			const toolsDesc = (skill.tools[1] === "") ? null : `'${escapeTick(skill.tools[1])}'`;
 
 			DatSkills.push(`(${skillIndex}, '${escapeTick(skill.name)}', ${stockId === null ? null : stockId[0]}, ${categoryId[0]}, ${typeId[0]}, ${skill.magical}, ${skill.training}, ${skill.noList}, ${root1}, ${root2}, ${desc}, ${toolTypeId[0]}, ${toolsDesc})`);
-			skillRefs.push([skillIndex, skill.name]);
+			skillRefs.push([skillIndex, `${skill.stockName} ${skill.categoryName}➞${skill.name}`]);
 
 			skill.allowed.forEach(rulesetId => DatRulesetSkills.push(`(${skillIndex}, '${rulesetId}')`));
 		});

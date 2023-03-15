@@ -36,7 +36,7 @@ export function processStocks(): Processed {
 		const stock = Stocks[setting.stock];
 		const stockIndex = findIndex("Stocks", stock.name, { Stocks: stockRefs });
 
-		settingRefs.push([settingIndex, setting.name]);
+		settingRefs.push([settingIndex, `${stock.name}➞${setting.name}`]);
 		DatSettings.push(`(${settingIndex}, '${setting.name}', '${setting.short}', ${stockIndex}, ${setting.type === "Subsetting"})`);
 
 		setting.allowed.forEach(rulesetId => {

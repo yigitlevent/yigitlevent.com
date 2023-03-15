@@ -25,9 +25,9 @@ process.forEach(func => {
 	refs = { ...refs, ...references };
 	outputs.push(...data);
 });
-
 // OUTPUT
 const outputPath = "../data_dat";
 if (fs.existsSync(outputPath)) fs.rmSync(outputPath, { recursive: true });
 fs.mkdirSync(outputPath);
+fs.writeFileSync(`${outputPath}/ref.json`, JSON.stringify(refs).replaceAll("]}", "\n\t]\n}").replaceAll("]],", "]\n\t],\n").replaceAll("[[", "[\n\t\t[").replaceAll("{", "{\n\t"));
 fs.writeFileSync(`${outputPath}/data.sql`, outputs.map(v => `${v};`).join("\n\n") + "\n");

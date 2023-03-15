@@ -59,8 +59,10 @@ export function processTraits(refs: References): Processed {
 			const typeId = findIndex("TraitTypes", trait.type, TraitTypesRefs);
 			const desc = trait.description ? `'${escapeTick(trait.description)}'` : null;
 
-			DatTraits.push(`(${traitIndex}, '${escapeTick(trait.name)}', ${stockId === null ? null : stockId[0]}, ${categoryId[0]}, ${typeId[0]}, ${trait.cost}, ${desc})`);
-			traitRefs.push([traitIndex, trait.name]);
+			const stockIdOrNull = stockId === null ? null : stockId[0];
+
+			DatTraits.push(`(${traitIndex}, '${escapeTick(trait.name)}', ${stockIdOrNull}, ${categoryId[0]}, ${typeId[0]}, ${trait.cost}, ${desc})`);
+			traitRefs.push([traitIndex, `${trait.stock} ${trait.categoryName}➞${trait.name}`]);
 
 			trait.allowed.forEach(rulesetId => {
 				DatRulesetTraits.push(`(${traitIndex}, '${rulesetId}')`);
