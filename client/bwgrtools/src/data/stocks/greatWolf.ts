@@ -2,15 +2,52 @@ import { Stock } from "./_stocks";
 
 export const GreatWolf: Stock = {
 	agePool: [
-		{ max: 1, min: 0, m: 6, p: 12 },
-		{ max: 3, min: 2, m: 7, p: 16 },
-		{ max: 5, min: 4, m: 7, p: 17 },
-		{ max: 7, min: 6, m: 7, p: 16 },
-		{ max: 9, min: 8, m: 6, p: 14 },
-		{ max: 11, min: 10, m: 6, p: 12 },
-		{ max: 99999, min: 12, m: 5, p: 10 }
+		{
+			max: 1,
+			min: 0,
+			m: 6,
+			p: 12
+		},
+		{
+			max: 3,
+			min: 2,
+			m: 7,
+			p: 16
+		},
+		{
+			max: 5,
+			min: 4,
+			m: 7,
+			p: 17
+		},
+		{
+			max: 7,
+			min: 6,
+			m: 7,
+			p: 16
+		},
+		{
+			max: 9,
+			min: 8,
+			m: 6,
+			p: 14
+		},
+		{
+			max: 11,
+			min: 10,
+			m: 6,
+			p: 12
+		},
+		{
+			max: 99999,
+			min: 12,
+			m: 5,
+			p: 10
+		}
 	],
-	allowed: ["bwc"],
+	allowed: [
+		"bwc"
+	],
 	hasSetting: true,
 	hasSubsetting: true,
 	name: "Great Wolf",
@@ -18,14 +55,18 @@ export const GreatWolf: Stock = {
 	stride: 11,
 	settings: {
 		"Captive": {
-			allowed: ["bwc"],
+			allowed: [
+				"bwc"
+			],
 			name: "Captive",
 			short: "Captive",
 			stock: "Great Wolf",
 			type: "Subsetting",
 			lifepaths: [
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -36,7 +77,8 @@ export const GreatWolf: Stock = {
 					mentalPool: 0,
 					name: "Captive",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 1,
 					setting: "Captive",
 					skillPool: 3,
@@ -56,14 +98,18 @@ export const GreatWolf: Stock = {
 			]
 		},
 		"Ghost of the Deeping Wood": {
-			allowed: ["bwc"],
+			allowed: [
+				"bwc"
+			],
 			name: "Ghost of the Deeping Wood",
 			short: "Ghost",
 			stock: "Great Wolf",
 			type: "Subsetting",
 			lifepaths: [
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -78,8 +124,13 @@ export const GreatWolf: Stock = {
 						conditions: {
 							type: "AND",
 							items: [
-								"Great Wolf➞Wild Pack➞Last Wolf",
-								"Great Wolf➞Outcast Wolf➞Lone Wolf"
+								{
+									type: "AND",
+									items: [
+										"Great Wolf➞Wild Pack➞Last Wolf",
+										"Great Wolf➞Outcast Wolf➞Lone Wolf"
+									]
+								}
 							]
 						}
 					},
@@ -91,23 +142,34 @@ export const GreatWolf: Stock = {
 					],
 					stock: "Great Wolf",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 0
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
-					leads: [],
+					leads: [
+
+					],
 					mentalPool: 1,
 					name: "Dire Haunt",
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Great Wolf➞Ghost of the Deeping Wood➞Wandering Lost"
+								{
+									type: "OR",
+									items: [
+										"Great Wolf➞Ghost of the Deeping Wood➞Wandering Lost"
+									]
+								}
 							]
 						}
 					},
@@ -119,11 +181,15 @@ export const GreatWolf: Stock = {
 					],
 					stock: "Great Wolf",
 					traitPool: 2,
-					traits: [],
+					traits: [
+
+					],
 					years: 1
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -136,9 +202,14 @@ export const GreatWolf: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Great Wolf➞Ghost of the Deeping Wood➞Wandering Lost"
+								{
+									type: "OR",
+									items: [
+										"Great Wolf➞Ghost of the Deeping Wood➞Wandering Lost"
+									]
+								}
 							]
 						}
 					},
@@ -150,23 +221,34 @@ export const GreatWolf: Stock = {
 					],
 					stock: "Great Wolf",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 0
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
-					leads: [],
+					leads: [
+
+					],
 					mentalPool: 1,
 					name: "Fell Ancient",
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Great Wolf➞Ghost of the Deeping Wood➞Ancient Journeyer"
+								{
+									type: "OR",
+									items: [
+										"Great Wolf➞Ghost of the Deeping Wood➞Ancient Journeyer"
+									]
+								}
 							]
 						}
 					},
@@ -186,11 +268,15 @@ export const GreatWolf: Stock = {
 					years: 2
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 1,
-					leads: [],
+					leads: [
+
+					],
 					mentalPool: 2,
 					name: "Ghost of the Wood",
 					physicalPool: 0,
@@ -198,8 +284,13 @@ export const GreatWolf: Stock = {
 						conditions: {
 							type: "AND",
 							items: [
-								"Great Wolf➞Ghost of the Deeping Wood➞Dire Haunt",
-								"Great Wolf➞Ghost of the Deeping Wood➞Fell Ancient"
+								{
+									type: "AND",
+									items: [
+										"Great Wolf➞Ghost of the Deeping Wood➞Dire Haunt",
+										"Great Wolf➞Ghost of the Deeping Wood➞Fell Ancient"
+									]
+								}
 							]
 						}
 					},
@@ -227,14 +318,18 @@ export const GreatWolf: Stock = {
 			]
 		},
 		"Outcast Wolf": {
-			allowed: ["bwc"],
+			allowed: [
+				"bwc"
+			],
 			name: "Outcast Wolf",
 			short: "Outcast",
 			stock: "Great Wolf",
 			type: "Subsetting",
 			lifepaths: [
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -250,15 +345,20 @@ export const GreatWolf: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Great Wolf➞Wild Pack➞Yearling",
-								"Great Wolf➞Wild Pack➞Last Wolf",
-								"Great Wolf➞Captive➞Captive",
-								"Great Wolf➞Ghost of the Deeping Wood➞Wandering Lost",
-								"Great Wolf➞Ghost of the Deeping Wood➞Ancient Journeyer",
-								"Great Wolf➞Slave to the Legion➞Wayward",
-								"Great Wolf➞Slave to the Legion➞Dark Friend"
+								{
+									type: "OR",
+									items: [
+										"Great Wolf➞Wild Pack➞Yearling",
+										"Great Wolf➞Wild Pack➞Last Wolf",
+										"Great Wolf➞Captive➞Captive",
+										"Great Wolf➞Ghost of the Deeping Wood➞Wandering Lost",
+										"Great Wolf➞Ghost of the Deeping Wood➞Ancient Journeyer",
+										"Great Wolf➞Slave to the Legion➞Wayward",
+										"Great Wolf➞Slave to the Legion➞Dark Friend"
+									]
+								}
 							]
 						}
 					},
@@ -279,7 +379,9 @@ export const GreatWolf: Stock = {
 					years: 1
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -293,11 +395,16 @@ export const GreatWolf: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Great Wolf➞Outcast Wolf➞Lone Wolf",
-								"Great Wolf➞Captive➞Captive",
-								"Great Wolf➞Slave to the Legion➞Caged and Beaten"
+								{
+									type: "OR",
+									items: [
+										"Great Wolf➞Outcast Wolf➞Lone Wolf",
+										"Great Wolf➞Captive➞Captive",
+										"Great Wolf➞Slave to the Legion➞Caged and Beaten"
+									]
+								}
 							]
 						}
 					},
@@ -320,14 +427,18 @@ export const GreatWolf: Stock = {
 			]
 		},
 		"Slave to the Legion": {
-			allowed: ["bwc"],
+			allowed: [
+				"bwc"
+			],
 			name: "Slave to the Legion",
 			short: "Slave",
 			stock: "Great Wolf",
 			type: "Setting",
 			lifepaths: [
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: true,
 					eitherPool: 0,
 					generalSkillPool: 2,
@@ -337,7 +448,8 @@ export const GreatWolf: Stock = {
 					mentalPool: 0,
 					name: "Born to the Legion",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 0,
 					setting: "Slave to the Legion",
 					skillPool: 2,
@@ -353,7 +465,9 @@ export const GreatWolf: Stock = {
 					years: 1
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -364,9 +478,17 @@ export const GreatWolf: Stock = {
 					name: "Caged and Beaten",
 					physicalPool: 0,
 					requirements: {
-						texts: [
-							"Wolves entering the legion from other settings must take Caged and Beaten as their first lifepath in this setting."
-						]
+						conditions: {
+							type: "AND",
+							items: [
+								{
+									type: "AND",
+									items: [
+										"FIRSTINSETTING"
+									]
+								}
+							]
+						}
 					},
 					resources: 1,
 					setting: "Slave to the Legion",
@@ -386,15 +508,20 @@ export const GreatWolf: Stock = {
 					years: 0
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
-					leads: [],
+					leads: [
+
+					],
 					mentalPool: 0,
 					name: "Shadow Chaser",
 					physicalPool: 1,
-					requirements: {},
+					requirements: {
+					},
 					resources: 2,
 					setting: "Slave to the Legion",
 					skillPool: 8,
@@ -417,7 +544,9 @@ export const GreatWolf: Stock = {
 					years: 1
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -429,10 +558,15 @@ export const GreatWolf: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Great Wolf➞Slave to the Legion➞Shadow Chaser",
-								"Great Wolf➞Slave to the Legion➞Caged and Beaten"
+								{
+									type: "OR",
+									items: [
+										"Great Wolf➞Slave to the Legion➞Shadow Chaser",
+										"Great Wolf➞Slave to the Legion➞Caged and Beaten"
+									]
+								}
 							]
 						}
 					},
@@ -449,22 +583,36 @@ export const GreatWolf: Stock = {
 					],
 					stock: "Great Wolf",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 0
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
-					leads: [],
+					leads: [
+
+					],
 					mentalPool: 0,
 					name: "Bitch",
 					physicalPool: 0,
 					requirements: {
-						limits: [
-							"YEARS➞MIN➞2"
-						]
+						conditions: {
+							type: "AND",
+							items: [
+								{
+									type: "AND",
+									items: [
+										"YEARS➞MIN➞2"
+									]
+								}
+							]
+						}
 					},
 					resources: 4,
 					setting: "Slave to the Legion",
@@ -484,19 +632,28 @@ export const GreatWolf: Stock = {
 					years: 1
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
-					leads: [],
+					leads: [
+
+					],
 					mentalPool: 0,
 					name: "Howling Beast",
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Great Wolf➞Slave to the Legion➞Shadow Chaser"
+								{
+									type: "OR",
+									items: [
+										"Great Wolf➞Slave to the Legion➞Shadow Chaser"
+									]
+								}
 							]
 						}
 					},
@@ -517,20 +674,29 @@ export const GreatWolf: Stock = {
 					years: 1
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
-					leads: [],
+					leads: [
+
+					],
 					mentalPool: 1,
 					name: "Black Destroyer",
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Great Wolf➞Slave to the Legion➞Howling Beast",
-								"Great Wolf➞Slave to the Legion➞Ebon Tyrant"
+								{
+									type: "OR",
+									items: [
+										"Great Wolf➞Slave to the Legion➞Howling Beast",
+										"Great Wolf➞Slave to the Legion➞Ebon Tyrant"
+									]
+								}
 							]
 						}
 					},
@@ -554,20 +720,29 @@ export const GreatWolf: Stock = {
 					years: 2
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
-					leads: [],
+					leads: [
+
+					],
 					mentalPool: 1,
 					name: "Ebon Tyrant",
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Great Wolf➞Slave to the Legion➞Shadow Chaser",
-								"Great Wolf➞Slave to the Legion➞Black Destroyer"
+								{
+									type: "OR",
+									items: [
+										"Great Wolf➞Slave to the Legion➞Shadow Chaser",
+										"Great Wolf➞Slave to the Legion➞Black Destroyer"
+									]
+								}
 							]
 						}
 					},
@@ -589,7 +764,9 @@ export const GreatWolf: Stock = {
 					years: 2
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 1,
@@ -601,9 +778,14 @@ export const GreatWolf: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Great Wolf➞Slave to the Legion➞Caged and Beaten"
+								{
+									type: "OR",
+									items: [
+										"Great Wolf➞Slave to the Legion➞Caged and Beaten"
+									]
+								}
 							]
 						}
 					},
@@ -629,14 +811,18 @@ export const GreatWolf: Stock = {
 			]
 		},
 		"Spirit Hunter": {
-			allowed: ["bwc"],
+			allowed: [
+				"bwc"
+			],
 			name: "Spirit Hunter",
 			short: "Hunter",
 			stock: "Great Wolf",
 			type: "Subsetting",
 			lifepaths: [
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -651,8 +837,13 @@ export const GreatWolf: Stock = {
 						conditions: {
 							type: "AND",
 							items: [
-								"Great Wolf➞Outcast Wolf➞Lone Wolf",
-								"Trait➞Great Wolf Lifepath➞Spirit Marked"
+								{
+									type: "AND",
+									items: [
+										"Great Wolf➞Outcast Wolf➞Lone Wolf",
+										"Trait➞Great Wolf Lifepath➞Spirit Marked"
+									]
+								}
 							]
 						}
 					},
@@ -666,23 +857,34 @@ export const GreatWolf: Stock = {
 					],
 					stock: "Great Wolf",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 1
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
-					leads: [],
+					leads: [
+
+					],
 					mentalPool: 0,
 					name: "Spirit Howler",
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Great Wolf➞Spirit Hunter➞Spirit Chaser"
+								{
+									type: "OR",
+									items: [
+										"Great Wolf➞Spirit Hunter➞Spirit Chaser"
+									]
+								}
 							]
 						}
 					},
@@ -701,7 +903,9 @@ export const GreatWolf: Stock = {
 					years: 1
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -713,9 +917,14 @@ export const GreatWolf: Stock = {
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Great Wolf➞Spirit Hunter➞Spirit Howler"
+								{
+									type: "OR",
+									items: [
+										"Great Wolf➞Spirit Hunter➞Spirit Howler"
+									]
+								}
 							]
 						}
 					},
@@ -735,14 +944,18 @@ export const GreatWolf: Stock = {
 			]
 		},
 		"Wild Pack": {
-			allowed: ["bwc"],
+			allowed: [
+				"bwc"
+			],
 			name: "Wild Pack",
 			short: "Pack",
 			stock: "Great Wolf",
 			type: "Setting",
 			lifepaths: [
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: true,
 					eitherPool: 0,
 					generalSkillPool: 2,
@@ -752,7 +965,8 @@ export const GreatWolf: Stock = {
 					mentalPool: 0,
 					name: "Born to the Pack",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 0,
 					setting: "Wild Pack",
 					skillPool: 2,
@@ -761,11 +975,15 @@ export const GreatWolf: Stock = {
 					],
 					stock: "Great Wolf",
 					traitPool: 2,
-					traits: [],
+					traits: [
+
+					],
 					years: 1
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -777,10 +995,18 @@ export const GreatWolf: Stock = {
 					name: "Yearling",
 					physicalPool: 1,
 					requirements: {
-						limits: [
-							"LP➞MAX➞2",
-							"LP➞UNIQUE"
-						]
+						conditions: {
+							type: "AND",
+							items: [
+								{
+									type: "AND",
+									items: [
+										"LP➞MAX➞2",
+										"LP➞UNIQUE"
+									]
+								}
+							]
+						}
 					},
 					resources: 1,
 					setting: "Wild Pack",
@@ -795,11 +1021,15 @@ export const GreatWolf: Stock = {
 					],
 					stock: "Great Wolf",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 1
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -810,7 +1040,8 @@ export const GreatWolf: Stock = {
 					mentalPool: 0,
 					name: "Hunter",
 					physicalPool: 1,
-					requirements: {},
+					requirements: {
+					},
 					resources: 2,
 					setting: "Wild Pack",
 					skillPool: 7,
@@ -830,7 +1061,9 @@ export const GreatWolf: Stock = {
 					years: 1
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -843,17 +1076,21 @@ export const GreatWolf: Stock = {
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Great Wolf➞Wild Pack➞Yearling",
-								"Great Wolf➞Wild Pack➞Aunt",
-								"Great Wolf➞Wild Pack➞Uncle",
-								"Great Wolf➞Wild Pack➞Last Wolf"
+								{
+									type: "OR",
+									items: [
+										"Great Wolf➞Wild Pack➞Yearling",
+										"Great Wolf➞Wild Pack➞Aunt",
+										"Great Wolf➞Wild Pack➞Uncle",
+										"Great Wolf➞Wild Pack➞Last Wolf"
+									]
+								}
 							]
 						},
-						texts: [
-							"Dominant wolves are the pack leaders.",
-							"Female Dominants of three years or older may take the Nursing skill. Males may not take this skill at all."
+						"texts": [
+							"Dominant wolves are the pack leaders. Female Dominants of three years or older may take the Nursing skill. Males may not take this skill at all."
 						]
 					},
 					resources: 3,
@@ -873,7 +1110,9 @@ export const GreatWolf: Stock = {
 					years: 1
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
@@ -884,7 +1123,8 @@ export const GreatWolf: Stock = {
 					mentalPool: 0,
 					name: "Aunt",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 2,
 					setting: "Wild Pack",
 					skillPool: 4,
@@ -902,7 +1142,9 @@ export const GreatWolf: Stock = {
 					years: 0
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
@@ -913,7 +1155,8 @@ export const GreatWolf: Stock = {
 					mentalPool: 0,
 					name: "Uncle",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 2,
 					setting: "Wild Pack",
 					skillPool: 4,
@@ -931,7 +1174,9 @@ export const GreatWolf: Stock = {
 					years: 0
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 1,
@@ -942,9 +1187,17 @@ export const GreatWolf: Stock = {
 					name: "Elder",
 					physicalPool: 0,
 					requirements: {
-						limits: [
-							"YEARS➞MIN➞7"
-						]
+						conditions: {
+							type: "AND",
+							items: [
+								{
+									type: "AND",
+									items: [
+										"YEARS➞MIN➞7"
+									]
+								}
+							]
+						}
 					},
 					resources: 1,
 					setting: "Wild Pack",
@@ -963,7 +1216,9 @@ export const GreatWolf: Stock = {
 					years: 2
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -975,9 +1230,17 @@ export const GreatWolf: Stock = {
 					name: "Last Wolf",
 					physicalPool: 0,
 					requirements: {
-						texts: [
-							"Any wolf entering the Wild Pack setting from another setting must take Last Wolf as their first lifepath in the Wild Pack."
-						]
+						conditions: {
+							type: "AND",
+							items: [
+								{
+									type: "AND",
+									items: [
+										"FIRSTINSETTING"
+									]
+								}
+							]
+						}
 					},
 					resources: 1,
 					setting: "Wild Pack",

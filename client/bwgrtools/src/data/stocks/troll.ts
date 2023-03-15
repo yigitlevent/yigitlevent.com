@@ -2,18 +2,70 @@ import { Stock } from "./_stocks";
 
 export const Troll: Stock = {
 	agePool: [
-		{ max: 5, min: 0, m: 3, p: 11 },
-		{ max: 10, min: 6, m: 4, p: 14 },
-		{ max: 19, min: 13, m: 4, p: 17 },
-		{ max: 27, min: 20, m: 4, p: 19 },
-		{ max: 57, min: 28, m: 4, p: 20 },
-		{ max: 80, min: 58, m: 4, p: 19 },
-		{ max: 124, min: 81, m: 4, p: 18 },
-		{ max: 213, min: 125, m: 5, p: 17 },
-		{ max: 390, min: 214, m: 5, p: 16 },
-		{ max: 712, min: 391, m: 6, p: 15 }
+		{
+			max: 5,
+			min: 0,
+			m: 3,
+			p: 11
+		},
+		{
+			max: 10,
+			min: 6,
+			m: 4,
+			p: 14
+		},
+		{
+			max: 19,
+			min: 13,
+			m: 4,
+			p: 17
+		},
+		{
+			max: 27,
+			min: 20,
+			m: 4,
+			p: 19
+		},
+		{
+			max: 57,
+			min: 28,
+			m: 4,
+			p: 20
+		},
+		{
+			max: 80,
+			min: 58,
+			m: 4,
+			p: 19
+		},
+		{
+			max: 124,
+			min: 81,
+			m: 4,
+			p: 18
+		},
+		{
+			max: 213,
+			min: 125,
+			m: 5,
+			p: 17
+		},
+		{
+			max: 390,
+			min: 214,
+			m: 5,
+			p: 16
+		},
+		{
+			max: 712,
+			min: 391,
+			m: 6,
+			p: 15
+		}
 	],
-	allowed: ["bwc"],
+	allowed: [
+		"bwc"
+	],
 	hasSetting: true,
 	hasSubsetting: false,
 	name: "Troll",
@@ -21,14 +73,18 @@ export const Troll: Stock = {
 	stride: 7,
 	settings: {
 		"Cavedweller": {
-			allowed: ["bwc"],
+			allowed: [
+				"bwc"
+			],
 			name: "Cavedweller",
 			short: "Cave",
 			stock: "Troll",
 			type: "Setting",
 			lifepaths: [
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: true,
 					eitherPool: 0,
 					generalSkillPool: 2,
@@ -38,18 +94,25 @@ export const Troll: Stock = {
 					mentalPool: 0,
 					name: "Born to Dark Caves",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 2,
 					setting: "Cavedweller",
 					skillPool: 0,
-					skills: [],
+					skills: [
+
+					],
 					stock: "Troll",
 					traitPool: 2,
-					traits: [],
+					traits: [
+
+					],
 					years: 5
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -59,7 +122,8 @@ export const Troll: Stock = {
 					mentalPool: 0,
 					name: "Dweller",
 					physicalPool: 1,
-					requirements: {},
+					requirements: {
+					},
 					resources: 1,
 					setting: "Cavedweller",
 					skillPool: 2,
@@ -70,11 +134,15 @@ export const Troll: Stock = {
 					],
 					stock: "Troll",
 					traitPool: 2,
-					traits: [],
+					traits: [
+
+					],
 					years: 4
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
@@ -85,7 +153,8 @@ export const Troll: Stock = {
 					mentalPool: 0,
 					name: "Mine Haunt",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 1,
 					setting: "Cavedweller",
 					skillPool: 2,
@@ -95,11 +164,15 @@ export const Troll: Stock = {
 					],
 					stock: "Troll",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 12
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -109,7 +182,8 @@ export const Troll: Stock = {
 					mentalPool: 1,
 					name: "Dwarf Hunter",
 					physicalPool: 1,
-					requirements: {},
+					requirements: {
+					},
 					resources: 3,
 					setting: "Cavedweller",
 					skillPool: 3,
@@ -125,20 +199,29 @@ export const Troll: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
-					leads: [],
+					leads: [
+
+					],
 					mentalPool: 0,
 					name: "Dread Stone",
 					physicalPool: 2,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Troll➞Cavedweller➞Mine Haunt",
-								"Troll➞Cavedweller➞Dwarf Hunter"
+								{
+									type: "OR",
+									items: [
+										"Troll➞Cavedweller➞Mine Haunt",
+										"Troll➞Cavedweller➞Dwarf Hunter"
+									]
+								}
 							]
 						}
 					},
@@ -151,20 +234,26 @@ export const Troll: Stock = {
 					],
 					stock: "Troll",
 					traitPool: 3,
-					traits: [],
+					traits: [
+
+					],
 					years: 30
 				}
 			]
 		},
 		"Pit": {
-			allowed: ["bwc"],
+			allowed: [
+				"bwc"
+			],
 			name: "Pit",
 			short: "Pit",
 			stock: "Troll",
 			type: "Setting",
 			lifepaths: [
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: true,
 					eitherPool: 0,
 					generalSkillPool: 1,
@@ -174,11 +263,14 @@ export const Troll: Stock = {
 					mentalPool: 0,
 					name: "Born to the Pit",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 1,
 					setting: "Pit",
 					skillPool: 0,
-					skills: [],
+					skills: [
+
+					],
 					stock: "Troll",
 					traitPool: 2,
 					traits: [
@@ -187,19 +279,26 @@ export const Troll: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
-					leads: [],
+					leads: [
+
+					],
 					mentalPool: 0,
 					name: "Tortured",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 0,
 					setting: "Pit",
 					skillPool: 1,
-					skills: [],
+					skills: [
+
+					],
 					stock: "Troll",
 					traitPool: 3,
 					traits: [
@@ -209,15 +308,20 @@ export const Troll: Stock = {
 					years: 3
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
-					leads: [],
+					leads: [
+
+					],
 					mentalPool: 0,
 					name: "Ox",
 					physicalPool: 1,
-					requirements: {},
+					requirements: {
+					},
 					resources: 1,
 					setting: "Pit",
 					skillPool: 2,
@@ -235,7 +339,9 @@ export const Troll: Stock = {
 					years: 9
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -245,7 +351,8 @@ export const Troll: Stock = {
 					mentalPool: 0,
 					name: "Battering Ram",
 					physicalPool: 1,
-					requirements: {},
+					requirements: {
+					},
 					resources: 1,
 					setting: "Pit",
 					skillPool: 2,
@@ -261,7 +368,9 @@ export const Troll: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -273,13 +382,18 @@ export const Troll: Stock = {
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Troll➞Pit➞Ox",
-								"Troll➞Pit➞Battering Ram",
-								"Troll➞Cavedweller➞Dwarf Hunter",
-								"Troll➞Wild➞Manhunter",
-								"Troll➞Wild➞Brute"
+								{
+									type: "OR",
+									items: [
+										"Troll➞Pit➞Ox",
+										"Troll➞Pit➞Battering Ram",
+										"Troll➞Cavedweller➞Dwarf Hunter",
+										"Troll➞Wild➞Manhunter",
+										"Troll➞Wild➞Brute"
+									]
+								}
 							]
 						}
 					},
@@ -298,7 +412,9 @@ export const Troll: Stock = {
 					years: 7
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
@@ -310,10 +426,15 @@ export const Troll: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Troll➞Pit➞Mattock",
-								"Troll➞Wild➞Brute"
+								{
+									type: "OR",
+									items: [
+										"Troll➞Pit➞Mattock",
+										"Troll➞Wild➞Brute"
+									]
+								}
 							]
 						}
 					},
@@ -332,20 +453,29 @@ export const Troll: Stock = {
 					years: 8
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
-					leads: [],
+					leads: [
+
+					],
 					mentalPool: 1,
 					name: "Bellower",
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Troll➞Wild➞Bull",
-								"Troll➞Pit➞Ironshield"
+								{
+									type: "OR",
+									items: [
+										"Troll➞Wild➞Bull",
+										"Troll➞Pit➞Ironshield"
+									]
+								}
 							]
 						}
 					},
@@ -366,19 +496,28 @@ export const Troll: Stock = {
 					years: 16
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 1,
-					leads: [],
+					leads: [
+
+					],
 					mentalPool: 1,
 					name: "Warlord",
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Troll➞Pit➞Bellower"
+								{
+									type: "OR",
+									items: [
+										"Troll➞Pit➞Bellower"
+									]
+								}
 							]
 						}
 					},
@@ -400,14 +539,18 @@ export const Troll: Stock = {
 			]
 		},
 		"Wild": {
-			allowed: ["bwc"],
+			allowed: [
+				"bwc"
+			],
 			name: "Wild",
 			short: "Wild",
 			stock: "Troll",
 			type: "Setting",
 			lifepaths: [
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: true,
 					eitherPool: 0,
 					generalSkillPool: 2,
@@ -417,18 +560,25 @@ export const Troll: Stock = {
 					mentalPool: 0,
 					name: "Born Wild",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 2,
 					setting: "Wild",
 					skillPool: 0,
-					skills: [],
+					skills: [
+
+					],
 					stock: "Troll",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 5
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -438,7 +588,8 @@ export const Troll: Stock = {
 					mentalPool: 0,
 					name: "Bogey",
 					physicalPool: 1,
-					requirements: {},
+					requirements: {
+					},
 					resources: 1,
 					setting: "Wild",
 					skillPool: 3,
@@ -449,19 +600,26 @@ export const Troll: Stock = {
 					],
 					stock: "Troll",
 					traitPool: 2,
-					traits: [],
+					traits: [
+
+					],
 					years: 7
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
-					leads: [],
+					leads: [
+
+					],
 					mentalPool: 0,
 					name: "Bridgehaunt",
 					physicalPool: 1,
-					requirements: {},
+					requirements: {
+					},
 					resources: 2,
 					setting: "Wild",
 					skillPool: 2,
@@ -477,7 +635,9 @@ export const Troll: Stock = {
 					years: 10
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
@@ -487,7 +647,8 @@ export const Troll: Stock = {
 					mentalPool: 0,
 					name: "Manhunter",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 2,
 					setting: "Wild",
 					skillPool: 2,
@@ -497,23 +658,32 @@ export const Troll: Stock = {
 					],
 					stock: "Troll",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 7
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 1,
-					leads: [],
+					leads: [
+
+					],
 					mentalPool: 1,
 					name: "Forlorn",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 1,
 					setting: "Wild",
 					skillPool: 0,
-					skills: [],
+					skills: [
+
+					],
 					stock: "Troll",
 					traitPool: 2,
 					traits: [
@@ -524,7 +694,9 @@ export const Troll: Stock = {
 					years: 13
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -536,14 +708,19 @@ export const Troll: Stock = {
 					physicalPool: 2,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Troll➞Wild➞Bridgehaunt",
-								"Troll➞Cavedweller➞Mine Haunt",
-								"Troll➞Wild➞Manhunter",
-								"Troll➞Cavedweller➞Dwarf Hunter",
-								"Troll➞Pit➞Battering Ram",
-								"Troll➞Pit➞Mattock"
+								{
+									type: "OR",
+									items: [
+										"Troll➞Wild➞Bridgehaunt",
+										"Troll➞Cavedweller➞Mine Haunt",
+										"Troll➞Wild➞Manhunter",
+										"Troll➞Cavedweller➞Dwarf Hunter",
+										"Troll➞Pit➞Battering Ram",
+										"Troll➞Pit➞Mattock"
+									]
+								}
 							]
 						}
 					},
@@ -562,7 +739,9 @@ export const Troll: Stock = {
 					years: 15
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -575,11 +754,16 @@ export const Troll: Stock = {
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Troll➞Wild➞Brute",
-								"Troll➞Cavedweller➞Dread Stone",
-								"Troll➞Pit➞Bellower"
+								{
+									type: "OR",
+									items: [
+										"Troll➞Wild➞Brute",
+										"Troll➞Cavedweller➞Dread Stone",
+										"Troll➞Pit➞Bellower"
+									]
+								}
 							]
 						}
 					},
@@ -600,7 +784,9 @@ export const Troll: Stock = {
 					years: 33
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -612,10 +798,15 @@ export const Troll: Stock = {
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Troll➞Wild➞Brute",
-								"Troll➞Pit➞Ironshield"
+								{
+									type: "OR",
+									items: [
+										"Troll➞Wild➞Brute",
+										"Troll➞Pit➞Ironshield"
+									]
+								}
 							]
 						}
 					},

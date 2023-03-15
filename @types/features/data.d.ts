@@ -35,18 +35,25 @@ type TraitCategoryPath = `${"Any"} ${"Character" | "Call-on" | "Die" | "Monstrou
 	| `${"Dwarf" | "Elf" | "Dark Elf" | "Human" | "Orc" | "Roden" | "Troll" | "Great Wolf"} ${"Lifepath" | "Special"}`;
 type TraitPath = `${TraitCategoryPath}➞${string}`;
 
-type ConditionItem = (LifepathPath | `Skill➞${SkillPath}` | `Trait➞${TraitPath}` | Condition);
+type RequirementItem =
+	LifepathPath | `Skill➞${SkillPath}` | `Trait➞${TraitPath}` |
+	"LP➞UNIQUE" | "FIRSTINSETTING" |
+	`GENDER➞${"FEMALE" | "MALE"}` |
+	`${"YEARS" | "LP" | "GRIEF"}➞${"MIN" | "MAX"}➞${number}` |
+	`OLDESTBY➞${number}`;
 
-type Limit = ("LP➞UNIQUE" | `GENDER➞${"FEMALE" | "MALE"}` | `${"YEARS" | "LP" | "GRIEF"}➞${"MIN" | "MAX"}➞${number}`);
-
-interface Condition {
+interface RequirementBlock {
 	type: "AND" | "OR" | "NOT",
-	items: ConditionItem[];
+	items: RequirementItem[];
+}
+
+interface RequirementBlocks {
+	type: "AND" | "OR",
+	items: RequirementBlock[];
 }
 
 interface Requirements {
-	conditions?: Condition;
-	limits?: Limit[];
+	conditions?: RequirementBlocks;
 	texts?: string[];
 }
 

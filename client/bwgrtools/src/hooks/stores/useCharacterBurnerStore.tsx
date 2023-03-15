@@ -870,8 +870,8 @@ export const useCharacterBurnerStore = create<CharacterBurnerState>()(
 					const state = get();
 					const skill = GetSkillFromPath(skillName);
 					const statShades = [
-						...Stats.filter(v => skill.root.includes(v.name)).map(v => state.getStatShade(v.name)),
-						...Attributes.filter(v => skill.root.includes(v.name)).map(v => state.getAttributeShade(v.name))
+						...Stats.filter(v => skill.root.length ? skill.root.includes(v.name) : false).map(v => state.getStatShade(v.name)),
+						...Attributes.filter(v => skill.root.length ? skill.root.includes(v.name) : false).map(v => state.getAttributeShade(v.name))
 					];
 					return statShades.every(v => v === "G") ? "G" : "B";
 				},
@@ -879,8 +879,8 @@ export const useCharacterBurnerStore = create<CharacterBurnerState>()(
 					const state = get();
 					const skill = GetSkillFromPath(skillName);
 					return Math.floor(GetAverage([
-						...Stats.filter(v => skill.root.includes(v.name)).map(v => state.getStatExponent(v.name)),
-						...Attributes.filter(v => skill.root.includes(v.name)).map(v => state.getAttributeExponent(v.name))
+						...Stats.filter(v => skill.root.length ? skill.root.includes(v.name) : false).map(v => state.getStatExponent(v.name)),
+						...Attributes.filter(v => skill.root.length ? skill.root.includes(v.name) : false).map(v => state.getAttributeExponent(v.name))
 					]) / 2) + state.spendings.skills[skillName].general.advance + state.spendings.skills[skillName].lifepath.advance;
 				},
 				getSkillRemainings: () => {

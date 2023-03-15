@@ -2,19 +2,77 @@ import { Stock } from "./_stocks";
 
 export const Human: Stock = {
 	agePool: [
-		{ max: 10, min: 0, m: 5, p: 10 },
-		{ max: 14, min: 11, m: 6, p: 13 },
-		{ max: 16, min: 15, m: 6, p: 16 },
-		{ max: 25, min: 17, m: 7, p: 16 },
-		{ max: 29, min: 26, m: 7, p: 15 },
-		{ max: 35, min: 30, m: 7, p: 14 },
-		{ max: 40, min: 36, m: 7, p: 13 },
-		{ max: 55, min: 41, m: 7, p: 12 },
-		{ max: 65, min: 56, m: 7, p: 11 },
-		{ max: 79, min: 66, m: 7, p: 10 },
-		{ max: 99999, min: 80, m: 6, p: 9 }
+		{
+			max: 10,
+			min: 0,
+			m: 5,
+			p: 10
+		},
+		{
+			max: 14,
+			min: 11,
+			m: 6,
+			p: 13
+		},
+		{
+			max: 16,
+			min: 15,
+			m: 6,
+			p: 16
+		},
+		{
+			max: 25,
+			min: 17,
+			m: 7,
+			p: 16
+		},
+		{
+			max: 29,
+			min: 26,
+			m: 7,
+			p: 15
+		},
+		{
+			max: 35,
+			min: 30,
+			m: 7,
+			p: 14
+		},
+		{
+			max: 40,
+			min: 36,
+			m: 7,
+			p: 13
+		},
+		{
+			max: 55,
+			min: 41,
+			m: 7,
+			p: 12
+		},
+		{
+			max: 65,
+			min: 56,
+			m: 7,
+			p: 11
+		},
+		{
+			max: 79,
+			min: 66,
+			m: 7,
+			p: 10
+		},
+		{
+			max: 99999,
+			min: 80,
+			m: 6,
+			p: 9
+		}
 	],
-	allowed: ["bwgr", "bs"],
+	allowed: [
+		"bwgr",
+		"bs"
+	],
 	hasSetting: true,
 	hasSubsetting: true,
 	name: "Human",
@@ -22,14 +80,20 @@ export const Human: Stock = {
 	stride: 7,
 	settings: {
 		"City Dweller": {
-			allowed: ["bwgr", "bs"],
+			allowed: [
+				"bwgr",
+				"bs"
+			],
 			name: "City Dweller",
 			short: "City",
 			stock: "Human",
 			type: "Setting",
 			lifepaths: [
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: true,
 					eitherPool: 0,
 					generalSkillPool: 4,
@@ -43,18 +107,25 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "City Born",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 10,
 					setting: "City Dweller",
 					skillPool: 0,
-					skills: [],
+					skills: [
+
+					],
 					stock: "Human",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 12
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: true,
 					eitherPool: 0,
 					generalSkillPool: 2,
@@ -66,11 +137,14 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Gifted Child",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 4,
 					setting: "City Dweller",
 					skillPool: 0,
-					skills: [],
+					skills: [
+
+					],
 					stock: "Human",
 					traitPool: 1,
 					traits: [
@@ -82,7 +156,10 @@ export const Human: Stock = {
 					years: 9
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -93,7 +170,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Runner",
 					physicalPool: 1,
-					requirements: {},
+					requirements: {
+					},
 					resources: 7,
 					setting: "City Dweller",
 					skillPool: 3,
@@ -103,11 +181,16 @@ export const Human: Stock = {
 					],
 					stock: "Human",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 3
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -120,9 +203,17 @@ export const Human: Stock = {
 					name: "Urchin",
 					physicalPool: 0,
 					requirements: {
-						limits: [
-							"LP➞MAX➞3"
-						]
+						conditions: {
+							type: "AND",
+							items: [
+								{
+									type: "AND",
+									items: [
+										"LP➞MAX➞3"
+									]
+								}
+							]
+						}
 					},
 					resources: 4,
 					setting: "City Dweller",
@@ -143,7 +234,10 @@ export const Human: Stock = {
 					years: 2
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -155,7 +249,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Beggar",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 4,
 					setting: "City Dweller",
 					skillPool: 7,
@@ -179,7 +274,10 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -190,7 +288,8 @@ export const Human: Stock = {
 					mentalPool: 1,
 					name: "Courier",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 8,
 					setting: "City Dweller",
 					skillPool: 4,
@@ -201,11 +300,16 @@ export const Human: Stock = {
 					],
 					stock: "Human",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 4
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -218,7 +322,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Laborer",
 					physicalPool: 1,
-					requirements: {},
+					requirements: {
+					},
 					resources: 4,
 					setting: "City Dweller",
 					skillPool: 2,
@@ -235,7 +340,10 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -247,7 +355,8 @@ export const Human: Stock = {
 					mentalPool: 1,
 					name: "Pilgrim",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 3,
 					setting: "City Dweller",
 					skillPool: 4,
@@ -266,7 +375,10 @@ export const Human: Stock = {
 					years: 2
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -278,7 +390,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Groom",
 					physicalPool: 1,
-					requirements: {},
+					requirements: {
+					},
 					resources: 5,
 					setting: "City Dweller",
 					skillPool: 6,
@@ -299,7 +412,10 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -313,7 +429,7 @@ export const Human: Stock = {
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
 								{
 									type: "OR",
@@ -352,7 +468,10 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -363,7 +482,8 @@ export const Human: Stock = {
 					mentalPool: 1,
 					name: "Coin Clipper",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 15,
 					setting: "City Dweller",
 					skillPool: 5,
@@ -383,7 +503,10 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -395,7 +518,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Pickpocket",
 					physicalPool: 1,
-					requirements: {},
+					requirements: {
+					},
 					resources: 8,
 					setting: "City Dweller",
 					skillPool: 5,
@@ -413,7 +537,10 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -425,7 +552,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Street Thug",
 					physicalPool: 1,
-					requirements: {},
+					requirements: {
+					},
 					resources: 5,
 					setting: "City Dweller",
 					skillPool: 5,
@@ -444,7 +572,10 @@ export const Human: Stock = {
 					years: 3
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
@@ -456,7 +587,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Criminal",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 10,
 					setting: "City Dweller",
 					skillPool: 6,
@@ -478,7 +610,10 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -490,7 +625,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Confidence Man",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 12,
 					setting: "City Dweller",
 					skillPool: 5,
@@ -503,11 +639,16 @@ export const Human: Stock = {
 					],
 					stock: "Human",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 4
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -520,7 +661,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "City Peddler",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 10,
 					setting: "City Dweller",
 					skillPool: 7,
@@ -541,7 +683,9 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -554,7 +698,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Sailor",
 					physicalPool: 1,
-					requirements: {},
+					requirements: {
+					},
 					resources: 5,
 					setting: "City Dweller",
 					skillPool: 5,
@@ -575,7 +720,10 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -592,7 +740,8 @@ export const Human: Stock = {
 					mentalPool: 1,
 					name: "Student",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 5,
 					setting: "City Dweller",
 					skillPool: 11,
@@ -619,7 +768,10 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -631,7 +783,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Ganymede",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 15,
 					setting: "City Dweller",
 					skillPool: 5,
@@ -652,7 +805,10 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -664,7 +820,8 @@ export const Human: Stock = {
 					mentalPool: 1,
 					name: "Dilettante",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 8,
 					setting: "City Dweller",
 					skillPool: 4,
@@ -683,7 +840,9 @@ export const Human: Stock = {
 					years: 3
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -697,7 +856,8 @@ export const Human: Stock = {
 					mentalPool: 1,
 					name: "Neophyte Sorcerer",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 12,
 					setting: "City Dweller",
 					skillPool: 6,
@@ -718,7 +878,9 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -731,7 +893,8 @@ export const Human: Stock = {
 					mentalPool: 1,
 					name: "Temple Acolyte",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 10,
 					setting: "City Dweller",
 					skillPool: 5,
@@ -752,7 +915,10 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
@@ -764,7 +930,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Sculptor",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 8,
 					setting: "City Dweller",
 					skillPool: 6,
@@ -783,7 +950,10 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
@@ -795,7 +965,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Painter",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 5,
 					setting: "City Dweller",
 					skillPool: 5,
@@ -815,7 +986,10 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -827,7 +1001,8 @@ export const Human: Stock = {
 					mentalPool: 1,
 					name: "Composer",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 5,
 					setting: "City Dweller",
 					skillPool: 5,
@@ -847,7 +1022,10 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -859,7 +1037,8 @@ export const Human: Stock = {
 					mentalPool: 1,
 					name: "Dramaturge",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 5,
 					setting: "City Dweller",
 					skillPool: 5,
@@ -877,7 +1056,10 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -889,7 +1071,8 @@ export const Human: Stock = {
 					mentalPool: 1,
 					name: "Performer",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 5,
 					setting: "City Dweller",
 					skillPool: 6,
@@ -910,7 +1093,10 @@ export const Human: Stock = {
 					years: 3
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -922,7 +1108,8 @@ export const Human: Stock = {
 					mentalPool: 1,
 					name: "Tinkerer",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 8,
 					setting: "City Dweller",
 					skillPool: 5,
@@ -933,11 +1120,16 @@ export const Human: Stock = {
 					],
 					stock: "Human",
 					traitPool: 2,
-					traits: [],
+					traits: [
+
+					],
 					years: 7
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -950,7 +1142,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Coal Man",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 5,
 					setting: "City Dweller",
 					skillPool: 4,
@@ -968,7 +1161,10 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -979,7 +1175,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Seamstress",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 10,
 					setting: "City Dweller",
 					skillPool: 4,
@@ -998,7 +1195,10 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1009,7 +1209,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Barkeep",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 15,
 					setting: "City Dweller",
 					skillPool: 4,
@@ -1026,7 +1227,10 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1037,7 +1241,8 @@ export const Human: Stock = {
 					mentalPool: 1,
 					name: "Shopkeeper",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 16,
 					setting: "City Dweller",
 					skillPool: 4,
@@ -1049,11 +1254,16 @@ export const Human: Stock = {
 					],
 					stock: "Human",
 					traitPool: 0,
-					traits: [],
+					traits: [
+
+					],
 					years: 6
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1064,7 +1274,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Baker",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 10,
 					setting: "City Dweller",
 					skillPool: 5,
@@ -1082,7 +1293,10 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1095,9 +1309,17 @@ export const Human: Stock = {
 					name: "Alewife",
 					physicalPool: 1,
 					requirements: {
-						limits: [
-							"GENDER➞FEMALE"
-						]
+						conditions: {
+							type: "AND",
+							items: [
+								{
+									type: "AND",
+									items: [
+										"GENDER➞FEMALE"
+									]
+								}
+							]
+						}
 					},
 					resources: 12,
 					setting: "City Dweller",
@@ -1117,7 +1339,10 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1129,7 +1354,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Conner",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 12,
 					setting: "City Dweller",
 					skillPool: 5,
@@ -1149,7 +1375,10 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1161,7 +1390,8 @@ export const Human: Stock = {
 					mentalPool: 1,
 					name: "Clerk",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 9,
 					setting: "City Dweller",
 					skillPool: 4,
@@ -1175,11 +1405,15 @@ export const Human: Stock = {
 					],
 					stock: "Human",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 4
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1192,15 +1426,20 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞City Dweller➞Student",
-								"Human➞Noble➞Student",
-								"Human➞Noble Court➞Student",
-								"Human➞Religious➞Temple Acolyte",
-								"Human➞Villager➞Acolyte",
-								"Human➞City Dweller➞Clerk",
-								"Human➞Villager➞Clerk"
+								{
+									type: "OR",
+									items: [
+										"Human➞City Dweller➞Student",
+										"Human➞Noble➞Student",
+										"Human➞Noble Court➞Student",
+										"Human➞Religious➞Temple Acolyte",
+										"Human➞Villager➞Acolyte",
+										"Human➞City Dweller➞Clerk",
+										"Human➞Villager➞Clerk"
+									]
+								}
 							]
 						}
 					},
@@ -1222,7 +1461,10 @@ export const Human: Stock = {
 					years: 7
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1235,15 +1477,20 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞City Dweller➞Clerk",
-								"Human➞Villager➞Clerk",
-								"Human➞Noble➞Young Lady",
-								"Human➞Noble Court➞Young Lady",
-								"Human➞City Dweller➞Student",
-								"Human➞Noble➞Student",
-								"Human➞Noble Court➞Student"
+								{
+									type: "OR",
+									items: [
+										"Human➞City Dweller➞Clerk",
+										"Human➞Villager➞Clerk",
+										"Human➞Noble➞Young Lady",
+										"Human➞Noble Court➞Young Lady",
+										"Human➞City Dweller➞Student",
+										"Human➞Noble➞Student",
+										"Human➞Noble Court➞Student"
+									]
+								}
 							]
 						}
 					},
@@ -1265,7 +1512,9 @@ export const Human: Stock = {
 					years: 10
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1280,23 +1529,25 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞City Dweller➞Scribe",
-								"Human➞Outcast➞Thinker",
-								"Human➞Religious➞Archivist",
-								"Human➞Religious➞Interpreter",
-								"Human➞Religious➞Custodian",
-								"Human➞City Dweller➞Bishop",
-								"Human➞Religious➞Bishop",
-								"Skill➞Human Magical➞Sorcery",
-								"Skill➞Human Magical➞Enchanting",
-								"Skill➞Human Magical➞Summoning"
+								{
+									type: "OR",
+									items: [
+										"Human➞City Dweller➞Scribe",
+										"Human➞Outcast➞Thinker",
+										"Human➞Religious➞Archivist",
+										"Human➞Religious➞Interpreter",
+										"Human➞Religious➞Custodian",
+										"Human➞City Dweller➞Bishop",
+										"Human➞Religious➞Bishop",
+										"Skill➞Human Magical➞Sorcery",
+										"Skill➞Human Magical➞Enchanting",
+										"Skill➞Human Magical➞Summoning"
+									]
+								}
 							]
-						},
-						limits: [
-							"LP➞UNIQUE"
-						]
+						}
 					},
 					resources: 15,
 					setting: "City Dweller",
@@ -1321,7 +1572,10 @@ export const Human: Stock = {
 					years: 10
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1333,7 +1587,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Moneylender",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 20,
 					setting: "City Dweller",
 					skillPool: 4,
@@ -1350,7 +1605,10 @@ export const Human: Stock = {
 					years: 8
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1363,9 +1621,17 @@ export const Human: Stock = {
 					name: "Tax Collector",
 					physicalPool: 0,
 					requirements: {
-						limits: [
-							"LP➞MIN➞3"
-						]
+						conditions: {
+							type: "AND",
+							items: [
+								{
+									type: "AND",
+									items: [
+										"LP➞MIN➞3"
+									]
+								}
+							]
+						}
 					},
 					resources: 18,
 					setting: "City Dweller",
@@ -1384,7 +1650,10 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
@@ -1397,9 +1666,17 @@ export const Human: Stock = {
 					name: "Taskmaster",
 					physicalPool: 0,
 					requirements: {
-						limits: [
-							"LP➞MIN➞3"
-						]
+						conditions: {
+							type: "AND",
+							items: [
+								{
+									type: "AND",
+									items: [
+										"LP➞MIN➞3"
+									]
+								}
+							]
+						}
 					},
 					resources: 15,
 					setting: "City Dweller",
@@ -1420,7 +1697,9 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
@@ -1434,15 +1713,20 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞City Dweller➞Sailor",
-								"Human➞Professional Soldier➞Sailor",
-								"Human➞Seafaring➞Sailor",
-								"Human➞Villager➞Sailor",
-								"Human➞Outcast➞Pirate",
-								"Human➞Noble➞Knight",
-								"Human➞Noble Court➞Knight"
+								{
+									type: "OR",
+									items: [
+										"Human➞City Dweller➞Sailor",
+										"Human➞Professional Soldier➞Sailor",
+										"Human➞Seafaring➞Sailor",
+										"Human➞Villager➞Sailor",
+										"Human➞Outcast➞Pirate",
+										"Human➞Noble➞Knight",
+										"Human➞Noble Court➞Knight"
+									]
+								}
 							]
 						}
 					},
@@ -1464,7 +1748,10 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1475,7 +1762,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "City Guard",
 					physicalPool: 1,
-					requirements: {},
+					requirements: {
+					},
 					resources: 9,
 					setting: "City Dweller",
 					skillPool: 5,
@@ -1494,7 +1782,10 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1507,18 +1798,23 @@ export const Human: Stock = {
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞City Dweller➞City Guard",
-								"Human➞City Dweller➞Guard Captain",
-								"Human➞Seafaring➞Marine",
-								"Human➞Seafaring➞First Mate",
-								"Human➞Professional Soldier➞Foot Soldier",
-								"Human➞Outcast➞Freebooter",
-								"Human➞Noble➞Squire",
-								"Human➞Noble Court➞Squire",
-								"Human➞Noble Court➞Man-at-Arms",
-								"Human➞Professional Soldier➞Cavalryman"
+								{
+									type: "OR",
+									items: [
+										"Human➞City Dweller➞City Guard",
+										"Human➞City Dweller➞Guard Captain",
+										"Human➞Seafaring➞Marine",
+										"Human➞Seafaring➞First Mate",
+										"Human➞Professional Soldier➞Foot Soldier",
+										"Human➞Outcast➞Freebooter",
+										"Human➞Noble➞Squire",
+										"Human➞Noble Court➞Squire",
+										"Human➞Noble Court➞Man-at-Arms",
+										"Human➞Professional Soldier➞Cavalryman"
+									]
+								}
 							]
 						}
 					},
@@ -1539,7 +1835,10 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1553,14 +1852,19 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Noble➞Knight",
-								"Human➞Noble Court➞Knight",
-								"Human➞Professional Soldier➞Captain",
-								"Human➞Villager➞Village Sergeant",
-								"Human➞Villager➞Corrupt Sergeant",
-								"Human➞Professional Soldier➞Sergeant"
+								{
+									type: "OR",
+									items: [
+										"Human➞Noble➞Knight",
+										"Human➞Noble Court➞Knight",
+										"Human➞Professional Soldier➞Captain",
+										"Human➞Villager➞Village Sergeant",
+										"Human➞Villager➞Corrupt Sergeant",
+										"Human➞Professional Soldier➞Sergeant"
+									]
+								}
 							]
 						}
 					},
@@ -1582,7 +1886,10 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1595,7 +1902,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Apprentice",
 					physicalPool: 1,
-					requirements: {},
+					requirements: {
+					},
 					resources: 8,
 					setting: "City Dweller",
 					skillPool: 6,
@@ -1616,7 +1924,10 @@ export const Human: Stock = {
 					years: 7
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1627,7 +1938,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Apprentice Artisan",
 					physicalPool: 1,
-					requirements: {},
+					requirements: {
+					},
 					resources: 10,
 					setting: "City Dweller",
 					skillPool: 8,
@@ -1642,11 +1954,16 @@ export const Human: Stock = {
 					],
 					stock: "Human",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 8
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
@@ -1661,11 +1978,16 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞City Dweller➞Apprentice",
-								"Human➞Professional Soldier➞Apprentice",
-								"Human➞Villager➞Apprentice"
+								{
+									type: "OR",
+									items: [
+										"Human➞City Dweller➞Apprentice",
+										"Human➞Professional Soldier➞Apprentice",
+										"Human➞Villager➞Apprentice"
+									]
+								}
 							]
 						}
 					},
@@ -1690,7 +2012,10 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1703,11 +2028,16 @@ export const Human: Stock = {
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞City Dweller➞Journeyman",
-								"Human➞Professional Soldier➞Journeyman",
-								"Human➞Villager➞Journeyman"
+								{
+									type: "OR",
+									items: [
+										"Human➞City Dweller➞Journeyman",
+										"Human➞Professional Soldier➞Journeyman",
+										"Human➞Villager➞Journeyman"
+									]
+								}
 							]
 						}
 					},
@@ -1727,7 +2057,10 @@ export const Human: Stock = {
 					years: 7
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
@@ -1741,11 +2074,16 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞City Dweller➞Journeyman",
-								"Human➞Professional Soldier➞Journeyman",
-								"Human➞Villager➞Journeyman"
+								{
+									type: "OR",
+									items: [
+										"Human➞City Dweller➞Journeyman",
+										"Human➞Professional Soldier➞Journeyman",
+										"Human➞Villager➞Journeyman"
+									]
+								}
 							]
 						}
 					},
@@ -1762,11 +2100,16 @@ export const Human: Stock = {
 					],
 					stock: "Human",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 8
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1780,11 +2123,16 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞City Dweller➞Journeyman",
-								"Human➞Professional Soldier➞Journeyman",
-								"Human➞Villager➞Journeyman"
+								{
+									type: "OR",
+									items: [
+										"Human➞City Dweller➞Journeyman",
+										"Human➞Professional Soldier➞Journeyman",
+										"Human➞Villager➞Journeyman"
+									]
+								}
 							]
 						}
 					},
@@ -1806,7 +2154,10 @@ export const Human: Stock = {
 					years: 10
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1819,11 +2170,16 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞City Dweller➞Journeyman",
-								"Human➞Professional Soldier➞Journeyman",
-								"Human➞Villager➞Journeyman"
+								{
+									type: "OR",
+									items: [
+										"Human➞City Dweller➞Journeyman",
+										"Human➞Professional Soldier➞Journeyman",
+										"Human➞Villager➞Journeyman"
+									]
+								}
 							]
 						}
 					},
@@ -1844,7 +2200,10 @@ export const Human: Stock = {
 					years: 7
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1857,11 +2216,16 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞City Dweller➞Journeyman",
-								"Human➞Professional Soldier➞Journeyman",
-								"Human➞Villager➞Journeyman"
+								{
+									type: "OR",
+									items: [
+										"Human➞City Dweller➞Journeyman",
+										"Human➞Professional Soldier➞Journeyman",
+										"Human➞Villager➞Journeyman"
+									]
+								}
 							]
 						}
 					},
@@ -1880,7 +2244,10 @@ export const Human: Stock = {
 					years: 8
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1893,11 +2260,16 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞City Dweller➞Journeyman",
-								"Human➞Professional Soldier➞Journeyman",
-								"Human➞Villager➞Journeyman"
+								{
+									type: "OR",
+									items: [
+										"Human➞City Dweller➞Journeyman",
+										"Human➞Professional Soldier➞Journeyman",
+										"Human➞Villager➞Journeyman"
+									]
+								}
 							]
 						}
 					},
@@ -1918,7 +2290,10 @@ export const Human: Stock = {
 					years: 9
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1933,14 +2308,19 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Noble➞Born Noble",
-								"Human➞City Dweller➞Merchant",
-								"Human➞Villager➞Merchant",
-								"Human➞Professional Soldier➞Sergeant",
-								"Human➞Noble Court➞Man-at-Arms",
-								"Human➞City Dweller➞Judge"
+								{
+									type: "OR",
+									items: [
+										"Human➞Noble➞Born Noble",
+										"Human➞City Dweller➞Merchant",
+										"Human➞Villager➞Merchant",
+										"Human➞Professional Soldier➞Sergeant",
+										"Human➞Noble Court➞Man-at-Arms",
+										"Human➞City Dweller➞Judge"
+									]
+								}
 							]
 						}
 					},
@@ -1955,11 +2335,16 @@ export const Human: Stock = {
 					],
 					stock: "Human",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 4
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1973,13 +2358,18 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞City Dweller➞Student",
-								"Human➞Noble➞Student",
-								"Human➞Noble Court➞Student",
-								"Human➞Noble➞Young Lady",
-								"Human➞Noble Court➞Young Lady"
+								{
+									type: "OR",
+									items: [
+										"Human➞City Dweller➞Student",
+										"Human➞Noble➞Student",
+										"Human➞Noble Court➞Student",
+										"Human➞Noble➞Young Lady",
+										"Human➞Noble Court➞Young Lady"
+									]
+								}
 							]
 						}
 					},
@@ -2001,7 +2391,9 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -2015,13 +2407,18 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞City Dweller➞Student",
-								"Human➞Noble➞Student",
-								"Human➞Noble Court➞Student",
-								"Human➞Noble➞Young Lady",
-								"Human➞Noble Court➞Young Lady"
+								{
+									type: "OR",
+									items: [
+										"Human➞City Dweller➞Student",
+										"Human➞Noble➞Student",
+										"Human➞Noble Court➞Student",
+										"Human➞Noble➞Young Lady",
+										"Human➞Noble Court➞Young Lady"
+									]
+								}
 							]
 						}
 					},
@@ -2043,7 +2440,9 @@ export const Human: Stock = {
 					years: 7
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -2057,14 +2456,19 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Peasant➞Midwife",
-								"Human➞City Dweller➞Student",
-								"Human➞Noble➞Student",
-								"Human➞Noble Court➞Student",
-								"Human➞Noble➞Young Lady",
-								"Human➞Noble Court➞Young Lady"
+								{
+									type: "OR",
+									items: [
+										"Human➞Peasant➞Midwife",
+										"Human➞City Dweller➞Student",
+										"Human➞Noble➞Student",
+										"Human➞Noble Court➞Student",
+										"Human➞Noble➞Young Lady",
+										"Human➞Noble Court➞Young Lady"
+									]
+								}
 							]
 						}
 					},
@@ -2080,11 +2484,15 @@ export const Human: Stock = {
 					],
 					stock: "Human",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 5
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -2098,11 +2506,16 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Noble➞1*ANY",
-								"Human➞Noble Court➞1*ANY",
-								"Human➞Religious➞1*ANY"
+								{
+									type: "OR",
+									items: [
+										"Human➞Noble➞1*ANY",
+										"Human➞Noble Court➞1*ANY",
+										"Human➞Religious➞1*ANY"
+									]
+								}
 							]
 						}
 					},
@@ -2126,7 +2539,9 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 2,
@@ -2139,15 +2554,20 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞City Dweller➞Merchant",
-								"Human➞Villager➞Merchant",
-								"Human➞City Dweller➞Moneylender",
-								"Human➞Noble Court➞Steward",
-								"Human➞Seafaring➞Steward",
-								"Human➞City Dweller➞Accountant",
-								"Human➞Noble Court➞Chamberlain"
+								{
+									type: "OR",
+									items: [
+										"Human➞City Dweller➞Merchant",
+										"Human➞Villager➞Merchant",
+										"Human➞City Dweller➞Moneylender",
+										"Human➞Noble Court➞Steward",
+										"Human➞Seafaring➞Steward",
+										"Human➞City Dweller➞Accountant",
+										"Human➞Noble Court➞Chamberlain"
+									]
+								}
 							]
 						}
 					},
@@ -2167,7 +2587,9 @@ export const Human: Stock = {
 					years: 10
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -2181,23 +2603,28 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞City Dweller➞Master Craftsman",
-								"Human➞Villager➞Master Craftsman",
-								"Human➞Noble Court➞Master of Horses",
-								"Human➞Noble Court➞Master of Hounds",
-								"Human➞City Dweller➞Moneylender",
-								"Human➞Noble Court➞Steward",
-								"Human➞Seafaring➞Steward",
-								"Human➞City Dweller➞Jeweler",
-								"Human➞City Dweller➞Saddler",
-								"Human➞City Dweller➞Armorer",
-								"Human➞Noble Court➞Armorer",
-								"Human➞Professional Soldier➞Armorer",
-								"Human➞Villager➞Cobbler",
-								"Human➞Noble Court➞Courtier",
-								"Human➞Noble Court➞Chamberlain"
+								{
+									type: "OR",
+									items: [
+										"Human➞City Dweller➞Master Craftsman",
+										"Human➞Villager➞Master Craftsman",
+										"Human➞Noble Court➞Master of Horses",
+										"Human➞Noble Court➞Master of Hounds",
+										"Human➞City Dweller➞Moneylender",
+										"Human➞Noble Court➞Steward",
+										"Human➞Seafaring➞Steward",
+										"Human➞City Dweller➞Jeweler",
+										"Human➞City Dweller➞Saddler",
+										"Human➞City Dweller➞Armorer",
+										"Human➞Noble Court➞Armorer",
+										"Human➞Professional Soldier➞Armorer",
+										"Human➞Villager➞Cobbler",
+										"Human➞Noble Court➞Courtier",
+										"Human➞Noble Court➞Chamberlain"
+									]
+								}
 							]
 						}
 					},
@@ -2213,11 +2640,15 @@ export const Human: Stock = {
 					],
 					stock: "Human",
 					traitPool: 0,
-					traits: [],
+					traits: [
+
+					],
 					years: 6
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -2232,12 +2663,17 @@ export const Human: Stock = {
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Villager➞Wizard's Apprentice",
-								"Human➞City Dweller➞Neophyte Sorcerer",
-								"Human➞Noble➞Arcane Devotee",
-								"Human➞Seafaring➞Weather Witch"
+								{
+									type: "OR",
+									items: [
+										"Human➞Villager➞Wizard's Apprentice",
+										"Human➞City Dweller➞Neophyte Sorcerer",
+										"Human➞Noble➞Arcane Devotee",
+										"Human➞Seafaring➞Weather Witch"
+									]
+								}
 							]
 						}
 					},
@@ -2251,11 +2687,16 @@ export const Human: Stock = {
 					],
 					stock: "Human",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 6
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -2274,12 +2715,17 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Noble➞Religious Acolyte",
-								"Human➞City Dweller➞Temple Acolyte",
-								"Human➞Religious➞Temple Acolyte",
-								"Human➞Religious➞Military Order"
+								{
+									type: "OR",
+									items: [
+										"Human➞Noble➞Religious Acolyte",
+										"Human➞City Dweller➞Temple Acolyte",
+										"Human➞Religious➞Temple Acolyte",
+										"Human➞Religious➞Military Order"
+									]
+								}
 							]
 						}
 					},
@@ -2304,7 +2750,10 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -2317,13 +2766,18 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Villager➞Town Official",
-								"Human➞City Dweller➞Tax Collector",
-								"Human➞Villager➞Tax Collector",
-								"Human➞Noble Court➞Bailiff",
-								"Human➞Noble Court➞Justiciar"
+								{
+									type: "OR",
+									items: [
+										"Human➞Villager➞Town Official",
+										"Human➞City Dweller➞Tax Collector",
+										"Human➞Villager➞Tax Collector",
+										"Human➞Noble Court➞Bailiff",
+										"Human➞Noble Court➞Justiciar"
+									]
+								}
 							]
 						}
 					},
@@ -2345,7 +2799,10 @@ export const Human: Stock = {
 					years: 10
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -2359,23 +2816,28 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Villager➞Town Official",
-								"Human➞City Dweller➞Scholar",
-								"Human➞Religious➞Priest",
-								"Human➞Religious➞Templar",
-								"Human➞City Dweller➞Bishop",
-								"Human➞Religious➞Bishop",
-								"Human➞Professional Soldier➞Captain",
-								"Human➞Seafaring➞Ship's Captain",
-								"Human➞City Dweller➞Artisan",
-								"Human➞City Dweller➞Master Craftsman",
-								"Human➞Villager➞Master Craftsman",
-								"Human➞Noble➞Knight",
-								"Human➞Noble Court➞Knight",
-								"Human➞Noble Court➞Courtier",
-								"Human➞Noble Court➞Master of Horses"
+								{
+									type: "OR",
+									items: [
+										"Human➞Villager➞Town Official",
+										"Human➞City Dweller➞Scholar",
+										"Human➞Religious➞Priest",
+										"Human➞Religious➞Templar",
+										"Human➞City Dweller➞Bishop",
+										"Human➞Religious➞Bishop",
+										"Human➞Professional Soldier➞Captain",
+										"Human➞Seafaring➞Ship's Captain",
+										"Human➞City Dweller➞Artisan",
+										"Human➞City Dweller➞Master Craftsman",
+										"Human➞Villager➞Master Craftsman",
+										"Human➞Noble➞Knight",
+										"Human➞Noble Court➞Knight",
+										"Human➞Noble Court➞Courtier",
+										"Human➞Noble Court➞Master of Horses"
+									]
+								}
 							]
 						}
 					},
@@ -2392,11 +2854,16 @@ export const Human: Stock = {
 					],
 					stock: "Human",
 					traitPool: 0,
-					traits: [],
+					traits: [
+
+					],
 					years: 9
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -2409,13 +2876,18 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞City Dweller➞Apprentice Artisan",
-								"Human➞Professional Soldier➞Engineer",
-								"Human➞Seafaring➞Engineer",
-								"Human➞City Dweller➞Master Craftsman",
-								"Human➞Villager➞Master Craftsman"
+								{
+									type: "OR",
+									items: [
+										"Human➞City Dweller➞Apprentice Artisan",
+										"Human➞Professional Soldier➞Engineer",
+										"Human➞Seafaring➞Engineer",
+										"Human➞City Dweller➞Master Craftsman",
+										"Human➞Villager➞Master Craftsman"
+									]
+								}
 							]
 						}
 					},
@@ -2436,7 +2908,10 @@ export const Human: Stock = {
 					years: 10
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 3,
@@ -2452,9 +2927,14 @@ export const Human: Stock = {
 						conditions: {
 							type: "AND",
 							items: [
-								"Human➞City Dweller➞Journeyman",
-								"Human➞Professional Soldier➞Journeyman",
-								"Human➞Villager➞Journeyman",
+								{
+									type: "OR",
+									items: [
+										"Human➞City Dweller➞Journeyman",
+										"Human➞Professional Soldier➞Journeyman",
+										"Human➞Villager➞Journeyman"
+									]
+								},
 								{
 									type: "OR",
 									items: [
@@ -2494,7 +2974,9 @@ export const Human: Stock = {
 					years: 10
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -2507,14 +2989,19 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Religious➞Archpriest",
-								"Human➞Religious➞Canon",
-								"Human➞Noble Court➞Steward",
-								"Human➞Seafaring➞Steward",
-								"Human➞Noble Court➞Chamberlain",
-								"Trait➞Human Lifepath➞Your Grace"
+								{
+									type: "OR",
+									items: [
+										"Human➞Religious➞Archpriest",
+										"Human➞Religious➞Canon",
+										"Human➞Noble Court➞Steward",
+										"Human➞Seafaring➞Steward",
+										"Human➞Noble Court➞Chamberlain",
+										"Trait➞Human Lifepath➞Your Grace"
+									]
+								}
 							]
 						}
 					},
@@ -2536,7 +3023,9 @@ export const Human: Stock = {
 					years: 12
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 1,
@@ -2556,11 +3045,16 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞City Dweller➞Merchant",
-								"Human➞Villager➞Merchant",
-								"Human➞Noble Court➞Master of Horses"
+								{
+									type: "OR",
+									items: [
+										"Human➞City Dweller➞Merchant",
+										"Human➞Villager➞Merchant",
+										"Human➞Noble Court➞Master of Horses"
+									]
+								}
 							]
 						}
 					},
@@ -2585,7 +3079,10 @@ export const Human: Stock = {
 					years: 12
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -2596,9 +3093,6 @@ export const Human: Stock = {
 					name: "City Wife",
 					physicalPool: 0,
 					requirements: {
-						texts: [
-							"Players who take the Village Wife lifepath may also choose their husband's lifepath from the Villager setting. The Village Wife may choose from her husband's skills -she gets half of his skill points, rounded down- and she gets half of her husband's Resources."
-						]
 					},
 					resources: 5,
 					setting: "City Dweller",
@@ -2609,11 +3103,15 @@ export const Human: Stock = {
 					],
 					stock: "Human",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 6
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
@@ -2628,16 +3126,21 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞City Dweller➞Dilettante",
-								"Human➞Religious➞1*ANY",
-								"Human➞Noble Court➞Court Summoner",
-								"Human➞College of Magic➞Master Summoner",
-								"Human➞Outcast➞Mad Summoner",
-								"Human➞Outcast➞Crazy Witch",
-								"Human➞Outcast➞Oasis Witch",
-								"Human➞Seafaring➞Weather Witch"
+								{
+									type: "OR",
+									items: [
+										"Human➞City Dweller➞Dilettante",
+										"Human➞Religious➞1*ANY",
+										"Human➞Noble Court➞Court Summoner",
+										"Human➞College of Magic➞Master Summoner",
+										"Human➞Outcast➞Mad Summoner",
+										"Human➞Outcast➞Crazy Witch",
+										"Human➞Outcast➞Oasis Witch",
+										"Human➞Seafaring➞Weather Witch"
+									]
+								}
 							]
 						}
 					},
@@ -2661,14 +3164,18 @@ export const Human: Stock = {
 			]
 		},
 		"College of Magic": {
-			allowed: ["bwc"],
+			allowed: [
+				"bwc"
+			],
 			name: "College of Magic",
 			short: "College",
 			stock: "Human",
 			type: "Subsetting",
 			lifepaths: [
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -2681,10 +3188,18 @@ export const Human: Stock = {
 					name: "Supplicant",
 					physicalPool: 0,
 					requirements: {
-						limits: [
-							"LP➞MAX➞2",
-							"LP➞UNIQUE"
-						]
+						conditions: {
+							type: "AND",
+							items: [
+								{
+									type: "AND",
+									items: [
+										"LP➞MAX➞2",
+										"LP➞UNIQUE"
+									]
+								}
+							]
+						}
 					},
 					resources: 3,
 					setting: "College of Magic",
@@ -2704,7 +3219,9 @@ export const Human: Stock = {
 					years: 1
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -2718,20 +3235,28 @@ export const Human: Stock = {
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞College of Magic➞Supplicant",
-								"Human➞Noble➞Arcane Devotee",
-								"Human➞Noble Court➞Apt Pupil",
-								"Human➞Outcast➞Apt Pupil",
-								"Human➞Professional Soldier➞Apt Pupil",
-								"Human➞Religious➞Apt Pupil",
-								"Human➞City Dweller➞Neophyte Sorcerer"
+								{
+									type: "OR",
+									items: [
+										"Human➞College of Magic➞Supplicant",
+										"Human➞Noble➞Arcane Devotee",
+										"Human➞Noble Court➞Apt Pupil",
+										"Human➞Outcast➞Apt Pupil",
+										"Human➞Professional Soldier➞Apt Pupil",
+										"Human➞Religious➞Apt Pupil",
+										"Human➞City Dweller➞Neophyte Sorcerer"
+									]
+								},
+								{
+									type: "AND",
+									items: [
+										"LP➞UNIQUE"
+									]
+								}
 							]
-						},
-						limits: [
-							"LP➞UNIQUE"
-						]
+						}
 					},
 					resources: 5,
 					setting: "College of Magic",
@@ -2753,7 +3278,9 @@ export const Human: Stock = {
 					years: 2
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -2767,15 +3294,23 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞College of Magic➞Junior Student",
-								"Human➞City Dweller➞Sorcerer"
+								{
+									type: "OR",
+									items: [
+										"Human➞College of Magic➞Junior Student",
+										"Human➞City Dweller➞Sorcerer"
+									]
+								},
+								{
+									type: "AND",
+									items: [
+										"LP➞UNIQUE"
+									]
+								}
 							]
-						},
-						limits: [
-							"LP➞UNIQUE"
-						]
+						}
 					},
 					resources: 10,
 					setting: "College of Magic",
@@ -2799,7 +3334,9 @@ export const Human: Stock = {
 					years: 2
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -2813,9 +3350,14 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞College of Magic➞Senior Student"
+								{
+									type: "OR",
+									items: [
+										"Human➞College of Magic➞Senior Student"
+									]
+								}
 							]
 						}
 					},
@@ -2838,7 +3380,9 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -2853,10 +3397,15 @@ export const Human: Stock = {
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞College of Magic➞Adjunct",
-								"Human➞Noble Court➞Court Sorcerer"
+								{
+									type: "OR",
+									items: [
+										"Human➞College of Magic➞Adjunct",
+										"Human➞Noble Court➞Court Sorcerer"
+									]
+								}
 							]
 						}
 					},
@@ -2878,7 +3427,9 @@ export const Human: Stock = {
 					years: 8
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -2892,10 +3443,15 @@ export const Human: Stock = {
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞College of Magic➞Adjunct",
-								"Human➞Noble Court➞Court Enchanter"
+								{
+									type: "OR",
+									items: [
+										"Human➞College of Magic➞Adjunct",
+										"Human➞Noble Court➞Court Enchanter"
+									]
+								}
 							]
 						}
 					},
@@ -2920,7 +3476,9 @@ export const Human: Stock = {
 					years: 8
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -2934,10 +3492,15 @@ export const Human: Stock = {
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞College of Magic➞Adjunct",
-								"Human➞Noble Court➞Court Summoner"
+								{
+									type: "OR",
+									items: [
+										"Human➞College of Magic➞Adjunct",
+										"Human➞Noble Court➞Court Summoner"
+									]
+								}
 							]
 						}
 					},
@@ -2964,7 +3527,9 @@ export const Human: Stock = {
 					years: 8
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -2980,13 +3545,21 @@ export const Human: Stock = {
 						conditions: {
 							type: "OR",
 							items: [
-								"Human➞College of Magic➞Adjunct",
-								"Human➞City Dweller➞Scholar"
+								{
+									type: "OR",
+									items: [
+										"Human➞College of Magic➞Adjunct",
+										"Human➞City Dweller➞Scholar"
+									]
+								},
+								{
+									type: "AND",
+									items: [
+										"LP➞UNIQUE"
+									]
+								}
 							]
-						},
-						limits: [
-							"LP➞UNIQUE"
-						]
+						}
 					},
 					resources: 15,
 					setting: "College of Magic",
@@ -3016,7 +3589,9 @@ export const Human: Stock = {
 					years: 10
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -3029,11 +3604,16 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞College of Magic➞Master Sorcerer",
-								"Human➞College of Magic➞Master Enchanter",
-								"Human➞College of Magic➞Master Summoner"
+								{
+									type: "OR",
+									items: [
+										"Human➞College of Magic➞Master Sorcerer",
+										"Human➞College of Magic➞Master Enchanter",
+										"Human➞College of Magic➞Master Summoner"
+									]
+								}
 							]
 						}
 					},
@@ -3055,7 +3635,9 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 1,
@@ -3068,9 +3650,14 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞College of Magic➞Councillor"
+								{
+									type: "OR",
+									items: [
+										"Human➞College of Magic➞Councillor"
+									]
+								}
 							]
 						}
 					},
@@ -3097,14 +3684,18 @@ export const Human: Stock = {
 			]
 		},
 		"Death Cult": {
-			allowed: ["bwc"],
+			allowed: [
+				"bwc"
+			],
 			name: "Death Cult",
 			short: "Cult",
 			stock: "Human",
 			type: "Subsetting",
 			lifepaths: [
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -3115,7 +3706,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Harem Slave",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 3,
 					setting: "Death Cult",
 					skillPool: 4,
@@ -3133,7 +3725,9 @@ export const Human: Stock = {
 					years: 3
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -3145,7 +3739,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Death Cultist",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 5,
 					setting: "Death Cult",
 					skillPool: 3,
@@ -3163,7 +3758,9 @@ export const Human: Stock = {
 					years: 2
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -3175,7 +3772,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Grave Robber",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 7,
 					setting: "Death Cult",
 					skillPool: 4,
@@ -3193,7 +3791,9 @@ export const Human: Stock = {
 					years: 3
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -3207,10 +3807,15 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Outcast➞Cultist",
-								"Human➞Outcast➞Insurrectionist"
+								{
+									type: "OR",
+									items: [
+										"Human➞Outcast➞Cultist",
+										"Human➞Outcast➞Insurrectionist"
+									]
+								}
 							]
 						}
 					},
@@ -3234,7 +3839,9 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
@@ -3249,13 +3856,18 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Death Cult➞Spy",
-								"Human➞Death Cult➞Tomb Guard",
-								"Human➞Outcast➞Deranged",
-								"Human➞City Dweller➞Evangelist",
-								"Human➞Outcast➞Insurrectionist"
+								{
+									type: "OR",
+									items: [
+										"Human➞Death Cult➞Spy",
+										"Human➞Death Cult➞Tomb Guard",
+										"Human➞Outcast➞Deranged",
+										"Human➞City Dweller➞Evangelist",
+										"Human➞Outcast➞Insurrectionist"
+									]
+								}
 							]
 						}
 					},
@@ -3280,7 +3892,9 @@ export const Human: Stock = {
 					years: 7
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -3294,12 +3908,17 @@ export const Human: Stock = {
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Outcast➞Cultist",
-								"Human➞Outcast➞Gravedigger",
-								"Human➞Outcast➞Freebooter",
-								"Human➞Professional Soldier➞1*ANY"
+								{
+									type: "OR",
+									items: [
+										"Human➞Outcast➞Cultist",
+										"Human➞Outcast➞Gravedigger",
+										"Human➞Outcast➞Freebooter",
+										"Human➞Professional Soldier➞1*ANY"
+									]
+								}
 							]
 						}
 					},
@@ -3321,7 +3940,9 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -3335,10 +3956,15 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Villager➞Venal Priest",
-								"Human➞Outcast➞Heretic Priest"
+								{
+									type: "OR",
+									items: [
+										"Human➞Villager➞Venal Priest",
+										"Human➞Outcast➞Heretic Priest"
+									]
+								}
 							]
 						}
 					},
@@ -3362,7 +3988,9 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
@@ -3375,14 +4003,19 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Outcast➞Evil Necromancer",
-								"Human➞Noble Court➞Apt Pupil",
-								"Human➞Outcast➞Apt Pupil",
-								"Human➞Professional Soldier➞Apt Pupil",
-								"Human➞Religious➞Apt Pupil",
-								"Human➞Outcast➞Rogue Wizard"
+								{
+									type: "OR",
+									items: [
+										"Human➞Outcast➞Evil Necromancer",
+										"Human➞Noble Court➞Apt Pupil",
+										"Human➞Outcast➞Apt Pupil",
+										"Human➞Professional Soldier➞Apt Pupil",
+										"Human➞Religious➞Apt Pupil",
+										"Human➞Outcast➞Rogue Wizard"
+									]
+								}
 							]
 						}
 					},
@@ -3411,14 +4044,20 @@ export const Human: Stock = {
 			]
 		},
 		"Noble": {
-			allowed: ["bwgr", "bs"],
+			allowed: [
+				"bwgr",
+				"bs"
+			],
 			name: "Noble",
 			short: "Noble",
 			stock: "Human",
 			type: "Setting",
 			lifepaths: [
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: true,
 					eitherPool: 0,
 					generalSkillPool: 5,
@@ -3436,11 +4075,14 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Born Noble",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 15,
 					setting: "Noble",
 					skillPool: 0,
-					skills: [],
+					skills: [
+
+					],
 					stock: "Human",
 					traitPool: 1,
 					traits: [
@@ -3452,7 +4094,10 @@ export const Human: Stock = {
 					years: 8
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
@@ -3466,10 +4111,18 @@ export const Human: Stock = {
 					name: "Bastard",
 					physicalPool: 0,
 					requirements: {
-						limits: [
-							"LP➞MAX➞2",
-							"LP➞UNIQUE"
-						]
+						conditions: {
+							type: "AND",
+							items: [
+								{
+									type: "AND",
+									items: [
+										"LP➞MAX➞2",
+										"LP➞UNIQUE"
+									]
+								}
+							]
+						}
 					},
 					resources: 15,
 					setting: "Noble",
@@ -3490,7 +4143,10 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -3503,10 +4159,18 @@ export const Human: Stock = {
 					name: "Page",
 					physicalPool: 1,
 					requirements: {
-						limits: [
-							"LP➞MAX➞2",
-							"LP➞UNIQUE"
-						]
+						conditions: {
+							type: "AND",
+							items: [
+								{
+									type: "AND",
+									items: [
+										"LP➞MAX➞2",
+										"LP➞UNIQUE"
+									]
+								}
+							]
+						}
 					},
 					resources: 15,
 					setting: "Noble",
@@ -3521,11 +4185,16 @@ export const Human: Stock = {
 					],
 					stock: "Human",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 6
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -3537,7 +4206,8 @@ export const Human: Stock = {
 					mentalPool: 1,
 					name: "Student",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 10,
 					setting: "Noble",
 					skillPool: 8,
@@ -3551,11 +4221,16 @@ export const Human: Stock = {
 					],
 					stock: "Human",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 4
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -3570,11 +4245,16 @@ export const Human: Stock = {
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Noble➞Page",
-								"Human➞Noble Court➞Page",
-								"Human➞Professional Soldier➞1*ANY"
+								{
+									type: "OR",
+									items: [
+										"Human➞Noble➞Page",
+										"Human➞Noble Court➞Page",
+										"Human➞Professional Soldier➞1*ANY"
+									]
+								}
 							]
 						}
 					},
@@ -3592,11 +4272,15 @@ export const Human: Stock = {
 					],
 					stock: "Human",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 6
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -3609,7 +4293,8 @@ export const Human: Stock = {
 					mentalPool: 1,
 					name: "Arcane Devotee",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 10,
 					setting: "Noble",
 					skillPool: 6,
@@ -3629,7 +4314,10 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -3641,7 +4329,8 @@ export const Human: Stock = {
 					mentalPool: 1,
 					name: "Religious Acolyte",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 10,
 					setting: "Noble",
 					skillPool: 6,
@@ -3661,7 +4350,10 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -3674,10 +4366,18 @@ export const Human: Stock = {
 					name: "Young Lady",
 					physicalPool: 0,
 					requirements: {
-						limits: [
-							"LP➞MAX➞3",
-							"LP➞UNIQUE"
-						]
+						conditions: {
+							type: "AND",
+							items: [
+								{
+									type: "AND",
+									items: [
+										"LP➞MAX➞3",
+										"LP➞UNIQUE"
+									]
+								}
+							]
+						}
 					},
 					resources: 20,
 					setting: "Noble",
@@ -3696,11 +4396,16 @@ export const Human: Stock = {
 					],
 					stock: "Human",
 					traitPool: 2,
-					traits: [],
+					traits: [
+
+					],
 					years: 10
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -3715,11 +4420,16 @@ export const Human: Stock = {
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Noble➞Squire",
-								"Human➞Noble Court➞Squire",
-								"Human➞Professional Soldier➞Cavalryman"
+								{
+									type: "OR",
+									items: [
+										"Human➞Noble➞Squire",
+										"Human➞Noble Court➞Squire",
+										"Human➞Professional Soldier➞Cavalryman"
+									]
+								}
 							]
 						}
 					},
@@ -3741,7 +4451,10 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -3756,19 +4469,21 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Noble➞Young Lady",
-								"Human➞Noble Court➞Young Lady",
-								"Human➞Noble Court➞Courtier",
-								"Human➞Noble➞Knight",
-								"Human➞Noble Court➞Knight",
-								"Human➞City Dweller➞City Wife"
+								{
+									type: "OR",
+									items: [
+										"Human➞Noble➞Young Lady",
+										"Human➞Noble Court➞Young Lady",
+										"Human➞Noble Court➞Courtier",
+										"Human➞Noble➞Knight",
+										"Human➞Noble Court➞Knight",
+										"Human➞City Dweller➞City Wife"
+									]
+								}
 							]
-						},
-						texts: [
-							"If City Wife is chosen, Magnate or Bishop must be the Husband's lifepath."
-						]
+						}
 					},
 					resources: 25,
 					setting: "Noble",
@@ -3787,11 +4502,16 @@ export const Human: Stock = {
 					],
 					stock: "Human",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 5
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 1,
@@ -3805,11 +4525,16 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Noble➞Knight",
-								"Human➞Noble Court➞Knight",
-								"Trait➞Human Lifepath➞Your Lordship"
+								{
+									type: "OR",
+									items: [
+										"Human➞Noble➞Knight",
+										"Human➞Noble Court➞Knight",
+										"Trait➞Human Lifepath➞Your Lordship"
+									]
+								}
 							]
 						}
 					},
@@ -3825,11 +4550,16 @@ export const Human: Stock = {
 					],
 					stock: "Human",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 7
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 2,
@@ -3844,16 +4574,18 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Noble➞Lady",
-								"Trait➞Human Lifepath➞Your Lordship",
-								"Human➞City Dweller➞City Wife"
+								{
+									type: "OR",
+									items: [
+										"Human➞Noble➞Lady",
+										"Trait➞Human Lifepath➞Your Lordship",
+										"Human➞City Dweller➞City Wife"
+									]
+								}
 							]
-						},
-						texts: [
-							"If City Wife is chosen, Magnate or Bishop must be the Husband's lifepath."
-						]
+						}
 					},
 					resources: 40,
 					setting: "Noble",
@@ -3864,11 +4596,16 @@ export const Human: Stock = {
 					],
 					stock: "Human",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 7
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 1,
@@ -3883,13 +4620,18 @@ export const Human: Stock = {
 						conditions: {
 							type: "OR",
 							items: [
-								"Human➞City Dweller➞Magnate",
-								"Human➞Noble Court➞Master of Horses",
-								"Human➞Noble Court➞Steward",
-								"Human➞Seafaring➞Steward",
-								"Human➞Noble➞Lord",
-								"Human➞Noble Court➞Constable",
-								"Human➞Noble Court➞Justiciar",
+								{
+									type: "OR",
+									items: [
+										"Human➞City Dweller➞Magnate",
+										"Human➞Noble Court➞Master of Horses",
+										"Human➞Noble Court➞Steward",
+										"Human➞Seafaring➞Steward",
+										"Human➞Noble➞Lord",
+										"Human➞Noble Court➞Constable",
+										"Human➞Noble Court➞Justiciar"
+									]
+								},
 								{
 									type: "AND",
 									items: [
@@ -3910,7 +4652,9 @@ export const Human: Stock = {
 					resources: 60,
 					setting: "Noble",
 					skillPool: 0,
-					skills: [],
+					skills: [
+
+					],
 					stock: "Human",
 					traitPool: 1,
 					traits: [
@@ -3923,7 +4667,10 @@ export const Human: Stock = {
 					years: 8
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 2,
@@ -3938,10 +4685,15 @@ export const Human: Stock = {
 						conditions: {
 							type: "OR",
 							items: [
-								"Human➞City Dweller➞Magnate",
-								"Human➞Noble Court➞Constable",
-								"Human➞Noble Court➞Justiciar",
-								"Human➞Noble➞Baron",
+								{
+									type: "OR",
+									items: [
+										"Human➞City Dweller➞Magnate",
+										"Human➞Noble Court➞Constable",
+										"Human➞Noble Court➞Justiciar",
+										"Human➞Noble➞Baron"
+									]
+								},
 								{
 									type: "AND",
 									items: [
@@ -3962,7 +4714,9 @@ export const Human: Stock = {
 					resources: 65,
 					setting: "Noble",
 					skillPool: 0,
-					skills: [],
+					skills: [
+
+					],
 					stock: "Human",
 					traitPool: 1,
 					traits: [
@@ -3975,7 +4729,10 @@ export const Human: Stock = {
 					years: 9
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 3,
@@ -3990,9 +4747,14 @@ export const Human: Stock = {
 						conditions: {
 							type: "OR",
 							items: [
-								"Human➞City Dweller➞Magnate",
-								"Human➞Noble Court➞Constable",
-								"Human➞Noble Court➞Justiciar",
+								{
+									type: "OR",
+									items: [
+										"Human➞City Dweller➞Magnate",
+										"Human➞Noble Court➞Constable",
+										"Human➞Noble Court➞Justiciar"
+									]
+								},
 								{
 									type: "AND",
 									items: [
@@ -4013,7 +4775,9 @@ export const Human: Stock = {
 					resources: 70,
 					setting: "Noble",
 					skillPool: 0,
-					skills: [],
+					skills: [
+
+					],
 					stock: "Human",
 					traitPool: 1,
 					traits: [
@@ -4026,7 +4790,10 @@ export const Human: Stock = {
 					years: 10
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 3,
@@ -4041,7 +4808,12 @@ export const Human: Stock = {
 						conditions: {
 							type: "OR",
 							items: [
-								"Human➞Noble➞Count",
+								{
+									type: "OR",
+									items: [
+										"Human➞Noble➞Count"
+									]
+								},
 								{
 									type: "AND",
 									items: [
@@ -4062,7 +4834,9 @@ export const Human: Stock = {
 					resources: 90,
 					setting: "Noble",
 					skillPool: 0,
-					skills: [],
+					skills: [
+
+					],
 					stock: "Human",
 					traitPool: 1,
 					traits: [
@@ -4075,7 +4849,9 @@ export const Human: Stock = {
 					years: 10
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 4,
@@ -4090,7 +4866,12 @@ export const Human: Stock = {
 						conditions: {
 							type: "OR",
 							items: [
-								"Human➞Noble➞Duke",
+								{
+									type: "OR",
+									items: [
+										"Human➞Noble➞Duke"
+									]
+								},
 								{
 									type: "AND",
 									items: [
@@ -4111,7 +4892,9 @@ export const Human: Stock = {
 					resources: 100,
 					setting: "Noble",
 					skillPool: 0,
-					skills: [],
+					skills: [
+
+					],
 					stock: "Human",
 					traitPool: 1,
 					traits: [
@@ -4124,7 +4907,9 @@ export const Human: Stock = {
 					years: 10
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 2,
@@ -4138,20 +4923,26 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Trait➞Human Lifepath➞Your Grace"
+								{
+									type: "OR",
+									items: [
+										"Trait➞Human Lifepath➞Your Grace"
+									]
+								}
 							]
 						},
-						texts: [
-							"Requires express permission from the GM and all players in the current game.",
-							"Players may take the Prince of the Blood lifepath for any appropriate length of time, from 2 years to 20. Subject to GM approval, of course."
+						"texts": [
+							"Requires express permission from the GM and all players in the current game. Length of this lifepath is suject to GM's approval."
 						]
 					},
 					resources: 60,
 					setting: "Noble",
 					skillPool: 0,
-					skills: [],
+					skills: [
+
+					],
 					stock: "Human",
 					traitPool: 2,
 					traits: [
@@ -4167,14 +4958,19 @@ export const Human: Stock = {
 			]
 		},
 		"Noble Court": {
-			allowed: ["bwgr", "bs"],
+			allowed: [
+				"bwgr",
+				"bs"
+			],
 			name: "Noble Court",
 			short: "Court",
 			stock: "Human",
 			type: "Subsetting",
 			lifepaths: [
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -4189,10 +4985,18 @@ export const Human: Stock = {
 					name: "Apt Pupil",
 					physicalPool: 0,
 					requirements: {
-						limits: [
-							"LP➞MAX➞3",
-							"LP➞UNIQUE"
-						]
+						conditions: {
+							type: "AND",
+							items: [
+								{
+									type: "AND",
+									items: [
+										"LP➞MAX➞3",
+										"LP➞UNIQUE"
+									]
+								}
+							]
+						}
 					},
 					resources: 8,
 					setting: "Noble Court",
@@ -4212,7 +5016,10 @@ export const Human: Stock = {
 					years: 3
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -4224,7 +5031,8 @@ export const Human: Stock = {
 					mentalPool: 1,
 					name: "Minstrel",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 10,
 					setting: "Noble Court",
 					skillPool: 5,
@@ -4241,7 +5049,10 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -4252,7 +5063,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Court Jester",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 10,
 					setting: "Noble Court",
 					skillPool: 7,
@@ -4273,7 +5085,10 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -4286,13 +5101,18 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Noble Court➞Court Jester",
-								"Human➞City Dweller➞Painter",
-								"Human➞Outcast➞Thinker",
-								"Human➞City Dweller➞Scholar",
-								"Human➞City Dweller➞Sculptor"
+								{
+									type: "OR",
+									items: [
+										"Human➞Noble Court➞Court Jester",
+										"Human➞City Dweller➞Painter",
+										"Human➞Outcast➞Thinker",
+										"Human➞City Dweller➞Scholar",
+										"Human➞City Dweller➞Sculptor"
+									]
+								}
 							]
 						}
 					},
@@ -4314,7 +5134,10 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -4325,7 +5148,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Servant",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 7,
 					setting: "Noble Court",
 					skillPool: 4,
@@ -4344,7 +5168,10 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -4356,7 +5183,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Nurse",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 7,
 					setting: "Noble Court",
 					skillPool: 5,
@@ -4375,7 +5203,10 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -4387,7 +5218,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Groom",
 					physicalPool: 1,
-					requirements: {},
+					requirements: {
+					},
 					resources: 5,
 					setting: "Noble Court",
 					skillPool: 5,
@@ -4401,11 +5233,15 @@ export const Human: Stock = {
 					stock: "Human",
 					traitPool: 1,
 					traits: [
+
 					],
 					years: 4
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -4416,7 +5252,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Gardener",
 					physicalPool: 1,
-					requirements: {},
+					requirements: {
+					},
 					resources: 10,
 					setting: "Noble Court",
 					skillPool: 7,
@@ -4440,7 +5277,10 @@ export const Human: Stock = {
 					years: 10
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -4452,7 +5292,8 @@ export const Human: Stock = {
 					mentalPool: 1,
 					name: "Torturer",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 10,
 					setting: "Noble Court",
 					skillPool: 5,
@@ -4470,7 +5311,10 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
@@ -4483,7 +5327,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Forester",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 9,
 					setting: "Noble Court",
 					skillPool: 8,
@@ -4502,11 +5347,16 @@ export const Human: Stock = {
 					],
 					stock: "Human",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 7
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -4518,7 +5368,8 @@ export const Human: Stock = {
 					mentalPool: 1,
 					name: "Student",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 10,
 					setting: "Noble Court",
 					skillPool: 9,
@@ -4539,7 +5390,10 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -4552,10 +5406,18 @@ export const Human: Stock = {
 					name: "Page",
 					physicalPool: 1,
 					requirements: {
-						limits: [
-							"LP➞MAX➞2",
-							"LP➞UNIQUE"
-						]
+						conditions: {
+							type: "AND",
+							items: [
+								{
+									type: "AND",
+									items: [
+										"LP➞MAX➞2",
+										"LP➞UNIQUE"
+									]
+								}
+							]
+						}
 					},
 					resources: 15,
 					setting: "Noble Court",
@@ -4569,11 +5431,16 @@ export const Human: Stock = {
 					],
 					stock: "Human",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 6
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -4587,13 +5454,18 @@ export const Human: Stock = {
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Noble➞Page",
-								"Human➞Noble Court➞Page",
-								"Human➞Noble➞Squire",
-								"Human➞Noble Court➞Squire",
-								"Human➞Professional Soldier➞1*ANY"
+								{
+									type: "OR",
+									items: [
+										"Human➞Noble➞Page",
+										"Human➞Noble Court➞Page",
+										"Human➞Noble➞Squire",
+										"Human➞Noble Court➞Squire",
+										"Human➞Professional Soldier➞1*ANY"
+									]
+								}
 							]
 						}
 					},
@@ -4611,11 +5483,16 @@ export const Human: Stock = {
 					],
 					stock: "Human",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 6
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
@@ -4627,7 +5504,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Falconer",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 10,
 					setting: "Noble Court",
 					skillPool: 4,
@@ -4646,7 +5524,10 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
@@ -4657,7 +5538,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Huntsman",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 12,
 					setting: "Noble Court",
 					skillPool: 8,
@@ -4673,11 +5555,16 @@ export const Human: Stock = {
 					],
 					stock: "Human",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 5
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -4689,7 +5576,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Herald",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 10,
 					setting: "Noble Court",
 					skillPool: 4,
@@ -4707,7 +5595,10 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -4718,7 +5609,8 @@ export const Human: Stock = {
 					mentalPool: 1,
 					name: "Court Chef",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 14,
 					setting: "Noble Court",
 					skillPool: 5,
@@ -4730,11 +5622,16 @@ export const Human: Stock = {
 					],
 					stock: "Human",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 5
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -4750,15 +5647,20 @@ export const Human: Stock = {
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Villager➞Corrupt Sergeant",
-								"Human➞Villager➞Village Sergeant",
-								"Human➞Professional Soldier➞Sergeant",
-								"Human➞Professional Soldier➞Veteran",
-								"Human➞Noble➞Page",
-								"Human➞Noble Court➞Page",
-								"Human➞Noble Court➞Man-at-Arms"
+								{
+									type: "OR",
+									items: [
+										"Human➞Villager➞Corrupt Sergeant",
+										"Human➞Villager➞Village Sergeant",
+										"Human➞Professional Soldier➞Sergeant",
+										"Human➞Professional Soldier➞Veteran",
+										"Human➞Noble➞Page",
+										"Human➞Noble Court➞Page",
+										"Human➞Noble Court➞Man-at-Arms"
+									]
+								}
 							]
 						}
 					},
@@ -4784,7 +5686,10 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -4797,10 +5702,18 @@ export const Human: Stock = {
 					name: "Young Lady",
 					physicalPool: 0,
 					requirements: {
-						limits: [
-							"LP➞MAX➞3",
-							"LP➞UNIQUE"
-						]
+						conditions: {
+							type: "AND",
+							items: [
+								{
+									type: "AND",
+									items: [
+										"LP➞MAX➞3",
+										"LP➞UNIQUE"
+									]
+								}
+							]
+						}
 					},
 					resources: 25,
 					setting: "Noble Court",
@@ -4819,11 +5732,16 @@ export const Human: Stock = {
 					],
 					stock: "Human",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 9
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -4837,11 +5755,16 @@ export const Human: Stock = {
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Noble➞Squire",
-								"Human➞Noble Court➞Squire",
-								"Human➞Professional Soldier➞Cavalryman"
+								{
+									type: "OR",
+									items: [
+										"Human➞Noble➞Squire",
+										"Human➞Noble Court➞Squire",
+										"Human➞Professional Soldier➞Cavalryman"
+									]
+								}
 							]
 						}
 					},
@@ -4863,7 +5786,10 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -4875,7 +5801,8 @@ export const Human: Stock = {
 					mentalPool: 1,
 					name: "Courtier",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 15,
 					setting: "Noble Court",
 					skillPool: 8,
@@ -4896,7 +5823,10 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -4910,14 +5840,19 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Noble Court➞Nurse",
-								"Human➞Peasant➞Midwife",
-								"Human➞Noble➞Lady",
-								"Human➞Villager➞Village Wife",
-								"Human➞Peasant➞Country Wife",
-								"Human➞City Dweller➞City Wife"
+								{
+									type: "OR",
+									items: [
+										"Human➞Noble Court➞Nurse",
+										"Human➞Peasant➞Midwife",
+										"Human➞Noble➞Lady",
+										"Human➞Villager➞Village Wife",
+										"Human➞Peasant➞Country Wife",
+										"Human➞City Dweller➞City Wife"
+									]
+								}
 							]
 						}
 					},
@@ -4942,7 +5877,10 @@ export const Human: Stock = {
 					years: 8
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
@@ -4956,19 +5894,24 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Religious➞Military Order",
-								"Human➞Religious➞Priest",
-								"Human➞Religious➞Templar",
-								"Human➞Religious➞Archpriest",
-								"Human➞City Dweller➞Temple Priest",
-								"Human➞Outcast➞Heretic Priest",
-								"Human➞Death Cult➞Death Priest",
-								"Human➞Peasant➞Itinerant Priest",
-								"Human➞Villager➞Village Priest",
-								"Human➞Villager➞Venal Priest",
-								"Human➞Noble Court➞Court Priest"
+								{
+									type: "OR",
+									items: [
+										"Human➞Religious➞Military Order",
+										"Human➞Religious➞Priest",
+										"Human➞Religious➞Templar",
+										"Human➞Religious➞Archpriest",
+										"Human➞City Dweller➞Temple Priest",
+										"Human➞Outcast➞Heretic Priest",
+										"Human➞Death Cult➞Death Priest",
+										"Human➞Peasant➞Itinerant Priest",
+										"Human➞Villager➞Village Priest",
+										"Human➞Villager➞Venal Priest",
+										"Human➞Noble Court➞Court Priest"
+									]
+								}
 							]
 						}
 					},
@@ -4986,11 +5929,16 @@ export const Human: Stock = {
 					],
 					stock: "Human",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 5
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -5004,11 +5952,16 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Noble➞Arcane Devotee",
-								"Human➞Outcast➞Rogue Wizard",
-								"Human➞City Dweller➞Sorcerer"
+								{
+									type: "OR",
+									items: [
+										"Human➞Noble➞Arcane Devotee",
+										"Human➞Outcast➞Rogue Wizard",
+										"Human➞City Dweller➞Sorcerer"
+									]
+								}
 							]
 						}
 					},
@@ -5032,7 +5985,10 @@ export const Human: Stock = {
 					years: 8
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -5046,12 +6002,17 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞City Dweller➞Student",
-								"Human➞Noble➞Student",
-								"Human➞Noble Court➞Student",
-								"Human➞City Dweller➞Advocate"
+								{
+									type: "OR",
+									items: [
+										"Human➞City Dweller➞Student",
+										"Human➞Noble➞Student",
+										"Human➞Noble Court➞Student",
+										"Human➞City Dweller➞Advocate"
+									]
+								}
 							]
 						}
 					},
@@ -5074,7 +6035,10 @@ export const Human: Stock = {
 					years: 8
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -5087,15 +6051,20 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞City Dweller➞Student",
-								"Human➞Noble➞Student",
-								"Human➞Noble Court➞Student",
-								"Human➞Religious➞Itinerant Monk",
-								"Human➞Religious➞Cloistered Nun",
-								"Human➞Religious➞Priest",
-								"Human➞Religious➞Templar"
+								{
+									type: "OR",
+									items: [
+										"Human➞City Dweller➞Student",
+										"Human➞Noble➞Student",
+										"Human➞Noble Court➞Student",
+										"Human➞Religious➞Itinerant Monk",
+										"Human➞Religious➞Cloistered Nun",
+										"Human➞Religious➞Priest",
+										"Human➞Religious➞Templar"
+									]
+								}
 							]
 						}
 					},
@@ -5119,7 +6088,10 @@ export const Human: Stock = {
 					years: 8
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -5133,16 +6105,21 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞City Dweller➞Student",
-								"Human➞Noble➞Student",
-								"Human➞Noble Court➞Student",
-								"Human➞Religious➞Custodian",
-								"Human➞Religious➞Interpreter",
-								"Human➞Religious➞Archivist",
-								"Human➞Noble➞Young Lady",
-								"Human➞Noble Court➞Young Lady"
+								{
+									type: "OR",
+									items: [
+										"Human➞City Dweller➞Student",
+										"Human➞Noble➞Student",
+										"Human➞Noble Court➞Student",
+										"Human➞Religious➞Custodian",
+										"Human➞Religious➞Interpreter",
+										"Human➞Religious➞Archivist",
+										"Human➞Noble➞Young Lady",
+										"Human➞Noble Court➞Young Lady"
+									]
+								}
 							]
 						}
 					},
@@ -5168,7 +6145,10 @@ export const Human: Stock = {
 					years: 10
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -5181,11 +6161,16 @@ export const Human: Stock = {
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞City Dweller➞Journeyman",
-								"Human➞Professional Soldier➞Journeyman",
-								"Human➞Villager➞Journeyman"
+								{
+									type: "OR",
+									items: [
+										"Human➞City Dweller➞Journeyman",
+										"Human➞Professional Soldier➞Journeyman",
+										"Human➞Villager➞Journeyman"
+									]
+								}
 							]
 						}
 					},
@@ -5208,7 +6193,10 @@ export const Human: Stock = {
 					years: 7
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -5221,11 +6209,16 @@ export const Human: Stock = {
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞City Dweller➞Journeyman",
-								"Human➞Professional Soldier➞Journeyman",
-								"Human➞Villager➞Journeyman"
+								{
+									type: "OR",
+									items: [
+										"Human➞City Dweller➞Journeyman",
+										"Human➞Professional Soldier➞Journeyman",
+										"Human➞Villager➞Journeyman"
+									]
+								}
 							]
 						}
 					},
@@ -5245,7 +6238,10 @@ export const Human: Stock = {
 					years: 10
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -5259,13 +6255,18 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Noble Court➞Chaplain",
-								"Human➞Professional Soldier➞Chaplain",
-								"Human➞Religious➞Priest",
-								"Human➞Religious➞Templar",
-								"Human➞Noble➞Religious Acolyte"
+								{
+									type: "OR",
+									items: [
+										"Human➞Noble Court➞Chaplain",
+										"Human➞Professional Soldier➞Chaplain",
+										"Human➞Religious➞Priest",
+										"Human➞Religious➞Templar",
+										"Human➞Noble➞Religious Acolyte"
+									]
+								}
 							]
 						}
 					},
@@ -5288,7 +6289,10 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -5303,18 +6307,23 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Villager➞Town Official",
-								"Human➞City Dweller➞Municipal Minister",
-								"Human➞City Dweller➞Judge",
-								"Human➞Noble Court➞Court Lawyer",
-								"Human➞Noble Court➞Court Doctor",
-								"Human➞Noble Court➞Governess",
-								"Human➞Noble➞Young Lady",
-								"Human➞Noble Court➞Young Lady",
-								"Human➞City Dweller➞Magnate",
-								"Human➞Noble➞Lord"
+								{
+									type: "OR",
+									items: [
+										"Human➞Villager➞Town Official",
+										"Human➞City Dweller➞Municipal Minister",
+										"Human➞City Dweller➞Judge",
+										"Human➞Noble Court➞Court Lawyer",
+										"Human➞Noble Court➞Court Doctor",
+										"Human➞Noble Court➞Governess",
+										"Human➞Noble➞Young Lady",
+										"Human➞Noble Court➞Young Lady",
+										"Human➞City Dweller➞Magnate",
+										"Human➞Noble➞Lord"
+									]
+								}
 							]
 						}
 					},
@@ -5329,11 +6338,15 @@ export const Human: Stock = {
 					],
 					stock: "Human",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 7
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -5346,14 +6359,19 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Professional Soldier➞Captain",
-								"Human➞Noble➞Baron",
-								"Human➞City Dweller➞Saddler",
-								"Human➞City Dweller➞Merchant",
-								"Human➞Villager➞Merchant",
-								"Human➞City Dweller➞Magnate"
+								{
+									type: "OR",
+									items: [
+										"Human➞Professional Soldier➞Captain",
+										"Human➞Noble➞Baron",
+										"Human➞City Dweller➞Saddler",
+										"Human➞City Dweller➞Merchant",
+										"Human➞Villager➞Merchant",
+										"Human➞City Dweller➞Magnate"
+									]
+								}
 							]
 						}
 					},
@@ -5375,7 +6393,10 @@ export const Human: Stock = {
 					years: 8
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -5388,14 +6409,19 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Professional Soldier➞Captain",
-								"Human➞Noble➞Baron",
-								"Human➞City Dweller➞Saddler",
-								"Human➞City Dweller➞Merchant",
-								"Human➞Villager➞Merchant",
-								"Human➞City Dweller➞Magnate"
+								{
+									type: "OR",
+									items: [
+										"Human➞Professional Soldier➞Captain",
+										"Human➞Noble➞Baron",
+										"Human➞City Dweller➞Saddler",
+										"Human➞City Dweller➞Merchant",
+										"Human➞Villager➞Merchant",
+										"Human➞City Dweller➞Magnate"
+									]
+								}
 							]
 						}
 					},
@@ -5420,7 +6446,10 @@ export const Human: Stock = {
 					years: 7
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -5435,14 +6464,16 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Noble➞1*ANY"
+								{
+									type: "OR",
+									items: [
+										"Human➞Noble➞1*ANY"
+									]
+								}
 							]
-						},
-						texts: [
-							"Hostage gives resources points equal to half ot the character's previous lifepath."
-						]
+						}
 					},
 					resources: "*",
 					setting: "Noble Court",
@@ -5463,7 +6494,10 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
@@ -5477,11 +6511,16 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Noble➞Knight",
-								"Human➞Noble Court➞Knight",
-								"Trait➞Human Lifepath➞Your Lordship"
+								{
+									type: "OR",
+									items: [
+										"Human➞Noble➞Knight",
+										"Human➞Noble Court➞Knight",
+										"Trait➞Human Lifepath➞Your Lordship"
+									]
+								}
 							]
 						}
 					},
@@ -5505,7 +6544,10 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
@@ -5520,12 +6562,17 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞City Dweller➞Judge",
-								"Human➞Professional Soldier➞Captain",
-								"Human➞Noble Court➞Bailiff",
-								"Human➞Noble➞Lord"
+								{
+									type: "OR",
+									items: [
+										"Human➞City Dweller➞Judge",
+										"Human➞Professional Soldier➞Captain",
+										"Human➞Noble Court➞Bailiff",
+										"Human➞Noble➞Lord"
+									]
+								}
 							]
 						}
 					},
@@ -5548,7 +6595,10 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -5561,17 +6611,22 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Noble Court➞Steward",
-								"Human➞Seafaring➞Steward",
-								"Human➞Villager➞Town Official",
-								"Human➞City Dweller➞Municipal Minister",
-								"Human➞City Dweller➞Judge",
-								"Human➞Noble Court➞Court Lawyer",
-								"Human➞Noble Court➞Court Doctor",
-								"Human➞City Dweller➞Magnate",
-								"Human➞Noble➞Lord"
+								{
+									type: "OR",
+									items: [
+										"Human➞Noble Court➞Steward",
+										"Human➞Seafaring➞Steward",
+										"Human➞Villager➞Town Official",
+										"Human➞City Dweller➞Municipal Minister",
+										"Human➞City Dweller➞Judge",
+										"Human➞Noble Court➞Court Lawyer",
+										"Human➞Noble Court➞Court Doctor",
+										"Human➞City Dweller➞Magnate",
+										"Human➞Noble➞Lord"
+									]
+								}
 							]
 						}
 					},
@@ -5593,7 +6648,10 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -5607,13 +6665,18 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Professional Soldier➞Captain",
-								"Human➞Noble➞Baron",
-								"Human➞Noble➞Viscount",
-								"Human➞Noble➞Count",
-								"Human➞Noble➞Duke"
+								{
+									type: "OR",
+									items: [
+										"Human➞Professional Soldier➞Captain",
+										"Human➞Noble➞Baron",
+										"Human➞Noble➞Viscount",
+										"Human➞Noble➞Count",
+										"Human➞Noble➞Duke"
+									]
+								}
 							]
 						}
 					},
@@ -5637,7 +6700,10 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -5651,22 +6717,27 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Noble Court➞Steward",
-								"Human➞Seafaring➞Steward",
-								"Human➞Villager➞Town Official",
-								"Human➞City Dweller➞Municipal Minister",
-								"Human➞City Dweller➞Judge",
-								"Human➞Noble Court➞Court Lawyer",
-								"Human➞Noble Court➞Court Doctor",
-								"Human➞City Dweller➞Magnate",
-								"Human➞Noble➞Baron",
-								"Human➞City Dweller➞Bishop",
-								"Human➞Religious➞Bishop",
-								"Human➞Noble➞Viscount",
-								"Human➞Noble➞Count",
-								"Human➞Noble➞Duke"
+								{
+									type: "OR",
+									items: [
+										"Human➞Noble Court➞Steward",
+										"Human➞Seafaring➞Steward",
+										"Human➞Villager➞Town Official",
+										"Human➞City Dweller➞Municipal Minister",
+										"Human➞City Dweller➞Judge",
+										"Human➞Noble Court➞Court Lawyer",
+										"Human➞Noble Court➞Court Doctor",
+										"Human➞City Dweller➞Magnate",
+										"Human➞Noble➞Baron",
+										"Human➞City Dweller➞Bishop",
+										"Human➞Religious➞Bishop",
+										"Human➞Noble➞Viscount",
+										"Human➞Noble➞Count",
+										"Human➞Noble➞Duke"
+									]
+								}
 							]
 						}
 					},
@@ -5688,7 +6759,10 @@ export const Human: Stock = {
 					years: 7
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 1,
@@ -5702,23 +6776,28 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞City Dweller➞Scholar",
-								"Human➞Noble Court➞Steward",
-								"Human➞Seafaring➞Steward",
-								"Human➞Villager➞Town Official",
-								"Human➞City Dweller➞Municipal Minister",
-								"Human➞City Dweller➞Judge",
-								"Human➞Noble Court➞Court Lawyer",
-								"Human➞Noble Court➞Court Doctor",
-								"Human➞City Dweller➞Magnate",
-								"Human➞Noble➞Baron",
-								"Human➞City Dweller➞Bishop",
-								"Human➞Religious➞Bishop",
-								"Human➞Noble➞Viscount",
-								"Human➞Noble➞Count",
-								"Human➞Noble➞Duke"
+								{
+									type: "OR",
+									items: [
+										"Human➞City Dweller➞Scholar",
+										"Human➞Noble Court➞Steward",
+										"Human➞Seafaring➞Steward",
+										"Human➞Villager➞Town Official",
+										"Human➞City Dweller➞Municipal Minister",
+										"Human➞City Dweller➞Judge",
+										"Human➞Noble Court➞Court Lawyer",
+										"Human➞Noble Court➞Court Doctor",
+										"Human➞City Dweller➞Magnate",
+										"Human➞Noble➞Baron",
+										"Human➞City Dweller➞Bishop",
+										"Human➞Religious➞Bishop",
+										"Human➞Noble➞Viscount",
+										"Human➞Noble➞Count",
+										"Human➞Noble➞Duke"
+									]
+								}
 							]
 						}
 					},
@@ -5738,7 +6817,10 @@ export const Human: Stock = {
 					years: 7
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: "1/yr",
@@ -5758,43 +6840,51 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Outcast➞Thinker",
-								"Human➞Professional Soldier➞Captain",
-								"Human➞City Dweller➞Magnate",
-								"Human➞City Dweller➞Master Craftsman",
-								"Human➞Villager➞Master Craftsman",
-								"Human➞City Dweller➞Artisan",
-								"Human➞City Dweller➞Bishop",
-								"Human➞Religious➞Bishop",
-								"Human➞Outcast➞Rogue Wizard",
-								"Human➞Outcast➞Mad Summoner",
-								"Human➞Outcast➞Heretic Priest",
-								"Human➞Noble➞Dame",
-								"Human➞Noble➞Baron",
-								"Human➞Noble➞Viscount",
-								"Human➞Noble➞Count",
-								"Human➞Noble➞Duke",
-								"Human➞Noble➞Prince of the Blood",
-								"Human➞Noble➞Noble Prince"
+								{
+									type: "OR",
+									items: [
+										"Human➞Outcast➞Thinker",
+										"Human➞Professional Soldier➞Captain",
+										"Human➞City Dweller➞Magnate",
+										"Human➞City Dweller➞Master Craftsman",
+										"Human➞Villager➞Master Craftsman",
+										"Human➞City Dweller➞Artisan",
+										"Human➞City Dweller➞Bishop",
+										"Human➞Religious➞Bishop",
+										"Human➞Outcast➞Rogue Wizard",
+										"Human➞Outcast➞Mad Summoner",
+										"Human➞Outcast➞Heretic Priest",
+										"Human➞Noble➞Dame",
+										"Human➞Noble➞Baron",
+										"Human➞Noble➞Viscount",
+										"Human➞Noble➞Count",
+										"Human➞Noble➞Duke",
+										"Human➞Noble➞Prince of the Blood",
+										"Human➞Noble➞Noble Prince"
+									]
+								}
 							]
-						},
-						texts: [
-							"This lifepath can be one to three years long, player chooses tenure. Character gains 1 general skill point and 10 resource points per year. The Stat and trait points are earned once."
-						]
+						}
 					},
 					resources: "10/yr",
 					setting: "Noble Court",
 					skillPool: 1,
-					skills: [],
+					skills: [
+
+					],
 					stock: "Human",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: "*"
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -5808,15 +6898,20 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞College of Magic➞Senior Student",
-								"Human➞City Dweller➞Neophyte Sorcerer",
-								"Human➞Noble Court➞Apt Pupil",
-								"Human➞Outcast➞Apt Pupil",
-								"Human➞Professional Soldier➞Apt Pupil",
-								"Human➞Religious➞Apt Pupil",
-								"Human➞Villager➞Wizard's Apprentice"
+								{
+									type: "OR",
+									items: [
+										"Human➞College of Magic➞Senior Student",
+										"Human➞City Dweller➞Neophyte Sorcerer",
+										"Human➞Noble Court➞Apt Pupil",
+										"Human➞Outcast➞Apt Pupil",
+										"Human➞Professional Soldier➞Apt Pupil",
+										"Human➞Religious➞Apt Pupil",
+										"Human➞Villager➞Wizard's Apprentice"
+									]
+								}
 							]
 						}
 					},
@@ -5839,7 +6934,9 @@ export const Human: Stock = {
 					years: 8
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
@@ -5854,15 +6951,20 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞College of Magic➞Senior Student",
-								"Human➞Outcast➞Mad Summoner",
-								"Human➞Noble Court➞Apt Pupil",
-								"Human➞Outcast➞Apt Pupil",
-								"Human➞Professional Soldier➞Apt Pupil",
-								"Human➞Religious➞Apt Pupil",
-								"Human➞Villager➞Wizard's Apprentice"
+								{
+									type: "OR",
+									items: [
+										"Human➞College of Magic➞Senior Student",
+										"Human➞Outcast➞Mad Summoner",
+										"Human➞Noble Court➞Apt Pupil",
+										"Human➞Outcast➞Apt Pupil",
+										"Human➞Professional Soldier➞Apt Pupil",
+										"Human➞Religious➞Apt Pupil",
+										"Human➞Villager➞Wizard's Apprentice"
+									]
+								}
 							]
 						}
 					},
@@ -5892,14 +6994,19 @@ export const Human: Stock = {
 			]
 		},
 		"Outcast": {
-			allowed: ["bwgr", "bs"],
+			allowed: [
+				"bwgr",
+				"bs"
+			],
 			name: "Outcast",
 			short: "Outcast",
 			stock: "Human",
 			type: "Subsetting",
 			lifepaths: [
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -5913,10 +7020,18 @@ export const Human: Stock = {
 					name: "Apt Pupil",
 					physicalPool: 0,
 					requirements: {
-						limits: [
-							"LP➞MAX➞3",
-							"LP➞UNIQUE"
-						]
+						conditions: {
+							type: "AND",
+							items: [
+								{
+									type: "AND",
+									items: [
+										"LP➞MAX➞2",
+										"LP➞UNIQUE"
+									]
+								}
+							]
+						}
 					},
 					resources: 8,
 					setting: "Outcast",
@@ -5936,7 +7051,10 @@ export const Human: Stock = {
 					years: 3
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -5949,10 +7067,18 @@ export const Human: Stock = {
 					name: "Urchin",
 					physicalPool: 0,
 					requirements: {
-						limits: [
-							"LP➞MAX➞2",
-							"LP➞UNIQUE"
-						]
+						conditions: {
+							type: "AND",
+							items: [
+								{
+									type: "AND",
+									items: [
+										"LP➞MAX➞2",
+										"LP➞UNIQUE"
+									]
+								}
+							]
+						}
 					},
 					resources: 3,
 					setting: "Outcast",
@@ -5971,7 +7097,9 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -5983,7 +7111,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Apostate",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 6,
 					setting: "Outcast",
 					skillPool: 4,
@@ -6000,7 +7129,10 @@ export const Human: Stock = {
 					years: 3
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -6013,7 +7145,8 @@ export const Human: Stock = {
 					mentalPool: 1,
 					name: "Blackmailer",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 10,
 					setting: "Outcast",
 					skillPool: 4,
@@ -6032,7 +7165,10 @@ export const Human: Stock = {
 					years: 3
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -6045,7 +7181,8 @@ export const Human: Stock = {
 					mentalPool: 1,
 					name: "Kidnapper",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 10,
 					setting: "Outcast",
 					skillPool: 5,
@@ -6063,7 +7200,10 @@ export const Human: Stock = {
 					years: 3
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -6077,7 +7217,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Pillager",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 7,
 					setting: "Outcast",
 					skillPool: 4,
@@ -6090,11 +7231,16 @@ export const Human: Stock = {
 					],
 					stock: "Human",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 4
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -6106,7 +7252,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Vagrant",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 5,
 					setting: "Outcast",
 					skillPool: 4,
@@ -6118,11 +7265,16 @@ export const Human: Stock = {
 					],
 					stock: "Human",
 					traitPool: 2,
-					traits: [],
+					traits: [
+
+					],
 					years: 3
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -6134,7 +7286,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Cripple",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 3,
 					setting: "Outcast",
 					skillPool: 6,
@@ -6152,7 +7305,10 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
@@ -6164,7 +7320,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Poacher",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 5,
 					setting: "Outcast",
 					skillPool: 6,
@@ -6177,11 +7334,16 @@ export const Human: Stock = {
 					],
 					stock: "Human",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 5
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -6192,7 +7354,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Deranged",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 3,
 					setting: "Outcast",
 					skillPool: 3,
@@ -6212,7 +7375,10 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
@@ -6226,7 +7392,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Outlaw",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 5,
 					setting: "Outcast",
 					skillPool: 5,
@@ -6243,7 +7410,10 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
@@ -6257,18 +7427,23 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞City Dweller➞Shopkeeper",
-								"Human➞Villager➞Shopkeeper",
-								"Human➞City Dweller➞Barkeep",
-								"Human➞City Dweller➞Moneylender",
-								"Human➞Outcast➞1*ANY",
-								"Human➞City Dweller➞Coin Clipper",
-								"Human➞City Dweller➞Pickpocket",
-								"Human➞City Dweller➞Street Thug",
-								"Human➞City Dweller➞Criminal",
-								"Human➞City Dweller➞Confidence Man"
+								{
+									type: "OR",
+									items: [
+										"Human➞City Dweller➞Shopkeeper",
+										"Human➞Villager➞Shopkeeper",
+										"Human➞City Dweller➞Barkeep",
+										"Human➞City Dweller➞Moneylender",
+										"Human➞Outcast➞1*ANY",
+										"Human➞City Dweller➞Coin Clipper",
+										"Human➞City Dweller➞Pickpocket",
+										"Human➞City Dweller➞Street Thug",
+										"Human➞City Dweller➞Criminal",
+										"Human➞City Dweller➞Confidence Man"
+									]
+								}
 							]
 						}
 					},
@@ -6290,7 +7465,10 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -6302,7 +7480,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Gravedigger",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 4,
 					setting: "Outcast",
 					skillPool: 6,
@@ -6321,15 +7500,21 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
-					leads: [],
+					leads: [
+
+					],
 					mentalPool: 0,
 					name: "Ratcatcher",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 4,
 					setting: "Outcast",
 					skillPool: 4,
@@ -6347,7 +7532,10 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -6359,7 +7547,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Beggar",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 5,
 					setting: "Outcast",
 					skillPool: 5,
@@ -6377,7 +7566,10 @@ export const Human: Stock = {
 					years: 3
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: -1,
 					generalSkillPool: 0,
@@ -6389,7 +7581,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Leper",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 3,
 					setting: "Outcast",
 					skillPool: 5,
@@ -6409,7 +7602,10 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -6422,7 +7618,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Prostitute",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 6,
 					setting: "Outcast",
 					skillPool: 3,
@@ -6442,7 +7639,10 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -6456,19 +7656,24 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Villager➞Venal Priest",
-								"Human➞City Dweller➞Shopkeeper",
-								"Human➞Villager➞Shopkeeper",
-								"Human➞City Dweller➞Barkeep",
-								"Human➞City Dweller➞Moneylender",
-								"Human➞Outcast➞1*ANY",
-								"Human➞City Dweller➞Coin Clipper",
-								"Human➞City Dweller➞Pickpocket",
-								"Human➞City Dweller➞Street Thug",
-								"Human➞City Dweller➞Criminal",
-								"Human➞City Dweller➞Confidence Man"
+								{
+									type: "OR",
+									items: [
+										"Human➞Villager➞Venal Priest",
+										"Human➞City Dweller➞Shopkeeper",
+										"Human➞Villager➞Shopkeeper",
+										"Human➞City Dweller➞Barkeep",
+										"Human➞City Dweller➞Moneylender",
+										"Human➞Outcast➞1*ANY",
+										"Human➞City Dweller➞Coin Clipper",
+										"Human➞City Dweller➞Pickpocket",
+										"Human➞City Dweller➞Street Thug",
+										"Human➞City Dweller➞Criminal",
+										"Human➞City Dweller➞Confidence Man"
+									]
+								}
 							]
 						}
 					},
@@ -6484,11 +7689,16 @@ export const Human: Stock = {
 					],
 					stock: "Human",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 6
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -6501,7 +7711,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Itinerant Performer",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 5,
 					setting: "Outcast",
 					skillPool: 8,
@@ -6522,7 +7733,10 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -6534,7 +7748,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Insurrectionist",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 5,
 					setting: "Outcast",
 					skillPool: 4,
@@ -6553,7 +7768,10 @@ export const Human: Stock = {
 					years: 3
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -6566,7 +7784,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Cultist",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 8,
 					setting: "Outcast",
 					skillPool: 5,
@@ -6587,7 +7806,10 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -6599,7 +7821,8 @@ export const Human: Stock = {
 					mentalPool: 1,
 					name: "Poisoner",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 8,
 					setting: "Outcast",
 					skillPool: 5,
@@ -6617,7 +7840,10 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -6628,7 +7854,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Thug",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 7,
 					setting: "Outcast",
 					skillPool: 4,
@@ -6647,7 +7874,10 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -6659,7 +7889,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Desperate Killer",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 5,
 					setting: "Outcast",
 					skillPool: 5,
@@ -6679,7 +7910,10 @@ export const Human: Stock = {
 					years: 3
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -6690,7 +7924,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Bandit",
 					physicalPool: 1,
-					requirements: {},
+					requirements: {
+					},
 					resources: 7,
 					setting: "Outcast",
 					skillPool: 4,
@@ -6702,11 +7937,15 @@ export const Human: Stock = {
 					],
 					stock: "Human",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 3
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -6718,7 +7957,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Pirate",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 5,
 					setting: "Outcast",
 					skillPool: 6,
@@ -6742,7 +7982,10 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -6754,7 +7997,8 @@ export const Human: Stock = {
 					mentalPool: 1,
 					name: "Smuggler",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 15,
 					setting: "Outcast",
 					skillPool: 6,
@@ -6775,7 +8019,10 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -6790,18 +8037,23 @@ export const Human: Stock = {
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Outcast➞Bandit",
-								"Human➞Outcast➞Smuggler",
-								"Human➞Noble➞Squire",
-								"Human➞Noble Court➞Squire",
-								"Human➞Noble➞Knight",
-								"Human➞Noble Court➞Knight",
-								"Human➞City Dweller➞City Guard",
-								"Human➞Villager➞Village Tough",
-								"Human➞Seafaring➞Marine",
-								"Human➞Professional Soldier➞1*ANY"
+								{
+									type: "OR",
+									items: [
+										"Human➞Outcast➞Bandit",
+										"Human➞Outcast➞Smuggler",
+										"Human➞Noble➞Squire",
+										"Human➞Noble Court➞Squire",
+										"Human➞Noble➞Knight",
+										"Human➞Noble Court➞Knight",
+										"Human➞City Dweller➞City Guard",
+										"Human➞Villager➞Village Tough",
+										"Human➞Seafaring➞Marine",
+										"Human➞Professional Soldier➞1*ANY"
+									]
+								}
 							]
 						}
 					},
@@ -6828,7 +8080,10 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -6842,13 +8097,18 @@ export const Human: Stock = {
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Noble➞Born Noble",
-								"Human➞Peasant➞Hunter",
-								"Human➞Peasant➞Trapper",
-								"Human➞Noble Court➞Huntsman",
-								"Human➞Professional Soldier➞Scout"
+								{
+									type: "OR",
+									items: [
+										"Human➞Noble➞Born Noble",
+										"Human➞Peasant➞Hunter",
+										"Human➞Peasant➞Trapper",
+										"Human➞Noble Court➞Huntsman",
+										"Human➞Professional Soldier➞Scout"
+									]
+								}
 							]
 						}
 					},
@@ -6874,7 +8134,9 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
@@ -6888,13 +8150,18 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Outcast➞Cultist",
-								"Human➞Peasant➞Augur",
-								"Human➞Villager➞Wizard's Apprentice",
-								"Human➞City Dweller➞Neophyte Sorcerer",
-								"Human➞Noble➞Arcane Devotee"
+								{
+									type: "OR",
+									items: [
+										"Human➞Outcast➞Cultist",
+										"Human➞Peasant➞Augur",
+										"Human➞Villager➞Wizard's Apprentice",
+										"Human➞City Dweller➞Neophyte Sorcerer",
+										"Human➞Noble➞Arcane Devotee"
+									]
+								}
 							]
 						}
 					},
@@ -6918,7 +8185,10 @@ export const Human: Stock = {
 					years: 8
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -6933,13 +8203,18 @@ export const Human: Stock = {
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Outcast➞Cultist",
-								"Human➞Peasant➞Augur",
-								"Human➞Villager➞Wizard's Apprentice",
-								"Human➞City Dweller➞Neophyte Sorcerer",
-								"Human➞Noble➞Arcane Devotee"
+								{
+									type: "OR",
+									items: [
+										"Human➞Outcast➞Cultist",
+										"Human➞Peasant➞Augur",
+										"Human➞Villager➞Wizard's Apprentice",
+										"Human➞City Dweller➞Neophyte Sorcerer",
+										"Human➞Noble➞Arcane Devotee"
+									]
+								}
 							]
 						}
 					},
@@ -6967,7 +8242,10 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
@@ -6981,13 +8259,18 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Seafaring➞Weather Witch",
-								"Human➞Noble➞Young Lady",
-								"Human➞Noble Court➞Young Lady",
-								"Human➞Peasant➞Augur",
-								"Human➞Peasant➞Midwife"
+								{
+									type: "OR",
+									items: [
+										"Human➞Seafaring➞Weather Witch",
+										"Human➞Noble➞Young Lady",
+										"Human➞Noble Court➞Young Lady",
+										"Human➞Peasant➞Augur",
+										"Human➞Peasant➞Midwife"
+									]
+								}
 							]
 						}
 					},
@@ -7011,7 +8294,10 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -7025,16 +8311,21 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Religious➞Temple Acolyte",
-								"Human➞Villager➞Acolyte",
-								"Human➞Outcast➞Cultist",
-								"Human➞Outcast➞Apostate",
-								"Human➞Religious➞Theologian",
-								"Human➞Villager➞Venal Priest",
-								"Human➞Religious➞Interpreter",
-								"Human➞Religious➞Archivist"
+								{
+									type: "OR",
+									items: [
+										"Human➞Religious➞Temple Acolyte",
+										"Human➞Villager➞Acolyte",
+										"Human➞Outcast➞Cultist",
+										"Human➞Outcast➞Apostate",
+										"Human➞Religious➞Theologian",
+										"Human➞Villager➞Venal Priest",
+										"Human➞Religious➞Interpreter",
+										"Human➞Religious➞Archivist"
+									]
+								}
 							]
 						}
 					},
@@ -7059,7 +8350,10 @@ export const Human: Stock = {
 					years: 7
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 1,
@@ -7078,9 +8372,17 @@ export const Human: Stock = {
 					name: "Thinker",
 					physicalPool: 0,
 					requirements: {
-						limits: [
-							"YEARS➞MIN➞36"
-						]
+						conditions: {
+							type: "AND",
+							items: [
+								{
+									type: "AND",
+									items: [
+										"YEARS➞MIN➞36"
+									]
+								}
+							]
+						}
 					},
 					resources: 5,
 					setting: "Outcast",
@@ -7095,11 +8397,15 @@ export const Human: Stock = {
 					],
 					stock: "Human",
 					traitPool: 2,
-					traits: [],
+					traits: [
+
+					],
 					years: 15
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -7112,14 +8418,19 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Outcast➞Rogue Wizard",
-								"Human➞Noble Court➞Apt Pupil",
-								"Human➞Outcast➞Apt Pupil",
-								"Human➞Professional Soldier➞Apt Pupil",
-								"Human➞Religious➞Apt Pupil",
-								"Human➞Villager➞Wizard's Apprentice"
+								{
+									type: "OR",
+									items: [
+										"Human➞Outcast➞Rogue Wizard",
+										"Human➞Noble Court➞Apt Pupil",
+										"Human➞Outcast➞Apt Pupil",
+										"Human➞Professional Soldier➞Apt Pupil",
+										"Human➞Religious➞Apt Pupil",
+										"Human➞Villager➞Wizard's Apprentice"
+									]
+								}
 							]
 						}
 					},
@@ -7142,7 +8453,9 @@ export const Human: Stock = {
 					years: 7
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -7154,15 +8467,20 @@ export const Human: Stock = {
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Noble Court➞Coroner",
-								"Human➞Death Cult➞Death Cultist",
-								"Human➞Outcast➞Cultist",
-								"Human➞Noble Court➞Apt Pupil",
-								"Human➞Outcast➞Apt Pupil",
-								"Human➞Professional Soldier➞Apt Pupil",
-								"Human➞Religious➞Apt Pupil"
+								{
+									type: "OR",
+									items: [
+										"Human➞Noble Court➞Coroner",
+										"Human➞Death Cult➞Death Cultist",
+										"Human➞Outcast➞Cultist",
+										"Human➞Noble Court➞Apt Pupil",
+										"Human➞Outcast➞Apt Pupil",
+										"Human➞Professional Soldier➞Apt Pupil",
+										"Human➞Religious➞Apt Pupil"
+									]
+								}
 							]
 						}
 					},
@@ -7210,10 +8528,13 @@ export const Human: Stock = {
 						"Any Character➞Bitter",
 						"Human Special➞Gifted"
 					],
-					requirements: {},
+					requirements: {
+					},
 					stock: "Human",
 					setting: "Outcast",
-					allowed: ["bs"]
+					allowed: [
+						"bs"
+					]
 				},
 				{
 					name: "Defiler",
@@ -7245,15 +8566,22 @@ export const Human: Stock = {
 					],
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Outcast➞Neophyte Sorcerer"
+								{
+									type: "OR",
+									items: [
+										"Human➞Outcast➞Neophyte Sorcerer"
+									]
+								}
 							]
 						}
 					},
 					stock: "Human",
 					setting: "Outcast",
-					allowed: ["bs"]
+					allowed: [
+						"bs"
+					]
 				},
 				{
 					name: "Preserver",
@@ -7278,18 +8606,27 @@ export const Human: Stock = {
 						"Any Wise➞Defiler-wise",
 						"Any General➞Inconspicuous"
 					],
-					traits: ["Any Character➞Frugal"],
+					traits: [
+						"Any Character➞Frugal"
+					],
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Outcast➞Neophyte Sorcerer"
+								{
+									type: "OR",
+									items: [
+										"Human➞Outcast➞Neophyte Sorcerer"
+									]
+								}
 							]
 						}
 					},
 					stock: "Human",
 					setting: "Outcast",
-					allowed: ["bs"]
+					allowed: [
+						"bs"
+					]
 				},
 				{
 					name: "Desert Hermit",
@@ -7302,7 +8639,11 @@ export const Human: Stock = {
 					generalSkillPool: 0,
 					skillPool: 5,
 					traitPool: 3,
-					leads: ["Human➞Peasant", "Human➞Villager", "Human➞Nomad"],
+					leads: [
+						"Human➞Peasant",
+						"Human➞Villager",
+						"Human➞Nomad"
+					],
 					skills: [
 						"Any Wise➞Desert-wise",
 						"Any General➞Survival",
@@ -7315,10 +8656,13 @@ export const Human: Stock = {
 						"Any Die➞Pickled",
 						"Any Die➞Weather Sense"
 					],
-					requirements: {},
+					requirements: {
+					},
 					stock: "Human",
 					setting: "Outcast",
-					allowed: ["bs"]
+					allowed: [
+						"bs"
+					]
 				},
 				{
 					name: "Oasis Witch",
@@ -7331,7 +8675,9 @@ export const Human: Stock = {
 					generalSkillPool: 0,
 					skillPool: 6,
 					traitPool: 2,
-					leads: [],
+					leads: [
+
+					],
 					skills: [
 						"Any Wise➞Oasis-wise",
 						"Any Wise➞Superstition-wise",
@@ -7339,11 +8685,16 @@ export const Human: Stock = {
 						"Any Wise➞Desert-wise",
 						"Human Magical➞Spirit Binding"
 					],
-					traits: ["Any Die➞Weather Sense"],
-					requirements: {},
+					traits: [
+						"Any Die➞Weather Sense"
+					],
+					requirements: {
+					},
 					stock: "Human",
 					setting: "Outcast",
-					allowed: ["bs"]
+					allowed: [
+						"bs"
+					]
 				},
 				{
 					name: "Bandit Lord",
@@ -7380,24 +8731,31 @@ export const Human: Stock = {
 					],
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Outcast➞Freebooter",
-								"Human➞Outcast➞Ravager",
-								"Human➞Outcast➞Bandit",
-								"Human➞Nomad➞Bandit",
-								"Human➞Noble➞Knight",
-								"Human➞Noble Court➞Knight",
-								"Human➞Professional Soldier➞Captain",
-								"Human➞Villager➞Village Sergeant",
-								"Human➞Villager➞Corrupt Sergeant",
-								"Human➞Professional Soldier➞Sergeant"
+								{
+									type: "OR",
+									items: [
+										"Human➞Outcast➞Freebooter",
+										"Human➞Outcast➞Ravager",
+										"Human➞Outcast➞Bandit",
+										"Human➞Nomad➞Bandit",
+										"Human➞Noble➞Knight",
+										"Human➞Noble Court➞Knight",
+										"Human➞Professional Soldier➞Captain",
+										"Human➞Villager➞Village Sergeant",
+										"Human➞Villager➞Corrupt Sergeant",
+										"Human➞Professional Soldier➞Sergeant"
+									]
+								}
 							]
 						}
 					},
 					stock: "Human",
 					setting: "Outcast",
-					allowed: ["bs"]
+					allowed: [
+						"bs"
+					]
 				},
 				{
 					name: "Scavenger",
@@ -7410,7 +8768,10 @@ export const Human: Stock = {
 					generalSkillPool: 0,
 					skillPool: 5,
 					traitPool: 2,
-					leads: ["Human➞Peasant", "Human➞Servitude and Captive"],
+					leads: [
+						"Human➞Peasant",
+						"Human➞Servitude and Captive"
+					],
 					skills: [
 						"Any General➞Scavenging",
 						"Any Wise➞Ruins-wise",
@@ -7424,10 +8785,13 @@ export const Human: Stock = {
 						"Any Character➞Obsessed",
 						"Any Character➞Nasty Cough"
 					],
-					requirements: {},
+					requirements: {
+					},
 					stock: "Human",
 					setting: "Outcast",
-					allowed: ["bs"]
+					allowed: [
+						"bs"
+					]
 				},
 				{
 					name: "Monster Hunter",
@@ -7463,22 +8827,29 @@ export const Human: Stock = {
 					],
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Nomad➞Bandit Hunter",
-								"Human➞Peasant➞Hunter",
-								"Human➞Peasant➞Hunter",
-								"Human➞Nomad➞Hunter",
-								"Human➞Servitude and Captive➞Champion",
-								"Human➞Noble➞Knight",
-								"Human➞Noble Court➞Knight",
-								"Human➞Professional Soldier➞1*ANY"
+								{
+									type: "OR",
+									items: [
+										"Human➞Nomad➞Bandit Hunter",
+										"Human➞Peasant➞Hunter",
+										"Human➞Peasant➞Hunter",
+										"Human➞Nomad➞Hunter",
+										"Human➞Servitude and Captive➞Champion",
+										"Human➞Noble➞Knight",
+										"Human➞Noble Court➞Knight",
+										"Human➞Professional Soldier➞1*ANY"
+									]
+								}
 							]
 						}
 					},
 					stock: "Human",
 					setting: "Outcast",
-					allowed: ["bs"]
+					allowed: [
+						"bs"
+					]
 				},
 				{
 					name: "Ravager",
@@ -7491,7 +8862,10 @@ export const Human: Stock = {
 					generalSkillPool: 0,
 					skillPool: 5,
 					traitPool: 2,
-					leads: ["Human➞Nomad", "Human➞Villager"],
+					leads: [
+						"Human➞Nomad",
+						"Human➞Villager"
+					],
 					skills: [
 						"Any General➞Intimidation",
 						"Any General➞Command",
@@ -7506,15 +8880,22 @@ export const Human: Stock = {
 					],
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Outcast➞Defiler"
+								{
+									type: "OR",
+									items: [
+										"Human➞Outcast➞Defiler"
+									]
+								}
 							]
 						}
 					},
 					stock: "Human",
 					setting: "Outcast",
-					allowed: ["bs"]
+					allowed: [
+						"bs"
+					]
 				},
 				{
 					name: "Bonecaster",
@@ -7527,7 +8908,10 @@ export const Human: Stock = {
 					generalSkillPool: 0,
 					skillPool: 7,
 					traitPool: 3,
-					leads: ["Human➞Servitude and Captive", "Human➞Nomad"],
+					leads: [
+						"Human➞Servitude and Captive",
+						"Human➞Nomad"
+					],
 					skills: [
 						"Any Wise➞Bone-wise",
 						"Human Magical➞Death Art",
@@ -7545,28 +8929,41 @@ export const Human: Stock = {
 					],
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Outcast➞Rogue Wizard",
-								"Human➞Nomad➞Shaman"
+								{
+									type: "OR",
+									items: [
+										"Human➞Outcast➞Rogue Wizard",
+										"Human➞Nomad➞Shaman"
+									]
+								}
 							]
 						}
 					},
 					stock: "Human",
 					setting: "Outcast",
-					allowed: ["bs"]
+					allowed: [
+						"bs"
+					]
 				}
 			]
 		},
 		"Peasant": {
-			allowed: ["bwgr", "bs"],
+			allowed: [
+				"bwgr",
+				"bs"
+			],
 			name: "Peasant",
 			short: "Peasant",
 			stock: "Human",
 			type: "Setting",
 			lifepaths: [
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: true,
 					eitherPool: 0,
 					generalSkillPool: 3,
@@ -7580,18 +8977,25 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Born Peasant",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 3,
 					setting: "Peasant",
 					skillPool: 0,
-					skills: [],
+					skills: [
+
+					],
 					stock: "Human",
 					traitPool: 2,
-					traits: [],
+					traits: [
+
+					],
 					years: 8
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: true,
 					eitherPool: 0,
 					generalSkillPool: 2,
@@ -7603,11 +9007,14 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Gifted Child",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 4,
 					setting: "Peasant",
 					skillPool: 0,
-					skills: [],
+					skills: [
+
+					],
 					stock: "Human",
 					traitPool: 1,
 					traits: [
@@ -7619,7 +9026,10 @@ export const Human: Stock = {
 					years: 9
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -7632,9 +9042,17 @@ export const Human: Stock = {
 					name: "Farmer",
 					physicalPool: 1,
 					requirements: {
-						limits: [
-							"LP➞MIN➞3"
-						]
+						conditions: {
+							type: "AND",
+							items: [
+								{
+									type: "AND",
+									items: [
+										"LP➞MIN➞3"
+									]
+								}
+							]
+						}
 					},
 					resources: 5,
 					setting: "Peasant",
@@ -7657,7 +9075,10 @@ export const Human: Stock = {
 					years: 8
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -7672,13 +9093,21 @@ export const Human: Stock = {
 						conditions: {
 							type: "OR",
 							items: [
-								"Human➞Peasant➞Farmer",
-								"Human➞Peasant➞Itinerant Priest"
+								{
+									type: "OR",
+									items: [
+										"Human➞Peasant➞Farmer",
+										"Human➞Peasant➞Itinerant Priest"
+									]
+								},
+								{
+									type: "AND",
+									items: [
+										"GENDER➞FEMALE"
+									]
+								}
 							]
-						},
-						texts: [
-							"Otherwise requires a female lifepath."
-						]
+						}
 					},
 					resources: 20,
 					setting: "Peasant",
@@ -7691,11 +9120,16 @@ export const Human: Stock = {
 					],
 					stock: "Human",
 					traitPool: 2,
-					traits: [],
+					traits: [
+
+					],
 					years: 15
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -7708,27 +9142,32 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Peasant➞Augur",
-								"Human➞Peasant➞Midwife",
-								"Human➞Peasant➞Country Wife",
-								"Human➞Villager➞Serving Girl",
-								"Human➞Villager➞Village Wife",
-								"Human➞City Dweller➞Alewife",
-								"Human➞City Dweller➞City Wife",
-								"Human➞Noble➞Young Lady",
-								"Human➞Noble➞Lady",
-								"Human➞Noble➞Dame",
-								"Human➞Noble Court➞Nurse",
-								"Human➞Noble Court➞Young Lady",
-								"Human➞Noble Court➞Governess",
-								"Human➞Religious➞Cloistered Nun",
-								"Human➞Religious➞Abbot/Abbess",
-								"Human➞Outcast➞Crazy Witch",
-								"Human➞Outcast➞Oasis Witch",
-								"Human➞Peasant➞Farmer",
-								"Human➞Peasant➞Itinerant Priest"
+								{
+									type: "OR",
+									items: [
+										"Human➞Peasant➞Augur",
+										"Human➞Peasant➞Midwife",
+										"Human➞Peasant➞Country Wife",
+										"Human➞Villager➞Serving Girl",
+										"Human➞Villager➞Village Wife",
+										"Human➞City Dweller➞Alewife",
+										"Human➞City Dweller➞City Wife",
+										"Human➞Noble➞Young Lady",
+										"Human➞Noble➞Lady",
+										"Human➞Noble➞Dame",
+										"Human➞Noble Court➞Nurse",
+										"Human➞Noble Court➞Young Lady",
+										"Human➞Noble Court➞Governess",
+										"Human➞Religious➞Cloistered Nun",
+										"Human➞Religious➞Abbot/Abbess",
+										"Human➞Outcast➞Crazy Witch",
+										"Human➞Outcast➞Oasis Witch",
+										"Human➞Peasant➞Farmer",
+										"Human➞Peasant➞Itinerant Priest"
+									]
+								}
 							]
 						}
 					},
@@ -7749,7 +9188,10 @@ export const Human: Stock = {
 					years: 10
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -7761,7 +9203,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Lazy Stayabout",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 3,
 					setting: "Peasant",
 					skillPool: 3,
@@ -7779,7 +9222,10 @@ export const Human: Stock = {
 					years: 7
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -7791,7 +9237,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Conscript",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 4,
 					setting: "Peasant",
 					skillPool: 2,
@@ -7808,7 +9255,10 @@ export const Human: Stock = {
 					years: 1
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -7820,7 +9270,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Peasant Pilgrim",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 4,
 					setting: "Peasant",
 					skillPool: 3,
@@ -7838,7 +9289,10 @@ export const Human: Stock = {
 					years: 3
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -7848,7 +9302,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Miller",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 15,
 					setting: "Peasant",
 					skillPool: 5,
@@ -7866,7 +9321,9 @@ export const Human: Stock = {
 					years: 7
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -7878,7 +9335,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Fisherman",
 					physicalPool: 1,
-					requirements: {},
+					requirements: {
+					},
 					resources: 5,
 					setting: "Peasant",
 					skillPool: 6,
@@ -7898,7 +9356,10 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -7909,7 +9370,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Shepherd",
 					physicalPool: 1,
-					requirements: {},
+					requirements: {
+					},
 					resources: 4,
 					setting: "Peasant",
 					skillPool: 5,
@@ -7928,7 +9390,10 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -7939,7 +9404,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Woodcutter",
 					physicalPool: 1,
-					requirements: {},
+					requirements: {
+					},
 					resources: 5,
 					setting: "Peasant",
 					skillPool: 5,
@@ -7953,11 +9419,16 @@ export const Human: Stock = {
 					],
 					stock: "Human",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 3
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -7969,7 +9440,8 @@ export const Human: Stock = {
 					mentalPool: 1,
 					name: "Hunter",
 					physicalPool: 1,
-					requirements: {},
+					requirements: {
+					},
 					resources: 6,
 					setting: "Peasant",
 					skillPool: 7,
@@ -7983,11 +9455,16 @@ export const Human: Stock = {
 					],
 					stock: "Human",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 5
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -7999,7 +9476,8 @@ export const Human: Stock = {
 					mentalPool: 1,
 					name: "Trapper",
 					physicalPool: 1,
-					requirements: {},
+					requirements: {
+					},
 					resources: 8,
 					setting: "Peasant",
 					skillPool: 6,
@@ -8019,7 +9497,10 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -8032,7 +9513,8 @@ export const Human: Stock = {
 					mentalPool: 1,
 					name: "Peddler",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 10,
 					setting: "Peasant",
 					skillPool: 7,
@@ -8055,7 +9537,10 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -8067,9 +9552,17 @@ export const Human: Stock = {
 					name: "Elder",
 					physicalPool: 0,
 					requirements: {
-						limits: [
-							"YEARS➞MIN➞50"
-						]
+						conditions: {
+							type: "AND",
+							items: [
+								{
+									type: "AND",
+									items: [
+										"YEARS➞MIN➞50"
+									]
+								}
+							]
+						}
 					},
 					resources: 5,
 					setting: "Peasant",
@@ -8089,7 +9582,10 @@ export const Human: Stock = {
 					years: 15
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -8104,15 +9600,22 @@ export const Human: Stock = {
 						conditions: {
 							type: "OR",
 							items: [
-								"Human➞Peasant➞Midwife",
-								"Human➞Peasant➞Country Wife"
+								{
+									type: "OR",
+									items: [
+										"Human➞Peasant➞Midwife",
+										"Human➞Peasant➞Country Wife"
+									]
+								},
+								{
+									type: "AND",
+									items: [
+										"GENDER➞FEMALE",
+										"LP➞MAX➞4"
+									]
+								}
 							]
-						},
-						limits: [
-							// FIX: [LIFEPATHS] These two are the "otherwise" case for the condition above. Either this or condition should be met.
-							"GENDER➞FEMALE",
-							"LP➞MAX➞4"
-						]
+						}
 					},
 					resources: 10,
 					setting: "Peasant",
@@ -8135,7 +9638,10 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -8150,13 +9656,18 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Villager➞Acolyte",
-								"Human➞Villager➞Failed Acolyte",
-								"Human➞City Dweller➞Temple Acolyte",
-								"Human➞Noble➞Religious Acolyte",
-								"Human➞Religious➞Temple Acolyte"
+								{
+									type: "OR",
+									items: [
+										"Human➞Villager➞Acolyte",
+										"Human➞Villager➞Failed Acolyte",
+										"Human➞City Dweller➞Temple Acolyte",
+										"Human➞Noble➞Religious Acolyte",
+										"Human➞Religious➞Temple Acolyte"
+									]
+								}
 							]
 						}
 					},
@@ -8181,7 +9692,10 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -8196,9 +9710,14 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Skill➞Human Magical➞Sorcery"
+								{
+									type: "OR",
+									items: [
+										"Skill➞Human Magical➞Sorcery"
+									]
+								}
 							]
 						}
 					},
@@ -8222,7 +9741,10 @@ export const Human: Stock = {
 					years: 15
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -8233,9 +9755,6 @@ export const Human: Stock = {
 					name: "Country Wife",
 					physicalPool: 1,
 					requirements: {
-						texts: [
-							"A player who takes the Country Wife lifepath may also choose her husband's lifepath from the Peasant setting and may choose from his skills. She gets half of his skill points,rounded down. She also recieves half of her husband's resource points."
-						]
 					},
 					resources: 5,
 					setting: "Peasant",
@@ -8246,11 +9765,15 @@ export const Human: Stock = {
 					],
 					stock: "Human",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 10
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -8263,14 +9786,19 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Peasant➞Augur",
-								"Human➞Outcast➞Crazy Witch",
-								"Human➞Outcast➞Oasis Witch",
-								"Human➞City Dweller➞Neophyte Sorcerer",
-								"Human➞Villager➞Wizard's Apprentice",
-								"Human➞Peasant➞Elder"
+								{
+									type: "OR",
+									items: [
+										"Human➞Peasant➞Augur",
+										"Human➞Outcast➞Crazy Witch",
+										"Human➞Outcast➞Oasis Witch",
+										"Human➞City Dweller➞Neophyte Sorcerer",
+										"Human➞Villager➞Wizard's Apprentice",
+										"Human➞Peasant➞Elder"
+									]
+								}
 							]
 						}
 					},
@@ -8296,14 +9824,19 @@ export const Human: Stock = {
 			]
 		},
 		"Professional Soldier": {
-			allowed: ["bwgr", "bs"],
+			allowed: [
+				"bwgr",
+				"bs"
+			],
 			name: "Professional Soldier",
 			short: "Soldier",
 			stock: "Human",
 			type: "Subsetting",
 			lifepaths: [
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -8317,10 +9850,18 @@ export const Human: Stock = {
 					name: "Apt Pupil",
 					physicalPool: 0,
 					requirements: {
-						limits: [
-							"LP➞MAX➞3",
-							"LP➞UNIQUE"
-						]
+						conditions: {
+							type: "AND",
+							items: [
+								{
+									type: "AND",
+									items: [
+										"LP➞MAX➞3",
+										"LP➞UNIQUE"
+									]
+								}
+							]
+						}
 					},
 					resources: 8,
 					setting: "Professional Soldier",
@@ -8340,7 +9881,10 @@ export const Human: Stock = {
 					years: 3
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -8354,7 +9898,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Runner",
 					physicalPool: 1,
-					requirements: {},
+					requirements: {
+					},
 					resources: 5,
 					setting: "Professional Soldier",
 					skillPool: 4,
@@ -8373,7 +9918,10 @@ export const Human: Stock = {
 					years: 3
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -8386,7 +9934,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Apprentice",
 					physicalPool: 1,
-					requirements: {},
+					requirements: {
+					},
 					resources: 6,
 					setting: "Professional Soldier",
 					skillPool: 6,
@@ -8407,7 +9956,10 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -8420,7 +9972,8 @@ export const Human: Stock = {
 					mentalPool: 1,
 					name: "Musician",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 5,
 					setting: "Professional Soldier",
 					skillPool: 4,
@@ -8431,11 +9984,16 @@ export const Human: Stock = {
 					],
 					stock: "Human",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 3
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -8448,7 +10006,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Foot Soldier",
 					physicalPool: 1,
-					requirements: {},
+					requirements: {
+					},
 					resources: 6,
 					setting: "Professional Soldier",
 					skillPool: 6,
@@ -8462,11 +10021,16 @@ export const Human: Stock = {
 					],
 					stock: "Human",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 3
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -8479,7 +10043,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Archer",
 					physicalPool: 1,
-					requirements: {},
+					requirements: {
+					},
 					resources: 5,
 					setting: "Professional Soldier",
 					skillPool: 5,
@@ -8492,11 +10057,16 @@ export const Human: Stock = {
 					],
 					stock: "Human",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 3
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -8509,7 +10079,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Crossbowman",
 					physicalPool: 1,
-					requirements: {},
+					requirements: {
+					},
 					resources: 8,
 					setting: "Professional Soldier",
 					skillPool: 6,
@@ -8522,11 +10093,15 @@ export const Human: Stock = {
 					],
 					stock: "Human",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 4
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -8540,7 +10115,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Sailor",
 					physicalPool: 1,
-					requirements: {},
+					requirements: {
+					},
 					resources: 5,
 					setting: "Professional Soldier",
 					skillPool: 6,
@@ -8563,7 +10139,10 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -8576,7 +10155,8 @@ export const Human: Stock = {
 					mentalPool: 1,
 					name: "Herald",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 7,
 					setting: "Professional Soldier",
 					skillPool: 4,
@@ -8589,11 +10169,16 @@ export const Human: Stock = {
 					],
 					stock: "Human",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 3
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -8606,7 +10191,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Bannerman",
 					physicalPool: 1,
-					requirements: {},
+					requirements: {
+					},
 					resources: 7,
 					setting: "Professional Soldier",
 					skillPool: 5,
@@ -8626,7 +10212,10 @@ export const Human: Stock = {
 					years: 3
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -8639,7 +10228,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Scout",
 					physicalPool: 1,
-					requirements: {},
+					requirements: {
+					},
 					resources: 4,
 					setting: "Professional Soldier",
 					skillPool: 5,
@@ -8652,11 +10242,16 @@ export const Human: Stock = {
 					],
 					stock: "Human",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 3
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
@@ -8671,7 +10266,7 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
 								{
 									type: "OR",
@@ -8698,11 +10293,16 @@ export const Human: Stock = {
 					],
 					stock: "Human",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 5
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -8716,14 +10316,19 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Professional Soldier➞Sergeant",
-								"Human➞City Dweller➞Sergeant-at-Arms",
-								"Human➞Noble➞Knight",
-								"Human➞Noble Court➞Knight",
-								"Human➞Religious➞Military Order",
-								"Human➞Outcast➞Freebooter"
+								{
+									type: "OR",
+									items: [
+										"Human➞Professional Soldier➞Sergeant",
+										"Human➞City Dweller➞Sergeant-at-Arms",
+										"Human➞Noble➞Knight",
+										"Human➞Noble Court➞Knight",
+										"Human➞Religious➞Military Order",
+										"Human➞Outcast➞Freebooter"
+									]
+								}
 							]
 						}
 					},
@@ -8745,7 +10350,10 @@ export const Human: Stock = {
 					years: 8
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -8760,27 +10368,32 @@ export const Human: Stock = {
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Villager➞Groom",
-								"Human➞Villager➞Farrier",
-								"Human➞City Dweller➞Courier",
-								"Human➞City Dweller➞Groom",
-								"Human➞City Dweller➞Guard Captain",
-								"Human➞City Dweller➞Saddler",
-								"Human➞Noble➞Page",
-								"Human➞Noble➞Squire",
-								"Human➞Noble➞Knight",
-								"Human➞Noble Court➞Groom",
-								"Human➞Noble Court➞Page",
-								"Human➞Noble Court➞Man-at-Arms",
-								"Human➞Noble Court➞Squire",
-								"Human➞Noble Court➞Master of Horses",
-								"Human➞Religious➞Military Order",
-								"Human➞Professional Soldier➞Bannerman",
-								"Human➞Professional Soldier➞Cavalryman",
-								"Human➞Professional Soldier➞Chaplain",
-								"Human➞Professional Soldier➞Captain"
+								{
+									type: "OR",
+									items: [
+										"Human➞Villager➞Groom",
+										"Human➞Villager➞Farrier",
+										"Human➞City Dweller➞Courier",
+										"Human➞City Dweller➞Groom",
+										"Human➞City Dweller➞Guard Captain",
+										"Human➞City Dweller➞Saddler",
+										"Human➞Noble➞Page",
+										"Human➞Noble➞Squire",
+										"Human➞Noble➞Knight",
+										"Human➞Noble Court➞Groom",
+										"Human➞Noble Court➞Page",
+										"Human➞Noble Court➞Man-at-Arms",
+										"Human➞Noble Court➞Squire",
+										"Human➞Noble Court➞Master of Horses",
+										"Human➞Religious➞Military Order",
+										"Human➞Professional Soldier➞Bannerman",
+										"Human➞Professional Soldier➞Cavalryman",
+										"Human➞Professional Soldier➞Chaplain",
+										"Human➞Professional Soldier➞Captain"
+									]
+								}
 							]
 						}
 					},
@@ -8798,11 +10411,16 @@ export const Human: Stock = {
 					],
 					stock: "Human",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 4
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
@@ -8817,11 +10435,16 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞City Dweller➞Apprentice",
-								"Human➞Professional Soldier➞Apprentice",
-								"Human➞Villager➞Apprentice"
+								{
+									type: "OR",
+									items: [
+										"Human➞City Dweller➞Apprentice",
+										"Human➞Professional Soldier➞Apprentice",
+										"Human➞Villager➞Apprentice"
+									]
+								}
 							]
 						}
 					},
@@ -8836,11 +10459,16 @@ export const Human: Stock = {
 					],
 					stock: "Human",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 5
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -8855,11 +10483,16 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞City Dweller➞Journeyman",
-								"Human➞Professional Soldier➞Journeyman",
-								"Human➞Villager➞Journeyman"
+								{
+									type: "OR",
+									items: [
+										"Human➞City Dweller➞Journeyman",
+										"Human➞Professional Soldier➞Journeyman",
+										"Human➞Villager➞Journeyman"
+									]
+								}
 							]
 						}
 					},
@@ -8876,11 +10509,16 @@ export const Human: Stock = {
 					],
 					stock: "Human",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 8
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -8895,11 +10533,16 @@ export const Human: Stock = {
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞City Dweller➞Journeyman",
-								"Human➞Professional Soldier➞Journeyman",
-								"Human➞Villager➞Journeyman"
+								{
+									type: "OR",
+									items: [
+										"Human➞City Dweller➞Journeyman",
+										"Human➞Professional Soldier➞Journeyman",
+										"Human➞Villager➞Journeyman"
+									]
+								}
 							]
 						}
 					},
@@ -8915,11 +10558,16 @@ export const Human: Stock = {
 					],
 					stock: "Human",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 10
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
@@ -8936,20 +10584,25 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Religious➞Priest",
-								"Human➞Religious➞Templar",
-								"Human➞Religious➞Archpriest",
-								"Human➞Religious➞High Templar",
-								"Human➞City Dweller➞Temple Priest",
-								"Human➞Outcast➞Heretic Priest",
-								"Human➞Death Cult➞Death Priest",
-								"Human➞Peasant➞Itinerant Priest",
-								"Human➞Villager➞Village Priest",
-								"Human➞Villager➞Venal Priest",
-								"Human➞Noble Court➞Court Priest",
-								"Human➞Religious➞Military Order"
+								{
+									type: "OR",
+									items: [
+										"Human➞Religious➞Priest",
+										"Human➞Religious➞Templar",
+										"Human➞Religious➞Archpriest",
+										"Human➞Religious➞High Templar",
+										"Human➞City Dweller➞Temple Priest",
+										"Human➞Outcast➞Heretic Priest",
+										"Human➞Death Cult➞Death Priest",
+										"Human➞Peasant➞Itinerant Priest",
+										"Human➞Villager➞Village Priest",
+										"Human➞Villager➞Venal Priest",
+										"Human➞Noble Court➞Court Priest",
+										"Human➞Religious➞Military Order"
+									]
+								}
 							]
 						}
 					},
@@ -8972,7 +10625,10 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -8987,14 +10643,19 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞City Dweller➞Student",
-								"Human➞Noble➞Student",
-								"Human➞Noble Court➞Student",
-								"Human➞Professional Soldier➞Engineer",
-								"Human➞Seafaring➞Engineer",
-								"Human➞Villager➞Mining Engineer"
+								{
+									type: "OR",
+									items: [
+										"Human➞City Dweller➞Student",
+										"Human➞Noble➞Student",
+										"Human➞Noble Court➞Student",
+										"Human➞Professional Soldier➞Engineer",
+										"Human➞Seafaring➞Engineer",
+										"Human➞Villager➞Mining Engineer"
+									]
+								}
 							]
 						}
 					},
@@ -9015,7 +10676,9 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -9030,14 +10693,19 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Villager➞Wizard's Apprentice",
-								"Human➞City Dweller➞Neophyte Sorcerer",
-								"Human➞Noble➞Arcane Devotee",
-								"Human➞Seafaring➞Weather Witch",
-								"Human➞Outcast➞Rogue Wizard",
-								"Human➞Outcast➞Mad Summoner"
+								{
+									type: "OR",
+									items: [
+										"Human➞Villager➞Wizard's Apprentice",
+										"Human➞City Dweller➞Neophyte Sorcerer",
+										"Human➞Noble➞Arcane Devotee",
+										"Human➞Seafaring➞Weather Witch",
+										"Human➞Outcast➞Rogue Wizard",
+										"Human➞Outcast➞Mad Summoner"
+									]
+								}
 							]
 						}
 					},
@@ -9060,7 +10728,10 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -9075,19 +10746,24 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Professional Soldier➞Sergeant",
-								"Human➞Professional Soldier➞Veteran",
-								"Human➞Noble Court➞Steward",
-								"Human➞Seafaring➞Steward",
-								"Human➞Seafaring➞Ship's Captain",
-								"Human➞City Dweller➞Merchant",
-								"Human➞Villager➞Merchant",
-								"Human➞Noble Court➞Man-at-Arms",
-								"Human➞Outcast➞Smuggler",
-								"Human➞Noble Court➞Constable",
-								"Human➞Noble➞Lord"
+								{
+									type: "OR",
+									items: [
+										"Human➞Professional Soldier➞Sergeant",
+										"Human➞Professional Soldier➞Veteran",
+										"Human➞Noble Court➞Steward",
+										"Human➞Seafaring➞Steward",
+										"Human➞Seafaring➞Ship's Captain",
+										"Human➞City Dweller➞Merchant",
+										"Human➞Villager➞Merchant",
+										"Human➞Noble Court➞Man-at-Arms",
+										"Human➞Outcast➞Smuggler",
+										"Human➞Noble Court➞Constable",
+										"Human➞Noble➞Lord"
+									]
+								}
 							]
 						}
 					},
@@ -9108,7 +10784,10 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -9128,7 +10807,7 @@ export const Human: Stock = {
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
 								{
 									type: "OR",
@@ -9167,14 +10846,19 @@ export const Human: Stock = {
 			]
 		},
 		"Religious": {
-			allowed: ["bwgr", "bs"],
+			allowed: [
+				"bwgr",
+				"bs"
+			],
 			name: "Religious",
 			short: "Religious",
 			stock: "Human",
 			type: "Subsetting",
 			lifepaths: [
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -9189,10 +10873,18 @@ export const Human: Stock = {
 					name: "Apt Pupil",
 					physicalPool: 0,
 					requirements: {
-						limits: [
-							"LP➞MAX➞3",
-							"LP➞UNIQUE"
-						]
+						conditions: {
+							type: "AND",
+							items: [
+								{
+									type: "AND",
+									items: [
+										"LP➞MAX➞3",
+										"LP➞UNIQUE"
+									]
+								}
+							]
+						}
 					},
 					resources: 8,
 					setting: "Religious",
@@ -9212,7 +10904,10 @@ export const Human: Stock = {
 					years: 3
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -9223,7 +10918,8 @@ export const Human: Stock = {
 					mentalPool: 1,
 					name: "Castrati",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 15,
 					setting: "Religious",
 					skillPool: 7,
@@ -9246,7 +10942,10 @@ export const Human: Stock = {
 					years: 7
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -9259,7 +10958,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Pardoner",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 12,
 					setting: "Religious",
 					skillPool: 5,
@@ -9278,7 +10978,10 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -9291,7 +10994,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Zealous Convert",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 10,
 					setting: "Religious",
 					skillPool: 4,
@@ -9311,7 +11015,10 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -9330,13 +11037,18 @@ export const Human: Stock = {
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Noble➞Squire",
-								"Human➞Noble Court➞Squire",
-								"Human➞Noble➞Knight",
-								"Human➞Noble Court➞Knight",
-								"Human➞Professional Soldier➞1*ANY"
+								{
+									type: "OR",
+									items: [
+										"Human➞Noble➞Squire",
+										"Human➞Noble Court➞Squire",
+										"Human➞Noble➞Knight",
+										"Human➞Noble Court➞Knight",
+										"Human➞Professional Soldier➞1*ANY"
+									]
+								}
 							]
 						}
 					},
@@ -9359,7 +11071,10 @@ export const Human: Stock = {
 					years: 3
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -9373,7 +11088,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Grave Digger",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 6,
 					setting: "Religious",
 					skillPool: 4,
@@ -9391,7 +11107,10 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -9403,7 +11122,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Porter",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 5,
 					setting: "Religious",
 					skillPool: 4,
@@ -9422,7 +11142,10 @@ export const Human: Stock = {
 					years: 3
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -9434,7 +11157,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Notary",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 15,
 					setting: "Religious",
 					skillPool: 4,
@@ -9446,11 +11170,16 @@ export const Human: Stock = {
 					],
 					stock: "Human",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 4
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -9463,20 +11192,25 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞City Dweller➞Student",
-								"Human➞Noble➞Student",
-								"Human➞Noble Court➞Student",
-								"Human➞Noble➞Young Lady",
-								"Human➞Noble Court➞Young Lady",
-								"Human➞Religious➞Itinerant Monk",
-								"Human➞Religious➞Cloistered Nun",
-								"Human➞City Dweller➞Temple Acolyte",
-								"Human➞Religious➞Temple Acolyte",
-								"Human➞Religious➞Inquisitor",
-								"Human➞Religious➞Exorcist",
-								"Human➞Religious➞Theologian"
+								{
+									type: "OR",
+									items: [
+										"Human➞City Dweller➞Student",
+										"Human➞Noble➞Student",
+										"Human➞Noble Court➞Student",
+										"Human➞Noble➞Young Lady",
+										"Human➞Noble Court➞Young Lady",
+										"Human➞Religious➞Itinerant Monk",
+										"Human➞Religious➞Cloistered Nun",
+										"Human➞City Dweller➞Temple Acolyte",
+										"Human➞Religious➞Temple Acolyte",
+										"Human➞Religious➞Inquisitor",
+										"Human➞Religious➞Exorcist",
+										"Human➞Religious➞Theologian"
+									]
+								}
 							]
 						}
 					},
@@ -9502,7 +11236,9 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -9516,17 +11252,22 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞City Dweller➞Student",
-								"Human➞Noble➞Student",
-								"Human➞Noble Court➞Student",
-								"Human➞Noble➞Young Lady",
-								"Human➞Noble Court➞Young Lady",
-								"Human➞City Dweller➞Temple Acolyte",
-								"Human➞Religious➞Temple Acolyte",
-								"Human➞Religious➞Exorcist",
-								"Human➞Religious➞Theologian"
+								{
+									type: "OR",
+									items: [
+										"Human➞City Dweller➞Student",
+										"Human➞Noble➞Student",
+										"Human➞Noble Court➞Student",
+										"Human➞Noble➞Young Lady",
+										"Human➞Noble Court➞Young Lady",
+										"Human➞City Dweller➞Temple Acolyte",
+										"Human➞Religious➞Temple Acolyte",
+										"Human➞Religious➞Exorcist",
+										"Human➞Religious➞Theologian"
+									]
+								}
 							]
 						}
 					},
@@ -9550,7 +11291,10 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -9562,7 +11306,8 @@ export const Human: Stock = {
 					mentalPool: 1,
 					name: "Archivist",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 8,
 					setting: "Religious",
 					skillPool: 5,
@@ -9581,7 +11326,9 @@ export const Human: Stock = {
 					years: 7
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -9593,7 +11340,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Itinerant Monk",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 6,
 					setting: "Religious",
 					skillPool: 7,
@@ -9614,7 +11362,9 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -9626,7 +11376,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Cloistered Nun",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 12,
 					setting: "Religious",
 					skillPool: 6,
@@ -9648,7 +11399,9 @@ export const Human: Stock = {
 					years: 10
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -9660,7 +11413,8 @@ export const Human: Stock = {
 					mentalPool: 1,
 					name: "Temple Acolyte",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 5,
 					setting: "Religious",
 					skillPool: 4,
@@ -9680,7 +11434,9 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -9695,11 +11451,16 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞City Dweller➞Temple Acolyte",
-								"Human➞Religious➞Temple Acolyte",
-								"Human➞Noble➞Religious Acolyte"
+								{
+									type: "OR",
+									items: [
+										"Human➞City Dweller➞Temple Acolyte",
+										"Human➞Religious➞Temple Acolyte",
+										"Human➞Noble➞Religious Acolyte"
+									]
+								}
 							]
 						}
 					},
@@ -9723,7 +11484,10 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -9737,14 +11501,19 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞City Dweller➞Temple Priest",
-								"Human➞Peasant➞Itinerant Priest",
-								"Human➞Religious➞Priest",
-								"Human➞Religious➞Templar",
-								"Human➞Noble Court➞Court Priest",
-								"Human➞Religious➞Archivist"
+								{
+									type: "OR",
+									items: [
+										"Human➞City Dweller➞Temple Priest",
+										"Human➞Peasant➞Itinerant Priest",
+										"Human➞Religious➞Priest",
+										"Human➞Religious➞Templar",
+										"Human➞Noble Court➞Court Priest",
+										"Human➞Religious➞Archivist"
+									]
+								}
 							]
 						}
 					},
@@ -9773,7 +11542,10 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
@@ -9788,15 +11560,20 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞City Dweller➞Temple Priest",
-								"Human➞Peasant➞Itinerant Priest",
-								"Human➞Religious➞Priest",
-								"Human➞Religious➞Templar",
-								"Human➞Noble Court➞Court Priest",
-								"Human➞City Dweller➞Judge",
-								"Human➞Noble Court➞Justiciar"
+								{
+									type: "OR",
+									items: [
+										"Human➞City Dweller➞Temple Priest",
+										"Human➞Peasant➞Itinerant Priest",
+										"Human➞Religious➞Priest",
+										"Human➞Religious➞Templar",
+										"Human➞Noble Court➞Court Priest",
+										"Human➞City Dweller➞Judge",
+										"Human➞Noble Court➞Justiciar"
+									]
+								}
 							]
 						}
 					},
@@ -9820,7 +11597,10 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -9834,18 +11614,23 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞City Dweller➞Scribe",
-								"Human➞Religious➞Archivist",
-								"Human➞Noble Court➞Court Lawyer",
-								"Human➞City Dweller➞Advocate",
-								"Human➞Religious➞Custodian",
-								"Human➞Religious➞Interpreter",
-								"Human➞Religious➞Priest",
-								"Human➞Religious➞Templar",
-								"Human➞City Dweller➞Bishop",
-								"Human➞Religious➞Bishop"
+								{
+									type: "OR",
+									items: [
+										"Human➞City Dweller➞Scribe",
+										"Human➞Religious➞Archivist",
+										"Human➞Noble Court➞Court Lawyer",
+										"Human➞City Dweller➞Advocate",
+										"Human➞Religious➞Custodian",
+										"Human➞Religious➞Interpreter",
+										"Human➞Religious➞Priest",
+										"Human➞Religious➞Templar",
+										"Human➞City Dweller➞Bishop",
+										"Human➞Religious➞Bishop"
+									]
+								}
 							]
 						}
 					},
@@ -9874,7 +11659,9 @@ export const Human: Stock = {
 					years: 10
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
@@ -9888,15 +11675,20 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞City Dweller➞Temple Priest",
-								"Human➞Peasant➞Itinerant Priest",
-								"Human➞Religious➞Priest",
-								"Human➞Religious➞Templar",
-								"Human➞Noble Court➞Court Priest",
-								"Human➞Noble Court➞Chaplain",
-								"Human➞Professional Soldier➞Chaplain"
+								{
+									type: "OR",
+									items: [
+										"Human➞City Dweller➞Temple Priest",
+										"Human➞Peasant➞Itinerant Priest",
+										"Human➞Religious➞Priest",
+										"Human➞Religious➞Templar",
+										"Human➞Noble Court➞Court Priest",
+										"Human➞Noble Court➞Chaplain",
+										"Human➞Professional Soldier➞Chaplain"
+									]
+								}
 							]
 						}
 					},
@@ -9924,7 +11716,10 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
@@ -9938,11 +11733,16 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Religious➞Archpriest",
-								"Human➞Religious➞Theologian",
-								"Human➞Religious➞Abbot/Abbess"
+								{
+									type: "OR",
+									items: [
+										"Human➞Religious➞Archpriest",
+										"Human➞Religious➞Theologian",
+										"Human➞Religious➞Abbot/Abbess"
+									]
+								}
 							]
 						}
 					},
@@ -9964,7 +11764,10 @@ export const Human: Stock = {
 					years: 10
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 2,
@@ -9978,12 +11781,17 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Religious➞Itinerant Monk",
-								"Human➞Religious➞Cloistered Nun",
-								"Human➞Religious➞Theologian",
-								"Human➞Villager➞Vintner"
+								{
+									type: "OR",
+									items: [
+										"Human➞Religious➞Itinerant Monk",
+										"Human➞Religious➞Cloistered Nun",
+										"Human➞Religious➞Theologian",
+										"Human➞Villager➞Vintner"
+									]
+								}
 							]
 						}
 					},
@@ -10000,11 +11808,15 @@ export const Human: Stock = {
 					],
 					stock: "Human",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 10
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -10020,11 +11832,16 @@ export const Human: Stock = {
 						conditions: {
 							type: "OR",
 							items: [
-								"Human➞Religious➞Archpriest",
-								"Human➞Noble➞Baron",
-								"Human➞Noble➞Viscount",
-								"Human➞Noble➞Count",
-								"Human➞Noble➞Duke",
+								{
+									type: "OR",
+									items: [
+										"Human➞Religious➞Archpriest",
+										"Human➞Noble➞Baron",
+										"Human➞Noble➞Viscount",
+										"Human➞Noble➞Count",
+										"Human➞Noble➞Duke"
+									]
+								},
 								{
 									type: "AND",
 									items: [
@@ -10054,9 +11871,24 @@ export const Human: Stock = {
 					years: 8
 				},
 				{
-					stock: "Human", setting: "Religious", allowed: ["bs"],
-					name: "Acolyte", born: false, years: 6, resources: 5, mentalPool: 1, physicalPool: 0, eitherPool: 0, generalSkillPool: 0, skillPool: 5, traitPool: 1,
-					leads: [],
+					stock: "Human",
+					setting: "Religious",
+					allowed: [
+						"bs"
+					],
+					name: "Acolyte",
+					born: false,
+					years: 6,
+					resources: 5,
+					mentalPool: 1,
+					physicalPool: 0,
+					eitherPool: 0,
+					generalSkillPool: 0,
+					skillPool: 5,
+					traitPool: 1,
+					leads: [
+
+					],
 					skills: [
 						"Any General➞Read",
 						"Any General➞Write",
@@ -10069,12 +11901,30 @@ export const Human: Stock = {
 						"Any Character➞Ambitious",
 						"Any Die➞Scheming"
 					],
-					requirements: {}
+					requirements: {
+					}
 				},
 				{
-					stock: "Human", setting: "Religious", allowed: ["bs"],
-					name: "Clerk", born: false, years: 4, resources: 9, mentalPool: 1, physicalPool: 0, eitherPool: 0, generalSkillPool: 0, skillPool: 4, traitPool: 1,
-					leads: ["Human➞Villager", "Human➞Professional Soldier", "Human➞Outcast"],
+					stock: "Human",
+					setting: "Religious",
+					allowed: [
+						"bs"
+					],
+					name: "Clerk",
+					born: false,
+					years: 4,
+					resources: 9,
+					mentalPool: 1,
+					physicalPool: 0,
+					eitherPool: 0,
+					generalSkillPool: 0,
+					skillPool: 4,
+					traitPool: 1,
+					leads: [
+						"Human➞Villager",
+						"Human➞Professional Soldier",
+						"Human➞Outcast"
+					],
 					skills: [
 						"Any General➞Bureaucracy",
 						"Any General➞Read",
@@ -10083,40 +11933,91 @@ export const Human: Stock = {
 						"Any Wise➞Bribe-wise",
 						"Any Wise➞Paperwork-wise"
 					],
-					traits: [],
+					traits: [
+
+					],
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Religious➞Acolyte"
+								{
+									type: "OR",
+									items: [
+										"Human➞Religious➞Acolyte"
+									]
+								}
 							]
 						}
 					}
 				},
 				{
-					stock: "Human", setting: "Religious", allowed: ["bs"],
-					name: "Scribe", born: false, years: 7, resources: 10, mentalPool: 1, physicalPool: 0, eitherPool: 0, generalSkillPool: 0, skillPool: 5, traitPool: 1,
-					leads: ["Human➞Villager", "Human➞Peasant", "Human➞Merchant House"],
+					stock: "Human",
+					setting: "Religious",
+					allowed: [
+						"bs"
+					],
+					name: "Scribe",
+					born: false,
+					years: 7,
+					resources: 10,
+					mentalPool: 1,
+					physicalPool: 0,
+					eitherPool: 0,
+					generalSkillPool: 0,
+					skillPool: 5,
+					traitPool: 1,
+					leads: [
+						"Human➞Villager",
+						"Human➞Peasant",
+						"Human➞Merchant House"
+					],
 					skills: [
 						"Any General➞Write",
 						"Any General➞Illuminations",
 						"Any General➞Read",
 						"Any Wise➞Handwriting-wise"
 					],
-					traits: ["Human Lifepath➞Near-Sighted", "Any Character➞Cramped Hands"],
+					traits: [
+						"Human Lifepath➞Near-Sighted",
+						"Any Character➞Cramped Hands"
+					],
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Religious➞Acolyte"
+								{
+									type: "OR",
+									items: [
+										"Human➞Religious➞Acolyte"
+									]
+								}
 							]
 						}
 					}
 				},
 				{
-					stock: "Human", setting: "Religious", allowed: ["bs"],
-					name: "Templar", born: false, years: 5, resources: 18, mentalPool: 1, physicalPool: 0, eitherPool: 0, generalSkillPool: 0, skillPool: 7, traitPool: 2,
-					leads: ["Human➞Villager", "Human➞City Dweller", "Human➞Noble Court", "Human➞Professional Soldier", "Human➞Outcast"],
+					stock: "Human",
+					setting: "Religious",
+					allowed: [
+						"bs"
+					],
+					name: "Templar",
+					born: false,
+					years: 5,
+					resources: 18,
+					mentalPool: 1,
+					physicalPool: 0,
+					eitherPool: 0,
+					generalSkillPool: 0,
+					skillPool: 7,
+					traitPool: 2,
+					leads: [
+						"Human➞Villager",
+						"Human➞City Dweller",
+						"Human➞Noble Court",
+						"Human➞Professional Soldier",
+						"Human➞Outcast"
+					],
 					skills: [
 						"Any General➞Oratory",
 						"Any General➞Doctrine",
@@ -10135,17 +12036,39 @@ export const Human: Stock = {
 					],
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Religious➞Acolyte"
+								{
+									type: "OR",
+									items: [
+										"Human➞Religious➞Acolyte"
+									]
+								}
 							]
 						}
 					}
 				},
 				{
-					stock: "Human", setting: "Religious", allowed: ["bs"],
-					name: "High Templar", born: false, years: 5, resources: 25, mentalPool: 0, physicalPool: 0, eitherPool: 1, generalSkillPool: 0, skillPool: 10, traitPool: 2,
-					leads: ["Human➞Villager", "Human➞Outcast", "Human➞Noble Court"],
+					stock: "Human",
+					setting: "Religious",
+					allowed: [
+						"bs"
+					],
+					name: "High Templar",
+					born: false,
+					years: 5,
+					resources: 25,
+					mentalPool: 0,
+					physicalPool: 0,
+					eitherPool: 1,
+					generalSkillPool: 0,
+					skillPool: 10,
+					traitPool: 2,
+					leads: [
+						"Human➞Villager",
+						"Human➞Outcast",
+						"Human➞Noble Court"
+					],
 					skills: [
 						"Any General➞Oratory",
 						"Any General➞Read",
@@ -10159,25 +12082,49 @@ export const Human: Stock = {
 						"Any General➞Official History",
 						"Any General➞Persuasion"
 					],
-					traits: ["Human Lifepath➞Imperious Demeanor"],
+					traits: [
+						"Human Lifepath➞Imperious Demeanor"
+					],
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞City Dweller➞Temple Priest",
-								"Human➞Peasant➞Itinerant Priest",
-								"Human➞Religious➞Templar",
-								"Human➞Noble Court➞Court Priest",
-								"Human➞Noble Court➞Chaplain",
-								"Human➞Professional Soldier➞Chaplain"
+								{
+									type: "OR",
+									items: [
+										"Human➞City Dweller➞Temple Priest",
+										"Human➞Peasant➞Itinerant Priest",
+										"Human➞Religious➞Templar",
+										"Human➞Noble Court➞Court Priest",
+										"Human➞Noble Court➞Chaplain",
+										"Human➞Professional Soldier➞Chaplain"
+									]
+								}
 							]
 						}
 					}
 				},
 				{
-					stock: "Human", setting: "Religious", allowed: ["bs"],
-					name: "Royal Advisor", born: false, years: 8, resources: 45, mentalPool: 0, physicalPool: 0, eitherPool: 0, generalSkillPool: 0, skillPool: 7, traitPool: 2,
-					leads: ["Human➞Villager", "Human➞Outcast", "Human➞Noble Court"],
+					stock: "Human",
+					setting: "Religious",
+					allowed: [
+						"bs"
+					],
+					name: "Royal Advisor",
+					born: false,
+					years: 8,
+					resources: 45,
+					mentalPool: 0,
+					physicalPool: 0,
+					eitherPool: 0,
+					generalSkillPool: 0,
+					skillPool: 7,
+					traitPool: 2,
+					leads: [
+						"Human➞Villager",
+						"Human➞Outcast",
+						"Human➞Noble Court"
+					],
 					skills: [
 						"Any General➞Official History",
 						"Any General➞Soothing Platitudes",
@@ -10187,18 +12134,25 @@ export const Human: Stock = {
 						"Any General➞History",
 						"Any General➞Obscure History"
 					],
-					traits: ["Human Lifepath➞Domineering Presence"],
+					traits: [
+						"Human Lifepath➞Domineering Presence"
+					],
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞City Dweller➞Temple Priest",
-								"Human➞Peasant➞Itinerant Priest",
-								"Human➞Religious➞High Templar",
-								"Human➞Noble➞Baron",
-								"Human➞Noble➞Viscount",
-								"Human➞Noble➞Count",
-								"Human➞Noble➞Duke"
+								{
+									type: "OR",
+									items: [
+										"Human➞City Dweller➞Temple Priest",
+										"Human➞Peasant➞Itinerant Priest",
+										"Human➞Religious➞High Templar",
+										"Human➞Noble➞Baron",
+										"Human➞Noble➞Viscount",
+										"Human➞Noble➞Count",
+										"Human➞Noble➞Duke"
+									]
+								}
 							]
 						}
 					}
@@ -10206,14 +12160,18 @@ export const Human: Stock = {
 			]
 		},
 		"Seafaring": {
-			allowed: ["bwgr"],
+			allowed: [
+				"bwgr"
+			],
 			name: "Seafaring",
 			short: "Seafaring",
 			stock: "Human",
 			type: "Setting",
 			lifepaths: [
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: true,
 					eitherPool: 0,
 					generalSkillPool: 3,
@@ -10226,11 +12184,14 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Son of a Gun",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 3,
 					setting: "Seafaring",
 					skillPool: 0,
-					skills: [],
+					skills: [
+
+					],
 					stock: "Human",
 					traitPool: 2,
 					traits: [
@@ -10239,7 +12200,9 @@ export const Human: Stock = {
 					years: 8
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: true,
 					eitherPool: 0,
 					generalSkillPool: 2,
@@ -10251,11 +12214,14 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Gifted Child",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 4,
 					setting: "Seafaring",
 					skillPool: 0,
-					skills: [],
+					skills: [
+
+					],
 					stock: "Human",
 					traitPool: 1,
 					traits: [
@@ -10267,7 +12233,9 @@ export const Human: Stock = {
 					years: 9
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -10281,10 +12249,18 @@ export const Human: Stock = {
 					name: "Boy",
 					physicalPool: 0,
 					requirements: {
-						limits: [
-							"LP➞MAX➞2",
-							"LP➞UNIQUE"
-						]
+						conditions: {
+							type: "AND",
+							items: [
+								{
+									type: "AND",
+									items: [
+										"LP➞MAX➞2",
+										"LP➞UNIQUE"
+									]
+								}
+							]
+						}
 					},
 					resources: 8,
 					setting: "Seafaring",
@@ -10303,7 +12279,9 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -10315,7 +12293,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Galley Slave",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 3,
 					setting: "Seafaring",
 					skillPool: 3,
@@ -10339,7 +12318,9 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -10351,7 +12332,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Ratcatcher",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 4,
 					setting: "Seafaring",
 					skillPool: 5,
@@ -10370,7 +12352,9 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -10382,7 +12366,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Landsman",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 5,
 					setting: "Seafaring",
 					skillPool: 3,
@@ -10401,7 +12386,9 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -10414,7 +12401,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Drummer",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 6,
 					setting: "Seafaring",
 					skillPool: 3,
@@ -10431,7 +12419,9 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -10444,7 +12434,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Sailor",
 					physicalPool: 1,
-					requirements: {},
+					requirements: {
+					},
 					resources: 7,
 					setting: "Seafaring",
 					skillPool: 6,
@@ -10465,7 +12456,9 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -10478,20 +12471,28 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞City Dweller➞Sailor",
-								"Human➞Professional Soldier➞Sailor",
-								"Human➞Seafaring➞Sailor",
-								"Human➞Villager➞Sailor",
-								"Human➞Outcast➞Pirate",
-								"Human➞City Dweller➞Mercenary Captain"
+								{
+									type: "OR",
+									items: [
+										"Human➞City Dweller➞Sailor",
+										"Human➞Professional Soldier➞Sailor",
+										"Human➞Seafaring➞Sailor",
+										"Human➞Villager➞Sailor",
+										"Human➞Outcast➞Pirate",
+										"Human➞City Dweller➞Mercenary Captain"
+									]
+								},
+								{
+									type: "AND",
+									items: [
+										"YEARS➞MIN➞40",
+										"YEARS➞MAX➞50"
+									]
+								}
 							]
-						},
-						limits: [
-							"YEARS➞MIN➞40",
-							"YEARS➞MAX➞50"
-						]
+						}
 					},
 					resources: 8,
 					setting: "Seafaring",
@@ -10511,7 +12512,9 @@ export const Human: Stock = {
 					years: 10
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -10524,17 +12527,22 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞City Dweller➞Clerk",
-								"Human➞Villager➞Clerk",
-								"Human➞City Dweller➞Student",
-								"Human➞Noble➞Student",
-								"Human➞Noble Court➞Student",
-								"Human➞City Dweller➞Sailor",
-								"Human➞Professional Soldier➞Sailor",
-								"Human➞Seafaring➞Sailor",
-								"Human➞Villager➞Sailor"
+								{
+									type: "OR",
+									items: [
+										"Human➞City Dweller➞Clerk",
+										"Human➞Villager➞Clerk",
+										"Human➞City Dweller➞Student",
+										"Human➞Noble➞Student",
+										"Human➞Noble Court➞Student",
+										"Human➞City Dweller➞Sailor",
+										"Human➞Professional Soldier➞Sailor",
+										"Human➞Seafaring➞Sailor",
+										"Human➞Villager➞Sailor"
+									]
+								}
 							]
 						}
 					},
@@ -10556,7 +12564,9 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -10567,7 +12577,8 @@ export const Human: Stock = {
 					mentalPool: 1,
 					name: "Signalman",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 8,
 					setting: "Seafaring",
 					skillPool: 5,
@@ -10584,7 +12595,9 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -10599,14 +12612,19 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞City Dweller➞Sailor",
-								"Human➞Professional Soldier➞Sailor",
-								"Human➞Seafaring➞Sailor",
-								"Human➞Villager➞Sailor",
-								"Human➞Outcast➞Pirate",
-								"Human➞City Dweller➞Mercenary Captain"
+								{
+									type: "OR",
+									items: [
+										"Human➞City Dweller➞Sailor",
+										"Human➞Professional Soldier➞Sailor",
+										"Human➞Seafaring➞Sailor",
+										"Human➞Villager➞Sailor",
+										"Human➞Outcast➞Pirate",
+										"Human➞City Dweller➞Mercenary Captain"
+									]
+								}
 							]
 						}
 					},
@@ -10630,7 +12648,9 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -10645,14 +12665,19 @@ export const Human: Stock = {
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞City Dweller➞Sailor",
-								"Human➞Professional Soldier➞Sailor",
-								"Human➞Seafaring➞Sailor",
-								"Human➞Villager➞Sailor",
-								"Human➞Outcast➞Pirate",
-								"Human➞City Dweller➞Mercenary Captain"
+								{
+									type: "OR",
+									items: [
+										"Human➞City Dweller➞Sailor",
+										"Human➞Professional Soldier➞Sailor",
+										"Human➞Seafaring➞Sailor",
+										"Human➞Villager➞Sailor",
+										"Human➞Outcast➞Pirate",
+										"Human➞City Dweller➞Mercenary Captain"
+									]
+								}
 							]
 						}
 					},
@@ -10673,7 +12698,9 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -10688,14 +12715,19 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞City Dweller➞Sailor",
-								"Human➞Professional Soldier➞Sailor",
-								"Human➞Seafaring➞Sailor",
-								"Human➞Villager➞Sailor",
-								"Human➞Outcast➞Pirate",
-								"Human➞City Dweller➞Mercenary Captain"
+								{
+									type: "OR",
+									items: [
+										"Human➞City Dweller➞Sailor",
+										"Human➞Professional Soldier➞Sailor",
+										"Human➞Seafaring➞Sailor",
+										"Human➞Villager➞Sailor",
+										"Human➞Outcast➞Pirate",
+										"Human➞City Dweller➞Mercenary Captain"
+									]
+								}
 							]
 						}
 					},
@@ -10716,7 +12748,9 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -10731,14 +12765,19 @@ export const Human: Stock = {
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞City Dweller➞Sailor",
-								"Human➞Professional Soldier➞Sailor",
-								"Human➞Seafaring➞Sailor",
-								"Human➞Villager➞Sailor",
-								"Human➞Outcast➞Pirate",
-								"Human➞City Dweller➞Seamstress"
+								{
+									type: "OR",
+									items: [
+										"Human➞City Dweller➞Sailor",
+										"Human➞Professional Soldier➞Sailor",
+										"Human➞Seafaring➞Sailor",
+										"Human➞Villager➞Sailor",
+										"Human➞Outcast➞Pirate",
+										"Human➞City Dweller➞Seamstress"
+									]
+								}
 							]
 						}
 					},
@@ -10753,11 +12792,15 @@ export const Human: Stock = {
 					],
 					stock: "Human",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 5
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -10772,15 +12815,20 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞City Dweller➞Doctor",
-								"Human➞Noble Court➞Court Doctor",
-								"Human➞City Dweller➞Physician",
-								"Human➞Villager➞Barber",
-								"Human➞City Dweller➞Student",
-								"Human➞Noble➞Student",
-								"Human➞Noble Court➞Student"
+								{
+									type: "OR",
+									items: [
+										"Human➞City Dweller➞Doctor",
+										"Human➞Noble Court➞Court Doctor",
+										"Human➞City Dweller➞Physician",
+										"Human➞Villager➞Barber",
+										"Human➞City Dweller➞Student",
+										"Human➞Noble➞Student",
+										"Human➞Noble Court➞Student"
+									]
+								}
 							]
 						}
 					},
@@ -10806,7 +12854,9 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -10821,13 +12871,18 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞City Dweller➞Sailor",
-								"Human➞Professional Soldier➞Sailor",
-								"Human➞Seafaring➞Sailor",
-								"Human➞Villager➞Sailor",
-								"Human➞Outcast➞Pirate"
+								{
+									type: "OR",
+									items: [
+										"Human➞City Dweller➞Sailor",
+										"Human➞Professional Soldier➞Sailor",
+										"Human➞Seafaring➞Sailor",
+										"Human➞Villager➞Sailor",
+										"Human➞Outcast➞Pirate"
+									]
+								}
 							]
 						}
 					},
@@ -10851,7 +12906,9 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -10866,14 +12923,19 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Noble Court➞Chaplain",
-								"Human➞Professional Soldier➞Chaplain",
-								"Human➞Religious➞Military Order",
-								"Human➞City Dweller➞Temple Acolyte",
-								"Human➞Religious➞Temple Acolyte",
-								"Human➞Noble➞Religious Acolyte"
+								{
+									type: "OR",
+									items: [
+										"Human➞Noble Court➞Chaplain",
+										"Human➞Professional Soldier➞Chaplain",
+										"Human➞Religious➞Military Order",
+										"Human➞City Dweller➞Temple Acolyte",
+										"Human➞Religious➞Temple Acolyte",
+										"Human➞Noble➞Religious Acolyte"
+									]
+								}
 							]
 						}
 					},
@@ -10895,7 +12957,9 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
@@ -10910,13 +12974,18 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Peasant➞Augur",
-								"Human➞Villager➞Wizard's Apprentice",
-								"Human➞City Dweller➞Neophyte Sorcerer",
-								"Human➞Noble➞Arcane Devotee",
-								"Human➞Outcast➞Rogue Wizard"
+								{
+									type: "OR",
+									items: [
+										"Human➞Peasant➞Augur",
+										"Human➞Villager➞Wizard's Apprentice",
+										"Human➞City Dweller➞Neophyte Sorcerer",
+										"Human➞Noble➞Arcane Devotee",
+										"Human➞Outcast➞Rogue Wizard"
+									]
+								}
 							]
 						}
 					},
@@ -10938,7 +13007,9 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -10953,17 +13024,22 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Seafaring➞Pilot",
-								"Human➞City Dweller➞Mercenary Captain",
-								"Human➞City Dweller➞Sailor",
-								"Human➞Professional Soldier➞Sailor",
-								"Human➞Seafaring➞Sailor",
-								"Human➞Villager➞Sailor",
-								"Human➞City Dweller➞Student",
-								"Human➞Noble➞Student",
-								"Human➞Noble Court➞Student"
+								{
+									type: "OR",
+									items: [
+										"Human➞Seafaring➞Pilot",
+										"Human➞City Dweller➞Mercenary Captain",
+										"Human➞City Dweller➞Sailor",
+										"Human➞Professional Soldier➞Sailor",
+										"Human➞Seafaring➞Sailor",
+										"Human➞Villager➞Sailor",
+										"Human➞City Dweller➞Student",
+										"Human➞Noble➞Student",
+										"Human➞Noble Court➞Student"
+									]
+								}
 							]
 						}
 					},
@@ -10979,11 +13055,15 @@ export const Human: Stock = {
 					],
 					stock: "Human",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 6
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -10996,7 +13076,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Carpenter's Mate",
 					physicalPool: 1,
-					requirements: {},
+					requirements: {
+					},
 					resources: 8,
 					setting: "Seafaring",
 					skillPool: 5,
@@ -11016,7 +13097,9 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -11031,12 +13114,17 @@ export const Human: Stock = {
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞City Dweller➞Apprentice",
-								"Human➞Professional Soldier➞Apprentice",
-								"Human➞Villager➞Apprentice",
-								"Human➞Seafaring➞Carpenter's Mate"
+								{
+									type: "OR",
+									items: [
+										"Human➞City Dweller➞Apprentice",
+										"Human➞Professional Soldier➞Apprentice",
+										"Human➞Villager➞Apprentice",
+										"Human➞Seafaring➞Carpenter's Mate"
+									]
+								}
 							]
 						}
 					},
@@ -11058,7 +13146,9 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -11071,7 +13161,8 @@ export const Human: Stock = {
 					mentalPool: 1,
 					name: "Artillerist's Mate",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 8,
 					setting: "Seafaring",
 					skillPool: 4,
@@ -11088,7 +13179,9 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -11103,18 +13196,23 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Seafaring➞Artillerist's Mate",
-								"Human➞City Dweller➞Student",
-								"Human➞Noble➞Student",
-								"Human➞Noble Court➞Student",
-								"Human➞Seafaring➞Ship's Carpenter",
-								"Human➞Professional Soldier➞Engineer",
-								"Human➞Seafaring➞Engineer",
-								"Human➞City Dweller➞Journeyman",
-								"Human➞Professional Soldier➞Journeyman",
-								"Human➞Villager➞Journeyman"
+								{
+									type: "OR",
+									items: [
+										"Human➞Seafaring➞Artillerist's Mate",
+										"Human➞City Dweller➞Student",
+										"Human➞Noble➞Student",
+										"Human➞Noble Court➞Student",
+										"Human➞Seafaring➞Ship's Carpenter",
+										"Human➞Professional Soldier➞Engineer",
+										"Human➞Seafaring➞Engineer",
+										"Human➞City Dweller➞Journeyman",
+										"Human➞Professional Soldier➞Journeyman",
+										"Human➞Villager➞Journeyman"
+									]
+								}
 							]
 						}
 					},
@@ -11136,7 +13234,9 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
@@ -11151,17 +13251,26 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Noble➞Born Noble",
-								"Human➞Noble➞Page",
-								"Human➞Noble Court➞Page",
-								"Human➞Seafaring➞Son of a Gun"
+								{
+									type: "OR",
+									items: [
+										"Human➞Noble➞Born Noble",
+										"Human➞Noble➞Page",
+										"Human➞Noble Court➞Page",
+										"Human➞Seafaring➞Son of a Gun"
+									]
+								},
+								{
+									type: "AND",
+									items: [
+										"YEARS➞MIN➞40",
+										"YEARS➞MAX➞50"
+									]
+								}
 							]
-						},
-						limits: [
-							"LP➞MAX➞3"
-						]
+						}
 					},
 					resources: 10,
 					setting: "Seafaring",
@@ -11179,7 +13288,9 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -11194,14 +13305,19 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Seafaring➞Purser",
-								"Human➞City Dweller➞Merchant",
-								"Human➞Villager➞Merchant",
-								"Human➞Noble Court➞Steward",
-								"Human➞Seafaring➞Steward",
-								"Human➞City Dweller➞Accountant"
+								{
+									type: "OR",
+									items: [
+										"Human➞Seafaring➞Purser",
+										"Human➞City Dweller➞Merchant",
+										"Human➞Villager➞Merchant",
+										"Human➞Noble Court➞Steward",
+										"Human➞Seafaring➞Steward",
+										"Human➞City Dweller➞Accountant"
+									]
+								}
 							]
 						}
 					},
@@ -11217,11 +13333,15 @@ export const Human: Stock = {
 					],
 					stock: "Human",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 6
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -11236,14 +13356,19 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Noble➞Knight",
-								"Human➞Noble Court➞Knight",
-								"Human➞City Dweller➞2*Sailor",
-								"Human➞Professional Soldier➞2*Sailor",
-								"Human➞Villager➞2*Sailor",
-								"Human➞Seafaring➞2*ANY"
+								{
+									type: "OR",
+									items: [
+										"Human➞Noble➞Knight",
+										"Human➞Noble Court➞Knight",
+										"Human➞City Dweller➞2*Sailor",
+										"Human➞Professional Soldier➞2*Sailor",
+										"Human➞Villager➞2*Sailor",
+										"Human➞Seafaring➞2*ANY"
+									]
+								}
 							]
 						}
 					},
@@ -11259,11 +13384,15 @@ export const Human: Stock = {
 					],
 					stock: "Human",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 6
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 2,
@@ -11282,12 +13411,17 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Seafaring➞First Mate",
-								"Human➞Noble➞Knight",
-								"Human➞Noble Court➞Knight",
-								"Human➞City Dweller➞2*Mercenary Captain"
+								{
+									type: "OR",
+									items: [
+										"Human➞Seafaring➞First Mate",
+										"Human➞Noble➞Knight",
+										"Human➞Noble Court➞Knight",
+										"Human➞City Dweller➞2*Mercenary Captain"
+									]
+								}
 							]
 						}
 					},
@@ -11310,14 +13444,20 @@ export const Human: Stock = {
 			]
 		},
 		"Servitude and Captive": {
-			allowed: ["bwgr", "bs"],
+			allowed: [
+				"bwgr",
+				"bs"
+			],
 			name: "Servitude and Captive",
 			short: "Servitude",
 			stock: "Human",
 			type: "Setting",
 			lifepaths: [
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: true,
 					eitherPool: -1,
 					generalSkillPool: 2,
@@ -11328,7 +13468,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Born Slave",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 5,
 					setting: "Servitude and Captive",
 					skillPool: 1,
@@ -11346,7 +13487,9 @@ export const Human: Stock = {
 					years: 12
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: true,
 					eitherPool: 0,
 					generalSkillPool: 2,
@@ -11358,11 +13501,14 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Gifted Child",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 4,
 					setting: "Servitude and Captive",
 					skillPool: 0,
-					skills: [],
+					skills: [
+
+					],
 					stock: "Human",
 					traitPool: 1,
 					traits: [
@@ -11374,7 +13520,10 @@ export const Human: Stock = {
 					years: 9
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -11385,7 +13534,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Ditch Digger",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 4,
 					setting: "Servitude and Captive",
 					skillPool: 3,
@@ -11403,7 +13553,10 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -11416,7 +13569,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Servant",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 6,
 					setting: "Servitude and Captive",
 					skillPool: 3,
@@ -11434,7 +13588,10 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -11445,7 +13602,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Field Laborer",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 5,
 					setting: "Servitude and Captive",
 					skillPool: 7,
@@ -11465,7 +13623,10 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -11478,7 +13639,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Captive of War",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 4,
 					setting: "Servitude and Captive",
 					skillPool: 2,
@@ -11495,7 +13657,10 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -11508,7 +13673,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Gaol",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 3,
 					setting: "Servitude and Captive",
 					skillPool: 3,
@@ -11524,7 +13690,10 @@ export const Human: Stock = {
 					years: 3
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -11535,7 +13704,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Harem Slave",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 4,
 					setting: "Servitude and Captive",
 					skillPool: 3,
@@ -11552,7 +13722,10 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -11565,14 +13738,13 @@ export const Human: Stock = {
 					name: "Bondsman",
 					physicalPool: 0,
 					requirements: {
-						texts: [
-							"The player may choose his Bondsman's owner's lifepath from Noble, City Dweller, Soldier or Villager setting. The Bondsman may purchase from owner's skills with one querter of that path's skill points (minimum of 1)."
-						]
 					},
 					resources: 7,
 					setting: "Servitude and Captive",
 					skillPool: "*",
-					skills: [],
+					skills: [
+
+					],
 					stock: "Human",
 					traitPool: 2,
 					traits: [
@@ -11581,7 +13753,11 @@ export const Human: Stock = {
 					years: 7
 				},
 				{
-					allowed: ["bs"], stock: "Human", setting: "Servitude and Captive",
+					allowed: [
+						"bs"
+					],
+					stock: "Human",
+					setting: "Servitude and Captive",
 					name: "Born Mule",
 					born: true,
 					years: 10,
@@ -11592,19 +13768,27 @@ export const Human: Stock = {
 					generalSkillPool: 2,
 					skillPool: 0,
 					traitPool: 2,
-					leads: ["Human➞Nomad", "Human➞Merchant House"],
-					skills: [],
+					leads: [
+						"Human➞Nomad",
+						"Human➞Merchant House"
+					],
+					skills: [
+
+					],
 					traits: [
 						"Human Lifepath➞Mule",
 						"Any Die➞Stubborn",
 						"Any Die➞Tough"
 					],
 					requirements: {
-						texts: ["Mules cannot enter Noble or Templar subsettings."]
 					}
 				},
 				{
-					allowed: ["bs"], stock: "Human", setting: "Servitude and Captive",
+					allowed: [
+						"bs"
+					],
+					stock: "Human",
+					setting: "Servitude and Captive",
 					name: "Slave Soldier",
 					born: false,
 					years: 4,
@@ -11615,7 +13799,9 @@ export const Human: Stock = {
 					generalSkillPool: 0,
 					skillPool: 4,
 					traitPool: 2,
-					leads: ["Human➞Merchant House"],
+					leads: [
+						"Human➞Merchant House"
+					],
 					skills: [
 						"Any General➞Soldiering",
 						"Any Wise➞Cruel and Unusual Punishment-wise",
@@ -11629,15 +13815,24 @@ export const Human: Stock = {
 					],
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Servitude and Captive➞1*ANY"
+								{
+									type: "OR",
+									items: [
+										"Human➞Servitude and Captive➞1*ANY"
+									]
+								}
 							]
 						}
 					}
 				},
 				{
-					allowed: ["bs"], stock: "Human", setting: "Servitude and Captive",
+					allowed: [
+						"bs"
+					],
+					stock: "Human",
+					setting: "Servitude and Captive",
 					name: "Mamluk",
 					born: false,
 					years: 5,
@@ -11648,26 +13843,41 @@ export const Human: Stock = {
 					generalSkillPool: 0,
 					skillPool: 5,
 					traitPool: 1,
-					leads: ["Human➞Outcast", "Human➞Professional Soldier", "Human➞Nomad"],
+					leads: [
+						"Human➞Outcast",
+						"Human➞Professional Soldier",
+						"Human➞Nomad"
+					],
 					skills: [
 						"Any General➞Spear",
 						"Any General➞Soldiering",
 						"Any General➞Intimidation",
 						"Any Wise➞Master-wise"
 					],
-					traits: [],
+					traits: [
+
+					],
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Servitude and Captive➞Bondsman",
-								"Human➞Servitude and Captive➞Slave Soldier"
+								{
+									type: "OR",
+									items: [
+										"Human➞Servitude and Captive➞Bondsman",
+										"Human➞Servitude and Captive➞Slave Soldier"
+									]
+								}
 							]
 						}
 					}
 				},
 				{
-					allowed: ["bs"], stock: "Human", setting: "Servitude and Captive",
+					allowed: [
+						"bs"
+					],
+					stock: "Human",
+					setting: "Servitude and Captive",
 					name: "Child Attendant",
 					born: false,
 					years: 2,
@@ -11678,7 +13888,10 @@ export const Human: Stock = {
 					generalSkillPool: 0,
 					skillPool: 3,
 					traitPool: 2,
-					leads: ["Human➞Outcast", "Human➞Religious"],
+					leads: [
+						"Human➞Outcast",
+						"Human➞Religious"
+					],
 					skills: [
 						"Any General➞Soothing Platitudes",
 						"Any Wise➞Templar-wise",
@@ -11690,11 +13903,25 @@ export const Human: Stock = {
 						"Any Character➞Haunted Beauty"
 					],
 					requirements: {
-						limits: ["LP➞MAX➞2"]
+						conditions: {
+							type: "AND",
+							items: [
+								{
+									type: "AND",
+									items: [
+										"LP➞MAX➞2"
+									]
+								}
+							]
+						}
 					}
 				},
 				{
-					allowed: ["bs"], stock: "Human", setting: "Servitude and Captive",
+					allowed: [
+						"bs"
+					],
+					stock: "Human",
+					setting: "Servitude and Captive",
 					name: "Slave Doctor",
 					born: false,
 					years: 8,
@@ -11705,7 +13932,11 @@ export const Human: Stock = {
 					generalSkillPool: 0,
 					skillPool: 4,
 					traitPool: 2,
-					leads: ["Human➞Outcast", "Human➞City Dweller", "Human➞Noble Court"],
+					leads: [
+						"Human➞Outcast",
+						"Human➞City Dweller",
+						"Human➞Noble Court"
+					],
 					skills: [
 						"Any Wise➞Sickness-wise",
 						"Any General➞Herbalism",
@@ -11719,16 +13950,25 @@ export const Human: Stock = {
 					],
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Religious➞Castrati",
-								"Human➞Servitude and Captive➞Beast Handler"
+								{
+									type: "OR",
+									items: [
+										"Human➞Religious➞Castrati",
+										"Human➞Servitude and Captive➞Beast Handler"
+									]
+								}
 							]
 						}
 					}
 				},
 				{
-					allowed: ["bs"], stock: "Human", setting: "Servitude and Captive",
+					allowed: [
+						"bs"
+					],
+					stock: "Human",
+					setting: "Servitude and Captive",
 					name: "Slave Artist",
 					born: false,
 					years: 5,
@@ -11739,7 +13979,10 @@ export const Human: Stock = {
 					generalSkillPool: 0,
 					skillPool: 4,
 					traitPool: 2,
-					leads: ["Human➞Outcast", "Human➞Nomad"],
+					leads: [
+						"Human➞Outcast",
+						"Human➞Nomad"
+					],
 					skills: [
 						"Any Wise➞Bad Taste-wise",
 						"Any General➞Painting",
@@ -11749,10 +13992,15 @@ export const Human: Stock = {
 						"Any Character➞Veneer of Obedience",
 						"Any Call-on➞Perspective"
 					],
-					requirements: {}
+					requirements: {
+					}
 				},
 				{
-					allowed: ["bs"], stock: "Human", setting: "Servitude and Captive",
+					allowed: [
+						"bs"
+					],
+					stock: "Human",
+					setting: "Servitude and Captive",
 					name: "Slave Performer",
 					born: false,
 					years: 4,
@@ -11763,17 +14011,27 @@ export const Human: Stock = {
 					generalSkillPool: 0,
 					skillPool: 3,
 					traitPool: 2,
-					leads: ["Human➞Outcast"],
+					leads: [
+						"Human➞Outcast"
+					],
 					skills: [
 						"Any General➞Sing",
 						"Any General➞Acting",
 						"Any General➞Musical Instrument"
 					],
-					traits: ["Any Character➞Bitter", "Any Die➞Ear for Voices"],
-					requirements: {}
+					traits: [
+						"Any Character➞Bitter",
+						"Any Die➞Ear for Voices"
+					],
+					requirements: {
+					}
 				},
 				{
-					allowed: ["bs"], stock: "Human", setting: "Servitude and Captive",
+					allowed: [
+						"bs"
+					],
+					stock: "Human",
+					setting: "Servitude and Captive",
 					name: "Slave Musician",
 					born: false,
 					years: 7,
@@ -11784,8 +14042,13 @@ export const Human: Stock = {
 					generalSkillPool: 0,
 					skillPool: 4,
 					traitPool: 3,
-					leads: ["Human➞Outcast"],
-					skills: ["Any General➞Musical Instrument", "Any General➞Sing"],
+					leads: [
+						"Human➞Outcast"
+					],
+					skills: [
+						"Any General➞Musical Instrument",
+						"Any General➞Sing"
+					],
 					traits: [
 						"Any Die➞Blind",
 						"Any Die➞Lame",
@@ -11793,15 +14056,24 @@ export const Human: Stock = {
 					],
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Skill➞Any General➞Sing"
+								{
+									type: "OR",
+									items: [
+										"Skill➞Any General➞Sing"
+									]
+								}
 							]
 						}
 					}
 				},
 				{
-					allowed: ["bs"], stock: "Human", setting: "Servitude and Captive",
+					allowed: [
+						"bs"
+					],
+					stock: "Human",
+					setting: "Servitude and Captive",
 					name: "Slave Scribe",
 					born: false,
 					years: 7,
@@ -11812,7 +14084,10 @@ export const Human: Stock = {
 					generalSkillPool: 0,
 					skillPool: 4,
 					traitPool: 2,
-					leads: ["Human➞Outcast", "Human➞Merchant House"],
+					leads: [
+						"Human➞Outcast",
+						"Human➞Merchant House"
+					],
 					skills: [
 						"Any General➞Write",
 						"Any General➞Illuminations",
@@ -11823,10 +14098,15 @@ export const Human: Stock = {
 						"Any Character➞Cramped Hands",
 						"Human Lifepath➞Mind-Numbing Work"
 					],
-					requirements: {}
+					requirements: {
+					}
 				},
 				{
-					allowed: ["bs"], stock: "Human", setting: "Servitude and Captive",
+					allowed: [
+						"bs"
+					],
+					stock: "Human",
+					setting: "Servitude and Captive",
 					name: "Quarry Slave",
 					born: false,
 					years: 8,
@@ -11837,7 +14117,10 @@ export const Human: Stock = {
 					generalSkillPool: 0,
 					skillPool: 3,
 					traitPool: 2,
-					leads: ["Human➞Outcast", "Human➞Merchant House"],
+					leads: [
+						"Human➞Outcast",
+						"Human➞Merchant House"
+					],
 					skills: [
 						"Any General➞Hauling",
 						"Any Wise➞Stone-wise",
@@ -11850,10 +14133,15 @@ export const Human: Stock = {
 						"Human Lifepath➞Maimed",
 						"Any Die➞Lame"
 					],
-					requirements: {}
+					requirements: {
+					}
 				},
 				{
-					allowed: ["bs"], stock: "Human", setting: "Servitude and Captive",
+					allowed: [
+						"bs"
+					],
+					stock: "Human",
+					setting: "Servitude and Captive",
 					name: "Foreman",
 					born: false,
 					years: 10,
@@ -11864,7 +14152,10 @@ export const Human: Stock = {
 					generalSkillPool: 0,
 					skillPool: 5,
 					traitPool: 2,
-					leads: ["Human➞Outcast", "Human➞City Dweller"],
+					leads: [
+						"Human➞Outcast",
+						"Human➞City Dweller"
+					],
 					skills: [
 						"Any Wise➞Slave-wise",
 						"Any Wise➞Grandiose Scheme-wise",
@@ -11880,16 +14171,25 @@ export const Human: Stock = {
 					],
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Servitude and Captive➞Taskmaster",
-								"Human➞Servitude and Captive➞Beast Handler"
+								{
+									type: "OR",
+									items: [
+										"Human➞Servitude and Captive➞Taskmaster",
+										"Human➞Servitude and Captive➞Beast Handler"
+									]
+								}
 							]
 						}
 					}
 				},
 				{
-					allowed: ["bs"], stock: "Human", setting: "Servitude and Captive",
+					allowed: [
+						"bs"
+					],
+					stock: "Human",
+					setting: "Servitude and Captive",
 					name: "Arena Slave",
 					born: false,
 					years: 3,
@@ -11900,18 +14200,28 @@ export const Human: Stock = {
 					generalSkillPool: 0,
 					skillPool: 2,
 					traitPool: 2,
-					leads: ["Human➞Outcast"],
-					skills: ["Any Wise➞Arena-wise", "Any Wise➞Outlandish Beast-wise"],
+					leads: [
+						"Human➞Outcast"
+					],
+					skills: [
+						"Any Wise➞Arena-wise",
+						"Any Wise➞Outlandish Beast-wise"
+					],
 					traits: [
 						"Human Lifepath➞Broken",
 						"Any Character➞Desperate",
 						"Any Character➞Scarred",
 						"Human Lifepath➞Maimed"
 					],
-					requirements: {}
+					requirements: {
+					}
 				},
 				{
-					allowed: ["bs"], stock: "Human", setting: "Servitude and Captive",
+					allowed: [
+						"bs"
+					],
+					stock: "Human",
+					setting: "Servitude and Captive",
 					name: "Gladiator",
 					born: false,
 					years: 5,
@@ -11922,7 +14232,11 @@ export const Human: Stock = {
 					generalSkillPool: 0,
 					skillPool: 5,
 					traitPool: 2,
-					leads: ["Human➞Outcast", "Human➞Professional Soldier", "Human➞Merchant House"],
+					leads: [
+						"Human➞Outcast",
+						"Human➞Professional Soldier",
+						"Human➞Merchant House"
+					],
 					skills: [
 						"Any General➞Brawling",
 						"Any General➞Appropriate Weapons",
@@ -11937,16 +14251,25 @@ export const Human: Stock = {
 					],
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Servitude and Captive➞Arena Slave",
-								"Human➞Servitude and Captive➞Slave Soldier"
+								{
+									type: "OR",
+									items: [
+										"Human➞Servitude and Captive➞Arena Slave",
+										"Human➞Servitude and Captive➞Slave Soldier"
+									]
+								}
 							]
 						}
 					}
 				},
 				{
-					allowed: ["bs"], stock: "Human", setting: "Servitude and Captive",
+					allowed: [
+						"bs"
+					],
+					stock: "Human",
+					setting: "Servitude and Captive",
 					name: "Champion",
 					born: false,
 					years: 6,
@@ -11957,7 +14280,10 @@ export const Human: Stock = {
 					generalSkillPool: 0,
 					skillPool: 6,
 					traitPool: 2,
-					leads: ["Human➞Outcast", "Human➞Nomad"],
+					leads: [
+						"Human➞Outcast",
+						"Human➞Nomad"
+					],
 					skills: [
 						"Any General➞Conspicuous",
 						"Any General➞Appropriate Weapons",
@@ -11970,10 +14296,15 @@ export const Human: Stock = {
 						"Any Character➞A Little Fat",
 						"Any Die➞Spartacus"
 					],
-					requirements: {}
+					requirements: {
+					}
 				},
 				{
-					allowed: ["bs"], stock: "Human", setting: "Servitude and Captive",
+					allowed: [
+						"bs"
+					],
+					stock: "Human",
+					setting: "Servitude and Captive",
 					name: "Enslaved",
 					born: false,
 					years: 3,
@@ -11984,18 +14315,29 @@ export const Human: Stock = {
 					generalSkillPool: 0,
 					skillPool: 2,
 					traitPool: 2,
-					leads: ["Human➞Outcast", "Human➞Merchant House"],
-					skills: ["Any Wise➞Shackles-wise", "Any General➞Ditch Digging"],
+					leads: [
+						"Human➞Outcast",
+						"Human➞Merchant House"
+					],
+					skills: [
+						"Any Wise➞Shackles-wise",
+						"Any General➞Ditch Digging"
+					],
 					traits: [
 						"Any Character➞Branded",
 						"Human Lifepath➞Back-Breaking Labor",
 						"Any Character➞Yearning",
 						"Any Character➞Cool Hand"
 					],
-					requirements: {}
+					requirements: {
+					}
 				},
 				{
-					allowed: ["bs"], stock: "Human", setting: "Servitude and Captive",
+					allowed: [
+						"bs"
+					],
+					stock: "Human",
+					setting: "Servitude and Captive",
 					name: "Tortured",
 					born: false,
 					years: 2,
@@ -12006,8 +14348,13 @@ export const Human: Stock = {
 					generalSkillPool: 0,
 					skillPool: 2,
 					traitPool: 3,
-					leads: ["Human➞Outcast"],
-					skills: ["Any Wise➞Screaming-wise", "Any Wise➞Torture Devices-wise"],
+					leads: [
+						"Human➞Outcast"
+					],
+					skills: [
+						"Any Wise➞Screaming-wise",
+						"Any Wise➞Torture Devices-wise"
+					],
 					traits: [
 						"Human Lifepath➞Broken",
 						"Human Lifepath➞Maimed",
@@ -12016,10 +14363,15 @@ export const Human: Stock = {
 						"Human Lifepath➞Numb",
 						"Any Die➞Thousand-Yard Stare"
 					],
-					requirements: {}
+					requirements: {
+					}
 				},
 				{
-					allowed: ["bs"], stock: "Human", setting: "Servitude and Captive",
+					allowed: [
+						"bs"
+					],
+					stock: "Human",
+					setting: "Servitude and Captive",
 					name: "Drover",
 					born: false,
 					years: 3,
@@ -12030,17 +14382,27 @@ export const Human: Stock = {
 					generalSkillPool: 0,
 					skillPool: 4,
 					traitPool: 2,
-					leads: ["Human➞Outcast"],
+					leads: [
+						"Human➞Outcast"
+					],
 					skills: [
 						"Any General➞Driving",
 						"Any General➞Mending",
 						"Any Wise➞Domestic Animals-wise"
 					],
-					traits: ["Any Character➞Dusty", "Any Character➞Thirsty"],
-					requirements: {}
+					traits: [
+						"Any Character➞Dusty",
+						"Any Character➞Thirsty"
+					],
+					requirements: {
+					}
 				},
 				{
-					allowed: ["bs"], stock: "Human", setting: "Servitude and Captive",
+					allowed: [
+						"bs"
+					],
+					stock: "Human",
+					setting: "Servitude and Captive",
 					name: "Beast Handler",
 					born: false,
 					years: 6,
@@ -12051,7 +14413,11 @@ export const Human: Stock = {
 					generalSkillPool: 0,
 					skillPool: 5,
 					traitPool: 2,
-					leads: ["Human➞Outcast", "Human➞City Dweller", "Human➞Merchant House"],
+					leads: [
+						"Human➞Outcast",
+						"Human➞City Dweller",
+						"Human➞Merchant House"
+					],
 					skills: [
 						"Any Wise➞Outlandish Beast-wise",
 						"Any General➞Animal Husbandry",
@@ -12068,16 +14434,25 @@ export const Human: Stock = {
 					],
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Servitude and Captive➞Arena Slave",
-								"Human➞Servitude and Captive➞Drover"
+								{
+									type: "OR",
+									items: [
+										"Human➞Servitude and Captive➞Arena Slave",
+										"Human➞Servitude and Captive➞Drover"
+									]
+								}
 							]
 						}
 					}
 				},
 				{
-					allowed: ["bs"], stock: "Human", setting: "Servitude and Captive",
+					allowed: [
+						"bs"
+					],
+					stock: "Human",
+					setting: "Servitude and Captive",
 					name: "Laborer",
 					born: false,
 					years: 4,
@@ -12088,18 +14463,29 @@ export const Human: Stock = {
 					generalSkillPool: 0,
 					skillPool: 2,
 					traitPool: 2,
-					leads: ["Human➞Outcast", "Human➞Nomad"],
-					skills: ["Any General➞Hauling", "Any General➞Ditch Digging"],
+					leads: [
+						"Human➞Outcast",
+						"Human➞Nomad"
+					],
+					skills: [
+						"Any General➞Hauling",
+						"Any General➞Ditch Digging"
+					],
 					traits: [
 						"Any Character➞Starved",
 						"Any Character➞Callous",
 						"Human Lifepath➞Hardened",
 						"Human Lifepath➞Back-Breaking Labor"
 					],
-					requirements: {}
+					requirements: {
+					}
 				},
 				{
-					allowed: ["bs"], stock: "Human", setting: "Servitude and Captive",
+					allowed: [
+						"bs"
+					],
+					stock: "Human",
+					setting: "Servitude and Captive",
 					name: "Farmer",
 					born: false,
 					years: 8,
@@ -12110,7 +14496,10 @@ export const Human: Stock = {
 					generalSkillPool: 0,
 					skillPool: 8,
 					traitPool: 1,
-					leads: ["Human➞Villager", "Human➞Professional Soldier"],
+					leads: [
+						"Human➞Villager",
+						"Human➞Professional Soldier"
+					],
 					skills: [
 						"Any General➞Farming",
 						"Any General➞Mending",
@@ -12121,18 +14510,29 @@ export const Human: Stock = {
 						"Any General➞Firebuilding",
 						"Any General➞Sing"
 					],
-					traits: ["Any Character➞Hoarding"],
+					traits: [
+						"Any Character➞Hoarding"
+					],
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Servitude and Captive➞Field Laborer"
+								{
+									type: "OR",
+									items: [
+										"Human➞Servitude and Captive➞Field Laborer"
+									]
+								}
 							]
 						}
 					}
 				},
 				{
-					allowed: ["bs"], stock: "Human", setting: "Servitude and Captive",
+					allowed: [
+						"bs"
+					],
+					stock: "Human",
+					setting: "Servitude and Captive",
 					name: "Shepherd",
 					born: false,
 					years: 4,
@@ -12143,25 +14543,40 @@ export const Human: Stock = {
 					generalSkillPool: 0,
 					skillPool: 5,
 					traitPool: 1,
-					leads: ["Human➞Villager", "Human➞Professional Soldier", "Human➞Nomad"],
+					leads: [
+						"Human➞Villager",
+						"Human➞Professional Soldier",
+						"Human➞Nomad"
+					],
 					skills: [
 						"Any General➞Animal Husbandry",
 						"Any General➞Sing",
 						"Any General➞Climbing",
 						"Any General➞Flute"
 					],
-					traits: ["Any Character➞Cry Wolf"],
+					traits: [
+						"Any Character➞Cry Wolf"
+					],
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Servitude and Captive➞Field Laborer"
+								{
+									type: "OR",
+									items: [
+										"Human➞Servitude and Captive➞Field Laborer"
+									]
+								}
 							]
 						}
 					}
 				},
 				{
-					allowed: ["bs"], stock: "Human", setting: "Servitude and Captive",
+					allowed: [
+						"bs"
+					],
+					stock: "Human",
+					setting: "Servitude and Captive",
 					name: "Taskmaster",
 					born: false,
 					years: 6,
@@ -12172,7 +14587,10 @@ export const Human: Stock = {
 					generalSkillPool: 0,
 					skillPool: 4,
 					traitPool: 2,
-					leads: ["Human➞Outcast", "Human➞Merchant House"],
+					leads: [
+						"Human➞Outcast",
+						"Human➞Merchant House"
+					],
 					skills: [
 						"Any General➞Intimidation",
 						"Any General➞Brawling",
@@ -12186,15 +14604,24 @@ export const Human: Stock = {
 					],
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Servitude and Captive➞2*ANY"
+								{
+									type: "OR",
+									items: [
+										"Human➞Servitude and Captive➞2*ANY"
+									]
+								}
 							]
 						}
 					}
 				},
 				{
-					allowed: ["bs"], stock: "Human", setting: "Servitude and Captive",
+					allowed: [
+						"bs"
+					],
+					stock: "Human",
+					setting: "Servitude and Captive",
 					name: "Concubine",
 					born: false,
 					years: 5,
@@ -12205,7 +14632,11 @@ export const Human: Stock = {
 					generalSkillPool: 0,
 					skillPool: 5,
 					traitPool: 2,
-					leads: ["Human➞Outcast", "Human➞Noble Court", "Human➞Merchant House"],
+					leads: [
+						"Human➞Outcast",
+						"Human➞Noble Court",
+						"Human➞Merchant House"
+					],
 					skills: [
 						"Any General➞Soothing Platitudes",
 						"Any General➞Seduction",
@@ -12220,9 +14651,14 @@ export const Human: Stock = {
 					],
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Servitude and Captive➞Harem Slave"
+								{
+									type: "OR",
+									items: [
+										"Human➞Servitude and Captive➞Harem Slave"
+									]
+								}
 							]
 						}
 					}
@@ -12230,14 +14666,20 @@ export const Human: Stock = {
 			]
 		},
 		"Villager": {
-			allowed: ["bwgr", "bs"],
+			allowed: [
+				"bwgr",
+				"bs"
+			],
 			name: "Villager",
 			short: "Villager",
 			stock: "Human",
 			type: "Setting",
 			lifepaths: [
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: true,
 					eitherPool: 0,
 					generalSkillPool: 3,
@@ -12251,18 +14693,25 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Village Born",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 4,
 					setting: "Villager",
 					skillPool: 0,
-					skills: [],
+					skills: [
+
+					],
 					stock: "Human",
 					traitPool: 2,
-					traits: [],
+					traits: [
+
+					],
 					years: 10
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: true,
 					eitherPool: 0,
 					generalSkillPool: 2,
@@ -12274,11 +14723,14 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Gifted Child",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 4,
 					setting: "Villager",
 					skillPool: 0,
-					skills: [],
+					skills: [
+
+					],
 					stock: "Human",
 					traitPool: 1,
 					traits: [
@@ -12290,7 +14742,10 @@ export const Human: Stock = {
 					years: 9
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -12307,10 +14762,18 @@ export const Human: Stock = {
 					name: "Kid",
 					physicalPool: 1,
 					requirements: {
-						limits: [
-							"LP➞MAX➞2",
-							"LP➞UNIQUE"
-						]
+						conditions: {
+							type: "AND",
+							items: [
+								{
+									type: "AND",
+									items: [
+										"LP➞MAX➞2",
+										"LP➞UNIQUE"
+									]
+								}
+							]
+						}
 					},
 					resources: 3,
 					setting: "Villager",
@@ -12330,7 +14793,10 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -12341,7 +14807,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Idiot",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 4,
 					setting: "Villager",
 					skillPool: 4,
@@ -12362,7 +14829,10 @@ export const Human: Stock = {
 					years: 10
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -12374,7 +14844,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Pilgrim",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 4,
 					setting: "Villager",
 					skillPool: 5,
@@ -12394,7 +14865,10 @@ export const Human: Stock = {
 					years: 2
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -12405,7 +14879,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Conscript",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 5,
 					setting: "Villager",
 					skillPool: 2,
@@ -12421,7 +14896,10 @@ export const Human: Stock = {
 					years: 1
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -12433,7 +14911,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Groom",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 7,
 					setting: "Villager",
 					skillPool: 4,
@@ -12446,11 +14925,16 @@ export const Human: Stock = {
 					],
 					stock: "Human",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 4
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -12462,7 +14946,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Runner",
 					physicalPool: 1,
-					requirements: {},
+					requirements: {
+					},
 					resources: 6,
 					setting: "Villager",
 					skillPool: 3,
@@ -12480,7 +14965,10 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -12493,7 +14981,8 @@ export const Human: Stock = {
 					mentalPool: 1,
 					name: "Village Peddler",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 10,
 					setting: "Villager",
 					skillPool: 7,
@@ -12514,7 +15003,10 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -12525,7 +15017,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Shopkeeper",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 15,
 					setting: "Villager",
 					skillPool: 5,
@@ -12537,11 +15030,16 @@ export const Human: Stock = {
 					],
 					stock: "Human",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 6
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -12553,7 +15051,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Clerk",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 9,
 					setting: "Villager",
 					skillPool: 4,
@@ -12572,7 +15071,9 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -12586,7 +15087,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Sailor",
 					physicalPool: 1,
-					requirements: {},
+					requirements: {
+					},
 					resources: 5,
 					setting: "Villager",
 					skillPool: 6,
@@ -12607,7 +15109,10 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -12620,7 +15125,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Laborer",
 					physicalPool: 1,
-					requirements: {},
+					requirements: {
+					},
 					resources: 4,
 					setting: "Villager",
 					skillPool: 2,
@@ -12640,7 +15146,10 @@ export const Human: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -12655,15 +15164,20 @@ export const Human: Stock = {
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞City Dweller➞Laborer",
-								"Human➞Villager➞Laborer",
-								"Human➞Servitude and Captive➞Field Laborer",
-								"Human➞Peasant➞Conscript",
-								"Human➞Villager➞Conscript",
-								"Human➞Peasant➞Farmer",
-								"Human➞Professional Soldier➞Foot Soldier"
+								{
+									type: "OR",
+									items: [
+										"Human➞City Dweller➞Laborer",
+										"Human➞Villager➞Laborer",
+										"Human➞Servitude and Captive➞Field Laborer",
+										"Human➞Peasant➞Conscript",
+										"Human➞Villager➞Conscript",
+										"Human➞Peasant➞Farmer",
+										"Human➞Professional Soldier➞Foot Soldier"
+									]
+								}
 							]
 						}
 					},
@@ -12684,7 +15198,10 @@ export const Human: Stock = {
 					years: 3
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -12698,10 +15215,15 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Villager➞Village Sergeant",
-								"Human➞Professional Soldier➞1*ANY"
+								{
+									type: "OR",
+									items: [
+										"Human➞Villager➞Village Sergeant",
+										"Human➞Professional Soldier➞1*ANY"
+									]
+								}
 							]
 						}
 					},
@@ -12726,7 +15248,10 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -12743,7 +15268,8 @@ export const Human: Stock = {
 					mentalPool: 1,
 					name: "Serving Girl",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 5,
 					setting: "Villager",
 					skillPool: 4,
@@ -12763,7 +15289,10 @@ export const Human: Stock = {
 					years: 3
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -12775,9 +15304,17 @@ export const Human: Stock = {
 					name: "Hosteller",
 					physicalPool: 0,
 					requirements: {
-						limits: [
-							"LP➞MAX➞2"
-						]
+						conditions: {
+							type: "AND",
+							items: [
+								{
+									type: "AND",
+									items: [
+										"LP➞MAX➞2"
+									]
+								}
+							]
+						}
 					},
 					resources: 15,
 					setting: "Villager",
@@ -12798,7 +15335,10 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -12811,7 +15351,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Village Tough",
 					physicalPool: 1,
-					requirements: {},
+					requirements: {
+					},
 					resources: 7,
 					setting: "Villager",
 					skillPool: 4,
@@ -12831,7 +15372,10 @@ export const Human: Stock = {
 					years: 3
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
@@ -12845,14 +15389,19 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Villager➞Village Tough",
-								"Human➞Noble➞Squire",
-								"Human➞Noble Court➞Squire",
-								"Human➞Outcast➞Freebooter",
-								"Human➞City Dweller➞Sergeant-at-Arms",
-								"Human➞Noble Court➞Man-at-Arms"
+								{
+									type: "OR",
+									items: [
+										"Human➞Villager➞Village Tough",
+										"Human➞Noble➞Squire",
+										"Human➞Noble Court➞Squire",
+										"Human➞Outcast➞Freebooter",
+										"Human➞City Dweller➞Sergeant-at-Arms",
+										"Human➞Noble Court➞Man-at-Arms"
+									]
+								}
 							]
 						}
 					},
@@ -12878,7 +15427,10 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
@@ -12892,14 +15444,19 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Villager➞Village Tough",
-								"Human➞Noble➞Squire",
-								"Human➞Noble Court➞Squire",
-								"Human➞Outcast➞Freebooter",
-								"Human➞City Dweller➞Sergeant-at-Arms",
-								"Human➞Noble Court➞Man-at-Arms"
+								{
+									type: "OR",
+									items: [
+										"Human➞Villager➞Village Tough",
+										"Human➞Noble➞Squire",
+										"Human➞Noble Court➞Squire",
+										"Human➞Outcast➞Freebooter",
+										"Human➞City Dweller➞Sergeant-at-Arms",
+										"Human➞Noble Court➞Man-at-Arms"
+									]
+								}
 							]
 						}
 					},
@@ -12923,7 +15480,10 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -12934,7 +15494,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Tailor",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 12,
 					setting: "Villager",
 					skillPool: 5,
@@ -12951,7 +15512,10 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -12964,9 +15528,17 @@ export const Human: Stock = {
 					name: "Tax Collector",
 					physicalPool: 0,
 					requirements: {
-						limits: [
-							"LP➞MIN➞3"
-						]
+						conditions: {
+							type: "AND",
+							items: [
+								{
+									type: "AND",
+									items: [
+										"LP➞MIN➞3"
+									]
+								}
+							]
+						}
 					},
 					resources: 15,
 					setting: "Villager",
@@ -12986,7 +15558,10 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -13000,10 +15575,15 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Villager➞Apprentice",
-								"Human➞Professional Soldier➞Apprentice"
+								{
+									type: "OR",
+									items: [
+										"Human➞Villager➞Apprentice",
+										"Human➞Professional Soldier➞Apprentice"
+									]
+								}
 							]
 						}
 					},
@@ -13025,7 +15605,10 @@ export const Human: Stock = {
 					years: 8
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -13039,10 +15622,15 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Villager➞Apprentice",
-								"Human➞Professional Soldier➞Apprentice"
+								{
+									type: "OR",
+									items: [
+										"Human➞Villager➞Apprentice",
+										"Human➞Professional Soldier➞Apprentice"
+									]
+								}
 							]
 						}
 					},
@@ -13063,7 +15651,10 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -13075,7 +15666,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Butcher",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 15,
 					setting: "Villager",
 					skillPool: 4,
@@ -13096,7 +15688,10 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -13108,7 +15703,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Barber",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 10,
 					setting: "Villager",
 					skillPool: 5,
@@ -13128,7 +15724,10 @@ export const Human: Stock = {
 					years: 7
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -13140,7 +15739,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Brewer",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 15,
 					setting: "Villager",
 					skillPool: 4,
@@ -13159,7 +15759,10 @@ export const Human: Stock = {
 					years: 8
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -13172,7 +15775,8 @@ export const Human: Stock = {
 					mentalPool: 1,
 					name: "Acolyte",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 10,
 					setting: "Villager",
 					skillPool: 6,
@@ -13196,7 +15800,10 @@ export const Human: Stock = {
 					years: 7
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -13208,7 +15815,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Failed Acolyte",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 8,
 					setting: "Villager",
 					skillPool: 4,
@@ -13226,7 +15834,10 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -13244,9 +15855,14 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Villager➞Acolyte"
+								{
+									type: "OR",
+									items: [
+										"Human➞Villager➞Acolyte"
+									]
+								}
 							]
 						}
 					},
@@ -13268,7 +15884,10 @@ export const Human: Stock = {
 					years: 8
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -13287,15 +15906,20 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Villager➞Acolyte",
-								"Human➞Villager➞Clerk",
-								"Human➞City Dweller➞Clerk",
-								"Human➞City Dweller➞Student",
-								"Human➞Noble➞Student",
-								"Human➞Noble Court➞Student",
-								"Human➞Religious➞1*ANY"
+								{
+									type: "OR",
+									items: [
+										"Human➞Villager➞Acolyte",
+										"Human➞Villager➞Clerk",
+										"Human➞City Dweller➞Clerk",
+										"Human➞City Dweller➞Student",
+										"Human➞Noble➞Student",
+										"Human➞Noble Court➞Student",
+										"Human➞Religious➞1*ANY"
+									]
+								}
 							]
 						}
 					},
@@ -13316,7 +15940,10 @@ export const Human: Stock = {
 					years: 9
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -13329,7 +15956,8 @@ export const Human: Stock = {
 					mentalPool: 0,
 					name: "Apprentice",
 					physicalPool: 1,
-					requirements: {},
+					requirements: {
+					},
 					resources: 7,
 					setting: "Villager",
 					skillPool: 6,
@@ -13350,7 +15978,10 @@ export const Human: Stock = {
 					years: 7
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
@@ -13365,10 +15996,15 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Villager➞Apprentice",
-								"Human➞Professional Soldier➞Apprentice"
+								{
+									type: "OR",
+									items: [
+										"Human➞Villager➞Apprentice",
+										"Human➞Professional Soldier➞Apprentice"
+									]
+								}
 							]
 						}
 					},
@@ -13390,7 +16026,10 @@ export const Human: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -13403,10 +16042,15 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Villager➞Apprentice",
-								"Human➞Professional Soldier➞Apprentice"
+								{
+									type: "OR",
+									items: [
+										"Human➞Villager➞Apprentice",
+										"Human➞Professional Soldier➞Apprentice"
+									]
+								}
 							]
 						}
 					},
@@ -13429,7 +16073,10 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -13443,13 +16090,18 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Villager➞Apprentice",
-								"Human➞Professional Soldier➞Apprentice",
-								"Human➞Noble Court➞Huntsman",
-								"Human➞Noble Court➞Forester",
-								"Human➞Professional Soldier➞Archer"
+								{
+									type: "OR",
+									items: [
+										"Human➞Villager➞Apprentice",
+										"Human➞Professional Soldier➞Apprentice",
+										"Human➞Noble Court➞Huntsman",
+										"Human➞Noble Court➞Forester",
+										"Human➞Professional Soldier➞Archer"
+									]
+								}
 							]
 						}
 					},
@@ -13465,11 +16117,16 @@ export const Human: Stock = {
 					],
 					stock: "Human",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 6
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -13482,11 +16139,16 @@ export const Human: Stock = {
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞City Dweller➞Journeyman",
-								"Human➞Professional Soldier➞Journeyman",
-								"Human➞Villager➞Journeyman"
+								{
+									type: "OR",
+									items: [
+										"Human➞City Dweller➞Journeyman",
+										"Human➞Professional Soldier➞Journeyman",
+										"Human➞Villager➞Journeyman"
+									]
+								}
 							]
 						}
 					},
@@ -13510,7 +16172,10 @@ export const Human: Stock = {
 					years: 10
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -13522,10 +16187,17 @@ export const Human: Stock = {
 					name: "Vintner",
 					physicalPool: 0,
 					requirements: {
-						limits:
-							[
-								"LP➞MIN➞3"
+						conditions: {
+							type: "AND",
+							items: [
+								{
+									type: "AND",
+									items: [
+										"LP➞MIN➞3"
+									]
+								}
 							]
+						}
 					},
 					resources: 40,
 					setting: "Villager",
@@ -13545,7 +16217,10 @@ export const Human: Stock = {
 					years: 10
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -13557,7 +16232,8 @@ export const Human: Stock = {
 					mentalPool: 1,
 					name: "Apiarist",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 20,
 					setting: "Villager",
 					skillPool: 4,
@@ -13576,7 +16252,10 @@ export const Human: Stock = {
 					years: 8
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -13590,17 +16269,22 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Villager➞Apprentice",
-								"Human➞Professional Soldier➞Apprentice",
-								"Human➞Villager➞Miner",
-								"Human➞City Dweller➞Student",
-								"Human➞Noble➞Student",
-								"Human➞Noble Court➞Student",
-								"Human➞City Dweller➞Journeyman",
-								"Human➞Professional Soldier➞Journeyman",
-								"Human➞Villager➞Journeyman"
+								{
+									type: "OR",
+									items: [
+										"Human➞Villager➞Apprentice",
+										"Human➞Professional Soldier➞Apprentice",
+										"Human➞Villager➞Miner",
+										"Human➞City Dweller➞Student",
+										"Human➞Noble➞Student",
+										"Human➞Noble Court➞Student",
+										"Human➞City Dweller➞Journeyman",
+										"Human➞Professional Soldier➞Journeyman",
+										"Human➞Villager➞Journeyman"
+									]
+								}
 							]
 						}
 					},
@@ -13624,7 +16308,10 @@ export const Human: Stock = {
 					years: 8
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -13638,15 +16325,20 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞City Dweller➞Clerk",
-								"Human➞Villager➞Clerk",
-								"Human➞Religious➞Priest",
-								"Human➞Religious➞Templar",
-								"Human➞City Dweller➞Student",
-								"Human➞Noble➞Student",
-								"Human➞Noble Court➞Student"
+								{
+									type: "OR",
+									items: [
+										"Human➞City Dweller➞Clerk",
+										"Human➞Villager➞Clerk",
+										"Human➞Religious➞Priest",
+										"Human➞Religious➞Templar",
+										"Human➞City Dweller➞Student",
+										"Human➞Noble➞Student",
+										"Human➞Noble Court➞Student"
+									]
+								}
 							]
 						}
 					},
@@ -13669,7 +16361,10 @@ export const Human: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -13683,16 +16378,21 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞City Dweller➞Accountant",
-								"Human➞Seafaring➞Ship's Captain",
-								"Human➞City Dweller➞Shopkeeper",
-								"Human➞Villager➞Shopkeeper",
-								"Human➞Outcast➞Smuggler",
-								"Human➞Outcast➞Fence",
-								"Human➞Villager➞Vintner",
-								"Human➞Noble Court➞Chamberlain"
+								{
+									type: "OR",
+									items: [
+										"Human➞City Dweller➞Accountant",
+										"Human➞Seafaring➞Ship's Captain",
+										"Human➞City Dweller➞Shopkeeper",
+										"Human➞Villager➞Shopkeeper",
+										"Human➞Outcast➞Smuggler",
+										"Human➞Outcast➞Fence",
+										"Human➞Villager➞Vintner",
+										"Human➞Noble Court➞Chamberlain"
+									]
+								}
 							]
 						}
 					},
@@ -13714,7 +16414,10 @@ export const Human: Stock = {
 					years: 7
 				},
 				{
-					allowed: ["bwgr", "bs"],
+					allowed: [
+						"bwgr",
+						"bs"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -13727,7 +16430,7 @@ export const Human: Stock = {
 					name: "Village Wife",
 					physicalPool: 1,
 					requirements: {
-						texts: [
+						"texts": [
 							"Players who take the Village Wife lifepath may also choose their husband's lifepath from the Villager setting. The Village Wife may choose from her husband's skills —she gets half of his skill points (including General points), rounded down— and she gets half of her husband's resources."
 						]
 					},
@@ -13740,11 +16443,15 @@ export const Human: Stock = {
 					],
 					stock: "Human",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 8
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -13757,7 +16464,8 @@ export const Human: Stock = {
 					mentalPool: 1,
 					name: "Wizard's Apprentice",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 10,
 					setting: "Villager",
 					skillPool: 6,
@@ -13780,7 +16488,9 @@ export const Human: Stock = {
 					years: 7
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -13840,7 +16550,9 @@ export const Human: Stock = {
 			]
 		},
 		"Nomad": {
-			allowed: ["bs"],
+			allowed: [
+				"bs"
+			],
 			name: "Nomad",
 			short: "Nomad",
 			stock: "Human",
@@ -13857,13 +16569,25 @@ export const Human: Stock = {
 					generalSkillPool: 2,
 					skillPool: 2,
 					traitPool: 2,
-					leads: ["Human➞Outcast", "Human➞Servitude and Captive"],
-					skills: ["Any Wise➞Migration-wise", "Any General➞Riding"],
-					traits: ["Any Character➞Weathered", "Any Call-on➞Sense of Direction"],
-					requirements: {},
+					leads: [
+						"Human➞Outcast",
+						"Human➞Servitude and Captive"
+					],
+					skills: [
+						"Any Wise➞Migration-wise",
+						"Any General➞Riding"
+					],
+					traits: [
+						"Any Character➞Weathered",
+						"Any Call-on➞Sense of Direction"
+					],
+					requirements: {
+					},
 					stock: "Human",
 					setting: "Nomad",
-					allowed: ["bs"]
+					allowed: [
+						"bs"
+					]
 				},
 				{
 					name: "Forager",
@@ -13876,7 +16600,10 @@ export const Human: Stock = {
 					generalSkillPool: 0,
 					skillPool: 5,
 					traitPool: 2,
-					leads: ["Human➞Outcast", "Human➞Servitude and Captive"],
+					leads: [
+						"Human➞Outcast",
+						"Human➞Servitude and Captive"
+					],
 					skills: [
 						"Any General➞Foraging",
 						"Any General➞Scavenging",
@@ -13884,11 +16611,16 @@ export const Human: Stock = {
 						"Any General➞Cooking",
 						"Any Wise➞Bone-wise"
 					],
-					traits: ["Any Character➞Hoarding"],
-					requirements: {},
+					traits: [
+						"Any Character➞Hoarding"
+					],
+					requirements: {
+					},
 					stock: "Human",
 					setting: "Nomad",
-					allowed: ["bs"]
+					allowed: [
+						"bs"
+					]
 				},
 				{
 					name: "Hunter",
@@ -13901,7 +16633,11 @@ export const Human: Stock = {
 					generalSkillPool: 0,
 					skillPool: 7,
 					traitPool: 1,
-					leads: ["Human➞Peasant", "Human➞Outcast", "Human➞Servitude and Captive"],
+					leads: [
+						"Human➞Peasant",
+						"Human➞Outcast",
+						"Human➞Servitude and Captive"
+					],
 					skills: [
 						"Any General➞Hunting",
 						"Any General➞Tracking",
@@ -13911,11 +16647,16 @@ export const Human: Stock = {
 						"Any General➞Throwing",
 						"Any General➞Bow"
 					],
-					traits: ["Any Character➞Lean"],
-					requirements: {},
+					traits: [
+						"Any Character➞Lean"
+					],
+					requirements: {
+					},
 					stock: "Human",
 					setting: "Nomad",
-					allowed: ["bs"]
+					allowed: [
+						"bs"
+					]
 				},
 				{
 					name: "Apprentice",
@@ -13928,7 +16669,11 @@ export const Human: Stock = {
 					generalSkillPool: 0,
 					skillPool: 6,
 					traitPool: 1,
-					leads: ["Human➞Villager", "Human➞Outcast", "Human➞Servitude and Captive"],
+					leads: [
+						"Human➞Villager",
+						"Human➞Outcast",
+						"Human➞Servitude and Captive"
+					],
 					skills: [
 						"Any General➞Mending",
 						"Any General➞Carving",
@@ -13937,11 +16682,16 @@ export const Human: Stock = {
 						"Any General➞Potter",
 						"Any General➞Weaving"
 					],
-					traits: ["Human Lifepath➞Back-Breaking Labor"],
-					requirements: {},
+					traits: [
+						"Human Lifepath➞Back-Breaking Labor"
+					],
+					requirements: {
+					},
 					stock: "Human",
 					setting: "Nomad",
-					allowed: ["bs"]
+					allowed: [
+						"bs"
+					]
 				},
 				{
 					name: "Herder",
@@ -13954,7 +16704,11 @@ export const Human: Stock = {
 					generalSkillPool: 0,
 					skillPool: 5,
 					traitPool: 1,
-					leads: ["Human➞Peasant", "Human➞Outcast", "Human➞Servitude and Captive"],
+					leads: [
+						"Human➞Peasant",
+						"Human➞Outcast",
+						"Human➞Servitude and Captive"
+					],
 					skills: [
 						"Any General➞Animal Husbandry",
 						"Any General➞Sing",
@@ -13962,11 +16716,16 @@ export const Human: Stock = {
 						"Any Wise➞Predator-wise",
 						"Any General➞Riding"
 					],
-					traits: ["Any Character➞Smelly"],
-					requirements: {},
+					traits: [
+						"Any Character➞Smelly"
+					],
+					requirements: {
+					},
 					stock: "Human",
 					setting: "Nomad",
-					allowed: ["bs"]
+					allowed: [
+						"bs"
+					]
 				},
 				{
 					name: "Lost in the Desert",
@@ -13995,10 +16754,13 @@ export const Human: Stock = {
 						"Any Die➞Unlucky",
 						"Any Character➞Never Out of Sight"
 					],
-					requirements: {},
+					requirements: {
+					},
 					stock: "Human",
 					setting: "Nomad",
-					allowed: ["bs"]
+					allowed: [
+						"bs"
+					]
 				},
 				{
 					name: "Strange",
@@ -14011,8 +16773,15 @@ export const Human: Stock = {
 					generalSkillPool: 0,
 					skillPool: 3,
 					traitPool: 3,
-					leads: ["Human➞Religious", "Human➞Outcast", "Human➞Servitude and Captive"],
-					skills: ["Any General➞Inconspicuous", "Any General➞Foraging"],
+					leads: [
+						"Human➞Religious",
+						"Human➞Outcast",
+						"Human➞Servitude and Captive"
+					],
+					skills: [
+						"Any General➞Inconspicuous",
+						"Any General➞Foraging"
+					],
 					traits: [
 						"Any Character➞Strange",
 						"Human Lifepath➞Problems",
@@ -14021,10 +16790,13 @@ export const Human: Stock = {
 						"Any Die➞Second Sight",
 						"Any Die➞Affinity for Bugs"
 					],
-					requirements: {},
+					requirements: {
+					},
 					stock: "Human",
 					setting: "Nomad",
-					allowed: ["bs"]
+					allowed: [
+						"bs"
+					]
 				},
 				{
 					name: "Pathfinder",
@@ -14050,20 +16822,29 @@ export const Human: Stock = {
 						"Any General➞Survival",
 						"Any Wise➞Oasis-wise"
 					],
-					traits: [],
+					traits: [
+
+					],
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Nomad➞Forager",
-								"Human➞Peasant➞Hunter",
-								"Human➞Nomad➞Hunter"
+								{
+									type: "OR",
+									items: [
+										"Human➞Nomad➞Forager",
+										"Human➞Peasant➞Hunter",
+										"Human➞Nomad➞Hunter"
+									]
+								}
 							]
 						}
 					},
 					stock: "Human",
 					setting: "Nomad",
-					allowed: ["bs"]
+					allowed: [
+						"bs"
+					]
 				},
 				{
 					name: "Guide",
@@ -14095,13 +16876,28 @@ export const Human: Stock = {
 						"Any General➞Soothing Platitudes",
 						"Any General➞Survival"
 					],
-					traits: ["Any Character➞Superstitious", "Human Lifepath➞Tall Tale Teller"],
+					traits: [
+						"Any Character➞Superstitious",
+						"Human Lifepath➞Tall Tale Teller"
+					],
 					requirements: {
-						limits: ["LP➞MIN➞3"]
+						conditions: {
+							type: "AND",
+							items: [
+								{
+									type: "AND",
+									items: [
+										"LP➞MIN➞3"
+									]
+								}
+							]
+						}
 					},
 					stock: "Human",
 					setting: "Nomad",
-					allowed: ["bs"]
+					allowed: [
+						"bs"
+					]
 				},
 				{
 					name: "Peddler",
@@ -14127,23 +16923,33 @@ export const Human: Stock = {
 						"Any General➞Falsehood",
 						"Any General➞Sleight of Hand"
 					],
-					traits: ["Any Character➞Prone to Exaggeration", "Any Call-on➞Glib"],
+					traits: [
+						"Any Character➞Prone to Exaggeration",
+						"Any Call-on➞Glib"
+					],
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞City Dweller➞Apprentice",
-								"Human➞Villager➞Apprentice",
-								"Human➞City Dweller➞Apprentice",
-								"Human➞Nomad➞Apprentice",
-								"Human➞Nomad➞Forager",
-								"Human➞Nomad➞Herder"
+								{
+									type: "OR",
+									items: [
+										"Human➞City Dweller➞Apprentice",
+										"Human➞Villager➞Apprentice",
+										"Human➞City Dweller➞Apprentice",
+										"Human➞Nomad➞Apprentice",
+										"Human➞Nomad➞Forager",
+										"Human➞Nomad➞Herder"
+									]
+								}
 							]
 						}
 					},
 					stock: "Human",
 					setting: "Nomad",
-					allowed: ["bs"]
+					allowed: [
+						"bs"
+					]
 				},
 				{
 					name: "Herd Overseer",
@@ -14156,7 +16962,11 @@ export const Human: Stock = {
 					generalSkillPool: 0,
 					skillPool: 6,
 					traitPool: 1,
-					leads: ["Human➞Outcast", "Human➞Servitude and Captive", "Human➞Merchant House"],
+					leads: [
+						"Human➞Outcast",
+						"Human➞Servitude and Captive",
+						"Human➞Merchant House"
+					],
 					skills: [
 						"Any General➞Appraisal",
 						"Any General➞Brewer",
@@ -14165,18 +16975,28 @@ export const Human: Stock = {
 						"Any Wise➞Kank-wise",
 						"Any Wise➞Erdlu-wise"
 					],
-					traits: ["Any Character➞Grasping", "Any Die➞Rainman"],
+					traits: [
+						"Any Character➞Grasping",
+						"Any Die➞Rainman"
+					],
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Nomad➞Herder"
+								{
+									type: "OR",
+									items: [
+										"Human➞Nomad➞Herder"
+									]
+								}
 							]
 						}
 					},
 					stock: "Human",
 					setting: "Nomad",
-					allowed: ["bs"]
+					allowed: [
+						"bs"
+					]
 				},
 				{
 					name: "Artisan",
@@ -14204,21 +17024,31 @@ export const Human: Stock = {
 						"Any General➞Weaponsmith",
 						"Any General➞Armorer"
 					],
-					traits: ["Human Lifepath➞Made Man", "Any Character➞Improvisation"],
+					traits: [
+						"Human Lifepath➞Made Man",
+						"Any Character➞Improvisation"
+					],
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞City Dweller➞Apprentice",
-								"Human➞Villager➞Apprentice",
-								"Human➞City Dweller➞Apprentice",
-								"Human➞Nomad➞Apprentice"
+								{
+									type: "OR",
+									items: [
+										"Human➞City Dweller➞Apprentice",
+										"Human➞Villager➞Apprentice",
+										"Human➞City Dweller➞Apprentice",
+										"Human➞Nomad➞Apprentice"
+									]
+								}
 							]
 						}
 					},
 					stock: "Human",
 					setting: "Nomad",
-					allowed: ["bs"]
+					allowed: [
+						"bs"
+					]
 				},
 				{
 					name: "Warrior",
@@ -14245,22 +17075,31 @@ export const Human: Stock = {
 						"Any General➞Intimidation",
 						"Any General➞Mounted Combat Training"
 					],
-					traits: ["Any Character➞Proud"],
+					traits: [
+						"Any Character➞Proud"
+					],
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Peasant➞Hunter",
-								"Human➞Nomad➞Hunter",
-								"Human➞Nomad➞Herder",
-								"Human➞Outcast➞Scavenger",
-								"Human➞Nomad➞Scavenger"
+								{
+									type: "OR",
+									items: [
+										"Human➞Peasant➞Hunter",
+										"Human➞Nomad➞Hunter",
+										"Human➞Nomad➞Herder",
+										"Human➞Outcast➞Scavenger",
+										"Human➞Nomad➞Scavenger"
+									]
+								}
 							]
 						}
 					},
 					stock: "Human",
 					setting: "Nomad",
-					allowed: ["bs"]
+					allowed: [
+						"bs"
+					]
 				},
 				{
 					name: "Performer",
@@ -14273,7 +17112,11 @@ export const Human: Stock = {
 					generalSkillPool: 0,
 					skillPool: 6,
 					traitPool: 2,
-					leads: ["Human➞Servitude and Captive", "Human➞Outcast", "Human➞City Dweller"],
+					leads: [
+						"Human➞Servitude and Captive",
+						"Human➞Outcast",
+						"Human➞City Dweller"
+					],
 					skills: [
 						"Any General➞Sing",
 						"Any General➞Dance",
@@ -14282,13 +17125,28 @@ export const Human: Stock = {
 						"Any General➞Falsehood",
 						"Any General➞Sleight of Hand"
 					],
-					traits: ["Any Character➞Colorful", "Any Character➞Exotic"],
+					traits: [
+						"Any Character➞Colorful",
+						"Any Character➞Exotic"
+					],
 					requirements: {
-						limits: ["LP➞MIN➞3"]
+						conditions: {
+							type: "AND",
+							items: [
+								{
+									type: "AND",
+									items: [
+										"LP➞MIN➞3"
+									]
+								}
+							]
+						}
 					},
 					stock: "Human",
 					setting: "Nomad",
-					allowed: ["bs"]
+					allowed: [
+						"bs"
+					]
 				},
 				{
 					name: "Storyteller",
@@ -14301,7 +17159,11 @@ export const Human: Stock = {
 					generalSkillPool: 0,
 					skillPool: 5,
 					traitPool: 1,
-					leads: ["Human➞Servitude and Captive", "Human➞Outcast", "Human➞City Dweller"],
+					leads: [
+						"Human➞Servitude and Captive",
+						"Human➞Outcast",
+						"Human➞City Dweller"
+					],
 					skills: [
 						"Any General➞Folklore",
 						"Any General➞Poetry",
@@ -14309,25 +17171,34 @@ export const Human: Stock = {
 						"Any General➞Oratory",
 						"Any General➞Conspicuous"
 					],
-					traits: ["Any Call-on➞Dramatic"],
+					traits: [
+						"Any Call-on➞Dramatic"
+					],
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Nomad➞Performer",
-								"Human➞Servitude and Captive➞Slave Performer",
-								"Human➞Outcast➞Itinerant Performer",
-								"Human➞City Dweller➞Performer",
-								"Human➞Nomad➞Veteran",
-								"Human➞Professional Soldier➞Veteran",
-								"Human➞Nomad➞Elder",
-								"Human➞Peasant➞Elder"
+								{
+									type: "OR",
+									items: [
+										"Human➞Nomad➞Performer",
+										"Human➞Servitude and Captive➞Slave Performer",
+										"Human➞Outcast➞Itinerant Performer",
+										"Human➞City Dweller➞Performer",
+										"Human➞Nomad➞Veteran",
+										"Human➞Professional Soldier➞Veteran",
+										"Human➞Nomad➞Elder",
+										"Human➞Peasant➞Elder"
+									]
+								}
 							]
 						}
 					},
 					stock: "Human",
 					setting: "Nomad",
-					allowed: ["bs"]
+					allowed: [
+						"bs"
+					]
 				},
 				{
 					name: "Tribal Wife",
@@ -14340,15 +17211,35 @@ export const Human: Stock = {
 					generalSkillPool: 0,
 					skillPool: 2,
 					traitPool: 2,
-					leads: ["Human➞Servitude and Captive", "Human➞Outcast"],
-					skills: ["Any General➞Child-Rearing", "Any General➞Cooking"],
-					traits: ["Any Character➞Burdened"],
+					leads: [
+						"Human➞Servitude and Captive",
+						"Human➞Outcast"
+					],
+					skills: [
+						"Any General➞Child-Rearing",
+						"Any General➞Cooking"
+					],
+					traits: [
+						"Any Character➞Burdened"
+					],
 					requirements: {
-						limits: ["LP➞MIN➞3"]
+						conditions: {
+							type: "AND",
+							items: [
+								{
+									type: "AND",
+									items: [
+										"LP➞MIN➞3"
+									]
+								}
+							]
+						}
 					},
 					stock: "Human",
 					setting: "Nomad",
-					allowed: ["bs"]
+					allowed: [
+						"bs"
+					]
 				},
 				{
 					name: "Healer",
@@ -14361,7 +17252,10 @@ export const Human: Stock = {
 					generalSkillPool: 0,
 					skillPool: 5,
 					traitPool: 2,
-					leads: ["Human➞Servitude and Captive", "Human➞Outcast"],
+					leads: [
+						"Human➞Servitude and Captive",
+						"Human➞Outcast"
+					],
 					skills: [
 						"Any General➞Soothing Platitudes",
 						"Any General➞Herbalism",
@@ -14376,18 +17270,25 @@ export const Human: Stock = {
 					],
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Nomad➞Herder",
-								"Human➞Nomad➞Shaman",
-								"Human➞Professional Soldier➞Veteran",
-								"Human➞Nomad➞Veteran"
+								{
+									type: "OR",
+									items: [
+										"Human➞Nomad➞Herder",
+										"Human➞Nomad➞Shaman",
+										"Human➞Professional Soldier➞Veteran",
+										"Human➞Nomad➞Veteran"
+									]
+								}
 							]
 						}
 					},
 					stock: "Human",
 					setting: "Nomad",
-					allowed: ["bs"]
+					allowed: [
+						"bs"
+					]
 				},
 				{
 					name: "Trader",
@@ -14415,24 +17316,33 @@ export const Human: Stock = {
 						"Any Wise➞City Dweller-wise",
 						"Any Wise➞Caravan-wise"
 					],
-					traits: [],
+					traits: [
+
+					],
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Nomad➞Herd Overseer",
-								"Human➞Nomad➞Artisan",
-								"Human➞City Dweller➞Artisan",
-								"Human➞Nomad➞Raider",
-								"Human➞City Dweller➞City Peddler",
-								"Human➞Peasant➞Peddler",
-								"Human➞Villager➞Village Peddler"
+								{
+									type: "OR",
+									items: [
+										"Human➞Nomad➞Herd Overseer",
+										"Human➞Nomad➞Artisan",
+										"Human➞City Dweller➞Artisan",
+										"Human➞Nomad➞Raider",
+										"Human➞City Dweller➞City Peddler",
+										"Human➞Peasant➞Peddler",
+										"Human➞Villager➞Village Peddler"
+									]
+								}
 							]
 						}
 					},
 					stock: "Human",
 					setting: "Nomad",
-					allowed: ["bs"]
+					allowed: [
+						"bs"
+					]
 				},
 				{
 					name: "Raider",
@@ -14466,17 +17376,24 @@ export const Human: Stock = {
 					],
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Nomad➞Warrior",
-								"Human➞Professional Soldier➞Scout",
-								"Human➞Nomad➞Trader"
+								{
+									type: "OR",
+									items: [
+										"Human➞Nomad➞Warrior",
+										"Human➞Professional Soldier➞Scout",
+										"Human➞Nomad➞Trader"
+									]
+								}
 							]
 						}
 					},
 					stock: "Human",
 					setting: "Nomad",
-					allowed: ["bs"]
+					allowed: [
+						"bs"
+					]
 				},
 				{
 					name: "Veteran",
@@ -14501,19 +17418,29 @@ export const Human: Stock = {
 						"Any General➞Soldiering",
 						"Any General➞Command"
 					],
-					traits: ["Any Die➞Stubborn", "Human Lifepath➞Maimed"],
+					traits: [
+						"Any Die➞Stubborn",
+						"Human Lifepath➞Maimed"
+					],
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Nomad➞Warrior",
-								"Human➞Nomad➞Raider"
+								{
+									type: "OR",
+									items: [
+										"Human➞Nomad➞Warrior",
+										"Human➞Nomad➞Raider"
+									]
+								}
 							]
 						}
 					},
 					stock: "Human",
 					setting: "Nomad",
-					allowed: ["bs"]
+					allowed: [
+						"bs"
+					]
 				},
 				{
 					name: "Shaman",
@@ -14526,7 +17453,11 @@ export const Human: Stock = {
 					generalSkillPool: 0,
 					skillPool: 6,
 					traitPool: 2,
-					leads: ["Human➞Outcast", "Human➞Servitude and Captive", "Human➞Religious"],
+					leads: [
+						"Human➞Outcast",
+						"Human➞Servitude and Captive",
+						"Human➞Religious"
+					],
 					skills: [
 						"Any General➞Folklore",
 						"Human Special➞Astrology",
@@ -14542,16 +17473,23 @@ export const Human: Stock = {
 					],
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Religious➞1*ANY",
-								"Human➞Nomad➞Strange"
+								{
+									type: "OR",
+									items: [
+										"Human➞Religious➞1*ANY",
+										"Human➞Nomad➞Strange"
+									]
+								}
 							]
 						}
 					},
 					stock: "Human",
 					setting: "Nomad",
-					allowed: ["bs"]
+					allowed: [
+						"bs"
+					]
 				},
 				{
 					name: "Patriarch/Matriarch",
@@ -14564,7 +17502,10 @@ export const Human: Stock = {
 					generalSkillPool: 0,
 					skillPool: 8,
 					traitPool: 2,
-					leads: ["Human➞Outcast", "Human➞Servitude and Captive"],
+					leads: [
+						"Human➞Outcast",
+						"Human➞Servitude and Captive"
+					],
 					skills: [
 						"Any Wise➞Family-wise",
 						"Any Wise➞Ancestor-wise",
@@ -14572,22 +17513,32 @@ export const Human: Stock = {
 						"Any General➞Persuasion",
 						"Any General➞Almanac"
 					],
-					traits: ["Any Character➞Honored", "Any Character➞Conservative"],
+					traits: [
+						"Any Character➞Honored",
+						"Any Character➞Conservative"
+					],
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Nomad➞Herd Overseer",
-								"Human➞Professional Soldier➞Veteran",
-								"Human➞Nomad➞Veteran",
-								"Human➞Nomad➞Artisan",
-								"Human➞City Dweller➞Artisan"
+								{
+									type: "OR",
+									items: [
+										"Human➞Nomad➞Herd Overseer",
+										"Human➞Professional Soldier➞Veteran",
+										"Human➞Nomad➞Veteran",
+										"Human➞Nomad➞Artisan",
+										"Human➞City Dweller➞Artisan"
+									]
+								}
 							]
 						}
 					},
 					stock: "Human",
 					setting: "Nomad",
-					allowed: ["bs"]
+					allowed: [
+						"bs"
+					]
 				},
 				{
 					name: "Warleader",
@@ -14621,17 +17572,24 @@ export const Human: Stock = {
 					],
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Nomad➞Headman",
-								"Human➞Professional Soldier➞Veteran",
-								"Human➞Nomad➞Veteran"
+								{
+									type: "OR",
+									items: [
+										"Human➞Nomad➞Headman",
+										"Human➞Professional Soldier➞Veteran",
+										"Human➞Nomad➞Veteran"
+									]
+								}
 							]
 						}
 					},
 					stock: "Human",
 					setting: "Nomad",
-					allowed: ["bs"]
+					allowed: [
+						"bs"
+					]
 				},
 				{
 					name: "Headman",
@@ -14644,28 +17602,40 @@ export const Human: Stock = {
 					generalSkillPool: 2,
 					skillPool: 4,
 					traitPool: 1,
-					leads: ["Human➞Outcast", "Human➞Servitude and Captive"],
+					leads: [
+						"Human➞Outcast",
+						"Human➞Servitude and Captive"
+					],
 					skills: [
 						"Any Wise➞Tribe-wise",
 						"Any General➞Oratory",
 						"Any General➞Administration",
 						"Any Wise➞Waste-wise"
 					],
-					traits: ["Human Lifepath➞Savvy"],
+					traits: [
+						"Human Lifepath➞Savvy"
+					],
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Nomad➞Patriarch/Matriarch",
-								"Human➞Nomad➞Trader",
-								"Human➞Nomad➞Warleader",
-								"Human➞Outcast➞Ravager"
+								{
+									type: "OR",
+									items: [
+										"Human➞Nomad➞Patriarch/Matriarch",
+										"Human➞Nomad➞Trader",
+										"Human➞Nomad➞Warleader",
+										"Human➞Outcast➞Ravager"
+									]
+								}
 							]
 						}
 					},
 					stock: "Human",
 					setting: "Nomad",
-					allowed: ["bs"]
+					allowed: [
+						"bs"
+					]
 				},
 				{
 					name: "Elder",
@@ -14678,7 +17648,10 @@ export const Human: Stock = {
 					generalSkillPool: 0,
 					skillPool: 6,
 					traitPool: 2,
-					leads: ["Human➞Peasant", "Human➞Servitude and Captive"],
+					leads: [
+						"Human➞Peasant",
+						"Human➞Servitude and Captive"
+					],
 					skills: [
 						"Any General➞Local History",
 						"Any Wise➞Tribe-wise",
@@ -14693,11 +17666,23 @@ export const Human: Stock = {
 						"Any Character➞Eccentric"
 					],
 					requirements: {
-						limits: ["LP➞MIN➞45"]
+						conditions: {
+							type: "AND",
+							items: [
+								{
+									type: "AND",
+									items: [
+										"YEARS➞MIN➞45"
+									]
+								}
+							]
+						}
 					},
 					stock: "Human",
 					setting: "Nomad",
-					allowed: ["bs"]
+					allowed: [
+						"bs"
+					]
 				},
 				{
 					name: "Wanderer",
@@ -14710,7 +17695,9 @@ export const Human: Stock = {
 					generalSkillPool: 0,
 					skillPool: 6,
 					traitPool: 2,
-					leads: ["Human➞Villager"],
+					leads: [
+						"Human➞Villager"
+					],
 					skills: [
 						"Any General➞Survival",
 						"Any Wise➞Waste-wise",
@@ -14724,10 +17711,13 @@ export const Human: Stock = {
 						"Any Die➞Light Sleeper",
 						"Any Character➞Strange"
 					],
-					requirements: {},
+					requirements: {
+					},
 					stock: "Human",
 					setting: "Nomad",
-					allowed: ["bs"]
+					allowed: [
+						"bs"
+					]
 				},
 				{
 					name: "Bandit",
@@ -14740,7 +17730,10 @@ export const Human: Stock = {
 					generalSkillPool: 0,
 					skillPool: 6,
 					traitPool: 1,
-					leads: ["Human➞Outcast", "Human➞Peasant"],
+					leads: [
+						"Human➞Outcast",
+						"Human➞Peasant"
+					],
 					skills: [
 						"Any General➞Appropriate Weapons",
 						"Any General➞Stealthy",
@@ -14749,11 +17742,16 @@ export const Human: Stock = {
 						"Any Wise➞Waste-wise",
 						"Any General➞Intimidation"
 					],
-					traits: [],
-					requirements: {},
+					traits: [
+
+					],
+					requirements: {
+					},
 					stock: "Human",
 					setting: "Nomad",
-					allowed: ["bs"]
+					allowed: [
+						"bs"
+					]
 				},
 				{
 					name: "Bandit King",
@@ -14766,7 +17764,11 @@ export const Human: Stock = {
 					generalSkillPool: 0,
 					skillPool: 7,
 					traitPool: 2,
-					leads: ["Human➞Outcast", "Human➞City Dweller", "Human➞Noble Court"],
+					leads: [
+						"Human➞Outcast",
+						"Human➞City Dweller",
+						"Human➞Noble Court"
+					],
 					skills: [
 						"Any General➞Intimidation",
 						"Any General➞Command",
@@ -14784,22 +17786,29 @@ export const Human: Stock = {
 					],
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Outcast➞Bandit",
-								"Human➞Nomad➞Bandit",
-								"Human➞Villager➞Village Sergeant",
-								"Human➞Villager➞Corrupt Sergeant",
-								"Human➞Professional Soldier➞Sergeant",
-								"Human➞Noble➞Knight",
-								"Human➞Noble Court➞Knight",
-								"Human➞Professional Soldier➞Captain"
+								{
+									type: "OR",
+									items: [
+										"Human➞Outcast➞Bandit",
+										"Human➞Nomad➞Bandit",
+										"Human➞Villager➞Village Sergeant",
+										"Human➞Villager➞Corrupt Sergeant",
+										"Human➞Professional Soldier➞Sergeant",
+										"Human➞Noble➞Knight",
+										"Human➞Noble Court➞Knight",
+										"Human➞Professional Soldier➞Captain"
+									]
+								}
 							]
 						}
 					},
 					stock: "Human",
 					setting: "Nomad",
-					allowed: ["bs"]
+					allowed: [
+						"bs"
+					]
 				},
 				{
 					name: "Monster Hunter",
@@ -14812,7 +17821,10 @@ export const Human: Stock = {
 					generalSkillPool: 0,
 					skillPool: 7,
 					traitPool: 2,
-					leads: ["Human➞Outcast", "Human➞Peasant"],
+					leads: [
+						"Human➞Outcast",
+						"Human➞Peasant"
+					],
 					skills: [
 						"Any General➞Stealthy",
 						"Any Wise➞Fell Beast-wise",
@@ -14830,15 +17842,22 @@ export const Human: Stock = {
 					],
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Outcast➞1*ANY"
+								{
+									type: "OR",
+									items: [
+										"Human➞Outcast➞1*ANY"
+									]
+								}
 							]
 						}
 					},
 					stock: "Human",
 					setting: "Nomad",
-					allowed: ["bs"]
+					allowed: [
+						"bs"
+					]
 				},
 				{
 					name: "Bandit Hunter",
@@ -14870,10 +17889,13 @@ export const Human: Stock = {
 						"Any Die➞Light Sleeper",
 						"Any Character➞Callous"
 					],
-					requirements: {},
+					requirements: {
+					},
 					stock: "Human",
 					setting: "Nomad",
-					allowed: ["bs"]
+					allowed: [
+						"bs"
+					]
 				},
 				{
 					name: "Scavenger",
@@ -14906,10 +17928,13 @@ export const Human: Stock = {
 						"Any Character➞Odd",
 						"Any Character➞Nasty Cough"
 					],
-					requirements: {},
+					requirements: {
+					},
 					stock: "Human",
 					setting: "Nomad",
-					allowed: ["bs"]
+					allowed: [
+						"bs"
+					]
 				},
 				{
 					name: "Ruin Explorer",
@@ -14946,21 +17971,30 @@ export const Human: Stock = {
 					],
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞Outcast➞Scavenger",
-								"Human➞Nomad➞Scavenger"
+								{
+									type: "OR",
+									items: [
+										"Human➞Outcast➞Scavenger",
+										"Human➞Nomad➞Scavenger"
+									]
+								}
 							]
 						}
 					},
 					stock: "Human",
 					setting: "Nomad",
-					allowed: ["bs"]
+					allowed: [
+						"bs"
+					]
 				}
 			]
 		},
 		"Merchant House": {
-			allowed: ["bs"],
+			allowed: [
+				"bs"
+			],
 			name: "Merchant House",
 			short: "Merchant",
 			stock: "Human",
@@ -14977,7 +18011,10 @@ export const Human: Stock = {
 					generalSkillPool: 0,
 					skillPool: 5,
 					traitPool: 2,
-					leads: ["Human➞City Dweller", "Human➞Outcast"],
+					leads: [
+						"Human➞City Dweller",
+						"Human➞Outcast"
+					],
 					skills: [
 						"Any General➞Driving",
 						"Any General➞Mending",
@@ -14985,11 +18022,17 @@ export const Human: Stock = {
 						"Any Wise➞Caravan-wise",
 						"Any General➞Brawling"
 					],
-					traits: ["Any Character➞Dusty", "Any Character➞Tired"],
-					requirements: {},
+					traits: [
+						"Any Character➞Dusty",
+						"Any Character➞Tired"
+					],
+					requirements: {
+					},
 					stock: "Human",
 					setting: "Merchant House",
-					allowed: ["bs"]
+					allowed: [
+						"bs"
+					]
 				},
 				{
 					name: "Caravan Guard",
@@ -15002,7 +18045,10 @@ export const Human: Stock = {
 					generalSkillPool: 0,
 					skillPool: 6,
 					traitPool: 1,
-					leads: ["Human➞City Dweller", "Human➞Outcast"],
+					leads: [
+						"Human➞City Dweller",
+						"Human➞Outcast"
+					],
 					skills: [
 						"Any General➞Intimidation",
 						"Any General➞Brawling",
@@ -15011,21 +18057,30 @@ export const Human: Stock = {
 						"Any Wise➞Waste-wise",
 						"Any Wise➞Bandit-wise"
 					],
-					traits: [],
+					traits: [
+
+					],
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Human➞City Dweller➞City Guard",
-								"Human➞Professional Soldier➞1*ANY",
-								"Human➞Outcast➞Bandit",
-								"Human➞Nomad➞Bandit"
+								{
+									type: "OR",
+									items: [
+										"Human➞City Dweller➞City Guard",
+										"Human➞Professional Soldier➞1*ANY",
+										"Human➞Outcast➞Bandit",
+										"Human➞Nomad➞Bandit"
+									]
+								}
 							]
 						}
 					},
 					stock: "Human",
 					setting: "Merchant House",
-					allowed: ["bs"]
+					allowed: [
+						"bs"
+					]
 				},
 				{
 					name: "Caravan Outrider",
@@ -15038,7 +18093,10 @@ export const Human: Stock = {
 					generalSkillPool: 0,
 					skillPool: 8,
 					traitPool: 1,
-					leads: ["Human➞Professional Soldier", "Human➞Outcast"],
+					leads: [
+						"Human➞Professional Soldier",
+						"Human➞Outcast"
+					],
 					skills: [
 						"Any General➞Mounted Combat Training",
 						"Any General➞Riding",
@@ -15049,19 +18107,28 @@ export const Human: Stock = {
 						"Any Wise➞Waste-wise",
 						"Any Wise➞Bandit-wise"
 					],
-					traits: [],
+					traits: [
+
+					],
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Skill➞Any General➞Riding",
-								"Human➞Merchant House➞Caravan Guard"
+								{
+									type: "OR",
+									items: [
+										"Skill➞Any General➞Riding",
+										"Human➞Merchant House➞Caravan Guard"
+									]
+								}
 							]
 						}
 					},
 					stock: "Human",
 					setting: "Merchant House",
-					allowed: ["bs"]
+					allowed: [
+						"bs"
+					]
 				},
 				{
 					name: "Caravan Master",
@@ -15074,7 +18141,11 @@ export const Human: Stock = {
 					generalSkillPool: 0,
 					skillPool: 7,
 					traitPool: 2,
-					leads: ["Human➞City Dweller", "Human➞Noble Court", "Human➞Outcast"],
+					leads: [
+						"Human➞City Dweller",
+						"Human➞Noble Court",
+						"Human➞Outcast"
+					],
 					skills: [
 						"Any General➞Caravan Management",
 						"Any General➞Foreign Languages",
@@ -15084,19 +18155,28 @@ export const Human: Stock = {
 						"Any Wise➞Waste-wise",
 						"Any Wise➞Duststorm-wise"
 					],
-					traits: [],
+					traits: [
+
+					],
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Skill➞Any General➞Riding",
-								"Human➞Merchant House➞Caravan Guard"
+								{
+									type: "OR",
+									items: [
+										"Skill➞Any General➞Riding",
+										"Human➞Merchant House➞Caravan Guard"
+									]
+								}
 							]
 						}
 					},
 					stock: "Human",
 					setting: "Merchant House",
-					allowed: ["bs"]
+					allowed: [
+						"bs"
+					]
 				},
 				{
 					name: "Camp Follower",
@@ -15109,7 +18189,10 @@ export const Human: Stock = {
 					generalSkillPool: 0,
 					skillPool: 5,
 					traitPool: 2,
-					leads: ["Human➞City Dweller", "Human➞Outcast"],
+					leads: [
+						"Human➞City Dweller",
+						"Human➞Outcast"
+					],
 					skills: [
 						"Any General➞Conspicuous",
 						"Any General➞Persuasion",
@@ -15123,10 +18206,13 @@ export const Human: Stock = {
 						"Any Character➞Bitter",
 						"Human Lifepath➞Broken"
 					],
-					requirements: {},
+					requirements: {
+					},
 					stock: "Human",
 					setting: "Merchant House",
-					allowed: ["bs"]
+					allowed: [
+						"bs"
+					]
 				}
 			]
 		}

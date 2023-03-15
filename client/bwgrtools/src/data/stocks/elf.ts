@@ -2,26 +2,118 @@ import { Stock } from "./_stocks";
 
 export const Elf: Stock = {
 	agePool: [
-		{ max: 25, min: 0, m: 7, p: 13 },
-		{ max: 60, min: 26, m: 8, p: 13 },
-		{ max: 100, min: 61, m: 9, p: 14 },
-		{ max: 125, min: 101, m: 9, p: 15 },
-		{ max: 160, min: 126, m: 10, p: 16 },
-		{ max: 225, min: 161, m: 10, p: 17 },
-		{ max: 325, min: 226, m: 11, p: 17 },
-		{ max: 425, min: 326, m: 12, p: 17 },
-		{ max: 525, min: 426, m: 13, p: 18 },
-		{ max: 625, min: 526, m: 13, p: 19 },
-		{ max: 725, min: 626, m: 14, p: 19 },
-		{ max: 825, min: 726, m: 14, p: 20 },
-		{ max: 925, min: 826, m: 15, p: 20 },
-		{ max: 1025, min: 926, m: 15, p: 21 },
-		{ max: 1125, min: 1026, m: 15, p: 22 },
-		{ max: 1225, min: 1126, m: 15, p: 23 },
-		{ max: 1325, min: 1226, m: 15, p: 24 },
-		{ max: 99999, min: 1326, m: 16, p: 24 }
+		{
+			max: 25,
+			min: 0,
+			m: 7,
+			p: 13
+		},
+		{
+			max: 60,
+			min: 26,
+			m: 8,
+			p: 13
+		},
+		{
+			max: 100,
+			min: 61,
+			m: 9,
+			p: 14
+		},
+		{
+			max: 125,
+			min: 101,
+			m: 9,
+			p: 15
+		},
+		{
+			max: 160,
+			min: 126,
+			m: 10,
+			p: 16
+		},
+		{
+			max: 225,
+			min: 161,
+			m: 10,
+			p: 17
+		},
+		{
+			max: 325,
+			min: 226,
+			m: 11,
+			p: 17
+		},
+		{
+			max: 425,
+			min: 326,
+			m: 12,
+			p: 17
+		},
+		{
+			max: 525,
+			min: 426,
+			m: 13,
+			p: 18
+		},
+		{
+			max: 625,
+			min: 526,
+			m: 13,
+			p: 19
+		},
+		{
+			max: 725,
+			min: 626,
+			m: 14,
+			p: 19
+		},
+		{
+			max: 825,
+			min: 726,
+			m: 14,
+			p: 20
+		},
+		{
+			max: 925,
+			min: 826,
+			m: 15,
+			p: 20
+		},
+		{
+			max: 1025,
+			min: 926,
+			m: 15,
+			p: 21
+		},
+		{
+			max: 1125,
+			min: 1026,
+			m: 15,
+			p: 22
+		},
+		{
+			max: 1225,
+			min: 1126,
+			m: 15,
+			p: 23
+		},
+		{
+			max: 1325,
+			min: 1226,
+			m: 15,
+			p: 24
+		},
+		{
+			max: 99999,
+			min: 1326,
+			m: 16,
+			p: 24
+		}
 	],
-	allowed: ["bwgr"],
+	allowed: [
+		"bwgr"
+	],
 	hasSetting: true,
 	hasSubsetting: true,
 	name: "Elf",
@@ -29,14 +121,18 @@ export const Elf: Stock = {
 	stride: 8,
 	settings: {
 		"Wilderlands": {
-			allowed: ["bwgr"],
+			allowed: [
+				"bwgr"
+			],
 			name: "Wilderlands",
 			short: "Wilderlands",
 			stock: "Elf",
 			type: "Setting",
 			lifepaths: [
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: true,
 					eitherPool: 0,
 					generalSkillPool: 4,
@@ -47,7 +143,8 @@ export const Elf: Stock = {
 					mentalPool: 0,
 					name: "Born Wilder Elf",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 5,
 					setting: "Wilderlands",
 					skillPool: 2,
@@ -57,11 +154,15 @@ export const Elf: Stock = {
 					],
 					stock: "Elf",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 20
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -73,7 +174,8 @@ export const Elf: Stock = {
 					mentalPool: 0,
 					name: "Rider",
 					physicalPool: 1,
-					requirements: {},
+					requirements: {
+					},
 					resources: 3,
 					setting: "Wilderlands",
 					skillPool: 6,
@@ -90,7 +192,9 @@ export const Elf: Stock = {
 					years: 20
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -101,7 +205,8 @@ export const Elf: Stock = {
 					mentalPool: 0,
 					name: "Harvester",
 					physicalPool: 1,
-					requirements: {},
+					requirements: {
+					},
 					resources: 5,
 					setting: "Wilderlands",
 					skillPool: 5,
@@ -119,7 +224,9 @@ export const Elf: Stock = {
 					years: 50
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -129,7 +236,8 @@ export const Elf: Stock = {
 					mentalPool: 0,
 					name: "Gatherer",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 3,
 					setting: "Wilderlands",
 					skillPool: 5,
@@ -146,7 +254,9 @@ export const Elf: Stock = {
 					years: 40
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -157,7 +267,8 @@ export const Elf: Stock = {
 					mentalPool: 0,
 					name: "Fisherman",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 8,
 					setting: "Wilderlands",
 					skillPool: 9,
@@ -179,7 +290,9 @@ export const Elf: Stock = {
 					years: 50
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -190,7 +303,8 @@ export const Elf: Stock = {
 					mentalPool: 0,
 					name: "Shepherd",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 6,
 					setting: "Wilderlands",
 					skillPool: 4,
@@ -207,7 +321,9 @@ export const Elf: Stock = {
 					years: 45
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -218,7 +334,8 @@ export const Elf: Stock = {
 					mentalPool: 0,
 					name: "Wanderer",
 					physicalPool: 1,
-					requirements: {},
+					requirements: {
+					},
 					resources: 5,
 					setting: "Wilderlands",
 					skillPool: 6,
@@ -230,11 +347,15 @@ export const Elf: Stock = {
 					],
 					stock: "Elf",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 75
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -246,7 +367,8 @@ export const Elf: Stock = {
 					mentalPool: 0,
 					name: "Huntsman",
 					physicalPool: 1,
-					requirements: {},
+					requirements: {
+					},
 					resources: 9,
 					setting: "Wilderlands",
 					skillPool: 7,
@@ -266,7 +388,9 @@ export const Elf: Stock = {
 					years: 45
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -278,7 +402,8 @@ export const Elf: Stock = {
 					mentalPool: 1,
 					name: "Chandler",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 15,
 					setting: "Wilderlands",
 					skillPool: 5,
@@ -290,11 +415,15 @@ export const Elf: Stock = {
 					],
 					stock: "Elf",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 50
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -305,7 +434,8 @@ export const Elf: Stock = {
 					mentalPool: 1,
 					name: "Weaver",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 10,
 					setting: "Wilderlands",
 					skillPool: 5,
@@ -322,7 +452,9 @@ export const Elf: Stock = {
 					years: 50
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -334,7 +466,8 @@ export const Elf: Stock = {
 					mentalPool: 0,
 					name: "Forester",
 					physicalPool: 1,
-					requirements: {},
+					requirements: {
+					},
 					resources: 5,
 					setting: "Wilderlands",
 					skillPool: 6,
@@ -352,7 +485,9 @@ export const Elf: Stock = {
 					years: 90
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -363,7 +498,8 @@ export const Elf: Stock = {
 					mentalPool: 1,
 					name: "Vintner",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 20,
 					setting: "Wilderlands",
 					skillPool: 7,
@@ -382,7 +518,9 @@ export const Elf: Stock = {
 					years: 60
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -393,7 +531,8 @@ export const Elf: Stock = {
 					mentalPool: 1,
 					name: "Miller",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 18,
 					setting: "Wilderlands",
 					skillPool: 6,
@@ -412,7 +551,9 @@ export const Elf: Stock = {
 					years: 60
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -424,7 +565,8 @@ export const Elf: Stock = {
 					mentalPool: 1,
 					name: "Song Singer",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 10,
 					setting: "Wilderlands",
 					skillPool: 6,
@@ -442,7 +584,9 @@ export const Elf: Stock = {
 					years: 45
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -454,7 +598,8 @@ export const Elf: Stock = {
 					mentalPool: 1,
 					name: "Spouse",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 10,
 					setting: "Wilderlands",
 					skillPool: 5,
@@ -466,11 +611,15 @@ export const Elf: Stock = {
 					],
 					stock: "Elf",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 75
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -483,9 +632,14 @@ export const Elf: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Elf➞Wilderlands➞Spouse"
+								{
+									type: "OR",
+									items: [
+										"Elf➞Wilderlands➞Spouse"
+									]
+								}
 							]
 						}
 					},
@@ -505,7 +659,9 @@ export const Elf: Stock = {
 					years: 100
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -518,10 +674,18 @@ export const Elf: Stock = {
 					name: "Elder",
 					physicalPool: 0,
 					requirements: {
-						// NOTE: [LIFEPATHS] First part of this must be turned into a limit maybe
-						texts: [
-							"The character must be 750 years old after taking this path or the oldest character in the group by 100 years."
-						]
+						conditions: {
+							type: "AND",
+							items: [
+								{
+									type: "OR",
+									items: [
+										"YEARS➞MIN➞600",
+										"OLDESTBY➞100"
+									]
+								}
+							]
+						}
 					},
 					resources: 30,
 					setting: "Wilderlands",
@@ -540,14 +704,18 @@ export const Elf: Stock = {
 			]
 		},
 		"Citadel": {
-			allowed: ["bwgr"],
+			allowed: [
+				"bwgr"
+			],
 			name: "Citadel",
 			short: "Citadel",
 			stock: "Elf",
 			type: "Setting",
 			lifepaths: [
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: true,
 					eitherPool: 0,
 					generalSkillPool: 5,
@@ -558,7 +726,8 @@ export const Elf: Stock = {
 					mentalPool: 0,
 					name: "Citadel Born",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 7,
 					setting: "Citadel",
 					skillPool: 2,
@@ -568,11 +737,15 @@ export const Elf: Stock = {
 					],
 					stock: "Elf",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 20
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -584,7 +757,8 @@ export const Elf: Stock = {
 					mentalPool: 0,
 					name: "Servitor",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 5,
 					setting: "Citadel",
 					skillPool: 5,
@@ -603,7 +777,9 @@ export const Elf: Stock = {
 					years: 20
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -614,7 +790,8 @@ export const Elf: Stock = {
 					mentalPool: 0,
 					name: "Wanderer",
 					physicalPool: 1,
-					requirements: {},
+					requirements: {
+					},
 					resources: 5,
 					setting: "Citadel",
 					skillPool: 6,
@@ -632,7 +809,9 @@ export const Elf: Stock = {
 					years: 75
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -644,7 +823,8 @@ export const Elf: Stock = {
 					mentalPool: 1,
 					name: "Song Singer",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 10,
 					setting: "Citadel",
 					skillPool: 5,
@@ -662,7 +842,9 @@ export const Elf: Stock = {
 					years: 25
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -674,7 +856,8 @@ export const Elf: Stock = {
 					mentalPool: 1,
 					name: "Student",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 10,
 					setting: "Citadel",
 					skillPool: 6,
@@ -692,7 +875,9 @@ export const Elf: Stock = {
 					years: 20
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -704,7 +889,8 @@ export const Elf: Stock = {
 					mentalPool: 0,
 					name: "Clothier",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 20,
 					setting: "Citadel",
 					skillPool: 7,
@@ -722,7 +908,9 @@ export const Elf: Stock = {
 					years: 75
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -737,15 +925,20 @@ export const Elf: Stock = {
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Elf➞Citadel➞Wanderer",
-								"Elf➞Citadel➞Seafarer",
-								"Elf➞Wilderlands➞Spouse",
-								"Elf➞Wilderlands➞Rider",
-								"Elf➞Wilderlands➞Huntsman",
-								"Elf➞Etharch➞1*ANY",
-								"Elf➞Protector➞1*ANY"
+								{
+									type: "OR",
+									items: [
+										"Elf➞Citadel➞Wanderer",
+										"Elf➞Citadel➞Seafarer",
+										"Elf➞Wilderlands➞Spouse",
+										"Elf➞Wilderlands➞Rider",
+										"Elf➞Wilderlands➞Huntsman",
+										"Elf➞Etharch➞1*ANY",
+										"Elf➞Protector➞1*ANY"
+									]
+								}
 							]
 						}
 					},
@@ -770,7 +963,9 @@ export const Elf: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -782,7 +977,8 @@ export const Elf: Stock = {
 					mentalPool: 0,
 					name: "Seafarer",
 					physicalPool: 1,
-					requirements: {},
+					requirements: {
+					},
 					resources: 5,
 					setting: "Citadel",
 					skillPool: 9,
@@ -803,7 +999,9 @@ export const Elf: Stock = {
 					years: 50
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -818,13 +1016,18 @@ export const Elf: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Elf➞Citadel➞Seafarer",
-								"Elf➞Citadel➞Adjutant",
-								"Elf➞Protector➞Lieutenant",
-								"Elf➞Etharch➞Sword Singer",
-								"Elf➞Protector➞Sword Singer"
+								{
+									type: "OR",
+									items: [
+										"Elf➞Citadel➞Seafarer",
+										"Elf➞Citadel➞Adjutant",
+										"Elf➞Protector➞Lieutenant",
+										"Elf➞Etharch➞Sword Singer",
+										"Elf➞Protector➞Sword Singer"
+									]
+								}
 							]
 						}
 					},
@@ -840,11 +1043,15 @@ export const Elf: Stock = {
 					],
 					stock: "Elf",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 100
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -855,7 +1062,8 @@ export const Elf: Stock = {
 					mentalPool: 0,
 					name: "Novice",
 					physicalPool: 1,
-					requirements: {},
+					requirements: {
+					},
 					resources: 10,
 					setting: "Citadel",
 					skillPool: 4,
@@ -872,7 +1080,9 @@ export const Elf: Stock = {
 					years: 10
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -886,9 +1096,14 @@ export const Elf: Stock = {
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Elf➞Citadel➞Novice"
+								{
+									type: "OR",
+									items: [
+										"Elf➞Citadel➞Novice"
+									]
+								}
 							]
 						}
 					},
@@ -908,7 +1123,9 @@ export const Elf: Stock = {
 					years: 35
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -922,9 +1139,14 @@ export const Elf: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Elf➞Citadel➞Shaper"
+								{
+									type: "OR",
+									items: [
+										"Elf➞Citadel➞Shaper"
+									]
+								}
 							]
 						}
 					},
@@ -945,7 +1167,9 @@ export const Elf: Stock = {
 					years: 75
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -960,9 +1184,14 @@ export const Elf: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Elf➞Citadel➞Shaper"
+								{
+									type: "OR",
+									items: [
+										"Elf➞Citadel➞Shaper"
+									]
+								}
 							]
 						}
 					},
@@ -977,11 +1206,15 @@ export const Elf: Stock = {
 					],
 					stock: "Elf",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 150
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
@@ -995,9 +1228,14 @@ export const Elf: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Elf➞Citadel➞Shaper"
+								{
+									type: "OR",
+									items: [
+										"Elf➞Citadel➞Shaper"
+									]
+								}
 							]
 						}
 					},
@@ -1017,7 +1255,9 @@ export const Elf: Stock = {
 					years: 100
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1028,7 +1268,8 @@ export const Elf: Stock = {
 					mentalPool: 1,
 					name: "Artist",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 12,
 					setting: "Citadel",
 					skillPool: 5,
@@ -1044,7 +1285,9 @@ export const Elf: Stock = {
 					years: 60
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
@@ -1058,10 +1301,15 @@ export const Elf: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Elf➞Etharch➞Sword Singer",
-								"Elf➞Protector➞Sword Singer"
+								{
+									type: "OR",
+									items: [
+										"Elf➞Etharch➞Sword Singer",
+										"Elf➞Protector➞Sword Singer"
+									]
+								}
 							]
 						}
 					},
@@ -1080,11 +1328,15 @@ export const Elf: Stock = {
 					],
 					stock: "Elf",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 65
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1098,12 +1350,17 @@ export const Elf: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Elf➞Protector➞Herald",
-								"Elf➞Etharch➞Attendant",
-								"Elf➞Etharch➞Student",
-								"Elf➞Wilderlands➞Spouse"
+								{
+									type: "OR",
+									items: [
+										"Elf➞Protector➞Herald",
+										"Elf➞Etharch➞Attendant",
+										"Elf➞Etharch➞Student",
+										"Elf➞Wilderlands➞Spouse"
+									]
+								}
 							]
 						}
 					},
@@ -1127,7 +1384,9 @@ export const Elf: Stock = {
 					years: 75
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1141,12 +1400,17 @@ export const Elf: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Elf➞Citadel➞Bard",
-								"Elf➞Citadel➞Adjutant",
-								"Elf➞Etharch➞Steward",
-								"Elf➞Wilderlands➞Patriarch/Matriarch"
+								{
+									type: "OR",
+									items: [
+										"Elf➞Citadel➞Bard",
+										"Elf➞Citadel➞Adjutant",
+										"Elf➞Etharch➞Steward",
+										"Elf➞Wilderlands➞Patriarch/Matriarch"
+									]
+								}
 							]
 						}
 					},
@@ -1163,11 +1427,15 @@ export const Elf: Stock = {
 					],
 					stock: "Elf",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 200
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1182,15 +1450,20 @@ export const Elf: Stock = {
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Elf➞Wilderlands➞Patriarch/Matriarch",
-								"Elf➞Citadel➞Loremaster",
-								"Elf➞Etharch➞Steward",
-								"Elf➞Citadel➞Bard",
-								"Elf➞Citadel➞Artisan",
-								"Elf➞Citadel➞Sea Captain",
-								"Elf➞Protector➞Captain"
+								{
+									type: "OR",
+									items: [
+										"Elf➞Wilderlands➞Patriarch/Matriarch",
+										"Elf➞Citadel➞Loremaster",
+										"Elf➞Etharch➞Steward",
+										"Elf➞Citadel➞Bard",
+										"Elf➞Citadel➞Artisan",
+										"Elf➞Citadel➞Sea Captain",
+										"Elf➞Protector➞Captain"
+									]
+								}
 							]
 						}
 					},
@@ -1215,14 +1488,18 @@ export const Elf: Stock = {
 			]
 		},
 		"Etharch": {
-			allowed: ["bwgr"],
+			allowed: [
+				"bwgr"
+			],
 			name: "Etharch",
 			short: "Etharch",
 			stock: "Elf",
 			type: "Setting",
 			lifepaths: [
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: true,
 					eitherPool: 0,
 					generalSkillPool: 5,
@@ -1234,7 +1511,8 @@ export const Elf: Stock = {
 					mentalPool: 0,
 					name: "Born Etharch",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 10,
 					setting: "Etharch",
 					skillPool: 2,
@@ -1253,7 +1531,9 @@ export const Elf: Stock = {
 					years: 25
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1265,7 +1545,8 @@ export const Elf: Stock = {
 					mentalPool: 1,
 					name: "Student",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 10,
 					setting: "Etharch",
 					skillPool: 9,
@@ -1285,7 +1566,9 @@ export const Elf: Stock = {
 					years: 25
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1298,7 +1581,8 @@ export const Elf: Stock = {
 					mentalPool: 0,
 					name: "Attendant",
 					physicalPool: 1,
-					requirements: {},
+					requirements: {
+					},
 					resources: 15,
 					setting: "Etharch",
 					skillPool: 4,
@@ -1316,7 +1600,9 @@ export const Elf: Stock = {
 					years: 25
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1331,13 +1617,18 @@ export const Elf: Stock = {
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Elf➞Etharch➞Attendant",
-								"Elf➞Protector➞Bowyer",
-								"Elf➞Protector➞Spearbearer",
-								"Elf➞Citadel➞Seafarer",
-								"Elf➞Citadel➞Soldier-Protector"
+								{
+									type: "OR",
+									items: [
+										"Elf➞Etharch➞Attendant",
+										"Elf➞Protector➞Bowyer",
+										"Elf➞Protector➞Spearbearer",
+										"Elf➞Citadel➞Seafarer",
+										"Elf➞Citadel➞Soldier-Protector"
+									]
+								}
 							]
 						}
 					},
@@ -1362,7 +1653,9 @@ export const Elf: Stock = {
 					years: 35
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1377,11 +1670,16 @@ export const Elf: Stock = {
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Elf➞Etharch➞Second",
-								"Elf➞Protector➞Lancer",
-								"Elf➞Protector➞Lieutenant"
+								{
+									type: "OR",
+									items: [
+										"Elf➞Etharch➞Second",
+										"Elf➞Protector➞Lancer",
+										"Elf➞Protector➞Lieutenant"
+									]
+								}
 							]
 						}
 					},
@@ -1405,7 +1703,9 @@ export const Elf: Stock = {
 					years: 40
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1419,15 +1719,20 @@ export const Elf: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Elf➞Protector➞Lieutenant",
-								"Elf➞Citadel➞Artisan",
-								"Elf➞Citadel➞Bard",
-								"Elf➞Citadel➞Loremaster",
-								"Elf➞Citadel➞Adjutant",
-								"Elf➞Citadel➞Sea Captain",
-								"Elf➞Wilderlands➞Patriarch/Matriarch"
+								{
+									type: "OR",
+									items: [
+										"Elf➞Protector➞Lieutenant",
+										"Elf➞Citadel➞Artisan",
+										"Elf➞Citadel➞Bard",
+										"Elf➞Citadel➞Loremaster",
+										"Elf➞Citadel➞Adjutant",
+										"Elf➞Citadel➞Sea Captain",
+										"Elf➞Wilderlands➞Patriarch/Matriarch"
+									]
+								}
 							]
 						}
 					},
@@ -1443,11 +1748,15 @@ export const Elf: Stock = {
 					],
 					stock: "Elf",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 110
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 4,
@@ -1463,7 +1772,12 @@ export const Elf: Stock = {
 						conditions: {
 							type: "AND",
 							items: [
-								"Trait➞Elf Lifepath➞Fêa",
+								{
+									type: "AND",
+									items: [
+										"Trait➞Elf Lifepath➞Fêa"
+									]
+								},
 								{
 									type: "OR",
 									items: [
@@ -1489,7 +1803,9 @@ export const Elf: Stock = {
 					years: 150
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 4,
@@ -1505,7 +1821,12 @@ export const Elf: Stock = {
 						conditions: {
 							type: "AND",
 							items: [
-								"Trait➞Elf Lifepath➞Aman",
+								{
+									type: "AND",
+									items: [
+										"Trait➞Elf Lifepath➞Aman"
+									]
+								},
 								{
 									type: "OR",
 									items: [
@@ -1535,14 +1856,18 @@ export const Elf: Stock = {
 			]
 		},
 		"Protector": {
-			allowed: ["bwgr"],
+			allowed: [
+				"bwgr"
+			],
 			name: "Protector",
 			short: "Protector",
 			stock: "Elf",
 			type: "Subsetting",
 			lifepaths: [
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1554,7 +1879,8 @@ export const Elf: Stock = {
 					mentalPool: 0,
 					name: "Rider",
 					physicalPool: 1,
-					requirements: {},
+					requirements: {
+					},
 					resources: 8,
 					setting: "Protector",
 					skillPool: 6,
@@ -1572,7 +1898,9 @@ export const Elf: Stock = {
 					years: 15
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
@@ -1584,7 +1912,8 @@ export const Elf: Stock = {
 					mentalPool: 0,
 					name: "Herald",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 10,
 					setting: "Protector",
 					skillPool: 8,
@@ -1603,7 +1932,9 @@ export const Elf: Stock = {
 					years: 35
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1615,7 +1946,8 @@ export const Elf: Stock = {
 					mentalPool: 1,
 					name: "Soother",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 10,
 					setting: "Protector",
 					skillPool: 6,
@@ -1627,11 +1959,15 @@ export const Elf: Stock = {
 					],
 					stock: "Elf",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 30
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
@@ -1644,12 +1980,17 @@ export const Elf: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Elf➞Wilderlands➞Forester",
-								"Elf➞Wilderlands➞Wanderer",
-								"Elf➞Protector➞Bowyer",
-								"Elf➞Etharch➞Second"
+								{
+									type: "OR",
+									items: [
+										"Elf➞Wilderlands➞Forester",
+										"Elf➞Wilderlands➞Wanderer",
+										"Elf➞Protector➞Bowyer",
+										"Elf➞Etharch➞Second"
+									]
+								}
 							]
 						}
 					},
@@ -1675,7 +2016,9 @@ export const Elf: Stock = {
 					years: 45
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1687,7 +2030,8 @@ export const Elf: Stock = {
 					mentalPool: 0,
 					name: "Bowyer",
 					physicalPool: 1,
-					requirements: {},
+					requirements: {
+					},
 					resources: 8,
 					setting: "Protector",
 					skillPool: 5,
@@ -1705,7 +2049,9 @@ export const Elf: Stock = {
 					years: 20
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1717,7 +2063,8 @@ export const Elf: Stock = {
 					mentalPool: 0,
 					name: "Spearbearer",
 					physicalPool: 1,
-					requirements: {},
+					requirements: {
+					},
 					resources: 8,
 					setting: "Protector",
 					skillPool: 8,
@@ -1729,11 +2076,15 @@ export const Elf: Stock = {
 					],
 					stock: "Elf",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 20
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1748,13 +2099,18 @@ export const Elf: Stock = {
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Elf➞Etharch➞Second",
-								"Elf➞Citadel➞Soldier-Protector",
-								"Elf➞Protector➞Soother",
-								"Elf➞Wilderlands➞Spouse",
-								"Elf➞Protector➞Spearbearer"
+								{
+									type: "OR",
+									items: [
+										"Elf➞Etharch➞Second",
+										"Elf➞Citadel➞Soldier-Protector",
+										"Elf➞Protector➞Soother",
+										"Elf➞Wilderlands➞Spouse",
+										"Elf➞Protector➞Spearbearer"
+									]
+								}
 							]
 						}
 					},
@@ -1777,7 +2133,9 @@ export const Elf: Stock = {
 					years: 30
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1791,9 +2149,14 @@ export const Elf: Stock = {
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Elf➞Protector➞Rider"
+								{
+									type: "OR",
+									items: [
+										"Elf➞Protector➞Rider"
+									]
+								}
 							]
 						}
 					},
@@ -1818,7 +2181,9 @@ export const Elf: Stock = {
 					years: 20
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1833,10 +2198,15 @@ export const Elf: Stock = {
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Elf➞Protector➞Outrider",
-								"Elf➞Etharch➞Second"
+								{
+									type: "OR",
+									items: [
+										"Elf➞Protector➞Outrider",
+										"Elf➞Etharch➞Second"
+									]
+								}
 							]
 						}
 					},
@@ -1853,11 +2223,15 @@ export const Elf: Stock = {
 					],
 					stock: "Elf",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 50
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1872,14 +2246,19 @@ export const Elf: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Elf➞Protector➞Sword Singer",
-								"Elf➞Etharch➞Sword Singer",
-								"Elf➞Protector➞Lancer",
-								"Elf➞Citadel➞Sea Captain",
-								"Elf➞Protector➞2*Bowyer",
-								"Elf➞Protector➞2*Spearbearer"
+								{
+									type: "OR",
+									items: [
+										"Elf➞Protector➞Sword Singer",
+										"Elf➞Etharch➞Sword Singer",
+										"Elf➞Protector➞Lancer",
+										"Elf➞Citadel➞Sea Captain",
+										"Elf➞Protector➞2*Bowyer",
+										"Elf➞Protector➞2*Spearbearer"
+									]
+								}
 							]
 						}
 					},
@@ -1901,7 +2280,9 @@ export const Elf: Stock = {
 					years: 65
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1916,14 +2297,19 @@ export const Elf: Stock = {
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Elf➞Protector➞Lieutenant",
-								"Elf➞Etharch➞Prince/Princess",
-								"Elf➞Citadel➞Sea Captain",
-								"Elf➞Etharch➞Steward",
-								"Elf➞Protector➞2*Sword Singer",
-								"Elf➞Etharch➞2*Sword Singer"
+								{
+									type: "OR",
+									items: [
+										"Elf➞Protector➞Lieutenant",
+										"Elf➞Etharch➞Prince/Princess",
+										"Elf➞Citadel➞Sea Captain",
+										"Elf➞Etharch➞Steward",
+										"Elf➞Protector➞2*Sword Singer",
+										"Elf➞Etharch➞2*Sword Singer"
+									]
+								}
 							]
 						}
 					},
@@ -1948,7 +2334,9 @@ export const Elf: Stock = {
 					years: 85
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1962,10 +2350,15 @@ export const Elf: Stock = {
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Elf➞Citadel➞Shaper",
-								"Elf➞Protector➞Bladesmith"
+								{
+									type: "OR",
+									items: [
+										"Elf➞Citadel➞Shaper",
+										"Elf➞Protector➞Bladesmith"
+									]
+								}
 							]
 						}
 					},
@@ -1987,7 +2380,9 @@ export const Elf: Stock = {
 					years: 90
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -2001,12 +2396,17 @@ export const Elf: Stock = {
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Elf➞Protector➞Armorer",
-								"Elf➞Citadel➞Shaper",
-								"Elf➞Protector➞Bowyer",
-								"Elf➞Protector➞Spearbearer"
+								{
+									type: "OR",
+									items: [
+										"Elf➞Protector➞Armorer",
+										"Elf➞Citadel➞Shaper",
+										"Elf➞Protector➞Bowyer",
+										"Elf➞Protector➞Spearbearer"
+									]
+								}
 							]
 						}
 					},
@@ -2026,7 +2426,9 @@ export const Elf: Stock = {
 					years: 80
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -2041,10 +2443,15 @@ export const Elf: Stock = {
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Elf➞Protector➞Captain",
-								"Elf➞Etharch➞Prince/Princess"
+								{
+									type: "OR",
+									items: [
+										"Elf➞Protector➞Captain",
+										"Elf➞Etharch➞Prince/Princess"
+									]
+								}
 							]
 						}
 					},
@@ -2071,25 +2478,39 @@ export const Elf: Stock = {
 			]
 		},
 		"Path of Spite": {
-			allowed: ["bwc"],
+			allowed: [
+				"bwc"
+			],
 			name: "Path of Spite",
 			short: "Spite",
 			stock: "Elf",
 			type: "Subsetting",
 			lifepaths: [
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
-					leads: [],
+					leads: [
+
+					],
 					mentalPool: 0,
 					name: "Griever",
 					physicalPool: 0,
 					requirements: {
-						limits: [
-							"GRIEF➞MIN➞3"
-						]
+						conditions: {
+							type: "AND",
+							items: [
+								{
+									type: "AND",
+									items: [
+										"GRIEF➞MIN➞3"
+									]
+								}
+							]
+						}
 					},
 					resources: 0,
 					setting: "Path of Spite",
@@ -2106,19 +2527,28 @@ export const Elf: Stock = {
 					years: 3
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
-					leads: [],
+					leads: [
+
+					],
 					mentalPool: 0,
 					name: "Wastrel",
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Elf➞Path of Spite➞Griever"
+								{
+									type: "OR",
+									items: [
+										"Elf➞Path of Spite➞Griever"
+									]
+								}
 							]
 						}
 					},
@@ -2141,19 +2571,28 @@ export const Elf: Stock = {
 					years: 25
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
-					leads: [],
+					leads: [
+
+					],
 					mentalPool: 0,
 					name: "Thief",
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Elf➞Path of Spite➞Griever"
+								{
+									type: "OR",
+									items: [
+										"Elf➞Path of Spite➞Griever"
+									]
+								}
 							]
 						}
 					},
@@ -2175,19 +2614,28 @@ export const Elf: Stock = {
 					years: 18
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
-					leads: [],
+					leads: [
+
+					],
 					mentalPool: 0,
 					name: "Assassin",
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Elf➞Path of Spite➞Griever"
+								{
+									type: "OR",
+									items: [
+										"Elf➞Path of Spite➞Griever"
+									]
+								}
 							]
 						}
 					},
@@ -2210,19 +2658,28 @@ export const Elf: Stock = {
 					years: 15
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
-					leads: [],
+					leads: [
+
+					],
 					mentalPool: 0,
 					name: "Stalker",
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Elf➞Path of Spite➞Griever"
+								{
+									type: "OR",
+									items: [
+										"Elf➞Path of Spite➞Griever"
+									]
+								}
 							]
 						}
 					},
@@ -2248,19 +2705,28 @@ export const Elf: Stock = {
 					years: 20
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
-					leads: [],
+					leads: [
+
+					],
 					mentalPool: 1,
 					name: "Deciever",
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Elf➞Path of Spite➞Griever"
+								{
+									type: "OR",
+									items: [
+										"Elf➞Path of Spite➞Griever"
+									]
+								}
 							]
 						}
 					},
@@ -2281,19 +2747,28 @@ export const Elf: Stock = {
 					years: 35
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
-					leads: [],
+					leads: [
+
+					],
 					mentalPool: 1,
 					name: "Liar",
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Elf➞Path of Spite➞Griever"
+								{
+									type: "OR",
+									items: [
+										"Elf➞Path of Spite➞Griever"
+									]
+								}
 							]
 						}
 					},
@@ -2314,21 +2789,30 @@ export const Elf: Stock = {
 					years: 25
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
-					leads: [],
+					leads: [
+
+					],
 					mentalPool: 0,
 					name: "Siren",
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Elf➞Path of Spite➞Assassin",
-								"Elf➞Path of Spite➞Deciever",
-								"Elf➞Path of Spite➞Liar"
+								{
+									type: "OR",
+									items: [
+										"Elf➞Path of Spite➞Assassin",
+										"Elf➞Path of Spite➞Deciever",
+										"Elf➞Path of Spite➞Liar"
+									]
+								}
 							]
 						}
 					},
@@ -2353,7 +2837,9 @@ export const Elf: Stock = {
 					years: 55
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -2365,11 +2851,16 @@ export const Elf: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Elf➞Path of Spite➞Siren",
-								"Elf➞Path of Spite➞Wastrel",
-								"Elf➞Path of Spite➞Stalker"
+								{
+									type: "OR",
+									items: [
+										"Elf➞Path of Spite➞Siren",
+										"Elf➞Path of Spite➞Wastrel",
+										"Elf➞Path of Spite➞Stalker"
+									]
+								}
 							]
 						}
 					},
@@ -2397,20 +2888,29 @@ export const Elf: Stock = {
 					years: 150
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 5,
-					leads: [],
+					leads: [
+
+					],
 					mentalPool: 0,
 					name: "Recluse",
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Elf➞Path of Spite➞Eremite",
-								"Elf➞Path of Spite➞3*ANY"
+								{
+									type: "OR",
+									items: [
+										"Elf➞Path of Spite➞Eremite",
+										"Elf➞Path of Spite➞3*ANY"
+									]
+								}
 							]
 						}
 					},

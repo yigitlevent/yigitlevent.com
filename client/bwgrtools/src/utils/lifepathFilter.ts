@@ -1,8 +1,24 @@
 import { Lifepath, Stock } from "../data/stocks/_stocks";
 
 
-function CheckString(chosenLifepaths: Lifepath[], conditionString: string): boolean {
-	if (conditionString.startsWith("Skill")) {
+function CheckString(chosenLifepaths: Lifepath[], currentAge: number, lp: Lifepath, conditionString: string): boolean {
+	// NOT CONSIDERED: GENDER➞FEMALE/MALE, GRIEF➞MIN/MAX, YEARS➞MIN/MAX
+	if (conditionString === "LP➞UNIQUE" && chosenLifepaths.includes(lp)) {
+		return false;
+	}
+	else if (conditionString.startsWith("LP➞MIN") && chosenLifepaths.length < parseInt(conditionString.split("➞")[2])) {
+		return false;
+	}
+	else if (conditionString.startsWith("LP➞MAX") && chosenLifepaths.length > parseInt(conditionString.split("➞")[2])) {
+		return false;
+	}
+	else if (conditionString.startsWith("YEARS➞MIN") && currentAge <= parseInt(conditionString.split("➞")[2])) {
+		return false;
+	}
+	else if (conditionString.startsWith("YEARS➞MAX") && currentAge >= parseInt(conditionString.split("➞")[2])) {
+		return false;
+	}
+	else if (conditionString.startsWith("Skill")) {
 		const hasSkill = chosenLifepaths.some(lifepath => lifepath.skills.includes((conditionString as any).slice(6)));
 		if (!hasSkill) return false;
 	}
@@ -17,11 +33,22 @@ function CheckString(chosenLifepaths: Lifepath[], conditionString: string): bool
 	return true;
 }
 
-function CheckBlock(chosenLifepaths: Lifepath[], condition: Condition): boolean {
-	if (condition.type === "AND") return condition.items.every(v => (typeof v === "string") ? CheckString(chosenLifepaths, v) : CheckBlock(chosenLifepaths, v));
-	else if (condition.type === "OR") return condition.items.some(v => (typeof v === "string") ? CheckString(chosenLifepaths, v) : CheckBlock(chosenLifepaths, v));
-	else if (condition.type === "NOT") return !condition.items.every(v => (typeof v === "string") ? CheckString(chosenLifepaths, v) : CheckBlock(chosenLifepaths, v));
-	return true;
+function CheckResults(blockType: "AND" | "OR" | "NOT", blockResults: boolean[]): boolean {
+	switch (blockType) {
+		case "AND":
+			return blockResults.every(b => b);
+		case "OR":
+			return blockResults.some(b => b);
+		case "NOT":
+			return blockResults.every(b => !b);
+		default:
+			throw new Error("unidentified block type");
+	}
+}
+
+function CheckBlocks(chosenLifepaths: Lifepath[], currentAge: number, lp: Lifepath, condition: RequirementBlocks): boolean {
+	const blocksResults = condition.items.map(block => CheckResults(block.type, block.items.map(item => CheckString(chosenLifepaths, currentAge, lp, item))));
+	return CheckResults(condition.type, blocksResults);
 }
 
 function GetCurrentAge(chosenLifepaths: Lifepath[], leadCount: number) {
@@ -38,20 +65,10 @@ function FilterByRequirements(combinedPossibleLifepaths: Lifepath[], chosenLifep
 	for (const lifepathKey in combinedPossibleLifepaths) {
 		const lp = combinedPossibleLifepaths[lifepathKey];
 		const conditions = lp.requirements.conditions;
-		const limits = lp.requirements.limits;
 
-		let add = true;
-		if (conditions) add = CheckBlock(chosenLifepaths, conditions);
-		if (limits) limits.forEach(v => {
-			// NOT CONSIDERED: GENDER➞FEMALE/MALE, GRIEF➞MIN/MAX, YEARS➞MIN/MAX
-			if (v === "LP➞UNIQUE" && chosenLifepaths.includes(lp)) add = false;
-			else if (v.startsWith("LP➞MIN") && chosenLifepaths.length < parseInt(v.split("➞")[2])) add = false;
-			else if (v.startsWith("LP➞MAX") && chosenLifepaths.length > parseInt(v.split("➞")[2])) add = false;
-			else if (v.startsWith("YEARS➞MIN") && currentAge <= parseInt(v.split("➞")[2])) add = false;
-			else if (v.startsWith("YEARS➞MAX") && currentAge >= parseInt(v.split("➞")[2])) add = false;
-		});
-
-		if (add) filteredLifepaths.push(lp);
+		if (conditions && CheckBlocks(chosenLifepaths, currentAge, lp, conditions)) {
+			filteredLifepaths.push(lp);
+		}
 	}
 
 	return filteredLifepaths;

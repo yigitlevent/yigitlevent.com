@@ -2,17 +2,64 @@ import { Stock } from "./_stocks";
 
 export const Roden: Stock = {
 	agePool: [
-		{ max: 5, min: 0, m: 6, p: 10 },
-		{ max: 9, min: 6, m: 7, p: 13 },
-		{ max: 15, min: 10, m: 7, p: 14 },
-		{ max: 24, min: 16, m: 8, p: 15 },
-		{ max: 30, min: 25, m: 8, p: 14 },
-		{ max: 36, min: 31, m: 7, p: 13 },
-		{ max: 40, min: 37, m: 7, p: 12 },
-		{ max: 45, min: 41, m: 7, p: 11 },
-		{ max: 99999, min: 46, m: 6, p: 10 }
+		{
+			max: 5,
+			min: 0,
+			m: 6,
+			p: 10
+		},
+		{
+			max: 9,
+			min: 6,
+			m: 7,
+			p: 13
+		},
+		{
+			max: 15,
+			min: 10,
+			m: 7,
+			p: 14
+		},
+		{
+			max: 24,
+			min: 16,
+			m: 8,
+			p: 15
+		},
+		{
+			max: 30,
+			min: 25,
+			m: 8,
+			p: 14
+		},
+		{
+			max: 36,
+			min: 31,
+			m: 7,
+			p: 13
+		},
+		{
+			max: 40,
+			min: 37,
+			m: 7,
+			p: 12
+		},
+		{
+			max: 45,
+			min: 41,
+			m: 7,
+			p: 11
+		},
+		{
+			max: 99999,
+			min: 46,
+			m: 6,
+			p: 10
+		}
 	],
-	allowed: ["bwc"],
+	allowed: [
+		"bwc"
+	],
 	hasSetting: true,
 	hasSubsetting: true,
 	name: "Roden",
@@ -20,14 +67,18 @@ export const Roden: Stock = {
 	stride: 8,
 	settings: {
 		"Below": {
-			allowed: ["bwc"],
+			allowed: [
+				"bwc"
+			],
 			name: "Below",
 			short: "Below",
 			stock: "Roden",
 			type: "Setting",
 			lifepaths: [
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: true,
 					eitherPool: 0,
 					generalSkillPool: 3,
@@ -37,11 +88,14 @@ export const Roden: Stock = {
 					mentalPool: 0,
 					name: "Born Below",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 0,
 					setting: "Below",
 					skillPool: 0,
-					skills: [],
+					skills: [
+
+					],
 					stock: "Roden",
 					traitPool: 2,
 					traits: [
@@ -50,15 +104,20 @@ export const Roden: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
-					leads: [],
+					leads: [
+
+					],
 					mentalPool: -1,
 					name: "Pinky",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 2,
 					setting: "Below",
 					skillPool: 3,
@@ -77,7 +136,9 @@ export const Roden: Stock = {
 					years: 2
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -88,7 +149,8 @@ export const Roden: Stock = {
 					mentalPool: 0,
 					name: "Scavenger",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 3,
 					setting: "Below",
 					skillPool: 5,
@@ -107,15 +169,20 @@ export const Roden: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
-					leads: [],
+					leads: [
+
+					],
 					mentalPool: 0,
 					name: "Scratcher",
 					physicalPool: 1,
-					requirements: {},
+					requirements: {
+					},
 					resources: 4,
 					setting: "Below",
 					skillPool: 4,
@@ -133,7 +200,9 @@ export const Roden: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -144,7 +213,8 @@ export const Roden: Stock = {
 					mentalPool: 0,
 					name: "Snitch",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 3,
 					setting: "Below",
 					skillPool: 4,
@@ -162,7 +232,9 @@ export const Roden: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -172,7 +244,8 @@ export const Roden: Stock = {
 					mentalPool: 0,
 					name: "The Gauntlet",
 					physicalPool: 1,
-					requirements: {},
+					requirements: {
+					},
 					resources: 4,
 					setting: "Below",
 					skillPool: 1,
@@ -190,7 +263,9 @@ export const Roden: Stock = {
 					years: 1
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -203,9 +278,14 @@ export const Roden: Stock = {
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Roden➞Below➞The Gauntlet"
+								{
+									type: "OR",
+									items: [
+										"Roden➞Below➞The Gauntlet"
+									]
+								}
 							]
 						}
 					},
@@ -225,7 +305,9 @@ export const Roden: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -238,9 +320,14 @@ export const Roden: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Roden➞Below➞The Gauntlet"
+								{
+									type: "OR",
+									items: [
+										"Roden➞Below➞The Gauntlet"
+									]
+								}
 							]
 						}
 					},
@@ -263,7 +350,9 @@ export const Roden: Stock = {
 					years: 7
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -276,9 +365,14 @@ export const Roden: Stock = {
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Roden➞Below➞The Gauntlet"
+								{
+									type: "OR",
+									items: [
+										"Roden➞Below➞The Gauntlet"
+									]
+								}
 							]
 						}
 					},
@@ -300,19 +394,28 @@ export const Roden: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
-					leads: [],
+					leads: [
+
+					],
 					mentalPool: 0,
 					name: "Sneak Thief",
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Roden➞Below➞The Gauntlet"
+								{
+									type: "OR",
+									items: [
+										"Roden➞Below➞The Gauntlet"
+									]
+								}
 							]
 						}
 					},
@@ -335,7 +438,9 @@ export const Roden: Stock = {
 					years: 7
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
@@ -347,10 +452,15 @@ export const Roden: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Roden➞Below➞Apprentice",
-								"Roden➞Field➞Apprentice"
+								{
+									type: "OR",
+									items: [
+										"Roden➞Below➞Apprentice",
+										"Roden➞Field➞Apprentice"
+									]
+								}
 							]
 						}
 					},
@@ -372,23 +482,32 @@ export const Roden: Stock = {
 					years: 8
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
-					leads: [],
+					leads: [
+
+					],
 					mentalPool: 0,
 					name: "Burglar",
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Roden➞Below➞Fingers",
-								"Roden➞Below➞Sneak Thief",
-								"Roden➞Society➞Shadow",
-								"Roden➞Exile➞Corsair",
-								"Roden➞Exile➞Bushwhacker"
+								{
+									type: "OR",
+									items: [
+										"Roden➞Below➞Fingers",
+										"Roden➞Below➞Sneak Thief",
+										"Roden➞Society➞Shadow",
+										"Roden➞Exile➞Corsair",
+										"Roden➞Exile➞Bushwhacker"
+									]
+								}
 							]
 						}
 					},
@@ -411,7 +530,9 @@ export const Roden: Stock = {
 					years: 8
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -424,9 +545,14 @@ export const Roden: Stock = {
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Roden➞Below➞The Gauntlet"
+								{
+									type: "OR",
+									items: [
+										"Roden➞Below➞The Gauntlet"
+									]
+								}
 							]
 						}
 					},
@@ -448,21 +574,30 @@ export const Roden: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
-					leads: [],
+					leads: [
+
+					],
 					mentalPool: 1,
 					name: "Fence",
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Roden➞Below➞Scavenger",
-								"Roden➞Below➞Snitch",
-								"Roden➞Below➞Sneak Thief"
+								{
+									type: "OR",
+									items: [
+										"Roden➞Below➞Scavenger",
+										"Roden➞Below➞Snitch",
+										"Roden➞Below➞Sneak Thief"
+									]
+								}
 							]
 						}
 					},
@@ -484,7 +619,9 @@ export const Roden: Stock = {
 					years: 7
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -496,12 +633,17 @@ export const Roden: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Roden➞Society➞Poisoner",
-								"Roden➞Exile➞Albino",
-								"Roden➞Field➞Healer",
-								"Roden➞Below➞Pinky"
+								{
+									type: "OR",
+									items: [
+										"Roden➞Society➞Poisoner",
+										"Roden➞Exile➞Albino",
+										"Roden➞Field➞Healer",
+										"Roden➞Below➞Pinky"
+									]
+								}
 							]
 						}
 					},
@@ -523,7 +665,9 @@ export const Roden: Stock = {
 					years: 8
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -535,14 +679,19 @@ export const Roden: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Roden➞Below➞Kidnapper",
-								"Roden➞Field➞Deputy",
-								"Roden➞Exile➞Corsair",
-								"Roden➞Field➞Missionary",
-								"Roden➞Below➞Fence",
-								"Roden➞Society➞Perverter"
+								{
+									type: "OR",
+									items: [
+										"Roden➞Below➞Kidnapper",
+										"Roden➞Field➞Deputy",
+										"Roden➞Exile➞Corsair",
+										"Roden➞Field➞Missionary",
+										"Roden➞Below➞Fence",
+										"Roden➞Society➞Perverter"
+									]
+								}
 							]
 						}
 					},
@@ -565,7 +714,9 @@ export const Roden: Stock = {
 					years: 8
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -579,9 +730,14 @@ export const Roden: Stock = {
 						conditions: {
 							type: "OR",
 							items: [
-								"Roden➞Exile➞Hermit",
-								"Roden➞Field➞Mayor",
-								"Roden➞Below➞Scratcher",
+								{
+									type: "OR",
+									items: [
+										"Roden➞Exile➞Hermit",
+										"Roden➞Field➞Mayor",
+										"Roden➞Below➞Scratcher"
+									]
+								},
 								{
 									type: "NOT",
 									items: [
@@ -617,22 +773,31 @@ export const Roden: Stock = {
 					years: 9
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
-					leads: [],
+					leads: [
+
+					],
 					mentalPool: 1,
 					name: "Mastermind",
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Roden➞Below➞Negotiator",
-								"Roden➞Below➞The Brain",
-								"Roden➞Exile➞Bandit King",
-								"Roden➞Field➞Abbot/Abbess"
+								{
+									type: "OR",
+									items: [
+										"Roden➞Below➞Negotiator",
+										"Roden➞Below➞The Brain",
+										"Roden➞Exile➞Bandit King",
+										"Roden➞Field➞Abbot/Abbess"
+									]
+								}
 							]
 						}
 					},
@@ -660,20 +825,29 @@ export const Roden: Stock = {
 					years: 10
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
-					leads: [],
+					leads: [
+
+					],
 					mentalPool: 1,
 					name: "The Pope",
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Roden➞Field➞Father/Mother",
-								"Roden➞Society➞Visionary"
+								{
+									type: "OR",
+									items: [
+										"Roden➞Field➞Father/Mother",
+										"Roden➞Society➞Visionary"
+									]
+								}
 							]
 						}
 					},
@@ -701,14 +875,18 @@ export const Roden: Stock = {
 			]
 		},
 		"Exile": {
-			allowed: ["bwc"],
+			allowed: [
+				"bwc"
+			],
 			name: "Exile",
 			short: "Exile",
 			stock: "Roden",
 			type: "Subsetting",
 			lifepaths: [
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -721,9 +899,14 @@ export const Roden: Stock = {
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Roden➞Field➞Born to the Fields"
+								{
+									type: "OR",
+									items: [
+										"Roden➞Field➞Born to the Fields"
+									]
+								}
 							]
 						}
 					},
@@ -746,7 +929,9 @@ export const Roden: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -759,9 +944,14 @@ export const Roden: Stock = {
 					physicalPool: -1,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Roden➞Below➞Born Below"
+								{
+									type: "OR",
+									items: [
+										"Roden➞Below➞Born Below"
+									]
+								}
 							]
 						}
 					},
@@ -787,7 +977,9 @@ export const Roden: Stock = {
 					years: 3
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -798,7 +990,8 @@ export const Roden: Stock = {
 					mentalPool: 0,
 					name: "Hermit",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 2,
 					setting: "Exile",
 					skillPool: 8,
@@ -822,7 +1015,9 @@ export const Roden: Stock = {
 					years: 10
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -834,7 +1029,8 @@ export const Roden: Stock = {
 					mentalPool: 0,
 					name: "Bushwhacker",
 					physicalPool: 1,
-					requirements: {},
+					requirements: {
+					},
 					resources: 5,
 					setting: "Exile",
 					skillPool: 4,
@@ -852,7 +1048,9 @@ export const Roden: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
@@ -866,14 +1064,19 @@ export const Roden: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Roden➞Exile➞Bushwhacker",
-								"Roden➞Field➞Sheriff",
-								"Roden➞Exile➞Bandit King",
-								"Roden➞Field➞Trader",
-								"Roden➞Below➞Negotiator",
-								"Roden➞Below➞Bruiser"
+								{
+									type: "OR",
+									items: [
+										"Roden➞Exile➞Bushwhacker",
+										"Roden➞Field➞Sheriff",
+										"Roden➞Exile➞Bandit King",
+										"Roden➞Field➞Trader",
+										"Roden➞Below➞Negotiator",
+										"Roden➞Below➞Bruiser"
+									]
+								}
 							]
 						}
 					},
@@ -898,7 +1101,9 @@ export const Roden: Stock = {
 					years: 7
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
@@ -912,11 +1117,16 @@ export const Roden: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Roden➞Exile➞Bushwhacker",
-								"Roden➞Field➞Sheriff",
-								"Roden➞Below➞Bruiser"
+								{
+									type: "OR",
+									items: [
+										"Roden➞Exile➞Bushwhacker",
+										"Roden➞Field➞Sheriff",
+										"Roden➞Below➞Bruiser"
+									]
+								}
 							]
 						}
 					},
@@ -939,15 +1149,20 @@ export const Roden: Stock = {
 					years: 7
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
-					leads: [],
+					leads: [
+
+					],
 					mentalPool: 1,
 					name: "Albino",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 25,
 					setting: "Exile",
 					skillPool: 7,
@@ -971,14 +1186,18 @@ export const Roden: Stock = {
 			]
 		},
 		"Field": {
-			allowed: ["bwc"],
+			allowed: [
+				"bwc"
+			],
 			name: "Field",
 			short: "Field",
 			stock: "Roden",
 			type: "Setting",
 			lifepaths: [
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: true,
 					eitherPool: 0,
 					generalSkillPool: 3,
@@ -988,11 +1207,14 @@ export const Roden: Stock = {
 					mentalPool: 0,
 					name: "Born to the Fields",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 0,
 					setting: "Field",
 					skillPool: 0,
-					skills: [],
+					skills: [
+
+					],
 					stock: "Roden",
 					traitPool: 2,
 					traits: [
@@ -1001,7 +1223,9 @@ export const Roden: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1011,7 +1235,8 @@ export const Roden: Stock = {
 					mentalPool: 0,
 					name: "Hand",
 					physicalPool: 1,
-					requirements: {},
+					requirements: {
+					},
 					resources: 3,
 					setting: "Field",
 					skillPool: 4,
@@ -1028,7 +1253,9 @@ export const Roden: Stock = {
 					years: 3
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1038,7 +1265,8 @@ export const Roden: Stock = {
 					mentalPool: 0,
 					name: "Woodsen",
 					physicalPool: 1,
-					requirements: {},
+					requirements: {
+					},
 					resources: 6,
 					setting: "Field",
 					skillPool: 4,
@@ -1056,7 +1284,9 @@ export const Roden: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1067,7 +1297,8 @@ export const Roden: Stock = {
 					mentalPool: 0,
 					name: "Apprentice",
 					physicalPool: 1,
-					requirements: {},
+					requirements: {
+					},
 					resources: 9,
 					setting: "Field",
 					skillPool: 3,
@@ -1084,7 +1315,9 @@ export const Roden: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1094,7 +1327,8 @@ export const Roden: Stock = {
 					mentalPool: 0,
 					name: "Gatherer",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 10,
 					setting: "Field",
 					skillPool: 3,
@@ -1105,19 +1339,26 @@ export const Roden: Stock = {
 					],
 					stock: "Roden",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 8
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
-					leads: [],
+					leads: [
+
+					],
 					mentalPool: 0,
 					name: "Farmer",
 					physicalPool: 1,
-					requirements: {},
+					requirements: {
+					},
 					resources: 10,
 					setting: "Field",
 					skillPool: 3,
@@ -1134,24 +1375,33 @@ export const Roden: Stock = {
 					years: 8
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
-					leads: [],
+					leads: [
+
+					],
 					mentalPool: 0,
 					name: "Beekeeper",
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Roden➞Field➞Woodsen",
-								"Roden➞Field➞Gatherer",
-								"Roden➞Field➞Farmer",
-								"Roden➞Below➞Apprentice",
-								"Roden➞Field➞Apprentice",
-								"Roden➞Field➞Hand"
+								{
+									type: "OR",
+									items: [
+										"Roden➞Field➞Woodsen",
+										"Roden➞Field➞Gatherer",
+										"Roden➞Field➞Farmer",
+										"Roden➞Below➞Apprentice",
+										"Roden➞Field➞Apprentice",
+										"Roden➞Field➞Hand"
+									]
+								}
 							]
 						}
 					},
@@ -1174,24 +1424,33 @@ export const Roden: Stock = {
 					years: 7
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
-					leads: [],
+					leads: [
+
+					],
 					mentalPool: 0,
 					name: "Miller",
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Roden➞Field➞Woodsen",
-								"Roden➞Field➞Gatherer",
-								"Roden➞Field➞Farmer",
-								"Roden➞Below➞Apprentice",
-								"Roden➞Field➞Apprentice",
-								"Roden➞Field➞Hand"
+								{
+									type: "OR",
+									items: [
+										"Roden➞Field➞Woodsen",
+										"Roden➞Field➞Gatherer",
+										"Roden➞Field➞Farmer",
+										"Roden➞Below➞Apprentice",
+										"Roden➞Field➞Apprentice",
+										"Roden➞Field➞Hand"
+									]
+								}
 							]
 						}
 					},
@@ -1211,19 +1470,28 @@ export const Roden: Stock = {
 					years: 9
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
-					leads: [],
+					leads: [
+
+					],
 					mentalPool: 0,
 					name: "Meadmaker",
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Roden➞Field➞Beekeeper"
+								{
+									type: "OR",
+									items: [
+										"Roden➞Field➞Beekeeper"
+									]
+								}
 							]
 						}
 					},
@@ -1238,25 +1506,36 @@ export const Roden: Stock = {
 					],
 					stock: "Roden",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 9
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
-					leads: [],
+					leads: [
+
+					],
 					mentalPool: 0,
 					name: "Baker",
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Roden➞Field➞Hand",
-								"Roden➞Field➞Miller",
-								"Roden➞Field➞Beekeeper"
+								{
+									type: "OR",
+									items: [
+										"Roden➞Field➞Hand",
+										"Roden➞Field➞Miller",
+										"Roden➞Field➞Beekeeper"
+									]
+								}
 							]
 						}
 					},
@@ -1278,20 +1557,29 @@ export const Roden: Stock = {
 					years: 7
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
-					leads: [],
+					leads: [
+
+					],
 					mentalPool: 0,
 					name: "Weaver",
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Roden➞Below➞Apprentice",
-								"Roden➞Field➞Apprentice"
+								{
+									type: "OR",
+									items: [
+										"Roden➞Below➞Apprentice",
+										"Roden➞Field➞Apprentice"
+									]
+								}
 							]
 						}
 					},
@@ -1313,20 +1601,29 @@ export const Roden: Stock = {
 					years: 8
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
-					leads: [],
+					leads: [
+
+					],
 					mentalPool: 0,
 					name: "Crafter",
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Roden➞Below➞Apprentice",
-								"Roden➞Field➞Apprentice"
+								{
+									type: "OR",
+									items: [
+										"Roden➞Below➞Apprentice",
+										"Roden➞Field➞Apprentice"
+									]
+								}
 							]
 						}
 					},
@@ -1350,24 +1647,33 @@ export const Roden: Stock = {
 					years: 10
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
-					leads: [],
+					leads: [
+
+					],
 					mentalPool: 1,
 					name: "Healer",
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Roden➞Exile➞Albino",
-								"Roden➞Below➞Sawbones",
-								"Roden➞Field➞Hand",
-								"Roden➞Field➞Woodsen",
-								"Roden➞Field➞Farmer",
-								"Roden➞Field➞Beekeeper"
+								{
+									type: "OR",
+									items: [
+										"Roden➞Exile➞Albino",
+										"Roden➞Below➞Sawbones",
+										"Roden➞Field➞Hand",
+										"Roden➞Field➞Woodsen",
+										"Roden➞Field➞Farmer",
+										"Roden➞Field➞Beekeeper"
+									]
+								}
 							]
 						}
 					},
@@ -1390,7 +1696,9 @@ export const Roden: Stock = {
 					years: 8
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1401,9 +1709,17 @@ export const Roden: Stock = {
 					name: "Trader",
 					physicalPool: 0,
 					requirements: {
-						limits: [
-							"LP➞MAX➞2"
-						]
+						conditions: {
+							type: "AND",
+							items: [
+								{
+									type: "AND",
+									items: [
+										"LP➞MAX➞2"
+									]
+								}
+							]
+						}
 					},
 					resources: 16,
 					setting: "Field",
@@ -1423,7 +1739,9 @@ export const Roden: Stock = {
 					years: 8
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1435,9 +1753,17 @@ export const Roden: Stock = {
 					name: "Deputy",
 					physicalPool: 1,
 					requirements: {
-						limits: [
-							"LP➞MIN➞3"
-						]
+						conditions: {
+							type: "AND",
+							items: [
+								{
+									type: "AND",
+									items: [
+										"LP➞MIN➞3"
+									]
+								}
+							]
+						}
 					},
 					resources: 6,
 					setting: "Field",
@@ -1457,22 +1783,31 @@ export const Roden: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
-					leads: [],
+					leads: [
+
+					],
 					mentalPool: 0,
 					name: "Sheriff",
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Roden➞Field➞Deputy",
-								"Roden➞Exile➞Bandit King",
-								"Roden➞Below➞Bruiser",
-								"Roden➞Below➞Mastermind"
+								{
+									type: "OR",
+									items: [
+										"Roden➞Field➞Deputy",
+										"Roden➞Exile➞Bandit King",
+										"Roden➞Below➞Bruiser",
+										"Roden➞Below➞Mastermind"
+									]
+								}
 							]
 						}
 					},
@@ -1487,27 +1822,38 @@ export const Roden: Stock = {
 					],
 					stock: "Roden",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 8
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
-					leads: [],
+					leads: [
+
+					],
 					mentalPool: 0,
 					name: "Mayor",
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Roden➞Field➞Sheriff",
-								"Roden➞Field➞Healer",
-								"Roden➞Field➞Baker",
-								"Roden➞Field➞Meadmaker",
-								"Roden➞Below➞Negotiator"
+								{
+									type: "OR",
+									items: [
+										"Roden➞Field➞Sheriff",
+										"Roden➞Field➞Healer",
+										"Roden➞Field➞Baker",
+										"Roden➞Field➞Meadmaker",
+										"Roden➞Below➞Negotiator"
+									]
+								}
 							]
 						}
 					},
@@ -1530,7 +1876,9 @@ export const Roden: Stock = {
 					years: 10
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1541,7 +1889,8 @@ export const Roden: Stock = {
 					mentalPool: 1,
 					name: "Brother/Sister",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 14,
 					setting: "Field",
 					skillPool: 6,
@@ -1562,7 +1911,9 @@ export const Roden: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1575,9 +1926,14 @@ export const Roden: Stock = {
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Roden➞Field➞Brother/Sister"
+								{
+									type: "OR",
+									items: [
+										"Roden➞Field➞Brother/Sister"
+									]
+								}
 							]
 						}
 					},
@@ -1602,19 +1958,28 @@ export const Roden: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
-					leads: [],
+					leads: [
+
+					],
 					mentalPool: 1,
 					name: "Father/Mother",
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Roden➞Field➞Brother/Sister"
+								{
+									type: "OR",
+									items: [
+										"Roden➞Field➞Brother/Sister"
+									]
+								}
 							]
 						}
 					},
@@ -1641,19 +2006,28 @@ export const Roden: Stock = {
 					years: 7
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
-					leads: [],
+					leads: [
+
+					],
 					mentalPool: 1,
 					name: "Abbot/Abbess",
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Roden➞Field➞Father/Mother"
+								{
+									type: "OR",
+									items: [
+										"Roden➞Field➞Father/Mother"
+									]
+								}
 							]
 						}
 					},
@@ -1676,14 +2050,18 @@ export const Roden: Stock = {
 			]
 		},
 		"Society": {
-			allowed: ["bwc"],
+			allowed: [
+				"bwc"
+			],
 			name: "Society",
 			short: "Society",
 			stock: "Roden",
 			type: "Subsetting",
 			lifepaths: [
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1693,7 +2071,8 @@ export const Roden: Stock = {
 					mentalPool: 0,
 					name: "Initiate",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 2,
 					setting: "Society",
 					skillPool: 3,
@@ -1709,19 +2088,28 @@ export const Roden: Stock = {
 					years: 3
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
-					leads: [],
+					leads: [
+
+					],
 					mentalPool: 1,
 					name: "Cultist",
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Roden➞Society➞Initiate"
+								{
+									type: "OR",
+									items: [
+										"Roden➞Society➞Initiate"
+									]
+								}
 							]
 						}
 					},
@@ -1743,19 +2131,28 @@ export const Roden: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
-					leads: [],
+					leads: [
+
+					],
 					mentalPool: 0,
 					name: "Shadow",
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Roden➞Society➞Initiate"
+								{
+									type: "OR",
+									items: [
+										"Roden➞Society➞Initiate"
+									]
+								}
 							]
 						}
 					},
@@ -1777,19 +2174,28 @@ export const Roden: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
-					leads: [],
+					leads: [
+
+					],
 					mentalPool: 0,
 					name: "Arsonist",
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Roden➞Society➞Initiate"
+								{
+									type: "OR",
+									items: [
+										"Roden➞Society➞Initiate"
+									]
+								}
 							]
 						}
 					},
@@ -1811,19 +2217,28 @@ export const Roden: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
-					leads: [],
+					leads: [
+
+					],
 					mentalPool: 0,
 					name: "Murderer",
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Roden➞Society➞Initiate"
+								{
+									type: "OR",
+									items: [
+										"Roden➞Society➞Initiate"
+									]
+								}
 							]
 						}
 					},
@@ -1846,19 +2261,28 @@ export const Roden: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
-					leads: [],
+					leads: [
+
+					],
 					mentalPool: 0,
 					name: "Willard",
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Roden➞Society➞Initiate"
+								{
+									type: "OR",
+									items: [
+										"Roden➞Society➞Initiate"
+									]
+								}
 							]
 						}
 					},
@@ -1868,7 +2292,7 @@ export const Roden: Stock = {
 					skills: [
 						"Any General➞Animal Husbandry",
 						"Any General➞Inconspicuous",
-						"Any General➞Ratiquette" 
+						"Any General➞Ratiquette"
 					],
 					stock: "Roden",
 					traitPool: 2,
@@ -1880,7 +2304,9 @@ export const Roden: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1894,11 +2320,16 @@ export const Roden: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Roden➞Below➞The Brain",
-								"Roden➞Society➞Cultist",
-								"Roden➞Field➞Missionary"
+								{
+									type: "OR",
+									items: [
+										"Roden➞Below➞The Brain",
+										"Roden➞Society➞Cultist",
+										"Roden➞Field➞Missionary"
+									]
+								}
 							]
 						}
 					},
@@ -1920,19 +2351,28 @@ export const Roden: Stock = {
 					years: 8
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
-					leads: [],
+					leads: [
+
+					],
 					mentalPool: 0,
 					name: "Poisoner",
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Roden➞Society➞Initiate"
+								{
+									type: "OR",
+									items: [
+										"Roden➞Society➞Initiate"
+									]
+								}
 							]
 						}
 					},
@@ -1953,21 +2393,30 @@ export const Roden: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
-					leads: [],
+					leads: [
+
+					],
 					mentalPool: 0,
 					name: "Guardian",
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Roden➞Society➞Murderer",
-								"Roden➞Society➞Willard",
-								"Roden➞Society➞Perverter"
+								{
+									type: "OR",
+									items: [
+										"Roden➞Society➞Murderer",
+										"Roden➞Society➞Willard",
+										"Roden➞Society➞Perverter"
+									]
+								}
 							]
 						}
 					},
@@ -1990,20 +2439,29 @@ export const Roden: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
-					leads: [],
+					leads: [
+
+					],
 					mentalPool: 1,
 					name: "Preacher",
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Roden➞Society➞Cultist",
-								"Roden➞Field➞Missionary"
+								{
+									type: "OR",
+									items: [
+										"Roden➞Society➞Cultist",
+										"Roden➞Field➞Missionary"
+									]
+								}
 							]
 						}
 					},
@@ -2025,7 +2483,9 @@ export const Roden: Stock = {
 					years: 8
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -2038,12 +2498,17 @@ export const Roden: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Roden➞Exile➞Albino",
-								"Roden➞Society➞Preacher",
-								"Roden➞Field➞Abbot/Abbess",
-								"Roden➞Below➞Mastermind"
+								{
+									type: "OR",
+									items: [
+										"Roden➞Exile➞Albino",
+										"Roden➞Society➞Preacher",
+										"Roden➞Field➞Abbot/Abbess",
+										"Roden➞Below➞Mastermind"
+									]
+								}
 							]
 						}
 					},

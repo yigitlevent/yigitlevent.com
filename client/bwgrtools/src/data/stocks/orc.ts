@@ -2,20 +2,82 @@ import { Stock } from "./_stocks";
 
 export const Orc: Stock = {
 	agePool: [
-		{ max: 10, min: 0, m: 3, p: 10 },
-		{ max: 16, min: 11, m: 4, p: 11 },
-		{ max: 22, min: 17, m: 5, p: 12 },
-		{ max: 30, min: 23, m: 5, p: 13 },
-		{ max: 40, min: 31, m: 6, p: 14 },
-		{ max: 50, min: 41, m: 6, p: 15 },
-		{ max: 60, min: 51, m: 7, p: 16 },
-		{ max: 80, min: 61, m: 7, p: 17 },
-		{ max: 99, min: 81, m: 8, p: 17 },
-		{ max: 125, min: 100, m: 8, p: 18 },
-		{ max: 150, min: 126, m: 9, p: 18 },
-		{ max: 99999, min: 151, m: 9, p: 19 }
+		{
+			max: 10,
+			min: 0,
+			m: 3,
+			p: 10
+		},
+		{
+			max: 16,
+			min: 11,
+			m: 4,
+			p: 11
+		},
+		{
+			max: 22,
+			min: 17,
+			m: 5,
+			p: 12
+		},
+		{
+			max: 30,
+			min: 23,
+			m: 5,
+			p: 13
+		},
+		{
+			max: 40,
+			min: 31,
+			m: 6,
+			p: 14
+		},
+		{
+			max: 50,
+			min: 41,
+			m: 6,
+			p: 15
+		},
+		{
+			max: 60,
+			min: 51,
+			m: 7,
+			p: 16
+		},
+		{
+			max: 80,
+			min: 61,
+			m: 7,
+			p: 17
+		},
+		{
+			max: 99,
+			min: 81,
+			m: 8,
+			p: 17
+		},
+		{
+			max: 125,
+			min: 100,
+			m: 8,
+			p: 18
+		},
+		{
+			max: 150,
+			min: 126,
+			m: 9,
+			p: 18
+		},
+		{
+			max: 99999,
+			min: 151,
+			m: 9,
+			p: 19
+		}
 	],
-	allowed: ["bwgr"],
+	allowed: [
+		"bwgr"
+	],
 	hasSetting: true,
 	hasSubsetting: true,
 	name: "Orc",
@@ -23,14 +85,18 @@ export const Orc: Stock = {
 	stride: 7,
 	settings: {
 		"Black Legion": {
-			allowed: ["bwgr"],
+			allowed: [
+				"bwgr"
+			],
 			name: "Black Legion",
 			short: "Legion",
 			stock: "Orc",
 			type: "Subsetting",
 			lifepaths: [
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -42,9 +108,14 @@ export const Orc: Stock = {
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "NOT",
+							type: "AND",
 							items: [
-								"Orc➞Great and Black➞Born Great"
+								{
+									type: "NOT",
+									items: [
+										"Orc➞Great and Black➞Born Great"
+									]
+								}
 							]
 						}
 					},
@@ -67,7 +138,9 @@ export const Orc: Stock = {
 					years: 3
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -79,9 +152,14 @@ export const Orc: Stock = {
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "NOT",
+							type: "AND",
 							items: [
-								"Orc➞Great and Black➞Born Great"
+								{
+									type: "NOT",
+									items: [
+										"Orc➞Great and Black➞Born Great"
+									]
+								}
 							]
 						}
 					},
@@ -102,7 +180,9 @@ export const Orc: Stock = {
 					years: 3
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -114,9 +194,14 @@ export const Orc: Stock = {
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "NOT",
+							type: "AND",
 							items: [
-								"Orc➞Great and Black➞Born Great"
+								{
+									type: "NOT",
+									items: [
+										"Orc➞Great and Black➞Born Great"
+									]
+								}
 							]
 						}
 					},
@@ -139,7 +224,9 @@ export const Orc: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -151,9 +238,14 @@ export const Orc: Stock = {
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "NOT",
+							type: "AND",
 							items: [
-								"Orc➞Great and Black➞Born Great"
+								{
+									type: "NOT",
+									items: [
+										"Orc➞Great and Black➞Born Great"
+									]
+								}
 							]
 						}
 					},
@@ -168,11 +260,15 @@ export const Orc: Stock = {
 					],
 					stock: "Orc",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 4
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -184,11 +280,16 @@ export const Orc: Stock = {
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Orc➞Great and Black➞The Rites",
-								"Orc➞Black Legion➞Legioner",
-								"Orc➞Chattel➞Whipmaster"
+								{
+									type: "OR",
+									items: [
+										"Orc➞Great and Black➞The Rites",
+										"Orc➞Black Legion➞Legioner",
+										"Orc➞Chattel➞Whipmaster"
+									]
+								}
 							]
 						}
 					},
@@ -209,7 +310,9 @@ export const Orc: Stock = {
 					years: 1
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -221,11 +324,16 @@ export const Orc: Stock = {
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Orc➞Great and Black➞The Rites",
-								"Orc➞Black Legion➞Legioner",
-								"Orc➞Chattel➞Whipmaster"
+								{
+									type: "OR",
+									items: [
+										"Orc➞Great and Black➞The Rites",
+										"Orc➞Black Legion➞Legioner",
+										"Orc➞Chattel➞Whipmaster"
+									]
+								}
 							]
 						}
 					},
@@ -245,7 +353,9 @@ export const Orc: Stock = {
 					years: 3
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -257,11 +367,16 @@ export const Orc: Stock = {
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Orc➞Great and Black➞Follower",
-								"Orc➞Chattel➞Ravager",
-								"Orc➞Black Legion➞Nightseeker"
+								{
+									type: "OR",
+									items: [
+										"Orc➞Great and Black➞Follower",
+										"Orc➞Chattel➞Ravager",
+										"Orc➞Black Legion➞Nightseeker"
+									]
+								}
 							]
 						}
 					},
@@ -282,7 +397,9 @@ export const Orc: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -295,10 +412,15 @@ export const Orc: Stock = {
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Orc➞Black Legion➞Black Hunter",
-								"Orc➞Great and Black➞Follower"
+								{
+									type: "OR",
+									items: [
+										"Orc➞Black Legion➞Black Hunter",
+										"Orc➞Great and Black➞Follower"
+									]
+								}
 							]
 						}
 					},
@@ -322,7 +444,9 @@ export const Orc: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -335,12 +459,17 @@ export const Orc: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Orc➞Chattel➞Whipmaster",
-								"Orc➞Black Legion➞Black Hunter",
-								"Orc➞Black Legion➞Astride the Beast",
-								"Orc➞Great and Black➞The Rites"
+								{
+									type: "OR",
+									items: [
+										"Orc➞Chattel➞Whipmaster",
+										"Orc➞Black Legion➞Black Hunter",
+										"Orc➞Black Legion➞Astride the Beast",
+										"Orc➞Great and Black➞The Rites"
+									]
+								}
 							]
 						}
 					},
@@ -363,7 +492,9 @@ export const Orc: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
@@ -376,13 +507,18 @@ export const Orc: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Orc➞Black Legion➞Bears the Lash",
-								"Orc➞Great and Black➞Follower",
-								"Orc➞Chattel➞Whipmaster",
-								"Orc➞Servant of the Dark Blood➞Master of Eight",
-								"Orc➞Servant of the Dark Blood➞Knower of Secrets"
+								{
+									type: "OR",
+									items: [
+										"Orc➞Black Legion➞Bears the Lash",
+										"Orc➞Great and Black➞Follower",
+										"Orc➞Chattel➞Whipmaster",
+										"Orc➞Servant of the Dark Blood➞Master of Eight",
+										"Orc➞Servant of the Dark Blood➞Knower of Secrets"
+									]
+								}
 							]
 						}
 					},
@@ -405,7 +541,9 @@ export const Orc: Stock = {
 					years: 7
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -418,11 +556,16 @@ export const Orc: Stock = {
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Orc➞Black Legion➞Bears the Lash",
-								"Orc➞Great and Black➞Black Destroyer",
-								"Orc➞Great and Black➞Named"
+								{
+									type: "OR",
+									items: [
+										"Orc➞Black Legion➞Bears the Lash",
+										"Orc➞Great and Black➞Black Destroyer",
+										"Orc➞Great and Black➞Named"
+									]
+								}
 							]
 						}
 					},
@@ -445,7 +588,9 @@ export const Orc: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -458,11 +603,16 @@ export const Orc: Stock = {
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Orc➞Black Legion➞Bears the Lash",
-								"Orc➞Black Legion➞Packmaster",
-								"Orc➞Great and Black➞Named"
+								{
+									type: "OR",
+									items: [
+										"Orc➞Black Legion➞Bears the Lash",
+										"Orc➞Black Legion➞Packmaster",
+										"Orc➞Great and Black➞Named"
+									]
+								}
 							]
 						}
 					},
@@ -486,14 +636,18 @@ export const Orc: Stock = {
 			]
 		},
 		"Chattel": {
-			allowed: ["bwgr"],
+			allowed: [
+				"bwgr"
+			],
 			name: "Chattel",
 			short: "Chattel",
 			stock: "Orc",
 			type: "Setting",
 			lifepaths: [
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: true,
 					eitherPool: 0,
 					generalSkillPool: 2,
@@ -504,26 +658,36 @@ export const Orc: Stock = {
 					mentalPool: 0,
 					name: "Born Chattel",
 					physicalPool: 1,
-					requirements: {},
+					requirements: {
+					},
 					resources: 5,
 					setting: "Chattel",
 					skillPool: 0,
-					skills: [],
+					skills: [
+
+					],
 					stock: "Orc",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 10
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
-					leads: [],
+					leads: [
+
+					],
 					mentalPool: 0,
 					name: "Cattle Slave",
 					physicalPool: 1,
-					requirements: {},
+					requirements: {
+					},
 					resources: 3,
 					setting: "Chattel",
 					skillPool: 2,
@@ -541,7 +705,9 @@ export const Orc: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -551,7 +717,8 @@ export const Orc: Stock = {
 					mentalPool: 0,
 					name: "Scavenger",
 					physicalPool: 1,
-					requirements: {},
+					requirements: {
+					},
 					resources: 6,
 					setting: "Chattel",
 					skillPool: 3,
@@ -571,15 +738,20 @@ export const Orc: Stock = {
 					years: 3
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
-					leads: [],
+					leads: [
+
+					],
 					mentalPool: 0,
 					name: "Forge Slave",
 					physicalPool: 1,
-					requirements: {},
+					requirements: {
+					},
 					resources: 3,
 					setting: "Chattel",
 					skillPool: 2,
@@ -597,15 +769,20 @@ export const Orc: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
-					leads: [],
+					leads: [
+
+					],
 					mentalPool: 0,
 					name: "Hauler",
 					physicalPool: 1,
-					requirements: {},
+					requirements: {
+					},
 					resources: 3,
 					setting: "Chattel",
 					skillPool: 2,
@@ -625,15 +802,20 @@ export const Orc: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
-					leads: [],
+					leads: [
+
+					],
 					mentalPool: 0,
 					name: "Cutter Slave",
 					physicalPool: 1,
-					requirements: {},
+					requirements: {
+					},
 					resources: 3,
 					setting: "Chattel",
 					skillPool: 2,
@@ -651,15 +833,20 @@ export const Orc: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
-					leads: [],
+					leads: [
+
+					],
 					mentalPool: 0,
 					name: "Tunneler",
 					physicalPool: 1,
-					requirements: {},
+					requirements: {
+					},
 					resources: 3,
 					setting: "Chattel",
 					skillPool: 2,
@@ -677,7 +864,9 @@ export const Orc: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -687,7 +876,8 @@ export const Orc: Stock = {
 					mentalPool: 0,
 					name: "Ravager",
 					physicalPool: 1,
-					requirements: {},
+					requirements: {
+					},
 					resources: 4,
 					setting: "Chattel",
 					skillPool: 4,
@@ -704,19 +894,28 @@ export const Orc: Stock = {
 					years: 3
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
-					leads: [],
+					leads: [
+
+					],
 					mentalPool: 1,
 					name: "Woodcutter",
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Orc➞Chattel➞Cutter Slave"
+								{
+									type: "OR",
+									items: [
+										"Orc➞Chattel➞Cutter Slave"
+									]
+								}
 							]
 						}
 					},
@@ -730,23 +929,34 @@ export const Orc: Stock = {
 					],
 					stock: "Orc",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 7
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
-					leads: [],
+					leads: [
+
+					],
 					mentalPool: 1,
 					name: "Butcher",
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Orc➞Chattel➞Cattle Slave"
+								{
+									type: "OR",
+									items: [
+										"Orc➞Chattel➞Cattle Slave"
+									]
+								}
 							]
 						}
 					},
@@ -760,23 +970,34 @@ export const Orc: Stock = {
 					],
 					stock: "Orc",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 7
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
-					leads: [],
+					leads: [
+
+					],
 					mentalPool: 1,
 					name: "Forger",
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Orc➞Chattel➞Forge Slave"
+								{
+									type: "OR",
+									items: [
+										"Orc➞Chattel➞Forge Slave"
+									]
+								}
 							]
 						}
 					},
@@ -795,19 +1016,28 @@ export const Orc: Stock = {
 					years: 7
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
-					leads: [],
+					leads: [
+
+					],
 					mentalPool: 1,
 					name: "Pitwright",
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Orc➞Chattel➞Tunneler"
+								{
+									type: "OR",
+									items: [
+										"Orc➞Chattel➞Tunneler"
+									]
+								}
 							]
 						}
 					},
@@ -826,7 +1056,9 @@ export const Orc: Stock = {
 					years: 8
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
@@ -838,9 +1070,14 @@ export const Orc: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Orc➞Chattel➞Forger"
+								{
+									type: "OR",
+									items: [
+										"Orc➞Chattel➞Forger"
+									]
+								}
 							]
 						}
 					},
@@ -861,7 +1098,9 @@ export const Orc: Stock = {
 					years: 10
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -873,13 +1112,18 @@ export const Orc: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Orc➞Chattel➞Pitwright",
-								"Orc➞Chattel➞Forger",
-								"Orc➞Great and Black➞1*ANY",
-								"Orc➞Black Legion➞1*ANY",
-								"Orc➞Chattel➞4*ANY" 
+								{
+									type: "OR",
+									items: [
+										"Orc➞Chattel➞Pitwright",
+										"Orc➞Chattel➞Forger",
+										"Orc➞Great and Black➞1*ANY",
+										"Orc➞Black Legion➞1*ANY",
+										"Orc➞Chattel➞4*ANY"
+									]
+								}
 							]
 						}
 					},
@@ -902,14 +1146,18 @@ export const Orc: Stock = {
 			]
 		},
 		"Great and Black": {
-			allowed: ["bwgr"],
+			allowed: [
+				"bwgr"
+			],
 			name: "Great and Black",
 			short: "Great",
 			stock: "Orc",
 			type: "Setting",
 			lifepaths: [
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: true,
 					eitherPool: 0,
 					generalSkillPool: 3,
@@ -919,11 +1167,14 @@ export const Orc: Stock = {
 					mentalPool: 0,
 					name: "Born Great",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 5,
 					setting: "Great and Black",
 					skillPool: 0,
-					skills: [],
+					skills: [
+
+					],
 					stock: "Orc",
 					traitPool: 2,
 					traits: [
@@ -933,7 +1184,9 @@ export const Orc: Stock = {
 					years: 10
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -945,10 +1198,18 @@ export const Orc: Stock = {
 					name: "The Rites",
 					physicalPool: 1,
 					requirements: {
-						limits: [
-							"LP➞UNIQUE",
-							"LP➞MAX➞2"
-						]
+						conditions: {
+							type: "AND",
+							items: [
+								{
+									type: "AND",
+									items: [
+										"LP➞UNIQUE",
+										"LP➞MAX➞2"
+									]
+								}
+							]
+						}
 					},
 					resources: 3,
 					setting: "Great and Black",
@@ -967,7 +1228,9 @@ export const Orc: Stock = {
 					years: 3
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -978,7 +1241,8 @@ export const Orc: Stock = {
 					mentalPool: 0,
 					name: "Servant of the Gate",
 					physicalPool: 1,
-					requirements: {},
+					requirements: {
+					},
 					resources: 7,
 					setting: "Great and Black",
 					skillPool: 2,
@@ -996,7 +1260,9 @@ export const Orc: Stock = {
 					years: 4
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1009,10 +1275,15 @@ export const Orc: Stock = {
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Orc➞Great and Black➞The Rites",
-								"Orc➞Black Legion➞Astride the Beast"
+								{
+									type: "OR",
+									items: [
+										"Orc➞Great and Black➞The Rites",
+										"Orc➞Black Legion➞Astride the Beast"
+									]
+								}
 							]
 						}
 					},
@@ -1037,7 +1308,9 @@ export const Orc: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1049,11 +1322,16 @@ export const Orc: Stock = {
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Orc➞Great and Black➞Follower",
-								"Orc➞Black Legion➞Astride the Beast",
-								"Orc➞Black Legion➞Head Taker"
+								{
+									type: "OR",
+									items: [
+										"Orc➞Great and Black➞Follower",
+										"Orc➞Black Legion➞Astride the Beast",
+										"Orc➞Black Legion➞Head Taker"
+									]
+								}
 							]
 						}
 					},
@@ -1076,7 +1354,9 @@ export const Orc: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1088,11 +1368,16 @@ export const Orc: Stock = {
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Orc➞Great and Black➞Black Destroyer",
-								"Orc➞Black Legion➞Troll Lord",
-								"Orc➞Black Legion➞Head Taker"
+								{
+									type: "OR",
+									items: [
+										"Orc➞Great and Black➞Black Destroyer",
+										"Orc➞Black Legion➞Troll Lord",
+										"Orc➞Black Legion➞Head Taker"
+									]
+								}
 							]
 						}
 					},
@@ -1112,7 +1397,9 @@ export const Orc: Stock = {
 					years: 8
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1124,9 +1411,14 @@ export const Orc: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Orc➞Great and Black➞Servant of the Gate"
+								{
+									type: "OR",
+									items: [
+										"Orc➞Great and Black➞Servant of the Gate"
+									]
+								}
 							]
 						}
 					},
@@ -1147,7 +1439,9 @@ export const Orc: Stock = {
 					years: 10
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1159,9 +1453,14 @@ export const Orc: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Orc➞Great and Black➞Siege Master"
+								{
+									type: "OR",
+									items: [
+										"Orc➞Great and Black➞Siege Master"
+									]
+								}
 							]
 						}
 					},
@@ -1181,7 +1480,9 @@ export const Orc: Stock = {
 					years: 10
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1193,12 +1494,17 @@ export const Orc: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Orc➞Servant of the Dark Blood➞Slave to the Dark",
-								"Orc➞Chattel➞Whipmaster",
-								"Orc➞Great and Black➞Gate Forger",
-								"Orc➞Black Legion➞Bears the Lash"
+								{
+									type: "OR",
+									items: [
+										"Orc➞Servant of the Dark Blood➞Slave to the Dark",
+										"Orc➞Chattel➞Whipmaster",
+										"Orc➞Great and Black➞Gate Forger",
+										"Orc➞Black Legion➞Bears the Lash"
+									]
+								}
 							]
 						}
 					},
@@ -1221,11 +1527,15 @@ export const Orc: Stock = {
 					years: 9
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 1,
-					leads: [],
+					leads: [
+
+					],
 					mentalPool: 2,
 					name: "Great One",
 					physicalPool: 2,
@@ -1233,8 +1543,13 @@ export const Orc: Stock = {
 						conditions: {
 							type: "AND",
 							items: [
-								"Orc➞Great and Black➞Named",
-								"Trait➞Orc Lifepath➞Born to Rule Them All"
+								{
+									type: "AND",
+									items: [
+										"Orc➞Great and Black➞Named",
+										"Trait➞Orc Lifepath➞Born to Rule Them All"
+									]
+								}
 							]
 						}
 					},
@@ -1258,14 +1573,18 @@ export const Orc: Stock = {
 			]
 		},
 		"Servant of the Dark Blood": {
-			allowed: ["bwgr"],
+			allowed: [
+				"bwgr"
+			],
 			name: "Servant of the Dark Blood",
 			short: "Servant",
 			stock: "Orc",
 			type: "Subsetting",
 			lifepaths: [
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1275,7 +1594,8 @@ export const Orc: Stock = {
 					mentalPool: 0,
 					name: "Slave to the Dark",
 					physicalPool: 0,
-					requirements: {},
+					requirements: {
+					},
 					resources: 3,
 					setting: "Servant of the Dark Blood",
 					skillPool: 2,
@@ -1291,7 +1611,9 @@ export const Orc: Stock = {
 					years: 6
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1303,9 +1625,14 @@ export const Orc: Stock = {
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Orc➞Servant of the Dark Blood➞Slave to the Dark"
+								{
+									type: "OR",
+									items: [
+										"Orc➞Servant of the Dark Blood➞Slave to the Dark"
+									]
+								}
 							]
 						}
 					},
@@ -1325,7 +1652,9 @@ export const Orc: Stock = {
 					years: 5
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 0,
@@ -1337,9 +1666,14 @@ export const Orc: Stock = {
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Orc➞Servant of the Dark Blood➞Drinker of the Dark"
+								{
+									type: "OR",
+									items: [
+										"Orc➞Servant of the Dark Blood➞Drinker of the Dark"
+									]
+								}
 							]
 						}
 					},
@@ -1354,11 +1688,15 @@ export const Orc: Stock = {
 					],
 					stock: "Orc",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 5
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
@@ -1371,9 +1709,14 @@ export const Orc: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Orc➞Servant of the Dark Blood➞Drinker of the Dark"
+								{
+									type: "OR",
+									items: [
+										"Orc➞Servant of the Dark Blood➞Drinker of the Dark"
+									]
+								}
 							]
 						}
 					},
@@ -1387,11 +1730,15 @@ export const Orc: Stock = {
 					],
 					stock: "Orc",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 6
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
@@ -1404,9 +1751,14 @@ export const Orc: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Orc➞Servant of the Dark Blood➞Knower of Secrets"
+								{
+									type: "OR",
+									items: [
+										"Orc➞Servant of the Dark Blood➞Knower of Secrets"
+									]
+								}
 							]
 						}
 					},
@@ -1429,19 +1781,28 @@ export const Orc: Stock = {
 					years: 8
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
-					leads: [],
+					leads: [
+
+					],
 					mentalPool: 0,
 					name: "Master of Blood",
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Orc➞Servant of the Dark Blood➞Bloodletter"
+								{
+									type: "OR",
+									items: [
+										"Orc➞Servant of the Dark Blood➞Bloodletter"
+									]
+								}
 							]
 						}
 					},
@@ -1463,19 +1824,28 @@ export const Orc: Stock = {
 					years: 7
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
-					leads: [],
+					leads: [
+
+					],
 					mentalPool: 0,
 					name: "Master of Darkness",
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Orc➞Servant of the Dark Blood➞Knower of Secrets"
+								{
+									type: "OR",
+									items: [
+										"Orc➞Servant of the Dark Blood➞Knower of Secrets"
+									]
+								}
 							]
 						}
 					},
@@ -1488,23 +1858,34 @@ export const Orc: Stock = {
 					],
 					stock: "Orc",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 7
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 1,
-					leads: [],
+					leads: [
+
+					],
 					mentalPool: 0,
 					name: "Dark Summoner",
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Orc➞Servant of the Dark Blood➞Master of Darkness"
+								{
+									type: "OR",
+									items: [
+										"Orc➞Servant of the Dark Blood➞Master of Darkness"
+									]
+								}
 							]
 						}
 					},
@@ -1516,23 +1897,34 @@ export const Orc: Stock = {
 					],
 					stock: "Orc",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 7
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 1,
-					leads: [],
+					leads: [
+
+					],
 					mentalPool: 0,
 					name: "Blood Summoner",
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Orc➞Servant of the Dark Blood➞Master of Blood"
+								{
+									type: "OR",
+									items: [
+										"Orc➞Servant of the Dark Blood➞Master of Blood"
+									]
+								}
 							]
 						}
 					},
@@ -1546,15 +1938,21 @@ export const Orc: Stock = {
 					],
 					stock: "Orc",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 10
 				},
 				{
-					allowed: ["bwgr"],
+					allowed: [
+						"bwgr"
+					],
 					born: false,
 					eitherPool: 0,
 					generalSkillPool: 2,
-					leads: [],
+					leads: [
+
+					],
 					mentalPool: 1,
 					name: "Servant",
 					physicalPool: 0,
@@ -1562,7 +1960,12 @@ export const Orc: Stock = {
 						conditions: {
 							type: "AND",
 							items: [
-								"Trait➞Orc Lifepath➞Born to Rule Them All",
+								{
+									type: "OR",
+									items: [
+										"Trait➞Orc Lifepath➞Born to Rule Them All"
+									]
+								},
 								{
 									type: "OR",
 									items: [
@@ -1582,23 +1985,34 @@ export const Orc: Stock = {
 					],
 					stock: "Orc",
 					traitPool: 1,
-					traits: [],
+					traits: [
+
+					],
 					years: 50
 				},
 				{
-					allowed: ["bwc"],
+					allowed: [
+						"bwc"
+					],
 					born: false,
 					eitherPool: 1,
 					generalSkillPool: 0,
-					leads: [],
+					leads: [
+
+					],
 					mentalPool: 0,
 					name: "Master of the Weak",
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "OR",
+							type: "AND",
 							items: [
-								"Orc➞Servant of the Dark Blood➞Knower of Secrets"
+								{
+									type: "OR",
+									items: [
+										"Orc➞Servant of the Dark Blood➞Knower of Secrets"
+									]
+								}
 							]
 						}
 					},

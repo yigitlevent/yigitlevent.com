@@ -135,54 +135,53 @@ function CheckRequirements(lifepath: Lifepath, errorPath: string): [Error[], War
 	const errors: { path: string; type: string; error: string; }[] = [];
 	const warnings: { path: string; type: string; warning: string; }[] = [];
 
-	const check = (condition: ConditionItem) => {
-		if (typeof condition === "string") {
-			if (condition.startsWith("Skill")) {
-				const [, skillCategory, skillName] = condition.split("➞");
+	const checkRequirementItem = (requirementItem: RequirementItem) => {
+		if (requirementItem.startsWith("Skill")) {
+			const [, skillCategory, skillName] = requirementItem.split("➞");
 
-				const error1 = CheckSkillCategory(skillCategory, condition, errorPath);
-				if (error1) errors.push(error1);
-				else {
-					const error2 = CheckSkillName(skillCategory, skillName, condition, errorPath);
-					if (error2) errors.push(error2);
-				}
-			}
-			else if (condition.startsWith("Trait")) {
-				const [, traitCategory, traitName] = condition.split("➞");
-
-				const error1 = CheckTraitCategory(traitCategory, condition, errorPath);
-				if (error1) errors.push(error1);
-				else {
-					const error2 = CheckTraitName(traitCategory, traitName, condition, errorPath);
-					if (error2) errors.push(error2);
-				}
-			}
+			const error1 = CheckSkillCategory(skillCategory, requirementItem, errorPath);
+			if (error1) errors.push(error1);
 			else {
-				const [leadStock, leadSetting, leadLifepath] = condition.split("➞");
+				const error2 = CheckSkillName(skillCategory, skillName, requirementItem, errorPath);
+				if (error2) errors.push(error2);
+			}
+		}
+		else if (requirementItem.startsWith("Trait")) {
+			const [, traitCategory, traitName] = requirementItem.split("➞");
 
-				const error1 = CheckStock(leadStock, condition, errorPath);
-				if (error1) errors.push(error1);
-				else {
-					const error2 = CheckSetting(leadStock, leadSetting, condition, errorPath);
-					if (error2) errors.push(error2);
-					else {
-						const error3 = CheckLifepath(leadStock, leadSetting, leadLifepath, condition, errorPath);
-						if (error3) errors.push(error3);
-					}
-				}
+			const error1 = CheckTraitCategory(traitCategory, requirementItem, errorPath);
+			if (error1) errors.push(error1);
+			else {
+				const error2 = CheckTraitName(traitCategory, traitName, requirementItem, errorPath);
+				if (error2) errors.push(error2);
 			}
 		}
 		else {
-			for (const itemKey in condition.items) {
-				check(condition.items[itemKey]);
+			const [leadStock, leadSetting, leadLifepath] = requirementItem.split("➞");
+
+			const error1 = CheckStock(leadStock, requirementItem, errorPath);
+			if (error1) errors.push(error1);
+			else {
+				const error2 = CheckSetting(leadStock, leadSetting, requirementItem, errorPath);
+				if (error2) errors.push(error2);
+				else {
+					const error3 = CheckLifepath(leadStock, leadSetting, leadLifepath, requirementItem, errorPath);
+					if (error3) errors.push(error3);
+				}
 			}
+		}
+	};
+
+	const checkRequirementBlock = (requirementBlock: RequirementBlock) => {
+		for (const itemKey in requirementBlock.items) {
+			checkRequirementItem(requirementBlock.items[itemKey]);
 		}
 	};
 
 	if (lifepath.requirements.conditions) {
 		for (const conditionKey in lifepath.requirements.conditions?.items) {
 			const condition = lifepath.requirements.conditions.items[conditionKey];
-			check(condition);
+			checkRequirementBlock(condition);
 		}
 	}
 
