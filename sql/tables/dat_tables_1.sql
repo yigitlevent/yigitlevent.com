@@ -5,7 +5,8 @@
 CREATE TABLE dat."AbilityTypes"
 (
 	"Id" serial NOT NULL,
-	"Name" character varying(255) NOT NULL
+	"Name" character varying(255) NOT NULL,
+    PRIMARY KEY ("Id")
 )
 
 ALTER TABLE IF EXISTS dat."AbilityTypes"
@@ -21,7 +22,8 @@ CREATE TABLE dat."Abilities"
 	"Id" serial NOT NULL,
 	"Name" character varying(255) NOT NULL,
 	"AbilityTypeId" integer NOT NULL,
-	"HasShades" boolean NOT NULL,
+	"HasShades" boolean NOT NULL,,
+    PRIMARY KEY ("Id"),
     FOREIGN KEY ("AbilityTypeId")
         REFERENCES dat."AbilityTypes" ("Id") MATCH SIMPLE
         ON UPDATE RESTRICT

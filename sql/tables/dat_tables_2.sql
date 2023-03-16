@@ -5,7 +5,8 @@
 CREATE TABLE dat."TraitTypes"
 (
 	"Id" serial NOT NULL,
-	"Name" character varying(255) NOT NULL
+	"Name" character varying(255) NOT NULL,
+    PRIMARY KEY ("Id")
 )
 
 ALTER TABLE IF EXISTS dat."TraitTypes"
@@ -18,7 +19,8 @@ ALTER TABLE IF EXISTS dat."TraitTypes"
 CREATE TABLE dat."TraitCategories"
 (
 	"Id" serial NOT NULL,
-	"Name" character varying(255) NOT NULL
+	"Name" character varying(255) NOT NULL,
+    PRIMARY KEY ("Id")
 )
 
 ALTER TABLE IF EXISTS dat."TraitCategories"
@@ -36,7 +38,8 @@ CREATE TABLE dat."Traits"
 	"CategoryId" integer NOT NULL,
 	"TypeId" integer NOT NULL,
 	"Cost" integer NOT NULL,
-	"Description" character varying(325124), -- 10485760?
+	"Description" character varying(325124), -- 10485760?,
+    PRIMARY KEY ("Id"),
     FOREIGN KEY ("StockId")
         REFERENCES dat."Stocks" ("Id") MATCH SIMPLE
         ON UPDATE RESTRICT
@@ -65,7 +68,7 @@ ALTER TABLE IF EXISTS dat."Traits"
 CREATE TABLE dat."RulesetTraits"
 (
 	"TraitId" integer NOT NULL,
-	"RulesetId" integer NOT NULL,
+	"RulesetId" character varying(15) NOT NULL,
     PRIMARY KEY ("TraitId", "RulesetId"),
     FOREIGN KEY ("TraitId")
         REFERENCES dat."Traits" ("Id") MATCH SIMPLE

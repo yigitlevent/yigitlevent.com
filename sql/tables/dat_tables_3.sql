@@ -5,7 +5,8 @@
 CREATE TABLE dat."SkillToolTypes"
 (
 	"Id" serial NOT NULL,
-	"Name" character varying(255) NOT NULL
+	"Name" character varying(255) NOT NULL,
+    PRIMARY KEY ("Id")
 )
 
 ALTER TABLE IF EXISTS dat."SkillToolTypes"
@@ -18,7 +19,8 @@ ALTER TABLE IF EXISTS dat."SkillToolTypes"
 CREATE TABLE dat."SkillTypes"
 (
 	"Id" serial NOT NULL,
-	"Name" character varying(255) NOT NULL
+	"Name" character varying(255) NOT NULL,
+    PRIMARY KEY ("Id")
 )
 
 ALTER TABLE IF EXISTS dat."SkillTypes"
@@ -31,7 +33,8 @@ ALTER TABLE IF EXISTS dat."SkillTypes"
 CREATE TABLE dat."SkillCategories"
 (
 	"Id" serial NOT NULL,
-	"Name" character varying(255) NOT NULL
+	"Name" character varying(255) NOT NULL,
+    PRIMARY KEY ("Id")
 )
 
 ALTER TABLE IF EXISTS dat."SkillCategories"
@@ -56,6 +59,7 @@ CREATE TABLE dat."Skills"
 	"Description" character varying(325124), -- 10485760?
 	"ToolTypeId" integer,
 	"ToolDescription" character varying(255),
+    PRIMARY KEY ("Id"),
     FOREIGN KEY ("StockId")
         REFERENCES dat."Stocks" ("Id") MATCH SIMPLE
         ON UPDATE RESTRICT
@@ -98,7 +102,7 @@ ALTER TABLE IF EXISTS dat."Skills"
 CREATE TABLE dat."RulesetSkills"
 (
 	"SkillId" integer NOT NULL,
-	"RulesetId" integer NOT NULL,
+	"RulesetId" character varying(15) NOT NULL,
     PRIMARY KEY ("SkillId", "RulesetId"),
     FOREIGN KEY ("SkillId")
         REFERENCES dat."Skills" ("Id") MATCH SIMPLE
