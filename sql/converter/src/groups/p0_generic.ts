@@ -1,3 +1,4 @@
+import { PracticeTable } from "../../../../client/bwgrtools/src/data/tables";
 import { arrayToSQL } from "../util/arrayToSql";
 
 
@@ -31,10 +32,11 @@ export function processGeneric(): Processed {
 	const skillToolTypeRefs: Reference[] = [];
 
 	const datSkillTypes =
-		["Academic", "Artisan", "Artist", "Craftsman", "Forester", "Martial", "Medicinal", "Military", "Musical", "Peasant", "Physical", "School of Thought", "Seafaring", "Social", "Sorcerous", "Special", "Wise"]
+		["Academic", "Artisan", "Artist", "Craftsman", "Forester", "Martial", "Medicinal", "Military", "Musical", "Peasant", "Physical", "School of Thought", "Seafaring", "Social", "Sorcerous", "Special"]
 			.map((v, i) => {
 				skillTypeRefs.push([i, v]);
-				return `(${i}, '${v}')`;
+				const p = PracticeTable[v];
+				return `(${i}, '${v}', ${p.Cycle}, ${p.Routine}, ${p.Difficult}, ${p.Challenging})`;
 			});
 
 	const datSkillCategories =
@@ -81,7 +83,7 @@ export function processGeneric(): Processed {
 
 			arrayToSQL("dat", "AbilityTypes", '"Id", "Name"', datAbilityTypes),
 
-			arrayToSQL("dat", "SkillTypes", '"Id", "Name"', datSkillTypes),
+			arrayToSQL("dat", "SkillTypes", '"Id", "Name", "Cycle", "Routine", "Difficult", "Challenging"', datSkillTypes),
 			arrayToSQL("dat", "SkillCategories", '"Id", "Name"', datSkillCategories),
 			arrayToSQL("dat", "SkillToolTypes", '"Id", "Name"', datSkillToolTypes),
 

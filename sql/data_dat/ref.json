@@ -9,7 +9,7 @@
 		[0,"Mental Stat"],[1,"Physical Stat"],[2,"Attribute"],[3,"Emotional Attribute"]
 	],
 "SkillTypes":[
-		[0,"Academic"],[1,"Artisan"],[2,"Artist"],[3,"Craftsman"],[4,"Forester"],[5,"Martial"],[6,"Medicinal"],[7,"Military"],[8,"Musical"],[9,"Peasant"],[10,"Physical"],[11,"School of Thought"],[12,"Seafaring"],[13,"Social"],[14,"Sorcerous"],[15,"Special"],[16,"Wise"]
+		[0,"Academic"],[1,"Artisan"],[2,"Artist"],[3,"Craftsman"],[4,"Forester"],[5,"Martial"],[6,"Medicinal"],[7,"Military"],[8,"Musical"],[9,"Peasant"],[10,"Physical"],[11,"School of Thought"],[12,"Seafaring"],[13,"Social"],[14,"Sorcerous"],[15,"Special"]
 	],
 "SkillCategories":[
 		[0,"General"],[1,"Wise"],[2,"Magical"],[3,"Special"],[4,"Monstrous"],[5,"Art"],[6,"Skill Song"],[7,"Spell Song"],[8,"Spirit Hunter Song"]

@@ -13,21 +13,6 @@ ALTER TABLE IF EXISTS dat."LogicTypes"
     OWNER to apiuser;
 	
 
--- Table: dat.Genders
-
--- DROP TABLE IF EXISTS dat."Genders";
-
-CREATE TABLE dat."Genders"
-(
-	"Id" int NOT NULL,
-	"Name" character varying(7) NOT NULL,
-    PRIMARY KEY ("Id")
-)
-
-ALTER TABLE IF EXISTS dat."Genders"
-    OWNER to apiuser;
-	
-
 -- Table: dat.RequirementItemTypes
 
 -- DROP TABLE IF EXISTS dat."RequirementItemTypes";
@@ -42,6 +27,21 @@ CREATE TABLE dat."RequirementItemTypes"
 ALTER TABLE IF EXISTS dat."RequirementItemTypes"
     OWNER to apiuser;
 	
+
+-- Table: dat.AbilityTypes
+
+-- DROP TABLE IF EXISTS dat."AbilityTypes";
+
+CREATE TABLE dat."AbilityTypes"
+(
+	"Id" serial NOT NULL,
+	"Name" character varying(255) NOT NULL
+    PRIMARY KEY ("Id")
+)
+
+ALTER TABLE IF EXISTS dat."AbilityTypes"
+    OWNER to apiuser;
+
 
 -- Table: dat.SkillToolTypes
 
@@ -66,6 +66,10 @@ CREATE TABLE dat."SkillTypes"
 (
 	"Id" serial NOT NULL,
 	"Name" character varying(255) NOT NULL,
+	"Cycle" integer NOT NULL,
+	"Routine" integer NOT NULL,
+	"Difficult" integer NOT NULL,
+	"Challenging" integer NOT NULL,
     PRIMARY KEY ("Id")
 )
 
