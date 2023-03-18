@@ -2,17 +2,19 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 
-import { RangeAndCoverActions, RangeAndCoverAction } from "../../../data/rangeAndCover";
+import { RangeAndCoverActions, RangeAndCoverAction, RangeAndCoverResolutionItem } from "../../../data/rangeAndCover";
 
+
+function ResolutionToString(res: RangeAndCoverResolutionItem): string {
+	const test = res.ability ? res.ability : res.skill;
+	const oppTest = res.opposingAbility ? res.opposingAbility : res.opposingSkill;
+
+	return `${test} ${res.type} ${oppTest}`;
+}
 
 export function RangeAndCoverActionDetails({ action }: { action: RangeAndCoverAction; }) {
 	return (
 		<Stack spacing={0} sx={{ width: "100%" }}>
-			<Box sx={{ margin: "0 0 10px" }}>
-				<b>Test:</b>
-				<Typography variant="body2">{action.test}</Typography>
-			</Box>
-
 			{action.effect
 				? <Box sx={{ margin: "0 0 10px" }}>
 					<b>Effect:</b>
@@ -57,8 +59,12 @@ export function RangeAndCoverActionDetails({ action }: { action: RangeAndCoverAc
 				? <Box sx={{ margin: "0 0 10px" }}>
 					<b>Resolution:</b>
 					{RangeAndCoverActions.map((v, i) => {
-						const res = action.resolution[v.name] ? action.resolution[v.name] : "—";
-						return <Typography variant="body2" key={i}>{v.name}: {res}</Typography>;
+						const res = action.resolution[v.name];
+						return (
+							<Typography variant="body2" key={i}>
+								{(res) ? ResolutionToString(res) : "—"}
+							</Typography>
+						);
 					})}
 				</Box>
 				: null

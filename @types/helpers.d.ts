@@ -16,3 +16,13 @@ interface NominalNumber<T extends number> extends Number {
 }
 
 type Guid = NominalString<string>;
+
+
+// Only one of two properties
+type RequireOnlyOne<T, Keys extends keyof T = keyof T> =
+	Pick<T, Exclude<keyof T, Keys>>
+	& {
+		[K in Keys]-?:
+		Required<Pick<T, K>>
+		& Partial<Record<Exclude<Keys, K>, undefined>>
+	}[Keys];
