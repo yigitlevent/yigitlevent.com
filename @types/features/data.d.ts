@@ -79,3 +79,11 @@ type Cell = {
 	remaining: number;
 	placed: Practice[];
 };
+
+type FightResolutionItem =
+	"Vs" | "Std" | "Ob 1" | "Skill"
+	| `Ob=${StatsAndAttributesList | "Skill"}`
+	| `vs ${StatsAndAttributesList | "Skill"}`
+	| `+vs ${StatsAndAttributesList | "Skill"}`
+	| `vs + ${StatsAndAttributesList | "Skill"}`
+	| `½ ${StatsAndAttributesList | "Skill"}`;

@@ -2,8 +2,19 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 
-import { DuelOfWitsActions, DuelOfWitsAction } from "../../../data/duelOfWits";
+import { DuelOfWitsActions, DuelOfWitsAction, DuelofWitsResolutionItem } from "../../../data/duelOfWits";
 
+
+function ResolutionToString(res: DuelofWitsResolutionItem): string {
+	const test =
+		(res.type !== "Ob")
+			? res.type
+			: (res.obstacle)
+				? `${res.type} ${res.obstacle}`
+				: `${res.type}=${res.obstacleStat}`;
+
+	return test;
+}
 
 export function DuelOfWitsActionDetails({ action }: { action: DuelOfWitsAction; }) {
 	return (
@@ -35,7 +46,7 @@ export function DuelOfWitsActionDetails({ action }: { action: DuelOfWitsAction; 
 				</Box>
 				: null
 			}
-			
+
 			{action.effects
 				? <Box sx={{ margin: "0 0 10px" }}>
 					<b>Effects:</b>
@@ -50,8 +61,12 @@ export function DuelOfWitsActionDetails({ action }: { action: DuelOfWitsAction; 
 				? <Box sx={{ margin: "0 0 10px" }}>
 					<b>Resolution:</b>
 					{DuelOfWitsActions.map((v, i) => {
-						const res = action.resolution[v.name] ? action.resolution[v.name] : "—";
-						return <Typography variant="body2" key={i}>{v.name}: {res}</Typography>;
+						const res = action.resolution[v.name];
+						return (
+							<Typography variant="body2" key={i}>
+								{(res) ? ResolutionToString(res) : "—"}
+							</Typography>
+						);
 					})}
 				</Box>
 				: null
