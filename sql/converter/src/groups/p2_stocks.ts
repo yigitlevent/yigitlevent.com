@@ -4,29 +4,29 @@ import { findIndex } from "../util/findRef";
 
 
 export function processStocks(): Processed {
-	const DatStocks: string[] = [];
-	const DatAgePools: string[] = [];
-	const DatRulesetStocks: string[] = [];
-	const DatSettings: string[] = [];
-	const DatRulesetSettings: string[] = [];
-
-	const allSettings: Setting[] = [];
-
 	const stockRefs: Reference[] = [];
 	const settingRefs: Reference[] = [];
+	
+	const datStocks: string[] = [];
+	const datAgePools: string[] = [];
+	const datRulesetStocks: string[] = [];
+	const datSettings: string[] = [];
+	const datRulesetSettings: string[] = [];
+	
+	const allSettings: Setting[] = [];
 
 	Object.keys(Stocks).forEach((stockKey, stockIndex) => {
 		const stock = Stocks[stockKey];
 
 		stockRefs.push([stockIndex, stock.name]);
-		DatStocks.push(`(${stockIndex}, '${stock.name}', '${stock.namePlural}', ${stock.stride})`);
+		datStocks.push(`(${stockIndex}, '${stock.name}', '${stock.namePlural}', ${stock.stride})`);
 
 		stock.agePool.forEach((age, ageIndex) => {
-			DatAgePools.push(`(${ageIndex}, ${stockIndex}, ${age.min}, ${age.m}, ${age.p})`);
+			datAgePools.push(`(${ageIndex}, ${stockIndex}, ${age.min}, ${age.m}, ${age.p})`);
 		});
 
 		stock.allowed.forEach(rulesetId => {
-			DatRulesetStocks.push(`(${stockIndex}, '${rulesetId}')`);
+			datRulesetStocks.push(`(${stockIndex}, '${rulesetId}')`);
 		});
 
 		allSettings.push(...Object.values(stock.settings));
@@ -37,21 +37,22 @@ export function processStocks(): Processed {
 		const stockIndex = findIndex("Stocks", stock.name, { Stocks: stockRefs });
 
 		settingRefs.push([settingIndex, `${stock.name}➞${setting.name}`]);
-		DatSettings.push(`(${settingIndex}, '${setting.name}', '${setting.short}', ${stockIndex}, ${setting.type === "Subsetting"})`);
+		datSettings.push(`(${settingIndex}, '${setting.name}', '${setting.short}', ${stockIndex}, ${setting.type === "Subsetting"})`);
 
 		setting.allowed.forEach(rulesetId => {
-			DatRulesetSettings.push(`(${settingIndex}, '${rulesetId}')`);
+			datRulesetSettings.push(`(${settingIndex}, '${rulesetId}')`);
 		});
 	});
 
-	const stocks = arrayToSQL("dat", "Stocks", '"Id", "Name", "NamePlural", "Stride"', DatStocks);
-	const agepools = arrayToSQL("dat", "AgePools", '"Id", "StockId", "MinAge", "MentalPool", "PhysicalPool"', DatAgePools);
-	const rulesetStocks = arrayToSQL("dat", "RulesetStocks", '"StockId", "RulesetId"', DatRulesetStocks);
-	const settings = arrayToSQL("dat", "Settings", '"Id", "Name", "NameShort", "StockId", "IsSubsetting"', DatSettings);
-	const rulesetSettings = arrayToSQL("dat", "RulesetSettings", '"SettingId", "RulesetId"', DatRulesetSettings);
 
 	return {
 		references: { Stocks: stockRefs, Settings: settingRefs },
-		data: [stocks, agepools, rulesetStocks, settings, rulesetSettings]
+		data: [
+			arrayToSQL("dat", "Stocks", '"Id", "Name", "NamePlural", "Stride"', datStocks),
+			arrayToSQL("dat", "AgePools", '"Id", "StockId", "MinAge", "MentalPool", "PhysicalPool"', datAgePools),
+			arrayToSQL("dat", "RulesetStocks", '"StockId", "RulesetId"', datRulesetStocks),
+			arrayToSQL("dat", "Settings", '"Id", "Name", "NameShort", "StockId", "IsSubsetting"', datSettings),
+			arrayToSQL("dat", "RulesetSettings", '"SettingId", "RulesetId"', datRulesetSettings)
+		]
 	};
 }

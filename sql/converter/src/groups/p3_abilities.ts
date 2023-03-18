@@ -1,32 +1,31 @@
 import { Stats } from "../../../../client/bwgrtools/src/data/stats";
 import { Attributes } from "../../../../client/bwgrtools/src/data/attributes";
 import { arrayToSQL } from "../util/arrayToSql";
+import { findIndex } from "../util/findRef";
 
 
-export function processAbilities(): Processed {
-	const DatAbilityTypes: string[] = ["(0, 'Mental Stat')", "(1, 'Physical Stat')", "(2, 'Attribute')", "(3, 'Emotional Attribute')"];
-	const DatAbilities: string[] = [];
-
-	const abilityTypeRefs: Reference[] = [[0, "Mental Stat"], [1, "Physical Stat"], [2, "Attribute"], [3, "Emotional Attribute"]];
+export function processAbilities(refs: References): Processed {
 	const abilityRefs: Reference[] = [];
-
+	
+	const datAbilities: string[] = [];
+	
 	[...Stats, ...Attributes].forEach((v, i) => {
 		abilityRefs.push([i, v.name]);
 
 		if ("pool" in v) {
-			DatAbilities.push(`(${i}, '${v.name}', ${v.pool === "Mental" ? 0 : 1}, true)`);
+			const ref = findIndex("AbilityTypes", (v.pool === "Mental") ? "Mental Stat" : "Physical Stat", refs);
+			datAbilities.push(`(${i}, '${v.name}', ${ref[0]}, true)`);
 		}
 		else {
-			if (v.requiredTrait) DatAbilities.push(`(${i}, '${v.name}', 3, ${v.hasShade})`);
-			else DatAbilities.push(`(${i}, '${v.name}', 2, ${v.hasShade})`);
+			const ref = findIndex("AbilityTypes", (v.requiredTrait) ? "Emotional Attribute" : "Attribute", refs);
+			datAbilities.push(`(${i}, '${v.name}', ${ref[0]}, ${v.hasShade})`);
 		}
 	});
 
-	const abilityTypes = arrayToSQL("dat", "AbilityTypes", '"Id", "Name"', DatAbilityTypes);
-	const abilities = arrayToSQL("dat", "Abilities", '"Id", "Name", "AbilityTypeId", "HasShades"', DatAbilities);
-
 	return {
-		references: { AbilityTypes: abilityTypeRefs, Abilities: abilityRefs },
-		data: [abilityTypes, abilities]
+		references: { Abilities: abilityRefs },
+		data: [
+			arrayToSQL("dat", "Abilities", '"Id", "Name", "AbilityTypeId", "HasShades"', datAbilities)
+		]
 	};
 }
