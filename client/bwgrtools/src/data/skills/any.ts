@@ -3420,7 +3420,7 @@ export const AnyMonstrous: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -3637,7 +3637,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -3651,7 +3651,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -3665,7 +3665,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -3679,7 +3679,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -3693,7 +3693,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -3707,7 +3707,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -3721,7 +3721,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -3735,7 +3735,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -3749,7 +3749,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -3763,7 +3763,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -3777,7 +3777,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -3791,7 +3791,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -3805,7 +3805,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -3819,7 +3819,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -3833,7 +3833,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -3847,7 +3847,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -3861,7 +3861,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -3875,7 +3875,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -3889,7 +3889,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -3903,7 +3903,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -3917,7 +3917,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -3931,7 +3931,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -3945,7 +3945,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -3959,7 +3959,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -3973,7 +3973,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -3987,7 +3987,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -4001,7 +4001,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -4015,7 +4015,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -4029,7 +4029,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -4043,7 +4043,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -4057,7 +4057,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -4071,7 +4071,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -4085,7 +4085,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -4099,7 +4099,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -4114,7 +4114,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -4128,7 +4128,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -4142,7 +4142,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -4156,7 +4156,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -4170,7 +4170,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -4184,7 +4184,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -4198,7 +4198,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -4212,7 +4212,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -4226,7 +4226,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -4240,7 +4240,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -4254,7 +4254,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -4268,7 +4268,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -4282,7 +4282,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -4296,7 +4296,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -4310,7 +4310,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -4324,7 +4324,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -4338,7 +4338,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -4352,7 +4352,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -4366,7 +4366,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -4380,7 +4380,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -4394,7 +4394,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -4408,7 +4408,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -4422,7 +4422,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -4436,7 +4436,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -4450,7 +4450,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -4464,7 +4464,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -4478,7 +4478,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -4492,7 +4492,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -4506,7 +4506,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -4520,7 +4520,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -4534,7 +4534,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -4548,7 +4548,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -4562,7 +4562,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -4576,7 +4576,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -4590,7 +4590,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -4604,7 +4604,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -4618,7 +4618,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -4632,7 +4632,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -4646,7 +4646,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -4660,7 +4660,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -4674,7 +4674,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -4688,7 +4688,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -4702,7 +4702,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -4716,7 +4716,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -4730,7 +4730,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -4744,7 +4744,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -4758,7 +4758,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -4772,7 +4772,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -4786,7 +4786,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -4800,7 +4800,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -4814,7 +4814,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -4828,7 +4828,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -4842,7 +4842,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -4856,7 +4856,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -4870,7 +4870,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -4884,7 +4884,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -4898,7 +4898,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -4912,7 +4912,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -4926,7 +4926,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -4940,7 +4940,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -4954,7 +4954,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -4968,7 +4968,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -4982,7 +4982,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -4996,7 +4996,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -5010,7 +5010,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -5024,7 +5024,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -5038,7 +5038,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -5052,7 +5052,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -5066,7 +5066,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -5080,7 +5080,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -5094,7 +5094,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -5108,7 +5108,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -5122,7 +5122,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -5136,7 +5136,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -5150,7 +5150,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -5164,7 +5164,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -5178,7 +5178,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -5192,7 +5192,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -5206,7 +5206,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -5220,7 +5220,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -5234,7 +5234,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -5248,7 +5248,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -5262,7 +5262,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -5276,7 +5276,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -5291,7 +5291,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -5305,7 +5305,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -5319,7 +5319,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -5333,7 +5333,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -5347,7 +5347,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -5361,7 +5361,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -5375,7 +5375,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -5389,7 +5389,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -5403,7 +5403,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -5417,7 +5417,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -5431,7 +5431,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -5445,7 +5445,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -5459,7 +5459,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -5473,7 +5473,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -5487,7 +5487,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -5501,7 +5501,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -5515,7 +5515,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -5529,7 +5529,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -5543,7 +5543,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -5557,7 +5557,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -5571,7 +5571,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -5585,7 +5585,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -5599,7 +5599,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -5613,7 +5613,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -5627,7 +5627,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -5641,7 +5641,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -5655,7 +5655,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -5669,7 +5669,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -5683,7 +5683,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -5697,7 +5697,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -5711,7 +5711,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -5725,7 +5725,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -5739,7 +5739,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -5753,7 +5753,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -5767,7 +5767,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -5781,7 +5781,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -5795,7 +5795,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -5809,7 +5809,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -5823,7 +5823,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -5837,7 +5837,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -5851,7 +5851,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -5865,7 +5865,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -5879,7 +5879,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -5893,7 +5893,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -5907,7 +5907,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -5921,7 +5921,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -5935,7 +5935,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -5949,7 +5949,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -5963,7 +5963,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -5977,7 +5977,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -5991,7 +5991,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -6005,7 +6005,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -6019,7 +6019,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -6033,7 +6033,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -6047,7 +6047,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -6061,7 +6061,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -6075,7 +6075,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -6089,7 +6089,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -6103,7 +6103,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -6117,7 +6117,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -6131,7 +6131,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -6145,7 +6145,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -6159,7 +6159,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -6173,7 +6173,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -6187,7 +6187,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -6201,7 +6201,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -6215,7 +6215,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -6229,7 +6229,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -6243,7 +6243,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -6257,7 +6257,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -6271,7 +6271,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -6285,7 +6285,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -6299,7 +6299,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -6313,7 +6313,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -6327,7 +6327,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -6341,7 +6341,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -6355,7 +6355,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -6369,7 +6369,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -6383,7 +6383,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -6397,7 +6397,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -6411,7 +6411,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -6425,7 +6425,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -6439,7 +6439,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -6453,7 +6453,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -6467,7 +6467,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -6481,7 +6481,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -6495,7 +6495,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -6509,7 +6509,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -6523,7 +6523,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -6537,7 +6537,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -6551,7 +6551,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -6565,7 +6565,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -6579,7 +6579,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -6593,7 +6593,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -6607,7 +6607,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -6621,7 +6621,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -6635,7 +6635,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -6649,7 +6649,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -6663,7 +6663,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -6677,7 +6677,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -6691,7 +6691,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -6705,7 +6705,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -6719,7 +6719,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -6733,7 +6733,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -6747,7 +6747,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -6761,7 +6761,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -6775,7 +6775,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -6789,7 +6789,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -6803,7 +6803,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -6817,7 +6817,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -6831,7 +6831,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -6845,7 +6845,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -6859,7 +6859,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -6873,7 +6873,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -6887,7 +6887,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -6901,7 +6901,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -6915,7 +6915,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -6929,7 +6929,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -6943,7 +6943,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -6957,7 +6957,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -6971,7 +6971,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -6985,7 +6985,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -6999,7 +6999,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -7013,7 +7013,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -7027,7 +7027,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -7041,7 +7041,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -7055,7 +7055,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -7069,7 +7069,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -7083,7 +7083,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -7097,7 +7097,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -7111,7 +7111,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -7125,7 +7125,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -7139,7 +7139,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -7153,7 +7153,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -7167,7 +7167,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -7181,7 +7181,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -7195,7 +7195,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -7209,7 +7209,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -7223,7 +7223,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -7237,7 +7237,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -7251,7 +7251,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -7265,7 +7265,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -7279,7 +7279,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -7293,7 +7293,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -7307,7 +7307,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -7321,7 +7321,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -7335,7 +7335,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -7349,7 +7349,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -7363,7 +7363,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -7377,7 +7377,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -7391,7 +7391,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -7405,7 +7405,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -7419,7 +7419,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -7433,7 +7433,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -7447,7 +7447,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -7461,7 +7461,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -7475,7 +7475,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -7489,7 +7489,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -7503,7 +7503,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -7517,7 +7517,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -7531,7 +7531,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -7545,7 +7545,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -7559,7 +7559,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -7573,7 +7573,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -7587,7 +7587,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -7601,7 +7601,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -7615,7 +7615,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -7629,7 +7629,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -7643,7 +7643,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -7657,7 +7657,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -7671,7 +7671,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -7685,7 +7685,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -7699,7 +7699,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -7713,7 +7713,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -7727,7 +7727,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr"],
@@ -7741,7 +7741,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr"],
@@ -7755,7 +7755,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -7769,7 +7769,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -7783,7 +7783,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -7797,7 +7797,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -7811,7 +7811,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -7825,7 +7825,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -7839,7 +7839,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -7853,7 +7853,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -7867,7 +7867,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -7881,7 +7881,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -7895,7 +7895,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -7909,7 +7909,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -7923,7 +7923,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -7937,7 +7937,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -7951,7 +7951,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -7965,7 +7965,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -7979,7 +7979,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -7993,7 +7993,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -8007,7 +8007,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -8021,7 +8021,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -8035,7 +8035,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -8049,7 +8049,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -8063,7 +8063,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -8077,7 +8077,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -8091,7 +8091,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -8105,7 +8105,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -8119,7 +8119,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -8133,7 +8133,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -8147,7 +8147,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -8161,7 +8161,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -8175,7 +8175,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -8189,7 +8189,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -8203,7 +8203,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -8217,7 +8217,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -8231,7 +8231,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -8245,7 +8245,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -8259,7 +8259,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -8273,7 +8273,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -8287,7 +8287,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -8301,7 +8301,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -8315,7 +8315,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -8329,7 +8329,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -8343,7 +8343,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 
 		{
@@ -8358,7 +8358,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -8372,7 +8372,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -8386,7 +8386,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -8400,7 +8400,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -8414,7 +8414,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -8428,7 +8428,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -8442,7 +8442,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -8456,7 +8456,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -8470,7 +8470,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -8484,7 +8484,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -8498,7 +8498,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -8512,7 +8512,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -8526,7 +8526,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -8540,7 +8540,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -8554,7 +8554,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -8568,7 +8568,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -8582,7 +8582,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -8597,7 +8597,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -8611,7 +8611,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -8625,7 +8625,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -8639,7 +8639,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -8653,7 +8653,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -8667,7 +8667,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -8681,7 +8681,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -8695,7 +8695,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -8709,7 +8709,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -8723,7 +8723,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -8737,7 +8737,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -8751,7 +8751,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -8765,7 +8765,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -8779,7 +8779,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -8793,7 +8793,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -8807,7 +8807,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -8821,7 +8821,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -8835,7 +8835,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -8849,7 +8849,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -8863,7 +8863,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -8877,7 +8877,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -8891,7 +8891,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -8905,7 +8905,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -8919,7 +8919,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -8933,7 +8933,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -8947,7 +8947,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -8961,7 +8961,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -8975,7 +8975,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -8989,7 +8989,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -9003,7 +9003,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -9017,7 +9017,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -9031,7 +9031,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -9045,7 +9045,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -9059,7 +9059,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr", "bs"],
@@ -9073,7 +9073,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bs"],
@@ -9087,7 +9087,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bs"],
@@ -9101,7 +9101,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bs"],
@@ -9115,7 +9115,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bs"],
@@ -9129,7 +9129,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bs"],
@@ -9143,7 +9143,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bs"],
@@ -9157,7 +9157,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bs"],
@@ -9171,7 +9171,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bs"],
@@ -9185,7 +9185,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bs"],
@@ -9199,7 +9199,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bs"],
@@ -9213,7 +9213,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bs"],
@@ -9227,7 +9227,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bs"],
@@ -9241,7 +9241,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bs"],
@@ -9255,7 +9255,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bs"],
@@ -9269,7 +9269,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bs"],
@@ -9283,7 +9283,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bs"],
@@ -9297,7 +9297,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bs"],
@@ -9311,7 +9311,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bs"],
@@ -9325,7 +9325,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bs"],
@@ -9339,7 +9339,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bs"],
@@ -9353,7 +9353,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bs"],
@@ -9367,7 +9367,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bs"],
@@ -9381,7 +9381,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bs"],
@@ -9395,7 +9395,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bs"],
@@ -9409,7 +9409,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bs"],
@@ -9423,7 +9423,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bs"],
@@ -9437,7 +9437,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bs"],
@@ -9451,7 +9451,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bs"],
@@ -9465,7 +9465,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bs"],
@@ -9479,7 +9479,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bs"],
@@ -9493,7 +9493,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bs"],
@@ -9507,7 +9507,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bs"],
@@ -9521,7 +9521,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bs"],
@@ -9535,7 +9535,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bs"],
@@ -9549,7 +9549,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bs"],
@@ -9563,7 +9563,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bs"],
@@ -9577,7 +9577,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bs"],
@@ -9591,7 +9591,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bs"],
@@ -9605,7 +9605,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bs"],
@@ -9619,7 +9619,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bs"],
@@ -9633,7 +9633,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bs"],
@@ -9647,7 +9647,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bs"],
@@ -9661,7 +9661,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bs"],
@@ -9675,7 +9675,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bs"],
@@ -9689,7 +9689,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bs"],
@@ -9703,7 +9703,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bs"],
@@ -9717,7 +9717,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bs"],
@@ -9731,7 +9731,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bs"],
@@ -9745,7 +9745,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bs"],
@@ -9759,7 +9759,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bs"],
@@ -9773,7 +9773,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bs"],
@@ -9787,7 +9787,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bs"],
@@ -9801,7 +9801,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bs"],
@@ -9815,7 +9815,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bs"],
@@ -9829,7 +9829,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bs"],
@@ -9843,7 +9843,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bs"],
@@ -9857,7 +9857,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bs"],
@@ -9871,7 +9871,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bs"],
@@ -9885,7 +9885,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bs"],
@@ -9899,7 +9899,7 @@ export const AnyWise: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		}
 	]
 };

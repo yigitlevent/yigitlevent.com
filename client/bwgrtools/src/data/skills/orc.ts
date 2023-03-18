@@ -153,7 +153,7 @@ export const OrcSpecial: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwgr"],

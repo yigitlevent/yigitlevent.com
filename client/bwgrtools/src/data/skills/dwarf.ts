@@ -430,7 +430,7 @@ export const DwarfSpecial: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		}
 	]
 };

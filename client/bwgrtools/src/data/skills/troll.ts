@@ -17,7 +17,7 @@ export const TrollSpecial: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -61,7 +61,7 @@ export const TrollSpecial: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		}
 	]
 };

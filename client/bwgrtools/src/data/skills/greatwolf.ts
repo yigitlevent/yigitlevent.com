@@ -32,7 +32,7 @@ export const GreatWolfSpecial: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -76,7 +76,7 @@ export const GreatWolfSpecial: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -90,7 +90,7 @@ export const GreatWolfSpecial: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -119,7 +119,7 @@ export const GreatWolfSpecial: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -134,7 +134,7 @@ export const GreatWolfSpecial: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -163,7 +163,7 @@ export const GreatWolfSpecial: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -207,7 +207,7 @@ export const GreatWolfSpecial: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -221,7 +221,7 @@ export const GreatWolfSpecial: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -265,7 +265,7 @@ export const GreatWolfSpecial: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -279,7 +279,7 @@ export const GreatWolfSpecial: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -293,7 +293,7 @@ export const GreatWolfSpecial: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -307,7 +307,7 @@ export const GreatWolfSpecial: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -351,7 +351,7 @@ export const GreatWolfSpecial: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -365,7 +365,7 @@ export const GreatWolfSpecial: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -409,7 +409,7 @@ export const GreatWolfSpecial: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -423,7 +423,7 @@ export const GreatWolfSpecial: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -437,7 +437,7 @@ export const GreatWolfSpecial: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		},
 		{
 			allowed: ["bwc"],
@@ -481,7 +481,7 @@ export const GreatWolfSpecial: SkillCategory = {
 				""
 			],
 			training: false,
-			type: "Wise"
+			type: "Special"
 		}
 	]
 };
