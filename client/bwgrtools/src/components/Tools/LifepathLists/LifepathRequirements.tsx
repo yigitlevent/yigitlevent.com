@@ -6,6 +6,7 @@ import { GetOrdinalSuffix, MakeName } from "../../../utils/misc";
 import { GetLifepathFromPath, GetSettingFromPath, GetSkillFromPath, GetTraitFromPath } from "../../../utils/pathFinder";
 
 
+// FIX: Requirements string resolution is probably completely broken now
 function ResolveString(requirementBlockItem: string, checkRulesets: (allowed: RulesetId[]) => boolean): string {
 	const temp = requirementBlockItem.split("➞");
 
@@ -54,6 +55,7 @@ function ResolveString(requirementBlockItem: string, checkRulesets: (allowed: Ru
 	}
 }
 
+// FIX: Requirements string resolution is probably completely broken now
 function BlockJoiner(type: "AND" | "OR" | "NOT", arr: string[]) {
 	switch (type) {
 		case "AND":
@@ -67,12 +69,14 @@ function BlockJoiner(type: "AND" | "OR" | "NOT", arr: string[]) {
 	}
 }
 
+// FIX: Requirements string resolution is probably completely broken now
 function ResolveRequirementBlock(requirementBlock: RequirementBlock, checkRulesets: (allowed: RulesetId[]) => boolean): string {
 	const blockSet = new Set<string>();
 	requirementBlock.items.forEach(item => blockSet.add(ResolveString(item, checkRulesets)));
 	return BlockJoiner(requirementBlock.type, [...blockSet]);
 }
 
+// FIX: Requirements string resolution is probably completely broken now
 function ResolveRequirementBlocks(requirementBlocks: RequirementBlocks, checkRulesets: (allowed: RulesetId[]) => boolean): string {
 	const blocksSet = new Set<string>();
 	requirementBlocks.items.map(requirementBlock => ResolveRequirementBlock(requirementBlock, checkRulesets));

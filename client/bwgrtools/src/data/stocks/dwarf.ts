@@ -1587,14 +1587,20 @@ export const Dwarf: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "AND",
+							type: "OR",
 							items: [
 								{
 									type: "OR",
 									items: [
 										"Dwarf➞Host➞Axe Bearer",
-										"Dwarf➞Clansman➞Longbeard",
-										"Dwarf➞Host➞3*ANY"
+										"Dwarf➞Clansman➞Longbeard"
+									]
+								},
+								{
+									type: "OR",
+									fulfilmentAmount: 3,
+									items: [
+										"Setting➞Dwarf➞Host"
 									]
 								}
 							]
@@ -1779,15 +1785,21 @@ export const Dwarf: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "AND",
+							type: "OR",
 							items: [
 								{
 									type: "OR",
 									items: [
 										"Dwarf➞Artificer➞Mask Bearer",
 										"Dwarf➞Guilder➞Craftsman",
-										"Dwarf➞Clansman➞Foreman",
-										"Dwarf➞Host➞3*Arbalester"
+										"Dwarf➞Clansman➞Foreman"
+									]
+								},
+								{
+									type: "OR",
+									fulfilmentAmount: 3,
+									items: [
+										"Dwarf➞Host➞Arbalester"
 									]
 								}
 							]
@@ -1927,7 +1939,7 @@ export const Dwarf: Stock = {
 										"Skill➞Any General➞Psionics (Psychobolics)",
 										"Skill➞Any General➞Psionics (Metapsionics)",
 										"Skill➞Any General➞Psionics (Psychonetics)",
-										"Dwarf➞Host➞1*ANY"
+										"Setting➞Dwarf➞Host"
 									]
 								}
 							]
@@ -1974,7 +1986,7 @@ export const Dwarf: Stock = {
 										"Skill➞Any General➞Psionics (Psychobolics)",
 										"Skill➞Any General➞Psionics (Metapsionics)",
 										"Skill➞Any General➞Psionics (Psychonetics)",
-										"Dwarf➞Host➞1*ANY"
+										"Setting➞Dwarf➞Host"
 									]
 								}
 							]
@@ -2724,7 +2736,7 @@ export const Dwarf: Stock = {
 										"Skill➞Any General➞Psionics (Psychobolics)",
 										"Skill➞Any General➞Psionics (Metapsionics)",
 										"Skill➞Any General➞Psionics (Psychonetics)",
-										"Dwarf➞Host➞1*ANY"
+										"Setting➞Dwarf➞Host"
 									]
 								}
 							]

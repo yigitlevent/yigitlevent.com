@@ -436,11 +436,11 @@ export const Human: Stock = {
 									items: [
 										"Human➞Noble➞Squire",
 										"Human➞Noble Court➞Squire",
-										"Human➞Outcast➞1*ANY",
-										"Human➞Professional Soldier➞1*ANY",
 										"Human➞City Dweller➞City Guard",
 										"Human➞City Dweller➞Guard Captain",
-										"Human➞Servitude and Captive➞Gladiator"
+										"Human➞Servitude and Captive➞Gladiator",
+										"Setting➞Human➞Outcast",
+										"Setting➞Human➞Professional Soldier"
 									]
 								}
 							]
@@ -2511,9 +2511,9 @@ export const Human: Stock = {
 								{
 									type: "OR",
 									items: [
-										"Human➞Noble➞1*ANY",
-										"Human➞Noble Court➞1*ANY",
-										"Human➞Religious➞1*ANY"
+										"Setting➞Human➞Noble",
+										"Setting➞Human➞Noble Court",
+										"Setting➞Human➞Religious"
 									]
 								}
 							]
@@ -3132,13 +3132,13 @@ export const Human: Stock = {
 									type: "OR",
 									items: [
 										"Human➞City Dweller➞Dilettante",
-										"Human➞Religious➞1*ANY",
 										"Human➞Noble Court➞Court Summoner",
 										"Human➞College of Magic➞Master Summoner",
 										"Human➞Outcast➞Mad Summoner",
 										"Human➞Outcast➞Crazy Witch",
 										"Human➞Outcast➞Oasis Witch",
-										"Human➞Seafaring➞Weather Witch"
+										"Human➞Seafaring➞Weather Witch",
+										"Setting➞Human➞Religious"
 									]
 								}
 							]
@@ -3916,7 +3916,7 @@ export const Human: Stock = {
 										"Human➞Outcast➞Cultist",
 										"Human➞Outcast➞Gravedigger",
 										"Human➞Outcast➞Freebooter",
-										"Human➞Professional Soldier➞1*ANY"
+										"Setting➞Human➞Professional Soldier"
 									]
 								}
 							]
@@ -4252,7 +4252,7 @@ export const Human: Stock = {
 									items: [
 										"Human➞Noble➞Page",
 										"Human➞Noble Court➞Page",
-										"Human➞Professional Soldier➞1*ANY"
+										"Setting➞Human➞Professional Soldier"
 									]
 								}
 							]
@@ -4953,7 +4953,7 @@ export const Human: Stock = {
 						"Any Character➞Sharp Dresser",
 						"Any Character➞Callous"
 					],
-					years: "*"
+					years: [1, 20]
 				}
 			]
 		},
@@ -5463,7 +5463,7 @@ export const Human: Stock = {
 										"Human➞Noble Court➞Page",
 										"Human➞Noble➞Squire",
 										"Human➞Noble Court➞Squire",
-										"Human➞Professional Soldier➞1*ANY"
+										"Setting➞Human➞Professional Soldier"
 									]
 								}
 							]
@@ -6469,7 +6469,7 @@ export const Human: Stock = {
 								{
 									type: "OR",
 									items: [
-										"Human➞Noble➞1*ANY"
+										"Setting➞Human➞Noble"
 									]
 								}
 							]
@@ -6879,7 +6879,7 @@ export const Human: Stock = {
 					traits: [
 
 					],
-					years: "*"
+					years: [1, 3]
 				},
 				{
 					allowed: [
@@ -7436,12 +7436,12 @@ export const Human: Stock = {
 										"Human➞Villager➞Shopkeeper",
 										"Human➞City Dweller➞Barkeep",
 										"Human➞City Dweller➞Moneylender",
-										"Human➞Outcast➞1*ANY",
 										"Human➞City Dweller➞Coin Clipper",
 										"Human➞City Dweller➞Pickpocket",
 										"Human➞City Dweller➞Street Thug",
 										"Human➞City Dweller➞Criminal",
-										"Human➞City Dweller➞Confidence Man"
+										"Human➞City Dweller➞Confidence Man",
+										"Setting➞Human➞Outcast"
 									]
 								}
 							]
@@ -7666,12 +7666,12 @@ export const Human: Stock = {
 										"Human➞Villager➞Shopkeeper",
 										"Human➞City Dweller➞Barkeep",
 										"Human➞City Dweller➞Moneylender",
-										"Human➞Outcast➞1*ANY",
 										"Human➞City Dweller➞Coin Clipper",
 										"Human➞City Dweller➞Pickpocket",
 										"Human➞City Dweller➞Street Thug",
 										"Human➞City Dweller➞Criminal",
-										"Human➞City Dweller➞Confidence Man"
+										"Human➞City Dweller➞Confidence Man",
+										"Setting➞Human➞Outcast"
 									]
 								}
 							]
@@ -8051,7 +8051,7 @@ export const Human: Stock = {
 										"Human➞City Dweller➞City Guard",
 										"Human➞Villager➞Village Tough",
 										"Human➞Seafaring➞Marine",
-										"Human➞Professional Soldier➞1*ANY"
+										"Setting➞Human➞Professional Soldier"
 									]
 								}
 							]
@@ -8839,7 +8839,7 @@ export const Human: Stock = {
 										"Human➞Servitude and Captive➞Champion",
 										"Human➞Noble➞Knight",
 										"Human➞Noble Court➞Knight",
-										"Human➞Professional Soldier➞1*ANY"
+										"Setting➞Human➞Professional Soldier"
 									]
 								}
 							]
@@ -10807,7 +10807,7 @@ export const Human: Stock = {
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "AND",
+							type: "OR",
 							items: [
 								{
 									type: "OR",
@@ -10816,8 +10816,14 @@ export const Human: Stock = {
 										"Human➞Noble➞Knight",
 										"Human➞Noble Court➞Knight",
 										"Human➞Noble➞Lord",
-										"Human➞Noble Court➞Constable",
-										"Human➞Outcast➞2*Freebooter"
+										"Human➞Noble Court➞Constable"
+									]
+								},
+								{
+									type: "OR",
+									fulfilmentAmount: 2,
+									items: [
+										"Human➞Outcast➞Freebooter"
 									]
 								}
 							]
@@ -11046,7 +11052,7 @@ export const Human: Stock = {
 										"Human➞Noble Court➞Squire",
 										"Human➞Noble➞Knight",
 										"Human➞Noble Court➞Knight",
-										"Human➞Professional Soldier➞1*ANY"
+										"Setting➞Human➞Professional Soldier"
 									]
 								}
 							]
@@ -13356,17 +13362,23 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "AND",
+							type: "OR",
 							items: [
 								{
 									type: "OR",
 									items: [
 										"Human➞Noble➞Knight",
-										"Human➞Noble Court➞Knight",
-										"Human➞City Dweller➞2*Sailor",
-										"Human➞Professional Soldier➞2*Sailor",
-										"Human➞Villager➞2*Sailor",
-										"Human➞Seafaring➞2*ANY"
+										"Human➞Noble Court➞Knight"
+									]
+								},
+								{
+									type: "OR",
+									fulfilmentAmount: 2,
+									items: [
+										"Human➞City Dweller➞Sailor",
+										"Human➞Professional Soldier➞Sailor",
+										"Human➞Villager➞Sailor",
+										"Setting➞Human➞Seafaring"
 									]
 								}
 							]
@@ -13411,15 +13423,21 @@ export const Human: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "AND",
+							type: "OR",
 							items: [
 								{
 									type: "OR",
 									items: [
 										"Human➞Seafaring➞First Mate",
 										"Human➞Noble➞Knight",
-										"Human➞Noble Court➞Knight",
-										"Human➞City Dweller➞2*Mercenary Captain"
+										"Human➞Noble Court➞Knight"
+									]
+								},
+								{
+									type: "OR",
+									fulfilmentAmount: 2,
+									items: [
+										"Human➞City Dweller➞Mercenary Captain"
 									]
 								}
 							]
@@ -13820,7 +13838,7 @@ export const Human: Stock = {
 								{
 									type: "OR",
 									items: [
-										"Human➞Servitude and Captive➞1*ANY"
+										"Setting➞Human➞Servitude and Captive"
 									]
 								}
 							]
@@ -14608,8 +14626,9 @@ export const Human: Stock = {
 							items: [
 								{
 									type: "OR",
+									fulfilmentAmount: 2,
 									items: [
-										"Human➞Servitude and Captive➞2*ANY"
+										"Setting➞Human➞Servitude and Captive"
 									]
 								}
 							]
@@ -15221,7 +15240,7 @@ export const Human: Stock = {
 									type: "OR",
 									items: [
 										"Human➞Villager➞Village Sergeant",
-										"Human➞Professional Soldier➞1*ANY"
+										"Setting➞Human➞Professional Soldier"
 									]
 								}
 							]
@@ -15917,7 +15936,7 @@ export const Human: Stock = {
 										"Human➞City Dweller➞Student",
 										"Human➞Noble➞Student",
 										"Human➞Noble Court➞Student",
-										"Human➞Religious➞1*ANY"
+										"Setting➞Human➞Religious"
 									]
 								}
 							]
@@ -17478,7 +17497,7 @@ export const Human: Stock = {
 								{
 									type: "OR",
 									items: [
-										"Human➞Religious➞1*ANY",
+										"Setting➞Human➞Religious",
 										"Human➞Nomad➞Strange"
 									]
 								}
@@ -17847,7 +17866,7 @@ export const Human: Stock = {
 								{
 									type: "OR",
 									items: [
-										"Human➞Outcast➞1*ANY"
+										"Setting➞Human➞Outcast"
 									]
 								}
 							]
@@ -18068,7 +18087,7 @@ export const Human: Stock = {
 									type: "OR",
 									items: [
 										"Human➞City Dweller➞City Guard",
-										"Human➞Professional Soldier➞1*ANY",
+										"Setting➞Human➞Professional Soldier",
 										"Human➞Outcast➞Bandit",
 										"Human➞Nomad➞Bandit"
 									]

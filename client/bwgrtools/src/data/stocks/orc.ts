@@ -1112,16 +1112,22 @@ export const Orc: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "AND",
+							type: "OR",
 							items: [
 								{
 									type: "OR",
 									items: [
 										"Orc➞Chattel➞Pitwright",
 										"Orc➞Chattel➞Forger",
-										"Orc➞Great and Black➞1*ANY",
-										"Orc➞Black Legion➞1*ANY",
-										"Orc➞Chattel➞4*ANY"
+										"Setting➞Orc➞Great and Black",
+										"Setting➞Orc➞Black Legion"
+									]
+								},
+								{
+									type: "OR",
+									fulfilmentAmount: 4,
+									items: [
+										"Setting➞Orc➞Chattel"
 									]
 								}
 							]

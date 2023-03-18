@@ -155,7 +155,7 @@ export const useCharacterBurnerStore = create<CharacterBurnerState>()(
 							}
 
 							if (typeof lp.years === "number") totals.years.points = totals.years.points + lp.years;
-							else totals.years.extensions.push(lp.years);
+							else totals.years.extensions.push(`${lp.years[0]}-${lp.years[1]}`);
 
 							if (repeatCount === 0 || repeatCount === 1) {
 								totals.stats.fromLifepaths.eitherPoints += lp.eitherPool;
@@ -281,7 +281,7 @@ export const useCharacterBurnerStore = create<CharacterBurnerState>()(
 								if (typeof lp.years === "number") state.totals.years.points = state.totals.years.points + lp.years;
 								else if (lp.name === "Advisor to the Court") state.totals.years.points += state.specialLifepaths.advisorToTheCourt.years;
 								else if (lp.name === "Prince of the Blood") state.totals.years.points += state.specialLifepaths.princeOfTheBlood.years;
-								else state.totals.years.extensions.push(lp.years);
+								else state.totals.years.extensions.push(`${lp.years[0]}-${lp.years[1]}`);
 
 								const bondsmanOwnerLifepath = (lp.name === "Bondsman") ? GetLifepathFromPath(state.specialLifepaths.bondsman.ownerLifepathPath) : undefined;
 

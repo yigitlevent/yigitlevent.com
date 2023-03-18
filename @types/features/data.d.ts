@@ -36,19 +36,24 @@ type TraitCategoryPath = `${"Any"} ${"Character" | "Call-on" | "Die" | "Monstrou
 type TraitPath = `${TraitCategoryPath}➞${string}`;
 
 type RequirementItem =
-	LifepathPath | `Skill➞${SkillPath}` | `Trait➞${TraitPath}` |
-	"LP➞UNIQUE" | "FIRSTINSETTING" |
-	`GENDER➞${"FEMALE" | "MALE"}` |
-	`${"YEARS" | "LP" | "GRIEF"}➞${"MIN" | "MAX"}➞${number}` |
-	`OLDESTBY➞${number}`;
+	`Setting➞${SettingPath}`
+	| LifepathPath
+	| `Skill➞${SkillPath}`
+	| `Trait➞${TraitPath}`
+	| "LP➞UNIQUE"
+	| "FIRSTINSETTING"
+	| `GENDER➞${"FEMALE" | "MALE"}`
+	| `${"YEARS" | "LP" | "GRIEF"}➞${"MIN" | "MAX"}➞${number}`
+	| `OLDESTBY➞${number}`;
 
 interface RequirementBlock {
-	type: "AND" | "OR" | "NOT",
+	type: "AND" | "OR" | "NOT";
+	fulfilmentAmount?: number;
 	items: RequirementItem[];
 }
 
 interface RequirementBlocks {
-	type: "AND" | "OR",
+	type: "AND" | "OR";
 	items: RequirementBlock[];
 }
 

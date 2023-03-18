@@ -935,8 +935,8 @@ export const Elf: Stock = {
 										"Elf➞Wilderlands➞Spouse",
 										"Elf➞Wilderlands➞Rider",
 										"Elf➞Wilderlands➞Huntsman",
-										"Elf➞Etharch➞1*ANY",
-										"Elf➞Protector➞1*ANY"
+										"Setting➞Elf➞Etharch",
+										"Setting➞Elf➞Protector"
 									]
 								}
 							]
@@ -2246,7 +2246,7 @@ export const Elf: Stock = {
 					physicalPool: 0,
 					requirements: {
 						conditions: {
-							type: "AND",
+							type: "OR",
 							items: [
 								{
 									type: "OR",
@@ -2254,9 +2254,14 @@ export const Elf: Stock = {
 										"Elf➞Protector➞Sword Singer",
 										"Elf➞Etharch➞Sword Singer",
 										"Elf➞Protector➞Lancer",
-										"Elf➞Citadel➞Sea Captain",
-										"Elf➞Protector➞2*Bowyer",
-										"Elf➞Protector➞2*Spearbearer"
+										"Elf➞Citadel➞Sea Captain"
+									]
+								},
+								{
+									type: "OR",
+									items: [
+										"Elf➞Protector➞Bowyer",
+										"Elf➞Protector➞Spearbearer"
 									]
 								}
 							]
@@ -2297,7 +2302,7 @@ export const Elf: Stock = {
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "AND",
+							type: "OR",
 							items: [
 								{
 									type: "OR",
@@ -2305,9 +2310,15 @@ export const Elf: Stock = {
 										"Elf➞Protector➞Lieutenant",
 										"Elf➞Etharch➞Prince/Princess",
 										"Elf➞Citadel➞Sea Captain",
-										"Elf➞Etharch➞Steward",
-										"Elf➞Protector➞2*Sword Singer",
-										"Elf➞Etharch➞2*Sword Singer"
+										"Elf➞Etharch➞Steward"
+									]
+								},
+								{
+									type: "OR",
+									fulfilmentAmount: 2,
+									items: [
+										"Elf➞Protector➞Sword Singer",
+										"Elf➞Etharch➞Sword Singer"
 									]
 								}
 							]
@@ -2902,13 +2913,19 @@ export const Elf: Stock = {
 					physicalPool: 1,
 					requirements: {
 						conditions: {
-							type: "AND",
+							type: "OR",
 							items: [
 								{
 									type: "OR",
 									items: [
-										"Elf➞Path of Spite➞Eremite",
-										"Elf➞Path of Spite➞3*ANY"
+										"Elf➞Path of Spite➞Eremite"
+									]
+								},
+								{
+									type: "OR",
+									fulfilmentAmount: 3,
+									items: [
+										"Setting➞Elf➞Path of Spite"
 									]
 								}
 							]

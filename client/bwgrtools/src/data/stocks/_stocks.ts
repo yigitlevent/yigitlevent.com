@@ -14,7 +14,7 @@ export interface Lifepath {
 	stock: StocksList;
 	setting: string;
 	leads: SettingPath[];
-	years: number | "*";
+	years: number | [min: number, max: number];
 	born: boolean;
 
 	eitherPool: number;

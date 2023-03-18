@@ -3149,13 +3149,6 @@ export const AnyCharacter: TraitCategory = {
 		{
 			allowed: ["bs"],
 			cost: 1,
-			name: "Misanthropic",
-			stock: "Any",
-			type: "Character"
-		},
-		{
-			allowed: ["bs"],
-			cost: 1,
 			name: "Nasty Cough",
 			stock: "Any",
 			type: "Character"
