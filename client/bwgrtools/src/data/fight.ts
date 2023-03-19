@@ -74,7 +74,7 @@ export const FightActions: FightAction[] = [
 			"Any General➞Sword"
 		],
 		restrictions: "On the first action, you take a breath to set up your attack. You are effectively defenseless on this action; you count as performing a Physical Action. Also, while any weapon can perform a Great Strike, you must be able to put two hands on the weapon to do so. A Great Strike counts as one action against your weapon speed limitation.",
-		effect: "A Great Strike, is a lunging thrust, an overhand strike or a half-sword technique. On the second action, Great Strike acts like a Strike but with two exceptions: It bypasses the Block action (but not shields) and it grants a bonus to damage or armor penetration. Choose before you roll: + 1 to your Incidental, Mark and Superb damage results or+ 1 to your weapon's versus armor rating.",
+		effect: "A Great Strike, is a lunging thrust, an overhand strike or a half-sword technique. On the second action, Great Strike acts like a Strike but with two exceptions: It bypasses the Block action (but not shields) and it grants a bonus to damage or armor penetration. Choose before you roll: +1 to your Incidental, Mark and Superb damage results or +1 to your weapon's versus armor rating.",
 		actionCost: 2,
 		resolution: {
 			"No Action": { type: "Ob", obstacle: 1 },
