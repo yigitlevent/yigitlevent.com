@@ -1,16 +1,3 @@
-type Item = {
-	type: "Vs";
-	skill?: SkillPath;
-	ability?: StatsAndAttributesList;
-	opposingSkill?: SkillPath;
-	opposingAbility?: StatsAndAttributesList;
-	opposingModifier?: number;
-};
-
-export type RangeAndCoverResolutionItem =
-	RequireOnlyOne<Item, "skill" | "ability">
-	& RequireOnlyOne<Item, "opposingSkill" | "opposingAbility">;
-
 export interface RangeAndCoverAction {
 	name: string;
 	group: "Closing" | "Maintaining" | "Withdrawal";
@@ -26,7 +13,7 @@ export interface RangeAndCoverAction {
 	specialRestriction?: string;
 	specialAction?: string;
 	however?: string;
-	resolution: { [key: string]: RangeAndCoverResolutionItem; };
+	resolution: { [key: string]: ResolutionItem; };
 }
 
 export const RangeAndCoverActions: RangeAndCoverAction[] = [

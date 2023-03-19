@@ -2,19 +2,9 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 
-import { DuelOfWitsActions, DuelOfWitsAction, DuelofWitsResolutionItem } from "../../../data/duelOfWits";
+import { DuelOfWitsActions, DuelOfWitsAction } from "../../../data/duelOfWits";
+import { GetResolutionString } from "../../../utils/getResolutionString";
 
-
-function ResolutionToString(res: DuelofWitsResolutionItem): string {
-	const test =
-		(res.type !== "Ob")
-			? res.type
-			: (res.obstacle)
-				? `${res.type} ${res.obstacle}`
-				: `${res.type}=${res.obstacleStat}`;
-
-	return test;
-}
 
 export function DuelOfWitsActionDetails({ action }: { action: DuelOfWitsAction; }) {
 	return (
@@ -64,7 +54,7 @@ export function DuelOfWitsActionDetails({ action }: { action: DuelOfWitsAction; 
 						const res = action.resolution[v.name];
 						return (
 							<Typography variant="body2" key={i}>
-								{(res) ? ResolutionToString(res) : "—"}
+								{(res) ? GetResolutionString(res) : "—"}
 							</Typography>
 						);
 					})}

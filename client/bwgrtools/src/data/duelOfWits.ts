@@ -1,12 +1,3 @@
-type Item = {
-	obstacle?: number;
-	obstacleStat?: StatsList;
-};
-
-export type DuelofWitsResolutionItem =
-	({ type: "Vs" | "Std"; } & NoneOf<Item>)
-	| ({ type: "Ob"; } & RequireOnlyOne<Item, "obstacle" | "obstacleStat">);
-
 export interface DuelOfWitsAction {
 	name: string;
 	tests?: (SkillPath | StatsList)[];
@@ -14,7 +5,7 @@ export interface DuelOfWitsAction {
 	special?: string;
 	effects?: string;
 	resolution: {
-		[key: string]: DuelofWitsResolutionItem;
+		[key: string]: ResolutionItem;
 	};
 }
 
@@ -176,7 +167,7 @@ export const DuelOfWitsActions: DuelOfWitsAction[] = [
 		resolution: {
 			"Dismiss": { type: "Ob", obstacle: 1 },
 			"Feint": { type: "Ob", obstacle: 1 },
-			"Incite": { type: "Ob", obstacleStat: "Will" },
+			"Incite": { type: "Ob", opposingAbility: "Will" },
 			"Obfuscate": { type: "Ob", obstacle: 1 },
 			"Point": { type: "Ob", obstacle: 1 }
 		}
@@ -186,7 +177,7 @@ export const DuelOfWitsActions: DuelOfWitsAction[] = [
 		resolution: {
 			"Dismiss": { type: "Ob", obstacle: 1 },
 			"Feint": { type: "Ob", obstacle: 1 },
-			"Incite": { type: "Ob", obstacleStat: "Will" },
+			"Incite": { type: "Ob", opposingAbility: "Will" },
 			"Obfuscate": { type: "Ob", obstacle: 1 },
 			"Point": { type: "Ob", obstacle: 1 }
 		}

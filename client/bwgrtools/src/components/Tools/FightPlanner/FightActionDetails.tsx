@@ -3,11 +3,9 @@ import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 
 import { FightActionExtended } from "../../../hooks/stores/useFightPlannerStore";
+import { FightActions } from "../../../data/fight";
+import { GetResolutionString } from "../../../utils/getResolutionString";
 
-
-const FightResolutionActions = [
-	"Great Strike", "Strike", "Avoid", "Block", "Counterstrike", "Beat", "Disarm", "Faint", "Charge/Tackle", "Lock", "Push", "Throw"
-];
 
 export function FightPlannerActionDetails({ action }: { action: FightActionExtended; }) {
 	return (
@@ -55,22 +53,10 @@ export function FightPlannerActionDetails({ action }: { action: FightActionExten
 				: null
 			}
 
-			{action.cost
+			{action.actionCost
 				? <Box sx={{ margin: "0 0 10px" }}>
 					<b>Action Cost:</b>
-					{action.cost.split("<br>").map((v, i) =>
-						<Typography variant="body2" key={i}>{v}</Typography>
-					)}
-				</Box>
-				: null
-			}
-
-			{action.interactions
-				? <Box sx={{ margin: "0 0 10px" }}>
-					<b>Interactions:</b>
-					{action.interactions.split("<br>").map((v, i) =>
-						<Typography variant="body2" key={i}>{v}</Typography>
-					)}
+					{<Typography variant="body2">{action.actionCost}</Typography>}
 				</Box>
 				: null
 			}
@@ -78,24 +64,14 @@ export function FightPlannerActionDetails({ action }: { action: FightActionExten
 			{action.resolution
 				? <Box sx={{ margin: "0 0 10px" }}>
 					<b>Resolution:</b>
-					{FightResolutionActions.map((v, i) => {
+					{FightActions.map((v, i) => {
 						if (action.resolution) {
-							const res = action.resolution[v] ? action.resolution[v] : "—";
-							return <Typography variant="body2" key={i}>{v}: {res}</Typography>;
-						}
-						return null;
-					})}
-				</Box>
-				: null
-			}
-
-			{action.resolutionAgainst
-				? <Box sx={{ margin: "0 0 10px" }}>
-					<b>Resolution (against):</b>
-					{FightResolutionActions.map((v, i) => {
-						if (action.resolutionAgainst) {
-							const res = action.resolutionAgainst[v] ? action.resolutionAgainst[v] : "—";
-							return <Typography variant="body2" key={i}>{v}: {res}</Typography>;
+							const res = action.resolution[v.name];
+							return (
+								<Typography variant="body2" key={i}>
+									{(res) ? GetResolutionString(res) : "—"}
+								</Typography>
+							);
 						}
 						return null;
 					})}

@@ -80,10 +80,18 @@ type Cell = {
 	placed: Practice[];
 };
 
-type FightResolutionItem =
-	"Vs" | "Std" | "Ob 1" | "Skill"
-	| `Ob=${StatsAndAttributesList | "Skill"}`
-	| `vs ${StatsAndAttributesList | "Skill"}`
-	| `+vs ${StatsAndAttributesList | "Skill"}`
-	| `vs + ${StatsAndAttributesList | "Skill"}`
-	| `½ ${StatsAndAttributesList | "Skill"}`;
+type ResolutionTypes = "Ob" | "Std" | "½" | "Skill" | "Vs" | "+Vs" | "Vs+";
+
+interface ResolutionItem {
+	type: ResolutionTypes;
+
+	againstSkill?: boolean;
+	obstacle?: number;
+	
+	skill?: SkillPath;
+	ability?: StatsAndAttributesList;
+
+	opposingSkill?: SkillPath;
+	opposingAbility?: StatsAndAttributesList;
+	opposingModifier?: number;
+}
