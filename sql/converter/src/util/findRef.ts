@@ -2,9 +2,9 @@ type ReferenceKeys = "Stocks" | "Settings" | "Lifepaths"
 	| "LogicTypes" | "RequirementItemTypes"
 	| "AbilityTypes" | "TraitTypes" | "TraitCategories" | "SkillToolTypes" | "SkillTypes" | "SkillCategories"
 	| "Abilities" | "Traits" | "Skills"
-	| "ActionResolutionTypes" 
-	| "DuelOfWitsActions" 
-	| "RangeAndCoverActionGroups" | "RangeAndCoverActions" 
+	| "ActionResolutionTypes"
+	| "DuelOfWitsActions"
+	| "RangeAndCoverActionGroups" | "RangeAndCoverActions"
 	| "FightActionGroups" | "FightActions";
 
 export function findIndex(type: ReferenceKeys, name: string, references: { [key: string]: Reference[]; }) {

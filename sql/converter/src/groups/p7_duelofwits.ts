@@ -45,11 +45,11 @@ export function processDuelOfWits(refs: References): Processed {
 				const iag = v.res.againstSkill ? v.res.againstSkill : null;
 				const obs = v.res.obstacle ? v.res.obstacle : null;
 
-				const sref = v.res.skill ? findIndex("Skills", v.res.type, refs) : [null, null];
-				const aref = v.res.ability ? findIndex("Abilities", v.res.type, refs) : [null, null];
+				const sref = v.res.skill ? findIndex("Skills", v.res.skill, refs) : [null, null];
+				const aref = v.res.ability ? findIndex("Abilities", v.res.ability, refs) : [null, null];
 
-				const osref = v.res.opposingSkill ? findIndex("Skills", v.res.type, refs) : [null, null];
-				const oaref = v.res.opposingAbility ? findIndex("Abilities", v.res.type, refs) : [null, null];
+				const osref = v.res.opposingSkill ? findIndex("Skills", v.res.opposingSkill, refs) : [null, null];
+				const oaref = v.res.opposingAbility ? findIndex("Abilities", v.res.opposingAbility, refs) : [null, null];
 
 				const opm = v.res.opposingModifier ? v.res.opposingModifier : null;
 
