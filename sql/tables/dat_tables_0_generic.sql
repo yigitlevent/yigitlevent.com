@@ -118,3 +118,19 @@ CREATE TABLE dat."TraitCategories"
 
 ALTER TABLE IF EXISTS dat."TraitCategories"
     OWNER to apiuser;
+
+
+-- Table: dat.ActionResolutionTypes
+
+-- DROP TABLE IF EXISTS dat."ActionResolutionTypes";
+
+CREATE TABLE dat."ActionResolutionTypes"
+(
+	"Id" serial NOT NULL,
+	"Name" character varying(15) NOT NULL,
+	"NameLong" character varying(255) NOT NULL,
+    PRIMARY KEY ("Id")
+)
+
+ALTER TABLE IF EXISTS dat."ActionResolutionTypes"
+    OWNER to apiuser;

@@ -7,6 +7,7 @@ import { processAbilities } from "./groups/p3_abilities";
 import { processTraits } from "./groups/p4_traits";
 import { processSkills } from "./groups/p5_skills";
 import { processLifepaths } from "./groups/p6_lifepaths";
+import { processDuelOfWits } from "./groups/p7_duelofwits";
 
 
 // REFERENCE AND DATA
@@ -21,7 +22,8 @@ const process = [
 	(refs: References) => processAbilities(refs),
 	(refs: References) => processTraits(refs),
 	(refs: References) => processSkills(refs),
-	(refs: References) => processLifepaths(refs)
+	(refs: References) => processLifepaths(refs),
+	(refs: References) => processDuelOfWits(refs)
 ];
 
 process.forEach(func => {

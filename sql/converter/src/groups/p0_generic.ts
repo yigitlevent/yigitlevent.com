@@ -69,13 +69,31 @@ export function processGeneric(): Processed {
 			return `(${i}, '${v}')`;
 		});
 
+	// CONFLICT GENERIC
+	const conflictTypeRefs: Reference[] = [];
+
+	const datConflictTypes =
+		[
+			["Skill", "Skill"],
+			["Ob", "Obstacle"],
+			["Std", "Standard"],
+			["Vs", "Versus"],
+			["Vs+", "Versus plus"],
+			["+Vs", "plus Versus"],
+			["½", "half of"]
+		].map((v, i) => {
+			conflictTypeRefs.push([i, v[0]]);
+			return `(${i}, '${v[0]}', '${v[1]}')`;
+		});
+
 
 	return {
 		references: {
 			LogicTypes: logicRef, RequirementItemTypes: requirementItemRef,
 			AbilityTypes: abilityTypeRefs,
 			SkillTypes: skillTypeRefs, SkillCategories: skillCategoryRefs, SkillToolTypes: skillToolTypeRefs,
-			TraitTypes: traitTypeRefs, TraitCategories: traitCategoryRefs
+			TraitTypes: traitTypeRefs, TraitCategories: traitCategoryRefs,
+			ActionResolutionTypes: conflictTypeRefs
 		},
 		data: [
 			arrayToSQL("dat", "LogicTypes", '"Id", "Name"', datLogicTypes),
@@ -88,7 +106,9 @@ export function processGeneric(): Processed {
 			arrayToSQL("dat", "SkillToolTypes", '"Id", "Name"', datSkillToolTypes),
 
 			arrayToSQL("dat", "TraitTypes", '"Id", "Name"', datTraitTypes),
-			arrayToSQL("dat", "TraitCategories", '"Id", "Name"', datTraitCategories)
+			arrayToSQL("dat", "TraitCategories", '"Id", "Name"', datTraitCategories),
+
+			arrayToSQL("dat", "ActionResolutionTypes", '"Id", "Name", "NameLong', datConflictTypes)
 		]
 	};
 }
