@@ -31,7 +31,7 @@ export function processDuelOfWits(refs: References): Processed {
 				return `${ref[0]}, ${skillRef[0]}, ${abilityRef[0]}`;
 			});
 
-	const datDowActionResolutions: string[] =
+	const datDoWActionResolutions: string[] =
 		DuelOfWitsActions
 			.map(v => {
 				return Object.keys(v.resolution).map(rKey => { return { actionName: v.name, resKey: rKey, res: v.resolution[rKey] }; });
@@ -61,7 +61,7 @@ export function processDuelOfWits(refs: References): Processed {
 		data: [
 			arrayToSQL("dat", "DuelOfWitsActions", '"Id", "Name", "SpeakingThePart", "Special", "Effect"', datDoWActions),
 			arrayToSQL("dat", "DuelOfWitsActionTests", '"ActionId", "SkillId", "AbilityId"', datDoWActionTests),
-			arrayToSQL("dat", "DuelOfWitsActionResolutions", '"Id", "ActionId", "OpposingActionId", "ResolutionTypeId", "IsAgainstSkill", "Obstacle", "SkillId", "AbilityId", "OpposingSkillId", "OpposingAbilityId", "OpposingModifier"', datDowActionResolutions)
+			arrayToSQL("dat", "DuelOfWitsActionResolutions", '"Id", "ActionId", "OpposingActionId", "ResolutionTypeId", "IsAgainstSkill", "Obstacle", "SkillId", "AbilityId", "OpposingSkillId", "OpposingAbilityId", "OpposingModifier"', datDoWActionResolutions)
 		]
 	};
 }

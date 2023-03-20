@@ -8,6 +8,7 @@ import { processTraits } from "./groups/p4_traits";
 import { processSkills } from "./groups/p5_skills";
 import { processLifepaths } from "./groups/p6_lifepaths";
 import { processDuelOfWits } from "./groups/p7_duelofwits";
+import { processRangeAndCover } from "./groups/p8_rangeandcover";
 
 
 // REFERENCE AND DATA
@@ -23,7 +24,8 @@ const process = [
 	(refs: References) => processTraits(refs),
 	(refs: References) => processSkills(refs),
 	(refs: References) => processLifepaths(refs),
-	(refs: References) => processDuelOfWits(refs)
+	(refs: References) => processDuelOfWits(refs),
+	(refs: References) => processRangeAndCover(refs)
 ];
 
 process.forEach(func => {
