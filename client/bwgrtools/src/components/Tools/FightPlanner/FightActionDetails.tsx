@@ -10,10 +10,10 @@ import { GetResolutionString } from "../../../utils/getResolutionString";
 export function FightPlannerActionDetails({ action }: { action: FightActionExtended; }) {
 	return (
 		<Stack spacing={0} sx={{ width: "100%" }}>
-			{action.test
+			{action.tests
 				? <Box sx={{ margin: "0 0 10px" }}>
 					<b>Tests:</b>
-					<Typography variant="body2">{action.test}</Typography>
+					<Typography variant="body2">{action.tests}</Typography>
 				</Box>
 				: null
 			}

@@ -2,7 +2,7 @@ export interface FightAction {
 	name: string;
 	group: "No Action" | "Attack" | "Defense" | "Basic" | "Special" | "Shooting & Throwing" | "Magic" | "Social" | "Hesitation";
 	actionCost: number | "variable";
-	test?: (SkillPath | StatsList)[];
+	tests?: (SkillPath | StatsList)[];
 	testExtra?: string;
 	restrictions?: string;
 	effect?: string;
@@ -21,7 +21,7 @@ export const FightActions: FightAction[] = [
 	{
 		name: "Strike",
 		group: "Attack",
-		test: [
+		tests: [
 			"Any General➞Axe",
 			"Any General➞Boxing",
 			"Any General➞Brawling",
@@ -59,7 +59,7 @@ export const FightActions: FightAction[] = [
 	{
 		name: "Great Strike",
 		group: "Attack",
-		test: [
+		tests: [
 			"Any General➞Axe",
 			"Any General➞Boxing",
 			"Any General➞Brawling",
@@ -98,7 +98,7 @@ export const FightActions: FightAction[] = [
 	{
 		name: "Block & Strike",
 		group: "Attack",
-		test: [
+		tests: [
 			"Any General➞Axe",
 			"Any General➞Boxing",
 			"Any General➞Brawling",
@@ -121,7 +121,7 @@ export const FightActions: FightAction[] = [
 	{
 		name: "Lock & Strike",
 		group: "Attack",
-		test: [
+		tests: [
 			"Any Monstrous➞Savage Attack",
 			"Great Wolf Special➞Savage Attack"
 		],
@@ -146,7 +146,7 @@ export const FightActions: FightAction[] = [
 	{
 		name: "Avoid",
 		group: "Defense",
-		test: [
+		tests: [
 			"Speed"
 		],
 		effect: "Successes from the Avoid action reduce the effectiveness of the opposing action. If you roll one success on an Avoid, and your opponent rolls two, you've reduced his effective total to one. If you roll two and he rolls two, you have stopped his action altogether.",
@@ -166,7 +166,7 @@ export const FightActions: FightAction[] = [
 	{
 		name: "Block",
 		group: "Defense",
-		test: [
+		tests: [
 			"Any General➞Axe",
 			"Any General➞Boxing",
 			"Any General➞Brawling",
@@ -195,7 +195,7 @@ export const FightActions: FightAction[] = [
 	{
 		name: "Counterstrike",
 		group: "Defense",
-		test: [
+		tests: [
 			"Any General➞Axe",
 			"Any General➞Boxing",
 			"Any General➞Brawling",
@@ -224,7 +224,7 @@ export const FightActions: FightAction[] = [
 	{
 		name: "Assess",
 		group: "Basic",
-		test: [
+		tests: [
 			"Perception"
 		],
 		effect: "Assessing allows a player to look for specific details —easy exits, the sources of that burning smell and unarmored locations on his opponent.",
@@ -253,7 +253,7 @@ export const FightActions: FightAction[] = [
 	{
 		name: "Charge/Tackle",
 		group: "Basic",
-		test: [
+		tests: [
 			"Power"
 		],
 		testExtra: "+1D advantage plus stride advantage.",
@@ -289,7 +289,7 @@ export const FightActions: FightAction[] = [
 	{
 		name: "Physical Action",
 		group: "Basic",
-		test: [
+		tests: [
 			"Power",
 			"Agility",
 			"Speed"
@@ -310,7 +310,7 @@ export const FightActions: FightAction[] = [
 	{
 		name: "Push",
 		group: "Basic",
-		test: [
+		tests: [
 			"Power"
 		],
 		testExtra: "Push uses the Hands weapon length.",
@@ -339,7 +339,7 @@ export const FightActions: FightAction[] = [
 	{
 		name: "Lock",
 		group: "Basic",
-		test: [
+		tests: [
 			"Power"
 		],
 		testExtra: "Lock uses the Hands weapon length.",
@@ -385,7 +385,7 @@ export const FightActions: FightAction[] = [
 	{
 		name: "Beat",
 		group: "Special",
-		test: [
+		tests: [
 			"Any General➞Axe",
 			"Any General➞Boxing",
 			"Any General➞Brawling",
@@ -424,7 +424,7 @@ export const FightActions: FightAction[] = [
 	{
 		name: "Disarm",
 		group: "Special",
-		test: [
+		tests: [
 			"Any General➞Axe",
 			"Any General➞Boxing",
 			"Any General➞Brawling",
@@ -463,7 +463,7 @@ export const FightActions: FightAction[] = [
 	{
 		name: "Feint",
 		group: "Special",
-		test: [
+		tests: [
 			"Any General➞Axe",
 			"Any General➞Boxing",
 			"Any General➞Brawling",
@@ -490,7 +490,7 @@ export const FightActions: FightAction[] = [
 	{
 		name: "Throw Person",
 		group: "Special",
-		test: [
+		tests: [
 			"Any General➞Boxing"
 		],
 		restrictions: "You must have a hand free to perform this action. If you do not, you drop your weapon as you go for the grab.",
@@ -518,7 +518,7 @@ export const FightActions: FightAction[] = [
 	{
 		name: "Throw Object/Weapon",
 		group: "Shooting & Throwing",
-		test: [
+		tests: [
 			"Any General➞Throwing"
 		],
 		testExtra: "It's an Ob 2 test to hit plus disadvantages from vying for position, weather and light.",
@@ -568,7 +568,7 @@ export const FightActions: FightAction[] = [
 	{
 		name: "Fire Crossbow or Gun",
 		group: "Shooting & Throwing",
-		test: [
+		tests: [
 			"Any General➞Crossbow",
 			"Any General➞Firearms"
 		],
@@ -581,7 +581,7 @@ export const FightActions: FightAction[] = [
 	{
 		name: "Release Bow",
 		group: "Shooting & Throwing",
-		test: [
+		tests: [
 			"Any General➞Bow"
 		],
 		testExtra: "It's an Ob 1 test to hit with a gun plus disadvantages for vying for position, light, and weather.",
@@ -593,7 +593,7 @@ export const FightActions: FightAction[] = [
 	{
 		name: "Snapshot",
 		group: "Shooting & Throwing",
-		test: [
+		tests: [
 			"Any General➞Bow",
 			"Any General➞Crossbow",
 			"Any General➞Firearms",
@@ -608,7 +608,7 @@ export const FightActions: FightAction[] = [
 	{
 		name: "Cast Spell",
 		group: "Magic",
-		test: [
+		tests: [
 			"Human Magical➞Sorcery"
 		],
 		effect: "Spells have effects listed in their individual descriptions.",
@@ -626,7 +626,7 @@ export const FightActions: FightAction[] = [
 	{
 		name: "Command Spirit",
 		group: "Magic",
-		test: [
+		tests: [
 			"Human Magical➞Spirit Binding"
 		],
 		effect: "It only costs one action, but it's very risky. These rules are described in detail in the Burning Wheel Codex.",
@@ -636,7 +636,7 @@ export const FightActions: FightAction[] = [
 	{
 		name: "Command",
 		group: "Social",
-		test: [
+		tests: [
 			"Any General➞Command"
 		],
 		effect: "Command can help reduce hesitation. Commanding another character to get back into the fight costs two actions. See the Command skill description for the rules.",
@@ -646,7 +646,7 @@ export const FightActions: FightAction[] = [
 	{
 		name: "Intimidate",
 		group: "Social",
-		test: [
+		tests: [
 			"Any General➞Intimidation"
 		],
 		testExtra: "Ob=Will.",
