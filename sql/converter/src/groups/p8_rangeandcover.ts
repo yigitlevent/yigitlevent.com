@@ -1,5 +1,6 @@
 import { RangeAndCoverActions } from "../../../../client/bwgrtools/src/data/rangeAndCover";
 import { arrayToSQL } from "../util/arrayToSql";
+import { escapeTick } from "../util/escapeTick";
 import { findIndex } from "../util/findRef";
 
 
@@ -10,7 +11,7 @@ export function processRangeAndCover(refs: References): Processed {
 	const datRaCActionGroups: string[] =
 		["Closing", "Maintaining", "Withdrawal"].map((v, i) => {
 			racActionGroupRefs.push([i, v]);
-			return `${i}, ${v}`;
+			return `(${i}, '${v}')`;
 		});
 
 	const datRaCActions: string[] =
@@ -26,10 +27,10 @@ export function processRangeAndCover(refs: References): Processed {
 			const s = v.advantages.stride;
 			const o = v.advantages.openEnded;
 
-			const eff = v.effect ? `'${v.effect}'` : null;
-			const spr = v.specialRestriction ? `'${v.specialRestriction}'` : null;
-			const spa = v.specialAction ? `'${v.specialAction}'` : null;
-			const hw = v.however ? `'${v.however}'` : null;
+			const eff = v.effect ? `'${escapeTick(v.effect)}'` : null;
+			const spr = v.specialRestriction ? `'${escapeTick(v.specialRestriction)}'` : null;
+			const spa = v.specialAction ? `'${escapeTick(v.specialAction)}'` : null;
+			const hw = v.however ? `'${escapeTick(v.however)}'` : null;
 
 			return `(${i}, '${v.name}', ${groupRef[0]}, ${m}, ${f}, ${wr}, ${p}, ${s}, ${o}, ${eff}, ${spr}, ${spa}, ${hw})`;
 		});
@@ -56,7 +57,7 @@ export function processRangeAndCover(refs: References): Processed {
 
 				const opm = v.res.opposingModifier ? v.res.opposingModifier : null;
 
-				return `${i}, ${ref[0]}, ${oref[0]}, ${res[0]}, ${iag}, ${obs}, ${sref[0]}, ${aref[0]}, ${osref[0]}, ${oaref[0]}, ${opm}`;
+				return `(${i}, ${ref[0]}, ${oref[0]}, ${res[0]}, ${iag}, ${obs}, ${sref[0]}, ${aref[0]}, ${osref[0]}, ${oaref[0]}, ${opm})`;
 			});
 
 	return {

@@ -1,5 +1,6 @@
 import { FightActions } from "../../../../client/bwgrtools/src/data/fight";
 import { arrayToSQL } from "../util/arrayToSql";
+import { escapeTick } from "../util/escapeTick";
 import { findIndex } from "../util/findRef";
 
 
@@ -11,7 +12,7 @@ export function processFight(refs: References): Processed {
 		["No Action", "Attack", "Defense", "Basic", "Special", "Shooting & Throwing", "Magic", "Social", "Hesitation"]
 			.map((v, i) => {
 				fightActionGroupRefs.push([i, v]);
-				return `${i}, ${v}`;
+				return `(${i}, '${v}')`;
 			});
 
 	const datFightActions: string[] =
@@ -20,10 +21,10 @@ export function processFight(refs: References): Processed {
 
 			const groupRef = findIndex("FightActionGroups", v.group, { "FightActionGroups": fightActionGroupRefs });
 
-			const te = v.testExtra ? `'${v.testExtra}'` : null;
-			const re = v.restrictions ? `'${v.restrictions}'` : null;
-			const ef = v.effect ? `'${v.effect}'` : null;
-			const sp = v.special ? `'${v.special}'` : null;
+			const te = v.testExtra ? `'${escapeTick(v.testExtra)}'` : null;
+			const re = v.restrictions ? `'${escapeTick(v.restrictions)}'` : null;
+			const ef = v.effect ? `'${escapeTick(v.effect)}'` : null;
+			const sp = v.special ? `'${escapeTick(v.special)}'` : null;
 
 			const cano = v.countsAsNoAction ? v.countsAsNoAction : false;
 
@@ -43,7 +44,7 @@ export function processFight(refs: References): Processed {
 				const skillRef = v.test.includes("➞") ? findIndex("Skills", v.test, refs) : [null, null];
 				const abilityRef = !(v.test.includes("➞")) ? findIndex("Abilities", v.test, refs) : [null, null];
 
-				return `${ref[0]}, ${skillRef[0]}, ${abilityRef[0]}`;
+				return `(${ref[0]}, ${skillRef[0]}, ${abilityRef[0]})`;
 			});
 
 	const datFightActionResolutions: string[] =
@@ -70,7 +71,7 @@ export function processFight(refs: References): Processed {
 
 				const opm = v.res.opposingModifier ? v.res.opposingModifier : null;
 
-				return `${i}, ${ref[0]}, ${oref[0]}, ${res[0]}, ${iag}, ${obs}, ${sref[0]}, ${aref[0]}, ${osref[0]}, ${oaref[0]}, ${opm}`;
+				return `(${i}, ${ref[0]}, ${oref[0]}, ${res[0]}, ${iag}, ${obs}, ${sref[0]}, ${aref[0]}, ${osref[0]}, ${oaref[0]}, ${opm})`;
 			});
 
 	return {

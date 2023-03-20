@@ -108,7 +108,7 @@ export function processGeneric(): Processed {
 			arrayToSQL("dat", "TraitTypes", '"Id", "Name"', datTraitTypes),
 			arrayToSQL("dat", "TraitCategories", '"Id", "Name"', datTraitCategories),
 
-			arrayToSQL("dat", "ActionResolutionTypes", '"Id", "Name", "NameLong', datConflictTypes)
+			arrayToSQL("dat", "ActionResolutionTypes", '"Id", "Name", "NameLong"', datConflictTypes)
 		]
 	};
 }

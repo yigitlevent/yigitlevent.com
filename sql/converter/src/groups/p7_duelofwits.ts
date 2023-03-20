@@ -1,5 +1,6 @@
 import { DuelOfWitsActions } from "../../../../client/bwgrtools/src/data/duelOfWits";
 import { arrayToSQL } from "../util/arrayToSql";
+import { escapeTick } from "../util/escapeTick";
 import { findIndex } from "../util/findRef";
 
 
@@ -9,10 +10,10 @@ export function processDuelOfWits(refs: References): Processed {
 	const datDoWActions: string[] = DuelOfWitsActions.map((v, i) => {
 		dowActionRefs.push([i, v.name]);
 
-		const stp = v.speakingThePart ? `'${v.speakingThePart}'` : null;
-		const sp = v.special ? `'${v.special}'` : null;
-		const ef = v.effects ? `'${v.effects}'` : null;
-		return `(${i}, '${v.name}', ${stp}, '${sp}', '${ef}')`;
+		const stp = v.speakingThePart ? `'${escapeTick(v.speakingThePart)}'` : null;
+		const sp = v.special ? `'${escapeTick(v.special)}'` : null;
+		const ef = v.effects ? `'${escapeTick(v.effects)}'` : null;
+		return `(${i}, '${v.name}', ${stp}, ${sp}, ${ef})`;
 	});
 
 	const datDoWActionTests: string[] =
@@ -28,7 +29,7 @@ export function processDuelOfWits(refs: References): Processed {
 				const skillRef = v.test.includes("➞") ? findIndex("Skills", v.test, refs) : [null, null];
 				const abilityRef = !(v.test.includes("➞")) ? findIndex("Abilities", v.test, refs) : [null, null];
 
-				return `${ref[0]}, ${skillRef[0]}, ${abilityRef[0]}`;
+				return `(${ref[0]}, ${skillRef[0]}, ${abilityRef[0]})`;
 			});
 
 	const datDoWActionResolutions: string[] =
@@ -53,7 +54,7 @@ export function processDuelOfWits(refs: References): Processed {
 
 				const opm = v.res.opposingModifier ? v.res.opposingModifier : null;
 
-				return `${i}, ${ref[0]}, ${oref[0]}, ${res[0]}, ${iag}, ${obs}, ${sref[0]}, ${aref[0]}, ${osref[0]}, ${oaref[0]}, ${opm}`;
+				return `(${i}, ${ref[0]}, ${oref[0]}, ${res[0]}, ${iag}, ${obs}, ${sref[0]}, ${aref[0]}, ${osref[0]}, ${oaref[0]}, ${opm})`;
 			});
 
 	return {
