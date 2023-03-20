@@ -46,11 +46,12 @@ export const FightActions: FightAction[] = [
 			"Counterstrike": { type: "Vs" },
 			"Beat": { type: "Ob", obstacle: 1 },
 			"Disarm": { type: "Ob", obstacle: 1 },
-			"Faint": { type: "Ob", obstacle: 1 },
+			"Feint": { type: "Ob", obstacle: 1 },
 			"Charge/Tackle": { type: "Ob", obstacle: 1 },
 			"Lock": { type: "Ob", obstacle: 1 },
 			"Push": { type: "Ob", obstacle: 1 },
-			"Throw": { type: "Ob", obstacle: 1 },
+			"Throw Person": { type: "Ob", obstacle: 1 },
+			"Throw Object/Weapon": { type: "Ob", obstacle: 1 },
 			"Fall Prone (and beg for mercy)": { type: "Ob", obstacle: 1 },
 			"Run Screaming": { type: "½", opposingAbility: "Speed" },
 			"Stand and Drool": { type: "Ob", obstacle: 1 }
@@ -85,11 +86,12 @@ export const FightActions: FightAction[] = [
 			"Counterstrike": { type: "Vs" },
 			"Beat": { type: "Ob", obstacle: 1 },
 			"Disarm": { type: "Ob", obstacle: 1 },
-			"Faint": { type: "Ob", obstacle: 1 },
+			"Feint": { type: "Ob", obstacle: 1 },
 			"Charge/Tackle": { type: "Ob", obstacle: 1 },
 			"Lock": { type: "Ob", obstacle: 1 },
 			"Push": { type: "Ob", obstacle: 1 },
-			"Throw": { type: "Ob", obstacle: 1 },
+			"Throw Person": { type: "Ob", obstacle: 1 },
+			"Throw Object/Weapon": { type: "Ob", obstacle: 1 },
 			"Fall Prone (and beg for mercy)": { type: "Ob", obstacle: 1 },
 			"Run Screaming": { type: "½", opposingAbility: "Speed" },
 			"Stand and Drool": { type: "Ob", obstacle: 1 }
@@ -136,11 +138,12 @@ export const FightActions: FightAction[] = [
 			"Counterstrike": { type: "Vs" },
 			"Beat": { type: "Ob", obstacle: 1 },
 			"Disarm": { type: "Ob", obstacle: 1 },
-			"Faint": { type: "Ob", obstacle: 1 },
+			"Feint": { type: "Ob", obstacle: 1 },
 			"Charge/Tackle": { type: "Ob", obstacle: 1 },
 			"Lock": { type: "Ob", obstacle: 1 },
 			"Push": { type: "Ob", obstacle: 1 },
-			"Throw": { type: "Ob", obstacle: 1 }
+			"Throw Person": { type: "Ob", obstacle: 1 },
+			"Throw Object/Weapon": { type: "Ob", obstacle: 1 }
 		}
 	},
 	{
@@ -160,7 +163,8 @@ export const FightActions: FightAction[] = [
 			"Charge/Tackle": { type: "Vs", opposingAbility: "Power" },
 			"Lock": { type: "Vs", opposingAbility: "Power" },
 			"Push": { type: "Vs", opposingAbility: "Power" },
-			"Throw": { type: "Vs" }
+			"Throw Person": { type: "Vs" },
+			"Throw Object/Weapon": { type: "Vs" }
 		}
 	},
 	{
@@ -238,7 +242,8 @@ export const FightActions: FightAction[] = [
 			"Charge/Tackle": { type: "½", opposingAbility: "Speed" },
 			"Lock": { type: "½", opposingAbility: "Power" },
 			"Push": { type: "½", opposingAbility: "Power" },
-			"Throw": { type: "½", opposingAbility: "Speed" }
+			"Throw Person": { type: "½", opposingAbility: "Speed" },
+			"Throw Object/Weapon": { type: "½", opposingAbility: "Speed" }
 		}
 	},
 	{
@@ -270,11 +275,12 @@ export const FightActions: FightAction[] = [
 			"Counterstrike": { type: "½", opposingAbility: "Speed" },
 			"Beat": { type: "½", opposingAbility: "Speed" },
 			"Disarm": { type: "½", opposingAbility: "Forte" },
-			"Faint": { type: "½", opposingAbility: "Forte" },
+			"Feint": { type: "½", opposingAbility: "Forte" },
 			"Charge/Tackle": { type: "Vs", opposingAbility: "Power" },
 			"Lock": { type: "½", opposingAbility: "Forte" },
 			"Push": { type: "Vs", opposingAbility: "Power" },
-			"Throw": { type: "Vs" },
+			"Throw Person": { type: "Vs" },
+			"Throw Object/Weapon": { type: "Vs" },
 			"Fall Prone (and beg for mercy)": { type: "Ob", obstacle: 1 },
 			"Run Screaming": { type: "Vs", opposingAbility: "Speed" },
 			"Stand and Drool": { type: "Ob", obstacle: 1 }
@@ -304,7 +310,8 @@ export const FightActions: FightAction[] = [
 			"Charge/Tackle": { type: "½", opposingAbility: "Speed" },
 			"Lock": { type: "½", opposingAbility: "Power" },
 			"Push": { type: "½", opposingAbility: "Speed" },
-			"Throw": { type: "½", opposingAbility: "Speed" }
+			"Throw Person": { type: "½", opposingAbility: "Speed" },
+			"Throw Object/Weapon": { type: "½", opposingAbility: "Speed" }
 		}
 	},
 	{
@@ -326,11 +333,12 @@ export const FightActions: FightAction[] = [
 			"Counterstrike": { type: "Vs" },
 			"Beat": { type: "½", opposingAbility: "Speed" },
 			"Disarm": { type: "½", opposingAbility: "Power" },
-			"Faint": { type: "½", opposingAbility: "Speed" },
+			"Feint": { type: "½", opposingAbility: "Speed" },
 			"Charge/Tackle": { type: "Vs", opposingAbility: "Power" },
 			"Lock": { type: "½", opposingAbility: "Speed" },
 			"Push": { type: "Vs", opposingAbility: "Power" },
-			"Throw": { type: "Vs" },
+			"Throw Person": { type: "Vs" },
+			"Throw Object/Weapon": { type: "Vs" },
 			"Fall Prone (and beg for mercy)": { type: "Ob", obstacle: 1 },
 			"Run Screaming": { type: "Vs", opposingAbility: "Speed" },
 			"Stand and Drool": { type: "Ob", obstacle: 1 }
@@ -356,11 +364,12 @@ export const FightActions: FightAction[] = [
 			"Counterstrike": { type: "Vs" },
 			"Beat": { type: "½", opposingAbility: "Power" },
 			"Disarm": { type: "Vs" },
-			"Faint": { type: "½", opposingAbility: "Power" },
+			"Feint": { type: "½", opposingAbility: "Power" },
 			"Charge/Tackle": { type: "½", opposingAbility: "Power" },
 			"Lock": { type: "Vs", opposingAbility: "Power" },
 			"Push": { type: "½", opposingAbility: "Power" },
-			"Throw": { type: "½", opposingAbility: "Power" },
+			"Throw Person": { type: "½", opposingAbility: "Power" },
+			"Throw Object/Weapon": { type: "½", opposingAbility: "Power" },
 			"Fall Prone (and beg for mercy)": { type: "Ob", obstacle: 1 },
 			"Run Screaming": { type: "Vs", opposingAbility: "Agility" },
 			"Stand and Drool": { type: "Ob", obstacle: 1 }
@@ -379,7 +388,8 @@ export const FightActions: FightAction[] = [
 			"Charge/Tackle": { type: "½", opposingAbility: "Forte" },
 			"Lock": { type: "½", opposingAbility: "Power" },
 			"Push": { type: "½", opposingAbility: "Speed" },
-			"Throw": { type: "½", opposingAbility: "Speed" }
+			"Throw Person": { type: "½", opposingAbility: "Speed" },
+			"Throw Object/Weapon": { type: "½", opposingAbility: "Speed" }
 		}
 	},
 	{
@@ -411,11 +421,12 @@ export const FightActions: FightAction[] = [
 			"Counterstrike": { type: "Vs" },
 			"Beat": { type: "Vs" },
 			"Disarm": { type: "+Vs", againstSkill: true },
-			"Faint": { type: "Vs" },
+			"Feint": { type: "Vs" },
 			"Charge/Tackle": { type: "½", againstSkill: true },
 			"Lock": { type: "½", againstSkill: true },
 			"Push": { type: "½", againstSkill: true },
-			"Throw": { type: "½", againstSkill: true },
+			"Throw Person": { type: "½", againstSkill: true },
+			"Throw Object/Weapon": { type: "½", againstSkill: true },
 			"Fall Prone (and beg for mercy)": { type: "Ob", obstacle: 1 },
 			"Run Screaming": { type: "Ob", obstacle: 1 },
 			"Stand and Drool": { type: "Ob", obstacle: 1 }
@@ -450,11 +461,12 @@ export const FightActions: FightAction[] = [
 			"Counterstrike": { type: "Vs+", againstSkill: true },
 			"Beat": { type: "Vs+", againstSkill: true },
 			"Disarm": { type: "Skill" },
-			"Faint": { type: "Vs" },
+			"Feint": { type: "Vs" },
 			"Charge/Tackle": { type: "Skill" },
 			"Lock": { type: "Skill" },
 			"Push": { type: "Skill" },
-			"Throw": { type: "Skill" },
+			"Throw Person": { type: "Skill" },
+			"Throw Object/Weapon": { type: "Skill" },
 			"Fall Prone (and beg for mercy)": { type: "Ob", obstacle: 1 },
 			"Run Screaming": { type: "½", opposingAbility: "Speed" },
 			"Stand and Drool": { type: "Ob", obstacle: 1 }
@@ -484,7 +496,7 @@ export const FightActions: FightAction[] = [
 			"Counterstrike": { type: "Ob", obstacle: 1 },
 			"Beat": { type: "Vs" },
 			"Disarm": { type: "Vs" },
-			"Faint": { type: "Vs" }
+			"Feint": { type: "Vs" }
 		}
 	},
 	{
@@ -505,11 +517,12 @@ export const FightActions: FightAction[] = [
 			"Counterstrike": { type: "Vs" },
 			"Beat": { type: "½", opposingAbility: "Agility" },
 			"Disarm": { type: "½", opposingAbility: "Agility" },
-			"Faint": { type: "½", opposingAbility: "Speed" },
+			"Feint": { type: "½", opposingAbility: "Speed" },
 			"Charge/Tackle": { type: "Vs", opposingAbility: "Power" },
 			"Lock": { type: "Vs", opposingAbility: "Power" },
 			"Push": { type: "Vs", opposingAbility: "Power" },
-			"Throw": { type: "Vs" },
+			"Throw Person": { type: "Vs" },
+			"Throw Object/Weapon": { type: "Vs" },
 			"Fall Prone (and beg for mercy)": { type: "Ob", obstacle: 1 },
 			"Run Screaming": { type: "Vs", opposingAbility: "Speed" },
 			"Stand and Drool": { type: "Ob", obstacle: 1 }
