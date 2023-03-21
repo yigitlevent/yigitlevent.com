@@ -8,6 +8,18 @@ import { Troll } from "./troll";
 import { GreatWolf } from "./greatWolf";
 
 
+export interface ResourceMagic {
+	origin: "Personal" | "Presence" | "Double Presence" | "Sight";
+	element: ("Anima" | "Arcana" | "Heaven" | "White" | "Fire" | "Air" | "Earth" | "Water")[];
+	duration: "Instantaneous" | "Sustained" | `Elapsed Time (${"Exchanges" | "Minutes" | "Hours"})` | "Permanent";
+	areaOfEffect: "Caster" | "Double Area" | `Measured Area (${"paces" | "10s of paces" | "100s of paces" | "miles"})` | "Half Area" | "Double Natural Effect" | "Natural Effect" | "Half Natural Eff." | "Double Presence" | "Presence" | "Half Presence" | "Single Target";
+	impetus: ("Create" | "Destroy" | "Tax" | "Transmute" | "Control" | "Influence" | "Enhance")[];
+	obstacle?: number | [string, number][];
+	obstacleStat?: StatsAndAttributesList | [StatsAndAttributesList, StatsAndAttributesList];
+	obstacleCaret?: boolean;
+	actions: number | `x${number}`;
+}
+
 export interface Resource {
 	name: string;
 	allowed: RulesetId[];
@@ -15,15 +27,7 @@ export interface Resource {
 	description?: string;
 	cost: number | [string, number][] | "various";
 	modifiers?: [string, number | `${number}/per`][];
-	magical?: {
-		origin: "Personal" | "Presence" | "Double Presence" | "Sight";
-		element: ("Anima" | "Arcana" | "Heaven" | "White" | "Fire" | "Air" | "Earth" | "Water")[];
-		duration: "Instantaneous" | "Sustained" | `Elapsed Time (${"Exchanges" | "Minutes" | "Hours"})` | "Permanent";
-		areaOfEffect: "Caster" | "Double Area" | `Measured Area (${"paces" | "10s of paces" | "100s of paces" | "miles"})` | "Half Area" | "Double Natural Effect" | "Natural Effect" | "Half Natural Eff." | "Double Presence" | "Presence" | "Half Presence" | "Single Target";
-		impetus: ("Create" | "Destroy" | "Tax" | "Transmute" | "Control" | "Influence" | "Enhance")[];
-		obstacle: number | `${number}^` | StatsAndAttributesList | `${StatsAndAttributesList}^` | `${number}+${StatsAndAttributesList}` | `${StatsAndAttributesList}/${StatsAndAttributesList}` | "See description";
-		actions: number | string;
-	};
+	magical?: ResourceMagic;
 }
 
 export interface ResourceStock {

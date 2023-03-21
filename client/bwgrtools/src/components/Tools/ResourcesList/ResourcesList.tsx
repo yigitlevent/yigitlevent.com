@@ -22,6 +22,7 @@ import { useSearch } from "../../../hooks/useSearch";
 import { GenericGrid } from "../../Shared/Grids";
 
 
+// FIX: Resource.magical.obstacle is probably completely broken now
 export function ResourceItem({ resource }: { resource: Resource; }) {
 	return (
 		<GenericGrid columns={3}>

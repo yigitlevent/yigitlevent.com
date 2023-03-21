@@ -14,7 +14,8 @@ export const SorcerySpells: Resource[] = [
 			duration: "Sustained",
 			areaOfEffect: "Caster",
 			impetus: ["Enhance"],
-			obstacle: "4^",
+			obstacle: 4,
+			obstacleCaret: true,
 			actions: 10
 		}
 	},
@@ -62,7 +63,8 @@ export const SorcerySpells: Resource[] = [
 			duration: "Instantaneous",
 			areaOfEffect: "Single Target",
 			impetus: ["Enhance"],
-			obstacle: "Health^",
+			obstacleStat: "Health",
+			obstacleCaret: true,
 			actions: 750
 		}
 	},
@@ -94,7 +96,8 @@ export const SorcerySpells: Resource[] = [
 			duration: "Instantaneous",
 			areaOfEffect: "Natural Effect",
 			impetus: ["Destroy"],
-			obstacle: "4^",
+			obstacle: 4,
+			obstacleCaret: true,
 			actions: 4
 		}
 	},
@@ -142,7 +145,8 @@ export const SorcerySpells: Resource[] = [
 			duration: "Sustained",
 			areaOfEffect: "Single Target",
 			impetus: ["Control"],
-			obstacle: "4^",
+			obstacle: 4,
+			obstacleCaret: true,
 			actions: 8
 		}
 	},
@@ -158,7 +162,8 @@ export const SorcerySpells: Resource[] = [
 			duration: "Sustained",
 			areaOfEffect: "Measured Area (10s of paces)",
 			impetus: ["Influence", "Tax"],
-			obstacle: "5^",
+			obstacle: 5,
+			obstacleCaret: true,
 			actions: 45
 		}
 	},
@@ -174,7 +179,8 @@ export const SorcerySpells: Resource[] = [
 			duration: "Sustained",
 			areaOfEffect: "Single Target",
 			impetus: ["Tax"],
-			obstacle: "3^",
+			obstacle: 3,
+			obstacleCaret: true,
 			actions: 4
 		}
 	},
@@ -206,7 +212,8 @@ export const SorcerySpells: Resource[] = [
 			duration: "Sustained",
 			areaOfEffect: "Measured Area (10s of paces)",
 			impetus: ["Tax"],
-			obstacle: "3^",
+			obstacle: 3,
+			obstacleCaret: true,
 			actions: 5
 		}
 	},
@@ -222,7 +229,7 @@ export const SorcerySpells: Resource[] = [
 			duration: "Instantaneous",
 			areaOfEffect: "Single Target",
 			impetus: ["Tax"],
-			obstacle: "Forte",
+			obstacleStat: "Forte",
 			actions: 3
 		}
 	},
@@ -238,7 +245,8 @@ export const SorcerySpells: Resource[] = [
 			duration: "Sustained",
 			areaOfEffect: "Single Target",
 			impetus: ["Enhance"],
-			obstacle: "1+Speed",
+			obstacle: 1,
+			obstacleStat: "Speed",
 			actions: 35
 		}
 	},
@@ -254,7 +262,7 @@ export const SorcerySpells: Resource[] = [
 			duration: "Sustained",
 			areaOfEffect: "Single Target",
 			impetus: ["Enhance"],
-			obstacle: "Perception",
+			obstacleStat: "Perception",
 			actions: 35
 		}
 	},
@@ -270,7 +278,8 @@ export const SorcerySpells: Resource[] = [
 			duration: "Sustained",
 			areaOfEffect: "Single Target",
 			impetus: ["Control"],
-			obstacle: "3^",
+			obstacle: 3,
+			obstacleCaret: true,
 			actions: 9
 		}
 	},
@@ -286,7 +295,8 @@ export const SorcerySpells: Resource[] = [
 			duration: "Instantaneous",
 			areaOfEffect: "Single Target",
 			impetus: ["Tax"],
-			obstacle: "Forte^",
+			obstacleStat: "Forte",
+			obstacleCaret: true,
 			actions: 4
 		}
 	},
@@ -334,7 +344,8 @@ export const SorcerySpells: Resource[] = [
 			duration: "Instantaneous",
 			areaOfEffect: "Measured Area (paces)",
 			impetus: ["Destroy"],
-			obstacle: "3^",
+			obstacle: 3,
+			obstacleCaret: true,
 			actions: 3
 		}
 	},
@@ -350,7 +361,8 @@ export const SorcerySpells: Resource[] = [
 			duration: "Instantaneous",
 			areaOfEffect: "Presence",
 			impetus: ["Destroy"],
-			obstacle: "3^",
+			obstacle: 3,
+			obstacleCaret: true,
 			actions: 1
 		}
 	},
@@ -414,7 +426,8 @@ export const SorcerySpells: Resource[] = [
 			duration: "Permanent",
 			areaOfEffect: "Single Target",
 			impetus: ["Control"],
-			obstacle: "6+Will",
+			obstacle: 6,
+			obstacleStat: "Will",
 			actions: 133
 		}
 	},
@@ -446,7 +459,8 @@ export const SorcerySpells: Resource[] = [
 			duration: "Sustained",
 			areaOfEffect: "Single Target",
 			impetus: ["Destroy"],
-			obstacle: "3^",
+			obstacle: 3,
+			obstacleCaret: true,
 			actions: 4
 		}
 	},
@@ -462,7 +476,8 @@ export const SorcerySpells: Resource[] = [
 			duration: "Instantaneous",
 			areaOfEffect: "Presence",
 			impetus: ["Influence"],
-			obstacle: "4^",
+			obstacle: 4,
+			obstacleCaret: true,
 			actions: 2
 		}
 	},
@@ -494,7 +509,8 @@ export const SorcerySpells: Resource[] = [
 			duration: "Instantaneous",
 			areaOfEffect: "Measured Area (paces)",
 			impetus: ["Tax"],
-			obstacle: "3^",
+			obstacle: 3,
+			obstacleCaret: true,
 			actions: 2
 		}
 	},
@@ -502,7 +518,7 @@ export const SorcerySpells: Resource[] = [
 		name: "Low Speech",
 		allowed: ["bwgr"],
 		type: "Magical",
-		description: "<br>This spell allows you to speak with animals: apes and simians, Ob 1; dogs, pigs and dolphins, Ob 2; horses, oxen, Ob 3; wild beasts, Ob 4; birds, Ob 5; reptiles, Ob 6; fish, Ob 7; insects, Ob 8. Decide which type before casting.",
+		description: "<br>This spell allows you to speak with animals. Decide which type before casting.",
 		cost: 8,
 		magical: {
 			origin: "Personal",
@@ -510,8 +526,17 @@ export const SorcerySpells: Resource[] = [
 			duration: "Sustained",
 			areaOfEffect: "Presence",
 			impetus: ["Enhance"],
-			obstacle: "See description",
-			actions: "×3"
+			actions: "x3",
+			obstacle: [
+				["Apes and simians", 1],
+				["Dogs, Pigs and Dolphins", 2],
+				["Horses, Oxen", 3],
+				["Wild beasts", 4],
+				["Birds", 5],
+				["Reptiles", 6],
+				["Fish", 7],
+				["Insects", 8]
+			]
 		}
 	},
 	{
@@ -526,7 +551,8 @@ export const SorcerySpells: Resource[] = [
 			duration: "Sustained",
 			areaOfEffect: "Presence",
 			impetus: ["Create"],
-			obstacle: "4^",
+			obstacle: 4,
+			obstacleCaret: true,
 			actions: 12
 		}
 	},
@@ -542,7 +568,8 @@ export const SorcerySpells: Resource[] = [
 			duration: "Sustained",
 			areaOfEffect: "Measured Area (10s of paces)",
 			impetus: ["Enhance"],
-			obstacle: "4^",
+			obstacle: 4,
+			obstacleCaret: true,
 			actions: 300
 		}
 	},
@@ -574,7 +601,8 @@ export const SorcerySpells: Resource[] = [
 			duration: "Sustained",
 			areaOfEffect: "Caster",
 			impetus: ["Control"],
-			obstacle: "3^",
+			obstacle: 3,
+			obstacleCaret: true,
 			actions: 4
 		}
 	},
@@ -590,7 +618,8 @@ export const SorcerySpells: Resource[] = [
 			duration: "Sustained",
 			areaOfEffect: "Single Target",
 			impetus: ["Control"],
-			obstacle: "4^",
+			obstacle: 4,
+			obstacleCaret: true,
 			actions: 27
 		}
 	},
@@ -606,7 +635,8 @@ export const SorcerySpells: Resource[] = [
 			duration: "Sustained",
 			areaOfEffect: "Single Target",
 			impetus: ["Create"],
-			obstacle: "3^",
+			obstacle: 3,
+			obstacleCaret: true,
 			actions: 12
 		}
 	},
@@ -622,7 +652,7 @@ export const SorcerySpells: Resource[] = [
 			duration: "Sustained",
 			areaOfEffect: "Single Target",
 			impetus: ["Influence"],
-			obstacle: "Will",
+			obstacleStat: "Will",
 			actions: 4
 		}
 	},
@@ -638,7 +668,8 @@ export const SorcerySpells: Resource[] = [
 			duration: "Sustained",
 			areaOfEffect: "Natural Effect",
 			impetus: ["Control"],
-			obstacle: "3^",
+			obstacle: 3,
+			obstacleCaret: true,
 			actions: 56
 		}
 	},
@@ -686,7 +717,8 @@ export const SorcerySpells: Resource[] = [
 			duration: "Instantaneous",
 			areaOfEffect: "Measured Area (10s of paces)",
 			impetus: ["Destroy"],
-			obstacle: "5^",
+			obstacle: 5,
+			obstacleCaret: true,
 			actions: 7
 		}
 	},
@@ -702,7 +734,8 @@ export const SorcerySpells: Resource[] = [
 			duration: "Instantaneous",
 			areaOfEffect: "Measured Area (100s of paces)",
 			impetus: ["Control"],
-			obstacle: "4^",
+			obstacle: 4,
+			obstacleCaret: true,
 			actions: 256
 		}
 	},
@@ -710,7 +743,7 @@ export const SorcerySpells: Resource[] = [
 		name: "Sarch's Glare",
 		allowed: ["bwgr"],
 		type: "Magical",
-		description: "Arcane power flares from the brow of the sorcerer, and his eyes become scintillating stars of fear.<br>Those who look into his eyes fre eze; their limbs go dead, paralyzed. The sorcerer may nominate one character to be the recipient of his gaze and attempt to paralyze him. Obstacle is the target's Will or Forte, whichever is lower.<br>Weapon Length: as Missile; Range: as Pistol.",
+		description: "Arcane power flares from the brow of the sorcerer, and his eyes become scintillating stars of fear.<br>Those who look into his eyes freeze; their limbs go dead, paralyzed. The sorcerer may nominate one character to be the recipient of his gaze and attempt to paralyze him. Obstacle is the target's Will or Forte, whichever is lower.<br>Weapon Length: as Missile; Range: as Pistol.",
 		cost: 12,
 		magical: {
 			origin: "Presence",
@@ -718,7 +751,7 @@ export const SorcerySpells: Resource[] = [
 			duration: "Sustained",
 			areaOfEffect: "Single Target",
 			impetus: ["Tax"],
-			obstacle: "Will/Forte",
+			obstacleStat: ["Will", "Forte"],
 			actions: 4
 		}
 	},
@@ -734,7 +767,8 @@ export const SorcerySpells: Resource[] = [
 			duration: "Instantaneous",
 			areaOfEffect: "Measured Area (paces)",
 			impetus: ["Destroy"],
-			obstacle: "2^",
+			obstacle: 2,
+			obstacleCaret: true,
 			actions: 1
 		}
 	},
@@ -750,7 +784,7 @@ export const SorcerySpells: Resource[] = [
 			duration: "Sustained",
 			areaOfEffect: "Single Target",
 			impetus: ["Enhance"],
-			obstacle: "Perception",
+			obstacleStat: "Perception",
 			actions: 30
 		}
 	},
@@ -766,7 +800,8 @@ export const SorcerySpells: Resource[] = [
 			duration: "Instantaneous",
 			areaOfEffect: "Single Target",
 			impetus: ["Destroy"],
-			obstacle: "2^",
+			obstacle: 2,
+			obstacleCaret: true,
 			actions: 1
 		}
 	},
@@ -814,7 +849,7 @@ export const SorcerySpells: Resource[] = [
 			duration: "Sustained",
 			areaOfEffect: "Single Target",
 			impetus: ["Enhance"],
-			obstacle: "Power",
+			obstacleStat: "Power",
 			actions: 30
 		}
 	},
@@ -846,7 +881,8 @@ export const SorcerySpells: Resource[] = [
 			duration: "Sustained",
 			areaOfEffect: "Caster",
 			impetus: ["Control"],
-			obstacle: "4^",
+			obstacle: 4,
+			obstacleCaret: true,
 			actions: 11
 		}
 	},
@@ -862,7 +898,8 @@ export const SorcerySpells: Resource[] = [
 			duration: "Sustained",
 			areaOfEffect: "Presence",
 			impetus: ["Enhance"],
-			obstacle: "4^",
+			obstacle: 4,
+			obstacleCaret: true,
 			actions: 6
 		}
 	},
@@ -926,7 +963,8 @@ export const SorcerySpells: Resource[] = [
 			duration: "Instantaneous",
 			areaOfEffect: "Measured Area (100s of paces)",
 			impetus: ["Control", "Destroy"],
-			obstacle: "4^",
+			obstacle: 4,
+			obstacleCaret: true,
 			actions: 8
 		}
 	},
@@ -958,7 +996,8 @@ export const SorcerySpells: Resource[] = [
 			duration: "Instantaneous",
 			areaOfEffect: "Single Target",
 			impetus: ["Control"],
-			obstacle: "3^",
+			obstacle: 3,
+			obstacleCaret: true,
 			actions: 8
 		}
 	},
@@ -974,7 +1013,8 @@ export const SorcerySpells: Resource[] = [
 			duration: "Instantaneous",
 			areaOfEffect: "Natural Effect",
 			impetus: ["Destroy"],
-			obstacle: "4^",
+			obstacle: 4,
+			obstacleCaret: true,
 			actions: 3
 		}
 	},
@@ -1006,7 +1046,7 @@ export const SorcerySpells: Resource[] = [
 			duration: "Sustained",
 			areaOfEffect: "Single Target",
 			impetus: ["Enhance"],
-			obstacle: "Will",
+			obstacleStat: "Will",
 			actions: 30
 		}
 	},
@@ -1022,7 +1062,8 @@ export const SorcerySpells: Resource[] = [
 			duration: "Instantaneous",
 			areaOfEffect: "Single Target",
 			impetus: ["Enhance"],
-			obstacle: "3^",
+			obstacle: 3,
+			obstacleCaret: true,
 			actions: 4
 		}
 	},
@@ -1054,7 +1095,7 @@ export const SorcerySpells: Resource[] = [
 			duration: "Sustained",
 			areaOfEffect: "Single Target",
 			impetus: ["Enhance"],
-			obstacle: "Perception",
+			obstacleStat: "Perception",
 			actions: 32
 		}
 	},
@@ -1105,7 +1146,8 @@ export const RitualsOfNightRituals: Resource[] = [
 			duration: "Sustained",
 			areaOfEffect: "Caster",
 			impetus: ["Tax", "Control"],
-			obstacle: "4^",
+			obstacle: 4,
+			obstacleCaret: true,
 			actions: 10
 		}
 	},
@@ -1121,7 +1163,8 @@ export const RitualsOfNightRituals: Resource[] = [
 			duration: "Sustained",
 			areaOfEffect: "Single Target",
 			impetus: ["Destroy"],
-			obstacle: "2^",
+			obstacle: 2,
+			obstacleCaret: true,
 			actions: 3
 		}
 	},
@@ -1137,7 +1180,8 @@ export const RitualsOfNightRituals: Resource[] = [
 			duration: "Instantaneous",
 			areaOfEffect: "Measured Area (100s of paces)",
 			impetus: ["Destroy"],
-			obstacle: "5^",
+			obstacle: 5,
+			obstacleCaret: true,
 			actions: 14
 		}
 	},
@@ -1153,7 +1197,8 @@ export const RitualsOfNightRituals: Resource[] = [
 			duration: "Sustained",
 			areaOfEffect: "Measured Area (10s of paces)",
 			impetus: ["Tax"],
-			obstacle: "3^",
+			obstacle: 3,
+			obstacleCaret: true,
 			actions: 5
 		}
 	},
@@ -1169,7 +1214,8 @@ export const RitualsOfNightRituals: Resource[] = [
 			duration: "Instantaneous",
 			areaOfEffect: "Natural Effect",
 			impetus: ["Destroy", "Control"],
-			obstacle: "3^",
+			obstacle: 3,
+			obstacleCaret: true,
 			actions: 7
 		}
 	},
@@ -1201,7 +1247,8 @@ export const RitualsOfNightRituals: Resource[] = [
 			duration: "Elapsed Time (Exchanges)",
 			areaOfEffect: "Double Presence",
 			impetus: ["Tax"],
-			obstacle: "4^",
+			obstacle: 4,
+			obstacleCaret: true,
 			actions: 6
 		}
 	},
@@ -1244,7 +1291,7 @@ export const DireHauntSpells: Resource[] = [
 		name: "Ancient Grip",
 		allowed: ["bwc"],
 		type: "Magical",
-		description: "The Ghost of the Woods cals upon the strength of roots, branches, bladess and vines to reach forth ad pul down the unwary and weak.<br>Ensorcelling grass and brush, 2 Ob; vines and hangers, Ob 3; small branches and saplings, Ob 4; large thick branches, Ob 5.<br>f the spell is successfully cast, the flora will do the bidding of the wolf as best they are able. They will carry or retrieve objects, close off paths or even subdue an opponent. Test the victim's Power versus that of the spell. The Power of the spell is equal to the caster's Will exponent modified like so: -1D for grass; no bonus/penalty for vines; +1D for branches +2D fr large or thick branches. The weapon length for each type of flora is as follows: Grass is shortest, vines are short, small branches are long, and large branches are longer.<br>The spell can affect all those in the wolf's presence, should he so desire. Rll separate Power tests for each victim.",
+		description: "The Ghost of the Woods cals upon the strength of roots, branches, bladess and vines to reach forth ad pul down the unwary and weak.<br>If the spell is successfully cast, the flora will do the bidding of the wolf as best they are able. They will carry or retrieve objects, close off paths or even subdue an opponent. Test the victim's Power versus that of the spell. The Power of the spell is equal to the caster's Will exponent modified like so: -1D for grass; no bonus/penalty for vines; +1D for branches +2D fr large or thick branches. The weapon length for each type of flora is as follows: Grass is shortest, vines are short, small branches are long, and large branches are longer.<br>The spell can affect all those in the wolf's presence, should he so desire. All separate Power tests for each victim.",
 		cost: 10,
 		magical: {
 			origin: "Personal",
@@ -1252,8 +1299,13 @@ export const DireHauntSpells: Resource[] = [
 			duration: "Sustained",
 			areaOfEffect: "Presence",
 			impetus: ["Control"],
-			obstacle: "See description",
-			actions: "Ob x1"
+			actions: "x1",
+			obstacle: [
+				["Ensorcelling grass and brush", 2],
+				["Vines and hangers", 3],
+				["Small branches and saplings", 4],
+				["Large thick branches", 5]
+			]
 		}
 	},
 	{
@@ -1284,7 +1336,8 @@ export const DireHauntSpells: Resource[] = [
 			duration: "Sustained",
 			areaOfEffect: "Single Target",
 			impetus: ["Control"],
-			obstacle: "4^",
+			obstacle: 4,
+			obstacleCaret: true,
 			actions: 8
 		}
 	},
@@ -1300,7 +1353,8 @@ export const DireHauntSpells: Resource[] = [
 			duration: "Sustained",
 			areaOfEffect: "Measured Area (10s of paces)",
 			impetus: ["Tax"],
-			obstacle: "3^",
+			obstacle: 3,
+			obstacleCaret: true,
 			actions: 5
 		}
 	},
@@ -1340,7 +1394,7 @@ export const DireHauntSpells: Resource[] = [
 		name: "High Speech",
 		allowed: ["bwc"],
 		type: "Magical",
-		description: "<br>This spell allows you to speak with animals: apes and simians, Ob 1; humans, orcs, and elves, Ob 8; horses, oxen, Ob 3; wild beasts, Ob 4; birds, Ob 5; reptiles, Ob 6; fish, Ob 7; insects, Ob 8. Decide which type before casting.",
+		description: "This spell allows you to speak with animals. Decide which type before casting.",
 		cost: 8,
 		magical: {
 			origin: "Personal",
@@ -1348,8 +1402,17 @@ export const DireHauntSpells: Resource[] = [
 			duration: "Sustained",
 			areaOfEffect: "Presence",
 			impetus: ["Enhance"],
-			obstacle: "See description",
-			actions: "×3"
+			actions: "x3",
+			obstacle: [
+				["Apes and simians", 1],
+				["Horses, Oxen", 3],
+				["Wild beasts", 4],
+				["Birds", 5],
+				["Reptiles", 6],
+				["Fish", 7],
+				["Insects", 8],
+				["Humans, Orcs, and Elves", 8]
+			]
 		}
 	},
 	{
@@ -1380,7 +1443,8 @@ export const DireHauntSpells: Resource[] = [
 			duration: "Sustained",
 			areaOfEffect: "Single Target",
 			impetus: ["Influence"],
-			obstacle: "3^",
+			obstacle: 3,
+			obstacleCaret: true,
 			actions: 4
 		}
 	},
@@ -1412,7 +1476,8 @@ export const DireHauntSpells: Resource[] = [
 			duration: "Instantaneous",
 			areaOfEffect: "Single Target",
 			impetus: ["Enhance"],
-			obstacle: "3^",
+			obstacle: 3,
+			obstacleCaret: true,
 			actions: 4
 		}
 	}
