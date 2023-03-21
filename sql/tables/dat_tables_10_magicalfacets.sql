@@ -1,23 +1,23 @@
--- Table: dat.MagicFacetGroups
+-- Table: dat.MagicalFacetGroups
 
--- DROP TABLE IF EXISTS dat."MagicFacetGroups";
+-- DROP TABLE IF EXISTS dat."MagicalFacetGroups";
 
-CREATE TABLE dat."MagicFacetGroups"
+CREATE TABLE dat."MagicalFacetGroups"
 (
 	"Id" serial NOT NULL,
 	"Name" character varying(255) NOT NULL,
     PRIMARY KEY ("Id")
 )
 
-ALTER TABLE IF EXISTS dat."MagicFacetGroups"
+ALTER TABLE IF EXISTS dat."MagicalFacetGroups"
     OWNER to apiuser;
 
 
--- Table: dat.MagicFacets
+-- Table: dat.MagicalFacets
 
--- DROP TABLE IF EXISTS dat."MagicFacets";
+-- DROP TABLE IF EXISTS dat."MagicalFacets";
 
-CREATE TABLE dat."MagicFacets"
+CREATE TABLE dat."MagicalFacets"
 (
 	"Id" serial NOT NULL,
 	"Name" character varying(255) NOT NULL,
@@ -28,11 +28,11 @@ CREATE TABLE dat."MagicFacets"
 	"IsAlternative" boolean NOT NULL,
     PRIMARY KEY ("Id"),
     FOREIGN KEY ("GroupId")
-        REFERENCES dat."MagicFacetGroups" ("Id") MATCH SIMPLE
+        REFERENCES dat."MagicalFacetGroups" ("Id") MATCH SIMPLE
         ON UPDATE RESTRICT
         ON DELETE RESTRICT
         NOT VALID
 )
 
-ALTER TABLE IF EXISTS dat."MagicFacets"
+ALTER TABLE IF EXISTS dat."MagicalFacets"
     OWNER to apiuser;
