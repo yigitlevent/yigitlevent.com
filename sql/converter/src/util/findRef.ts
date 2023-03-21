@@ -5,7 +5,8 @@ type ReferenceKeys = "Stocks" | "Settings" | "Lifepaths"
 	| "ActionResolutionTypes"
 	| "DuelOfWitsActions"
 	| "RangeAndCoverActionGroups" | "RangeAndCoverActions"
-	| "FightActionGroups" | "FightActions";
+	| "FightActionGroups" | "FightActions"
+	| "MagicFacetGroups" | "MagicFacets";
 
 export function findIndex(type: ReferenceKeys, name: string, references: { [key: string]: Reference[]; }) {
 	if (type in references) {

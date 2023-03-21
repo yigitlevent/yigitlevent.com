@@ -10,6 +10,7 @@ import { processLifepaths } from "./groups/p6_lifepaths";
 import { processDuelOfWits } from "./groups/p7_duelofwits";
 import { processRangeAndCover } from "./groups/p8_rangeandcover";
 import { processFight } from "./groups/p9_fight";
+import { processMagicFacets } from "./groups/p10_magicfacets";
 
 
 // REFERENCE AND DATA
@@ -27,7 +28,8 @@ const process = [
 	(refs: References) => processLifepaths(refs),
 	(refs: References) => processDuelOfWits(refs),
 	(refs: References) => processRangeAndCover(refs),
-	(refs: References) => processFight(refs)
+	(refs: References) => processFight(refs),
+	() => processMagicFacets()
 ];
 
 process.forEach(func => {
