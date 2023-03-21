@@ -134,3 +134,18 @@ CREATE TABLE dat."ActionResolutionTypes"
 
 ALTER TABLE IF EXISTS dat."ActionResolutionTypes"
     OWNER to apiuser;
+
+
+-- Table: dat.ResourceTypes
+
+-- DROP TABLE IF EXISTS dat."ResourceTypes";
+
+CREATE TABLE dat."ResourceTypes"
+(
+	"Id" serial NOT NULL,
+	"Name" character varying(255) NOT NULL,
+    PRIMARY KEY ("Id")
+)
+
+ALTER TABLE IF EXISTS dat."ResourceTypes"
+    OWNER to apiuser;

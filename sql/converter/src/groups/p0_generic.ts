@@ -86,6 +86,16 @@ export function processGeneric(): Processed {
 			return `(${i}, '${v[0]}', '${v[1]}')`;
 		});
 
+	// RESOURCES GENERIC 
+
+	const resourceTypeRefs: Reference[] = [];
+
+	const datResourceTypes =
+		["Gear", "Property", "Relationship", "Reputation", "Affiliation", "Magical"].map((v, i) => {
+			resourceTypeRefs.push([i, v]);
+			return `(${i}, '${v}')`;
+		});
+
 
 	return {
 		references: {
@@ -93,7 +103,8 @@ export function processGeneric(): Processed {
 			AbilityTypes: abilityTypeRefs,
 			SkillTypes: skillTypeRefs, SkillCategories: skillCategoryRefs, SkillToolTypes: skillToolTypeRefs,
 			TraitTypes: traitTypeRefs, TraitCategories: traitCategoryRefs,
-			ActionResolutionTypes: conflictTypeRefs
+			ActionResolutionTypes: conflictTypeRefs,
+			ResourceTypes: resourceTypeRefs
 		},
 		data: [
 			arrayToSQL("dat", "LogicTypes", '"Id", "Name"', datLogicTypes),
@@ -108,7 +119,9 @@ export function processGeneric(): Processed {
 			arrayToSQL("dat", "TraitTypes", '"Id", "Name"', datTraitTypes),
 			arrayToSQL("dat", "TraitCategories", '"Id", "Name"', datTraitCategories),
 
-			arrayToSQL("dat", "ActionResolutionTypes", '"Id", "Name", "NameLong"', datConflictTypes)
+			arrayToSQL("dat", "ActionResolutionTypes", '"Id", "Name", "NameLong"', datConflictTypes),
+
+			arrayToSQL("dat", "ResourceTypes", '"Id", "Name"', datResourceTypes)
 		]
 	};
 }
