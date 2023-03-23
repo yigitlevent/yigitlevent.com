@@ -27,7 +27,7 @@ CREATE TABLE dat."Traits"
         ON UPDATE RESTRICT
         ON DELETE RESTRICT
         NOT VALID
-)
+);
 
 ALTER TABLE IF EXISTS dat."Traits"
     OWNER to apiuser;
@@ -52,7 +52,7 @@ CREATE TABLE dat."RulesetTraits"
         ON UPDATE RESTRICT
         ON DELETE RESTRICT
         NOT VALID
-)
+);
 
 ALTER TABLE IF EXISTS dat."RulesetTraits"
     OWNER to apiuser;

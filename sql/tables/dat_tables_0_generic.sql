@@ -7,7 +7,7 @@ CREATE TABLE dat."LogicTypes"
 	"Id" int NOT NULL,
 	"Name" character varying(7) NOT NULL,
     PRIMARY KEY ("Id")
-)
+);
 
 ALTER TABLE IF EXISTS dat."LogicTypes"
     OWNER to apiuser;
@@ -22,7 +22,7 @@ CREATE TABLE dat."RequirementItemTypes"
 	"Id" int NOT NULL,
 	"Name" character varying(31) NOT NULL,
     PRIMARY KEY ("Id")
-)
+);
 
 ALTER TABLE IF EXISTS dat."RequirementItemTypes"
     OWNER to apiuser;
@@ -35,9 +35,9 @@ ALTER TABLE IF EXISTS dat."RequirementItemTypes"
 CREATE TABLE dat."AbilityTypes"
 (
 	"Id" serial NOT NULL,
-	"Name" character varying(255) NOT NULL
+	"Name" character varying(255) NOT NULL,
     PRIMARY KEY ("Id")
-)
+);
 
 ALTER TABLE IF EXISTS dat."AbilityTypes"
     OWNER to apiuser;
@@ -52,7 +52,7 @@ CREATE TABLE dat."SkillToolTypes"
 	"Id" serial NOT NULL,
 	"Name" character varying(255) NOT NULL,
     PRIMARY KEY ("Id")
-)
+);
 
 ALTER TABLE IF EXISTS dat."SkillToolTypes"
     OWNER to apiuser;
@@ -71,7 +71,7 @@ CREATE TABLE dat."SkillTypes"
 	"Difficult" integer NOT NULL,
 	"Challenging" integer NOT NULL,
     PRIMARY KEY ("Id")
-)
+);
 
 ALTER TABLE IF EXISTS dat."SkillTypes"
     OWNER to apiuser;
@@ -85,7 +85,7 @@ CREATE TABLE dat."SkillCategories"
 	"Id" serial NOT NULL,
 	"Name" character varying(255) NOT NULL,
     PRIMARY KEY ("Id")
-)
+);
 
 ALTER TABLE IF EXISTS dat."SkillCategories"
     OWNER to apiuser;
@@ -100,7 +100,7 @@ CREATE TABLE dat."TraitTypes"
 	"Id" serial NOT NULL,
 	"Name" character varying(255) NOT NULL,
     PRIMARY KEY ("Id")
-)
+);
 
 ALTER TABLE IF EXISTS dat."TraitTypes"
     OWNER to apiuser;
@@ -114,7 +114,7 @@ CREATE TABLE dat."TraitCategories"
 	"Id" serial NOT NULL,
 	"Name" character varying(255) NOT NULL,
     PRIMARY KEY ("Id")
-)
+);
 
 ALTER TABLE IF EXISTS dat."TraitCategories"
     OWNER to apiuser;
@@ -130,7 +130,7 @@ CREATE TABLE dat."ActionResolutionTypes"
 	"Name" character varying(15) NOT NULL,
 	"NameLong" character varying(255) NOT NULL,
     PRIMARY KEY ("Id")
-)
+);
 
 ALTER TABLE IF EXISTS dat."ActionResolutionTypes"
     OWNER to apiuser;
@@ -145,7 +145,7 @@ CREATE TABLE dat."ResourceTypes"
 	"Id" serial NOT NULL,
 	"Name" character varying(255) NOT NULL,
     PRIMARY KEY ("Id")
-)
+);
 
 ALTER TABLE IF EXISTS dat."ResourceTypes"
     OWNER to apiuser;
@@ -160,7 +160,7 @@ CREATE TABLE dat."TimeUnits"
 	"Id" serial NOT NULL,
 	"Name" character varying(255) NOT NULL,
     PRIMARY KEY ("Id")
-)
+);
 
 ALTER TABLE IF EXISTS dat."TimeUnits"
     OWNER to apiuser;
@@ -175,7 +175,7 @@ CREATE TABLE dat."DistanceUnits"
 	"Id" serial NOT NULL,
 	"Name" character varying(255) NOT NULL,
     PRIMARY KEY ("Id")
-)
+);
 
 ALTER TABLE IF EXISTS dat."DistanceUnits"
     OWNER to apiuser;
@@ -190,7 +190,7 @@ CREATE TABLE dat."UnitModifiers"
 	"Id" serial NOT NULL,
 	"Name" character varying(255) NOT NULL,
     PRIMARY KEY ("Id")
-)
+);
 
 ALTER TABLE IF EXISTS dat."UnitModifiers"
     OWNER to apiuser;

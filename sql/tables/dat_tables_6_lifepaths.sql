@@ -42,7 +42,7 @@ CREATE TABLE dat."Lifepaths"
         ON UPDATE RESTRICT
         ON DELETE RESTRICT
         NOT VALID
-)
+);
 
 ALTER TABLE IF EXISTS dat."Lifepaths"
     OWNER to apiuser;
@@ -67,7 +67,7 @@ CREATE TABLE dat."LifepathLeads"
         ON UPDATE RESTRICT
         ON DELETE RESTRICT
         NOT VALID
-)
+);
 
 ALTER TABLE IF EXISTS dat."LifepathLeads"
     OWNER to apiuser;
@@ -92,7 +92,7 @@ CREATE TABLE dat."LifepathSkills"
         ON UPDATE RESTRICT
         ON DELETE RESTRICT
         NOT VALID
-)
+);
 
 ALTER TABLE IF EXISTS dat."LifepathSkills"
     OWNER to apiuser;
@@ -117,7 +117,7 @@ CREATE TABLE dat."LifepathTraits"
         ON UPDATE RESTRICT
         ON DELETE RESTRICT
         NOT VALID
-)
+);
 
 ALTER TABLE IF EXISTS dat."LifepathTraits"
     OWNER to apiuser;
@@ -141,7 +141,7 @@ CREATE TABLE dat."LifepathCompanions"
         ON UPDATE RESTRICT
         ON DELETE RESTRICT
         NOT VALID,
-)
+);
 
 ALTER TABLE IF EXISTS dat."LifepathCompanions"
     OWNER to apiuser;
@@ -166,7 +166,7 @@ CREATE TABLE dat."LifepathCompanionSettings"
         ON UPDATE RESTRICT
         ON DELETE RESTRICT
         NOT VALID
-)
+);
 
 ALTER TABLE IF EXISTS dat."LifepathCompanionSettings"
     OWNER to apiuser;
@@ -191,7 +191,7 @@ CREATE TABLE dat."RulesetLifepaths"
         ON UPDATE RESTRICT
         ON DELETE RESTRICT
         NOT VALID
-)
+);
 
 ALTER TABLE IF EXISTS dat."RulesetLifepaths"
     OWNER to apiuser;
@@ -219,7 +219,7 @@ CREATE TABLE dat."LifepathRequirements"
         ON UPDATE RESTRICT
         ON DELETE RESTRICT
         NOT VALID
-)
+);
 
 ALTER TABLE IF EXISTS dat."LifepathRequirements"
     OWNER to apiuser;
@@ -277,7 +277,7 @@ CREATE TABLE dat."LifepathRequirementItems"
         ON UPDATE RESTRICT
         ON DELETE RESTRICT
         NOT VALID
-)
+);
 
 ALTER TABLE IF EXISTS dat."LifepathRequirementItems"
     OWNER to apiuser;

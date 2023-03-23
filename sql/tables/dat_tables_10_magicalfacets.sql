@@ -6,7 +6,7 @@ CREATE TABLE dat."SpellFacetTypes"
 (
 	"Name" character varying(255) NOT NULL,
     PRIMARY KEY ("Name")
-)
+);
 
 ALTER TABLE IF EXISTS dat."SpellFacetTypes"
     OWNER to apiuser;
@@ -24,7 +24,7 @@ CREATE TABLE dat."SpellOriginFacets"
 	"Actions" integer NOT NULL,
 	"Resource" integer NOT NULL
     PRIMARY KEY ("Id")
-)
+);
 
 ALTER TABLE IF EXISTS dat."SpellOriginFacets"
     OWNER to apiuser;
@@ -42,7 +42,7 @@ CREATE TABLE dat."SpellDurationFacets"
 	"Actions" integer NOT NULL,
 	"Resource" integer NOT NULL
     PRIMARY KEY ("Id")
-)
+);
 
 ALTER TABLE IF EXISTS dat."SpellDurationFacets"
     OWNER to apiuser;
@@ -60,7 +60,7 @@ CREATE TABLE dat."SpellAreaOfEffectFacets"
 	"Actions" integer NOT NULL,
 	"Resource" integer NOT NULL
     PRIMARY KEY ("Id")
-)
+);
 
 ALTER TABLE IF EXISTS dat."SpellAreaOfEffectFacets"
     OWNER to apiuser;
@@ -79,7 +79,7 @@ CREATE TABLE dat."SpellElementFacets"
 	"Actions" integer NOT NULL,
 	"Resource" integer NOT NULL
     PRIMARY KEY ("Id")
-)
+);
 
 ALTER TABLE IF EXISTS dat."SpellElementFacets"
     OWNER to apiuser;
@@ -98,7 +98,7 @@ CREATE TABLE dat."SpellImpetusFacets"
 	"Actions" integer NOT NULL,
 	"Resource" integer NOT NULL
     PRIMARY KEY ("Id")
-)
+);
 
 ALTER TABLE IF EXISTS dat."SpellImpetusFacets"
     OWNER to apiuser;

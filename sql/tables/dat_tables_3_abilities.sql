@@ -18,7 +18,7 @@ CREATE TABLE dat."Abilities"
         ON UPDATE RESTRICT
         ON DELETE RESTRICT
         NOT VALID
-)
+);
 
 ALTER TABLE IF EXISTS dat."Abilities"
     OWNER to apiuser;

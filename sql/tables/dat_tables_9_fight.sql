@@ -7,7 +7,7 @@ CREATE TABLE dat."FightActionGroups"
 	"Id" serial NOT NULL,
 	"Name" character varying(255) NOT NULL,
     PRIMARY KEY ("Id")
-)
+);
 
 ALTER TABLE IF EXISTS dat."FightActionGroups"
     OWNER to apiuser;
@@ -34,7 +34,7 @@ CREATE TABLE dat."FightActions"
         ON UPDATE RESTRICT
         ON DELETE RESTRICT
         NOT VALID
-)
+);
 
 ALTER TABLE IF EXISTS dat."FightActions"
     OWNER to apiuser;
@@ -66,7 +66,7 @@ CREATE TABLE dat."FightActionTests"
         ON DELETE RESTRICT
         NOT VALID,
 	CHECK (("SkillId" IS NULL) <> ("AbilityId" IS NULL))
-)
+);
 
 ALTER TABLE IF EXISTS dat."FightActionTests"
     OWNER to apiuser;
@@ -125,7 +125,7 @@ CREATE TABLE dat."FightActionResolutions"
         ON UPDATE RESTRICT
         ON DELETE RESTRICT
         NOT VALID
-)
+);
 
 ALTER TABLE IF EXISTS dat."FightActionResolutions"
     OWNER to apiuser;

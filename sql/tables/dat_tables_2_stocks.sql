@@ -10,7 +10,7 @@ CREATE TABLE dat."Stocks"
 	"NamePlural" character varying(255) NOT NULL,
 	"Stride" integer NOT NULL,
     PRIMARY KEY ("Id")
-)
+);
 
 ALTER TABLE IF EXISTS dat."Stocks"
     OWNER to apiuser;
@@ -33,7 +33,7 @@ CREATE TABLE dat."AgePools"
         ON UPDATE RESTRICT
         ON DELETE RESTRICT
         NOT VALID,
-)
+);
 
 ALTER TABLE IF EXISTS dat."AgePools"
     OWNER to apiuser;
@@ -58,7 +58,7 @@ CREATE TABLE dat."RulesetStocks"
         ON UPDATE RESTRICT
         ON DELETE RESTRICT
         NOT VALID
-)
+);
 
 ALTER TABLE IF EXISTS dat."RulesetStocks"
     OWNER to apiuser;
@@ -81,7 +81,7 @@ CREATE TABLE dat."Settings"
         ON UPDATE RESTRICT
         ON DELETE RESTRICT
         NOT VALID,
-)
+);
 
 ALTER TABLE IF EXISTS dat."Settings"
     OWNER to apiuser;
@@ -106,7 +106,7 @@ CREATE TABLE dat."RulesetSettings"
         ON UPDATE RESTRICT
         ON DELETE RESTRICT
         NOT VALID
-)
+);
 
 ALTER TABLE IF EXISTS dat."RulesetSettings"
     OWNER to apiuser;

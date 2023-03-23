@@ -7,7 +7,7 @@ CREATE TABLE dat."RangeAndCoverActionGroups"
 	"Id" serial NOT NULL,
 	"Name" character varying(255) NOT NULL,
     PRIMARY KEY ("Id")
-)
+);
 
 ALTER TABLE IF EXISTS dat."RangeAndCoverActionGroups"
     OWNER to apiuser;
@@ -38,7 +38,7 @@ CREATE TABLE dat."RangeAndCoverActions"
         ON UPDATE RESTRICT
         ON DELETE RESTRICT
         NOT VALID
-)
+);
 
 ALTER TABLE IF EXISTS dat."RangeAndCoverActions"
     OWNER to apiuser;
@@ -97,7 +97,7 @@ CREATE TABLE dat."RangeAndCoverActionResolutions"
         ON UPDATE RESTRICT
         ON DELETE RESTRICT
         NOT VALID
-)
+);
 
 ALTER TABLE IF EXISTS dat."RangeAndCoverActionResolutions"
     OWNER to apiuser;

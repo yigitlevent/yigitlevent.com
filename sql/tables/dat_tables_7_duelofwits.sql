@@ -10,7 +10,7 @@ CREATE TABLE dat."DuelOfWitsActions"
 	"Special" character varying(325124),
 	"Effect" character varying(325124),
     PRIMARY KEY ("Id")
-)
+);
 
 ALTER TABLE IF EXISTS dat."DuelOfWitsActions"
     OWNER to apiuser;
@@ -42,7 +42,7 @@ CREATE TABLE dat."DuelOfWitsActionTests"
         ON DELETE RESTRICT
         NOT VALID,
 	CHECK (("SkillId" IS NULL) <> ("AbilityId" IS NULL))
-)
+);
 
 ALTER TABLE IF EXISTS dat."DuelOfWitsActionTests"
     OWNER to apiuser;
@@ -101,7 +101,7 @@ CREATE TABLE dat."DuelOfWitsActionResolutions"
         ON UPDATE RESTRICT
         ON DELETE RESTRICT
         NOT VALID
-)
+);
 
 ALTER TABLE IF EXISTS dat."DuelOfWitsActionResolutions"
     OWNER to apiuser;

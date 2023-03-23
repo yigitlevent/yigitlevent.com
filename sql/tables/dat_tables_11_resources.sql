@@ -21,7 +21,7 @@ CREATE TABLE dat."Resources"
         ON UPDATE RESTRICT
         ON DELETE RESTRICT
         NOT VALID
-)
+);
 
 ALTER TABLE IF EXISTS dat."Resources"
     OWNER to apiuser;
@@ -42,7 +42,7 @@ CREATE TABLE dat."ResourceCosts"
         ON UPDATE RESTRICT
         ON DELETE RESTRICT
         NOT VALID
-)
+);
 
 ALTER TABLE IF EXISTS dat."ResourceCosts"
     OWNER to apiuser;
@@ -64,7 +64,7 @@ CREATE TABLE dat."ResourceModifiers"
         ON UPDATE RESTRICT
         ON DELETE RESTRICT
         NOT VALID
-)
+);
 
 ALTER TABLE IF EXISTS dat."ResourceModifiers"
     OWNER to apiuser;
@@ -165,7 +165,7 @@ CREATE TABLE dat."ResourceMagicDetails"
         ON UPDATE RESTRICT
         ON DELETE RESTRICT
         NOT VALID
-)
+);
 
 ALTER TABLE IF EXISTS dat."ResourceMagicDetails"
     OWNER to apiuser;
@@ -200,7 +200,7 @@ CREATE TABLE dat."ResourceMagicObstacles"
         ON UPDATE RESTRICT
         ON DELETE RESTRICT
         NOT VALID
-)
+);
 
 ALTER TABLE IF EXISTS dat."ResourceMagicObstacles"
     OWNER to apiuser;
@@ -225,7 +225,7 @@ CREATE TABLE dat."RulesetResources"
         ON UPDATE RESTRICT
         ON DELETE RESTRICT
         NOT VALID
-)
+);
 
 ALTER TABLE IF EXISTS dat."RulesetResources"
     OWNER to apiuser;

@@ -48,7 +48,7 @@ CREATE TABLE dat."Skills"
         ON UPDATE RESTRICT
         ON DELETE RESTRICT
         NOT VALID
-)
+);
 
 ALTER TABLE IF EXISTS dat."Skills"
     OWNER to apiuser;
@@ -72,7 +72,7 @@ CREATE TABLE dat."RulesetSkills"
         ON UPDATE RESTRICT
         ON DELETE RESTRICT
         NOT VALID
-)
+);
 
 ALTER TABLE IF EXISTS dat."RulesetSkills"
     OWNER to apiuser;
@@ -98,7 +98,7 @@ CREATE TABLE dat."SkillSubskills"
         ON DELETE RESTRICT
         NOT VALID,
 	CHECK ("SkillId" <> "SubskillId")
-)
+);
 
 ALTER TABLE IF EXISTS dat."SkillSubskills"
     OWNER to apiuser;
