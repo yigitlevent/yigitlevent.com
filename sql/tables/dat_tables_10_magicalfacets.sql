@@ -1,38 +1,104 @@
--- Table: dat.MagicalFacetGroups
+-- Table: dat.SpellFacetTypes
 
--- DROP TABLE IF EXISTS dat."MagicalFacetGroups";
+-- DROP TABLE IF EXISTS dat."SpellFacetTypes";
 
-CREATE TABLE dat."MagicalFacetGroups"
+CREATE TABLE dat."SpellFacetTypes"
 (
-	"Id" serial NOT NULL,
 	"Name" character varying(255) NOT NULL,
-    PRIMARY KEY ("Id")
+    PRIMARY KEY ("Name")
 )
 
-ALTER TABLE IF EXISTS dat."MagicalFacetGroups"
+ALTER TABLE IF EXISTS dat."SpellFacetTypes"
     OWNER to apiuser;
 
 
--- Table: dat.MagicalFacets
+-- Table: dat.SpellOriginFacets
 
--- DROP TABLE IF EXISTS dat."MagicalFacets";
+-- DROP TABLE IF EXISTS dat."SpellOriginFacets";
 
-CREATE TABLE dat."MagicalFacets"
+CREATE TABLE dat."SpellOriginFacets"
 (
 	"Id" serial NOT NULL,
 	"Name" character varying(255) NOT NULL,
-	"GroupId" integer NOT NULL,
 	"Obstacle" integer NOT NULL,
 	"Actions" integer NOT NULL,
-	"Resource" integer NOT NULL,
-	"IsAlternative" boolean NOT NULL,
-    PRIMARY KEY ("Id"),
-    FOREIGN KEY ("GroupId")
-        REFERENCES dat."MagicalFacetGroups" ("Id") MATCH SIMPLE
-        ON UPDATE RESTRICT
-        ON DELETE RESTRICT
-        NOT VALID
+	"Resource" integer NOT NULL
+    PRIMARY KEY ("Id")
 )
 
-ALTER TABLE IF EXISTS dat."MagicalFacets"
+ALTER TABLE IF EXISTS dat."SpellOriginFacets"
+    OWNER to apiuser;
+
+
+-- Table: dat.SpellDurationFacets
+
+-- DROP TABLE IF EXISTS dat."SpellDurationFacets";
+
+CREATE TABLE dat."SpellDurationFacets"
+(
+	"Id" serial NOT NULL,
+	"Name" character varying(255) NOT NULL,
+	"Obstacle" integer NOT NULL,
+	"Actions" integer NOT NULL,
+	"Resource" integer NOT NULL
+    PRIMARY KEY ("Id")
+)
+
+ALTER TABLE IF EXISTS dat."SpellDurationFacets"
+    OWNER to apiuser;
+
+
+-- Table: dat.SpellAreaOfEffectFacets
+
+-- DROP TABLE IF EXISTS dat."SpellAreaOfEffectFacets";
+
+CREATE TABLE dat."SpellAreaOfEffectFacets"
+(
+	"Id" serial NOT NULL,
+	"Name" character varying(255) NOT NULL,
+	"Obstacle" integer NOT NULL,
+	"Actions" integer NOT NULL,
+	"Resource" integer NOT NULL
+    PRIMARY KEY ("Id")
+)
+
+ALTER TABLE IF EXISTS dat."SpellAreaOfEffectFacets"
+    OWNER to apiuser;
+
+
+
+-- Table: dat.SpellElementFacets
+
+-- DROP TABLE IF EXISTS dat."SpellElementFacets";
+
+CREATE TABLE dat."SpellElementFacets"
+(
+	"Id" serial NOT NULL,
+	"Name" character varying(255) NOT NULL,
+	"Obstacle" integer NOT NULL,
+	"Actions" integer NOT NULL,
+	"Resource" integer NOT NULL
+    PRIMARY KEY ("Id")
+)
+
+ALTER TABLE IF EXISTS dat."SpellElementFacets"
+    OWNER to apiuser;
+
+
+
+-- Table: dat.SpellImpetusFacets
+
+-- DROP TABLE IF EXISTS dat."SpellImpetusFacets";
+
+CREATE TABLE dat."SpellImpetusFacets"
+(
+	"Id" serial NOT NULL,
+	"Name" character varying(255) NOT NULL,
+	"Obstacle" integer NOT NULL,
+	"Actions" integer NOT NULL,
+	"Resource" integer NOT NULL
+    PRIMARY KEY ("Id")
+)
+
+ALTER TABLE IF EXISTS dat."SpellImpetusFacets"
     OWNER to apiuser;
