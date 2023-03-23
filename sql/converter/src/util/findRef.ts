@@ -1,4 +1,5 @@
 type ReferenceKeys = "Stocks" | "Settings" | "Lifepaths"
+	| "TimeUnits" | "DistanceUnits" | "UnitModifiers"
 	| "LogicTypes" | "RequirementItemTypes"
 	| "AbilityTypes" | "TraitTypes" | "TraitCategories" | "SkillToolTypes" | "SkillTypes" | "SkillCategories"
 	| "Abilities" | "Traits" | "Skills"
@@ -6,7 +7,7 @@ type ReferenceKeys = "Stocks" | "Settings" | "Lifepaths"
 	| "DuelOfWitsActions"
 	| "RangeAndCoverActionGroups" | "RangeAndCoverActions"
 	| "FightActionGroups" | "FightActions"
-	| "MagicalFacetGroups" | "MagicalFacets"
+	| "SpellFacetTypes" | "SpellOriginFacets" | "SpellDurationFacets" | "SpellAreaOfEffectFacets" | "SpellElementFacets" | "SpellImpetusFacets"
 	| "ResourceTypes" | "Resources";
 
 export function findIndex(type: ReferenceKeys, name: string, references: { [key: string]: Reference[]; }) {
