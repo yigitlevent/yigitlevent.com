@@ -61,6 +61,7 @@ export function processRangeAndCover(refs: References): Processed {
 			});
 
 	return {
+		name: "p8_rangeandcover",
 		references: { RangeAndCoverActionGroups: racActionGroupRefs, RangeAndCoverActions: racActionRefs },
 		data: [
 			arrayToSQL("dat", "RangeAndCoverActionGroups", '"Id", "Name"', datRaCActionGroups),

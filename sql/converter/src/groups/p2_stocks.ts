@@ -46,6 +46,7 @@ export function processStocks(): Processed {
 
 
 	return {
+		name: "p2_stocks",
 		references: { Stocks: stockRefs, Settings: settingRefs },
 		data: [
 			arrayToSQL("dat", "Stocks", '"Id", "Name", "NamePlural", "Stride"', datStocks),

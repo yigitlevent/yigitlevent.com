@@ -39,6 +39,7 @@ function processSubskills(skillRefs: Reference[]): Processed {
 	const subskills = arrayToSQL("dat", "SkillSubskills", '"SkillId", "SubskillId"', datSubskills);
 
 	return {
+		name: "",
 		references: {},
 		data: [subskills]
 	};
@@ -87,6 +88,7 @@ export function processSkills(refs: References): Processed {
 		});
 
 	return {
+		name: "p5_skills",
 		references: { Skills: skillRefs },
 		data: [
 			arrayToSQL("dat", "Skills", '"Id", "Name", "StockId", "CategoryId", "TypeId", "IsMagical", "IsTraining", "DontList", "Root1Id", "Root2Id", "Description", "ToolTypeId", "ToolsDescription"', datSkills),

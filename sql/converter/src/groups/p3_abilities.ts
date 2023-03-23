@@ -26,6 +26,7 @@ export function processAbilities(refs: References): Processed {
 	});
 
 	return {
+		name: "p3_abilities",
 		references: { Abilities: abilityRefs },
 		data: [
 			arrayToSQL("dat", "Abilities", '"Id", "Name", "AbilityTypeId", "HasShades", "Cycle", "Routine", "Difficult", "Challenging"', datAbilities)

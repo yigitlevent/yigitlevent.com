@@ -83,6 +83,7 @@ export function processMagic(): Processed {
 	});
 
 	return {
+		name: "p10_magic",
 		references: {
 			SpellFacetTypes: spellFacetTypesRef,
 			SpellOriginFacets: spellOriginFacetsRef,

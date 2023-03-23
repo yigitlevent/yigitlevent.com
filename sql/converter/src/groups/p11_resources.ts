@@ -89,6 +89,7 @@ export function processResources(refs: References): Processed {
 
 
 	return {
+		name: "p11_resources",
 		references: {},
 		data: [
 			arrayToSQL("dat", "Resources", '"Id", "Name", "StockId", "ResourceTypeId", "Description", "VariableCost"', datResources),

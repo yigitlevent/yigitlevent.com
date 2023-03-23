@@ -14,6 +14,7 @@ export function processRulesets(): Processed {
 	ExpansionRulesets.forEach(ex => { datRulesets.push(`('${ex.id}', '${ex.name}', ${ex.isOffical}, true, true, null)`); });
 
 	return {
+		name: "p1_rulesets",
 		references: {},
 		data: [
 			arrayToSQL("dat", "Rulesets", '"Id", "Name", "IsOfficial", "IsPublic", "IsExpansion", "User"', datRulesets.filter(v => !v.includes("amw"))),

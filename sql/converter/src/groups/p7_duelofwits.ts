@@ -58,6 +58,7 @@ export function processDuelOfWits(refs: References): Processed {
 			});
 
 	return {
+		name: "p7_duelofwits",
 		references: { DuelOfWitsActions: dowActionRefs },
 		data: [
 			arrayToSQL("dat", "DuelOfWitsActions", '"Id", "Name", "SpeakingThePart", "Special", "Effect"', datDoWActions),

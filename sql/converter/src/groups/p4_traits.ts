@@ -33,6 +33,7 @@ export function processTraits(refs: References): Processed {
 		});
 
 	return {
+		name: "p4_traits",
 		references: { Traits: traitRefs },
 		data: [
 			arrayToSQL("dat", "Traits", '"Id", "Name", "StockId", "CategoryId", "TypeId", "Cost", "Description"', datTraits),

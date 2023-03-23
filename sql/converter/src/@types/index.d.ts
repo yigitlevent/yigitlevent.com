@@ -5,6 +5,7 @@ interface References {
 }
 
 interface Processed {
+	name: string;
 	references: References;
 	data: string[];
 }

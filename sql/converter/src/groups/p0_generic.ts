@@ -80,7 +80,7 @@ export function processGeneric(): Processed {
 			["Vs", "Versus"],
 			["Vs+", "Versus plus"],
 			["+Vs", "plus Versus"],
-			["½", "half of"]
+			["½", "Half of"]
 		].map((v, i) => {
 			conflictTypeRefs.push([i, v[0]]);
 			return `(${i}, '${v[0]}', '${v[1]}')`;
@@ -110,6 +110,7 @@ export function processGeneric(): Processed {
 		.map((v, i) => { unitModifiersRef.push([i, v]); return `(${i}, '${v}')`; });
 
 	return {
+		name: "p0_generic",
 		references: {
 			LogicTypes: logicRef, RequirementItemTypes: requirementItemRef,
 			AbilityTypes: abilityTypeRefs,

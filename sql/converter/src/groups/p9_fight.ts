@@ -75,6 +75,7 @@ export function processFight(refs: References): Processed {
 			});
 
 	return {
+		name: "p9_fight",
 		references: { FightActionGroups: fightActionGroupRefs, FightActions: fightActionRefs },
 		data: [
 			arrayToSQL("dat", "FightActionGroups", '"Id", "Name"', datFightActionGroups),

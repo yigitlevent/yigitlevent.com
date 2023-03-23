@@ -16,7 +16,7 @@ import { processResources } from "./groups/p11_resources";
 
 // REFERENCE AND DATA
 let refs: References = {};
-const outputs: string[] = [];
+const outputs: { name: string; data: string[]; }[] = [];
 
 // PROCESS
 const process = [
@@ -35,9 +35,9 @@ const process = [
 ];
 
 process.forEach(func => {
-	const { references, data } = func(refs);
+	const { name, references, data } = func(refs);
 	refs = { ...refs, ...references };
-	outputs.push(...data);
+	outputs.push({ name, data });
 });
 
 // OUTPUT
@@ -54,9 +54,10 @@ fs.writeFileSync(
 		.replaceAll("{", "{\n\t")
 );
 
-fs.writeFileSync(
-	`${outputPath}/data.sql`,
-	outputs.map(v => `${v};`)
-		.join("\n\n")
-	+ "\n"
-);
+outputs.map(v => {
+	fs.writeFileSync(
+		`${outputPath}/data_${v.name}.sql`,
+		v.data.map(s => `${s};`).join("\n\n") + "\n"
+	);
+});
+
