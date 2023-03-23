@@ -12,7 +12,7 @@ type SpellDurations = "Instantaneous" | "Sustained" | "Elapsed Time" | "Permanen
 type SpellDurationsElapsed = "Exchanges" | "Minutes" | "Hours";
 
 type SpellAreaOfEffects = "Caster" | "Single Target" | "Presence" | "Double Area" | "Measured Area" | "Natural Effect";
-type SpellAreaOfEffectsMeasured = "paces" | "10s of paces" | "100s of paces" | "miles";
+type SpellAreaOfEffectsMeasured = "Paces" | "10s of Paces" | "100s of Paces" | "Miles";
 
 type SpellElements = "Anima" | "Arcana" | "Heaven" | "White" | "Fire" | "Air" | "Earth" | "Water";
 type SpellImpetus = "Create" | "Destroy" | "Tax" | "Transmute" | "Control" | "Influence" | "Enhance";
