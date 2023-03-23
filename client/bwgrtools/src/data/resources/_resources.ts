@@ -1,6 +1,5 @@
 import { Dwarf } from "./dwarf";
 import { Elf } from "./elf";
-import { DarkElf } from "./darkElf";
 import { Human } from "./human";
 import { Orc } from "./orc";
 import { Roden } from "./roden";
@@ -8,12 +7,30 @@ import { Troll } from "./troll";
 import { GreatWolf } from "./greatWolf";
 
 
+type SpellOrigins = "Personal" | "Presence" | "Sight";
+type SpellDurations = "Instantaneous" | "Sustained" | "Elapsed Time" | "Permanent";
+type SpellDurationsElapsed = "Exchanges" | "Minutes" | "Hours";
+
+type SpellAreaOfEffects = "Caster" | "Single Target" | "Presence" | "Double Area" | "Measured Area" | "Natural Effect";
+type SpellAreaOfEffectsMeasured = "paces" | "10s of paces" | "100s of paces" | "miles";
+
+type SpellElements = "Anima" | "Arcana" | "Heaven" | "White" | "Fire" | "Air" | "Earth" | "Water";
+type SpellImpetus = "Create" | "Destroy" | "Tax" | "Transmute" | "Control" | "Influence" | "Enhance";
+
 export interface ResourceMagic {
-	origin: "Personal" | "Presence" | "Double Presence" | "Sight";
-	element: ("Anima" | "Arcana" | "Heaven" | "White" | "Fire" | "Air" | "Earth" | "Water")[];
-	duration: "Instantaneous" | "Sustained" | `Elapsed Time (${"Exchanges" | "Minutes" | "Hours"})` | "Permanent";
-	areaOfEffect: "Caster" | "Double Area" | `Measured Area (${"paces" | "10s of paces" | "100s of paces" | "miles"})` | "Half Area" | "Double Natural Effect" | "Natural Effect" | "Half Natural Eff." | "Double Presence" | "Presence" | "Half Presence" | "Single Target";
-	impetus: ("Create" | "Destroy" | "Tax" | "Transmute" | "Control" | "Influence" | "Enhance")[];
+	origin: SpellOrigins;
+	originModifier?: "Double" | "Half";
+
+	duration: SpellDurations;
+	durationElapsedUnit?: SpellDurationsElapsed;
+
+	areaOfEffect: SpellAreaOfEffects;
+	areaOfEffectMeasuredUnit?: SpellAreaOfEffectsMeasured;
+	areaOfEffectModifier?: "Double" | "Half"
+
+	element: [SpellElements] | [SpellElements, SpellElements];
+	impetus: [SpellImpetus] | [SpellImpetus, SpellImpetus];
+
 	obstacle?: number | [string, number][];
 	obstacleStat?: StatsAndAttributesList | [StatsAndAttributesList, StatsAndAttributesList];
 	obstacleCaret?: boolean;
@@ -43,7 +60,6 @@ interface ResourceGroup {
 export const Resources: ResourceGroup = {
 	"Dwarf": Dwarf,
 	"Elf": Elf,
-	"Dark Elf": DarkElf,
 	"Human": Human,
 	"Orc": Orc,
 	"Roden": Roden,
