@@ -149,3 +149,48 @@ CREATE TABLE dat."ResourceTypes"
 
 ALTER TABLE IF EXISTS dat."ResourceTypes"
     OWNER to apiuser;
+
+
+-- Table: dat.TimeUnits
+
+-- DROP TABLE IF EXISTS dat."TimeUnits";
+
+CREATE TABLE dat."TimeUnits"
+(
+	"Id" serial NOT NULL,
+	"Name" character varying(255) NOT NULL,
+    PRIMARY KEY ("Id")
+)
+
+ALTER TABLE IF EXISTS dat."TimeUnits"
+    OWNER to apiuser;
+
+
+-- Table: dat.DistanceUnits
+
+-- DROP TABLE IF EXISTS dat."DistanceUnits";
+
+CREATE TABLE dat."DistanceUnits"
+(
+	"Id" serial NOT NULL,
+	"Name" character varying(255) NOT NULL,
+    PRIMARY KEY ("Id")
+)
+
+ALTER TABLE IF EXISTS dat."DistanceUnits"
+    OWNER to apiuser;
+
+
+-- Table: dat.UnitModifiers
+
+-- DROP TABLE IF EXISTS dat."UnitModifiers";
+
+CREATE TABLE dat."UnitModifiers"
+(
+	"Id" serial NOT NULL,
+	"Name" character varying(255) NOT NULL,
+    PRIMARY KEY ("Id")
+)
+
+ALTER TABLE IF EXISTS dat."UnitModifiers"
+    OWNER to apiuser;

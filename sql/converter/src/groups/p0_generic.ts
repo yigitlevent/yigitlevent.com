@@ -96,6 +96,18 @@ export function processGeneric(): Processed {
 			return `(${i}, '${v}')`;
 		});
 
+	// MISC
+	const timeUnitsRef: Reference[] = [];
+	const datTimeUnits = ["Exchanges", "Minutes", "Hours", "Days", "Weeks", "Months", "Seasons", "Years"]
+		.map((v, i) => { timeUnitsRef.push([i, v]); return `(${i}, '${v}')`; });
+
+	const distanceUnitsRef: Reference[] = [];
+	const datDistanceUnits = ["Paces", "10s of Paces", "100s of Paces", "Miles"]
+		.map((v, i) => { distanceUnitsRef.push([i, v]); return `(${i}, '${v}')`; });
+
+	const unitModifiersRef: Reference[] = [];
+	const datUnitModifiers = ["Quarter", "Half", "Double", "Triple"]
+		.map((v, i) => { unitModifiersRef.push([i, v]); return `(${i}, '${v}')`; });
 
 	return {
 		references: {
@@ -104,7 +116,8 @@ export function processGeneric(): Processed {
 			SkillTypes: skillTypeRefs, SkillCategories: skillCategoryRefs, SkillToolTypes: skillToolTypeRefs,
 			TraitTypes: traitTypeRefs, TraitCategories: traitCategoryRefs,
 			ActionResolutionTypes: conflictTypeRefs,
-			ResourceTypes: resourceTypeRefs
+			ResourceTypes: resourceTypeRefs,
+			TimeUnits: timeUnitsRef, DistanceUnits: distanceUnitsRef, UnitModifiers: unitModifiersRef
 		},
 		data: [
 			arrayToSQL("dat", "LogicTypes", '"Id", "Name"', datLogicTypes),
@@ -121,7 +134,11 @@ export function processGeneric(): Processed {
 
 			arrayToSQL("dat", "ActionResolutionTypes", '"Id", "Name", "NameLong"', datConflictTypes),
 
-			arrayToSQL("dat", "ResourceTypes", '"Id", "Name"', datResourceTypes)
+			arrayToSQL("dat", "ResourceTypes", '"Id", "Name"', datResourceTypes),
+
+			arrayToSQL("dat", "TimeUnits", '"Id", "Name"', datTimeUnits),
+			arrayToSQL("dat", "DistanceUnits", '"Id", "Name"', datDistanceUnits),
+			arrayToSQL("dat", "UnitModifiers", '"Id", "Name"', datUnitModifiers)
 		]
 	};
 }
