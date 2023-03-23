@@ -22,10 +22,11 @@ ALTER TABLE IF EXISTS dat."DuelOfWitsActions"
 
 CREATE TABLE dat."DuelOfWitsActionTests"
 (
+	"Id" serial NOT NULL,
 	"ActionId" int NOT NULL,
-	"SkillId" int NOT NULL,
-	"AbilityId" int NOT NULL,
-    PRIMARY KEY ("ActionId", "SkillId", "AbilityId"),
+	"SkillId" int,
+	"AbilityId" int,
+    PRIMARY KEY ("Id"),
     FOREIGN KEY ("ActionId")
         REFERENCES dat."DuelOfWitsActions" ("Id") MATCH SIMPLE
         ON UPDATE RESTRICT
@@ -77,7 +78,7 @@ CREATE TABLE dat."DuelOfWitsActionResolutions"
         ON DELETE RESTRICT
         NOT VALID,
     FOREIGN KEY ("ResolutionTypeId")
-        REFERENCES dat."ResolutionTypes" ("Id") MATCH SIMPLE
+        REFERENCES dat."ActionResolutionTypes" ("Id") MATCH SIMPLE
         ON UPDATE RESTRICT
         ON DELETE RESTRICT
         NOT VALID,

@@ -91,7 +91,7 @@ export function processSkills(refs: References): Processed {
 		name: "p5_skills",
 		references: { Skills: skillRefs },
 		data: [
-			arrayToSQL("dat", "Skills", '"Id", "Name", "StockId", "CategoryId", "TypeId", "IsMagical", "IsTraining", "DontList", "Root1Id", "Root2Id", "Description", "ToolTypeId", "ToolsDescription"', datSkills),
+			arrayToSQL("dat", "Skills", '"Id", "Name", "StockId", "CategoryId", "TypeId", "IsMagical", "IsTraining", "DontList", "Root1Id", "Root2Id", "Description", "ToolTypeId", "ToolDescription"', datSkills),
 			arrayToSQL("dat", "RulesetSkills", '"SkillId", "RulesetId"', datRulesetSkills),
 			...processSubskills(skillRefs).data
 		]

@@ -28,14 +28,14 @@ export function processResources(refs: References): Processed {
 			datResources.push(`(${i}, '${escapeTick(v.name)}', ${v.stockRef[0]}, ${resTypeRef[0]}, ${v.description ? `'${escapeTick(v.description)}'` : null}, ${v.cost === "various"})`);
 
 			if (v.cost !== "various") {
-				if (typeof v.cost === "number") datResourceCosts.push(`(${i}, ${v.cost}, null)`);
-				else v.cost.forEach(vcost => datResourceCosts.push(`(${i}, ${vcost[1]}, '${escapeTick(vcost[0])}')`));
+				if (typeof v.cost === "number") datResourceCosts.push(`(${datResourceCosts.length}, ${i}, ${v.cost}, null)`);
+				else v.cost.forEach(vcost => datResourceCosts.push(`(${datResourceCosts.length}, ${i}, ${vcost[1]}, '${escapeTick(vcost[0])}')`));
 			}
 
 			if (v.modifiers) {
 				v.modifiers.forEach(v => {
-					if (typeof v[1] === "number") datResourceModifiers.push(`(${i}, ${v[1]}, false, '${escapeTick(v[0])}')`);
-					else datResourceModifiers.push(`(${i}, ${parseInt(v[1].split("/")[0])}, true, '${escapeTick(v[0])}')`);
+					if (typeof v[1] === "number") datResourceModifiers.push(`(${datResourceModifiers.length}, ${i}, ${v[1]}, false, '${escapeTick(v[0])}')`);
+					else datResourceModifiers.push(`(${datResourceModifiers.length}, ${i}, ${parseInt(v[1].split("/")[0])}, true, '${escapeTick(v[0])}')`);
 				});
 			}
 
@@ -51,13 +51,22 @@ export function processResources(refs: References): Processed {
 				const ae1 = mgc.areaOfEffectMeasuredUnit ? findIndex("DistanceUnits", mgc.areaOfEffectMeasuredUnit, refs)[0] : null;
 				const aeMod = mgc.areaOfEffectModifier ? findIndex("UnitModifiers", mgc.areaOfEffectModifier, refs)[0] : null;
 
-				const [el1, el2, el3] = mgc.element.map(m => findIndex("SpellElementFacets", m, refs)[0]).map(v => v ? v : null);
-				const [im1, im2] = mgc.impetus.map(m => findIndex("SpellImpetusFacets", m, refs)[0]).map(v => v ? v : null);
+				const elements: (number | null)[] = [
+					findIndex("SpellElementFacets", mgc.element[0], refs)[0],
+					(mgc.element[1]) ? findIndex("SpellElementFacets", mgc.element[1], refs)[0] : null,
+					null
+				];
+
+				const impetus: (number | null)[] = [
+					findIndex("SpellImpetusFacets", mgc.impetus[0], refs)[0],
+					(mgc.impetus[1]) ? findIndex("SpellImpetusFacets", mgc.impetus[1], refs)[0] : null,
+					null
+				];
 
 				const ac = typeof mgc.actions === "number" ? mgc.actions : parseInt(mgc.actions.slice(1));
 				const acMult = typeof mgc.actions !== "number";
 
-				datResourceMagicDetails.push(`(${datResourceMagicDetails.length}, ${i}, ${or}, ${orMod}, ${du}, ${du1}, ${ae}, ${ae1}, ${aeMod}, ${el1 ? el1 : null}, ${el2 ? el2 : null}, ${el3 ? el3 : null}, ${im1 ? im1 : null}, ${im2 ? im2 : null}, ${ac}, ${acMult})`);
+				datResourceMagicDetails.push(`(${datResourceMagicDetails.length}, ${i}, ${or}, ${orMod}, ${du}, ${du1}, ${ae}, ${ae1}, ${aeMod}, ${elements[0]}, ${elements[1]}, ${elements[2]}, ${impetus[0]}, ${impetus[1]}, ${ac}, ${acMult})`);
 
 				const oc = mgc.obstacleCaret !== undefined ? mgc.obstacleCaret : false;
 
@@ -93,10 +102,10 @@ export function processResources(refs: References): Processed {
 		references: {},
 		data: [
 			arrayToSQL("dat", "Resources", '"Id", "Name", "StockId", "ResourceTypeId", "Description", "VariableCost"', datResources),
-			arrayToSQL("dat", "ResourceCosts", '"ResourceId", "Cost", "Description"', datResourceCosts),
-			arrayToSQL("dat", "ResourceModifiers", '"ResourceId", "Cost", "IsPerCost", "Description"', datResourceModifiers),
+			arrayToSQL("dat", "ResourceCosts", '"Id", "ResourceId", "Cost", "Description"', datResourceCosts),
+			arrayToSQL("dat", "ResourceModifiers", '"Id", "ResourceId", "Cost", "IsPerCost", "Description"', datResourceModifiers),
 			arrayToSQL("dat", "ResourceMagicDetails", '"Id", "ResourceId", "OriginId", "OriginModifierId", "DurationId", "DurationUnitId", "AreaOfEffectId", "AreaOfEffectUnitId", "AreaOfEffectModifierId", "Element1Id", "Element2Id", "Element3Id", "Impetus1Id", "Impetus2Id", "Actions", "ActionsMultiply"', datResourceMagicDetails),
-			arrayToSQL("dat", "ResourceMagicObstacles", '"ResourceId", "Obstacle", "ObstacleAbility1Id", "ObstacleAbility2Id", "ObstacleCaret", "Description"', datResourceMagicObstacles),
+			arrayToSQL("dat", "ResourceMagicObstacles", '"Id", "ResourceId", "Obstacle", "ObstacleAbility1Id", "ObstacleAbility2Id", "ObstacleCaret", "Description"', datResourceMagicObstacles),
 			arrayToSQL("dat", "RulesetResources", '"ResourceId", "RulesetId"', datRulesetResources)
 		]
 	};

@@ -1,4 +1,3 @@
-
 -- Table: dat.Stocks
 
 -- DROP TABLE IF EXISTS dat."Stocks";
@@ -32,7 +31,7 @@ CREATE TABLE dat."AgePools"
         REFERENCES dat."Stocks" ("Id") MATCH SIMPLE
         ON UPDATE RESTRICT
         ON DELETE RESTRICT
-        NOT VALID,
+        NOT VALID
 );
 
 ALTER TABLE IF EXISTS dat."AgePools"
@@ -80,7 +79,7 @@ CREATE TABLE dat."Settings"
         REFERENCES dat."Stocks" ("Id") MATCH SIMPLE
         ON UPDATE RESTRICT
         ON DELETE RESTRICT
-        NOT VALID,
+        NOT VALID
 );
 
 ALTER TABLE IF EXISTS dat."Settings"

@@ -16,21 +16,22 @@ export function processDuelOfWits(refs: References): Processed {
 		return `(${i}, '${v.name}', ${stp}, ${sp}, ${ef})`;
 	});
 
-	const datDoWActionTests: string[] =
-		DuelOfWitsActions
-			.filter(v => v.tests !== undefined)
-			.map(v => {
-				const tests = v.tests as (SkillPath | StatsAndAttributesList)[];
-				return tests.map((t) => { return { actionName: v.name, test: t }; });
-			})
-			.flat()
-			.map(v => {
-				const ref = findIndex("DuelOfWitsActions", v.actionName, { "DuelOfWitsActions": dowActionRefs });
-				const skillRef = v.test.includes("➞") ? findIndex("Skills", v.test, refs) : [null, null];
-				const abilityRef = !(v.test.includes("➞")) ? findIndex("Abilities", v.test, refs) : [null, null];
+	const datDoWActionTests: string[] = [];
 
-				return `(${ref[0]}, ${skillRef[0]}, ${abilityRef[0]})`;
-			});
+	DuelOfWitsActions
+		.filter(v => v.tests !== undefined)
+		.map(v => {
+			const tests = v.tests as (SkillPath | StatsAndAttributesList)[];
+			return tests.map((t) => { return { actionName: v.name, test: t }; });
+		})
+		.flat()
+		.map(v => {
+			const ref = findIndex("DuelOfWitsActions", v.actionName, { "DuelOfWitsActions": dowActionRefs });
+			const skillRef = v.test.includes("➞") ? findIndex("Skills", v.test, refs) : [null, null];
+			const abilityRef = !(v.test.includes("➞")) ? findIndex("Abilities", v.test, refs) : [null, null];
+
+			datDoWActionTests.push(`(${datDoWActionTests.length}, ${ref[0]}, ${skillRef[0]}, ${abilityRef[0]})`);
+		});
 
 	const datDoWActionResolutions: string[] =
 		DuelOfWitsActions
@@ -62,7 +63,7 @@ export function processDuelOfWits(refs: References): Processed {
 		references: { DuelOfWitsActions: dowActionRefs },
 		data: [
 			arrayToSQL("dat", "DuelOfWitsActions", '"Id", "Name", "SpeakingThePart", "Special", "Effect"', datDoWActions),
-			arrayToSQL("dat", "DuelOfWitsActionTests", '"ActionId", "SkillId", "AbilityId"', datDoWActionTests),
+			arrayToSQL("dat", "DuelOfWitsActionTests", '"Id", "ActionId", "SkillId", "AbilityId"', datDoWActionTests),
 			arrayToSQL("dat", "DuelOfWitsActionResolutions", '"Id", "ActionId", "OpposingActionId", "ResolutionTypeId", "IsAgainstSkill", "Obstacle", "SkillId", "AbilityId", "OpposingSkillId", "OpposingAbilityId", "OpposingModifier"', datDoWActionResolutions)
 		]
 	};

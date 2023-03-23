@@ -9,7 +9,7 @@ interface temp {
 	logicType: "AND" | "OR" | "NOT";
 	parentLogicType: "AND" | "OR";
 	items: RequirementItem[];
-	fulfilmentAmount: number;
+	fulfilmentAmount?: number;
 }
 
 export function processLifepaths(refs: References): Processed {
@@ -60,7 +60,7 @@ export function processLifepaths(refs: References): Processed {
 
 		const rqt = (lifepath.requirements.texts) ? `'${escapeTick(lifepath.requirements.texts.join(" "))}'` : null;
 
-		datLifepaths.push(`(${id}, '${escapeTick(n)}', ${stId}, ${seId}, ${b}, {${years}}, ${ep}, ${mp}, ${pp}, ${gsp}, ${lsp}, ${tp}, ${rp}, ${igsp}, false, ${irp}, false, false, ${hrpp}, ${rqt})`);
+		datLifepaths.push(`(${id}, '${escapeTick(n)}', ${stId}, ${seId}, ${b}, ARRAY [${years}], ${ep}, ${mp}, ${pp}, ${gsp}, ${lsp}, ${tp}, ${rp}, ${igsp}, false, ${irp}, false, false, ${hrpp}, ${rqt})`);
 
 		lifepath.allowed.forEach(ruleset => datRulesetLifepaths.push(`(${id}, '${ruleset}')`));
 
@@ -78,23 +78,23 @@ export function processLifepaths(refs: References): Processed {
 	});
 
 	const datLifepathCompanions: string[] = [];
-	const datLifepathCompanionSettingsLifepaths: string[] = [];
+	const datLifepathCompanionSettings: string[] = [];
 
 	lps.forEach((lifepath, lifepathId) => {
 		const settingRef = findIndex("Settings", `${lifepath.stock}➞${lifepath.setting}`, refs);
 		const seId = settingRef[0];
 
 		if (lifepath.name === "Country Wife") {
-			datLifepathCompanions.push(`(${lifepathId}, "Husband", true, 0.0, 0.5, 0.5)`);
-			datLifepathCompanionSettingsLifepaths.push(`(${lifepathId}, ${seId}, null)`);
+			datLifepathCompanions.push(`(${lifepathId}, 'Husband', true, 0.0, 0.5, 0.5)`);
+			datLifepathCompanionSettings.push(`(${lifepathId}, ${seId})`);
 		}
 		else if (lifepath.name === "Village Wife") {
-			datLifepathCompanions.push(`(${lifepathId}, "Husband", true, 0.5, 0.5, 0.5)`);
-			datLifepathCompanionSettingsLifepaths.push(`(${lifepathId}, ${seId}, null)`);
+			datLifepathCompanions.push(`(${lifepathId}, 'Husband', true, 0.5, 0.5, 0.5)`);
+			datLifepathCompanionSettings.push(`(${lifepathId}, ${seId})`);
 		}
 		else if (lifepath.name === "City Wife") {
-			datLifepathCompanions.push(`(${lifepathId}, "Husband", true, 0.0, 0.5, 0.25)`);
-			datLifepathCompanionSettingsLifepaths.push(`(${lifepathId}, ${seId}, null)`);
+			datLifepathCompanions.push(`(${lifepathId}, 'Husband', true, 0.0, 0.5, 0.25)`);
+			datLifepathCompanionSettings.push(`(${lifepathId}, ${seId})`);
 		}
 		else if (lifepath.name === "Bondsman") {
 			const setting0Ref = findIndex("Settings", "Human➞Noble", refs);
@@ -102,11 +102,11 @@ export function processLifepaths(refs: References): Processed {
 			const setting2Ref = findIndex("Settings", "Human➞Professional Soldier", refs);
 			const setting3Ref = findIndex("Settings", "Human➞Villager", refs);
 
-			datLifepathCompanions.push(`(${lifepathId}, "Owner", true, 0.0, 0.25, 0.0)`);
-			datLifepathCompanionSettingsLifepaths.push(`(${lifepathId}, ${setting0Ref[0]}, null)`);
-			datLifepathCompanionSettingsLifepaths.push(`(${lifepathId}, ${setting1Ref[0]}, null)`);
-			datLifepathCompanionSettingsLifepaths.push(`(${lifepathId}, ${setting2Ref[0]}, null)`);
-			datLifepathCompanionSettingsLifepaths.push(`(${lifepathId}, ${setting3Ref[0]}, null)`);
+			datLifepathCompanions.push(`(${lifepathId}, 'Owner', true, 0.0, 0.25, 0.0)`);
+			datLifepathCompanionSettings.push(`(${lifepathId}, ${setting0Ref[0]})`);
+			datLifepathCompanionSettings.push(`(${lifepathId}, ${setting1Ref[0]})`);
+			datLifepathCompanionSettings.push(`(${lifepathId}, ${setting2Ref[0]})`);
+			datLifepathCompanionSettings.push(`(${lifepathId}, ${setting3Ref[0]})`);
 		}
 	});
 
@@ -185,8 +185,8 @@ export function processLifepaths(refs: References): Processed {
 				const lifepathRef = findIndex("Lifepaths", req.items[0], { Lifepaths: lifepathRefs });
 				const compLifepathRef = findIndex("Lifepaths", req.items[1], { Lifepaths: lifepathRefs });
 
-				datLifepathRequirementItems.push(`(${i}, ${ref[0]}, false, null, null, null, ${lifepathRef[0]}, null, null, null)`);
-				datLifepathRequirementItems.push(`(${i}, ${ref[0]}, true, null, null, null, ${compLifepathRef[0]}, null, null, null)`);
+				datLifepathRequirementItems.push(`(${datLifepathRequirementItems.length}, ${i}, ${ref[0]}, false, null, null, null, ${lifepathRef[0]}, null, null, null)`);
+				datLifepathRequirementItems.push(`(${datLifepathRequirementItems.length}, ${i}, ${ref[0]}, true, null, null, null, ${compLifepathRef[0]}, null, null, null)`);
 			}
 			else {
 				const mapper: { [key: string]: string; } = {
@@ -243,14 +243,14 @@ export function processLifepaths(refs: References): Processed {
 					if (ref[1] === "TRAIT") { r.traitId = findIndex("Traits", item.split("➞").slice(-2).join("➞"), refs)[0]; }
 					if (ref[1] === "ATTRIBUTE") { r.attributeId = griefRef[0]; }
 
-					datLifepathRequirementItems.push(`(${r.reqId}, ${r.reqTypeId}, ${r.forComp}, ${r.min}, ${r.max}, ${r.settingId}, ${r.lifepathId}, ${r.skillId}, ${r.traitId}, ${r.attributeId})`);
+					datLifepathRequirementItems.push(`(${datLifepathRequirementItems.length}, ${r.reqId}, ${r.reqTypeId}, ${r.forComp}, ${r.min}, ${r.max}, ${r.settingId}, ${r.lifepathId}, ${r.skillId}, ${r.traitId}, ${r.attributeId})`);
 				});
 			}
 
 			const lpId = req.lifepathRef[0];
 			const logicId = findIndex("LogicTypes", req.logicType, refs)[0];
 			const mustFulfill = req.parentLogicType === "AND";
-			const fulfilmentAmount = req.fulfilmentAmount;
+			const fulfilmentAmount = req.fulfilmentAmount ? req.fulfilmentAmount : 1;
 			return `(${i}, ${lpId}, ${logicId}, ${mustFulfill}, ${fulfilmentAmount})`;
 		});
 
@@ -266,10 +266,10 @@ export function processLifepaths(refs: References): Processed {
 			arrayToSQL("dat", "LifepathTraits", '"LifepathId", "TraitId"', datLifepathTraits),
 
 			arrayToSQL("dat", "LifepathCompanions", '"LifepathId", "CompanionName", "GivesSkills", "GSPMultiplier", "LSPMultiplier", "RPMultiplier"', datLifepathCompanions),
-			arrayToSQL("dat", "LifepathCompanionSettingsLifepaths", '"LifepathId", "CompanionSettingId", "CompanionLifepathId"', datLifepathCompanionSettingsLifepaths),
+			arrayToSQL("dat", "LifepathCompanionSettings", '"LifepathId", "CompanionSettingId"', datLifepathCompanionSettings),
 
 			arrayToSQL("dat", "LifepathRequirements", '"Id", "LifepathId", "LogicTypeId", "MustFulfill", "FulfillmentAmount"', datLifepathRequirements),
-			arrayToSQL("dat", "LifepathRequirementItems", '"RequirementId", "RequirementTypeId", "ForCompanion", "Min", "Max", "SettingId", "LifepathId", "SkillId", "TraitId", "AttributeId"', datLifepathRequirementItems)
+			arrayToSQL("dat", "LifepathRequirementItems", '"Id", "RequirementId", "RequirementTypeId", "ForCompanion", "Min", "Max", "SettingId", "LifepathId", "SkillId", "TraitId", "AttributeId"', datLifepathRequirementItems)
 		]
 	};
 }

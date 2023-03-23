@@ -21,6 +21,7 @@ export function processFight(refs: References): Processed {
 
 			const groupRef = findIndex("FightActionGroups", v.group, { "FightActionGroups": fightActionGroupRefs });
 
+			const actionCost = v.actionCost === "variable" ? null : v.actionCost;
 			const te = v.testExtra ? `'${escapeTick(v.testExtra)}'` : null;
 			const re = v.restrictions ? `'${escapeTick(v.restrictions)}'` : null;
 			const ef = v.effect ? `'${escapeTick(v.effect)}'` : null;
@@ -28,24 +29,25 @@ export function processFight(refs: References): Processed {
 
 			const cano = v.countsAsNoAction ? v.countsAsNoAction : false;
 
-			return `(${i}, '${v.name}', ${groupRef[0]}, ${te}, ${re}, ${ef}, ${sp}, ${cano})`;
+			return `(${i}, '${v.name}', ${groupRef[0]}, ${actionCost}, ${te}, ${re}, ${ef}, ${sp}, ${cano})`;
 		});
 
-	const datFightActionTests: string[] =
-		FightActions
-			.filter(v => v.tests !== undefined)
-			.map(v => {
-				const tests = v.tests as (SkillPath | StatsAndAttributesList)[];
-				return tests.map((t) => { return { actionName: v.name, test: t }; });
-			})
-			.flat()
-			.map(v => {
-				const ref = findIndex("FightActions", v.actionName, { "FightActions": fightActionRefs });
-				const skillRef = v.test.includes("➞") ? findIndex("Skills", v.test, refs) : [null, null];
-				const abilityRef = !(v.test.includes("➞")) ? findIndex("Abilities", v.test, refs) : [null, null];
+	const datFightActionTests: string[] = [];
 
-				return `(${ref[0]}, ${skillRef[0]}, ${abilityRef[0]})`;
-			});
+	FightActions
+		.filter(v => v.tests !== undefined)
+		.map(v => {
+			const tests = v.tests as (SkillPath | StatsAndAttributesList)[];
+			return tests.map((t) => { return { actionName: v.name, test: t }; });
+		})
+		.flat()
+		.map(v => {
+			const ref = findIndex("FightActions", v.actionName, { "FightActions": fightActionRefs });
+			const skillRef = v.test.includes("➞") ? findIndex("Skills", v.test, refs) : [null, null];
+			const abilityRef = !(v.test.includes("➞")) ? findIndex("Abilities", v.test, refs) : [null, null];
+
+			datFightActionTests.push(`(${datFightActionTests.length}, ${ref[0]}, ${skillRef[0]}, ${abilityRef[0]})`);
+		});
 
 	const datFightActionResolutions: string[] =
 		FightActions
@@ -80,7 +82,7 @@ export function processFight(refs: References): Processed {
 		data: [
 			arrayToSQL("dat", "FightActionGroups", '"Id", "Name"', datFightActionGroups),
 			arrayToSQL("dat", "FightActions", '"Id", "Name", "GroupId", "ActionCost", "TestExtra", "Restrictions", "Effect", "Special", "CountsAsNoAction"', datFightActions),
-			arrayToSQL("dat", "FightActionTests", '"ActionId", "SkillId", "AbilityId"', datFightActionTests),
+			arrayToSQL("dat", "FightActionTests", '"Id", "ActionId", "SkillId", "AbilityId"', datFightActionTests),
 			arrayToSQL("dat", "FightActionResolutions", '"Id", "ActionId", "OpposingActionId", "ResolutionTypeId", "IsAgainstSkill", "Obstacle", "SkillId", "AbilityId", "OpposingSkillId", "OpposingAbilityId", "OpposingModifier"', datFightActionResolutions)
 		]
 	};

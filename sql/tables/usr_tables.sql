@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS usr."UserRoles"
     "Id" serial NOT NULL,
     "Name" character varying(63) COLLATE pg_catalog."default",
     PRIMARY KEY ("Id")
-)
+);
 
 TABLESPACE pg_default;
 
@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS usr."Users"
 		ON UPDATE RESTRICT
 		ON DELETE RESTRICT
         NOT VALID
-)
+);
 
 TABLESPACE pg_default;
 
@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS usr."UserSessions"
     sess json NOT NULL,
     expire timestamp(6) without time zone NOT NULL,
     CONSTRAINT session_pkey PRIMARY KEY (sid)
-)
+);
 
 TABLESPACE pg_default;
 

@@ -4,8 +4,9 @@
 
 CREATE TABLE dat."SpellFacetTypes"
 (
+	"Id" serial NOT NULL,
 	"Name" character varying(255) NOT NULL,
-    PRIMARY KEY ("Name")
+    PRIMARY KEY ("Id")
 );
 
 ALTER TABLE IF EXISTS dat."SpellFacetTypes"
@@ -22,7 +23,7 @@ CREATE TABLE dat."SpellOriginFacets"
 	"Name" character varying(255) NOT NULL,
 	"Obstacle" integer NOT NULL,
 	"Actions" integer NOT NULL,
-	"Resource" integer NOT NULL
+	"Resource" integer NOT NULL,
     PRIMARY KEY ("Id")
 );
 
@@ -40,7 +41,7 @@ CREATE TABLE dat."SpellDurationFacets"
 	"Name" character varying(255) NOT NULL,
 	"Obstacle" integer NOT NULL,
 	"Actions" integer NOT NULL,
-	"Resource" integer NOT NULL
+	"Resource" integer NOT NULL,
     PRIMARY KEY ("Id")
 );
 
@@ -58,13 +59,12 @@ CREATE TABLE dat."SpellAreaOfEffectFacets"
 	"Name" character varying(255) NOT NULL,
 	"Obstacle" integer NOT NULL,
 	"Actions" integer NOT NULL,
-	"Resource" integer NOT NULL
+	"Resource" integer NOT NULL,
     PRIMARY KEY ("Id")
 );
 
 ALTER TABLE IF EXISTS dat."SpellAreaOfEffectFacets"
     OWNER to apiuser;
-
 
 
 -- Table: dat.SpellElementFacets
@@ -77,13 +77,12 @@ CREATE TABLE dat."SpellElementFacets"
 	"Name" character varying(255) NOT NULL,
 	"Obstacle" integer NOT NULL,
 	"Actions" integer NOT NULL,
-	"Resource" integer NOT NULL
+	"Resource" integer NOT NULL,
     PRIMARY KEY ("Id")
 );
 
 ALTER TABLE IF EXISTS dat."SpellElementFacets"
     OWNER to apiuser;
-
 
 
 -- Table: dat.SpellImpetusFacets
@@ -96,7 +95,7 @@ CREATE TABLE dat."SpellImpetusFacets"
 	"Name" character varying(255) NOT NULL,
 	"Obstacle" integer NOT NULL,
 	"Actions" integer NOT NULL,
-	"Resource" integer NOT NULL
+	"Resource" integer NOT NULL,
     PRIMARY KEY ("Id")
 );
 

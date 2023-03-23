@@ -33,10 +33,11 @@ ALTER TABLE IF EXISTS dat."Resources"
 
 CREATE TABLE dat."ResourceCosts"
 (
+	"Id" int NOT NULL,
 	"ResourceId" int NOT NULL,
 	"Cost" int NOT NULL,
-	"Description" character varying(255)
-    PRIMARY KEY ("ResourceId", "Cost"),
+	"Description" character varying(255),
+    PRIMARY KEY ("Id"),
     FOREIGN KEY ("ResourceId")
         REFERENCES dat."Resources" ("Id") MATCH SIMPLE
         ON UPDATE RESTRICT
@@ -54,11 +55,12 @@ ALTER TABLE IF EXISTS dat."ResourceCosts"
 
 CREATE TABLE dat."ResourceModifiers"
 (
+	"Id" int NOT NULL,
 	"ResourceId" int NOT NULL,
 	"Cost" int NOT NULL,
 	"IsPerCost" boolean NOT NULL,
-	"Description" character varying(255)
-    PRIMARY KEY ("ResourceId", "Cost"),
+	"Description" character varying(255),
+    PRIMARY KEY ("Id"),
     FOREIGN KEY ("ResourceId")
         REFERENCES dat."Resources" ("Id") MATCH SIMPLE
         ON UPDATE RESTRICT
@@ -80,21 +82,21 @@ CREATE TABLE dat."ResourceMagicDetails"
 	"ResourceId" int NOT NULL,
 
 	"OriginId" int NOT NULL,
-	"OriginModifierId" int NOT NULL,
+	"OriginModifierId" int,
 
 	"DurationId" int NOT NULL,
-	"DurationUnitId" int NOT NULL,
+	"DurationUnitId" int,
 
 	"AreaOfEffectId" int NOT NULL,
-	"AreaOfEffectUnitId" int NOT NULL,
-	"AreaOfEffectModifierId" int NOT NULL,
+	"AreaOfEffectUnitId" int,
+	"AreaOfEffectModifierId" int,
 
 	"Element1Id" int NOT NULL,
-	"Element2Id" int NOT NULL,
-	"Element3Id" int NOT NULL,
+	"Element2Id" int,
+	"Element3Id" int,
 
 	"Impetus1Id" int NOT NULL,
-	"Impetus2Id" int NOT NULL,
+	"Impetus2Id" int,
 
 	"Actions" int NOT NULL,
 	"ActionsMultiply" boolean NOT NULL,
@@ -179,11 +181,11 @@ CREATE TABLE dat."ResourceMagicObstacles"
 (
 	"Id" serial NOT NULL,
 	"ResourceId" int NOT NULL,
-	"Obstacle" int NOT NULL,
-	"ObstacleAbility1Id" int NOT NULL,
+	"Obstacle" int,
+	"ObstacleAbility1Id" int,
 	"ObstacleAbility2Id" int,
 	"ObstacleCaret" boolean NOT NULL,
-	"Description" character varying(255)
+	"Description" character varying(255),
     PRIMARY KEY ("Id"),
     FOREIGN KEY ("ResourceId")
         REFERENCES dat."Resources" ("Id") MATCH SIMPLE

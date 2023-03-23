@@ -22,12 +22,12 @@ CREATE TABLE dat."FightActions"
 	"Id" serial NOT NULL,
 	"Name" character varying(255) NOT NULL,
 	"GroupId" integer NOT NULL,
-	"ActionCost" integer NOT NULL,
+	"ActionCost" integer,
 	"TestExtra" character varying(325124),
 	"Restrictions" character varying(325124),
 	"Effect" character varying(325124),
 	"Special" character varying(325124),
-	"CountsAsNoAction" boolean NOT NULL
+	"CountsAsNoAction" boolean NOT NULL,
     PRIMARY KEY ("Id"),
     FOREIGN KEY ("GroupId")
         REFERENCES dat."FightActionGroups" ("Id") MATCH SIMPLE
@@ -46,10 +46,11 @@ ALTER TABLE IF EXISTS dat."FightActions"
 
 CREATE TABLE dat."FightActionTests"
 (
+	"Id" int NOT NULL,
 	"ActionId" int NOT NULL,
-	"SkillId" int NOT NULL,
-	"AbilityId" int NOT NULL,
-    PRIMARY KEY ("ActionId", "SkillId", "AbilityId"),
+	"SkillId" int,
+	"AbilityId" int,
+    PRIMARY KEY ("Id"),
     FOREIGN KEY ("ActionId")
         REFERENCES dat."FightActions" ("Id") MATCH SIMPLE
         ON UPDATE RESTRICT
@@ -101,7 +102,7 @@ CREATE TABLE dat."FightActionResolutions"
         ON DELETE RESTRICT
         NOT VALID,
     FOREIGN KEY ("ResolutionTypeId")
-        REFERENCES dat."ResolutionTypes" ("Id") MATCH SIMPLE
+        REFERENCES dat."ActionResolutionTypes" ("Id") MATCH SIMPLE
         ON UPDATE RESTRICT
         ON DELETE RESTRICT
         NOT VALID,

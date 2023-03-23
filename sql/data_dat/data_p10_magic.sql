@@ -1,5 +1,5 @@
 INSERT INTO dat."SpellFacetTypes"
-	("Name")
+	("Id", "Name")
 VALUES
 	(0, 'Origin'),
 	(1, 'Duration'),

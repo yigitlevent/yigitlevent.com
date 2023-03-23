@@ -1,5 +1,5 @@
 INSERT INTO dat."Skills"
-	("Id", "Name", "StockId", "CategoryId", "TypeId", "IsMagical", "IsTraining", "DontList", "Root1Id", "Root2Id", "Description", "ToolTypeId", "ToolsDescription")
+	("Id", "Name", "StockId", "CategoryId", "TypeId", "IsMagical", "IsTraining", "DontList", "Root1Id", "Root2Id", "Description", "ToolTypeId", "ToolDescription")
 VALUES
 	(0, 'Any Skill', null, 0, 0, false, false, true, 1, null, null, 0, null),
 	(1, 'Accounting', null, 0, 0, false, false, false, 1, null, 'Accountants keep track of expenses, income, stocks and taxes. This skill is primarily used to recover taxed Resources.', 1, null),

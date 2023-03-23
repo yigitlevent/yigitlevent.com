@@ -9648,8 +9648,7 @@ export const Human: Stock = {
 					leads: [
 						"Human➞Villager",
 						"Human➞Outcast",
-						"Human➞City Dweller",
-						"Human➞Outcast"
+						"Human➞City Dweller"
 					],
 					mentalPool: 1,
 					name: "Itinerant Priest",

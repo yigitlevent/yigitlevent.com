@@ -140,7 +140,7 @@ CREATE TABLE dat."LifepathCompanions"
         REFERENCES dat."Lifepaths" ("Id") MATCH SIMPLE
         ON UPDATE RESTRICT
         ON DELETE RESTRICT
-        NOT VALID,
+        NOT VALID
 );
 
 ALTER TABLE IF EXISTS dat."LifepathCompanions"
@@ -154,7 +154,7 @@ ALTER TABLE IF EXISTS dat."LifepathCompanions"
 CREATE TABLE dat."LifepathCompanionSettings"
 (
 	"LifepathId" int NOT NULL,
-	"CompanionSettingId" int NOT NULL,
+	"CompanionSettingId" int
     PRIMARY KEY ("LifepathId", "CompanionSettingId"),
     FOREIGN KEY ("LifepathId")
         REFERENCES dat."Lifepaths" ("Id") MATCH SIMPLE
@@ -203,7 +203,7 @@ ALTER TABLE IF EXISTS dat."RulesetLifepaths"
 
 CREATE TABLE dat."LifepathRequirements"
 (
-	"Id" serial NOT NULL
+	"Id" serial NOT NULL,
 	"LifepathId" int NOT NULL,
 	"LogicTypeId" int NOT NULL,
 	"MustFulfill" boolean NOT NULL,
@@ -231,6 +231,7 @@ ALTER TABLE IF EXISTS dat."LifepathRequirements"
 
 CREATE TABLE dat."LifepathRequirementItems"
 (
+	"Id" serial NOT NULL,
 	"RequirementId" int NOT NULL,
 	"RequirementTypeId" int NOT NULL,
 	"ForCompanion" boolean NOT NULL,
@@ -241,14 +242,14 @@ CREATE TABLE dat."LifepathRequirementItems"
 	"SkillId" int,
 	"TraitId" int,
 	"AttributeId" int,
-    PRIMARY KEY ("RequirementId", "RequirementTypeId"),
+    PRIMARY KEY ("Id"),
     FOREIGN KEY ("RequirementId")
         REFERENCES dat."LifepathRequirements" ("Id") MATCH SIMPLE
         ON UPDATE RESTRICT
         ON DELETE RESTRICT
         NOT VALID,
     FOREIGN KEY ("RequirementTypeId")
-        REFERENCES dat."RequirementTypes" ("Id") MATCH SIMPLE
+        REFERENCES dat."RequirementItemTypes" ("Id") MATCH SIMPLE
         ON UPDATE RESTRICT
         ON DELETE RESTRICT
         NOT VALID,

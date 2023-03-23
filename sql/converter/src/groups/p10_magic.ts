@@ -93,7 +93,7 @@ export function processMagic(): Processed {
 			SpellImpetusFacets: spellImpetusFacetsRef
 		},
 		data: [
-			arrayToSQL("dat", "SpellFacetTypes", '"Name"', datSpellFacetTypes),
+			arrayToSQL("dat", "SpellFacetTypes", '"Id", "Name"', datSpellFacetTypes),
 			arrayToSQL("dat", "SpellOriginFacets", '"Id", "Name", "Obstacle", "Actions", "Resource"', datSpellOriginFacets),
 			arrayToSQL("dat", "SpellDurationFacets", '"Id", "Name", "Obstacle", "Actions", "Resource"', datSpellDurationFacets),
 			arrayToSQL("dat", "SpellAreaOfEffectFacets", '"Id", "Name", "Obstacle", "Actions", "Resource"', datSpellAreaOfEffectFacets),

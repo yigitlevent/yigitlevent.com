@@ -1,11 +1,3 @@
--- SCHEMA: dat
-
--- DROP SCHEMA IF EXISTS dat;
-
-CREATE SCHEMA IF NOT EXISTS dat
-    AUTHORIZATION apiuser;
-
-
 -- Table: dat.Rulesets
 
 -- DROP TABLE IF EXISTS dat."Rulesets";
@@ -40,7 +32,7 @@ CREATE TABLE dat."RulesetExpansions"
 	"RulesetId" character varying(15) NOT NULL,
 	"ExpansionId" character varying(15) NOT NULL,
     PRIMARY KEY ("RulesetId", "ExpansionId"),
-    FOREIGN KEY ("ParentRulesetId")
+    FOREIGN KEY ("RulesetId")
         REFERENCES dat."Rulesets" ("Id") MATCH SIMPLE
         ON UPDATE RESTRICT
         ON DELETE RESTRICT

@@ -1,3 +1,11 @@
+-- SCHEMA: dat
+
+-- DROP SCHEMA IF EXISTS dat;
+
+CREATE SCHEMA IF NOT EXISTS dat
+    AUTHORIZATION apiuser;
+	
+	
 -- Table: dat.LogicTypes
 
 -- DROP TABLE IF EXISTS dat."LogicTypes";

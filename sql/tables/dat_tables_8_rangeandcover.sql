@@ -73,7 +73,7 @@ CREATE TABLE dat."RangeAndCoverActionResolutions"
         ON DELETE RESTRICT
         NOT VALID,
     FOREIGN KEY ("ResolutionTypeId")
-        REFERENCES dat."ResolutionTypes" ("Id") MATCH SIMPLE
+        REFERENCES dat."ActionResolutionTypes" ("Id") MATCH SIMPLE
         ON UPDATE RESTRICT
         ON DELETE RESTRICT
         NOT VALID,

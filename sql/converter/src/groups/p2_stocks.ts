@@ -21,8 +21,8 @@ export function processStocks(): Processed {
 		stockRefs.push([stockIndex, stock.name]);
 		datStocks.push(`(${stockIndex}, '${stock.name}', '${stock.namePlural}', ${stock.stride})`);
 
-		stock.agePool.forEach((age, ageIndex) => {
-			datAgePools.push(`(${ageIndex}, ${stockIndex}, ${age.min}, ${age.m}, ${age.p})`);
+		stock.agePool.forEach((age) => {
+			datAgePools.push(`(${datAgePools.length}, ${stockIndex}, ${age.min}, ${age.m}, ${age.p})`);
 		});
 
 		stock.allowed.forEach(rulesetId => {
@@ -34,7 +34,7 @@ export function processStocks(): Processed {
 
 	allSettings.forEach((setting, settingIndex) => {
 		const stock = Stocks[setting.stock];
-		const stockIndex = findIndex("Stocks", stock.name, { Stocks: stockRefs });
+		const stockIndex = findIndex("Stocks", stock.name, { Stocks: stockRefs })[0];
 
 		settingRefs.push([settingIndex, `${stock.name}➞${setting.name}`]);
 		datSettings.push(`(${settingIndex}, '${setting.name}', '${setting.short}', ${stockIndex}, ${setting.type === "Subsetting"})`);
