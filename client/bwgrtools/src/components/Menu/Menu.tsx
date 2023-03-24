@@ -12,7 +12,6 @@ import { Signup } from "./Signup/Signup";
 import { Tools } from "./Drawers/Tools";
 import { Checklist } from "./Drawers/Checklist";
 import { RulesetSelector } from "./Drawers/RulesetSelector";
-import { MyThings } from "./Drawers/MyThings";
 
 
 export function Menu() {
@@ -41,7 +40,7 @@ export function Menu() {
 			<Tools expanded={drawer === "Tools"} />
 			<RulesetSelector expanded={drawer === "Datasets"} />
 			<Checklist expanded={drawer === "Checklist"} />
-			<MyThings expanded={drawer === "My Things"} />
+			{/*{<MyThings expanded={drawer === "My Things"} />}*/}
 		</Fragment>
 	);
 }
