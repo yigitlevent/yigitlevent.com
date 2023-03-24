@@ -1,4 +1,4 @@
-import { CoreRulesets, ExpansionRulesets } from "../../../../client/bwgrtools/src/data/rulesets";
+import { CoreRulesets, ExpansionRulesets } from "../../../client/bwgrtools/src/data/rulesets";
 import { arrayToSQL } from "../util/arrayToSql";
 
 

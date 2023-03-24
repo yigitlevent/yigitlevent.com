@@ -11,6 +11,6 @@
 	"include": [
 		"src",
 		"vite.config.ts",
-		"../../@types"
+		"../@types"
 	]
 }

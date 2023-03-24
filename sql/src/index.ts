@@ -41,7 +41,8 @@ process.forEach(func => {
 });
 
 // OUTPUT
-const outputPath = "../data_dat";
+const outputPath = "./queries/data_dat";
+
 if (fs.existsSync(outputPath)) fs.rmSync(outputPath, { recursive: true });
 fs.mkdirSync(outputPath);
 

@@ -1,4 +1,4 @@
-import { DuelOfWitsActions } from "../../../../client/bwgrtools/src/data/duelOfWits";
+import { DuelOfWitsActions } from "../../../client/bwgrtools/src/data/duelOfWits";
 import { arrayToSQL } from "../util/arrayToSql";
 import { escapeTick } from "../util/escapeTick";
 import { findIndex } from "../util/findRef";

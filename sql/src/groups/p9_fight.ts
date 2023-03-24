@@ -1,4 +1,4 @@
-import { FightActions } from "../../../../client/bwgrtools/src/data/fight";
+import { FightActions } from "../../../client/bwgrtools/src/data/fight";
 import { arrayToSQL } from "../util/arrayToSql";
 import { escapeTick } from "../util/escapeTick";
 import { findIndex } from "../util/findRef";

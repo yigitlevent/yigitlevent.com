@@ -1,4 +1,4 @@
-import { TraitCategories } from "../../../../client/bwgrtools/src/data/traits/_traits";
+import { TraitCategories } from "../../../client/bwgrtools/src/data/traits/_traits";
 import { arrayToSQL } from "../util/arrayToSql";
 import { escapeTick } from "../util/escapeTick";
 import { findIndex } from "../util/findRef";

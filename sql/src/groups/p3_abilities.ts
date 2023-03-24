@@ -1,8 +1,8 @@
-import { Stats } from "../../../../client/bwgrtools/src/data/stats";
-import { Attributes } from "../../../../client/bwgrtools/src/data/attributes";
+import { Stats } from "../../../client/bwgrtools/src/data/stats";
+import { Attributes } from "../../../client/bwgrtools/src/data/attributes";
+import { PracticeTable } from "../../../client/bwgrtools/src/data/tables";
 import { arrayToSQL } from "../util/arrayToSql";
 import { findIndex } from "../util/findRef";
-import { PracticeTable } from "../../../../client/bwgrtools/src/data/tables";
 
 
 export function processAbilities(refs: References): Processed {
