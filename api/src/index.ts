@@ -13,7 +13,7 @@ import { UserAuth, UserSignUp, UserSignIn, UserSignOut, CheckAuth } from "./rout
 export const App = express();
 export const PgPool = new Pg.Pool(PgConfig);
 
-const SessionStore = new (pgsimple(session))({ pool: PgPool, schemaName: "dbo", tableName: "UserSessions" });
+const SessionStore = new (pgsimple(session))({ pool: PgPool, schemaName: "usr", tableName: "UserSessions" });
 
 App.use(express.json());
 App.use(express.urlencoded({ extended: true }));
