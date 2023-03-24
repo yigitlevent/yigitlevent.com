@@ -1,3 +1,10 @@
+interface UserDBO {
+	Id: string;
+	Username: string;
+	Email: string;
+	Password: string;
+}
+
 interface SkillsDBO {
 	Rulesets: string[];
 	Id: number;

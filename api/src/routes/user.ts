@@ -13,6 +13,7 @@ async function CleanSessions() {
 
 export function CheckAuth(request: Request, response: Response, next: NextFunction) {
 	if (request.sessionID && request.session.user) return next();
+	// TODO: Figure out what to do here
 	return response.sendStatus(401);
 }
 
@@ -24,7 +25,7 @@ export async function UserAuth(request: Request, response: Response) {
 export async function UserSignUp(request: Request, response: Response) {
 	const { username, email, password } = request.body;
 
-	if (username == null || email == null || password == null) return response.sendStatus(403); 
+	if (username == null || email == null || password == null) return response.sendStatus(403);
 
 	try {
 		const hashedPassword = bcrypt.hashSync(request.body.password, 10);
@@ -62,20 +63,32 @@ export async function UserSignIn(request: Request, response: Response) {
 			from usr."Users" 
 			where "Email" = '${email}';`;
 
-		const data = await PgPool.query(query);
+		const data = await PgPool.query<UserDBO>(query);
+
+		console.log("0");
+		console.log({ data });
 
 		if (data.rows.length === 0) { return response.sendStatus(403); }
-		const user: User = data.rows[0];
+		const user = data.rows[0];
 
-		const matches = bcrypt.compareSync(password, data.rows[0].Password);
+		console.log("1");
+		console.log({ user });
+
+		const matches = bcrypt.compareSync(password, user.Password);
 		if (!matches) { return response.sendStatus(403); }
 
-		request.session.user = { id: user.id, username: user.username, email: user.email };
+		console.log("2");
+		console.log({ matches });
+
+		request.session.user = { id: user.Id, username: user.Username, email: user.Email };
+
+		console.log("3");
+		console.log(request.session.user);
 
 		const updateQuery =
 			`UPDATE usr."Users" 
 				SET "LastSigninAt" = (to_timestamp(${Date.now()} / 1000.0))
-				WHERE "Id" = '${user.id}';`;
+				WHERE "Id" = '${user.Id}';`;
 
 		PgPool.query(updateQuery);
 
