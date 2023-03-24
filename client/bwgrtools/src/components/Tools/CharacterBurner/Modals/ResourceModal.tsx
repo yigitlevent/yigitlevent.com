@@ -129,7 +129,7 @@ export function ResourceModal({ openRe, openReModal }: { openRe: boolean; openRe
 
 	return (
 		<Modal open={openRe} onClose={() => openReModal(false)}>
-			<Paper sx={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", maxWidth: "800px", width: "100%", maxHeight: "100vh", padding: "0 24px 24px", border: "none", overflow: "auto" }}>
+			<Paper sx={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", maxWidth: "800px", width: "100%", maxHeight: "100svh", padding: "0 24px 24px", border: "none", overflow: "auto" }}>
 				<GenericGrid columns={6} spacing={[1, 2]} center="v">
 					<Grid item xs={6}>
 						<FormControl fullWidth variant="standard">
