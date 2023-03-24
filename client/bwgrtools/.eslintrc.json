@@ -30,7 +30,7 @@
 		"camelcase": "off",
 		"no-mixed-spaces-and-tabs": "error",
 		"linebreak-style": "off",
-		"quotes": ["error", "double"],
+		"quotes": ["error", "double", { "avoidEscape": true }],
 		"semi": ["error", "always"],
 		"no-unused-vars": "off",
 		"indent": "off",
