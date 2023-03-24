@@ -4,10 +4,10 @@ import cors from "cors";
 import Pg from "pg";
 import pgsimple from "connect-pg-simple";
 
-import { PORT } from "./constants.js";
-import { CorsConfig, PgConfig, SessionConfig } from "./configs.js";
-import { UserAuth, UserSignUp, UserSignIn, UserSignOut, CheckAuth } from "./routes/user.js";
-//import { CampaignInvite, CreateCampaign, DeleteCampaign, EditCampaign, GetCampaign, GetCampaigns } from "./routes/campaign.js";
+import { PORT } from "./constants";
+import { CorsConfig, PgConfig, SessionConfig } from "./configs";
+import { UserAuth, UserSignUp, UserSignIn, UserSignOut, CheckAuth } from "./routes/user";
+//import { CampaignInvite, CreateCampaign, DeleteCampaign, EditCampaign, GetCampaign, GetCampaigns } from "./routes/campaign";
 
 
 export const App = express();

@@ -24,10 +24,6 @@ export function MakeName(name: string, index: number, extension?: [singular: str
 		const categoryStr = split[index - 1].toLocaleLowerCase();
 		const extensionStr = (extension) ? (numberStr > 1) ? ` ${extension[1]}` : ` ${extension[0]}` : "";
 
-		console.log(numberStr);
-		console.log(categoryStr);
-		console.log(extensionStr);
-
 		if (split[index].includes("*-")) {
 			return `${numberStr} ${categoryStr}-type${extensionStr}`;
 		}

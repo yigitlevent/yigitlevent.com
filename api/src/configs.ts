@@ -2,7 +2,7 @@ import { CorsOptions } from "cors";
 import { PoolConfig } from "pg";
 import { SessionOptions } from "express-session";
 
-import { SECRET } from "./constants.js";
+import { SECRET } from "./constants";
 
 
 

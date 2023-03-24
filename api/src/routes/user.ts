@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import bcrypt from "bcrypt";
 
-import { PgPool } from "../index.js";
+import { PgPool } from "../index";
 
 
 async function CleanSessions() {
@@ -12,23 +12,19 @@ async function CleanSessions() {
 }
 
 export function CheckAuth(request: Request, response: Response, next: NextFunction) {
-	if (request.sessionID && request.session.user) {
-		return next();
-	}
+	if (request.sessionID && request.session.user) return next();
 	return response.sendStatus(401);
 }
 
 export async function UserAuth(request: Request, response: Response) {
 	CleanSessions();
-
-	console.log(request.session.user);
 	return response.json({ user: request.session.user });
 }
 
 export async function UserSignUp(request: Request, response: Response) {
 	const { username, email, password } = request.body;
 
-	if (username == null || email == null || password == null) { return response.sendStatus(403); }
+	if (username == null || email == null || password == null) return response.sendStatus(403); 
 
 	try {
 		const hashedPassword = bcrypt.hashSync(request.body.password, 10);
@@ -36,7 +32,7 @@ export async function UserSignUp(request: Request, response: Response) {
 		const query =
 			`insert into usr."Users"("Username", "Email", "Password") 
 			values ($1, $2, $3) 
-			RETURNING *;`;
+			returning *;`;
 
 		const data = await PgPool.query(query, [username, email, hashedPassword]);
 

@@ -33,7 +33,6 @@ export function useForm({ fields }: { fields: Field[]; }) {
 
 	useEffect(() => {
 		if (components.length === 0) {
-			console.log("should be called only once");
 			setComponents(fields.map(createComponent));
 		}
 	}, [components.length, createComponent, fields]);
