@@ -81,6 +81,7 @@ CREATE TABLE dat."LifepathSkills"
 (
 	"LifepathId" int NOT NULL,
 	"SkillId" int NOT NULL,
+	"Index" int NOT NULL,
     PRIMARY KEY ("LifepathId", "SkillId"),
     FOREIGN KEY ("LifepathId")
         REFERENCES dat."Lifepaths" ("Id") MATCH SIMPLE
@@ -106,6 +107,7 @@ CREATE TABLE dat."LifepathTraits"
 (
 	"LifepathId" int NOT NULL,
 	"TraitId" int NOT NULL,
+	"Index" int NOT NULL,
     PRIMARY KEY ("LifepathId", "TraitId"),
     FOREIGN KEY ("LifepathId")
         REFERENCES dat."Lifepaths" ("Id") MATCH SIMPLE

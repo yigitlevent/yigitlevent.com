@@ -65,13 +65,13 @@ export function processLifepaths(refs: References): Processed {
 		lifepath.allowed.forEach(ruleset => datRulesetLifepaths.push(`(${id}, '${ruleset}')`));
 
 		lifepath.leads.forEach(lead => datLifepathLeads.push(`(${id}, ${findIndex("Settings", lead, refs)[0]})`));
-		lifepath.skills.forEach(skill => {
+		lifepath.skills.forEach((skill, si) => {
 			const s = (skill.startsWith("Dark")) ? skill.replace("Dark ", "") : skill;
-			datLifepathSkills.push(`(${id}, ${findIndex("Skills", s, refs)[0]})`);
+			datLifepathSkills.push(`(${id}, ${findIndex("Skills", s, refs)[0]}, ${si})`);
 		});
-		lifepath.traits.forEach(trait => {
+		lifepath.traits.forEach((trait, ti) => {
 			const t = (trait.startsWith("Dark")) ? trait.replace("Dark ", "") : trait;
-			datLifepathTraits.push(`(${id}, ${findIndex("Traits", t, refs)[0]})`);
+			datLifepathTraits.push(`(${id}, ${findIndex("Traits", t, refs)[0]}, ${ti})`);
 		});
 
 		lifepathRefs.push([id, `${settingRef[1]}➞${n}`]);
@@ -262,8 +262,8 @@ export function processLifepaths(refs: References): Processed {
 			arrayToSQL("dat", "RulesetLifepaths", '"LifepathId", "RulesetId"', datRulesetLifepaths),
 
 			arrayToSQL("dat", "LifepathLeads", '"LifepathId", "SettingId"', datLifepathLeads),
-			arrayToSQL("dat", "LifepathSkills", '"LifepathId", "SkillId"', datLifepathSkills),
-			arrayToSQL("dat", "LifepathTraits", '"LifepathId", "TraitId"', datLifepathTraits),
+			arrayToSQL("dat", "LifepathSkills", '"LifepathId", "SkillId", "Index"', datLifepathSkills),
+			arrayToSQL("dat", "LifepathTraits", '"LifepathId", "TraitId", "Index"', datLifepathTraits),
 
 			arrayToSQL("dat", "LifepathCompanions", '"LifepathId", "CompanionName", "GivesSkills", "GSPMultiplier", "LSPMultiplier", "RPMultiplier"', datLifepathCompanions),
 			arrayToSQL("dat", "LifepathCompanionSettings", '"LifepathId", "CompanionSettingId"', datLifepathCompanionSettings),
