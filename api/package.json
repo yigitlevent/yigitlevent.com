@@ -3,7 +3,7 @@
 	"author": "Yiğit Levent",
 	"version": "0.0.3",
 	"private": true,
-	"type": "module",
+	"type": "commonjs",
 	"license": "MIT",
 	"homepage": "http://yigitlevent.com/",
 	"repository": {

@@ -1,9 +1,10 @@
 {
-	"name": "bwgr-tools-data-converter",
+	"name": "yigitlevent-bwgrtools-data-converter",
 	"author": "Yiğit Levent",
 	"version": "0.0.0",
 	"private": true,
 	"type": "commonjs",
+	"license": "MIT",
 	"scripts": {
 		"bstart": "npx tsc && node dist/sql/src/index.js"
 	},
