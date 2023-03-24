@@ -16,9 +16,18 @@ import { FightPlanner } from "./Tools/FightPlanner/FightPlanner";
 import { ResourcesList } from "./Tools/ResourcesList/ResourcesList";
 import { CharacterBurner } from "./Tools/CharacterBurner/CharacterBurner";
 import { Menu } from "./Menu/Menu";
+import { useSkillsStore } from "../hooks/apiStores/useSkillsStore";
 
+let Once = true;
 
 export function MainBox() {
+	const store = useSkillsStore();
+
+	if (Once) {
+		store.fetchSkills();
+		Once = false;
+	}
+
 	return (
 		<Container maxWidth="lg" sx={{ margin: "10px auto" }}>
 			<Menu />

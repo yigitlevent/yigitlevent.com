@@ -7,7 +7,9 @@ type UserForms = UserSigninRequest | UserSignupRequest;
 type CampaignRoutes = `/campaign${"" | "s" | "/" | "invite"}`;
 type CampaignForms = CreateCampaignRequest;
 
-type Routes = UserRoutes | CampaignRoutes;
+type SkillRoutes = "/skills/get";
+
+type Routes = UserRoutes | CampaignRoutes | SkillRoutes;
 type Forms = UserForms | CampaignForms;
 
 export function GenericGet<T>(path: Routes) {
