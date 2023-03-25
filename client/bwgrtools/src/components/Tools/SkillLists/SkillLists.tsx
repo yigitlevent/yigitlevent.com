@@ -23,8 +23,6 @@ export function SkillLists() {
 	const { stocks, skills, skillCategories, skillTypes } = useRulesetStore();
 	const { searchString, searchFields, filters, setFilter, searchResults } = useSearch<Skill>(skills, ["stock", "category", "type"]);
 
-	console.log(searchResults.length);
-
 	return (
 		<Fragment>
 			<Typography variant="h3">Skill Explorer</Typography>
