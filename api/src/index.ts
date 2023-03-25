@@ -6,9 +6,10 @@ import pgsimple from "connect-pg-simple";
 
 import { PORT } from "./constants";
 import { CorsConfig, PgConfig, SessionConfig } from "./configs";
+
 import { UserAuth, UserSignUp, UserSignIn, UserSignOut, CheckAuth } from "./routes/user";
-//import { CampaignInvite, CreateCampaign, DeleteCampaign, EditCampaign, GetCampaign, GetCampaigns } from "./routes/campaign";
-import { GetSkillsList } from "./routes/skills";
+import { GetRulesetsData, GetRulesetsList } from "./routes/rulesets";
+
 
 export const App = express();
 export const PgPool = new Pg.Pool(PgConfig);
@@ -25,8 +26,8 @@ App.post("/user/signup", UserSignUp);
 App.post("/user/signin", UserSignIn);
 App.post("/user/signout", UserSignOut);
 
-App.get("/skills/get", GetSkillsList);
-// App.get("/skills/getWithAuth", CheckAuth, GetSkillsList);
+App.get("/rulesets/list", GetRulesetsList);
+App.get("/rulesets/data", GetRulesetsData);
 
 
 /*

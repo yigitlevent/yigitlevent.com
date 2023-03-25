@@ -15,9 +15,6 @@ interface NominalNumber<T extends number> extends Number {
 	readonly __typeName: T;
 }
 
-type Guid = NominalString<string>;
-
-
 // Only one of two properties
 type RequireOnlyOne<T, Keys extends keyof T = keyof T> =
 	Pick<T, Exclude<keyof T, Keys>> & {

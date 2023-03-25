@@ -65,25 +65,13 @@ export async function UserSignIn(request: Request, response: Response) {
 
 		const data = await PgPool.query<UserDBO>(query);
 
-		console.log("0");
-		console.log({ data });
-
 		if (data.rows.length === 0) { return response.sendStatus(403); }
 		const user = data.rows[0];
-
-		console.log("1");
-		console.log({ user });
 
 		const matches = bcrypt.compareSync(password, user.Password);
 		if (!matches) { return response.sendStatus(403); }
 
-		console.log("2");
-		console.log({ matches });
-
 		request.session.user = { id: user.Id, username: user.Username, email: user.Email };
-
-		console.log("3");
-		console.log(request.session.user);
 
 		const updateQuery =
 			`UPDATE usr."Users" 
