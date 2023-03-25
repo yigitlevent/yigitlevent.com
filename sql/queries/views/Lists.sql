@@ -1,135 +1,206 @@
-create or replace view dat."SkillsList" as
-    select 
-        array(select rs."RulesetId" from dat."RulesetSkills" rs where rs."SkillId" = s."Id") as "Rulesets",
+-- View: dat."RulesetsList"
 
-        s."Id",
-        s."Name",
+-- DROP VIEW dat."RulesetsList";
 
-        s."StockId",
-        sto."Name" as "Stock", 
+CREATE OR REPLACE VIEW dat."RulesetsList" AS
+ SELECT r."Id",
+    r."Name",
+    r."IsOfficial",
+    r."IsPublic",
+    r."IsExpansion",
+    r."User",
+    ARRAY( SELECT re."ExpansionId"
+           FROM dat."RulesetExpansions" re
+          WHERE r."Id"::text = re."RulesetId"::text) AS "ExpansionIds"
+   FROM dat."Rulesets" r;
 
-        s."CategoryId",
-        sc."Name" as "Category",
-
-        s."TypeId",
-        sty."Name" as "Type",
-
-        array_remove(array [s."Root1Id", s."Root2Id"], null) as "RootIds",
-        array_remove(array [ab1."Name", ab2."Name"], null) as "Roots",
-
-        s."DontList",
-        s."IsMagical",
-        s."IsTraining",
-        s."ToolTypeId",
-
-        stt."Name" as "Tool",
-        s."ToolDescription",
-
-        s."Description",
-        
-        array(select ss."SubskillId" from dat."SkillSubskills" ss where ss."SkillId" = s."Id") as "Subskills"
-
-    from dat."Skills" s
-    left join dat."Stocks" sto
-        on sto."Id" = s."StockId"
-    left join dat."SkillCategories" sc
-        on sc."Id" = s."CategoryId"
-    left join dat."SkillTypes" sty
-        on sty."Id" = s."TypeId"
-    left join dat."SkillToolTypes" stt
-        on stt."Id" = s."ToolTypeId"
-    left join dat."Abilities" ab1
-        on ab1."Id" = s."Root1Id"
-    left join dat."Abilities" ab2
-        on ab2."Id" = s."Root2Id";
-
-alter view if exists dat."SkillsList"
-    OWNER to apiuser;
+ALTER TABLE dat."RulesetsList"
+    OWNER TO postgres;
 
 
-create or replace view dat."TraitsList" as
-    select 
-        array(select rt."RulesetId" from dat."RulesetTraits" rt where rt."TraitId" = t."Id") as "Rulesets",
+-- View: dat."AbilitiesList"
 
-        t."Id",
-        t."Name",
+-- DROP VIEW dat."AbilitiesList";
 
-        t."StockId",
-        sto."Name" as "Stock",
+CREATE OR REPLACE VIEW dat."AbilitiesList" AS
+ SELECT a."Id",
+    a."Name",
+    a."AbilityTypeId",
+    aty."Name" AS "AbilityType",
+    a."HasShades",
+    a."Cycle",
+    a."Routine",
+    a."Difficult",
+    a."Challenging"
+   FROM dat."Abilities" a
+     LEFT JOIN dat."AbilityTypes" aty ON aty."Id" = a."AbilityTypeId";
 
-        t."CategoryId",
-        tc."Name" as "Category",
-
-        t."TypeId",
-        tty."Name" as "Type",
-
-        t."Cost",
-        t."Description"
-
-    from dat."Traits" t
-    left join dat."Stocks" sto
-        on sto."Id" = t."StockId"
-    left join dat."TraitCategories" tc
-        on tc."Id" = t."CategoryId"
-    left join dat."TraitTypes" tty
-        on tty."Id" = t."TypeId";
-
-alter view if exists dat."TraitsList"
-    OWNER to apiuser;
+ALTER TABLE dat."AbilitiesList"
+    OWNER TO postgres;
 
 
-create or replace view dat."LifepathsList" as
-    -- TODO: Lifepath Requirements & Lifepath Requirement Items
+-- View: dat."StocksList"
 
-    select 
-        array(select rl."RulesetId" from dat."RulesetLifepaths" rl where rl."LifepathId" = l."Id") as "Rulesets",
+-- DROP VIEW dat."StocksList";
 
-        l."Id",
-        l."Name",
+CREATE OR REPLACE VIEW dat."StocksList" AS
+ SELECT ARRAY( SELECT rs."RulesetId"
+           FROM dat."RulesetStocks" rs
+          WHERE rs."StockId" = s."Id") AS "Rulesets",
+    s."Id",
+    s."Name",
+    s."NamePlural",
+    s."Stride",
+    ARRAY( SELECT ss."Id"
+           FROM dat."Settings" ss
+          WHERE ss."StockId" = s."Id") AS "SettingIds"
+   FROM dat."Stocks" s;
 
-        l."StockId",
-        sto."Name" as "Stock", 
+ALTER TABLE dat."StocksList"
+    OWNER TO postgres;
 
-        l."SettingId",
-        stt."Name" as "Setting",
 
-        array(select ll."SettingId" from dat."LifepathLeads" ll where ll."LifepathId" = l."Id") as "LeadIds",
-        array(select ls."SkillId" from dat."LifepathSkills" ls where ls."LifepathId" = l."Id" order by ls."Index" asc) as "SkillIds",
-        array(select lt."TraitId" from dat."LifepathTraits" lt where lt."LifepathId" = l."Id" order by lt."Index" asc) as "TraitIds",
+-- View: dat."SettingsList"
 
-        l."Born",
-        l."Years",
-        l."EitherPool",
-        l."MentalPool",
-        l."PhysicalPool",
-        l."GeneralSkillPool",
-        l."LifepathSkillPool",
-        l."TraitPool",
-        l."ResourcePoints",
+-- DROP VIEW dat."SettingsList";
 
-        l."IsGSPMultiplier",
-        l."IsLSPMultiplier",
-        l."IsRPMultiplier",
-        l."HalfGSPFromPrev",
-        l."HalfLSPFromPrev",
-        l."HalfRPFromPrev",
-        l."RequirementText",
+CREATE OR REPLACE VIEW dat."SettingsList" AS
+ SELECT ARRAY( SELECT rs."RulesetId"
+           FROM dat."RulesetSettings" rs
+          WHERE rs."SettingId" = s."Id") AS "Rulesets",
+    s."Id",
+    s."Name",
+    s."NameShort",
+    s."StockId",
+    ss."Name" AS "StockName",
+    s."IsSubsetting"
+   FROM dat."Settings" s
+     LEFT JOIN dat."Stocks" ss ON ss."Id" = s."StockId";
 
-        lc."CompanionName",
-        lc."GivesSkills" as "CompanionGivesSkills",
-        lc."GSPMultiplier" as "CompanionGSPMultiplier",
-        lc."LSPMultiplier" as "CompanionLSPMultiplier",
-        lc."RPMultiplier" as "CompanionRPMultiplier",
-        array(select lcs."CompanionSettingId" from dat."LifepathCompanionSettings" lcs where lcs."LifepathId" = l."Id") as "CompanionSettingIds"
+ALTER TABLE dat."SettingsList"
+    OWNER TO postgres;
 
-    from dat."Lifepaths" l
 
-    left join dat."Stocks" sto
-        on sto."Id" = l."StockId"
-    left join dat."Settings" stt
-        on stt."Id" = l."SettingId"
-    left join dat."LifepathCompanions" lc
-        on lc."LifepathId" = l."Id";
+-- View: dat."LifepathsList"
 
-alter view if exists dat."LifepathsList"
-    OWNER to apiuser;
+-- DROP VIEW dat."LifepathsList";
+
+CREATE OR REPLACE VIEW dat."LifepathsList" AS
+ SELECT ARRAY( SELECT rl."RulesetId"
+           FROM dat."RulesetLifepaths" rl
+          WHERE rl."LifepathId" = l."Id") AS "Rulesets",
+    l."Id",
+    l."Name",
+    l."StockId",
+    sto."Name" AS "Stock",
+    l."SettingId",
+    stt."Name" AS "Setting",
+    ARRAY( SELECT ll."SettingId"
+           FROM dat."LifepathLeads" ll
+          WHERE ll."LifepathId" = l."Id") AS "LeadIds",
+    ARRAY( SELECT ls."SkillId"
+           FROM dat."LifepathSkills" ls
+          WHERE ls."LifepathId" = l."Id"
+          ORDER BY ls."Index") AS "SkillIds",
+    ARRAY( SELECT lt."TraitId"
+           FROM dat."LifepathTraits" lt
+          WHERE lt."LifepathId" = l."Id"
+          ORDER BY lt."Index") AS "TraitIds",
+    l."Born",
+    l."Years",
+    l."EitherPool",
+    l."MentalPool",
+    l."PhysicalPool",
+    l."GeneralSkillPool",
+    l."LifepathSkillPool",
+    l."TraitPool",
+    l."ResourcePoints",
+    l."IsGSPMultiplier",
+    l."IsLSPMultiplier",
+    l."IsRPMultiplier",
+    l."HalfGSPFromPrev",
+    l."HalfLSPFromPrev",
+    l."HalfRPFromPrev",
+    l."RequirementText",
+    lc."CompanionName",
+    lc."GivesSkills" AS "CompanionGivesSkills",
+    lc."GSPMultiplier" AS "CompanionGSPMultiplier",
+    lc."LSPMultiplier" AS "CompanionLSPMultiplier",
+    lc."RPMultiplier" AS "CompanionRPMultiplier",
+    ARRAY( SELECT lcs."CompanionSettingId"
+           FROM dat."LifepathCompanionSettings" lcs
+          WHERE lcs."LifepathId" = l."Id") AS "CompanionSettingIds"
+   FROM dat."Lifepaths" l
+     LEFT JOIN dat."Stocks" sto ON sto."Id" = l."StockId"
+     LEFT JOIN dat."Settings" stt ON stt."Id" = l."SettingId"
+     LEFT JOIN dat."LifepathCompanions" lc ON lc."LifepathId" = l."Id";
+
+ALTER TABLE dat."LifepathsList"
+    OWNER TO apiuser;
+
+
+-- View: dat."SkillsList"
+
+-- DROP VIEW dat."SkillsList";
+
+CREATE OR REPLACE VIEW dat."SkillsList" AS
+ SELECT ARRAY( SELECT rs."RulesetId"
+           FROM dat."RulesetSkills" rs
+          WHERE rs."SkillId" = s."Id") AS "Rulesets",
+    s."Id",
+    s."Name",
+    s."StockId",
+    sto."Name" AS "Stock",
+    s."CategoryId",
+    sc."Name" AS "Category",
+    s."TypeId",
+    sty."Name" AS "Type",
+    array_remove(ARRAY[s."Root1Id", s."Root2Id"], NULL::integer) AS "RootIds",
+    array_remove(ARRAY[ab1."Name", ab2."Name"], NULL::character varying) AS "Roots",
+    s."DontList",
+    s."IsMagical",
+    s."IsTraining",
+    s."ToolTypeId",
+    stt."Name" AS "Tool",
+    s."ToolDescription",
+    s."Description",
+    ARRAY( SELECT ss."SubskillId"
+           FROM dat."SkillSubskills" ss
+          WHERE ss."SkillId" = s."Id") AS "SubskillIds"
+   FROM dat."Skills" s
+     LEFT JOIN dat."Stocks" sto ON sto."Id" = s."StockId"
+     LEFT JOIN dat."SkillCategories" sc ON sc."Id" = s."CategoryId"
+     LEFT JOIN dat."SkillTypes" sty ON sty."Id" = s."TypeId"
+     LEFT JOIN dat."SkillToolTypes" stt ON stt."Id" = s."ToolTypeId"
+     LEFT JOIN dat."Abilities" ab1 ON ab1."Id" = s."Root1Id"
+     LEFT JOIN dat."Abilities" ab2 ON ab2."Id" = s."Root2Id";
+
+ALTER TABLE dat."SkillsList"
+    OWNER TO apiuser;
+
+
+-- View: dat."TraitsList"
+
+-- DROP VIEW dat."TraitsList";
+
+CREATE OR REPLACE VIEW dat."TraitsList" AS
+ SELECT ARRAY( SELECT rt."RulesetId"
+           FROM dat."RulesetTraits" rt
+          WHERE rt."TraitId" = t."Id") AS "Rulesets",
+    t."Id",
+    t."Name",
+    t."StockId",
+    sto."Name" AS "Stock",
+    t."CategoryId",
+    tc."Name" AS "Category",
+    t."TypeId",
+    tty."Name" AS "Type",
+    t."Cost",
+    t."Description"
+   FROM dat."Traits" t
+     LEFT JOIN dat."Stocks" sto ON sto."Id" = t."StockId"
+     LEFT JOIN dat."TraitCategories" tc ON tc."Id" = t."CategoryId"
+     LEFT JOIN dat."TraitTypes" tty ON tty."Id" = t."TypeId";
+
+ALTER TABLE dat."TraitsList"
+    OWNER TO apiuser;
