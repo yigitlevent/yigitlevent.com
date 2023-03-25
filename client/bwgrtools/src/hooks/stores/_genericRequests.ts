@@ -4,13 +4,10 @@ import axios from "axios";
 type UserRoutes = `/user${"/auth" | "/signin" | "/signup" | "/signout"}`;
 type UserForms = UserSigninRequest | UserSignupRequest;
 
-type CampaignRoutes = `/campaign${"" | "s" | "/" | "invite"}`;
-type CampaignForms = CreateCampaignRequest;
+type RulesetRoutes = `/rulesets/${"list" | "data"}`;
 
-type SkillRoutes = "/skills/get";
-
-type Routes = UserRoutes | CampaignRoutes | SkillRoutes;
-type Forms = UserForms | CampaignForms;
+type Routes = UserRoutes | RulesetRoutes;
+type Forms = UserForms;
 
 export function GenericGet<T>(path: Routes) {
 	return axios.get<T>(

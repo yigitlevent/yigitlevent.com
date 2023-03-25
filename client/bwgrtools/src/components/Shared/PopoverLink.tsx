@@ -5,12 +5,11 @@ import Link from "@mui/material/Link";
 import Popover from "@mui/material/Popover";
 import Grid from "@mui/material/Grid";
 
-import { Skill } from "../../data/skills/_skills";
-import { Trait } from "../../data/traits/_traits";
+import { SkillOld } from "../../data/skills/_skills";
 import { GetSkillRestrictionString } from "../../utils/getSkillRestriction";
 
 
-function SkillPop({ skill }: { skill: Skill; }) {
+function SkillPop({ skill }: { skill: SkillOld; }) {
 	return (
 		<Grid container spacing={1} columns={2}>
 			<Grid item xs={2}>
@@ -51,7 +50,7 @@ function TraitPop({ trait }: { trait: Trait; }) {
 			</Grid>
 
 			<Grid item sm={3} md={1}>
-				<Typography variant="caption">Type: {trait.type}</Typography>
+				<Typography variant="caption">Type: {trait.type[1]}</Typography>
 			</Grid>
 
 			{trait.cost !== 0
@@ -63,11 +62,13 @@ function TraitPop({ trait }: { trait: Trait; }) {
 				: null
 			}
 
-			{trait.stock !== "Any"
+			{trait.stock
 				? <Grid item sm={3} md={1}>
-					<Typography variant="caption">Stock: {trait.stock}</Typography>
+					<Typography variant="caption">Stock: {trait.stock[1]}</Typography>
 				</Grid>
-				: null
+				: <Grid item sm={3} md={1}>
+					<Typography variant="caption">Stock: Any</Typography>
+				</Grid>
 			}
 
 			{trait.description
@@ -80,7 +81,7 @@ function TraitPop({ trait }: { trait: Trait; }) {
 	);
 }
 
-function Pop({ anchor, data, onClose }: { anchor: HTMLElement | null; data: Skill | Trait; onClose: () => void; }) {
+function Pop({ anchor, data, onClose }: { anchor: HTMLElement | null; data: SkillOld | Trait; onClose: () => void; }) {
 	return (
 		<Popover
 			open={Boolean(anchor)}
@@ -96,7 +97,7 @@ function Pop({ anchor, data, onClose }: { anchor: HTMLElement | null; data: Skil
 	);
 }
 
-export function PopoverLink({ data, noColor }: { data: Skill | Trait; noColor?: boolean; }) {
+export function PopoverLink({ data, noColor }: { data: SkillOld | Trait; noColor?: boolean; }) {
 	const [anchor, setAnchor] = useState<HTMLElement | null>(null);
 
 	const closePopover = () => { setAnchor(null); };

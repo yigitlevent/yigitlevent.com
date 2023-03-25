@@ -10,8 +10,8 @@ import { Resources, ResourceStock } from "../../data/resources/_resources";
 import { CoreRulesets } from "../../data/rulesets";
 
 
-interface RulesetState {
-	rulesets: RulesetId[];
+interface RulesetStateOld {
+	rulesets: RulesetIdOld[];
 
 	lifepathStock: StocksList;
 	lifepathSetting: string;
@@ -27,9 +27,9 @@ interface RulesetState {
 	resourceStock: StocksListExtended;
 	allowedResourceStocks: ResourceStock[];
 
-	toggleDataset: (dataset: RulesetId) => void;
-	checkRulesets: (allowed: RulesetId[]) => boolean;
-	checkExactRulesets: (allowed: RulesetId[]) => boolean;
+	toggleDataset: (dataset: RulesetIdOld) => void;
+	checkRulesets: (allowed: RulesetIdOld[]) => boolean;
+	checkExactRulesets: (allowed: RulesetIdOld[]) => boolean;
 
 	refreshAllowedStocksList: (stock: StocksList) => void;
 	refreshAllowedSettingsList: (setting: string) => void;
@@ -44,11 +44,11 @@ interface RulesetState {
 	changeResourceStock: (stock: StocksListExtended) => void;
 }
 
-function CheckRulesets(rulesets: RulesetId[], allowed: RulesetId[]) {
+function CheckRulesets(rulesets: RulesetIdOld[], allowed: RulesetIdOld[]) {
 	return rulesets.some(ruleset => allowed.includes(ruleset));
 }
 
-export const useRulesetStore = create<RulesetState>()(
+export const useRulesetStoreOld = create<RulesetStateOld>()(
 	devtools(
 		persist(
 			(set, get) => ({
@@ -68,8 +68,8 @@ export const useRulesetStore = create<RulesetState>()(
 				resourceStock: Object.values(Resources).filter(v => CheckRulesets(["bwgr"], v.allowed))[0].name,
 				allowedResourceStocks: Object.values(Resources).filter(v => CheckRulesets(["bwgr"], v.allowed)),
 
-				toggleDataset: (ruleset: RulesetId) => {
-					set(produce<RulesetState>((state) => {
+				toggleDataset: (ruleset: RulesetIdOld) => {
+					set(produce<RulesetStateOld>((state) => {
 						const found = CoreRulesets.find(x => x.id === ruleset);
 
 						if (found) { state.rulesets = [ruleset]; }
@@ -89,45 +89,45 @@ export const useRulesetStore = create<RulesetState>()(
 					state.refreshAllowedTraitCategoriesList(state.traitCategory);
 					state.refreshAllowedResourceStocksList(state.resourceStock);
 				},
-				checkRulesets: (allowed: RulesetId[]) => {
+				checkRulesets: (allowed: RulesetIdOld[]) => {
 					const state = get();
 					return CheckRulesets(state.rulesets, allowed);
 				},
-				checkExactRulesets: (allowed: RulesetId[]) => {
+				checkExactRulesets: (allowed: RulesetIdOld[]) => {
 					const state = get();
 					return allowed.every(ruleset => state.rulesets.includes(ruleset));
 				},
 
 				refreshAllowedStocksList: (stock: StocksList) => {
-					set(produce<RulesetState>((state) => {
+					set(produce<RulesetStateOld>((state) => {
 						state.allowedStocks = Object.values(Stocks).filter(v => state.checkRulesets(v.allowed));
 						const isAllowed = state.allowedStocks.some(v => v.name === stock);
 						if (isAllowed) state.lifepathStock = state.allowedStocks[0].name;
 					}));
 				},
 				refreshAllowedSettingsList: (setting: string) => {
-					set(produce<RulesetState>((state) => {
+					set(produce<RulesetStateOld>((state) => {
 						state.allowedSettings = Object.values(Stocks[state.lifepathStock].settings).filter(v => state.checkRulesets(v.allowed));
 						const isAllowed = state.allowedSettings.some(v => v.name === setting);
 						if (!isAllowed) state.lifepathSetting = state.allowedSettings[0].name;
 					}));
 				},
 				refreshAllowedSkillCategoriesList: (category: SkillCategoryPath) => {
-					set(produce<RulesetState>((state) => {
+					set(produce<RulesetStateOld>((state) => {
 						state.allowedSkillCategories = Object.values(SkillCategories).filter(v => state.checkRulesets(v.allowed));
 						const isAllowed = state.allowedSkillCategories.some(v => v.name === category);
 						if (!isAllowed) state.skillCategory = state.allowedSkillCategories[0].name;
 					}));
 				},
 				refreshAllowedTraitCategoriesList: (category: TraitCategoryPath) => {
-					set(produce<RulesetState>((state) => {
+					set(produce<RulesetStateOld>((state) => {
 						state.allowedTraitCategories = Object.values(TraitCategories).filter(v => state.checkRulesets(v.allowed));
 						const isAllowed = state.allowedTraitCategories.some(v => v.name === category);
 						if (!isAllowed) state.traitCategory = state.allowedTraitCategories[0].name;
 					}));
 				},
 				refreshAllowedResourceStocksList: (stock: StocksListExtended) => {
-					set(produce<RulesetState>((state) => {
+					set(produce<RulesetStateOld>((state) => {
 						state.allowedResourceStocks = Object.values(Resources).filter(v => state.checkRulesets(v.allowed));
 						const isAllowed = state.allowedResourceStocks.some(v => v.name === stock);
 						if (!isAllowed) state.resourceStock = state.allowedResourceStocks[0].name;
@@ -135,7 +135,7 @@ export const useRulesetStore = create<RulesetState>()(
 				},
 
 				changeLifepathStock: (stock: StocksList) => {
-					set(produce<RulesetState>((state) => {
+					set(produce<RulesetStateOld>((state) => {
 						state.lifepathStock = stock;
 						state.lifepathSetting = Object.keys(Stocks[stock].settings)[0];
 					}));
@@ -143,22 +143,22 @@ export const useRulesetStore = create<RulesetState>()(
 					state.refreshAllowedSettingsList(state.lifepathStock);
 				},
 				changeLifepathSetting: (setting: string) => {
-					set(produce<RulesetState>((state) => {
+					set(produce<RulesetStateOld>((state) => {
 						state.lifepathSetting = setting;
 					}));
 				},
 				changeSkillCategory: (category: SkillCategoryPath) => {
-					set(produce<RulesetState>((state) => {
+					set(produce<RulesetStateOld>((state) => {
 						state.skillCategory = category;
 					}));
 				},
 				changeTraitCategory: (category: TraitCategoryPath) => {
-					set(produce<RulesetState>((state) => {
+					set(produce<RulesetStateOld>((state) => {
 						state.traitCategory = category;
 					}));
 				},
 				changeResourceStock: (stock: StocksListExtended) => {
-					set(produce<RulesetState>((state) => {
+					set(produce<RulesetStateOld>((state) => {
 						state.resourceStock = stock;
 					}));
 				}

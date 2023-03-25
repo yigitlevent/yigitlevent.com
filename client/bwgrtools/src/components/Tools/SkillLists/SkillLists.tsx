@@ -13,18 +13,18 @@ import Checkbox from "@mui/material/Checkbox";
 import ListItemText from "@mui/material/ListItemText";
 import Alert from "@mui/material/Alert";
 
-import { useRulesetStore } from "../../../hooks/stores/useRulesetStore";
-import { useSearch } from "../../../hooks/useSearch";
-import { Skill, SkillCategories } from "../../../data/skills/_skills";
+import { useRulesetStoreOld } from "../../../hooks/stores/useRulesetStore_old";
+import { useSearchOld } from "../../../hooks/useSearchOld";
+import { SkillOld, SkillCategories } from "../../../data/skills/_skills";
 
 import { PopoverLink } from "../../Shared/PopoverLink";
 import { GenericGrid } from "../../Shared/Grids";
 
 
 export function SkillLists() {
-	const { checkRulesets } = useRulesetStore();
-	const { skillCategory, changeSkillCategory } = useRulesetStore();
-	const { searchString, setSearchString, searchFields, setSearchFields, setList, searchResults } = useSearch<Skill>(SkillCategories[skillCategory].skills);
+	const { checkRulesets } = useRulesetStoreOld();
+	const { skillCategory, changeSkillCategory } = useRulesetStoreOld();
+	const { searchString, setSearchString, searchFields, setSearchFields, setList, searchResults } = useSearchOld<SkillOld>(SkillCategories[skillCategory].skills);
 
 	const [searchParams, setSearchParams] = useSearchParams();
 

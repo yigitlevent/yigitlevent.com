@@ -1,6 +1,6 @@
-type CoreRulesetId = "bwgr" | "bs";
+type CoreRulesetIdOld = "bwgr" | "bs";
 type ExpansionRulesetId = "bwc" | "antv1" | "amw";
-type RulesetId = CoreRulesetId | ExpansionRulesetId;
+type RulesetIdOld = CoreRulesetIdOld | ExpansionRulesetId;
 
 type StocksList = "Dwarf" | "Elf" | "Human" | "Orc" | "Roden" | "Troll" | "Great Wolf";
 type SubStocksList = "Dark Elf";

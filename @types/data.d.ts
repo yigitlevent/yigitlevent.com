@@ -82,9 +82,13 @@ interface Trait {
 	name: string;
 	stock?: [id: StockId, name: string];
 	category: [id: TraitCategoryId, name: string];
-	typeId: [id: TraitTypeId, name: string];
+	type: [id: TraitTypeId, name: string];
 	cost: number;
 	description?: string;
+}
+
+interface RulesetList {
+	rulesets: Ruleset[];
 }
 
 interface RulesetData {

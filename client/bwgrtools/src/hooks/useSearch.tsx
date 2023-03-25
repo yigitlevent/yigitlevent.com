@@ -1,31 +1,75 @@
 import { useCallback, useEffect, useState } from "react";
-import Fuse from "fuse.js";
 import { useSearchParams } from "react-router-dom";
+import Fuse from "fuse.js";
 
-import { useRulesetStore } from "./stores/useRulesetStore";
 
+type List<T> = (T & { rulesets: RulesetId[]; })[];
 
-type List<T> = (T & { allowed: RulesetId[]; })[];
+export function useSearch<T>(mainList: List<T>, filterKeys: string[]) {
+	const [urlParams, setUrlParams] = useSearchParams();
 
-export function useSearch<T>(list: List<T>) {
-	const [searchParams, setSearchParams] = useSearchParams();
-	const { checkRulesets } = useRulesetStore();
+	const [searchResults, setSearchResults] = useState<List<T>>(mainList);
 
-	const s = searchParams.get("s");
-	const sf = searchParams.get("sf");
+	const [searchString, setSearchString] = useState("");
+	const [searchFields, setSearchFields] = useState<string[]>(["Name"]);
 
-	const [mainList, setMainList] = useState<List<T>>(list.filter(v => checkRulesets(v.allowed)));
-	const [searchResults, setSearchResults] = useState<List<T>>(list.filter(v => checkRulesets(v.allowed)));
+	const [filters, setFilters] = useState<{ [key: string]: string; }>(filterKeys.reduce((a, v) => ({ ...a, [v]: "Any" }), {}));
 
-	const [searchString, setSearchString] = useState(s ? s : "");
-	const [searchFields, setSearchFields] = useState<string[]>(sf ? sf.split(",") : []);
+	useEffect(() => {
+		const s = urlParams.get("s");
+		if (s) setSearchString(s);
 
-	const setList = useCallback((newList: List<T>) => {
-		setMainList(newList.filter(v => checkRulesets(v.allowed)));
-	}, [checkRulesets]);
+		const sf = urlParams.get("sf");
+		if (sf) setSearchFields(sf.split(","));
+
+		Object.keys(filters).forEach((filterKey) => {
+			const filterValue = urlParams.get(filterKey);
+			if (filterValue) {
+				const newFilters = JSON.parse(JSON.stringify(filters));
+				newFilters[filterKey] = filterValue;
+				setFilters(newFilters);
+			}
+		});
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+
+	const setFilter = useCallback((filterKey: string, filterValue: string) => {
+		if (filterKey === "s") {
+			if (filterValue === "") urlParams.delete(filterKey);
+			else urlParams.set("s", filterValue);
+			setSearchString(filterValue);
+		}
+		else if (filterKey === "sf") {
+			if (filterValue === "") urlParams.delete(filterKey);
+			else urlParams.set("sf", filterValue);
+			setSearchFields(filterValue.split(","));
+		}
+		else {
+			if (filterValue !== "Any") urlParams.set(filterKey, filterValue);
+			else urlParams.delete(filterKey);
+
+			const newFilters = JSON.parse(JSON.stringify(filters));
+			newFilters[filterKey] = filterValue;
+			setFilters(newFilters);
+		}
+
+		setUrlParams(urlParams);
+	}, [filters, setUrlParams, urlParams]);
 
 	const search = useCallback(() => {
-		let res = [];
+		let res = mainList;
+
+		Object.keys(filters).forEach((filterKey) => {
+			const filterValue = filters[filterKey];
+			if (filterValue !== "Any") {
+				res = res.filter(v => {
+					const itemValue = (v as any)[filterKey];
+					if (itemValue) return itemValue[1] === filters[filterKey];
+					return false;
+				});
+			}
+		});
+
 		if (searchString.length > 0 && searchFields.length > 0) {
 			const options = {
 				includeScore: true,
@@ -33,26 +77,18 @@ export function useSearch<T>(list: List<T>) {
 				keys: searchFields.map(v => v.toLocaleLowerCase())
 			};
 
-			const fuse = new Fuse(mainList, options);
-			const results = fuse.search(searchString);
+			const results = (new Fuse(res, options)).search(searchString);
 			res = results.map(x => x.item);
 		}
-		else { res = mainList; }
-		setSearchResults(res.filter(v => checkRulesets(v.allowed)));
-	}, [checkRulesets, mainList, searchFields, searchString]);
+
+		setSearchResults(res);
+	}, [mainList, filters, searchFields, searchString]);
+
 
 	useEffect(() => {
-		const arr = [...searchParams.entries()];
-		const prms: { [key: string]: string; } = {};
-		for (const item in arr) { prms[arr[item][0]] = arr[item][1]; }
-		if (searchString.length > 0) prms["s"] = searchString;
-		if (searchFields.length > 0) prms["sf"] = searchFields.join(",");
-		setSearchParams(prms);
-	}, [searchFields, searchParams, searchString, setSearchParams]);
+		const delay = setTimeout(() => search(), 500);
+		return () => clearTimeout(delay);
+	}, [search, mainList, filters, searchFields, searchString]);
 
-	useEffect(() => {
-		search();
-	}, [search, mainList, searchFields, searchString]);
-
-	return { searchString, setSearchString, searchFields, setSearchFields, setList, searchResults };
+	return { searchString, searchFields, filters, setFilter, searchResults };
 }

@@ -10,7 +10,6 @@ import { MenuButtons } from "./MenuButtons";
 import { Signin } from "./Signin/Signin";
 import { Signup } from "./Signup/Signup";
 import { Tools } from "./Drawers/Tools";
-import { Checklist } from "./Drawers/Checklist";
 import { RulesetSelector } from "./Drawers/RulesetSelector";
 
 
@@ -39,8 +38,8 @@ export function Menu() {
 
 			<Tools expanded={drawer === "Tools"} />
 			<RulesetSelector expanded={drawer === "Datasets"} />
-			<Checklist expanded={drawer === "Checklist"} />
-			{/*{<MyThings expanded={drawer === "My Things"} />}*/}
+			{/*<Checklist expanded={drawer === "Checklist"} />
+			<MyThings expanded={drawer === "My Things"} />*/}
 		</Fragment>
 	);
 }

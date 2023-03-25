@@ -1,6 +1,6 @@
-import { Skill, SkillCategories } from "../data/skills/_skills";
+import { SkillOld, SkillCategories } from "../data/skills/_skills";
 import { Lifepath, Setting, Stocks } from "../data/stocks/_stocks";
-import { Trait, TraitCategories } from "../data/traits/_traits";
+import { TraitOld, TraitCategories } from "../data/traits/_traits";
 
 
 export function GetSettingFromPath(path: string): Setting {
@@ -25,7 +25,7 @@ export function GetLifepathsFromPaths(paths: LifepathPath[]): Lifepath[] {
 	return paths.map((lp) => GetLifepathFromPath(lp));
 }
 
-export function GetSkillFromPath(path: string): Skill {
+export function GetSkillFromPath(path: string): SkillOld {
 	const spl = path.split("➞");
 	if (spl[0] === "Skill") spl.shift();
 	const skill = SkillCategories[spl[0]].skills.find(s => s.name === spl[1]);
@@ -33,7 +33,7 @@ export function GetSkillFromPath(path: string): Skill {
 	throw `Skill not found: ${path}`;
 }
 
-export function GetTraitFromPath(path: string): Trait {
+export function GetTraitFromPath(path: string): TraitOld {
 	const spl = path.split("➞");
 	if (spl[0] === "Trait") spl.shift();
 	const trait = TraitCategories[spl[0]].traits.find(t => t.name === spl[1]);

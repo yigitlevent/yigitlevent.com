@@ -1,5 +1,5 @@
 export interface CoreRuleset {
-	id: CoreRulesetId;
+	id: CoreRulesetIdOld;
 	name: string;
 	isOffical: boolean;
 	expansions: ExpansionRulesetId[];

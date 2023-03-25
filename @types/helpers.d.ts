@@ -32,3 +32,9 @@ type NoneOf<T> = Simplify<{ [K in keyof T]?: never }>;
 type AtMostOneOf<T> =
 	| NoneOf<T>
 	| { [K in keyof T]: Simplify<Pick<T, K> & NoneOf<Omit<T, K>>> }[keyof T];
+
+
+// https://stackoverflow.com/questions/71280331/index-signature-with-typescript-with-array-of-objects
+type KeysMatching<T, V> = {
+	[K in keyof T]-?: T[K] extends V ? K : never
+	}[keyof T]

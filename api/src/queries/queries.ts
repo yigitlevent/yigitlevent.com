@@ -122,7 +122,7 @@ export async function GetTraits() {
 			id: v.Id as unknown as TraitId,
 			name: v.Name,
 			category: [v.CategoryId as unknown as TraitCategoryId, v.Category],
-			typeId: [v.TypeId as unknown as TraitTypeId, v.Type],
+			type: [v.TypeId as unknown as TraitTypeId, v.Type],
 			cost: v.Cost
 		};
 

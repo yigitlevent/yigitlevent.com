@@ -1,8 +1,8 @@
-import { Skill } from "../data/skills/_skills";
+import { SkillOld } from "../data/skills/_skills";
 import { Stocks } from "../data/stocks/_stocks";
 
 
-export function GetSkillRestrictionString(skill: Skill) {
+export function GetSkillRestrictionString(skill: SkillOld) {
 	const spl = skill.restriction.split("➞");
 
 	if (spl.length > 1) {

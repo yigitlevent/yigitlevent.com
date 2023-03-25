@@ -86,7 +86,7 @@ export type TraitEffect = TraitNewCapability | TraitCallOnEffect | TraitShadeEff
 */
 
 export interface CharacterTrait {
-	allowed: RulesetId[];
+	allowed: RulesetIdOld[];
 	cost: number;
 	description?: string;
 	name: string;
@@ -95,7 +95,7 @@ export interface CharacterTrait {
 }
 
 export type OtherTrait = {
-	allowed: RulesetId[];
+	allowed: RulesetIdOld[];
 	cost: number;
 	description: string;
 	name: string;
@@ -103,12 +103,12 @@ export type OtherTrait = {
 	type: Exclude<TraitTypesList, "Character">;
 }; //& ({ effects?: TraitEffect[]; } | { effectsChooseOne?: TraitEffect[]; });
 
-export type Trait = CharacterTrait | OtherTrait;
+export type TraitOld = CharacterTrait | OtherTrait;
 
 export interface TraitCategory {
-	allowed: RulesetId[];
+	allowed: RulesetIdOld[];
 	name: TraitCategoryPath;
-	traits: Trait[];
+	traits: TraitOld[];
 }
 
 export interface TraitCategories {

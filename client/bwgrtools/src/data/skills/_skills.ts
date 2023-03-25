@@ -8,11 +8,11 @@ import { RodenSpecial } from "./roden";
 import { TrollSpecial } from "./troll";
 
 
-export interface Skill {
+export interface SkillOld {
 	name: string;
 	description?: string;
 
-	allowed: RulesetId[];
+	allowed: RulesetIdOld[];
 	magical: boolean;
 	noList: boolean;
 	restriction: "N/A" | `${"ONLY" | "ONLYBURN"}➞${StocksList}${"" | `➞WITH➞${AttributesList}`}`;
@@ -25,9 +25,9 @@ export interface Skill {
 }
 
 export interface SkillCategory {
-	allowed: RulesetId[];
+	allowed: RulesetIdOld[];
 	name: SkillCategoryPath;
-	skills: Skill[];
+	skills: SkillOld[];
 }
 
 export interface SkillCategories {
