@@ -1,3 +1,5 @@
+-- DROP SCHEMA dat CASCADE;
+
 -- SCHEMA: dat
 
 -- DROP SCHEMA IF EXISTS dat;

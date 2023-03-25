@@ -21,7 +21,7 @@
 		[0,"Character"],[1,"Call-on"],[2,"Die"],[3,"Call-on and Die"]
 	],
 "TraitCategories":[
-		[0,"Character"],[1,"Call-on"],[2,"Die"],[3,"Monstrous"],[4,"Common"],[5,"Lifepath"],[6,"Special"]
+		[0,"General"],[1,"Monstrous"],[2,"Common"],[3,"Lifepath"],[4,"Special"]
 	],
 "ActionResolutionTypes":[
 		[0,"Skill"],[1,"Ob"],[2,"Std"],[3,"Vs"],[4,"Vs+"],[5,"+Vs"],[6,"½"]

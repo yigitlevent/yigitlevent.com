@@ -82,13 +82,11 @@ VALUES
 INSERT INTO dat."TraitCategories"
 	("Id", "Name")
 VALUES
-	(0, 'Character'),
-	(1, 'Call-on'),
-	(2, 'Die'),
-	(3, 'Monstrous'),
-	(4, 'Common'),
-	(5, 'Lifepath'),
-	(6, 'Special');
+	(0, 'General'),
+	(1, 'Monstrous'),
+	(2, 'Common'),
+	(3, 'Lifepath'),
+	(4, 'Special');
 
 INSERT INTO dat."ActionResolutionTypes"
 	("Id", "Name", "NameLong")

@@ -6,7 +6,7 @@ import { findIndex } from "../util/findRef";
 
 export function processTraits(refs: References): Processed {
 	const traitRefs: Reference[] = [];
-	
+
 	const datTraits: string[] = [];
 	const datRulesetTraits: string[] = [];
 
@@ -18,7 +18,8 @@ export function processTraits(refs: References): Processed {
 		.flat()
 		.forEach((trait, traitIndex) => {
 			const stockId = trait.stock === "Any" ? null : findIndex("Stocks", trait.stock, refs);
-			const categoryId = findIndex("TraitCategories", trait.categoryName, refs);
+			const category = (["Character", "Call-on", "Die"].includes(trait.categoryName)) ? "General" : trait.categoryName;
+			const categoryId = findIndex("TraitCategories", category, refs);
 			const typeId = findIndex("TraitTypes", trait.type, refs);
 			const desc = trait.description ? `'${escapeTick(trait.description)}'` : null;
 

@@ -156,7 +156,7 @@ ALTER TABLE IF EXISTS dat."LifepathCompanions"
 CREATE TABLE dat."LifepathCompanionSettings"
 (
 	"LifepathId" int NOT NULL,
-	"CompanionSettingId" int
+	"CompanionSettingId" int,
     PRIMARY KEY ("LifepathId", "CompanionSettingId"),
     FOREIGN KEY ("LifepathId")
         REFERENCES dat."Lifepaths" ("Id") MATCH SIMPLE

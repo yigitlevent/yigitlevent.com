@@ -64,7 +64,7 @@ export function processGeneric(): Processed {
 		});
 
 	const datTraitCategories =
-		["Character", "Call-on", "Die", "Monstrous", "Common", "Lifepath", "Special"].map((v, i) => {
+		["General", "Monstrous", "Common", "Lifepath", "Special"].map((v, i) => {
 			traitCategoryRefs.push([i, v]);
 			return `(${i}, '${v}')`;
 		});

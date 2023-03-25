@@ -47,7 +47,7 @@ function processSubskills(skillRefs: Reference[]): Processed {
 
 export function processSkills(refs: References): Processed {
 	const skillRefs: Reference[] = [];
-	
+
 	const datSkills: string[] = [];
 	const datRulesetSkills: string[] = [];
 
