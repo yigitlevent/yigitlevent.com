@@ -15,7 +15,7 @@ CREATE OR REPLACE VIEW dat."RulesetsList" AS
    FROM dat."Rulesets" r;
 
 ALTER TABLE dat."RulesetsList"
-    OWNER TO postgres;
+    OWNER TO apiuser;
 
 
 -- View: dat."AbilitiesList"
@@ -36,7 +36,7 @@ CREATE OR REPLACE VIEW dat."AbilitiesList" AS
      LEFT JOIN dat."AbilityTypes" aty ON aty."Id" = a."AbilityTypeId";
 
 ALTER TABLE dat."AbilitiesList"
-    OWNER TO postgres;
+    OWNER TO apiuser;
 
 
 -- View: dat."StocksList"
@@ -57,7 +57,7 @@ CREATE OR REPLACE VIEW dat."StocksList" AS
    FROM dat."Stocks" s;
 
 ALTER TABLE dat."StocksList"
-    OWNER TO postgres;
+    OWNER TO apiuser;
 
 
 -- View: dat."SettingsList"
@@ -78,7 +78,7 @@ CREATE OR REPLACE VIEW dat."SettingsList" AS
      LEFT JOIN dat."Stocks" ss ON ss."Id" = s."StockId";
 
 ALTER TABLE dat."SettingsList"
-    OWNER TO postgres;
+    OWNER TO apiuser;
 
 
 -- View: dat."LifepathsList"
