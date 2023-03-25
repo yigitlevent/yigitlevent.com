@@ -19,6 +19,8 @@ interface RulesetStore {
 	settings: Setting[];
 
 	skills: Skill[];
+	skillCategories: string[];
+	skillTypes: string[];
 
 	traits: Trait[];
 	traitCategories: string[];
@@ -43,7 +45,10 @@ const Store: StateCreator<RulesetStore, [["zustand/devtools", never]], [], Rules
 	abilities: [],
 	stocks: [],
 	settings: [],
+
 	skills: [],
+	skillCategories: [],
+	skillTypes: [],
 
 	traits: [],
 	traitCategories: [],
@@ -79,7 +84,10 @@ const Store: StateCreator<RulesetStore, [["zustand/devtools", never]], [], Rules
 						state.abilities = response.data.abilities;
 						state.stocks = response.data.stocks;
 						state.settings = response.data.settings;
+
 						state.skills = response.data.skills;
+						state.skillCategories = [...response.data.skills.reduce((a, v) => a.add(v.category[1]), new Set<string>())];
+						state.skillTypes = [...response.data.skills.reduce((a, v) => a.add(v.type[1]), new Set<string>())];
 
 						state.traits = response.data.traits;
 						state.traitCategories = [...response.data.traits.reduce((a, v) => a.add(v.category[1]), new Set<string>())];

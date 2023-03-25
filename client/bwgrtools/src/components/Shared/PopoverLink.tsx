@@ -5,31 +5,31 @@ import Link from "@mui/material/Link";
 import Popover from "@mui/material/Popover";
 import Grid from "@mui/material/Grid";
 
-import { SkillOld } from "../../data/skills/_skills";
-import { GetSkillRestrictionString } from "../../utils/getSkillRestriction";
 
-
-function SkillPop({ skill }: { skill: SkillOld; }) {
+function SkillPop({ skill }: { skill: Skill; }) {
 	return (
 		<Grid container spacing={1} columns={2}>
 			<Grid item xs={2}>
 				<Typography variant="h6">{skill.name}</Typography>
 			</Grid>
 
-			<Grid item xs={2} md={1}>
-				<Typography variant="caption">Root: {skill.root.join("/")}</Typography>
-			</Grid>
+			{skill.roots
+				? <Grid item xs={2} md={1}>
+					<Typography variant="caption">Root: {skill.roots.map(v => v[1]).join("/")}</Typography>
+				</Grid>
+				: null
+			}
 
 			<Grid item xs={2} md={1}>
-				<Typography variant="caption">Type: {skill.type}</Typography>
+				<Typography variant="caption">Type: {skill.type[1]}</Typography>
 			</Grid>
 
 			<Grid item xs={2}>
-				<Typography variant="caption">Tools: {skill.tools.filter(v => v !== "").join(", ")}</Typography>
+				<Typography variant="caption">Tools: {skill.tool.tool}{skill.tool.description ? ` ${skill.tool.description}` : ""}</Typography>
 			</Grid>
 
 			<Grid item xs={2}>
-				<Typography variant="caption">Restrictions: {GetSkillRestrictionString(skill)}</Typography>
+				<Typography variant="caption">Restrictions: {/* TODO: re-enable this GetSkillRestrictionString(skill)*/}</Typography>
 			</Grid>
 
 			{skill.description
@@ -81,7 +81,7 @@ function TraitPop({ trait }: { trait: Trait; }) {
 	);
 }
 
-function Pop({ anchor, data, onClose }: { anchor: HTMLElement | null; data: SkillOld | Trait; onClose: () => void; }) {
+function Pop({ anchor, data, onClose }: { anchor: HTMLElement | null; data: Skill | Trait; onClose: () => void; }) {
 	return (
 		<Popover
 			open={Boolean(anchor)}
@@ -91,13 +91,13 @@ function Pop({ anchor, data, onClose }: { anchor: HTMLElement | null; data: Skil
 			transformOrigin={{ vertical: "top", horizontal: "left" }}
 		>
 			<Grid container spacing={1} sx={{ maxWidth: "400px", padding: "12px 16px" }} columns={2}>
-				{"root" in data ? <SkillPop skill={data} /> : <TraitPop trait={data} />}
+				{"flags" in data ? <SkillPop skill={data} /> : <TraitPop trait={data} />}
 			</Grid>
 		</Popover>
 	);
 }
 
-export function PopoverLink({ data, noColor }: { data: SkillOld | Trait; noColor?: boolean; }) {
+export function PopoverLink({ data, noColor }: { data: Skill | Trait; noColor?: boolean; }) {
 	const [anchor, setAnchor] = useState<HTMLElement | null>(null);
 
 	const closePopover = () => { setAnchor(null); };

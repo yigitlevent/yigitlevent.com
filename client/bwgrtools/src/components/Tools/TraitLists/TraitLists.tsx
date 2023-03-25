@@ -83,21 +83,21 @@ export function TraitLists() {
 						</Select>
 					</FormControl>
 				</Grid>
+			</GenericGrid>
 
-				<GenericGrid spacing={[2, 2]}>
-					{searchResults.length > 0
-						? searchResults.map((trait, i) =>
-							<Grid item key={i}>
-								<Paper elevation={2} sx={{ cursor: "pointer", padding: "2px 6px" }}>
-									<PopoverLink data={trait} />
-								</Paper>
-							</Grid>
-						)
-						: <Alert severity="warning" sx={{ width: "100%", maxWidth: "600px", margin: "12px auto" }}>
-							Could not find any matches. Try adding more fields or changing search text or filters.
-						</Alert>
-					}
-				</GenericGrid>
+			<GenericGrid spacing={[2, 2]}>
+				{searchResults.length > 0
+					? [...searchResults].sort((a, b) => a.name.localeCompare(b.name)).map((trait, i) =>
+						<Grid item key={i}>
+							<Paper elevation={2} sx={{ cursor: "pointer", padding: "2px 6px" }}>
+								<PopoverLink data={trait} />
+							</Paper>
+						</Grid>
+					)
+					: <Alert severity="warning" sx={{ width: "100%", maxWidth: "600px", margin: "12px auto" }}>
+						Could not find any matches. Try adding more fields or changing search text or filters.
+					</Alert>
+				}
 			</GenericGrid>
 		</Fragment>
 	);
