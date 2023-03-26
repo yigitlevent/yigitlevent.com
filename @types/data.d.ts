@@ -92,6 +92,63 @@ interface Trait {
 	description?: string;
 }
 
+interface Lifepath {
+	rulesets: RulesetId[];
+	id: LifepathId;
+	name: string;
+	stock: [id: StockId, name: string];
+	setting: [id: SettingId, name: string];
+	leads?: SettingId[];
+	skills?: SkillId[];
+	traits?: TraitId[];
+	years: number | number[];
+	pools: {
+		eitherStatPool: number;
+		mentalStatPool: number;
+		physicalStatPool: number;
+		generalSkillPool: number;
+		lifepathSkillPool: number;
+		traitPool: number;
+		resourcePoints: number;
+	};
+	flags: {
+		isBorn: boolean;
+		isGSPMultipliedByYear: boolean;
+		isLSPMultipliedByYear: boolean;
+		isRPMultipliedByYear: boolean;
+		isHalfGSPFromPrevLP: boolean;
+		isHalfLSPFromPrevLP: boolean;
+		isHalfRPFromPrevLP: boolean;
+	};
+	companion?: {
+		name: string;
+		givesSkills: boolean;
+		inheritGSPMultiplier: number;
+		inheritLSPMultiplier: number;
+		inheritRPMultiplier: number;
+	};
+	requirements?: {
+		logicType: [id: LogicTypeId, name: string];
+		mustFulfill: boolean;
+		fulfillmentAmount: number;
+		items: (
+			{ isUnique: true; } |
+			{ isSettingEntry: true; } |
+			{ minLpIndex: number; } |
+			{ maxLpIndex: number; } |
+			{ minYears: number; } |
+			{ maxYears: number; } |
+			{ gender: "Male" | "Female"; } |
+			{ oldestBy: number; } |
+			{ attribute: [id: AbilityId, name: string]; min: number | null; max: number | null; forCompanion: boolean; } |
+			{ skill: [id: SkillId, name: string]; forCompanion: boolean; } |
+			{ trait: [id: TraitId, name: string]; forCompanion: boolean; } |
+			{ lifepath: [id: LifepathId, name: string]; forCompanion: boolean; } |
+			{ setting: [id: SettingId, name: string]; forCompanion: boolean; }
+		)[];
+	}[];
+}
+
 interface RulesetList {
 	rulesets: Ruleset[];
 }
@@ -102,4 +159,5 @@ interface RulesetData {
 	settings: Setting[];
 	skills: Skill[];
 	traits: Trait[];
+	lifepaths: Lifepath[];
 }

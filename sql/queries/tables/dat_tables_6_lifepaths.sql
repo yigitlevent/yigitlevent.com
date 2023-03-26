@@ -16,10 +16,10 @@ CREATE TABLE dat."Lifepaths"
 	"MentalPool" int NOT NULL,
 	"PhysicalPool" int NOT NULL,
 
-	"GeneralSkillPool" int,
-	"LifepathSkillPool" int,
+	"GeneralSkillPool" int NOT NULL,
+	"LifepathSkillPool" int NOT NULL,
 	"TraitPool" int NOT NULL,
-	"ResourcePoints" int,
+	"ResourcePoints" int NOT NULL,
 
 	"IsGSPMultiplier" boolean NOT NULL,
 	"IsLSPMultiplier" boolean NOT NULL,

@@ -6,6 +6,8 @@ type StockId = NominalNumber<"StockId">;
 type SettingId = NominalNumber<"SettingId">;
 type SkillId = NominalNumber<"SkillId">;
 type TraitId = NominalNumber<"TraitId">;
+type LifepathId = NominalNumber<"LifepathId">;
+type LifepathRequirementId = NominalNumber<"RequirementId">;
 
 type AbilityTypeId = NominalNumber<"AbilityTypeId">; 
 type SkillCategoryId = NominalNumber<"SkillCategoryId">; 

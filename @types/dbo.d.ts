@@ -66,10 +66,10 @@ interface SkillDBO {
 	ToolDescription: string | null;
 	Description: string | null;
 	RestrictionOnlyStockId: integer | null;
-	RestrictionOnlyStockName: string | null;
+	RestrictionOnlyStock: string | null;
 	RestrictionWhenBurning: boolean | null;
 	RestrictionAbilityId: integer | null;
-	RestrictionAbilityName: string | null;
+	RestrictionAbility: string | null;
 	SubskillIds: number[];
 }
 
@@ -87,7 +87,60 @@ interface TraitDBO {
 	Description: string | null;
 }
 
-interface RulesetsDataDBO {
-	Skills: Skill[];
-	Traits: Trait[];
+interface LifepathDBO {
+	Rulesets: string[];
+	Id: number;
+	Name: string;
+	StockId: number;
+	Stock: string;
+	SettingId: number;
+	Setting: string;
+	LeadIds: number[];
+	SkillIds: number[];
+	TraitIds: number[];
+	Born: boolean;
+	Years: number[];
+	EitherPool: number;
+	MentalPool: number;
+	PhysicalPool: number;
+	GeneralSkillPool: number;
+	LifepathSkillPool: number;
+	TraitPool: number;
+	ResporcePoints: number;
+	IsGSPMultiplier: boolean;
+	IsLSPMultiplier: boolean;
+	IsRPMultiplier: boolean;
+	HalfGSPFromPrev: boolean;
+	HalfLSPFromPrev: boolean;
+	HalfRPFromPrev: boolean;
+	RequirementText: string | null;
+	CompanionName: string | null;
+	CompanionGivesSkills: boolean | null;
+	CompanionGSPMultiplier: number | null;
+	CompanionLSPMultiplier: number | null;
+	CompanionRPMultiplier: number | null;
+	CompanionSettingIds: number[];
+}
+
+interface LifepathRequirementBlockDBO {
+	Id: string;
+	LifepathId: number;
+	LogicTypeId: number;
+	LogicType: string;
+	MustFulfill: boolean;
+	FulfillmentAmount: number;
+}
+
+interface LifepathRequirementBlockItemDBO {
+	RequirementId: number;
+	RequirementTypeId: number;
+	RequirementType: string;
+	ForCompanion: boolean;
+	Min: number | null;
+	Max: number | null;
+	SettingId: number | null;
+	LifepathId: number | null;
+	SkillId: number | null;
+	TraitId: number | null;
+	AttributeId: number | null;
 }
