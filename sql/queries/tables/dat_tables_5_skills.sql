@@ -51,12 +51,12 @@ CREATE TABLE dat."Skills"
         ON UPDATE RESTRICT
         ON DELETE RESTRICT
         NOT VALID,
-    FOREIGN KEY ("RestrictionOnlyStock")
+    FOREIGN KEY ("RestrictionOnlyStockId")
         REFERENCES dat."Stocks" ("Id") MATCH SIMPLE
         ON UPDATE RESTRICT
         ON DELETE RESTRICT
         NOT VALID,
-    FOREIGN KEY ("RestrictionAbility")
+    FOREIGN KEY ("RestrictionAbilityId")
         REFERENCES dat."Abilities" ("Id") MATCH SIMPLE
         ON UPDATE RESTRICT
         ON DELETE RESTRICT
