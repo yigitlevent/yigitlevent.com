@@ -5,6 +5,8 @@ import Link from "@mui/material/Link";
 import Popover from "@mui/material/Popover";
 import Grid from "@mui/material/Grid";
 
+import { GetSkillRestrictionString } from "../../utils/getSkillRestriction";
+
 
 function SkillPop({ skill }: { skill: Skill; }) {
 	return (
@@ -29,7 +31,7 @@ function SkillPop({ skill }: { skill: Skill; }) {
 			</Grid>
 
 			<Grid item xs={2}>
-				<Typography variant="caption">Restrictions: {/* TODO: re-enable this GetSkillRestrictionString(skill)*/}</Typography>
+				<Typography variant="caption">Restrictions: {GetSkillRestrictionString(skill)}</Typography>
 			</Grid>
 
 			{skill.description

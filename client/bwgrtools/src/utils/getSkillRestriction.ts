@@ -1,15 +1,8 @@
-import { SkillOld } from "../data/skills/_skills";
-import { Stocks } from "../data/stocks/_stocks";
-
-
-export function GetSkillRestrictionString(skill: SkillOld) {
-	const spl = skill.restriction.split("➞");
-
-	if (spl.length > 1) {
-		const stockPlural = Stocks[spl[1]].namePlural;
-		const attribute = (spl.length === 4) ? ` with ${spl[3]} ` as AttributesList : " ";
-		const type = spl[0] === "ONLYBURN" ? " in character burning" : "";
-		return `${stockPlural}${attribute}only${type}`;
+export function GetSkillRestrictionString(skill: Skill) {
+	if (skill.restriction) {
+		const attribute = (skill.restriction.onlyWithAbility) ? ` with ${skill.restriction.onlyWithAbility[1]} ` : " ";
+		const type = (skill.restriction.onlyAtBurn) ? " in character burning" : "";
+		return `${skill.restriction.onlyStock[1]}${attribute}only${type}.`;
 	}
 
 	return "N/A";
