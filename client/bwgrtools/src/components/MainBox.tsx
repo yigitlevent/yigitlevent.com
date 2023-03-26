@@ -16,6 +16,7 @@ export function MainBox() {
 	const store = useRulesetStore();
 
 	if (Once) {
+		// TODO: move this to a better place, think about how to actually do this properly
 		store.fetchList();
 		store.fetchData();
 		Once = false;
@@ -29,8 +30,16 @@ export function MainBox() {
 				<Routes>
 					<Route path="/" element={<Navigate replace to="/diceroller" />} />
 					<Route path="/diceroller" element={<DiceRoller />} />
+					{/*<Route path="/lifepaths" element={<LifepathLists />} />*/}
 					<Route path="/skills" element={<SkillLists />} />
 					<Route path="/traits" element={<TraitLists />} />
+					{/*<Route path="/resources" element={<ResourcesList />} />*/}
+					{/*<Route path="/practiceplanner" element={<PracticePlanner />} />*/}
+					{/*<Route path="/magicwheel" element={<MagicWheel />} />*/}
+					{/*<Route path="/dowplanner" element={<DuelOfWitsPlanner />} />*/}
+					{/*<Route path="/racplanner" element={<RangeAndCoverPlanner />} />*/}
+					{/*<Route path="/fightplanner" element={<FightPlanner />} />*/}
+					{/*<Route path="/characterburner" element={<CharacterBurner />} />*/}
 				</Routes>
 			</Paper>
 
