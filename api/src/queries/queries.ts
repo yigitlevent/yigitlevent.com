@@ -106,10 +106,10 @@ export async function GetSkills() {
 		if (v.ToolDescription !== null) r.tool.description = v.ToolDescription;
 		if (v.Description !== null) r.description = v.Description;
 		if (v.SubskillIds.length > 0) r.subskillIds = v.SubskillIds as unknown[] as SkillId[];
-		if (v.RestrictionOnlyStockId !== null) {
-			r.restriction = { onlyStock: [v.RestrictionOnlyStockId, v.RestrictionOnlyStockId] };
+		if (v.RestrictionOnlyStockId !== null && v.RestrictionOnlyStock !== null) {
+			r.restriction = { onlyStock: [v.RestrictionOnlyStockId, v.RestrictionOnlyStock] };
 			if (v.RestrictionWhenBurning !== null) r.restriction.onlyAtBurn = v.RestrictionWhenBurning;
-			if (v.RestrictionAbilityId !== null && v.RestrictionAbilityName !== null) r.restriction.onlyWithAbility = [v.RestrictionAbilityId, v.RestrictionAbilityName];
+			if (v.RestrictionAbilityId !== null && v.RestrictionAbility !== null) r.restriction.onlyWithAbility = [v.RestrictionAbilityId, v.RestrictionAbility];
 		}
 
 		return r;
@@ -142,5 +142,25 @@ export async function GetTraits() {
 		.then(result => result.rows.map(convert));
 }
 
+export async function GetLifepaths() {
+	const convert = (v: LifepathDBO): Lifepath => {
+		const r: Trait = {
+			rulesets: v.Rulesets as unknown[] as RulesetId[],
+			id: v.Id as unknown as TraitId,
+			name: v.Name,
+			category: [v.CategoryId as unknown as TraitCategoryId, v.Category],
+			type: [v.TypeId as unknown as TraitTypeId, v.Type],
+			cost: v.Cost
+		};
+
+		if (v.Description !== null) r.description = v.Description;
+
+		return r;
+	};
+
+	const query = 'select * from dat."LifepathsList";';
+	return PgPool.query<LifepathDBO>(query)
+		.then(result => result.rows.map(convert));
+}
 
 
