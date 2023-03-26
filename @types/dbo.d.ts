@@ -65,6 +65,11 @@ interface SkillDBO {
 	Tool: string;
 	ToolDescription: string | null;
 	Description: string | null;
+	RestrictionOnlyStockId: integer | null;
+	RestrictionOnlyStockName: string | null;
+	RestrictionWhenBurning: boolean | null;
+	RestrictionAbilityId: integer | null;
+	RestrictionAbilityName: string | null;
 	SubskillIds: number[];
 }
 

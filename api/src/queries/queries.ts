@@ -106,6 +106,11 @@ export async function GetSkills() {
 		if (v.ToolDescription !== null) r.tool.description = v.ToolDescription;
 		if (v.Description !== null) r.description = v.Description;
 		if (v.SubskillIds.length > 0) r.subskillIds = v.SubskillIds as unknown[] as SkillId[];
+		if (v.RestrictionOnlyStockId !== null) {
+			r.restriction = { onlyStock: [v.RestrictionOnlyStockId, v.RestrictionOnlyStockId] };
+			if (v.RestrictionWhenBurning !== null) r.restriction.onlyAtBurn = v.RestrictionWhenBurning;
+			if (v.RestrictionAbilityId !== null && v.RestrictionAbilityName !== null) r.restriction.onlyWithAbility = [v.RestrictionAbilityId, v.RestrictionAbilityName];
+		}
 
 		return r;
 	};

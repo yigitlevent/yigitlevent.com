@@ -73,6 +73,11 @@ interface Skill {
 		description?: string;
 	};
 	description?: string;
+	restriction?: {
+		onlyStock: [id: StockId, name: string];
+		onlyWithAbility?: [id: AbilityId, name: string];
+		onlyAtBurn?: boolean;
+	};
 	subskillIds?: SkillId[];
 }
 
