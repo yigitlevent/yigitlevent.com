@@ -5,8 +5,16 @@ import Link from "@mui/material/Link";
 import Popover from "@mui/material/Popover";
 import Grid from "@mui/material/Grid";
 
-import { GetSkillRestrictionString } from "../../utils/getSkillRestriction";
 
+function GetSkillRestrictionString(skill: Skill) {
+	if (skill.restriction) {
+		const attribute = (skill.restriction.onlyWithAbility) ? ` with ${skill.restriction.onlyWithAbility[1]} ` : " ";
+		const type = (skill.restriction.onlyAtBurn) ? " in character burning" : "";
+		return `${skill.restriction.onlyStock[1]}${attribute}only${type}.`;
+	}
+
+	return "N/A";
+}
 
 function SkillPop({ skill }: { skill: Skill; }) {
 	return (
