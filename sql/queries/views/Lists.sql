@@ -164,16 +164,23 @@ CREATE OR REPLACE VIEW dat."SkillsList" AS
     stt."Name" AS "Tool",
     s."ToolDescription",
     s."Description",
+	s."RestrictionOnlyStockId",
+	sto2."RestrictionOnlyStockName",
+	s."RestrictionWhenBurning",
+	s."RestrictionAbilityId",
+	ab3."RestrictionAbilityName",
     ARRAY( SELECT ss."SubskillId"
            FROM dat."SkillSubskills" ss
           WHERE ss."SkillId" = s."Id") AS "SubskillIds"
    FROM dat."Skills" s
      LEFT JOIN dat."Stocks" sto ON sto."Id" = s."StockId"
+     LEFT JOIN dat."Stocks" sto2 ON sto2."Id" = s."RestrictionOnlyStock"
      LEFT JOIN dat."SkillCategories" sc ON sc."Id" = s."CategoryId"
      LEFT JOIN dat."SkillTypes" sty ON sty."Id" = s."TypeId"
      LEFT JOIN dat."SkillToolTypes" stt ON stt."Id" = s."ToolTypeId"
      LEFT JOIN dat."Abilities" ab1 ON ab1."Id" = s."Root1Id"
-     LEFT JOIN dat."Abilities" ab2 ON ab2."Id" = s."Root2Id";
+     LEFT JOIN dat."Abilities" ab2 ON ab2."Id" = s."Root2Id"
+     LEFT JOIN dat."Abilities" ab3 ON ab3."Id" = s."RestrictionAbility";
 
 ALTER TABLE dat."SkillsList"
     OWNER TO apiuser;

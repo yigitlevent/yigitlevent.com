@@ -81,7 +81,12 @@ export function processSkills(refs: References): Processed {
 			const toolTypeId = findIndex("SkillToolTypes", skill.tools[0], refs);
 			const toolsDesc = (skill.tools[1] === "") ? null : `'${escapeTick(skill.tools[1])}'`;
 
-			datSkills.push(`(${skillIndex}, '${escapeTick(skill.name)}', ${stockId === null ? null : stockId[0]}, ${categoryId[0]}, ${typeId[0]}, ${skill.magical}, ${skill.training}, ${skill.noList}, ${root1}, ${root2}, ${desc}, ${toolTypeId[0]}, ${toolsDesc})`);
+			const splitRest = skill.restriction.split("➞");
+			const restStock = splitRest[1] ? findIndex("Stocks", splitRest[1], refs)[0] : null;
+			const restBurning = splitRest[0] === "ONLYBURN" ? true : splitRest[0] === "ONLY" ? false : null;
+			const restAttr = splitRest[3] ? findIndex("Abilities", splitRest[3], refs)[0] : null;
+
+			datSkills.push(`(${skillIndex}, '${escapeTick(skill.name)}', ${stockId === null ? null : stockId[0]}, ${categoryId[0]}, ${typeId[0]}, ${skill.magical}, ${skill.training}, ${skill.noList}, ${root1}, ${root2}, ${desc}, ${toolTypeId[0]}, ${toolsDesc}, ${restStock}, ${restBurning}, ${restAttr})`);
 			skillRefs.push([skillIndex, `${skill.stockName} ${skill.categoryName}➞${skill.name}`]);
 
 			skill.allowed.forEach(rulesetId => datRulesetSkills.push(`(${skillIndex}, '${rulesetId}')`));
@@ -91,7 +96,7 @@ export function processSkills(refs: References): Processed {
 		name: "p5_skills",
 		references: { Skills: skillRefs },
 		data: [
-			arrayToSQL("dat", "Skills", '"Id", "Name", "StockId", "CategoryId", "TypeId", "IsMagical", "IsTraining", "DontList", "Root1Id", "Root2Id", "Description", "ToolTypeId", "ToolDescription"', datSkills),
+			arrayToSQL("dat", "Skills", '"Id", "Name", "StockId", "CategoryId", "TypeId", "IsMagical", "IsTraining", "DontList", "Root1Id", "Root2Id", "Description", "ToolTypeId", "ToolDescription", "RestrictionOnlyStockId", "RestrictionWhenBurning", "RestrictionAbilityId"', datSkills),
 			arrayToSQL("dat", "RulesetSkills", '"SkillId", "RulesetId"', datRulesetSkills),
 			...processSubskills(skillRefs).data
 		]

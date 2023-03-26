@@ -17,6 +17,9 @@ CREATE TABLE dat."Skills"
 	"Description" character varying(325124), -- 10485760?
 	"ToolTypeId" integer,
 	"ToolDescription" character varying(255),
+	"RestrictionOnlyStockId" integer,
+	"RestrictionWhenBurning" boolean,
+	"RestrictionAbilityId" integer, 
     PRIMARY KEY ("Id"),
     FOREIGN KEY ("StockId")
         REFERENCES dat."Stocks" ("Id") MATCH SIMPLE
@@ -45,6 +48,16 @@ CREATE TABLE dat."Skills"
         NOT VALID,
     FOREIGN KEY ("ToolTypeId")
         REFERENCES dat."SkillToolTypes" ("Id") MATCH SIMPLE
+        ON UPDATE RESTRICT
+        ON DELETE RESTRICT
+        NOT VALID,
+    FOREIGN KEY ("RestrictionOnlyStock")
+        REFERENCES dat."Stocks" ("Id") MATCH SIMPLE
+        ON UPDATE RESTRICT
+        ON DELETE RESTRICT
+        NOT VALID,
+    FOREIGN KEY ("RestrictionAbility")
+        REFERENCES dat."Abilities" ("Id") MATCH SIMPLE
         ON UPDATE RESTRICT
         ON DELETE RESTRICT
         NOT VALID
