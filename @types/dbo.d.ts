@@ -123,7 +123,7 @@ interface LifepathDBO {
 }
 
 interface LifepathRequirementBlockDBO {
-	Id: string;
+	Id: number;
 	LifepathId: number;
 	LogicTypeId: number;
 	LogicType: string;
@@ -139,8 +139,13 @@ interface LifepathRequirementBlockItemDBO {
 	Min: number | null;
 	Max: number | null;
 	SettingId: number | null;
+	Setting: string | null;
 	LifepathId: number | null;
+	Lifepath: string | null;
 	SkillId: number | null;
+	Skill: string | null;
 	TraitId: number | null;
+	Trait: string | null;
 	AttributeId: number | null;
+	Attribute: string | null;
 }
