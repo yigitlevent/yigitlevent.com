@@ -1,7 +1,7 @@
-import { Lifepath, Stock } from "../data/stocks/_stocks";
+import { LifepathOld, StockOld } from "../data/stocks/_stocks";
 
 
-function CheckString(chosenLifepaths: Lifepath[], currentAge: number, lp: Lifepath, conditionString: string): boolean {
+function CheckString(chosenLifepaths: LifepathOld[], currentAge: number, lp: LifepathOld, conditionString: string): boolean {
 	// NOT CONSIDERED: GENDER➞FEMALE/MALE, GRIEF➞MIN/MAX, YEARS➞MIN/MAX
 	if (conditionString === "LP➞UNIQUE" && chosenLifepaths.includes(lp)) {
 		return false;
@@ -46,19 +46,19 @@ function CheckResults(blockType: "AND" | "OR" | "NOT", blockResults: boolean[]):
 	}
 }
 
-function CheckBlocks(chosenLifepaths: Lifepath[], currentAge: number, lp: Lifepath, condition: RequirementBlocks): boolean {
+function CheckBlocks(chosenLifepaths: LifepathOld[], currentAge: number, lp: LifepathOld, condition: RequirementBlocks): boolean {
 	const blocksResults = condition.items.map(block => CheckResults(block.type, block.items.map(item => CheckString(chosenLifepaths, currentAge, lp, item))));
 	return CheckResults(condition.type, blocksResults);
 }
 
-function GetCurrentAge(chosenLifepaths: Lifepath[], leadCount: number) {
+function GetCurrentAge(chosenLifepaths: LifepathOld[], leadCount: number) {
 	const yrs = chosenLifepaths.map(v => v.years).filter(v => typeof v === "number") as number[];
 	const sum = yrs.reduce((prev, curr) => prev + curr);
 	return sum + leadCount;
 }
 
-function FilterByRequirements(combinedPossibleLifepaths: Lifepath[], chosenLifepaths: Lifepath[], currentAge: number, checkRulesets: (allowed: RulesetIdOld[]) => boolean): Lifepath[] {
-	const filteredLifepaths: Lifepath[] = [];
+function FilterByRequirements(combinedPossibleLifepaths: LifepathOld[], chosenLifepaths: LifepathOld[], currentAge: number, checkRulesets: (allowed: RulesetIdOld[]) => boolean): LifepathOld[] {
+	const filteredLifepaths: LifepathOld[] = [];
 
 	combinedPossibleLifepaths = combinedPossibleLifepaths.filter(v => v.born === false).filter(v => checkRulesets(v.allowed));
 
@@ -74,7 +74,7 @@ function FilterByRequirements(combinedPossibleLifepaths: Lifepath[], chosenLifep
 	return filteredLifepaths;
 }
 
-export function FilterLifepaths(currentStock: Stock, chosenLifepaths: Lifepath[], maxLeads: number, prevLeadsCount: number, checkRulesets: (allowed: RulesetIdOld[]) => boolean) {
+export function FilterLifepaths(currentStock: StockOld, chosenLifepaths: LifepathOld[], maxLeads: number, prevLeadsCount: number, checkRulesets: (allowed: RulesetIdOld[]) => boolean) {
 	const lastLP = chosenLifepaths[chosenLifepaths.length - 1];
 	let possibilities = [...currentStock.settings[lastLP.setting].lifepaths];
 	if (prevLeadsCount < maxLeads) {

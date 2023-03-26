@@ -5,7 +5,7 @@ import { CharacterBurnerStoreVersion } from "./_persistOptions";
 
 import { GetLifepathFromPath, GetLifepathsFromPaths, GetSkillFromPath, GetTraitFromPath } from "../../utils/pathFinder";
 import { GetAverage } from "../../utils/misc";
-import { Lifepath, Stocks } from "../../data/stocks/_stocks";
+import { LifepathOld, Stocks } from "../../data/stocks/_stocks";
 import { Stat, Stats } from "../../data/stats";
 import { Attribute, AttributeQuestions, AttributeQuestionsKeys, Attributes } from "../../data/attributes";
 import { TraitCategories } from "../../data/traits/_traits";
@@ -136,8 +136,8 @@ export const useCharacterBurnerStore = create<CharacterBurnerState>()(
 						|| state.totals.traits.generalList.includes(traitPath));
 				},
 
-				calculateTotals: (chosenLifepaths: Lifepath[]) => {
-					const occuranceCount = (chosenLifepaths: Lifepath[], currentLifepath: Lifepath, currentIndex: number) => {
+				calculateTotals: (chosenLifepaths: LifepathOld[]) => {
+					const occuranceCount = (chosenLifepaths: LifepathOld[], currentLifepath: LifepathOld, currentIndex: number) => {
 						const previousLifepaths = chosenLifepaths.slice(0, currentIndex);
 						return previousLifepaths.filter(lp => lp.name === currentLifepath.name).length;
 					};
@@ -257,7 +257,7 @@ export const useCharacterBurnerStore = create<CharacterBurnerState>()(
 				},
 
 				refreshTotals: (generalSkills: string[], generalTraits: string[]) => {
-					const occuranceCount = (chosenLifepaths: Lifepath[], currentLifepath: Lifepath, currentIndex: number) => {
+					const occuranceCount = (chosenLifepaths: LifepathOld[], currentLifepath: LifepathOld, currentIndex: number) => {
 						const previousLifepaths = chosenLifepaths.slice(0, currentIndex);
 						return previousLifepaths.filter(lp => lp.name === currentLifepath.name).length;
 					};

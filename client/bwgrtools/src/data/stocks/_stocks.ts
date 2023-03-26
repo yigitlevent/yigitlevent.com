@@ -7,7 +7,7 @@ import { Troll } from "./troll";
 import { GreatWolf } from "./greatWolf";
 
 
-export interface Lifepath {
+export interface LifepathOld {
 	name: string;
 
 	allowed: RulesetIdOld[];
@@ -31,20 +31,20 @@ export interface Lifepath {
 	requirements: Requirements;
 }
 
-export interface Setting {
+export interface SettingOld {
 	allowed: RulesetIdOld[];
 	name: string;
 	short: string;
 	stock: StocksList;
 	type: SettingTypesList;
-	lifepaths: Lifepath[];
+	lifepaths: LifepathOld[];
 }
 
 export interface Settings {
-	[key: string]: Setting;
+	[key: string]: SettingOld;
 }
 
-export interface Stock {
+export interface StockOld {
 	agePool: { max: number, min: number, m: number, p: number; }[];
 	allowed: RulesetIdOld[];
 	hasSetting: boolean;
@@ -56,7 +56,7 @@ export interface Stock {
 }
 
 export interface StocksGroup {
-	[key: string]: Stock;
+	[key: string]: StockOld;
 }
 
 export const Stocks: StocksGroup = {

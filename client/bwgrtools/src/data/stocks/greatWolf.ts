@@ -1,6 +1,6 @@
-import { Stock } from "./_stocks";
+import { StockOld } from "./_stocks";
 
-export const GreatWolf: Stock = {
+export const GreatWolf: StockOld = {
 	agePool: [
 		{
 			max: 1,
