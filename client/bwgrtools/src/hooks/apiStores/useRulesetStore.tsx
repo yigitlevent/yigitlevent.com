@@ -26,6 +26,8 @@ interface RulesetStore {
 	traitCategories: string[];
 	traitTypes: string[];
 
+	lifepaths: Lifepath[];
+
 	toggleFetching: () => void;
 	fetchList: () => void;
 	fetchData: () => void;
@@ -37,7 +39,7 @@ interface RulesetStore {
 
 const Name = "RulesetStore";
 const Store: StateCreator<RulesetStore, [["zustand/devtools", never]], [], RulesetStore> = (set, get) => ({
-	fetching: false,
+	fetching: true,
 
 	rulesets: [],
 	chosenRulesets: ["bwgr" as unknown as RulesetId], // TODO: this shouldn't be fixed
@@ -54,14 +56,13 @@ const Store: StateCreator<RulesetStore, [["zustand/devtools", never]], [], Rules
 	traitCategories: [],
 	traitTypes: [],
 
+	lifepaths: [],
+
 	toggleFetching: () => {
 		set(produce<RulesetStore>((state) => { state.fetching = !state.fetching; }));
 	},
 
 	fetchList: () => {
-		const toggleFetching = get().toggleFetching;
-		toggleFetching();
-
 		GenericGet<RulesetList>("/rulesets/list")
 			.then(response => {
 				if (response.status === 200) {
@@ -69,13 +70,11 @@ const Store: StateCreator<RulesetStore, [["zustand/devtools", never]], [], Rules
 				}
 				else throw new Error();
 			})
-			.catch(reason => console.error(reason))
-			.finally(() => toggleFetching());
+			.catch(reason => console.error(reason));
 	},
 
 	fetchData: () => {
 		const toggleFetching = get().toggleFetching;
-		toggleFetching();
 
 		GenericGet<RulesetData>("/rulesets/data")
 			.then(response => {
@@ -92,6 +91,8 @@ const Store: StateCreator<RulesetStore, [["zustand/devtools", never]], [], Rules
 						state.traits = response.data.traits;
 						state.traitCategories = [...response.data.traits.reduce((a, v) => a.add(v.category[1]), new Set<string>())];
 						state.traitTypes = [...response.data.traits.reduce((a, v) => a.add(v.type[1]), new Set<string>())];
+
+						state.lifepaths = response.data.lifepaths;
 					}));
 				}
 				else throw new Error();

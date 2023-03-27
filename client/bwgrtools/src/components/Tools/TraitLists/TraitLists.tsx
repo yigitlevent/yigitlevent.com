@@ -31,7 +31,7 @@ export function TraitLists() {
 				<Grid item xs={3} sm={3} md={1}>
 					<FormControl variant="standard" fullWidth>
 						<InputLabel>Stock</InputLabel>
-						<Select label="Stock" value={filters["stock"]} onChange={v => setFilter("stock", v.target.value)}>
+						<Select label="Stock" value={filters["stock"]} onChange={v => setFilter([{ key: "stock", value: v.target.value }])}>
 							<MenuItem value="Any">Any</MenuItem>
 							{stocks.map(v => v.name).map((v, i) => <MenuItem key={i} value={v}>{v}</MenuItem>)}
 						</Select>
@@ -40,7 +40,7 @@ export function TraitLists() {
 				<Grid item xs={3} sm={3} md={1}>
 					<FormControl variant="standard" fullWidth>
 						<InputLabel>Category</InputLabel>
-						<Select label="Category" value={filters["category"]} onChange={v => setFilter("category", v.target.value)}>
+						<Select label="Category" value={filters["category"]} onChange={v => setFilter([{ key: "category", value: v.target.value }])}>
 							<MenuItem value="Any">Any</MenuItem>
 							{traitCategories.map((v, i) => <MenuItem key={i} value={v}>{v}</MenuItem>)}
 						</Select>
@@ -49,7 +49,7 @@ export function TraitLists() {
 				<Grid item xs={3} sm={3} md={1}>
 					<FormControl variant="standard" fullWidth>
 						<InputLabel>Type</InputLabel>
-						<Select label="Type" value={filters["type"]} onChange={v => setFilter("type", v.target.value)}>
+						<Select label="Type" value={filters["type"]} onChange={v => setFilter([{ key: "type", value: v.target.value }])}>
 							<MenuItem value="Any">Any</MenuItem>
 							{traitTypes.map((v, i) => <MenuItem key={i} value={v}>{v}</MenuItem>)}
 						</Select>
@@ -61,7 +61,7 @@ export function TraitLists() {
 						label={"Search"}
 						variant="standard"
 						value={searchString}
-						onChange={(e) => setFilter("s", e.target.value)}
+						onChange={(e) => setFilter([{ key: "s", value: e.target.value }])}
 						fullWidth
 					/>
 				</Grid>
@@ -70,7 +70,7 @@ export function TraitLists() {
 						<InputLabel>Search Fields</InputLabel>
 						<Select
 							value={searchFields}
-							onChange={(e) => setFilter("sf", typeof e.target.value !== "string" ? e.target.value.join(",") : e.target.value)}
+							onChange={(e) => setFilter([{ key: "sf", value: typeof e.target.value !== "string" ? e.target.value.join(",") : e.target.value }])}
 							renderValue={(selected) => selected.join(", ")}
 							multiple
 						>

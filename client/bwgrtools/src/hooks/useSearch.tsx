@@ -5,59 +5,81 @@ import Fuse from "fuse.js";
 
 type List<T> = (T & { rulesets: RulesetId[]; })[];
 
-export function useSearch<T>(mainList: List<T>, filterKeys: string[]) {
+export function useSearch<T>(mainList: List<T>, filterKeys: string[], initialFilterValues?: { [key: string]: string; }) {
+	const [originalList] = useState(mainList);
 	const [urlParams, setUrlParams] = useSearchParams();
 
-	const [searchResults, setSearchResults] = useState<List<T>>(mainList);
-
-	const [searchString, setSearchString] = useState("");
-	const [searchFields, setSearchFields] = useState<string[]>(["Name"]);
-
-	const [filters, setFilters] = useState<{ [key: string]: string; }>(filterKeys.reduce((a, v) => ({ ...a, [v]: "Any" }), {}));
-
-	useEffect(() => {
+	const applyInitialFilterValues = useCallback((fKeys: string[]) => {
 		const s = urlParams.get("s");
 		if (s) setSearchString(s);
 
 		const sf = urlParams.get("sf");
 		if (sf) setSearchFields(sf.split(","));
 
-		Object.keys(filters).forEach((filterKey) => {
+		const newFilters: { [key: string]: string; } = fKeys.reduce((a, v) => ({ ...a, [v]: "Any" }), {});
+
+		Object.keys(newFilters).forEach((filterKey) => {
 			const filterValue = urlParams.get(filterKey);
-			if (filterValue) {
-				const newFilters = JSON.parse(JSON.stringify(filters));
-				newFilters[filterKey] = filterValue;
-				setFilters(newFilters);
+			if (filterValue) newFilters[filterKey] = filterValue;
+			else if (initialFilterValues) newFilters[filterKey] = initialFilterValues[filterKey];
+		});
+
+		return newFilters;
+	}, [initialFilterValues, urlParams]);
+
+	const [filters, setFilters] = useState<{ [key: string]: string; }>(applyInitialFilterValues(filterKeys));
+
+	const setInitialList = useCallback((mlist: List<T>) => {
+		if (filters) {
+			let res = mlist;
+			Object.keys(filters).forEach((filterKey) => {
+				const filterValue = filters[filterKey];
+				if (filterValue !== "Any") {
+					res = res.filter(v => {
+						const itemValue = (v as any)[filterKey];
+						if (itemValue) return itemValue[1] === filters[filterKey];
+						return false;
+					});
+				}
+			});
+			return res;
+		}
+		return mlist;
+	}, [filters]);
+
+	const [searchResults, setSearchResults] = useState<List<T>>(setInitialList(mainList));
+
+	const [searchString, setSearchString] = useState("");
+	const [searchFields, setSearchFields] = useState<string[]>(["Name"]);
+
+
+	const setFilter = useCallback((filtersToApply: { key: string; value: string; }[]) => {
+		const newFilters: { [key: string]: string; } = JSON.parse(JSON.stringify(filters));
+
+		filtersToApply.forEach(filter => {
+			if (filter.key === "s") {
+				if (filter.value === "") urlParams.delete(filter.key);
+				else urlParams.set("s", filter.value);
+				setSearchString(filter.value);
+			}
+			else if (filter.key === "sf") {
+				if (filter.value === "") urlParams.delete(filter.key);
+				else urlParams.set("sf", filter.value);
+				setSearchFields(filter.value.split(","));
+			}
+			else {
+				if (filter.value !== "Any") urlParams.set(filter.key, filter.value);
+				else urlParams.delete(filter.key);
+				newFilters[filter.key] = filter.value;
 			}
 		});
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
-
-	const setFilter = useCallback((filterKey: string, filterValue: string) => {
-		if (filterKey === "s") {
-			if (filterValue === "") urlParams.delete(filterKey);
-			else urlParams.set("s", filterValue);
-			setSearchString(filterValue);
-		}
-		else if (filterKey === "sf") {
-			if (filterValue === "") urlParams.delete(filterKey);
-			else urlParams.set("sf", filterValue);
-			setSearchFields(filterValue.split(","));
-		}
-		else {
-			if (filterValue !== "Any") urlParams.set(filterKey, filterValue);
-			else urlParams.delete(filterKey);
-
-			const newFilters = JSON.parse(JSON.stringify(filters));
-			newFilters[filterKey] = filterValue;
-			setFilters(newFilters);
-		}
 
 		setUrlParams(urlParams);
+		setFilters(newFilters);
 	}, [filters, setUrlParams, urlParams]);
 
 	const search = useCallback(() => {
-		let res = mainList;
+		let res = originalList;
 
 		Object.keys(filters).forEach((filterKey) => {
 			const filterValue = filters[filterKey];
@@ -82,7 +104,7 @@ export function useSearch<T>(mainList: List<T>, filterKeys: string[]) {
 		}
 
 		setSearchResults(res);
-	}, [mainList, filters, searchFields, searchString]);
+	}, [originalList, filters, searchString, searchFields]);
 
 
 	useEffect(() => {
