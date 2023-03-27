@@ -1,4 +1,4 @@
-import { Stocks, Setting } from "../../../client/bwgrtools/src/data/stocks/_stocks";
+import { Stocks, SettingOld } from "../../../client/bwgrtools/src/data/stocks/_stocks";
 import { arrayToSQL } from "../util/arrayToSql";
 import { findIndex } from "../util/findRef";
 
@@ -13,7 +13,7 @@ export function processStocks(): Processed {
 	const datSettings: string[] = [];
 	const datRulesetSettings: string[] = [];
 	
-	const allSettings: Setting[] = [];
+	const allSettings: SettingOld[] = [];
 
 	Object.keys(Stocks).forEach((stockKey, stockIndex) => {
 		const stock = Stocks[stockKey];

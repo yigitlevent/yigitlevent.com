@@ -258,7 +258,7 @@ export function processLifepaths(refs: References): Processed {
 		name: "p6_lifepaths",
 		references: { Lifepaths: lifepathRefs },
 		data: [
-			arrayToSQL("dat", "Lifepaths", '"Id", "Name" , "StockId", "SettingId", "Born", "Years", "EitherPool", "MentalPool", "PhysicalPool", "GeneralSkillPool", "LifepathSkillPool", "TraitPool", "ResourcePoints", "IsGSPMultiplier", "IsLSPMultiplier", "IsRPMultiplier", "HalfGSPFromPrev", "HalfLSPFromPrev", "HalfRPFromPrev", "RequirementText"', datLifepaths),
+			arrayToSQL("dat", "Lifepaths", '"Id", "Name", "StockId", "SettingId", "Born", "Years", "EitherPool", "MentalPool", "PhysicalPool", "GeneralSkillPool", "LifepathSkillPool", "TraitPool", "ResourcePoints", "IsGSPMultiplier", "IsLSPMultiplier", "IsRPMultiplier", "HalfGSPFromPrev", "HalfLSPFromPrev", "HalfRPFromPrev", "RequirementText"', datLifepaths),
 			arrayToSQL("dat", "RulesetLifepaths", '"LifepathId", "RulesetId"', datRulesetLifepaths),
 
 			arrayToSQL("dat", "LifepathLeads", '"LifepathId", "SettingId"', datLifepathLeads),
