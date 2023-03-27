@@ -35,7 +35,7 @@ export function LifepathLists() {
 			<Typography variant="h3">Lifepath Explorer</Typography>
 
 			<GenericGrid columns={4} center>
-				<Grid item xs={3} sm={3} md={1}>
+				<Grid item xs={4} sm={2} md={1}>
 					<FormControl variant="standard" fullWidth>
 						<InputLabel>Stock</InputLabel>
 						<Select label="Stock" value={filters["stock"]} onChange={v => updateStock(v.target.value)}>
@@ -43,7 +43,7 @@ export function LifepathLists() {
 						</Select>
 					</FormControl>
 				</Grid>
-				<Grid item xs={3} sm={3} md={1}>
+				<Grid item xs={4} sm={2} md={1}>
 					<FormControl variant="standard" fullWidth>
 						<InputLabel>Setting</InputLabel>
 						<Select label="Setting" value={allowedSettings.includes(filters["setting"]) ? filters["setting"] : ""} onChange={v => setFilter([{ key: "setting", value: v.target.value }])}>
@@ -51,8 +51,7 @@ export function LifepathLists() {
 						</Select>
 					</FormControl>
 				</Grid>
-
-				<Grid item xs={3} sm={3} md={2}>
+				<Grid item xs={4} sm={2} md={2}>
 					<TextField
 						label={"Search"}
 						variant="standard"
@@ -61,7 +60,7 @@ export function LifepathLists() {
 						fullWidth
 					/>
 				</Grid>
-				<Grid item xs={3} sm={3} md={1}>
+				<Grid item xs={4} sm={2} md={1}>
 					<FormControl variant="standard" fullWidth>
 						<InputLabel>Search Fields</InputLabel>
 						<Select
