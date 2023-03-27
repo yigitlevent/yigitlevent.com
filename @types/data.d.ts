@@ -93,7 +93,8 @@ interface Trait {
 }
 
 type LifepathRequirementItem =
-	{ isUnique: true; } |
+	{ logicType: [id: LogicTypeId, name: string]; } &
+	({ isUnique: true; } |
 	{ isSettingEntry: true; } |
 	{ minLpIndex: number; } |
 	{ maxLpIndex: number; } |
@@ -105,7 +106,7 @@ type LifepathRequirementItem =
 	{ skill: [id: SkillId, name: string]; forCompanion: boolean; } |
 	{ trait: [id: TraitId, name: string]; forCompanion: boolean; } |
 	{ lifepath: [id: LifepathId, name: string]; forCompanion: boolean; } |
-	{ setting: [id: SettingId, name: string]; forCompanion: boolean; };
+	{ setting: [id: SettingId, name: string]; forCompanion: boolean; });
 
 interface LifepathRequirementBlock {
 	logicType: [id: LogicTypeId, name: string];

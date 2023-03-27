@@ -106,7 +106,7 @@ interface LifepathDBO {
 	GeneralSkillPool: number;
 	LifepathSkillPool: number;
 	TraitPool: number;
-	ResporcePoints: number;
+	ResourcePoints: number;
 	IsGSPMultiplier: boolean;
 	IsLSPMultiplier: boolean;
 	IsRPMultiplier: boolean;
