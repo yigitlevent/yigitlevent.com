@@ -9041,19 +9041,7 @@ export const Human: StockOld = {
 					mentalPool: 0,
 					name: "Farmer",
 					physicalPool: 1,
-					requirements: {
-						conditions: {
-							type: "AND",
-							items: [
-								{
-									type: "AND",
-									items: [
-										"LP➞MIN➞3"
-									]
-								}
-							]
-						}
-					},
+					requirements: {},
 					resources: 5,
 					setting: "Peasant",
 					skillPool: 8,
@@ -9094,16 +9082,9 @@ export const Human: StockOld = {
 							type: "OR",
 							items: [
 								{
-									type: "OR",
-									items: [
-										"Human➞Peasant➞Farmer",
-										"Human➞Peasant➞Itinerant Priest"
-									]
-								},
-								{
 									type: "AND",
 									items: [
-										"GENDER➞FEMALE"
+										"LP➞MIN➞3"
 									]
 								}
 							]
