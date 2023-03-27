@@ -187,6 +187,8 @@ export async function GetLifepaths() {
 				if (v.CompanionRPMultiplier && v.CompanionRPMultiplier > 0) lp.companion.inheritRPMultiplier = v.CompanionRPMultiplier;
 			}
 
+			if (v.RequirementText) lp.requirementsText = v.RequirementText;
+
 			const reqBlocks = lr.filter(a => a.LifepathId === v.Id);
 			if (reqBlocks.length > 0) {
 				lp.requirements = reqBlocks.map(vrb => {

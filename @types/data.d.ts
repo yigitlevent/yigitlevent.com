@@ -151,6 +151,7 @@ interface Lifepath {
 		settingIds: SettingId[];
 	};
 	requirements?: LifepathRequirementBlock[];
+	requirementsText?: string;
 }
 
 interface RulesetList {
