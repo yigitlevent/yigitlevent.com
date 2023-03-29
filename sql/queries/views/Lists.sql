@@ -263,3 +263,113 @@ CREATE OR REPLACE VIEW dat."LifepathRequirementBlockItems" AS
 ALTER TABLE dat."LifepathRequirementBlockItems"
     OWNER TO apiuser;
 
+
+-- View: dat."ResourcesList"
+
+-- DROP VIEW dat."ResourcesList";
+
+CREATE OR REPLACE VIEW dat."ResourcesList" AS
+ SELECT ARRAY( SELECT rr."RulesetId"
+           FROM dat."RulesetResources" rr
+          WHERE rr."ResourceId" = r."Id") AS "Rulesets",
+    r."Id",
+    r."Name",
+    r."StockId",
+    s."Name" AS "Stock",
+    r."ResourceTypeId",
+    rt."Name" AS "ResourceType",
+    r."Description",
+    r."VariableCost",
+    ARRAY( SELECT rc."Cost"
+           FROM dat."ResourceCosts" rc
+          WHERE r."Id" = rc."ResourceId"
+          ORDER BY rc."Id") AS "Costs",
+    array_remove(ARRAY( SELECT rc."Description"
+           FROM dat."ResourceCosts" rc
+          WHERE r."Id" = rc."ResourceId"
+          ORDER BY rc."Id"), NULL::character varying) AS "CostDescriptions",
+    ARRAY( SELECT rc."Cost"
+           FROM dat."ResourceModifiers" rc
+          WHERE r."Id" = rc."ResourceId"
+          ORDER BY rc."Id") AS "Modifiers",
+    ARRAY( SELECT rc."IsPerCost"
+           FROM dat."ResourceModifiers" rc
+          WHERE r."Id" = rc."ResourceId"
+          ORDER BY rc."Id") AS "ModifierIsPerCosts",
+    ARRAY( SELECT rc."Description"
+           FROM dat."ResourceModifiers" rc
+          WHERE r."Id" = rc."ResourceId"
+          ORDER BY rc."Id") AS "ModifierDescriptions"
+   FROM dat."Resources" r
+     LEFT JOIN dat."Stocks" s ON s."Id" = r."StockId"
+     LEFT JOIN dat."ResourceTypes" rt ON rt."Id" = r."ResourceTypeId";
+
+ALTER TABLE dat."ResourcesList"
+    OWNER TO apiuser;
+
+
+-- View: dat."ResourceMagicDetailsList"
+
+-- DROP VIEW dat."ResourceMagicDetailsList";
+
+CREATE OR REPLACE VIEW dat."ResourceMagicDetailsList" AS
+ SELECT rmd."Id",
+    rmd."ResourceId",
+    rmd."OriginId",
+    sof."Name" AS "Origin",
+    rmd."DurationId",
+    sdf."Name" AS "Duration",
+    rmd."AreaOfEffectId",
+    saf."Name" AS "AreaOfEffect",
+    rmd."AreaOfEffectUnitId",
+    du."Name" AS "AreaOfEffectUnit",
+    rmd."AreaOfEffectModifierId",
+    um."Name" AS "AreaofEffectModifier",
+    rmd."Element1Id",
+    sef1."Name" AS "Element1",
+    rmd."Element2Id",
+    sef2."Name" AS "Element2",
+    rmd."Element3Id",
+    sef3."Name" AS "Element3",
+    rmd."Impetus1Id",
+    sif1."Name" AS "Impetus1",
+    rmd."Impetus2Id",
+    sif2."Name" AS "Impetus2",
+    rmd."Actions",
+    rmd."ActionsMultiply"
+   FROM dat."ResourceMagicDetails" rmd
+     LEFT JOIN dat."SpellOriginFacets" sof ON sof."Id" = rmd."OriginId"
+     LEFT JOIN dat."SpellDurationFacets" sdf ON sdf."Id" = rmd."DurationId"
+     LEFT JOIN dat."SpellAreaOfEffectFacets" saf ON saf."Id" = rmd."AreaOfEffectId"
+     LEFT JOIN dat."SpellElementFacets" sef1 ON sef1."Id" = rmd."Element1Id"
+     LEFT JOIN dat."SpellElementFacets" sef2 ON sef2."Id" = rmd."Element2Id"
+     LEFT JOIN dat."SpellElementFacets" sef3 ON sef3."Id" = rmd."Element3Id"
+     LEFT JOIN dat."SpellImpetusFacets" sif1 ON sif1."Id" = rmd."Impetus1Id"
+     LEFT JOIN dat."SpellImpetusFacets" sif2 ON sif2."Id" = rmd."Impetus2Id"
+     LEFT JOIN dat."DistanceUnits" du ON du."Id" = rmd."AreaOfEffectUnitId"
+     LEFT JOIN dat."UnitModifiers" um ON um."Id" = rmd."AreaOfEffectModifierId";
+
+ALTER TABLE dat."ResourceMagicDetailsList"
+    OWNER TO apiuser;
+
+
+-- View: dat."ResourceMagicObstaclesList"
+
+-- DROP VIEW dat."ResourceMagicObstaclesList";
+
+CREATE OR REPLACE VIEW dat."ResourceMagicObstaclesList" AS
+ SELECT rmo."Id",
+    rmo."ResourceId",
+    rmo."Obstacle",
+    rmo."ObstacleAbility1Id",
+    a1."Name" AS "ObstacleAbility1",
+    rmo."ObstacleAbility2Id",
+    a2."Name" AS "ObstacleAbility2",
+    rmo."ObstacleCaret",
+    rmo."Description"
+   FROM dat."ResourceMagicObstacles" rmo
+     LEFT JOIN dat."Abilities" a1 ON a1."Id" = rmo."ObstacleAbility1Id"
+     LEFT JOIN dat."Abilities" a2 ON a2."Id" = rmo."ObstacleAbility2Id";
+
+ALTER TABLE dat."ResourceMagicObstaclesList"
+    OWNER TO apiuser;
