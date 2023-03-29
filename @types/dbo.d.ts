@@ -149,3 +149,59 @@ interface LifepathRequirementBlockItemDBO {
 	AttributeId: number | null;
 	Attribute: string | null;
 }
+
+interface ResourceDBO {
+	Rulesets: string[];
+	Id: number;
+	Name: string;
+	StockId: number;
+	Stock: string;
+	ResourceTypeId: number;
+	ResourceType: string;
+	Description: string | null;
+	VariableCost: boolean;
+	Costs: number[];
+	CostDescriptions: string[];
+	Modifiers: int[];
+	ModifierIsPerCosts: boolean[];
+	ModifierDescriptions: string[];
+}
+
+interface ResourceMagicDetailsDBO {
+	Id: number;
+	ResourceId: number;
+	OriginId: number;
+	Origin: string;
+	DurationId: number;
+	Duration: string;
+	AreaOfEffectId: number;
+	AreaOfEffect: string;
+	AreaOfEffectUnitId: number | null;
+	AreaOfEffectUnit: string | null;
+	AreaOfEffectModifierId: number | null;
+	AreaofEffectModifier: string | null;
+	Element1Id: number;
+	Element1: string;
+	Element2Id: number | null;
+	Element2: string | null;
+	Element3Id: number | null;
+	Element3: string | null;
+	Impetus1Id: number;
+	Impetus1: string;
+	Impetus2Id: number | null;
+	Impetus2: string | null;
+	Actions: number;
+	ActionsMultiply: boolean;
+}
+
+interface ResourceMagicObstaclesDBO {
+	Id: number;
+	ResourceId: number;
+	Obstacle: number | null;
+	ObstacleAbility1Id: number | null;
+	ObstacleAbility1: string | null;
+	ObstacleAbility2Id: number | null;
+	ObstacleAbility2: string | null;
+	ObstacleCaret: boolean;
+	Description: string | null;
+}

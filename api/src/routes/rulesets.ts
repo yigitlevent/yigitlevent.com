@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 
-import { GetAbilities, GetLifepaths, GetRulesets, GetSettings, GetSkills, GetStocks, GetTraits } from "../queries/queries";
+import { GetAbilities, GetLifepaths, GetResources, GetRulesets, GetSettings, GetSkills, GetStocks, GetTraits } from "../queries/queries";
 
 
 export async function GetRulesetsList(request: Request, response: Response) {
@@ -24,8 +24,9 @@ export async function GetRulesetsData(request: Request, response: Response) {
 		const skills = await GetSkills();
 		const traits = await GetTraits();
 		const lifepaths = await GetLifepaths();
+		const resources = await GetResources();
 
-		const data: RulesetData = { abilities, stocks, settings, skills, traits, lifepaths };
+		const data: RulesetData = { abilities, stocks, settings, skills, traits, lifepaths, resources };
 
 		response.status(200);
 		return response.json(data);

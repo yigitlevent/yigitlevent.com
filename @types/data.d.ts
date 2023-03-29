@@ -155,6 +155,39 @@ interface Lifepath {
 	requirementsText?: string;
 }
 
+interface ResourceMagicDetails {
+	origin: [id: OriginFacetId, name: string];
+	duration: [id: DurationFacetId, name: string];
+	areaOfEffect: [id: AreaOfEffectFacetId, name: string];
+	areaOfEffectDetails?: {
+		unit?: [id: DistanceUnitId, name: string],
+		modifier?: [id: UnitModifierId, name: string];
+	};
+	elements: [id: ElementFacetId, name: string][];
+	impetus: [id: ImpetusFacetId, name: string][];
+	actions: number;
+	doActionsMultiply: boolean;
+	obstacles: {
+		obstacle?: number;
+		abilities?: [id: AbilityId, name: string][];
+		caret?: boolean;
+		description?: string;
+	};
+}
+
+interface Resource {
+	rulesets: RulesetId[];
+	id: ResourceId;
+	name: string;
+	stock: [id: StockId, name: string];
+	resourceType: [id: ResourceTypeId, name: string];
+	description?: string;
+	variableCost?: boolean;
+	costs: [cost: number, description: string][];
+	modifiers: [cost: number, isPer: boolean, description: string][];
+	magical?: ResourceMagicDetails[];
+};
+
 interface RulesetList {
 	rulesets: Ruleset[];
 }
@@ -166,4 +199,5 @@ interface RulesetData {
 	skills: Skill[];
 	traits: Trait[];
 	lifepaths: Lifepath[];
+	resources: Resource[];
 }

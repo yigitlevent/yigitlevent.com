@@ -264,4 +264,83 @@ export async function GetLifepaths() {
 	]).then(result => convert(result[0].rows, result[1].rows, result[2].rows));
 }
 
+export async function GetResources() {
+	const convert = (re: ResourceDBO[], rmd: ResourceMagicDetailsDBO[], rmo: ResourceMagicObstaclesDBO[]): Resource[] => {
+		const r: Resource[] = re.map(v => {
+			const res: Resource = {
+				rulesets: v.Rulesets as unknown[] as RulesetId[],
+				id: v.Id as unknown as ResourceId,
+				name: v.Name,
+				stock: [v.StockId as unknown as StockId, v.Stock],
+				resourceType: [v.StockId as unknown as ResourceTypeId, v.ResourceType],
+				costs: [],
+				modifiers: []
+			};
 
+			if (v.VariableCost) res.variableCost = true;
+			if (v.Description) res.description = v.Description;
+			v.Costs.forEach((c, i) => res.costs.push([c, v.CostDescriptions[i]]));
+			v.Modifiers.forEach((c, i) => res.modifiers.push([c, v.ModifierIsPerCosts[i], v.CostDescriptions[i]]));
+
+			const mDetails = rmd.filter(a => a.ResourceId === v.Id);
+			if (mDetails.length > 0) res.magical = [];
+			mDetails.forEach(md => {
+				const mdet: ResourceMagicDetails = {
+					origin: [md.OriginId as unknown as OriginFacetId, md.Origin],
+					duration: [md.DurationId as unknown as DurationFacetId, md.Duration],
+					areaOfEffect: [md.AreaOfEffectId as unknown as AreaOfEffectFacetId, md.AreaOfEffect],
+					elements: [],
+					impetus: [],
+					actions: md.Actions,
+					doActionsMultiply: md.ActionsMultiply,
+					obstacles: {}
+				};
+
+				if (md.AreaOfEffectModifierId || md.AreaofEffectModifier || md.AreaOfEffectUnitId || md.AreaOfEffectUnit) mdet.areaOfEffectDetails = {};
+				if (mdet.areaOfEffectDetails && md.AreaOfEffectUnitId && md.AreaOfEffectUnit) {
+					mdet.areaOfEffectDetails.unit = [md.AreaOfEffectUnitId as unknown as DistanceUnitId, md.AreaOfEffectUnit];
+				}
+				if (mdet.areaOfEffectDetails && md.AreaOfEffectModifierId && md.AreaofEffectModifier) {
+					mdet.areaOfEffectDetails.modifier = [md.AreaOfEffectModifierId as unknown as UnitModifierId, md.AreaofEffectModifier];
+				}
+
+				if (md.Element1Id && md.Element1) mdet.elements.push([md.Element1Id as unknown as ElementFacetId, md.Element1]);
+				if (md.Element2Id && md.Element2) mdet.elements.push([md.Element2Id as unknown as ElementFacetId, md.Element2]);
+				if (md.Element3Id && md.Element3) mdet.elements.push([md.Element3Id as unknown as ElementFacetId, md.Element3]);
+				if (md.Impetus1Id && md.Impetus1) mdet.impetus.push([md.Impetus1Id as unknown as ImpetusFacetId, md.Impetus1]);
+				if (md.Impetus2Id && md.Impetus2) mdet.impetus.push([md.Impetus2Id as unknown as ImpetusFacetId, md.Impetus2]);
+
+				const mObs = rmo.filter(a => a.ResourceId === v.Id);
+				mObs.forEach(mo => {
+					if (mo.Obstacle) mdet.obstacles.obstacle = mo.Obstacle;
+					if (mo.ObstacleCaret) mdet.obstacles.caret = mo.ObstacleCaret;
+					if (mo.Description) mdet.obstacles.description = mo.Description;
+					if (mo.ObstacleAbility1Id || mo.ObstacleAbility1 || mo.ObstacleAbility2Id || mo.ObstacleAbility2) mdet.obstacles.abilities = [];
+					if (mdet.obstacles.abilities && mo.ObstacleAbility1Id && mo.ObstacleAbility1) {
+						mdet.obstacles.abilities.push([mo.ObstacleAbility1Id as unknown as AbilityId, mo.ObstacleAbility1]);
+					}
+					if (mdet.obstacles.abilities && mo.ObstacleAbility2Id && mo.ObstacleAbility2) {
+						mdet.obstacles.abilities.push([mo.ObstacleAbility2Id as unknown as AbilityId, mo.ObstacleAbility2]);
+					}
+				});
+
+				res.magical?.push(mdet);
+			});
+
+
+			return res;
+		});
+
+
+		return r;
+	};
+
+	const query1 = 'select * from dat."ResourcesList";';
+	const query2 = 'select * from dat."ResourceMagicDetailsList";';
+	const query3 = 'select * from dat."ResourceMagicObstaclesList";';
+	return Promise.all([
+		PgPool.query<ResourceDBO>(query1),
+		PgPool.query<ResourceMagicDetailsDBO>(query2),
+		PgPool.query<ResourceMagicObstaclesDBO>(query3)
+	]).then(result => convert(result[0].rows, result[1].rows, result[2].rows));
+}

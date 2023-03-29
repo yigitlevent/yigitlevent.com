@@ -7,6 +7,7 @@ type SettingId = NominalNumber<"SettingId">;
 type SkillId = NominalNumber<"SkillId">;
 type TraitId = NominalNumber<"TraitId">;
 type LifepathId = NominalNumber<"LifepathId">;
+type ResourceId = NominalNumber<"ResourceId">;
 
 type AbilityTypeId = NominalNumber<"AbilityTypeId">;
 type SkillCategoryId = NominalNumber<"SkillCategoryId">;
@@ -15,4 +16,14 @@ type SkillRootId = NominalNumber<"SkillRootId">;
 type SkillToolTypeId = NominalNumber<"SkillToolTypeId">;
 type TraitCategoryId = NominalNumber<"TraitCategoryId">;
 type TraitTypeId = NominalNumber<"TraitTypeId">;
-type LogicTypeId = NominalNumber<"LogicTypeId">; 
+type ResourceTypeId = NominalNumber<"ResourceTypeId">;
+
+type OriginFacetId = NominalNumber<"OriginFacetId">;
+type DurationFacetId = NominalNumber<"DurationFacetId">;
+type AreaOfEffectFacetId = NominalNumber<"AreaOfEffectFacetId">;
+type ElementFacetId = NominalNumber<"ElementFacetId">;
+type ImpetusFacetId = NominalNumber<"ImpetusFacetId">;
+
+type LogicTypeId = NominalNumber<"LogicTypeId">;
+type DistanceUnitId = NominalNumber<"DistanceUnitId">;
+type UnitModifierId = NominalNumber<"UnitModifierId">; 
