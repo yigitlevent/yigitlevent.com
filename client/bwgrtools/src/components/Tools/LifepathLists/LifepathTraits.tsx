@@ -9,13 +9,13 @@ import { PopoverLink } from "../../Shared/PopoverLink";
 
 
 export function LifepathTraits({ lifepath }: { lifepath: Lifepath; }) {
-	const { traits } = useRulesetStore();
+	const { getTrait } = useRulesetStore();
 
 	const lifepathTraits =
 		lifepath.traits
 			? lifepath.traits
 				.map(traitId => {
-					const trait = traits.find(v => v.id === traitId);
+					const trait = getTrait(traitId);
 					if (trait) return trait;
 					else throw new Error(`Trait of TraitId '${traitId}' cannot be found.`);
 				})

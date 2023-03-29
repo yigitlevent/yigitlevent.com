@@ -9,18 +9,18 @@ import { PopoverLink } from "../../Shared/PopoverLink";
 
 
 export function LifepathSkills({ lifepath }: { lifepath: Lifepath; }) {
-	const { skills } = useRulesetStore();
+	const { getSkill } = useRulesetStore();
 
 	const hasGeneralSkill = lifepath.pools.generalSkillPool !== 0;
 	const hasLifepathSkill = lifepath.pools.lifepathSkillPool !== 0;
 
-	const generalSkill = skills.find(v => v.name === "General");
+	const generalSkill = getSkill("General");
 
 	const lifepathSkills =
 		lifepath.skills
 			? lifepath.skills
 				.map(skillId => {
-					const skill = skills.find(v => v.id === skillId);
+					const skill = getSkill(skillId);
 					if (skill) return skill;
 					else throw new Error(`Skill of SkillId '${skillId}' cannot be found.`);
 				})

@@ -10,7 +10,7 @@ import { LifepathRequirements } from "./LifepathRequirements";
 
 
 export function LifepathBox({ lifepath }: { lifepath: Lifepath; }) {
-	const { settings } = useRulesetStore();
+	const { getSetting } = useRulesetStore();
 
 	const getYears = (l: Lifepath) => {
 		const years = typeof l.years === "number"
@@ -40,7 +40,7 @@ export function LifepathBox({ lifepath }: { lifepath: Lifepath; }) {
 		const leads = (l.leads && l.leads.length > 0)
 			? l.leads
 				.map(settingId => {
-					const s = settings.find(v => v.id === settingId);
+					const s = getSetting(settingId);
 					if (s) return s.nameShort;
 					else throw new Error(`Setting of LeadId '${settingId}' cannot be found.`);
 				})

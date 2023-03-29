@@ -7,32 +7,40 @@ import { GenericGet } from "../stores/_genericRequests";
 
 // TODO: research index key signatures to see if there is a workaround
 interface RulesetStore {
-	fetching: boolean;
+	readonly fetching: boolean;
 
-	rulesets: Ruleset[];
-	chosenRulesets: RulesetId[];
+	readonly rulesets: Ruleset[];
+	readonly chosenRulesets: RulesetId[];
 
-	abilities: Ability[];
+	readonly abilities: Ability[];
+	readonly stocks: Stock[];
+	readonly settings: Setting[];
 
-	stocks: Stock[];
+	readonly skills: Skill[];
+	readonly skillCategories: string[];
+	readonly skillTypes: string[];
 
-	settings: Setting[];
+	readonly traits: Trait[];
+	readonly traitCategories: string[];
+	readonly traitTypes: string[];
 
-	skills: Skill[];
-	skillCategories: string[];
-	skillTypes: string[];
+	readonly lifepaths: Lifepath[];
 
-	traits: Trait[];
-	traitCategories: string[];
-	traitTypes: string[];
-
-	lifepaths: Lifepath[];
-
-	resources: Resource[];
+	readonly resources: Resource[];
 
 	toggleFetching: () => void;
 	fetchList: () => void;
 	fetchData: () => void;
+
+	// TODO: Might be useful to create a hash table of id-index pairs to quicken the search -- name/string search being slow is fine, it should be used veeery rarely
+	serveResult: <T>(row: T[], error: [id: any, msg: string]) => T;
+	getAbility: (search: AbilityId | string) => Ability;
+	getStock: (search: StockId | string) => Stock;
+	getSetting: (search: SettingId | string) => Setting;
+	getSkill: (search: SkillId | string) => Skill;
+	getTrait: (search: TraitId | string) => Trait;
+	getLifepath: (search: LifepathId | string) => Lifepath;
+	getResource: (search: ResourceId | string) => Resource;
 
 	toggleDataset: (dataset: RulesetId) => void;
 	checkRulesets: (allowed: RulesetId[]) => boolean;
@@ -107,6 +115,47 @@ const Store: StateCreator<RulesetStore, [["zustand/devtools", never]], [], Rules
 			.finally(() => toggleFetching());
 	},
 
+	serveResult<T>(row: T[], error: [id: any, msg: string]): T {
+		if (row.length == 1) return row[0];
+		else if (row.length > 1) throw new Error(`Found multiple ${error[1]} rows with ${typeof error[0] === "string" ? "name" : "id"} '${error[0]}'`);
+		else throw new Error(`Could not find any ${error[1]} with ${typeof error[0] === "string" ? "name" : "id"} '${error[0]}'`);
+	},
+
+	getAbility(search: AbilityId | string) {
+		const rows = (typeof search === "string") ? this.abilities.filter(v => v.name = search) : this.abilities.filter(v => v.id = search);
+		return this.serveResult(rows, [search, "abilities"]);
+	},
+
+	getStock(search: StockId | string) {
+		const rows = (typeof search === "string") ? this.stocks.filter(v => v.name = search) : this.stocks.filter(v => v.id = search);
+		return this.serveResult(rows, [search, "stocks"]);
+	},
+
+	getSetting(search: SettingId | string) {
+		const rows = (typeof search === "string") ? this.settings.filter(v => v.name = search) : this.settings.filter(v => v.id = search);
+		return this.serveResult(rows, [search, "settings"]);
+	},
+
+	getSkill(search: SkillId | string) {
+		const rows = (typeof search === "string") ? this.skills.filter(v => v.name = search) : this.skills.filter(v => v.id = search);
+		return this.serveResult(rows, [search, "skills"]);
+	},
+
+	getTrait(search: TraitId | string) {
+		const rows = (typeof search === "string") ? this.traits.filter(v => v.name = search) : this.traits.filter(v => v.id = search);
+		return this.serveResult(rows, [search, "traits"]);
+	},
+
+	getLifepath(search: LifepathId | string) {
+		const rows = (typeof search === "string") ? this.lifepaths.filter(v => v.name = search) : this.lifepaths.filter(v => v.id = search);
+		return this.serveResult(rows, [search, "lifepaths"]);
+	},
+
+	getResource(search: ResourceId | string) {
+		const rows = (typeof search === "string") ? this.resources.filter(v => v.name = search) : this.resources.filter(v => v.id = search);
+		return this.serveResult(rows, [search, "resources"]);
+	},
+
 	toggleDataset: (ruleset: RulesetId) => {
 		set(produce<RulesetStore>((state) => {
 			if (state.chosenRulesets.includes(ruleset)) {
@@ -117,10 +166,12 @@ const Store: StateCreator<RulesetStore, [["zustand/devtools", never]], [], Rules
 			}
 		}));
 	},
+
 	checkRulesets: (allowed: RulesetId[]) => {
 		const state = get();
 		return state.chosenRulesets.some(ruleset => allowed.includes(ruleset));
 	},
+
 	checkExactRulesets: (allowed: RulesetId[]) => {
 		const state = get();
 		return allowed.every(ruleset => state.chosenRulesets.includes(ruleset));
