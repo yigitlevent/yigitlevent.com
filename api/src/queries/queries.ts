@@ -327,10 +327,8 @@ export async function GetResources() {
 				res.magical?.push(mdet);
 			});
 
-
 			return res;
 		});
-
 
 		return r;
 	};
