@@ -99,6 +99,6 @@ export function LifepathBox({ lifepath }: { lifepath: Lifepath; }) {
 				</Grid>
 				: null
 			}
-		</Grid >
+		</Grid>
 	);
 }

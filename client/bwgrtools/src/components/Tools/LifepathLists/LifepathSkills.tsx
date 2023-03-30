@@ -61,6 +61,6 @@ export function LifepathSkills({ lifepath }: { lifepath: Lifepath; }) {
 				})
 				: null
 			}
-		</Fragment >
+		</Fragment>
 	);
 }
