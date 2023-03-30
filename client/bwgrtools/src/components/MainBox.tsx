@@ -10,6 +10,7 @@ import { DiceRoller } from "./Tools/DiceRoller/DiceRoller";
 import { LifepathLists } from "./Tools/LifepathLists/LifepathLists";
 import { SkillLists } from "./Tools/SkillLists/SkillLists";
 import { TraitLists } from "./Tools/TraitLists/TraitLists";
+import { ResourcesList } from "./Tools/ResourcesList/ResourcesList";
 import { Menu } from "./Menu/Menu";
 
 let Once = true;
@@ -37,7 +38,7 @@ export function MainBox() {
 						<Route path="/lifepaths" element={<LifepathLists />} />
 						<Route path="/skills" element={<SkillLists />} />
 						<Route path="/traits" element={<TraitLists />} />
-						{/* TODO: <Route path="/resources" element={<ResourcesList />} />*/}
+						<Route path="/resources" element={<ResourcesList />} />
 						{/* TODO: <Route path="/practiceplanner" element={<PracticePlanner />} />*/}
 						{/* TODO: <Route path="/magicwheel" element={<MagicWheel />} />*/}
 						{/* TODO: <Route path="/dowplanner" element={<DuelOfWitsPlanner />} />*/}

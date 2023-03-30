@@ -1,7 +1,7 @@
-import { Resource } from "./_resources";
+import { ResourceOld } from "./_resources";
 
 
-export const Relationship: Resource = {
+export const Relationship: ResourceOld = {
 	name: "Relationship",
 	allowed: ["bwgr"],
 	type: "Relationship",
@@ -19,7 +19,7 @@ export const Relationship: Resource = {
 	]
 };
 
-export const Reputation: Resource = {
+export const Reputation: ResourceOld = {
 	name: "Reputation",
 	allowed: ["bwgr"],
 	type: "Reputation",
@@ -30,7 +30,7 @@ export const Reputation: Resource = {
 	]
 };
 
-export const Affiliation: Resource = {
+export const Affiliation: ResourceOld = {
 	name: "Affiliation",
 	allowed: ["bwgr"],
 	type: "Affiliation",
@@ -41,7 +41,7 @@ export const Affiliation: Resource = {
 	]
 };
 
-export const OrcAffiliation: Resource = {
+export const OrcAffiliation: ResourceOld = {
 	name: "Clans and Warbands",
 	allowed: ["bwgr"],
 	type: "Affiliation",
@@ -52,7 +52,7 @@ export const OrcAffiliation: Resource = {
 	]
 };
 
-export const PackAffiliation: Resource = {
+export const PackAffiliation: ResourceOld = {
 	name: "Pack Affiliation",
 	allowed: ["bwc"],
 	type: "Affiliation",

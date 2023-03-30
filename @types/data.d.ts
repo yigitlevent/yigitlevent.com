@@ -185,7 +185,7 @@ interface Resource {
 	variableCost?: boolean;
 	costs: [cost: number, description: string][];
 	modifiers: [cost: number, isPer: boolean, description: string][];
-	magical?: ResourceMagicDetails[];
+	magical?: ResourceMagicDetails;
 };
 
 interface RulesetList {

@@ -282,33 +282,32 @@ export async function GetResources() {
 			v.Costs.forEach((c, i) => res.costs.push([c, v.CostDescriptions[i]]));
 			v.Modifiers.forEach((c, i) => res.modifiers.push([c, v.ModifierIsPerCosts[i], v.CostDescriptions[i]]));
 
-			const mDetails = rmd.filter(a => a.ResourceId === v.Id);
-			if (mDetails.length > 0) res.magical = [];
-			mDetails.forEach(md => {
+			const mDetails = rmd.find(a => a.ResourceId === v.Id);
+			if (mDetails) {
 				const mdet: ResourceMagicDetails = {
-					origin: [md.OriginId as unknown as OriginFacetId, md.Origin],
-					duration: [md.DurationId as unknown as DurationFacetId, md.Duration],
-					areaOfEffect: [md.AreaOfEffectId as unknown as AreaOfEffectFacetId, md.AreaOfEffect],
+					origin: [mDetails.OriginId as unknown as OriginFacetId, mDetails.Origin],
+					duration: [mDetails.DurationId as unknown as DurationFacetId, mDetails.Duration],
+					areaOfEffect: [mDetails.AreaOfEffectId as unknown as AreaOfEffectFacetId, mDetails.AreaOfEffect],
 					elements: [],
 					impetus: [],
-					actions: md.Actions,
-					doActionsMultiply: md.ActionsMultiply,
+					actions: mDetails.Actions,
+					doActionsMultiply: mDetails.ActionsMultiply,
 					obstacles: {}
 				};
 
-				if (md.AreaOfEffectModifierId || md.AreaofEffectModifier || md.AreaOfEffectUnitId || md.AreaOfEffectUnit) mdet.areaOfEffectDetails = {};
-				if (mdet.areaOfEffectDetails && md.AreaOfEffectUnitId && md.AreaOfEffectUnit) {
-					mdet.areaOfEffectDetails.unit = [md.AreaOfEffectUnitId as unknown as DistanceUnitId, md.AreaOfEffectUnit];
+				if (mDetails.AreaOfEffectModifierId || mDetails.AreaofEffectModifier || mDetails.AreaOfEffectUnitId || mDetails.AreaOfEffectUnit) mdet.areaOfEffectDetails = {};
+				if (mdet.areaOfEffectDetails && mDetails.AreaOfEffectUnitId && mDetails.AreaOfEffectUnit) {
+					mdet.areaOfEffectDetails.unit = [mDetails.AreaOfEffectUnitId as unknown as DistanceUnitId, mDetails.AreaOfEffectUnit];
 				}
-				if (mdet.areaOfEffectDetails && md.AreaOfEffectModifierId && md.AreaofEffectModifier) {
-					mdet.areaOfEffectDetails.modifier = [md.AreaOfEffectModifierId as unknown as UnitModifierId, md.AreaofEffectModifier];
+				if (mdet.areaOfEffectDetails && mDetails.AreaOfEffectModifierId && mDetails.AreaofEffectModifier) {
+					mdet.areaOfEffectDetails.modifier = [mDetails.AreaOfEffectModifierId as unknown as UnitModifierId, mDetails.AreaofEffectModifier];
 				}
 
-				if (md.Element1Id && md.Element1) mdet.elements.push([md.Element1Id as unknown as ElementFacetId, md.Element1]);
-				if (md.Element2Id && md.Element2) mdet.elements.push([md.Element2Id as unknown as ElementFacetId, md.Element2]);
-				if (md.Element3Id && md.Element3) mdet.elements.push([md.Element3Id as unknown as ElementFacetId, md.Element3]);
-				if (md.Impetus1Id && md.Impetus1) mdet.impetus.push([md.Impetus1Id as unknown as ImpetusFacetId, md.Impetus1]);
-				if (md.Impetus2Id && md.Impetus2) mdet.impetus.push([md.Impetus2Id as unknown as ImpetusFacetId, md.Impetus2]);
+				if (mDetails.Element1Id && mDetails.Element1) mdet.elements.push([mDetails.Element1Id as unknown as ElementFacetId, mDetails.Element1]);
+				if (mDetails.Element2Id && mDetails.Element2) mdet.elements.push([mDetails.Element2Id as unknown as ElementFacetId, mDetails.Element2]);
+				if (mDetails.Element3Id && mDetails.Element3) mdet.elements.push([mDetails.Element3Id as unknown as ElementFacetId, mDetails.Element3]);
+				if (mDetails.Impetus1Id && mDetails.Impetus1) mdet.impetus.push([mDetails.Impetus1Id as unknown as ImpetusFacetId, mDetails.Impetus1]);
+				if (mDetails.Impetus2Id && mDetails.Impetus2) mdet.impetus.push([mDetails.Impetus2Id as unknown as ImpetusFacetId, mDetails.Impetus2]);
 
 				const mObs = rmo.filter(a => a.ResourceId === v.Id);
 				mObs.forEach(mo => {
@@ -323,13 +322,10 @@ export async function GetResources() {
 						mdet.obstacles.abilities.push([mo.ObstacleAbility2Id as unknown as AbilityId, mo.ObstacleAbility2]);
 					}
 				});
-
-				res.magical?.push(mdet);
-			});
-
+				res.magical = mdet;
+			}
 			return res;
 		});
-
 		return r;
 	};
 

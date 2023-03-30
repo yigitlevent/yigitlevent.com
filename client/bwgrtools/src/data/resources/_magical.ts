@@ -1,7 +1,7 @@
-import { Resource } from "./_resources";
+import { ResourceOld } from "./_resources";
 
 
-export const SorcerySpells: Resource[] = [
+export const SorcerySpells: ResourceOld[] = [
 	{
 		name: "Arcane Kindness",
 		allowed: ["bwgr"],
@@ -1135,7 +1135,7 @@ export const SorcerySpells: Resource[] = [
 	}
 ];
 
-export const RitualsOfNightRituals: Resource[] = [
+export const RitualsOfNightRituals: ResourceOld[] = [
 	{
 		name: "Black-Blooded Rage",
 		allowed: ["bwgr"],
@@ -1312,7 +1312,7 @@ export const RitualsOfNightRituals: Resource[] = [
 	}
 ];
 
-export const DireHauntSpells: Resource[] = [
+export const DireHauntSpells: ResourceOld[] = [
 	{
 		name: "Ancient Grip",
 		allowed: ["bwc"],
@@ -1512,7 +1512,7 @@ export const DireHauntSpells: Resource[] = [
 	}
 ];
 
-export const PracticalMagicSchools: Resource[] = [
+export const PracticalMagicSchools: ResourceOld[] = [
 	{
 		name: "Practical Magic — Schools",
 		allowed: ["bwc"],
@@ -1538,7 +1538,7 @@ export const PracticalMagicSchools: Resource[] = [
 	}
 ];
 
-export const SpiritBindingDomainBindingLevels: Resource[] = [
+export const SpiritBindingDomainBindingLevels: ResourceOld[] = [
 	{
 		name: "Spirit Binding — Domain Binding Levels",
 		allowed: ["bwc"],
@@ -1552,7 +1552,7 @@ export const SpiritBindingDomainBindingLevels: Resource[] = [
 	}
 ];
 
-export const SpiritBindingSpiritMarkLevels: Resource[] = [
+export const SpiritBindingSpiritMarkLevels: ResourceOld[] = [
 	{
 		name: "Spirit Binding — Spirit Mark Levels",
 		allowed: ["bwc"],
@@ -1565,7 +1565,7 @@ export const SpiritBindingSpiritMarkLevels: Resource[] = [
 	}
 ];
 
-export const SummoningAffiliatedOrderLevels: Resource[] = [
+export const SummoningAffiliatedOrderLevels: ResourceOld[] = [
 	{
 		name: "Summoning — Affiliated Order Levels",
 		allowed: ["bwc"],

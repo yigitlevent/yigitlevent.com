@@ -63,9 +63,11 @@ export function useSearch<T>(mainList: List<T>, filterKeys: string[], initialFil
 				setSearchString(filter.value);
 			}
 			else if (filter.key === "sf") {
-				if (filter.value === "") urlParams.delete(filter.key);
-				else urlParams.set("sf", filter.value);
-				setSearchFields(filter.value.split(","));
+				if (filter.value !== "") urlParams.set("sf", filter.value);
+				else if (searchFields.length > 1) {
+					urlParams.delete(filter.key);
+					setSearchFields(filter.value.split(","));
+				}
 			}
 			else {
 				if (filter.value !== "Any") urlParams.set(filter.key, filter.value);
@@ -76,7 +78,7 @@ export function useSearch<T>(mainList: List<T>, filterKeys: string[], initialFil
 
 		setUrlParams(urlParams);
 		setFilters(newFilters);
-	}, [filters, setUrlParams, urlParams]);
+	}, [filters, searchFields.length, setUrlParams, urlParams]);
 
 	const search = useCallback(() => {
 		let res = originalList;

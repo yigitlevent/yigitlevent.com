@@ -37,7 +37,7 @@ export interface ResourceMagic {
 	actions: number | `x${number}`;
 }
 
-export interface Resource {
+export interface ResourceOld {
 	name: string;
 	allowed: RulesetIdOld[];
 	type: "Gear" | "Property" | "Relationship" | "Affiliation" | "Reputation" | "Magical";
@@ -50,7 +50,7 @@ export interface Resource {
 export interface ResourceStock {
 	name: StocksListExtended;
 	allowed: RulesetIdOld[];
-	resources: Resource[];
+	resources: ResourceOld[];
 }
 
 interface ResourceGroup {

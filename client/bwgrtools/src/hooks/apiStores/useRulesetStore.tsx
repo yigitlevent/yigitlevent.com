@@ -27,6 +27,7 @@ interface RulesetStore {
 	readonly lifepaths: Lifepath[];
 
 	readonly resources: Resource[];
+	readonly resourceTypes: string[];
 
 	toggleFetching: () => void;
 	fetchList: () => void;
@@ -69,6 +70,7 @@ const Store: StateCreator<RulesetStore, [["zustand/devtools", never]], [], Rules
 	lifepaths: [],
 
 	resources: [],
+	resourceTypes: [],
 
 	toggleFetching: () => {
 		set(produce<RulesetStore>((state) => { state.fetching = !state.fetching; }));
@@ -107,6 +109,7 @@ const Store: StateCreator<RulesetStore, [["zustand/devtools", never]], [], Rules
 						state.lifepaths = response.data.lifepaths;
 
 						state.resources = response.data.resources;
+						state.resourceTypes = [...response.data.resources.reduce((a, v) => a.add(v.resourceType[1]), new Set<string>())];
 					}));
 				}
 				else throw new Error();
