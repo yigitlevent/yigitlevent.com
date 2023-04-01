@@ -183,7 +183,7 @@ interface Resource {
 	id: ResourceId;
 	name: string;
 	stock: [id: StockId, name: string];
-	resourceType: [id: ResourceTypeId, name: string];
+	type: [id: ResourceTypeId, name: string];
 	description?: string;
 	variableCost?: boolean;
 	costs: [cost: number, description: string][];

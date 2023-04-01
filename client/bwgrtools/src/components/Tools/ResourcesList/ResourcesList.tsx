@@ -20,15 +20,26 @@ import { GenericGrid } from "../../Shared/Grids";
 
 
 export function ResourceItem({ resource }: { resource: Resource; }) {
-	const getObstacleString = (rmagical: ResourceMagicDetails) => {
-		const ro = rmagical.obstacles;
-		if (ro.obstacle) {
-			return `${ro.obstacle}${ro.caret ? "^" : ""}`;
-		}
-		else if (ro.abilities && ro.abilities.length > 0) {
-			return `${ro.abilities.map(v => v[1]).join("/")}${ro.caret ? "^" : ""}`;
-		}
-		else throw new Error("How could this be?!");
+	const getObstacleString = (obstacleDetails: ResourceMagicObstacleDetails[]) => {
+		const strs = obstacleDetails.map(v => {
+			const desc = v.description ? `${v.description}: ` : "";
+			if (v.obstacle) {
+				return `${desc}${v.obstacle}${v.caret ? "^" : ""}`;
+			}
+			else if (v.abilities && v.abilities.length > 0) {
+				return `${desc}${v.abilities.map(v => v[1]).join("/")}${v.caret ? "^" : ""}`;
+			}
+			else throw new Error(`How could this be?! ${resource.id} ${resource.name}`);
+		});
+
+		return strs.join("; ");
+	};
+
+	const getAreaOfEffectDetails = (aoeDetails: { unit?: [id: DistanceUnitId, name: string] | undefined; modifier?: [id: UnitModifierId, name: string] | undefined; }) => {
+		const texts = [];
+		if (aoeDetails.unit) { texts.push(aoeDetails.unit[1]); }
+		if (aoeDetails.modifier) { texts.push(aoeDetails.modifier[1]); }
+		return ` (${texts.join(", ")})`;
 	};
 
 	return (
@@ -38,15 +49,19 @@ export function ResourceItem({ resource }: { resource: Resource; }) {
 			</Grid>
 
 			<Grid item xs={1}>
-				<Typography sx={{ float: "right" }}>{resource.resourceType[1]}</Typography>
+				<Typography sx={{ float: "right" }}>{resource.type[1]}</Typography>
 			</Grid>
 
 			<Grid item xs={resource.magical ? 1 : 3}>
 				{resource.variableCost
 					? <Typography variant="body2">variable</Typography>
-					: resource.costs.map((res, i) =>
-						<Typography variant="body2" key={i}>{res[1]}: {res[0]}{res[0] > 1 ? "rps" : "rp"}</Typography>
-					)
+					: resource.costs.every(v => v[1] === null) ?
+						resource.costs.map((res, i) =>
+							<Typography variant="body2" key={i}>Resources: {res[0]}{res[0] > 1 ? "rps" : "rp"}</Typography>
+						)
+						: resource.costs.map((res, i) =>
+							<Typography variant="body2" key={i}>{res[1]}: {res[0]}{res[0] > 1 ? "rps" : "rp"}</Typography>
+						)
 				}
 			</Grid>
 
@@ -59,13 +74,16 @@ export function ResourceItem({ resource }: { resource: Resource; }) {
 			{resource.magical
 				? <Fragment>
 					<Grid item xs={1}>
-						<Typography variant="body2">Obstacle: {getObstacleString(resource.magical)}</Typography>
-						{resource.magical.obstacles.description ? <Typography variant="body2">{resource.magical.obstacles.description}</Typography> : null}
-					</Grid>
-					<Grid item xs={1}>
 						<Typography variant="body2">Actions: {resource.magical.doActionsMultiply ? "x" : ""}{resource.magical.actions}</Typography>
 					</Grid>
 				</Fragment>
+				: null
+			}
+
+			{resource.magical?.obstacleDetails
+				? <Grid item xs={3}>
+					<Typography variant="body2">Obstacles: {getObstacleString(resource.magical.obstacleDetails)}</Typography>
+				</Grid>
 				: null
 			}
 
@@ -82,10 +100,8 @@ export function ResourceItem({ resource }: { resource: Resource; }) {
 						<Typography variant="body2">Duration: {resource.magical.duration[1]}</Typography>
 					</Grid>
 					<Grid item xs={1}>
-						<Typography variant="body2">Area of Effect:
-							{resource.magical.areaOfEffect[1]}
-							{resource.magical.areaOfEffectDetails?.modifier ? resource.magical.areaOfEffectDetails.modifier[1] : ""}
-							{resource.magical.areaOfEffectDetails?.unit ? resource.magical.areaOfEffectDetails.unit[1] : ""}
+						<Typography variant="body2">Area of Effect: {resource.magical.areaOfEffect[1]}
+							{resource.magical.areaOfEffectDetails?.unit || resource.magical.areaOfEffectDetails?.modifier ? getAreaOfEffectDetails(resource.magical.areaOfEffectDetails) : ""}
 						</Typography>
 					</Grid>
 					<Grid item xs={1}>
@@ -112,7 +128,7 @@ export function ResourceItem({ resource }: { resource: Resource; }) {
 }
 
 export function ResourcesList() {
-	const { resources, resourceTypes } = useRulesetStore();
+	const { stocks, resources, resourceTypes } = useRulesetStore();
 	const { searchString, searchFields, filters, setFilter, searchResults } = useSearch<Resource>(resources, ["stock", "type"]);
 
 	return (
@@ -125,7 +141,7 @@ export function ResourcesList() {
 						<InputLabel>Stock</InputLabel>
 						<Select label="Stock" value={filters["stock"]} onChange={v => setFilter([{ key: "stock", value: v.target.value }])}>
 							<MenuItem value="Any">Any</MenuItem>
-							{resources.map(v => v.name).map((v, i) => <MenuItem key={i} value={v}>{v}</MenuItem>)}
+							{stocks.map(v => v.name).map((v, i) => <MenuItem key={i} value={v}>{v}</MenuItem>)}
 						</Select>
 					</FormControl>
 				</Grid>

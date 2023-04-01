@@ -119,7 +119,7 @@ const Store: StateCreator<RulesetStore, [["zustand/devtools", never]], [], Rules
 						state.lifepaths = response.data.lifepaths;
 
 						state.resources = response.data.resources;
-						state.resourceTypes = [...response.data.resources.reduce((a, v) => a.add(v.resourceType[1]), new Set<string>())];
+						state.resourceTypes = [...response.data.resources.reduce((a, v) => a.add(v.type[1]), new Set<string>())];
 
 						state.spellFacets = response.data.spellFacets;
 					}));

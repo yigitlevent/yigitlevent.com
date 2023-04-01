@@ -276,7 +276,7 @@ export async function GetResources() {
 				id: v.Id as unknown as ResourceId,
 				name: v.Name,
 				stock: [v.StockId as unknown as StockId, v.Stock],
-				resourceType: [v.StockId as unknown as ResourceTypeId, v.ResourceType],
+				type: [v.ResourceTypeId as unknown as ResourceTypeId, v.ResourceType],
 				costs: [],
 				modifiers: []
 			};
@@ -284,7 +284,7 @@ export async function GetResources() {
 			if (v.VariableCost) res.variableCost = true;
 			if (v.Description) res.description = v.Description;
 			v.Costs.forEach((c, i) => res.costs.push([c, v.CostDescriptions[i]]));
-			v.Modifiers.forEach((c, i) => res.modifiers.push([c, v.ModifierIsPerCosts[i], v.CostDescriptions[i]]));
+			v.Modifiers.forEach((c, i) => res.modifiers.push([c, v.ModifierIsPerCosts[i], v.ModifierDescriptions[i]]));
 
 			const mDetails = rmd.find(a => a.ResourceId === v.Id);
 			if (mDetails) {
@@ -314,18 +314,23 @@ export async function GetResources() {
 
 				const mObs = rmo.filter(a => a.ResourceId === v.Id);
 				if (mObs.length > 0) {
+					if (res.name === "Persuasion") console.log(mObs);
+
 					mdet.obstacleDetails = mObs.map(mo => {
 						const obsDet: ResourceMagicObstacleDetails = {};
 						if (mo.Obstacle) obsDet.obstacle = mo.Obstacle;
+						else if (mo.ObstacleAbility1Id !== null || mo.ObstacleAbility1 !== null || mo.ObstacleAbility2Id !== null || mo.ObstacleAbility2 !== null) {
+							obsDet.abilities = [];
+							if (obsDet.abilities && mo.ObstacleAbility1Id !== null && mo.ObstacleAbility1 !== null) {
+								obsDet.abilities.push([mo.ObstacleAbility1Id as unknown as AbilityId, mo.ObstacleAbility1]);
+							}
+							if (obsDet.abilities && mo.ObstacleAbility2Id !== null && mo.ObstacleAbility2 !== null) {
+								obsDet.abilities.push([mo.ObstacleAbility2Id as unknown as AbilityId, mo.ObstacleAbility2]);
+							}
+						}
+
 						if (mo.ObstacleCaret) obsDet.caret = mo.ObstacleCaret;
-						if (mo.Description) obsDet.description = mo.Description;
-						if (mo.ObstacleAbility1Id || mo.ObstacleAbility1 || mo.ObstacleAbility2Id || mo.ObstacleAbility2) obsDet.abilities = [];
-						if (obsDet.abilities && mo.ObstacleAbility1Id && mo.ObstacleAbility1) {
-							obsDet.abilities.push([mo.ObstacleAbility1Id as unknown as AbilityId, mo.ObstacleAbility1]);
-						}
-						if (obsDet.abilities && mo.ObstacleAbility2Id && mo.ObstacleAbility2) {
-							obsDet.abilities.push([mo.ObstacleAbility2Id as unknown as AbilityId, mo.ObstacleAbility2]);
-						}
+						if (mo.Description !== null) obsDet.description = mo.Description;
 						return obsDet;
 					});
 				}
