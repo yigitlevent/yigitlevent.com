@@ -42,9 +42,9 @@ export const useUserStore = create<UserState>()(
 						if (response.status === 200) setUser({ ...response.data.user });
 						else throw new Error();
 					})
-					.catch(reason => {
+					.catch(() => {
 						setUser(undefined);
-						console.error(reason);
+						//console.error(reason);
 					})
 					.finally(() => toggleFetching());
 			},
