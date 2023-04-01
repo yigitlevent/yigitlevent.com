@@ -31,6 +31,10 @@ export async function GetAbilities() {
 			hasShades: v.HasShades
 		};
 
+		if (v.RequiredTraitId && v.RequiredTrait) {
+			r.requiredTrait = [v.RequiredTraitId as unknown as TraitId, v.RequiredTrait];
+		}
+
 		if (v.Cycle !== null && v.Routine !== null && v.Difficult !== null && v.Challenging !== null) {
 			r.practice = {
 				cycle: v.Cycle,

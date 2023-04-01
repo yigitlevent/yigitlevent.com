@@ -12,9 +12,15 @@ CREATE TABLE dat."Abilities"
 	"Routine" integer,
 	"Difficult" integer,
 	"Challenging" integer,
+	"RequiredTraitId" integer,
     PRIMARY KEY ("Id"),
     FOREIGN KEY ("AbilityTypeId")
         REFERENCES dat."AbilityTypes" ("Id") MATCH SIMPLE
+        ON UPDATE RESTRICT
+        ON DELETE RESTRICT
+        NOT VALID,
+    FOREIGN KEY ("RequiredTraitId")
+        REFERENCES dat."Traits" ("Id") MATCH SIMPLE
         ON UPDATE RESTRICT
         ON DELETE RESTRICT
         NOT VALID

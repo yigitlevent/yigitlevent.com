@@ -71,7 +71,7 @@ export const Attributes: Attribute[] = [
 	{ name: "Hesitation", hasShade: false },
 	{ name: "Greed", hasShade: true, requiredTrait: "Dwarf Common➞Greed" },
 	{ name: "Grief", hasShade: true, requiredTrait: "Elf Common➞Grief" },
-	{ name: "Spite", hasShade: true, requiredTrait: "Dark Elf Lifepath➞Spite" },
+	{ name: "Spite", hasShade: true, requiredTrait: "Elf Lifepath➞Spite" },
 	{ name: "Faith", hasShade: true, requiredTrait: "Human Special➞Faithful" },
 	{ name: "Faith in Dead Gods", hasShade: true, requiredTrait: "Human Lifepath➞Faith in Dead Gods" },
 	{ name: "Hatred", hasShade: true, requiredTrait: "Orc Common➞Loathsome and Twisted" },

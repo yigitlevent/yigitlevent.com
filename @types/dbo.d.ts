@@ -25,6 +25,8 @@ interface AbilityDBO {
 	Routine: number | null;
 	Difficult: number | null;
 	Challenging: number | null;
+	RequiredTraitId: number | null;
+	RequiredTrait: string | null;
 }
 
 interface StockDBO {

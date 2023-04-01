@@ -1,6 +1,7 @@
 type Guid = NominalString<"Guid">;
 
 type RulesetId = NominalString<"RulesetId">;
+
 type AbilityId = NominalNumber<"AbilityId">;
 type StockId = NominalNumber<"StockId">;
 type SettingId = NominalNumber<"SettingId">;

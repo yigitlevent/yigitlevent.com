@@ -31,9 +31,12 @@ CREATE OR REPLACE VIEW dat."AbilitiesList" AS
     a."Cycle",
     a."Routine",
     a."Difficult",
-    a."Challenging"
+    a."Challenging",
+    a."RequiredTraitId",
+    t."Name" as "RequiredTrait"
    FROM dat."Abilities" a
-     LEFT JOIN dat."AbilityTypes" aty ON aty."Id" = a."AbilityTypeId";
+     LEFT JOIN dat."AbilityTypes" aty ON aty."Id" = a."AbilityTypeId"
+     LEFT JOIN dat."Traits" t ON t."Id" = a."RequiredTraitId";
 
 ALTER TABLE dat."AbilitiesList"
     OWNER TO apiuser;
