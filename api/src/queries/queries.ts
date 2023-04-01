@@ -314,8 +314,6 @@ export async function GetResources() {
 
 				const mObs = rmo.filter(a => a.ResourceId === v.Id);
 				if (mObs.length > 0) {
-					if (res.name === "Persuasion") console.log(mObs);
-
 					mdet.obstacleDetails = mObs.map(mo => {
 						const obsDet: ResourceMagicObstacleDetails = {};
 						if (mo.Obstacle) obsDet.obstacle = mo.Obstacle;

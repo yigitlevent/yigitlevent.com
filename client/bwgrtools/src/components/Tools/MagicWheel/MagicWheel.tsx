@@ -328,24 +328,29 @@ export function MagicWheel() {
 			<Divider sx={{ margin: "10px 0 8px" }} />
 
 			{isFontLoaded
-				? <Fragment>
-					<CanvasWrapper ref={wrapperRef} size={size}>
-						<BackCanvas />
-						<MainCanvas
-							currentAngles={[currentOriginAngle, currentDurationAngle, currentImpetusAngle, currentElementAngle, currentAOEAngle]}
-							blockAngle={entryAngleSpan}
-							spellFacets={spellFacets}
-							getFacetMapping={getFacetMapping}
-						/>
-						<FrontCanvas show={cover} />
-					</CanvasWrapper>
+				? <GenericGrid columns={1} center="c">
+					<Grid item xs={1}>
+						<CanvasWrapper ref={wrapperRef} size={size}>
+							<BackCanvas />
+							<MainCanvas
+								currentAngles={[currentOriginAngle, currentDurationAngle, currentImpetusAngle, currentElementAngle, currentAOEAngle]}
+								blockAngle={entryAngleSpan}
+								spellFacets={spellFacets}
+								getFacetMapping={getFacetMapping}
+							/>
+							<FrontCanvas show={cover} />
+						</CanvasWrapper>
+					</Grid>
 
-					<FormControlLabel
-						label="Toggle Cover"
-						labelPlacement="start"
-						control={<Checkbox checked={cover} onChange={toggleCover} />}
-					/>
-				</Fragment>
+
+					<Grid item>
+						<FormControlLabel
+							label="Toggle Cover"
+							labelPlacement="start"
+							control={<Checkbox checked={cover} onChange={toggleCover} />}
+						/>
+					</Grid>
+				</GenericGrid>
 				: <CircularProgress />
 			}
 		</Fragment>
