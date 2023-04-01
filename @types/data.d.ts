@@ -156,6 +156,13 @@ interface Lifepath {
 	requirementsText?: string;
 }
 
+interface ResourceMagicObstacleDetails {
+	obstacle?: number;
+	abilities?: [id: AbilityId, name: string][];
+	caret?: boolean;
+	description?: string;
+}
+
 interface ResourceMagicDetails {
 	origin: [id: OriginFacetId, name: string];
 	duration: [id: DurationFacetId, name: string];
@@ -168,12 +175,7 @@ interface ResourceMagicDetails {
 	impetus: [id: ImpetusFacetId, name: string][];
 	actions: number;
 	doActionsMultiply: boolean;
-	obstacles: {
-		obstacle?: number;
-		abilities?: [id: AbilityId, name: string][];
-		caret?: boolean;
-		description?: string;
-	};
+	obstacleDetails?: ResourceMagicObstacleDetails[];
 }
 
 interface Resource {

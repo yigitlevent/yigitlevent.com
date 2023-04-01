@@ -295,8 +295,7 @@ export async function GetResources() {
 					elements: [],
 					impetus: [],
 					actions: mDetails.Actions,
-					doActionsMultiply: mDetails.ActionsMultiply,
-					obstacles: {}
+					doActionsMultiply: mDetails.ActionsMultiply
 				};
 
 				if (mDetails.AreaOfEffectModifierId || mDetails.AreaofEffectModifier || mDetails.AreaOfEffectUnitId || mDetails.AreaOfEffectUnit) mdet.areaOfEffectDetails = {};
@@ -314,18 +313,23 @@ export async function GetResources() {
 				if (mDetails.Impetus2Id && mDetails.Impetus2) mdet.impetus.push([mDetails.Impetus2Id as unknown as ImpetusFacetId, mDetails.Impetus2]);
 
 				const mObs = rmo.filter(a => a.ResourceId === v.Id);
-				mObs.forEach(mo => {
-					if (mo.Obstacle) mdet.obstacles.obstacle = mo.Obstacle;
-					if (mo.ObstacleCaret) mdet.obstacles.caret = mo.ObstacleCaret;
-					if (mo.Description) mdet.obstacles.description = mo.Description;
-					if (mo.ObstacleAbility1Id || mo.ObstacleAbility1 || mo.ObstacleAbility2Id || mo.ObstacleAbility2) mdet.obstacles.abilities = [];
-					if (mdet.obstacles.abilities && mo.ObstacleAbility1Id && mo.ObstacleAbility1) {
-						mdet.obstacles.abilities.push([mo.ObstacleAbility1Id as unknown as AbilityId, mo.ObstacleAbility1]);
-					}
-					if (mdet.obstacles.abilities && mo.ObstacleAbility2Id && mo.ObstacleAbility2) {
-						mdet.obstacles.abilities.push([mo.ObstacleAbility2Id as unknown as AbilityId, mo.ObstacleAbility2]);
-					}
-				});
+				if (mObs.length > 0) {
+					mdet.obstacleDetails = mObs.map(mo => {
+						const obsDet: ResourceMagicObstacleDetails = {};
+						if (mo.Obstacle) obsDet.obstacle = mo.Obstacle;
+						if (mo.ObstacleCaret) obsDet.caret = mo.ObstacleCaret;
+						if (mo.Description) obsDet.description = mo.Description;
+						if (mo.ObstacleAbility1Id || mo.ObstacleAbility1 || mo.ObstacleAbility2Id || mo.ObstacleAbility2) obsDet.abilities = [];
+						if (obsDet.abilities && mo.ObstacleAbility1Id && mo.ObstacleAbility1) {
+							obsDet.abilities.push([mo.ObstacleAbility1Id as unknown as AbilityId, mo.ObstacleAbility1]);
+						}
+						if (obsDet.abilities && mo.ObstacleAbility2Id && mo.ObstacleAbility2) {
+							obsDet.abilities.push([mo.ObstacleAbility2Id as unknown as AbilityId, mo.ObstacleAbility2]);
+						}
+						return obsDet;
+					});
+				}
+
 				res.magical = mdet;
 			}
 			return res;
