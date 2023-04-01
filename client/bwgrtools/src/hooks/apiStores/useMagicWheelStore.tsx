@@ -1,46 +1,42 @@
 import produce from "immer";
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
-import { MagicWheelStoreVersion } from "./_persistOptions";
+import { MagicWheelStoreVersion } from "../stores/_persistOptions";
 
 import { Clamp } from "../../utils/misc";
 
 
 interface MagicWheelState {
-	aoe: string;
-	element: string;
-	impetus: string;
-	duration: string;
-	origin: string;
+	areaOfEffectId: AreaOfEffectFacetId;
+	elementId: ElementFacetId;
+	impetusId: ImpetusFacetId;
+	durationId: DurationFacetId;
+	originId: OriginFacetId;
 
 	direction: "Clockwise" | "Counterclockwise";
 	steps: number;
 	cover: boolean;
 
-	elementIndex: number;
-
-	changeAOE: (aoe: string) => void;
-	changeElement: (element: string) => void;
-	changeImpetus: (impetus: string) => void;
-	changeDuration: (duration: string) => void;
-	changeOrigin: (origin: string) => void;
+	changeAOE: (aoe: AreaOfEffectFacetId) => void;
+	changeElement: (element: ElementFacetId) => void;
+	changeImpetus: (impetus: ImpetusFacetId) => void;
+	changeDuration: (duration: DurationFacetId) => void;
+	changeOrigin: (origin: OriginFacetId) => void;
 
 	changeDirection: (direction: string) => void;
 	changeSteps: (steps: string) => void;
 	toggleCover: () => void;
-
-	changeElementIndex: (elementIndex: number) => void;
 }
 
 export const useMagicWheelStore = create<MagicWheelState>()(
 	devtools(
 		persist(
 			(set) => ({
-				aoe: "Caster",
-				element: "Anima",
-				impetus: "Create",
-				duration: "Instantaneous",
-				origin: "Personal",
+				areaOfEffectId: 0 as unknown as AreaOfEffectFacetId,
+				elementId: 0 as unknown as ElementFacetId,
+				impetusId: 0 as unknown as ImpetusFacetId,
+				durationId: 0 as unknown as DurationFacetId,
+				originId: 0 as unknown as OriginFacetId,
 
 				direction: "Clockwise",
 				steps: 1,
@@ -48,29 +44,29 @@ export const useMagicWheelStore = create<MagicWheelState>()(
 
 				elementIndex: 0,
 
-				changeAOE: (aoe: string) => {
+				changeAOE: (aoe: AreaOfEffectFacetId) => {
 					set(produce<MagicWheelState>((state) => {
-						state.aoe = aoe;
+						state.areaOfEffectId = aoe;
 					}));
 				},
-				changeElement: (element: string) => {
+				changeElement: (element: ElementFacetId) => {
 					set(produce<MagicWheelState>((state) => {
-						state.element = element;
+						state.elementId = element;
 					}));
 				},
-				changeImpetus: (impetus: string) => {
+				changeImpetus: (impetus: ImpetusFacetId) => {
 					set(produce<MagicWheelState>((state) => {
-						state.impetus = impetus;
+						state.impetusId = impetus;
 					}));
 				},
-				changeDuration: (duration: string) => {
+				changeDuration: (duration: DurationFacetId) => {
 					set(produce<MagicWheelState>((state) => {
-						state.duration = duration;
+						state.durationId = duration;
 					}));
 				},
-				changeOrigin: (origin: string) => {
+				changeOrigin: (origin: OriginFacetId) => {
 					set(produce<MagicWheelState>((state) => {
-						state.origin = origin;
+						state.originId = origin;
 					}));
 				},
 				changeDirection: (direction: string) => {
@@ -86,11 +82,6 @@ export const useMagicWheelStore = create<MagicWheelState>()(
 				toggleCover: () => {
 					set(produce<MagicWheelState>((state) => {
 						state.cover = !state.cover;
-					}));
-				},
-				changeElementIndex: (elementIndex: number) => {
-					set(produce<MagicWheelState>((state) => {
-						state.elementIndex = elementIndex;
 					}));
 				}
 			}),

@@ -188,6 +188,49 @@ interface Resource {
 	magical?: ResourceMagicDetails;
 };
 
+interface Facet {
+	name: string;
+	obstacle: number;
+	actions: number;
+	resource: Number;
+}
+
+interface SpellOriginFacet extends Facet {
+	id: OriginFacetId;
+}
+
+interface SpellDurationFacet extends Facet {
+	id: DurationFacetId;
+}
+
+interface SpellAreaOfEffectFacet extends Facet {
+	id: AreaOfEffectFacetId;
+}
+
+interface SpellElementFacet extends Facet {
+	id: ElementFacetId;
+}
+
+interface SpellImpetusFacet extends Facet {
+	id: ImpetusFacetId;
+}
+
+interface SpellFacets {
+	origins: SpellOriginFacet[];
+	elements: SpellElementFacet[];
+	impetus: SpellImpetusFacet[];
+	areaOfEffects: SpellAreaOfEffectFacet[];
+	duration: SpellDurationFacet[];
+}
+
+interface SpellFacetSelected {
+	originId: SpellOriginFacet;
+	elementId: SpellElementFacet;
+	impetusId: SpellImpetusFacet;
+	areaOfEffectId: SpellAreaOfEffectFacet;
+	durationId: SpellDurationFacet;
+}
+
 interface RulesetList {
 	rulesets: Ruleset[];
 }
@@ -200,4 +243,5 @@ interface RulesetData {
 	traits: Trait[];
 	lifepaths: Lifepath[];
 	resources: Resource[];
+	spellFacets: SpellFacets;
 }

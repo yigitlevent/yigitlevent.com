@@ -29,6 +29,8 @@ interface RulesetStore {
 	readonly resources: Resource[];
 	readonly resourceTypes: string[];
 
+	readonly spellFacets: SpellFacets;
+
 	toggleFetching: () => void;
 	fetchList: () => void;
 	fetchData: () => void;
@@ -72,6 +74,14 @@ const Store: StateCreator<RulesetStore, [["zustand/devtools", never]], [], Rules
 	resources: [],
 	resourceTypes: [],
 
+	spellFacets: {
+		origins: [],
+		elements: [],
+		impetus: [],
+		areaOfEffects: [],
+		duration: []
+	},
+
 	toggleFetching: () => {
 		set(produce<RulesetStore>((state) => { state.fetching = !state.fetching; }));
 	},
@@ -110,6 +120,8 @@ const Store: StateCreator<RulesetStore, [["zustand/devtools", never]], [], Rules
 
 						state.resources = response.data.resources;
 						state.resourceTypes = [...response.data.resources.reduce((a, v) => a.add(v.resourceType[1]), new Set<string>())];
+
+						state.spellFacets = response.data.spellFacets;
 					}));
 				}
 				else throw new Error();
