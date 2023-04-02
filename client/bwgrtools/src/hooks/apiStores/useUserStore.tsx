@@ -2,7 +2,7 @@ import produce from "immer";
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 
-import { GenericPost } from "../stores/_genericRequests";
+import { GenericPost } from "./_genericRequests";
 
 
 interface UserState {

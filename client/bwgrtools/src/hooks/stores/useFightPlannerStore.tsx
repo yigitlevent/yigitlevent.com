@@ -1,7 +1,7 @@
 import produce from "immer";
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
-import { FightPlannerStoreVersion } from "./_persistOptions";
+import { FightPlannerStoreVersion } from "../apiStores/_persistOptions";
 
 import { FightAction, FightActions } from "../../data/fight";
 import { Clamp } from "../../utils/misc";

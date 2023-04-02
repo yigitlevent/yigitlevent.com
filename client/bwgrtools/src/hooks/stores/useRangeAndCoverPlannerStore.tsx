@@ -1,7 +1,7 @@
 import produce from "immer";
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
-import { RangeAndCoverPlannerStoreVersion } from "./_persistOptions";
+import { RangeAndCoverPlannerStoreVersion } from "../apiStores/_persistOptions";
 
 import { RangeAndCoverAction, RangeAndCoverActions } from "../../data/rangeAndCover";
 

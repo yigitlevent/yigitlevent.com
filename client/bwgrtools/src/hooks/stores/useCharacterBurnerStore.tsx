@@ -1,7 +1,7 @@
 import produce from "immer";
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
-import { CharacterBurnerStoreVersion } from "./_persistOptions";
+import { CharacterBurnerStoreVersion } from "../apiStores/_persistOptions";
 
 import { GetLifepathFromPath, GetLifepathsFromPaths, GetSkillFromPath, GetTraitFromPath } from "../../utils/pathFinder";
 import { GetAverage } from "../../utils/misc";

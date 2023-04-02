@@ -2,7 +2,7 @@ import { Dispatch, FormEvent, SetStateAction } from "react";
 import produce from "immer";
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
-import { PracticePlannerStoreVersion } from "./_persistOptions";
+import { PracticePlannerStoreVersion } from "../apiStores/_persistOptions";
 
 import { PracticeTable } from "../../data/tables";
 import { Clamp } from "../../utils/misc";

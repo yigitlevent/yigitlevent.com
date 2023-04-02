@@ -1,7 +1,7 @@
 import produce from "immer";
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
-import { MagicWheelStoreVersion } from "../stores/_persistOptions";
+import { MagicWheelStoreVersion } from "./_persistOptions";
 
 import { Clamp } from "../../utils/misc";
 

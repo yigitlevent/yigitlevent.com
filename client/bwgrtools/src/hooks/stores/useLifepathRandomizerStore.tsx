@@ -1,7 +1,7 @@
 import produce from "immer";
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
-import { LifepathRandomizerStoreVersion } from "./_persistOptions";
+import { LifepathRandomizerStoreVersion } from "../apiStores/_persistOptions";
 
 import { Clamp } from "../../utils/misc";
 

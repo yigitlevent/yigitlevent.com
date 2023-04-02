@@ -2,7 +2,7 @@ import produce from "immer";
 import { create, StateCreator } from "zustand";
 import { devtools } from "zustand/middleware";
 
-import { GenericGet } from "../stores/_genericRequests";
+import { GenericGet } from "./_genericRequests";
 
 
 // TODO: research index key signatures to see if there is a workaround
@@ -31,6 +31,8 @@ interface RulesetStore {
 
 	readonly spellFacets: SpellFacets;
 
+	readonly dowActions: DoWAction[];
+
 	toggleFetching: () => void;
 	fetchList: () => void;
 	fetchData: () => void;
@@ -44,6 +46,7 @@ interface RulesetStore {
 	getTrait: (search: TraitId | string) => Trait;
 	getLifepath: (search: LifepathId | string) => Lifepath;
 	getResource: (search: ResourceId | string) => Resource;
+	getDoWAction: (search: DoWActionId | string) => DoWAction;
 
 	toggleDataset: (dataset: RulesetId) => void;
 	checkRulesets: (allowed: RulesetId[]) => boolean;
@@ -73,6 +76,8 @@ const Store: StateCreator<RulesetStore, [["zustand/devtools", never]], [], Rules
 
 	resources: [],
 	resourceTypes: [],
+
+	dowActions: [],
 
 	spellFacets: {
 		origins: [],
@@ -122,6 +127,8 @@ const Store: StateCreator<RulesetStore, [["zustand/devtools", never]], [], Rules
 						state.resourceTypes = [...response.data.resources.reduce((a, v) => a.add(v.type[1]), new Set<string>())];
 
 						state.spellFacets = response.data.spellFacets;
+
+						state.dowActions = response.data.dowActions;
 					}));
 				}
 				else throw new Error();
@@ -169,6 +176,11 @@ const Store: StateCreator<RulesetStore, [["zustand/devtools", never]], [], Rules
 	getResource(search: ResourceId | string) {
 		const rows = (typeof search === "string") ? this.resources.filter(v => v.name = search) : this.resources.filter(v => v.id = search);
 		return this.serveResult(rows, [search, "resources"]);
+	},
+
+	getDoWAction(search: DoWActionId | string) {
+		const rows = (typeof search === "string") ? this.dowActions.filter(v => v.name = search) : this.dowActions.filter(v => v.id = search);
+		return this.serveResult(rows, [search, "dowActions"]);
 	},
 
 	toggleDataset: (ruleset: RulesetId) => {

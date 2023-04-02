@@ -31,7 +31,7 @@ export async function GetAbilities() {
 			hasShades: v.HasShades
 		};
 
-		if (v.RequiredTraitId && v.RequiredTrait) {
+		if (v.RequiredTraitId !== null && v.RequiredTrait) {
 			r.requiredTrait = [v.RequiredTraitId as unknown as TraitId, v.RequiredTrait];
 		}
 
@@ -298,19 +298,19 @@ export async function GetResources() {
 					doActionsMultiply: mDetails.ActionsMultiply
 				};
 
-				if (mDetails.AreaOfEffectModifierId || mDetails.AreaofEffectModifier || mDetails.AreaOfEffectUnitId || mDetails.AreaOfEffectUnit) mdet.areaOfEffectDetails = {};
-				if (mdet.areaOfEffectDetails && mDetails.AreaOfEffectUnitId && mDetails.AreaOfEffectUnit) {
+				if (mDetails.AreaOfEffectModifierId !== null || mDetails.AreaofEffectModifier || mDetails.AreaOfEffectUnitId !== null || mDetails.AreaOfEffectUnit) mdet.areaOfEffectDetails = {};
+				if (mdet.areaOfEffectDetails && mDetails.AreaOfEffectUnitId !== null && mDetails.AreaOfEffectUnit) {
 					mdet.areaOfEffectDetails.unit = [mDetails.AreaOfEffectUnitId as unknown as DistanceUnitId, mDetails.AreaOfEffectUnit];
 				}
-				if (mdet.areaOfEffectDetails && mDetails.AreaOfEffectModifierId && mDetails.AreaofEffectModifier) {
+				if (mdet.areaOfEffectDetails && mDetails.AreaOfEffectModifierId !== null && mDetails.AreaofEffectModifier) {
 					mdet.areaOfEffectDetails.modifier = [mDetails.AreaOfEffectModifierId as unknown as UnitModifierId, mDetails.AreaofEffectModifier];
 				}
 
-				if (mDetails.Element1Id && mDetails.Element1) mdet.elements.push([mDetails.Element1Id as unknown as ElementFacetId, mDetails.Element1]);
-				if (mDetails.Element2Id && mDetails.Element2) mdet.elements.push([mDetails.Element2Id as unknown as ElementFacetId, mDetails.Element2]);
-				if (mDetails.Element3Id && mDetails.Element3) mdet.elements.push([mDetails.Element3Id as unknown as ElementFacetId, mDetails.Element3]);
-				if (mDetails.Impetus1Id && mDetails.Impetus1) mdet.impetus.push([mDetails.Impetus1Id as unknown as ImpetusFacetId, mDetails.Impetus1]);
-				if (mDetails.Impetus2Id && mDetails.Impetus2) mdet.impetus.push([mDetails.Impetus2Id as unknown as ImpetusFacetId, mDetails.Impetus2]);
+				if (mDetails.Element1Id !== null && mDetails.Element1) mdet.elements.push([mDetails.Element1Id as unknown as ElementFacetId, mDetails.Element1]);
+				if (mDetails.Element2Id !== null && mDetails.Element2) mdet.elements.push([mDetails.Element2Id as unknown as ElementFacetId, mDetails.Element2]);
+				if (mDetails.Element3Id !== null && mDetails.Element3) mdet.elements.push([mDetails.Element3Id as unknown as ElementFacetId, mDetails.Element3]);
+				if (mDetails.Impetus1Id !== null && mDetails.Impetus1) mdet.impetus.push([mDetails.Impetus1Id as unknown as ImpetusFacetId, mDetails.Impetus1]);
+				if (mDetails.Impetus2Id !== null && mDetails.Impetus2) mdet.impetus.push([mDetails.Impetus2Id as unknown as ImpetusFacetId, mDetails.Impetus2]);
 
 				const mObs = rmo.filter(a => a.ResourceId === v.Id);
 				if (mObs.length > 0) {
@@ -367,4 +367,68 @@ export async function GetSpellFacets() {
 	]).then((result): SpellFacets => {
 		return { origins: result[0].rows, duration: result[1].rows, areaOfEffects: result[2].rows, elements: result[3].rows, impetus: result[4].rows };
 	});
+}
+
+export async function GetDoWActions() {
+	const convert = (a: DoWActionDBO[], at: ActionTestDBO[], ar: ActionResolutionDBO[]): DoWAction[] => {
+		const r: DoWAction[] = a.map(v => {
+			const act: DoWAction = {
+				id: v.Id as unknown as DoWActionId,
+				name: v.Name
+			};
+
+			if (v.Name) act.name = v.Name;
+			if (v.SpeakingThePart) act.speakingThePart = v.SpeakingThePart;
+			if (v.Special) act.special = v.Special;
+
+			const t = at.filter(t => t.ActionId === v.Id);
+			if (t.length > 0) {
+				act.tests = {
+					skills: [],
+					abilities: []
+				};
+
+				t.forEach(test => {
+					if (test.Ability && test.AbilityId !== null) act.tests?.abilities.push([test.AbilityId as unknown as AbilityId, test.Ability]);
+					if (test.Skill && test.SkillId !== null) act.tests?.skills.push([test.SkillId as unknown as SkillId, test.Skill]);
+				});
+			}
+
+			const r = ar.filter(t => t.ActionId === v.Id);
+			if (r.length > 0) {
+				act.resolutions = [];
+
+				r.forEach(res => {
+					const actionRes: ActionResolution<DoWActionId> = {
+						opposingAction: [res.OpposingActionId as unknown as DoWActionId, res.OpposingAction],
+						type: [res.ResolutionTypeId as unknown as ActionResolutionTypeId, res.ResolutionType]
+					};
+
+					if (res.IsAgainstSkill) actionRes.isAgainstSkill = res.IsAgainstSkill;
+					if (res.Obstacle) actionRes.obstacle = res.Obstacle;
+					if (res.OpposingModifier) actionRes.opposingModifier = res.OpposingModifier;
+
+					if (res.SkillId !== null && res.Skill !== null) actionRes.skill = [res.SkillId as unknown as SkillId, res.Skill];
+					if (res.AbilityId !== null && res.Ability !== null) actionRes.ability = [res.AbilityId as unknown as AbilityId, res.Ability];
+					if (res.OpposingSkillId !== null && res.OpposingSkill) actionRes.opposingSkill = [res.OpposingSkillId as unknown as SkillId, res.OpposingSkill];
+					if (res.OpposingAbilityId !== null && res.OpposingAbility) actionRes.opposingAbility = [res.OpposingAbilityId as unknown as AbilityId, res.OpposingAbility];
+
+					act.resolutions?.push(actionRes);
+				});
+			}
+
+			return act;
+		});
+
+		return r;
+	};
+
+	const query1 = 'select * from dat."DuelOfWitsActions";';
+	const query2 = 'select * from dat."DoWActionTestList";';
+	const query3 = 'select * from dat."DoWActionResolutionList";';
+	return Promise.all([
+		PgPool.query<DoWActionDBO>(query1),
+		PgPool.query<ActionTestDBO>(query2),
+		PgPool.query<ActionResolutionDBO>(query3)
+	]).then(result => convert(result[0].rows, result[1].rows, result[2].rows));
 }

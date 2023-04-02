@@ -3,21 +3,19 @@ import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
 import { DuelOfWitsPlannerStoreVersion } from "./_persistOptions";
 
-import { DuelOfWitsAction, DuelOfWitsActions } from "../../data/duelOfWits";
 
-
-export interface DuelOfWitsActionExtended extends DuelOfWitsAction {
+export interface DoWActionExtended extends DoWAction {
 	open: boolean;
 	visible: boolean;
 }
 
 interface DuelOfWitsPlannerState {
 	volleyIndex: number;
-	actions: [undefined | DuelOfWitsActionExtended, undefined | DuelOfWitsActionExtended, undefined | DuelOfWitsActionExtended];
+	actions: [undefined | DoWActionExtended, undefined | DoWActionExtended, undefined | DoWActionExtended];
 	selectedAction: string;
 
 	changeVolleyIndex: (volleyIndex: number) => void;
-	addAction: (volleyIndex: number, actionName: undefined | string) => void;
+	addAction: (actions: DoWAction[], volleyIndex: number, actionName: undefined | string) => void;
 	deleteAction: (volleyIndex: number) => void;
 	selectedChangeAction: (actionName: string) => void;
 	toggleActionDetails: (volleyIndex: number) => void;
@@ -37,14 +35,14 @@ export const useDuelOfWitsPlannerStore = create<DuelOfWitsPlannerState>()(
 						state.volleyIndex = volleyIndex;
 					}));
 				},
-				addAction: (volleyIndex: number, actionName: undefined | string) => {
-					const action: DuelOfWitsActionExtended = { ...DuelOfWitsActions.find(v => v.name === actionName) as DuelOfWitsAction, open: false, visible: true };
+				addAction: (actions: DoWAction[], volleyIndex: number, actionName: undefined | string) => {
+					const action: DoWActionExtended = { ...actions.find(v => v.name === actionName) as DoWAction, open: false, visible: true };
 					set(produce<DuelOfWitsPlannerState>((state) => {
 						const newActions = state.actions;
 						state.actions = newActions.map((v, i) => {
 							if (i === volleyIndex) return action;
 							else return v;
-						}) as [DuelOfWitsActionExtended, DuelOfWitsActionExtended, DuelOfWitsActionExtended];
+						}) as [DoWActionExtended, DoWActionExtended, DoWActionExtended];
 					}));
 				},
 				deleteAction: (volleyIndex: number) => {
@@ -53,7 +51,7 @@ export const useDuelOfWitsPlannerStore = create<DuelOfWitsPlannerState>()(
 						state.actions = newActions.map((v, i) => {
 							if (i === volleyIndex) return undefined;
 							else return v;
-						}) as [DuelOfWitsActionExtended, DuelOfWitsActionExtended, DuelOfWitsActionExtended];
+						}) as [DoWActionExtended, DoWActionExtended, DoWActionExtended];
 
 					}));
 				},
@@ -68,7 +66,7 @@ export const useDuelOfWitsPlannerStore = create<DuelOfWitsPlannerState>()(
 						state.actions = newActions.map((v, i) => {
 							if (v && i === volleyIndex) { return { ...v, open: !v.open }; }
 							return v;
-						}) as [DuelOfWitsActionExtended, DuelOfWitsActionExtended, DuelOfWitsActionExtended];
+						}) as [DoWActionExtended, DoWActionExtended, DoWActionExtended];
 					}));
 				},
 				toggleActionVisibility: (volleyIndex: number) => {
@@ -77,7 +75,7 @@ export const useDuelOfWitsPlannerStore = create<DuelOfWitsPlannerState>()(
 						state.actions = newActions.map((v, i) => {
 							if (v && i === volleyIndex) { return { ...v, visible: !v.visible }; }
 							return v;
-						}) as [DuelOfWitsActionExtended, DuelOfWitsActionExtended, DuelOfWitsActionExtended];
+						}) as [DoWActionExtended, DoWActionExtended, DoWActionExtended];
 
 					}));
 				}
