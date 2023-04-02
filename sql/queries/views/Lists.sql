@@ -376,3 +376,54 @@ CREATE OR REPLACE VIEW dat."ResourceMagicObstaclesList" AS
 
 ALTER TABLE dat."ResourceMagicObstaclesList"
     OWNER TO apiuser;
+
+
+-- View: dat."DoWActionTestList"
+
+-- DROP VIEW dat."DoWActionTestList";
+
+CREATE OR REPLACE VIEW dat."DoWActionTestList" AS
+ SELECT a."ActionId",
+    a."SkillId",
+    s."Name" AS "Skill",
+    a."AbilityId",
+    ab."Name" AS "Ability"
+   FROM dat."DuelOfWitsActionTests" a
+     LEFT JOIN dat."Skills" s ON s."Id" = a."SkillId"
+     LEFT JOIN dat."Abilities" ab ON ab."Id" = a."AbilityId";
+
+ALTER TABLE dat."DoWActionTestList"
+    OWNER TO apiuser;
+
+
+-- View: dat."DoWActionResolutionList"
+
+-- DROP VIEW dat."DoWActionResolutionList";
+
+CREATE OR REPLACE VIEW dat."DoWActionResolutionList" AS
+ SELECT a."ActionId",
+    a."OpposingActionId",
+    oa."Name" AS "OpposingAction",
+    a."ResolutionTypeId",
+    rt."Name" AS "ResolutionType",
+    a."IsAgainstSkill",
+    a."Obstacle",
+    a."OpposingModifier",
+    a."SkillId",
+    s."Name" AS "Skill",
+    a."AbilityId",
+    ab."Name" AS "Ability",
+    a."OpposingSkillId",
+    os."Name" AS "OpposingSkill",
+    a."OpposingAbilityId",
+    oab."Name" AS "OpposingAbility"
+   FROM dat."DuelOfWitsActionResolutions" a
+     LEFT JOIN dat."DuelOfWitsActions" oa ON oa."Id" = a."OpposingActionId"
+     LEFT JOIN dat."ActionResolutionTypes" rt ON rt."Id" = a."ResolutionTypeId"
+     LEFT JOIN dat."Skills" s ON s."Id" = a."SkillId"
+     LEFT JOIN dat."Skills" os ON os."Id" = a."SkillId"
+     LEFT JOIN dat."Abilities" ab ON ab."Id" = a."AbilityId"
+     LEFT JOIN dat."Abilities" oab ON ab."Id" = a."AbilityId";
+
+ALTER TABLE dat."DoWActionResolutionList"
+    OWNER TO apiuser;
