@@ -207,3 +207,38 @@ interface ResourceMagicObstaclesDBO {
 	ObstacleCaret: boolean;
 	Description: string | null;
 }
+
+interface DoWActionDBO {
+	Id: number;
+	Name: string;
+	SpeakingThePart: string | null;
+	Special: string | null;
+	Effect: string | null;
+}
+
+interface ActionTestDBO {
+	ActionId: number;
+	SkillId: SkillId | null;
+	Skill: string | null;
+	AbilityId: AbilityId | null;
+	Ability: string | null;
+}
+
+interface ActionResolutionDBO {
+	ActionId: number;
+	OpposingActionId: number;
+	OpposingAction: string;
+	ResolutionTypeId: number;
+	ResolutionType: string;
+	IsAgainstSkill: boolean | null;
+	Obstacle: number | null;
+	OpposingModifier: number | null;
+	SkillId: SkillId | null;
+	Skill: string;
+	AbilityId: AbilityId | null;
+	Ability: string;
+	OpposingSkillId: SkillId | null;
+	OpposingSkill: string;
+	OpposingAbilityId: AbilityId | null;
+	OpposingAbility: string;
+}

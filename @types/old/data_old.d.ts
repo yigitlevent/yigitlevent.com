@@ -94,4 +94,6 @@ interface ResolutionItem {
 	opposingSkill?: SkillPath;
 	opposingAbility?: StatsAndAttributesList;
 	opposingModifier?: number;
+
+	
 }

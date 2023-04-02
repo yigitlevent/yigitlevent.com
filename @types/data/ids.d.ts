@@ -10,6 +10,10 @@ type TraitId = NominalNumber<"TraitId">;
 type LifepathId = NominalNumber<"LifepathId">;
 type ResourceId = NominalNumber<"ResourceId">;
 
+type DoWActionId = NominalNumber<"DoWActionId">;
+type RaCActionId = NominalNumber<"RaCActionId">;
+type FightActionId = NominalNumber<"FightActionId">;
+
 type AbilityTypeId = NominalNumber<"AbilityTypeId">;
 type SkillCategoryId = NominalNumber<"SkillCategoryId">;
 type SkillTypeId = NominalNumber<"SkillTypeId">;
@@ -18,6 +22,7 @@ type SkillToolTypeId = NominalNumber<"SkillToolTypeId">;
 type TraitCategoryId = NominalNumber<"TraitCategoryId">;
 type TraitTypeId = NominalNumber<"TraitTypeId">;
 type ResourceTypeId = NominalNumber<"ResourceTypeId">;
+type ActionResolutionTypeId = NominalNumber<"ActionResolutionTypeId">;
 
 type OriginFacetId = NominalNumber<"OriginFacetId">;
 type DurationFacetId = NominalNumber<"DurationFacetId">;

@@ -234,6 +234,34 @@ interface SpellFacetSelected {
 	durationId: SpellDurationFacet;
 }
 
+interface ActionResolution<T> {
+	opposingAction: [id: T, name: string];
+	type: [id: ActionResolutionTypeId, name: string];
+	isAgainstSkill?: boolean;
+	obstacle?: number;
+	opposingModifier?: number;
+	skill?: [id: SkillId, name: string];
+	ability?: [id: AbilityId, name: string];
+	opposingSkill?: [id: SkillId, name: string];
+	opposingAbility?: [id: AbilityId, name: string];
+}
+
+interface ActionTests {
+	skills: [id: SkillId, name: string][];
+	abilities: [id: AbilityId, name: string][];
+}
+
+interface DoWAction {
+	id: DoWActionId;
+	name: string;
+	speakingThePart?: string;
+	special?: string;
+	effect?: string;
+	tests?: ActionTests;
+	resolutions?: ActionResolution<DoWActionId>[];
+}
+
+
 interface RulesetList {
 	rulesets: Ruleset[];
 }
@@ -247,4 +275,5 @@ interface RulesetData {
 	lifepaths: Lifepath[];
 	resources: Resource[];
 	spellFacets: SpellFacets;
+	dowActions: DoWAction[];
 }
