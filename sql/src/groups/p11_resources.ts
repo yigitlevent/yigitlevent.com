@@ -1,4 +1,4 @@
-import { Resources } from "../../../client/bwgrtools/src/data/resources/_resources";
+import { Resources } from "../old_data/resources/_resources";
 import { arrayToSQL } from "../util/arrayToSql";
 import { escapeTick } from "../util/escapeTick";
 import { findIndex } from "../util/findRef";

@@ -427,3 +427,134 @@ CREATE OR REPLACE VIEW dat."DoWActionResolutionList" AS
 
 ALTER TABLE dat."DoWActionResolutionList"
     OWNER TO apiuser;
+
+
+-- View: dat."RangeAndCoverActionsList"
+
+-- DROP VIEW dat."RangeAndCoverActionsList";
+
+CREATE OR REPLACE VIEW dat."RangeAndCoverActionsList" AS
+ SELECT r."Id",
+    r."Name",
+    r."GroupId",
+    rg."Name" AS "Group",
+    r."UseFoRKs",
+    r."UseWeaponRangeAdvantage",
+    r."UsePositionAdvantage",
+    r."UseStrideAdvantage",
+    r."IsOpenEnded",
+    r."Effect",
+    r."SpecialRestriction",
+    r."SpecialAction",
+    r."However"
+   FROM dat."RangeAndCoverActions" r
+     LEFT JOIN dat."RangeAndCoverActionGroups" rg ON rg."Id" = r."GroupId";
+
+ALTER TABLE dat."RangeAndCoverActionsList"
+    OWNER TO apiuser;
+
+
+-- View: dat."RangeAndCoverActionResolutionList"
+
+-- DROP VIEW dat."RangeAndCoverActionResolutionList";
+
+CREATE OR REPLACE VIEW dat."RangeAndCoverActionResolutionList" AS
+ SELECT a."ActionId",
+    a."OpposingActionId",
+    oa."Name" AS "OpposingAction",
+    a."ResolutionTypeId",
+    rt."Name" AS "ResolutionType",
+    a."IsAgainstSkill",
+    a."Obstacle",
+    a."OpposingModifier",
+    a."SkillId",
+    s."Name" AS "Skill",
+    a."AbilityId",
+    ab."Name" AS "Ability",
+    a."OpposingSkillId",
+    os."Name" AS "OpposingSkill",
+    a."OpposingAbilityId",
+    oab."Name" AS "OpposingAbility"
+   FROM dat."RangeAndCoverActionResolutions" a
+     LEFT JOIN dat."RangeAndCoverActions" oa ON oa."Id" = a."OpposingActionId"
+     LEFT JOIN dat."ActionResolutionTypes" rt ON rt."Id" = a."ResolutionTypeId"
+     LEFT JOIN dat."Skills" s ON s."Id" = a."SkillId"
+     LEFT JOIN dat."Skills" os ON os."Id" = a."SkillId"
+     LEFT JOIN dat."Abilities" ab ON ab."Id" = a."AbilityId"
+     LEFT JOIN dat."Abilities" oab ON ab."Id" = a."AbilityId";
+
+ALTER TABLE dat."RangeAndCoverActionResolutionList"
+    OWNER TO apiuser;
+
+
+-- View: dat."FightActionsList"
+
+-- DROP VIEW dat."FightActionsList";
+
+CREATE OR REPLACE VIEW dat."FightActionsList" AS
+ SELECT f."Id",
+    f."Name",
+    f."GroupId",
+    fg."Name" AS "Group",
+    f."ActionCost",
+    f."TestExtra",
+    f."Restrictions",
+    f."Effect",
+    f."Special",
+    f."CountsAsNoAction"
+   FROM dat."FightActions" f
+     LEFT JOIN dat."FightActionGroups" fg ON fg."Id" = f."GroupId";
+
+ALTER TABLE dat."FightActionsList"
+    OWNER TO apiuser;
+
+
+-- View: dat."FightActionTestList"
+
+-- DROP VIEW dat."FightActionTestList";
+
+CREATE OR REPLACE VIEW dat."FightActionTestList" AS
+ SELECT a."ActionId",
+    a."SkillId",
+    s."Name" AS "Skill",
+    a."AbilityId",
+    ab."Name" AS "Ability"
+   FROM dat."FightActionTests" a
+     LEFT JOIN dat."Skills" s ON s."Id" = a."SkillId"
+     LEFT JOIN dat."Abilities" ab ON ab."Id" = a."AbilityId";
+
+ALTER TABLE dat."FightActionTestList"
+    OWNER TO apiuser;
+
+
+-- View: dat."FightActionResolutionList"
+
+-- DROP VIEW dat."FightActionResolutionList";
+
+CREATE OR REPLACE VIEW dat."FightActionResolutionList" AS
+ SELECT a."ActionId",
+    a."OpposingActionId",
+    oa."Name" AS "OpposingAction",
+    a."ResolutionTypeId",
+    rt."Name" AS "ResolutionType",
+    a."IsAgainstSkill",
+    a."Obstacle",
+    a."OpposingModifier",
+    a."SkillId",
+    s."Name" AS "Skill",
+    a."AbilityId",
+    ab."Name" AS "Ability",
+    a."OpposingSkillId",
+    os."Name" AS "OpposingSkill",
+    a."OpposingAbilityId",
+    oab."Name" AS "OpposingAbility"
+   FROM dat."FightActionResolutions" a
+     LEFT JOIN dat."FightActions" oa ON oa."Id" = a."OpposingActionId"
+     LEFT JOIN dat."ActionResolutionTypes" rt ON rt."Id" = a."ResolutionTypeId"
+     LEFT JOIN dat."Skills" s ON s."Id" = a."SkillId"
+     LEFT JOIN dat."Skills" os ON os."Id" = a."SkillId"
+     LEFT JOIN dat."Abilities" ab ON ab."Id" = a."AbilityId"
+     LEFT JOIN dat."Abilities" oab ON ab."Id" = a."AbilityId";
+
+ALTER TABLE dat."FightActionResolutionList"
+    OWNER TO apiuser;

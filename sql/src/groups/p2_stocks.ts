@@ -1,4 +1,4 @@
-import { Stocks, SettingOld } from "../../../client/bwgrtools/src/data/stocks/_stocks";
+import { Stocks, SettingOld } from "../old_data/stocks/_stocks";
 import { arrayToSQL } from "../util/arrayToSql";
 import { findIndex } from "../util/findRef";
 

@@ -1,4 +1,4 @@
-import { RangeAndCoverActions } from "../../../client/bwgrtools/src/data/rangeAndCover";
+import { RangeAndCoverActions } from "../old_data/rangeAndCover";
 import { arrayToSQL } from "../util/arrayToSql";
 import { escapeTick } from "../util/escapeTick";
 import { findIndex } from "../util/findRef";

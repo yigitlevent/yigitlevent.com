@@ -1,4 +1,4 @@
-import { SkillCategories } from "../../../client/bwgrtools/src/data/skills/_skills";
+import { SkillCategories } from "../old_data/skills/_skills";
 import { arrayToSQL } from "../util/arrayToSql";
 import { escapeTick } from "../util/escapeTick";
 import { findIndex } from "../util/findRef";

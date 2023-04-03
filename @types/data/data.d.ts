@@ -313,11 +313,11 @@ interface RulesetData {
 	fightActions: FightAction[];
 }
 
-
 interface ActionPlannerExtension {
 	open: boolean;
 	visible: boolean;
 }
+
 type DoWActionExtended = DoWAction & ActionPlannerExtension;
 type RaCActionExtended = RaCAction & ActionPlannerExtension;
 type FightActionExtended = FightAction & ActionPlannerExtension;

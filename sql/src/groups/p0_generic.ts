@@ -1,4 +1,4 @@
-import { PracticeTable } from "../../../client/bwgrtools/src/data/tables";
+import { PracticeTable } from "../old_data/tables";
 import { arrayToSQL } from "../util/arrayToSql";
 
 

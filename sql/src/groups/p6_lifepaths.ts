@@ -1,4 +1,4 @@
-import { Stocks } from "../../../client/bwgrtools/src/data/stocks/_stocks";
+import { Stocks } from "../old_data/stocks/_stocks";
 import { arrayToSQL } from "../util/arrayToSql";
 import { escapeTick } from "../util/escapeTick";
 import { findIndex } from "../util/findRef";

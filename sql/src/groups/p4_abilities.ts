@@ -1,6 +1,6 @@
-import { Stats } from "../../../client/bwgrtools/src/data/stats";
-import { Attributes } from "../../../client/bwgrtools/src/data/attributes";
-import { PracticeTable } from "../../../client/bwgrtools/src/data/tables";
+import { Stats } from "../old_data/stats";
+import { Attributes } from "../old_data/attributes";
+import { PracticeTable } from "../old_data/tables";
 import { arrayToSQL } from "../util/arrayToSql";
 import { findIndex } from "../util/findRef";
 

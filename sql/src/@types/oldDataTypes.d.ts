@@ -87,13 +87,11 @@ interface ResolutionItem {
 
 	againstSkill?: boolean;
 	obstacle?: number;
-	
+
 	skill?: SkillPath;
 	ability?: StatsAndAttributesList;
 
 	opposingSkill?: SkillPath;
 	opposingAbility?: StatsAndAttributesList;
 	opposingModifier?: number;
-
-	
 }
