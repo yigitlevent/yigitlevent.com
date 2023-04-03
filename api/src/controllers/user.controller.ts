@@ -17,12 +17,9 @@ export async function UserSignUp(request: Request, response: Response) {
 	try {
 		const hashedPassword = bcrypt.hashSync(request.body.password, 10);
 
-		const query =
-			`insert into usr."Users"("Username", "Email", "Password") 
-			values ($1, $2, $3) 
-			returning *;`;
+		const query = `insert into usr."Users"("Username", "Email", "Password") values ('${username}', '${email}', '${hashedPassword}') returning *;`;
 
-		const data = await PgPool.query(query, [username, email, hashedPassword]);
+		const data = await PgPool.query(query);
 
 		if (data.rows.length === 0) { response.sendStatus(403); }
 
@@ -45,10 +42,7 @@ export async function UserSignIn(request: Request, response: Response) {
 	if (email == null || password == null) { return response.sendStatus(403); }
 
 	try {
-		const query =
-			`select "Id", "Username", "Email", "Password"
-			from usr."Users" 
-			where "Email" = '${email}';`;
+		const query = `select "Id", "Username", "Email", "Password" from usr."Users" where "Email" = '${email}';`;
 
 		const data = await PgPool.query<UserDBO>(query);
 
