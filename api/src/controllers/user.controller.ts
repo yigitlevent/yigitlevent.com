@@ -1,24 +1,11 @@
-import { Request, Response, NextFunction } from "express";
+import { Request, Response } from "express";
 import bcrypt from "bcrypt";
 
 import { PgPool } from "../index";
 
 
-async function CleanSessions() {
-	const query =
-		`delete from usr."UserSessions"
-		where ("expire"::date + '7 day'::interval) < now();`;
-	PgPool.query(query);
-}
-
-export function CheckAuth(request: Request, response: Response, next: NextFunction) {
-	if (request.sessionID && request.session.user) return next();
-	// TODO: Figure out what to do here
-	return response.sendStatus(401);
-}
 
 export async function UserAuth(request: Request, response: Response) {
-	CleanSessions();
 	return response.json({ user: request.session.user });
 }
 

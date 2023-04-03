@@ -4,11 +4,14 @@ import cors from "cors";
 import Pg from "pg";
 import pgsimple from "connect-pg-simple";
 
-import { PORT } from "./constants";
-import { CorsConfig, PgConfig, SessionConfig } from "./configs";
+import { PORT } from "./configs/constants.config";
+import { PgConfig } from "./configs/postgres.config";
 
-import { UserAuth, UserSignUp, UserSignIn, UserSignOut, CheckAuth } from "./routes/user";
-import { GetRulesetsData, GetRulesetsList } from "./routes/rulesets";
+import { CorsConfig } from "./configs/cors.config";
+import { SessionConfig } from "./configs/session.config";
+
+import userRouter from "./routes/user.route";
+import rulesetRouter from "./routes/ruleset.route";
 
 
 export const App = express();
@@ -21,13 +24,9 @@ App.use(express.urlencoded({ extended: true }));
 App.use(cors(CorsConfig));
 App.use(session({ store: SessionStore, ...SessionConfig }));
 
-App.post("/user/auth", CheckAuth, UserAuth);
-App.post("/user/signup", UserSignUp);
-App.post("/user/signin", UserSignIn);
-App.post("/user/signout", UserSignOut);
+App.use("/user", userRouter);
+App.use("/ruleset", rulesetRouter);
 
-App.get("/rulesets/list", GetRulesetsList);
-App.get("/rulesets/data", GetRulesetsData);
 
 
 /*

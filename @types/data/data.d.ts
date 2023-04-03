@@ -261,6 +261,39 @@ interface DoWAction {
 	resolutions?: ActionResolution<DoWActionId>[];
 }
 
+interface RaCAction {
+	id: RaCActionId;
+	name: string;
+	group: [id: RaCActionGroupId, name: string];
+	flags: {
+		useFoRKs?: boolean;
+		useWeaponRangeAdvantage?: boolean;
+		usePositionAdvantage?: boolean;
+		useStrideAdvantage?: boolean;
+		isOpenEnded?: boolean;
+	};
+	effect: string;
+	specialRestriction?: string;
+	specialAction?: string;
+	however?: string;
+	resolutions?: ActionResolution<RaCActionId>[];
+}
+
+interface FightAction {
+	id: FightActionId;
+	name: string;
+	group: [id: FightActionGroupId, name: string];
+	flags: {
+		countsAsNoAction?: boolean;
+	};
+	actionCost?: number;
+	testExtra?: string;
+	restrictions?: string;
+	effect?: string;
+	special?: string;
+	tests?: ActionTests;
+	resolutions?: ActionResolution<FightActionId>[];
+}
 
 interface RulesetList {
 	rulesets: Ruleset[];
@@ -276,4 +309,15 @@ interface RulesetData {
 	resources: Resource[];
 	spellFacets: SpellFacets;
 	dowActions: DoWAction[];
+	racActions: RaCAction[];
+	fightActions: FightAction[];
 }
+
+
+interface ActionPlannerExtension {
+	open: boolean;
+	visible: boolean;
+}
+type DoWActionExtended = DoWAction & ActionPlannerExtension;
+type RaCActionExtended = RaCAction & ActionPlannerExtension;
+type FightActionExtended = FightAction & ActionPlannerExtension;

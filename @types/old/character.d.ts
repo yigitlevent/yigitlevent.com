@@ -1,5 +1,3 @@
-
-
 interface StatSpending {
 	shade: number;
 	exponent: number;

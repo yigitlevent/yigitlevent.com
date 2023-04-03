@@ -216,6 +216,35 @@ interface DoWActionDBO {
 	Effect: string | null;
 }
 
+interface RaCActionDBO {
+	Id: number;
+	Name: string;
+	GroupId: number;
+	Group: string;
+	UseForks: boolean;
+	UseWeaponRangeAdvantage: boolean;
+	UsePositionAdvantage: boolean;
+	UseStrideAdvantage: boolean;
+	IsOpenEnded: boolean;
+	Effect: string;
+	SpecialRestriction: string | null;
+	SpecialAction: string | null;
+	However: string | null;
+}
+
+interface FightActionDBO {
+	Id: number;
+	Name: string;
+	GroupId: number;
+	Group: string;
+	ActionCost: number | null;
+	TestExtra: string | null;
+	Restrictions: string | null;
+	Effect: string | null;
+	Special: string | null;
+	CountsAsNoAction: boolean;
+}
+
 interface ActionTestDBO {
 	ActionId: number;
 	SkillId: SkillId | null;

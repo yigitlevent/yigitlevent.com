@@ -22,7 +22,10 @@ type SkillToolTypeId = NominalNumber<"SkillToolTypeId">;
 type TraitCategoryId = NominalNumber<"TraitCategoryId">;
 type TraitTypeId = NominalNumber<"TraitTypeId">;
 type ResourceTypeId = NominalNumber<"ResourceTypeId">;
+
 type ActionResolutionTypeId = NominalNumber<"ActionResolutionTypeId">;
+type RaCActionGroupId = NominalNumber<"RaCActionGroupId">;
+type FightActionGroupId = NominalNumber<"FightActionGroupId">;
 
 type OriginFacetId = NominalNumber<"OriginFacetId">;
 type DurationFacetId = NominalNumber<"DurationFacetId">;
