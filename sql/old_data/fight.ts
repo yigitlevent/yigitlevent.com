@@ -1,4 +1,4 @@
-export interface FightAction {
+export interface FightActionOld {
 	name: string;
 	group: "No Action" | "Attack" | "Defense" | "Basic" | "Special" | "Shooting & Throwing" | "Magic" | "Social" | "Hesitation";
 	actionCost: number | "variable";
@@ -11,7 +11,7 @@ export interface FightAction {
 	resolution?: { [key: string]: ResolutionItem; };
 }
 
-export const FightActions: FightAction[] = [
+export const FightActions: FightActionOld[] = [
 	{
 		name: "No Action",
 		group: "No Action",
