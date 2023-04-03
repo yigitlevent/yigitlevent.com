@@ -2,7 +2,7 @@ import produce from "immer";
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 
-import { GenericPost } from "./_genericRequests";
+import { GenericPost } from "../../utils/genericRequests";
 
 
 interface UserState {
@@ -15,7 +15,6 @@ interface UserState {
 	signin: (formData: UserSigninRequest, handleClose: (open: boolean) => void) => void;
 	signout: () => void;
 }
-
 
 export const useUserStore = create<UserState>()(
 	devtools(

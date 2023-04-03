@@ -2,7 +2,7 @@ import produce from "immer";
 import { create, StateCreator } from "zustand";
 import { devtools } from "zustand/middleware";
 
-import { GenericGet } from "./_genericRequests";
+import { GenericGet } from "../../utils/genericRequests";
 
 
 // TODO: research index key signatures to see if there is a workaround
@@ -32,6 +32,8 @@ interface RulesetStore {
 	readonly spellFacets: SpellFacets;
 
 	readonly dowActions: DoWAction[];
+	readonly racActions: RaCAction[];
+	readonly fightActions: FightAction[];
 
 	toggleFetching: () => void;
 	fetchList: () => void;
@@ -47,6 +49,8 @@ interface RulesetStore {
 	getLifepath: (search: LifepathId | string) => Lifepath;
 	getResource: (search: ResourceId | string) => Resource;
 	getDoWAction: (search: DoWActionId | string) => DoWAction;
+	getRaCAction: (search: RaCActionId | string) => RaCAction;
+	getFightAction: (search: FightActionId | string) => FightAction;
 
 	toggleDataset: (dataset: RulesetId) => void;
 	checkRulesets: (allowed: RulesetId[]) => boolean;
@@ -78,6 +82,8 @@ const Store: StateCreator<RulesetStore, [["zustand/devtools", never]], [], Rules
 	resourceTypes: [],
 
 	dowActions: [],
+	racActions: [],
+	fightActions: [],
 
 	spellFacets: {
 		origins: [],
@@ -129,6 +135,8 @@ const Store: StateCreator<RulesetStore, [["zustand/devtools", never]], [], Rules
 						state.spellFacets = response.data.spellFacets;
 
 						state.dowActions = response.data.dowActions;
+						state.racActions = response.data.racActions;
+						state.fightActions = response.data.fightActions;
 					}));
 				}
 				else throw new Error();
@@ -137,7 +145,7 @@ const Store: StateCreator<RulesetStore, [["zustand/devtools", never]], [], Rules
 			.finally(() => toggleFetching());
 	},
 
-	serveResult<T>(row: T[], error: [id: any, msg: string]): T {
+	serveResult<T>(row: T[], error: [id: any, msg: string]): Readonly<T> {
 		if (row.length == 1) return row[0];
 		else if (row.length > 1) throw new Error(`Found multiple ${error[1]} rows with ${typeof error[0] === "string" ? "name" : "id"} '${error[0]}'`);
 		else throw new Error(`Could not find any ${error[1]} with ${typeof error[0] === "string" ? "name" : "id"} '${error[0]}'`);
@@ -181,6 +189,16 @@ const Store: StateCreator<RulesetStore, [["zustand/devtools", never]], [], Rules
 	getDoWAction(search: DoWActionId | string) {
 		const rows = (typeof search === "string") ? this.dowActions.filter(v => v.name = search) : this.dowActions.filter(v => v.id = search);
 		return this.serveResult(rows, [search, "dowActions"]);
+	},
+
+	getRaCAction(search: RaCActionId | string) {
+		const rows = (typeof search === "string") ? this.racActions.filter(v => v.name = search) : this.racActions.filter(v => v.id = search);
+		return this.serveResult(rows, [search, "racActions"]);
+	},
+
+	getFightAction(search: FightActionId | string) {
+		const rows = (typeof search === "string") ? this.fightActions.filter(v => v.name = search) : this.fightActions.filter(v => v.id = search);
+		return this.serveResult(rows, [search, "fightActions"]);
 	},
 
 	toggleDataset: (ruleset: RulesetId) => {

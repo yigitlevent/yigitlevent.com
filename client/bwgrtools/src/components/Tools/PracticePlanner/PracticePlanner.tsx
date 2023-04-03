@@ -10,7 +10,7 @@ import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import Divider from "@mui/material/Divider";
 
-import { usePracticePlannerStore } from "../../../hooks/stores/usePracticePlannerStore";
+import { usePracticePlannerStore } from "../../../hooks/featureStores/usePracticePlannerStore";
 import { PracticeTable } from "../../../data/tables";
 
 import { GenericGrid } from "../../Shared/Grids";

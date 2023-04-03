@@ -6,7 +6,7 @@ import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import StepContent from "@mui/material/StepContent";
 
-import { useCharacterBurnerStore } from "../../../hooks/stores/useCharacterBurnerStore";
+import { useCharacterBurnerStore } from "../../../hooks/oldStores/useCharacterBurnerStore";
 
 import { StepIcon } from "../../Shared/StepIcon";
 import { DrawerBox } from "../../Shared/DrawerBox";

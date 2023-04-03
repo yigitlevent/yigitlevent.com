@@ -9,7 +9,7 @@ import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import StopIcon from "@mui/icons-material/Stop";
 
-import { usePracticePlannerStore } from "../../../hooks/stores/usePracticePlannerStore";
+import { usePracticePlannerStore } from "../../../hooks/featureStores/usePracticePlannerStore";
 
 
 export function PracticePlannerCell({ cell, cellIndex, setNotification }: { cell: Cell; cellIndex: number; setNotification: (value: React.SetStateAction<JSX.Element | null>) => void; }) {

@@ -14,7 +14,7 @@ import OpenInBrowserOutlinedIcon from "@mui/icons-material/OpenInBrowserOutlined
 import AutoStoriesOutlinedIcon from "@mui/icons-material/AutoStoriesOutlined";
 
 import { useUserStore } from "../../hooks/apiStores/useUserStore";
-import { useDrawerStore, DrawerNames } from "../../hooks/stores/useDrawerStore";
+import { useDrawerStore, DrawerNames } from "../../hooks/apiStores/useDrawerStore";
 
 
 function DrawerIconButton({ title, icon, onClick }: { title: string; icon: JSX.Element; onClick: () => void; }) {

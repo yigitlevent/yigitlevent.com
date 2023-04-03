@@ -9,6 +9,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import Divider from "@mui/material/Divider";
+import ListSubheader from "@mui/material/ListSubheader";
 
 import DeleteOutline from "@mui/icons-material/DeleteOutline";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
@@ -17,28 +18,32 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
 import { useRulesetStore } from "../../../hooks/apiStores/useRulesetStore";
-import { useDuelOfWitsPlannerStore } from "../../../hooks/featureStores/useDuelOfWitsPlannerStore";
+import { useRangeAndCoverPlannerStore } from "../../../hooks/featureStores/useRangeAndCoverPlannerStore";
+import { GroupBy } from "../../../utils/misc";
 
 import { GenericGrid } from "../../Shared/Grids";
-import { DuelOfWitsActionDetails } from "./DuelOfWitsActionDetails";
+import { RangeAndCoverActionDetails } from "./RangeAndCoverActionDetails";
 
 
-export function DuelOfWitsPlanner() {
-	const { dowActions } = useRulesetStore();
+
+
+export function RangeAndCoverPlanner() {
+	const { racActions } = useRulesetStore();
+	const groupedActions = GroupBy(racActions, a => a.group[1]);
 
 	const {
 		volleyIndex, actions, selectedAction,
 		changeVolleyIndex, addAction, deleteAction, selectedChangeAction, toggleActionDetails, toggleActionVisibility
-	} = useDuelOfWitsPlannerStore();
+	} = useRangeAndCoverPlannerStore();
 
 	return (
 		<Fragment>
-			<Typography variant="h3">Duel of Wits Planner</Typography>
+			<Typography variant="h3">Range and Cover Planner</Typography>
 
 			<GenericGrid columns={3} center>
 				<Grid item xs={3} sm={3} md={1}>
 					<FormControl fullWidth variant="standard">
-						<InputLabel>Volley</InputLabel>
+						<InputLabel >Volley</InputLabel>
 						<Select label="Volley" value={volleyIndex} onChange={(e) => changeVolleyIndex(parseInt(e.target.value as string))}>
 							<MenuItem value={0}>Volley 1</MenuItem>
 							<MenuItem value={1}>Volley 2</MenuItem>
@@ -51,13 +56,21 @@ export function DuelOfWitsPlanner() {
 					<FormControl fullWidth variant="standard">
 						<InputLabel>Action</InputLabel>
 						<Select label="Action" value={selectedAction} onChange={(e) => selectedChangeAction(e.target.value)}>
-							{dowActions.map(v => <MenuItem key={v.name} value={v.name}>{v.name}</MenuItem>)}
+							{Object.keys(groupedActions).map((groupKey, groupIndex) => {
+								const elements = [
+									<ListSubheader key={groupIndex}>{groupKey}</ListSubheader>,
+									Object.values(groupedActions)[groupIndex].map((action, actionIndex) =>
+										<MenuItem key={actionIndex} value={action.name}>{action.name}</MenuItem>
+									)
+								];
+								return elements;
+							})}
 						</Select>
 					</FormControl>
 				</Grid>
 
 				<Grid item xs={3} sm={3} md={1}>
-					<Button variant="outlined" size="medium" onClick={() => addAction(dowActions, volleyIndex, selectedAction)}>Add Action</Button>
+					<Button variant="outlined" size="medium" onClick={() => addAction(racActions, volleyIndex, selectedAction)}>Add Action</Button>
 				</Grid>
 			</GenericGrid>
 
@@ -90,13 +103,13 @@ export function DuelOfWitsPlanner() {
 									<Divider />
 								</Grid>
 
-								{action.visible && action.open ? <DuelOfWitsActionDetails action={action} /> : null}
+								{action.visible && action.open ? <RangeAndCoverActionDetails action={action} /> : null}
 							</Grid>
 							: <Typography variant="body2">No action selected</Typography>
 						}
 					</Grid>
 				)}
 			</GenericGrid>
-		</Fragment>
+		</Fragment >
 	);
 }

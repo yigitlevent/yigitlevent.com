@@ -17,7 +17,7 @@ import Checkbox from "@mui/material/Checkbox";
 import CircularProgress from "@mui/material/CircularProgress";
 
 import { useRulesetStore } from "../../../hooks/apiStores/useRulesetStore";
-import { useMagicWheelStore } from "../../../hooks/apiStores/useMagicWheelStore";
+import { useMagicWheelStore } from "../../../hooks/featureStores/useMagicWheelStore";
 import { useFontLoading } from "../../../hooks/apiStores/useFontLoading";
 import { RandomNumber } from "../../../utils/misc";
 
