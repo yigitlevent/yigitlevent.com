@@ -17,6 +17,7 @@ function Placed({ placed, practiceIndex, cellIndex }: { placed: PracticePlaced; 
 	const { getPractice } = useRulesetStore();
 	const { deletePractice } = usePracticePlannerStore();
 
+	console.log(placed.practiceId);
 	const practice = getPractice(placed.practiceId);
 
 	return (

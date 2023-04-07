@@ -75,10 +75,10 @@ export const usePracticePlannerStore = create<PracticePlannerState>()(
 				const els = Object.values((e.target as HTMLFormElement).elements) as HTMLInputElement[];
 				const [cIndex, pId, tType, name] = els.filter(v => v.tagName === "INPUT" && v.type === "text").map((v) => v.value);
 				const cellIndex = parseInt(cIndex);
-				const practiceId = parseInt(pId) as unknown as PracticeId;
+				const practiceId = pId as unknown as PracticeId;
 				const testType = tType as Exclude<keyof Practice, "id" | "ability" | "skillType" | "cycle">;
 				const practice = practices.find(v => v.id === practiceId);
-				if (practice === undefined) throw new Error("PracticeId not found");
+				if (practice === undefined) throw new Error(`PracticeId '${practiceId}' not found`);
 				const hours = practice[testType];
 
 				if (name === "") {

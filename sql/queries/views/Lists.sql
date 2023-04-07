@@ -567,7 +567,7 @@ ALTER TABLE dat."FightActionResolutionList"
 CREATE OR REPLACE VIEW dat."PracticeList" AS
  SELECT row_number() OVER (ORDER BY x."SkillTypeId", x."AbilityId") AS "Id",
     x."AbilityId",
-    x."AbilityName",
+    x."Ability",
     x."SkillTypeId",
     x."SkillType",
     x."Cycle",
@@ -575,7 +575,7 @@ CREATE OR REPLACE VIEW dat."PracticeList" AS
     x."Difficult",
     x."Challenging"
    FROM ( SELECT "Abilities"."Id" AS "AbilityId",
-            "Abilities"."Name" AS "AbilityName",
+            "Abilities"."Name" AS "Ability",
             NULL::integer AS "SkillTypeId",
             NULL::character varying AS "SkillType",
             "Abilities"."Cycle",

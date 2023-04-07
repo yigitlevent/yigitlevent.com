@@ -69,10 +69,11 @@ export function PracticePlanner(): JSX.Element {
 					<Grid item xs={4} sm={2} md={1}>
 						<FormControl fullWidth variant="standard">
 							<InputLabel>Practice Type</InputLabel>
-							<Select label="Practice Type" defaultValue={"Academic"} disabled={cells.length < 1}>
-								{practices.map((v, i) => (v.ability)
-									? <MenuItem key={i} value={v.id as unknown as number}>{`${v.ability[1]}`}</MenuItem>
-									: <MenuItem key={i} value={v.id as unknown as number}>{`${v.skillType[1]}`}</MenuItem>)
+							<Select label="Practice Type" defaultValue={"1"} disabled={cells.length < 1}>
+								{practices.map((v, i) =>
+									v.ability
+										? <MenuItem key={i} value={v.id as unknown as number}>{`${v.ability[1]}`}</MenuItem>
+										: <MenuItem key={i} value={v.id as unknown as number}>{`${v.skillType[1]}`}</MenuItem>)
 								}
 							</Select>
 						</FormControl>

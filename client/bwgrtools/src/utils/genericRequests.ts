@@ -4,7 +4,7 @@ import axios from "axios";
 type UserRoutes = `/user${"/auth" | "/signin" | "/signup" | "/signout"}`;
 type UserForms = UserSigninRequest | UserSignupRequest;
 
-type RulesetRoutes = `/rulesets/${"list" | "data"}`;
+type RulesetRoutes = `/ruleset/${"list" | "data"}`;
 
 type Routes = UserRoutes | RulesetRoutes;
 type Forms = UserForms;
