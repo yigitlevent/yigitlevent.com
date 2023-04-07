@@ -9,11 +9,26 @@ import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import StopIcon from "@mui/icons-material/Stop";
 
+import { useRulesetStore } from "../../../hooks/apiStores/useRulesetStore";
 import { usePracticePlannerStore } from "../../../hooks/featureStores/usePracticePlannerStore";
 
 
-export function PracticePlannerCell({ cell, cellIndex, setNotification }: { cell: Cell; cellIndex: number; setNotification: (value: React.SetStateAction<JSX.Element | null>) => void; }) {
-	const { cells, deleteCell, changeCellHour, deletePractice } = usePracticePlannerStore();
+function Placed({ placed, practiceIndex, cellIndex }: { placed: PracticePlaced; practiceIndex: number; cellIndex: number; }) {
+	const { getPractice } = useRulesetStore();
+	const { deletePractice } = usePracticePlannerStore();
+
+	const practice = getPractice(placed.practiceId);
+
+	return (
+		<Paper key={practiceIndex} elevation={4} sx={{ padding: "2px 4px" }}>
+			{placed.name} <Typography variant="caption">({practice.ability ? practice.ability[1] : practice.skillType[1]}, {placed.testType}, {placed.hours}hr{placed.hours > 1 ? "s" : ""})</Typography>
+			<IconButton size="small" sx={{ float: "right" }} onClick={() => deletePractice(cellIndex, practiceIndex)}><DeleteOutlineIcon fontSize="small" /></IconButton>
+		</Paper>
+	);
+}
+
+export function PracticePlannerCell({ cell, cellIndex, setNotification }: { cell: PracticeCell; cellIndex: number; setNotification: (value: React.SetStateAction<JSX.Element | null>) => void; }) {
+	const { cells, deleteCell, changeCellHour } = usePracticePlannerStore();
 
 	return (
 		<Paper elevation={3} sx={{ padding: "5px 10px", margin: "10px 10px 10px" }}>
@@ -42,12 +57,7 @@ export function PracticePlannerCell({ cell, cellIndex, setNotification }: { cell
 				{cell.placed.length > 0 ? <Divider /> : null}
 
 				<Stack spacing={1} sx={{ margin: "6px 0" }}>
-					{cell.placed.map((placed, practiceIndex) =>
-						<Paper key={practiceIndex} elevation={4} sx={{ padding: "2px 4px" }}>
-							{placed.skillName} <Typography variant="caption">({placed.skillType}, {placed.testType}, {placed.hours}hr{placed.hours > 1 ? "s" : ""})</Typography>
-							<IconButton size="small" sx={{ float: "right" }} onClick={() => deletePractice(cellIndex, practiceIndex)}><DeleteOutlineIcon fontSize="small" /></IconButton>
-						</Paper>
-					)}
+					{cell.placed.map((placed, practiceIndex) => <Placed key={practiceIndex} placed={placed} practiceIndex={practiceIndex} cellIndex={cellIndex} />)}
 				</Stack>
 			</Stack>
 		</Paper>

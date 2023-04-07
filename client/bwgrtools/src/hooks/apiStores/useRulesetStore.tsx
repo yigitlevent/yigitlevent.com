@@ -35,6 +35,8 @@ interface RulesetStore {
 	readonly racActions: RaCAction[];
 	readonly fightActions: FightAction[];
 
+	readonly practices: Practice[];
+
 	toggleFetching: () => void;
 	fetchList: () => void;
 	fetchData: () => void;
@@ -51,6 +53,7 @@ interface RulesetStore {
 	getDoWAction: (search: DoWActionId | string) => DoWAction;
 	getRaCAction: (search: RaCActionId | string) => RaCAction;
 	getFightAction: (search: FightActionId | string) => FightAction;
+	getPractice: (search: PracticeId) => Practice;
 
 	toggleDataset: (dataset: RulesetId) => void;
 	checkRulesets: (allowed: RulesetId[]) => boolean;
@@ -84,6 +87,8 @@ const Store: StateCreator<RulesetStore, [["zustand/devtools", never]], [], Rules
 	dowActions: [],
 	racActions: [],
 	fightActions: [],
+
+	practices: [],
 
 	spellFacets: {
 		origins: [],
@@ -137,6 +142,8 @@ const Store: StateCreator<RulesetStore, [["zustand/devtools", never]], [], Rules
 						state.dowActions = response.data.dowActions;
 						state.racActions = response.data.racActions;
 						state.fightActions = response.data.fightActions;
+
+						state.practices = response.data.practices;
 					}));
 				}
 				else throw new Error();
@@ -198,6 +205,11 @@ const Store: StateCreator<RulesetStore, [["zustand/devtools", never]], [], Rules
 
 	getFightAction(search: FightActionId | string) {
 		const rows = (typeof search === "string") ? this.fightActions.filter(v => v.name = search) : this.fightActions.filter(v => v.id = search);
+		return this.serveResult(rows, [search, "fightActions"]);
+	},
+
+	getPractice(search: PracticeId) {
+		const rows = this.practices.filter(v => v.id = search);
 		return this.serveResult(rows, [search, "fightActions"]);
 	},
 

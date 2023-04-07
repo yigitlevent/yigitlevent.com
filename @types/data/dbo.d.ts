@@ -271,3 +271,15 @@ interface ActionResolutionDBO {
 	OpposingAbilityId: AbilityId | null;
 	OpposingAbility: string;
 }
+
+interface PracticeDBO {
+	Id: number;
+	AbilityId: number | null;
+	Ability: string | null;
+	SkillTypeId: number | null;
+	SkillType: string | null;
+	Cycle: number;
+	Routine: number;
+	Difficult: number;
+	Challenging: number;
+}

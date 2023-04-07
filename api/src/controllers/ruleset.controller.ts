@@ -12,6 +12,7 @@ import { GetTraits } from "../services/traits.service";
 import { GetRulesets } from "../services/rulesets.service";
 import { GetRaCActions } from "../services/racActions.service";
 import { GetFightActions } from "../services/fightActions.service";
+import { GetPractices } from "../services/practices.service";
 
 
 export async function GetRulesetsData(request: Request, response: Response) {
@@ -27,8 +28,9 @@ export async function GetRulesetsData(request: Request, response: Response) {
 		const dowActions = await GetDoWActions();
 		const racActions = await GetRaCActions();
 		const fightActions = await GetFightActions();
+		const practices = await GetPractices();
 
-		const data: RulesetData = { abilities, stocks, settings, skills, traits, lifepaths, resources, spellFacets, dowActions, racActions, fightActions };
+		const data: RulesetData = { abilities, stocks, settings, skills, traits, lifepaths, resources, spellFacets, dowActions, racActions, fightActions, practices };
 
 		response.status(200);
 		return response.json(data);

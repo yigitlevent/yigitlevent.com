@@ -10,14 +10,15 @@ import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import Divider from "@mui/material/Divider";
 
+import { useRulesetStore } from "../../../hooks/apiStores/useRulesetStore";
 import { usePracticePlannerStore } from "../../../hooks/featureStores/usePracticePlannerStore";
-import { PracticeTable } from "../../../data/tables";
 
 import { GenericGrid } from "../../Shared/Grids";
 import { PracticePlannerCell } from "./PracticePlannerCell";
 
 
 export function PracticePlanner(): JSX.Element {
+	const { practices } = useRulesetStore();
 	const { days, hours, cells, changeDays, changeHours, addCells, addPractice } = usePracticePlannerStore();
 
 	const [notification, setNotification] = useState<null | JSX.Element>(null);
@@ -54,7 +55,7 @@ export function PracticePlanner(): JSX.Element {
 				</Grid>
 			</GenericGrid>
 
-			<form onSubmit={e => addPractice(e, cells, setNotification)}>
+			<form onSubmit={e => addPractice(e, practices, cells, setNotification)}>
 				<GenericGrid columns={5} center>
 					<Grid item xs={4} sm={2} md={1}>
 						<FormControl fullWidth variant="standard">
@@ -67,9 +68,12 @@ export function PracticePlanner(): JSX.Element {
 
 					<Grid item xs={4} sm={2} md={1}>
 						<FormControl fullWidth variant="standard">
-							<InputLabel>Skill Type</InputLabel>
-							<Select label="Skill Type" defaultValue={"Academic"} disabled={cells.length < 1}>
-								{Object.keys(PracticeTable).map(v => <MenuItem key={v} value={v}>{v}</MenuItem>)}
+							<InputLabel>Practice Type</InputLabel>
+							<Select label="Practice Type" defaultValue={"Academic"} disabled={cells.length < 1}>
+								{practices.map((v, i) => (v.ability)
+									? <MenuItem key={i} value={v.id as unknown as number}>{`${v.ability[1]}`}</MenuItem>
+									: <MenuItem key={i} value={v.id as unknown as number}>{`${v.skillType[1]}`}</MenuItem>)
+								}
 							</Select>
 						</FormControl>
 					</Grid>

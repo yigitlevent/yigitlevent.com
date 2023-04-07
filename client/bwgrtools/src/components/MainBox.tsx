@@ -14,7 +14,11 @@ import { ResourcesList } from "./Tools/ResourcesList/ResourcesList";
 import { PracticePlanner } from "./Tools/PracticePlanner/PracticePlanner";
 import { MagicWheel } from "./Tools/MagicWheel/MagicWheel";
 import { DuelOfWitsPlanner } from "./Tools/DuelOfWitsPlanner/DuelOfWitsPlanner";
+import { RangeAndCoverPlanner } from "./Tools/RangeAndCoverPlanner/RangeAndCoverPlanner";
+import { FightPlanner } from "./Tools/FightPlanner/FightPlanner";
+import { CharacterBurner } from "./Tools/CharacterBurner/CharacterBurner";
 import { Menu } from "./Menu/Menu";
+
 
 let Once = true;
 
@@ -45,9 +49,9 @@ export function MainBox() {
 						<Route path="/practiceplanner" element={<PracticePlanner />} />
 						<Route path="/magicwheel" element={<MagicWheel />} />
 						<Route path="/dowplanner" element={<DuelOfWitsPlanner />} />
-						{/* TODO: <Route path="/racplanner" element={<RangeAndCoverPlanner />} />*/}
-						{/* TODO: <Route path="/fightplanner" element={<FightPlanner />} />*/}
-						{/* TODO: <Route path="/characterburner" element={<CharacterBurner />} />*/}
+						TODO: <Route path="/racplanner" element={<RangeAndCoverPlanner />} />
+						TODO: <Route path="/fightplanner" element={<FightPlanner />} />
+						TODO: <Route path="/characterburner" element={<CharacterBurner />} />
 					</Routes>
 				}
 			</Paper>

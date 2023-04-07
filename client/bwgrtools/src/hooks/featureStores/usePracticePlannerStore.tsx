@@ -3,7 +3,6 @@ import produce from "immer";
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 
-import { PracticeTable } from "../../data/tables";
 import { Clamp } from "../../utils/misc";
 
 import { Notification } from "../../components/Shared/Notification";
@@ -12,14 +11,14 @@ import { Notification } from "../../components/Shared/Notification";
 interface PracticePlannerState {
 	days: number;
 	hours: number;
-	cells: Cell[];
+	cells: PracticeCell[];
 
 	changeDays: (value: string) => void;
 	changeHours: (value: string) => void;
 	addCells: (days: number, hours: number) => void;
 	deleteCell: (cellIndex: number) => void;
-	changeCellHour: (cellIndex: number, change: 1 | -1, cells: Cell[], setNotification: Dispatch<SetStateAction<JSX.Element | null>>) => void;
-	addPractice: (e: FormEvent<HTMLFormElement>, cells: Cell[], setNotification: React.Dispatch<React.SetStateAction<JSX.Element | null>>) => void;
+	changeCellHour: (cellIndex: number, change: 1 | -1, cells: PracticeCell[], setNotification: Dispatch<SetStateAction<JSX.Element | null>>) => void;
+	addPractice: (e: FormEvent<HTMLFormElement>, practices: Practice[], cells: PracticeCell[], setNotification: React.Dispatch<React.SetStateAction<JSX.Element | null>>) => void;
 	deletePractice: (cellIndex: number, practiceIndex: number) => void;
 }
 
@@ -54,7 +53,7 @@ export const usePracticePlannerStore = create<PracticePlannerState>()(
 					state.cells = newCells;
 				}));
 			},
-			changeCellHour: (cellIndex: number, change: 1 | -1, cells: Cell[], setNotification: Dispatch<SetStateAction<JSX.Element | null>>) => {
+			changeCellHour: (cellIndex: number, change: 1 | -1, cells: PracticeCell[], setNotification: Dispatch<SetStateAction<JSX.Element | null>>) => {
 				if (cells[cellIndex].remaining === 0 && change === -1) {
 					setNotification(<Notification text="Cannot reduce hours from day. It is used by practices." severity="error" onClose={() => setNotification(null)} />);
 				}
@@ -71,21 +70,25 @@ export const usePracticePlannerStore = create<PracticePlannerState>()(
 					setNotification(null);
 				}
 			},
-			addPractice: (e: FormEvent<HTMLFormElement>, cells: Cell[], setNotification: React.Dispatch<React.SetStateAction<JSX.Element | null>>) => {
+			addPractice: (e: FormEvent<HTMLFormElement>, practices: Practice[], cells: PracticeCell[], setNotification: React.Dispatch<React.SetStateAction<JSX.Element | null>>) => {
 				e.preventDefault();
 				const els = Object.values((e.target as HTMLFormElement).elements) as HTMLInputElement[];
-				const [cIndex, sType, tType, sName] = els.filter(v => v.tagName === "INPUT" && v.type === "text").map((v) => v.value);
-				const hours = PracticeTable[sType][tType];
+				const [cIndex, pId, tType, name] = els.filter(v => v.tagName === "INPUT" && v.type === "text").map((v) => v.value);
 				const cellIndex = parseInt(cIndex);
+				const practiceId = parseInt(pId) as unknown as PracticeId;
+				const testType = tType as Exclude<keyof Practice, "id" | "ability" | "skillType" | "cycle">;
+				const practice = practices.find(v => v.id === practiceId);
+				if (practice === undefined) throw new Error("PracticeId not found");
+				const hours = practice[testType];
 
-				if (sName === "") {
+				if (name === "") {
 					setNotification(<Notification text="Please enter a Skill name." severity="error" onClose={() => setNotification(null)} />);
 				}
 				else if (cells[cellIndex].remaining - hours < 0) {
 					setNotification(<Notification text={`Cannot fit practice into the day. This practice takes ${hours} hours.`} severity="error" onClose={() => setNotification(null)} />);
 				}
 				else {
-					const practice: Practice = { skillName: sName, skillType: sType, testType: tType, hours: PracticeTable[sType][tType] };
+					const practice: PracticePlaced = { practiceId, name, testType, hours };
 					set(produce<PracticePlannerState>((state) => {
 						const newCells = state.cells;
 						state.cells = newCells.map((v, i) => {

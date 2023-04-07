@@ -295,6 +295,16 @@ interface FightAction {
 	resolutions?: ActionResolution<FightActionId>[];
 }
 
+type Practice = RequireOnlyOne<{
+	id: PracticeId;
+	ability?: [id: AbilityId, name: string];
+	skillType?: [id: SkillTypeId, name: string];
+	cycle: number;
+	routine: number;
+	difficult: number;
+	challenging: number;
+}, "ability" | "skillType">;
+
 interface RulesetList {
 	rulesets: Ruleset[];
 }
@@ -311,6 +321,7 @@ interface RulesetData {
 	dowActions: DoWAction[];
 	racActions: RaCAction[];
 	fightActions: FightAction[];
+	practices: Practice[];
 }
 
 interface ActionPlannerExtension {
@@ -321,3 +332,6 @@ interface ActionPlannerExtension {
 type DoWActionExtended = DoWAction & ActionPlannerExtension;
 type RaCActionExtended = RaCAction & ActionPlannerExtension;
 type FightActionExtended = FightAction & ActionPlannerExtension;
+
+
+

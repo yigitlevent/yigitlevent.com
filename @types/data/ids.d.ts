@@ -22,6 +22,7 @@ type SkillToolTypeId = NominalNumber<"SkillToolTypeId">;
 type TraitCategoryId = NominalNumber<"TraitCategoryId">;
 type TraitTypeId = NominalNumber<"TraitTypeId">;
 type ResourceTypeId = NominalNumber<"ResourceTypeId">;
+type PracticeId = NominalNumber<"PracticeId">;
 
 type ActionResolutionTypeId = NominalNumber<"ActionResolutionTypeId">;
 type RaCActionGroupId = NominalNumber<"RaCActionGroupId">;

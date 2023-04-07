@@ -558,3 +558,43 @@ CREATE OR REPLACE VIEW dat."FightActionResolutionList" AS
 
 ALTER TABLE dat."FightActionResolutionList"
     OWNER TO apiuser;
+
+
+-- View: dat."PracticeList"
+
+-- DROP VIEW dat."PracticeList";
+
+CREATE OR REPLACE VIEW dat."PracticeList" AS
+ SELECT row_number() OVER (ORDER BY x."SkillTypeId", x."AbilityId") AS "Id",
+    x."AbilityId",
+    x."AbilityName",
+    x."SkillTypeId",
+    x."SkillType",
+    x."Cycle",
+    x."Routine",
+    x."Difficult",
+    x."Challenging"
+   FROM ( SELECT "Abilities"."Id" AS "AbilityId",
+            "Abilities"."Name" AS "AbilityName",
+            NULL::integer AS "SkillTypeId",
+            NULL::character varying AS "SkillType",
+            "Abilities"."Cycle",
+            "Abilities"."Routine",
+            "Abilities"."Difficult",
+            "Abilities"."Challenging"
+           FROM dat."Abilities"
+          WHERE "Abilities"."Cycle" IS NOT NULL
+        UNION
+         SELECT NULL::integer AS "AbilityId",
+            NULL::character varying AS "AbilityName",
+            "SkillTypes"."Id" AS "SkillTypeId",
+            "SkillTypes"."Name" AS "SkillType",
+            "SkillTypes"."Cycle",
+            "SkillTypes"."Routine",
+            "SkillTypes"."Difficult",
+            "SkillTypes"."Challenging"
+           FROM dat."SkillTypes"
+          WHERE "SkillTypes"."Cycle" IS NOT NULL) x;
+
+ALTER TABLE dat."PracticeList"
+    OWNER TO apiuser;
