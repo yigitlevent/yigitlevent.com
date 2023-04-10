@@ -21,8 +21,23 @@ export function CharacterBurner(): JSX.Element {
 			<Basics openModal={openModal} />
 			<Stats />
 			<Skills />
+			{/* TODO
+			<Traits />
+			<Attributes />
+			<Resources />
+			<Tolerances />
+			<Beliefs />
+			<Instincts />
+			*/}
 
 			<LifepathSelection isOpen={currentModal === "lp"} close={closeModals} />
+			{/*
+			<AnswerQuestions />
+			<ChooseResources />
+			<ChooseGeneralSkills />
+			<ChooseGeneralLifepaths />
+			<ChooseSpecial /> --- StockSpecific, SpecialLifepaths, SpecialSkills
+			*/}
 		</Fragment>
 	);
 }

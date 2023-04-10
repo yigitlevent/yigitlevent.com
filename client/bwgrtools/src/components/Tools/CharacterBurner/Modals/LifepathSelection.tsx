@@ -12,6 +12,7 @@ import { GenericGrid } from "../../../Shared/Grids";
 import { LifepathBox } from "../../LifepathLists/LifepathBox";
 
 
+// TODO: random lifepath selection: "Choose Lifepaths" or "Random Lifepaths"
 export function LifepathSelection({ isOpen, close }: { isOpen: boolean; close: () => void; }) {
 	const { availableLifepaths, lifepaths, addLifepath, removeLastLifepath } = useCharacterBurnerStore();
 
