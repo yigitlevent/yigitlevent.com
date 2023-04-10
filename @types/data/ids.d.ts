@@ -17,7 +17,6 @@ type FightActionId = NominalNumber<"FightActionId">;
 type AbilityTypeId = NominalNumber<"AbilityTypeId">;
 type SkillCategoryId = NominalNumber<"SkillCategoryId">;
 type SkillTypeId = NominalNumber<"SkillTypeId">;
-type SkillRootId = NominalNumber<"SkillRootId">;
 type SkillToolTypeId = NominalNumber<"SkillToolTypeId">;
 type TraitCategoryId = NominalNumber<"TraitCategoryId">;
 type TraitTypeId = NominalNumber<"TraitTypeId">;

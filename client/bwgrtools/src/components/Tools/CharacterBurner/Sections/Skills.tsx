@@ -100,7 +100,7 @@ export function Skills() {
 	const skillPools = getSkillPools();
 
 	return (
-		<GenericGrid columns={6} center="v" spacing={[0, 2]}>
+		<GenericGrid columns={6} center="v" spacing={[0, 2]} sx={{ marginTop: 3 }}>
 			<Grid item xs={6}>
 				<Typography variant="h4">Skills</Typography>
 			</Grid>

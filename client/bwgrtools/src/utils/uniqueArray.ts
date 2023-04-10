@@ -7,7 +7,7 @@ export class UniqueArray<K, T> {
 		if (newArray) this.values = newArray;
 	}
 
-	get items() {
+	get items(): UniqueArrayItem<K, T>[] {
 		return this.values;
 	}
 
@@ -38,20 +38,28 @@ export class UniqueArray<K, T> {
 		return this.values[this.values.length - 1];
 	}
 
-	clear() {
+	clear(): UniqueArray<K, T> {
 		this.values = [];
+		return this;
 	}
 
 	has(id: K): boolean {
 		return this.values.some(v => v.id === id);
 	}
 
+	/**
+	 * Checks if any element with the given `id` satisfies the pair of key-value.
+	 * @param id - id of the element `T`.
+	 * @param key - key of the element type of `T`.
+	 * @param value - value condition for the key of the element type of `T`.
+	 * @returns boolean.
+	**/
 	exists(id: K, key: keyof T, value: T[keyof T]): boolean {
 		return this.values.some(v => v.id === id && v[key] === value);
 	}
 
 	/**
-	 * Returns count of elements which satisfy the key-value pair condition.
+	 * Returns count of elements which satisfy the specified pair of key-value.
 	 * @param key - key of the element type of `T`.
 	 * @param value - value condition for the key of the element type of `T`.
 	 * @returns count of elements that has this key-value pair.
@@ -64,15 +72,15 @@ export class UniqueArray<K, T> {
 		return this.values.find(v => v.id === id);
 	}
 
-	map<R>(callback: (value: UniqueArrayItem<K, T>, index: number, array: UniqueArrayItem<K, T>[]) => R) {
+	map<R>(callback: (value: UniqueArrayItem<K, T>, index: number, array: UniqueArrayItem<K, T>[]) => R): R[] {
 		return this.values.map(callback);
 	}
 
-	forEach<R>(callback: (value: UniqueArrayItem<K, T>, index: number, array: UniqueArrayItem<K, T>[]) => R) {
+	forEach<R>(callback: (value: UniqueArrayItem<K, T>, index: number, array: UniqueArrayItem<K, T>[]) => R): void {
 		return this.values.forEach(callback);
 	}
 
-	filter<R>(callback: (value: UniqueArrayItem<K, T>, index: number, array: UniqueArrayItem<K, T>[]) => R) {
+	filter(callback: (value: UniqueArrayItem<K, T>, index: number, array: UniqueArrayItem<K, T>[]) => boolean): UniqueArrayItem<K, T>[] {
 		return this.values.filter(callback);
 	}
 }
