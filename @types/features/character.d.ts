@@ -1,3 +1,5 @@
+type CharacterBurnerModals = "lp" | "st";
+
 interface CharacterAttribute {
 	id: AbilityId;
 	name: string;
@@ -37,6 +39,7 @@ interface CharacterStockLimits {
 	beliefs: number;
 	instincts: number;
 	stats: {
+		[key: string]: { min: number, max: number; };
 		Will: { min: number, max: number; };
 		Perception: { min: number, max: number; };
 		Power: { min: number, max: number; };

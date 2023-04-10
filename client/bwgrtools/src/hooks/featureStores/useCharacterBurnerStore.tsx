@@ -2,11 +2,9 @@ import produce from "immer";
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 
-import { Pairwise } from "../../utils/misc";
+import { Clamp, Pairwise } from "../../utils/misc";
 import { UniqueArray } from "../../utils/uniqueArray";
 import { useRulesetStore } from "../apiStores/useRulesetStore";
-
-
 
 
 interface CharacterBurnerProperties {
@@ -18,7 +16,7 @@ interface CharacterBurnerProperties {
 	beliefs: { name: string, belief: string; }[];
 	instincts: { name: string, instinct: string; }[];
 
-	stats: { [key: string]: { pool: "Mental" | "Physical", shadeShifted: boolean, advancement: number; }; };
+	stats: { [key: string]: { poolType: "Mental" | "Physical", shadeShifted: boolean, poolSpent: number; eitherSpent: number; }; };
 
 	skills: UniqueArray<SkillId, CharacterSkill>;
 	traits: UniqueArray<TraitId, CharacterTrait>;
@@ -42,9 +40,17 @@ interface CharacterBurnerMethods {
 	setConcept: (concept: string) => void;
 	setGender: (gender: string) => void;
 
+	shiftStatShade: (statName: string) => void;
+	modifyStatExponent: (statName: string, decrease?: boolean) => void;
+
 	getLeadCount: () => number;
 	getAge: () => number;
 	getResourcePoints: () => number;
+	getAgePool: () => { minAge: number; mentalPool: number; physicalPool: number; };
+	getMentalPool: () => { total: number, spent: number; remaining: number; };
+	getPhysicalPool: () => { total: number, spent: number; remaining: number; };
+	getEitherPool: () => { total: number, spent: number; remaining: number; };
+	getStat: (statName: string) => { shade: ShadesList, exponent: number; };
 
 	updateAvailableLifepaths: () => Lifepath[];
 
@@ -80,12 +86,12 @@ const InitialState: CharacterBurnerProperties = {
 	],
 
 	stats: {
-		"Will": { pool: "Mental", shadeShifted: false, advancement: 0 },
-		"Perception": { pool: "Mental", shadeShifted: false, advancement: 0 },
-		"Power": { pool: "Physical", shadeShifted: false, advancement: 0 },
-		"Agility": { pool: "Physical", shadeShifted: false, advancement: 0 },
-		"Forte": { pool: "Physical", shadeShifted: false, advancement: 0 },
-		"Speed": { pool: "Physical", shadeShifted: false, advancement: 0 }
+		"Will": { poolType: "Mental", shadeShifted: false, poolSpent: 0, eitherSpent: 0 },
+		"Perception": { poolType: "Mental", shadeShifted: false, poolSpent: 0, eitherSpent: 0 },
+		"Power": { poolType: "Physical", shadeShifted: false, poolSpent: 0, eitherSpent: 0 },
+		"Agility": { poolType: "Physical", shadeShifted: false, poolSpent: 0, eitherSpent: 0 },
+		"Forte": { poolType: "Physical", shadeShifted: false, poolSpent: 0, eitherSpent: 0 },
+		"Speed": { poolType: "Physical", shadeShifted: false, poolSpent: 0, eitherSpent: 0 }
 	},
 
 	skills: new UniqueArray<SkillId, CharacterSkill>(),
@@ -147,13 +153,29 @@ export const useCharacterBurnerStore = create<CharacterBurnerState>()(
 		setConcept: (concept: string): void => { set({ concept }); },
 		setGender: (gender: string): void => { set({ gender }); },
 
-		getLeadCount() {
+		shiftStatShade: (statName: string) => {
+			set(produce<CharacterBurnerState>((state) => {
+				state.stats[statName].shadeShifted = !state.stats[statName].shadeShifted;
+				// TODO: Check remaining counts, use either pool too
+				state.stats[statName].poolSpent += state.stats[statName].shadeShifted ? 5 : -5;
+			}));
+		},
+
+		modifyStatExponent: (statName: string, decrease?: boolean) => {
+			set(produce<CharacterBurnerState>((state) => {
+				// TODO: Check remaining counts, use either pool too
+				const newNumber = Clamp(state.stats[statName].poolSpent + (decrease ? -1 : 1), 0, state.limits.stats[statName].max);
+				state.stats[statName].poolSpent = newNumber;
+			}));
+		},
+
+		getLeadCount: () => {
 			const state = get();
 			if (state.lifepaths.length === 0) return 0;
 			return Pairwise(state.lifepaths).reduce((pv, cv) => cv[0].setting[0] !== cv[1].setting[0] ? pv + 1 : pv, 0);
 		},
 
-		getAge(): number {
+		getAge: (): number => {
 			const state = get();
 			if (state.lifepaths.length === 0) return 0;
 			const yrs = state.lifepaths.map(v => v.years).filter(v => typeof v === "number") as number[];
@@ -162,12 +184,59 @@ export const useCharacterBurnerStore = create<CharacterBurnerState>()(
 			return sum + get().getLeadCount();
 		},
 
-		getResourcePoints(): number {
+		getResourcePoints: (): number => {
 			const state = get();
 			if (state.lifepaths.length === 0) return 0;
 			const rps = state.lifepaths.map(v => v.pools.resourcePoints).reduce((pv, cv) => pv + cv);
 			// TODO: Special lifepaths should matter here
 			return rps;
+		},
+
+		getAgePool: (): { minAge: number; mentalPool: number; physicalPool: number; } => {
+			const { getStock } = useRulesetStore.getState();
+			const state = get();
+			const age = state.getAge();
+			if (age === 0) return { minAge: 0, mentalPool: 0, physicalPool: 0 };
+			const agePool = getStock(state.stock[0]).agePool;
+			return agePool.filter(a => age > a.minAge).reduce((pv, cv) => pv.minAge < cv.minAge ? pv : cv);
+		},
+
+		getMentalPool: (): { total: number, spent: number; remaining: number; } => {
+			const state = get();
+			const stockAgePool = state.getAgePool().mentalPool;
+			const lifepathPool = state.lifepaths.length > 0 ? state.lifepaths.map(lp => lp.pools.mentalStatPool).reduce((pv, cv) => pv + cv) : 0;
+			const total = stockAgePool + lifepathPool;
+
+			const stats = Object.values(state.stats).filter(s => s.poolType === "Mental");
+			const spent = stats.map((v): number => v.poolSpent).reduce((pv, cv) => pv + cv);
+
+			return { total: total, spent, remaining: total - spent };
+		},
+
+		getPhysicalPool: (): { total: number, spent: number; remaining: number; } => {
+			const state = get();
+			const stockAgePool = state.getAgePool().physicalPool;
+			const lifepathPool = state.lifepaths.length > 0 ? state.lifepaths.map(lp => lp.pools.physicalStatPool).reduce((pv, cv) => pv + cv) : 0;
+			const total = stockAgePool + lifepathPool;
+
+			const stats = Object.values(state.stats).filter(s => s.poolType === "Physical");
+			const spent = stats.map((v): number => v.poolSpent).reduce((pv, cv) => pv + cv);
+
+			return { total: total, spent, remaining: total - spent };
+		},
+
+		getEitherPool: (): { total: number, spent: number; remaining: number; } => {
+			const state = get();
+			const total = state.lifepaths.length > 0 ? state.lifepaths.map(lp => lp.pools.eitherStatPool).reduce((pv, cv) => pv + cv) : 0;
+			const spent = Object.values(state.stats).map((v): number => v.eitherSpent).reduce((pv, cv) => pv + cv);
+			return { total, spent, remaining: total - spent };
+		},
+
+		getStat: (statName: string): { shade: ShadesList, exponent: number; } => {
+			const state = get();
+			const shade = state.stats[statName].shadeShifted ? "G" : "B";
+			const exponent = state.stats[statName].eitherSpent + state.stats[statName].poolSpent + (state.stats[statName].shadeShifted ? -5 : 0);
+			return { shade, exponent };
 		},
 
 		updateAvailableLifepaths: () => {

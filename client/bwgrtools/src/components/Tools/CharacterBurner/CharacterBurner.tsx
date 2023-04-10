@@ -3,11 +3,9 @@ import { Fragment, useState } from "react";
 import Typography from "@mui/material/Typography";
 
 import { Basics } from "./Sections/Basics";
-
+import { Stats } from "./Sections/Stats";
 import { LifepathSelection } from "./Modals/LifepathSelection";
 
-
-type CharacterBurnerModals = "lp" | "st";
 
 export function CharacterBurner(): JSX.Element {
 	const [currentModal, setCurrentModal] = useState<CharacterBurnerModals | null>(null);
@@ -20,7 +18,7 @@ export function CharacterBurner(): JSX.Element {
 			<Typography variant="h3">Character Burner</Typography>
 
 			<Basics openModal={openModal} />
-			<Stats openModal={openModal} />
+			<Stats />
 
 			<LifepathSelection isOpen={currentModal === "lp"} close={closeModals} />
 		</Fragment>
