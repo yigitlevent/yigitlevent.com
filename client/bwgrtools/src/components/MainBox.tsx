@@ -49,9 +49,9 @@ export function MainBox() {
 						<Route path="/practiceplanner" element={<PracticePlanner />} />
 						<Route path="/magicwheel" element={<MagicWheel />} />
 						<Route path="/dowplanner" element={<DuelOfWitsPlanner />} />
-						TODO: <Route path="/racplanner" element={<RangeAndCoverPlanner />} />
-						TODO: <Route path="/fightplanner" element={<FightPlanner />} />
-						TODO: <Route path="/characterburner" element={<CharacterBurner />} />
+						<Route path="/racplanner" element={<RangeAndCoverPlanner />} />
+						<Route path="/fightplanner" element={<FightPlanner />} />
+						<Route path="/characterburner" element={<CharacterBurner />} />
 					</Routes>
 				}
 			</Paper>

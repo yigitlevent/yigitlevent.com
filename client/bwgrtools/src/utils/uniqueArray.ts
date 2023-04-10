@@ -3,8 +3,8 @@ type UniqueArrayItem<K, T> = { id: K; } & T;
 export class UniqueArray<K, T> {
 	private values: UniqueArrayItem<K, T>[] = [];
 
-	constructor(array?: UniqueArrayItem<K, T>[]) {
-		if (array) array.forEach(this.add);
+	constructor(newArray?: UniqueArrayItem<K, T>[]) {
+		if (newArray) this.values = newArray;
 	}
 
 	get items() {

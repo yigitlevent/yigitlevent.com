@@ -1,0 +1,80 @@
+type CharacterQuestions = {
+	[key in AttributeQuestionsKeys]?: boolean;
+};
+
+interface SpecialLifepaths {
+	advisorToTheCourt: { years: number; };
+	bondsman: { ownerLifepathPath: LifepathPath; };
+	princeOfTheBlood: { years: number; };
+}
+
+interface SpecialSkills {
+	appropriateWeapons: { selected: SkillPath[]; mandatory: SkillPath; };
+	javelinOrBow: SkillPath;
+	anySmith: SkillPath[];
+}
+
+
+
+
+
+interface StatRemaining {
+	eitherPool: number;
+	mentalPool: number;
+	physicalPool: number;
+}
+
+interface SkillRemaining {
+	generalPoints: number;
+	lifepathPoints: number;
+}
+
+interface TraitRemaining {
+	traitPoints: number;
+}
+
+interface ResourceRemaining {
+	resourcePoints: number;
+}
+
+interface LifepathTotals {
+	years: {
+		points: number;
+		extensions: string[];
+	};
+	resources: {
+		points: number;
+		extensions: string[];
+		fromTraitsList: FreeResource[];
+	};
+	stats: {
+		fromAge: [mentalPoints: number, physicalPoints: number];
+		fromLifepaths: {
+			mentalPoints: number;
+			physicalPoints: number;
+			eitherPoints: number;
+		};
+	};
+	skills: {
+		generalPoints: {
+			points: number;
+			extensions: string[];
+		};
+		lifepathPoints: {
+			points: number;
+			extensions: string[];
+		};
+		mandatoryList: string[];
+		lifepathList: string[];
+		generalList: string[];
+	};
+	traits: {
+		points: number;
+		commonList: string[];
+		mandatoryList: string[];
+		lifepathList: string[];
+		generalList: string[];
+		attributeMods: { [key: string]: number; };
+	};
+}
+
