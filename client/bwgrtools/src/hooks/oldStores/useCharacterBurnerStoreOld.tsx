@@ -26,16 +26,12 @@ interface CharacterBurnerStateOld {
 	refreshQuestions: () => void;
 	resetStockSpecifics: () => void;
 
-	getMentalPointsTotal: () => number;
-	getPhysicalPointsTotal: () => number;
 	getStatRemainings: () => StatRemaining;
 	getAttributeShade: (attributeId: AbilityId) => ShadesList;
 	
-	getSkillOpenness: (skillId: SkillId) => boolean;
 	getSkillShade: (skillId: SkillId) => ShadesList;
 	getSkillExponent: (skillId: SkillId) => number;
 	getSkillRemainings: () => SkillRemaining;
-	getTraitOpenness: (traitId: TraitId) => boolean;
 	getTraitRemainings: () => TraitRemaining;
 	getResourceRemainings: () => ResourceRemaining;
 
@@ -180,26 +176,6 @@ export const useCharacterBurnerStoreOld = create<CharacterBurnerStateOld>()(
 				return inCommon || isOpen;
 			},
 			
-			clearLifepathPaths: () => {
-				set(produce<CharacterBurnerState>((state) => {
-					state.lifepathIds = [];
-				}));
-			},
-			clearTotals: () => {
-				set(produce<CharacterBurnerState>((state) => {
-					state.totals = JSON.parse(JSON.stringify(EmptyTotals));
-				}));
-			},
-			clearSpendings: () => {
-				set(produce<CharacterBurnerState>((state) => {
-					state.spendings = JSON.parse(JSON.stringify(EmptySpendings));
-				}));
-			},
-			clearQuestions: () => {
-				set(produce<CharacterBurnerState>((state) => {
-					state.questions = {};
-				}));
-			},
 			
 			refreshTotals: (generalSkills: string[], generalTraits: string[]) => {
 				const occuranceCount = (chosenLifepaths: LifepathOld[], currentLifepath: LifepathOld, currentIndex: number) => {
@@ -511,32 +487,6 @@ export const useCharacterBurnerStoreOld = create<CharacterBurnerStateOld>()(
 			},
 			
 			
-			getMentalPointsTotal: () => {
-				const state = get();
-				return state.totals.stats.fromAge[0] + state.totals.stats.fromLifepaths.mentalPoints;
-			},
-			getPhysicalPointsTotal: () => {
-				const state = get();
-				return state.totals.stats.fromAge[1] + state.totals.stats.fromLifepaths.physicalPoints;
-			},
-			getStatShade: (statName: StatsList) => {
-				const state = get();
-				const totalSpent =
-					state.spendings.stats[statName].eitherPool.shade +
-					((Stats.find(v => v.name === statName) as Stat).pool === "Mental"
-						? (state.spendings.stats[statName].mentalPool as StatSpending).shade
-						: (state.spendings.stats[statName].physicalPool as StatSpending).shade);
-				return totalSpent === 0 ? "B" : "G";
-			},
-			getStatExponent: (statName: StatsList) => {
-				const state = get();
-				const total =
-					state.spendings.stats[statName].eitherPool.exponent +
-					((Stats.find(v => v.name === statName) as Stat).pool === "Mental"
-						? (state.spendings.stats[statName].mentalPool as StatSpending).exponent
-						: (state.spendings.stats[statName].physicalPool as StatSpending).exponent);
-				return total;
-			},
 			getStatRemainings: () => {
 				const state = get();
 				const eitherSpending =
@@ -565,10 +515,6 @@ export const useCharacterBurnerStoreOld = create<CharacterBurnerStateOld>()(
 				}
 			
 				return shade;
-			},
-			getSkillOpenness: (skillName: SkillPath) => {
-				const state = get();
-				return (state.spendings.skills[skillName].general.open + state.spendings.skills[skillName].lifepath.open) > 0;
 			},
 			getSkillShade: (skillName: SkillPath) => {
 				const state = get();
@@ -600,10 +546,6 @@ export const useCharacterBurnerStoreOld = create<CharacterBurnerStateOld>()(
 					lifepathPoints: state.totals.skills.lifepathPoints.points - ((lifepathSpending.length > 0) ? lifepathSpending.reduce((v, a) => v + a) : 0)
 				};
 			},
-			getTraitOpenness: (traitName: TraitPath) => {
-				const state = get();
-				return traitName in state.spendings.traits && state.spendings.traits[traitName].open > 0;
-			},
 			getTraitRemainings: () => {
 				const state = get();
 				const traitPointSpending = Object.values(state.spendings.traits).map(v => v.open);
@@ -618,37 +560,6 @@ export const useCharacterBurnerStoreOld = create<CharacterBurnerStateOld>()(
 				return {
 					resourcePoints: state.totals.resources.points - resourcePointSpending
 				};
-			},
-			
-			changeStock: (stock: StocksList) => {
-				set(produce<CharacterBurnerState>((state) => {
-					state.stock = stock;
-				}));
-				const state = get();
-				state.clearLifepathPaths();
-				state.clearTotals();
-				state.clearSpendings();
-				state.clearQuestions();
-			},
-			changeConcept: (concept: string) => {
-				set(produce<CharacterBurnerState>((state) => {
-					state.concept = concept;
-				}));
-			},
-			changeName: (name: string) => {
-				set(produce<CharacterBurnerState>((state) => {
-					state.name = name;
-				}));
-			},
-			changeBelief: (index: number, belief: string) => {
-				set(produce<CharacterBurnerState>((state) => {
-					state.beliefs.list[index] = belief;
-				}));
-			},
-			changeInstinct: (index: number, instinct: string) => {
-				set(produce<CharacterBurnerState>((state) => {
-					state.instincts.list[index] = instinct;
-				}));
 			},
 			
 			
