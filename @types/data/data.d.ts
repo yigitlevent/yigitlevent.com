@@ -44,6 +44,11 @@ interface Stock {
 	namePlural: string;
 	stride: number;
 	settingIds: SettingId[];
+	agePool: {
+		minAge: number;
+		mentalPool: number;
+		physicalPool: number;
+	}[];
 }
 
 interface Setting {

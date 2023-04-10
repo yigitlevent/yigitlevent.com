@@ -38,6 +38,14 @@ interface StockDBO {
 	SettingIds: string[];
 }
 
+interface AgePoolDBO {
+	Id: number;
+	StockId: number;
+	MinAge: number;
+	MentalPool: number;
+	PhysicalPool: number;
+}
+
 interface SettingDBO {
 	Rulesets: string[];
 	Id: number;
