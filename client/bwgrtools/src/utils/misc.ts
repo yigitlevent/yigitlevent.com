@@ -48,3 +48,12 @@ export const GroupBy = <T, K extends keyof any>(list: T[], getKey: (item: T) => 
 		previous[group].push(currentItem);
 		return previous;
 	}, {} as Record<K, T[]>);
+
+
+export function Pairwise<T>(arr: T[]): T[][] {
+	const nArr = [];
+	for (let i = 0; i < arr.length - 1; i++) {
+		nArr.push([arr[i], arr[i + 1]]);
+	}
+	return nArr;
+}
