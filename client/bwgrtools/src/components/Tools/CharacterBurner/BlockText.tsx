@@ -23,16 +23,17 @@ export function BlockText({ text, hasLeftPadding }: BlockTextProps) {
 }
 
 interface BlockSkillPopoverProps {
-	skillId: SkillId;
+	skill: [id: SkillId, name: string];
 	checkbox?: {
 		checked: boolean;
 		disabled?: boolean;
 		onChange?: (event: React.ChangeEvent<HTMLInputElement>, checked: boolean) => void;
+		onClick?: () => void;
 	};
 	deleteCallback?: () => void;
 }
 
-export function BlockSkillPopover({ skillId, checkbox, deleteCallback }: BlockSkillPopoverProps) {
+export function BlockSkillPopover({ skill, checkbox, deleteCallback }: BlockSkillPopoverProps) {
 	const { getSkill } = useRulesetStore();
 
 	return (
@@ -42,12 +43,13 @@ export function BlockSkillPopover({ skillId, checkbox, deleteCallback }: BlockSk
 					checked={checkbox.checked}
 					disabled={checkbox.disabled}
 					onChange={checkbox.onChange}
+					onClick={checkbox.onClick}
 					sx={{ margin: "0 0 4px 0", padding: "0" }}
 				/>
 				: null
 			}
 			<Typography sx={{ cursor: "pointer", display: "inline-block", margin: "6px 0 0 8px" }}>
-				<PopoverLink data={getSkill(skillId)} />
+				<PopoverLink data={getSkill(skill[0])} />
 			</Typography>
 
 			{deleteCallback

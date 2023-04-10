@@ -21,7 +21,7 @@ export async function GetSkills() {
 		};
 
 		if (v.StockId !== null && v.Stock !== null) r.stock = [v.StockId as unknown as StockId, v.Stock];
-		if (v.RootIds.length > 0) r.roots = v.RootIds.map((rootId, index) => [rootId as unknown as SkillRootId, v.Roots[index]]);
+		if (v.RootIds.length > 0) r.roots = v.RootIds.map((rootId, index) => [rootId as unknown as AbilityId, v.Roots[index]]);
 		if (v.ToolDescription !== null) r.tool.description = v.ToolDescription;
 		if (v.Description !== null) r.description = v.Description;
 		if (v.SubskillIds.length > 0) r.subskillIds = v.SubskillIds as unknown[] as SkillId[];

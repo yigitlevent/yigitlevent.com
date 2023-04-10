@@ -16,14 +16,14 @@ interface CharacterBurnerProperties {
 	beliefs: { name: string, belief: string; }[];
 	instincts: { name: string, instinct: string; }[];
 
+	availableLifepaths: Lifepath[];
+	lifepaths: Lifepath[];
+
 	stats: { [key: string]: { poolType: "Mental" | "Physical", shadeShifted: boolean, poolSpent: number; eitherSpent: number; }; };
 
 	skills: UniqueArray<SkillId, CharacterSkill>;
 	traits: UniqueArray<TraitId, CharacterTrait>;
 	attributes: UniqueArray<AbilityId, CharacterAttribute>;
-
-	availableLifepaths: Lifepath[];
-	lifepaths: Lifepath[];
 
 	questions: CharacterQuestions;
 	stockSpecific: CharacterStockSpecific;
@@ -42,6 +42,8 @@ interface CharacterBurnerMethods {
 
 	shiftStatShade: (statName: string) => void;
 	modifyStatExponent: (statName: string, decrease?: boolean) => void;
+	openSkill: (skillId: SkillId) => void;
+	modifySkillExponent: (skillId: SkillId, decrease?: boolean) => void;
 
 	getLeadCount: () => number;
 	getAge: () => number;
@@ -51,6 +53,8 @@ interface CharacterBurnerMethods {
 	getPhysicalPool: () => { total: number, spent: number; remaining: number; };
 	getEitherPool: () => { total: number, spent: number; remaining: number; };
 	getStat: (statName: string) => { shade: ShadesList, exponent: number; };
+	getSkillPools: () => { general: Points; lifepath: Points; };
+	getSkill: (skillId: SkillId) => { shade: ShadesList; exponent: number; };
 
 	updateAvailableLifepaths: () => Lifepath[];
 
@@ -85,6 +89,9 @@ const InitialState: CharacterBurnerProperties = {
 		{ name: "Special Instinct", instinct: "" }
 	],
 
+	availableLifepaths: [],
+	lifepaths: [],
+
 	stats: {
 		"Will": { poolType: "Mental", shadeShifted: false, poolSpent: 0, eitherSpent: 0 },
 		"Perception": { poolType: "Mental", shadeShifted: false, poolSpent: 0, eitherSpent: 0 },
@@ -97,9 +104,6 @@ const InitialState: CharacterBurnerProperties = {
 	skills: new UniqueArray<SkillId, CharacterSkill>(),
 	traits: new UniqueArray<TraitId, CharacterTrait>(),
 	attributes: new UniqueArray<AbilityId, CharacterAttribute>(),
-
-	availableLifepaths: [],
-	lifepaths: [],
 
 	questions: {},
 	stockSpecific: {},
@@ -169,6 +173,28 @@ export const useCharacterBurnerStore = create<CharacterBurnerState>()(
 			}));
 		},
 
+		openSkill: (skillId: SkillId) => {
+			set(produce<CharacterBurnerState>((state) => {
+				// TODO: Check remaining counts, use either pool too
+				const charSkill = state.skills.find(skillId);
+				if (charSkill) {
+					charSkill.isOpen = !charSkill.isOpen;
+					state.skills = new UniqueArray(state.skills.add(charSkill).items);
+				}
+			}));
+		},
+
+		modifySkillExponent: (skillId: SkillId, decrease?: boolean) => {
+			set(produce<CharacterBurnerState>((state) => {
+				// TODO: Check remaining counts, use either pool too
+				const charSkill = state.skills.find(skillId);
+				if (charSkill) {
+					charSkill.advancement.lifepath = Clamp(charSkill.advancement.lifepath + (decrease ? -1 : 1), 0, 10);
+					state.skills = new UniqueArray(state.skills.add(charSkill).items);
+				}
+			}));
+		},
+
 		getLeadCount: () => {
 			const state = get();
 			if (state.lifepaths.length === 0) return 0;
@@ -201,7 +227,7 @@ export const useCharacterBurnerStore = create<CharacterBurnerState>()(
 			return agePool.filter(a => age > a.minAge).reduce((pv, cv) => pv.minAge < cv.minAge ? pv : cv);
 		},
 
-		getMentalPool: (): { total: number, spent: number; remaining: number; } => {
+		getMentalPool: (): Points => {
 			const state = get();
 			const stockAgePool = state.getAgePool().mentalPool;
 			const lifepathPool = state.lifepaths.length > 0 ? state.lifepaths.map(lp => lp.pools.mentalStatPool).reduce((pv, cv) => pv + cv) : 0;
@@ -213,7 +239,7 @@ export const useCharacterBurnerStore = create<CharacterBurnerState>()(
 			return { total: total, spent, remaining: total - spent };
 		},
 
-		getPhysicalPool: (): { total: number, spent: number; remaining: number; } => {
+		getPhysicalPool: (): Points => {
 			const state = get();
 			const stockAgePool = state.getAgePool().physicalPool;
 			const lifepathPool = state.lifepaths.length > 0 ? state.lifepaths.map(lp => lp.pools.physicalStatPool).reduce((pv, cv) => pv + cv) : 0;
@@ -225,17 +251,67 @@ export const useCharacterBurnerStore = create<CharacterBurnerState>()(
 			return { total: total, spent, remaining: total - spent };
 		},
 
-		getEitherPool: (): { total: number, spent: number; remaining: number; } => {
+		getEitherPool: (): Points => {
 			const state = get();
 			const total = state.lifepaths.length > 0 ? state.lifepaths.map(lp => lp.pools.eitherStatPool).reduce((pv, cv) => pv + cv) : 0;
 			const spent = Object.values(state.stats).map((v): number => v.eitherSpent).reduce((pv, cv) => pv + cv);
 			return { total, spent, remaining: total - spent };
 		},
 
-		getStat: (statName: string): { shade: ShadesList, exponent: number; } => {
+		getStat: (statName: string): { shade: ShadesList; exponent: number; } => {
 			const state = get();
 			const shade = state.stats[statName].shadeShifted ? "G" : "B";
 			const exponent = state.stats[statName].eitherSpent + state.stats[statName].poolSpent + (state.stats[statName].shadeShifted ? -5 : 0);
+			return { shade, exponent };
+		},
+
+		getSkillPools: (): { general: Points; lifepath: Points; } => {
+			const state = get();
+
+			const gpTotal = state.lifepaths.reduce((pv, cv) => pv + cv.pools.generalSkillPool, 0);
+			const lpTotal = state.lifepaths.reduce((pv, cv) => pv + cv.pools.lifepathSkillPool, 0);
+
+			let gpSpent = 0;
+			let lpSpent = 0;
+
+			state.skills.forEach(skill => {
+				if (skill.isOpen) {
+					if (skill.isGeneral) {
+						if (skill.isDoubleOpen) gpSpent += 2;
+						else if (!skill.isDoubleOpen) gpSpent += 1;
+						gpSpent += skill.advancement.general;
+					}
+					else {
+						// TODO: maybe gp spent for lp skill
+						if (skill.isDoubleOpen) lpSpent += 2;
+						else if (!skill.isDoubleOpen) lpSpent += 1;
+						lpSpent += skill.advancement.lifepath;
+						gpSpent += skill.advancement.general;
+					}
+				}
+			});
+
+			return {
+				general: { total: gpTotal, spent: gpSpent, remaining: gpTotal - gpSpent },
+				lifepath: { total: lpTotal, spent: lpSpent, remaining: lpTotal - lpSpent }
+			};
+		},
+
+		getSkill: (skillId: SkillId): { shade: ShadesList; exponent: number; } => {
+			const { getSkill } = useRulesetStore.getState();
+			const state = get();
+
+			const charSkill = state.skills.find(skillId);
+
+			let shade: ShadesList = "B";
+			let exponent: number = 0;
+
+			if (charSkill && state.hasSkillOpen(skillId)) {
+				exponent = charSkill.advancement.general + charSkill.advancement.lifepath;
+				const skillRoots = getSkill(skillId).roots;
+				if (skillRoots) shade = skillRoots.map(s => state.getStat(s[1]).shade).every(v => v === "G") ? "G" : "B";
+			}
+
 			return { shade, exponent };
 		},
 
@@ -368,7 +444,8 @@ export const useCharacterBurnerStore = create<CharacterBurnerState>()(
 						name: trait.name,
 						isLifepath: true,
 						isMandatory: isMandatory,
-						isOpen: isMandatory
+						isOpen: isMandatory,
+						isGeneral: false
 					};
 					return entry;
 				}) : [];

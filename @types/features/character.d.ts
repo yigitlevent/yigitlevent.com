@@ -23,6 +23,7 @@ interface CharacterTrait {
 	name: string;
 	isLifepath: boolean;
 	isMandatory: boolean;
+	isGeneral: boolean;
 	isOpen: boolean;
 }
 
@@ -57,3 +58,9 @@ type CharacterQuestions = {
 type ShadesList = "B" | "G" | "W";
 
 type HuntingGroundsList = "Waste" | "Marginal" | "Typical" | "Plentiful" | "Untouched";
+
+interface Points { 
+	total: number; 
+	spent: number; 
+	remaining: number;
+ }

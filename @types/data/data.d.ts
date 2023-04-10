@@ -67,7 +67,7 @@ interface Skill {
 	stock?: [id: StockId, name: string];
 	category: [id: SkillCategoryId, name: string];
 	type: [id: SkillTypeId, name: string];
-	roots?: [id: SkillRootId, name: string][];
+	roots?: [id: AbilityId, name: string][];
 	flags: {
 		dontList: boolean;
 		isMagical: boolean;

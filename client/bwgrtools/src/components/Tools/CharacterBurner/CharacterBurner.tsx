@@ -4,6 +4,7 @@ import Typography from "@mui/material/Typography";
 
 import { Basics } from "./Sections/Basics";
 import { Stats } from "./Sections/Stats";
+import { Skills } from "./Sections/Skills";
 import { LifepathSelection } from "./Modals/LifepathSelection";
 
 
@@ -19,6 +20,7 @@ export function CharacterBurner(): JSX.Element {
 
 			<Basics openModal={openModal} />
 			<Stats />
+			<Skills />
 
 			<LifepathSelection isOpen={currentModal === "lp"} close={closeModals} />
 		</Fragment>
