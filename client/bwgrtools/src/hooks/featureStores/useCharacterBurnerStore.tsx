@@ -304,6 +304,7 @@ export const useCharacterBurnerStore = create<CharacterBurnerState>()(
 			const charSkill = state.skills.find(skillId);
 
 			let shade: ShadesList = "B";
+			// TODO: exponent starts from root average
 			let exponent: number = 0;
 
 			if (charSkill && state.hasSkillOpen(skillId)) {
