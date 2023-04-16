@@ -1,9 +1,11 @@
 type CharacterBurnerModals = "lp" | "st";
+type Shades = "B" | "G" | "W";
 
 interface CharacterAttribute {
 	id: AbilityId;
 	name: string;
-	isShadeShifted: boolean;
+	hasShade: boolean;
+	shadeShifted: boolean;
 	exponent: number;
 }
 
@@ -52,7 +54,6 @@ type CharacterQuestions = {
 	[key: string]: boolean;
 };
 
-type ShadesList = "B" | "G" | "W";
 
 type HuntingGroundsList = "Waste" | "Marginal" | "Typical" | "Plentiful" | "Untouched";
 
