@@ -13,6 +13,8 @@ interface RulesetStore {
 	readonly chosenRulesets: RulesetId[];
 
 	readonly abilities: Ability[];
+	readonly abilityTypes: string[];
+
 	readonly stocks: Stock[];
 	readonly settings: Setting[];
 
@@ -71,6 +73,8 @@ export const useRulesetStore = create<RulesetStore>()(
 			chosenRulesets: ["bwgr" as unknown as RulesetId], // TODO: this shouldn't be fixed
 
 			abilities: [],
+			abilityTypes: [],
+
 			stocks: [],
 			settings: [],
 
@@ -124,6 +128,8 @@ export const useRulesetStore = create<RulesetStore>()(
 						if (response.status === 200) {
 							set(produce<RulesetStore>((state) => {
 								state.abilities = response.data.abilities;
+								state.abilityTypes = [...response.data.abilities.reduce((a, v) => a.add(v.abilityType[1]), new Set<string>())];
+
 								state.stocks = response.data.stocks;
 								state.settings = response.data.settings;
 
