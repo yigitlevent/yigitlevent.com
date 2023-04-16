@@ -1,48 +1,97 @@
 export type UniqueArrayItem<K, T> = { id: K; } & T;
 
+
+/**
+ * UniqueArray collection can only store objects that has an `id` property. 
+ * It uses this `id` property to force uniqueness of its elements. 
+ * Keys of this collections is the type of the `id` property.
+ * @param newArray - Optional. Array of objects.
+**/
 export class UniqueArray<K, T> {
 	private values: UniqueArrayItem<K, T>[] = [];
 
+	/**
+	 * UniqueArray collection can only store objects that has an `id` property. 
+	 * It uses this `id` property to force uniqueness of its elements. 
+	 * Keys of this collections is the type of the `id` property.
+	 * @param newArray - Optional. Array of objects.
+	**/
 	constructor(newArray?: UniqueArrayItem<K, T>[]) {
 		if (newArray) this.values = newArray;
 	}
 
+	/**
+	 * Returns the underlying array.
+	 * @returns `UniqueArrayItem<K, T>[]`
+	**/
 	get items(): UniqueArrayItem<K, T>[] {
 		return this.values;
 	}
 
+	/**
+	 * Adds a new item to the UniqueArray if the `id` property of the object is not found.
+	 * @param item - `UniqueArrayItem<K, T>`
+	 * @returns `UniqueArray<K, T>`
+	**/
 	add(item: UniqueArrayItem<K, T>): UniqueArray<K, T> {
-		const index = this.values.findIndex(v => v.id === item.id);
-		if (index === -1) this.values.push(item);
-		else this.values[index] = item;
+		const index = this.findIndex(item.id);
+		if (index) this.values[index] = item;
+		else this.values.push(item);
 		return this;
 	}
 
+	/**
+	 * Removes specified item from the UniqueArray if the `id` property of the object is found.
+	 * @param id - `K`
+	 * @returns `UniqueArray<K, T>`
+	**/
 	remove(id: K): UniqueArray<K, T> {
-		const index = this.values.findIndex(v => v.id === id);
-		if (index !== -1) this.values.splice(index, 1);
+		const index = this.findIndex(id);
+		if (index) this.values.splice(index, 1);
 		return this;
 	}
 
+	/**
+	 * Returns the item at index.
+	 * @param index - `number`
+	 * @returns `UniqueArrayItem<K, T>`
+	**/
 	at(index: number): UniqueArrayItem<K, T> {
 		if (index > this.values.length - 1 || this.values.length + index < 0) throw Error("Index out of bounds");
 		else if (index < 0) return this.values[this.values.length + index];
 		else return this.values[index];
 	}
 
+	/**
+	 * Returns the first item.
+	 * @returns `UniqueArrayItem<K, T>`
+	**/
 	head(): UniqueArrayItem<K, T> {
 		return this.values[0];
 	}
 
+	/**
+	 * Returns the last item.
+	 * @returns `UniqueArrayItem<K, T>`
+	**/
 	last(): UniqueArrayItem<K, T> {
 		return this.values[this.values.length - 1];
 	}
 
+	/**
+	 * Empties the underlying array.
+	 * @returns `UniqueArray<K, T>`
+	**/
 	clear(): UniqueArray<K, T> {
 		this.values = [];
 		return this;
 	}
 
+	/**
+	 * Checks if the id already exists in the collection..
+	 * @param id - `K`
+	 * @returns `boolean`
+	**/
 	has(id: K): boolean {
 		return this.values.some(v => v.id === id);
 	}
@@ -68,18 +117,47 @@ export class UniqueArray<K, T> {
 		return this.values.filter(v => v[key] === value).length;
 	}
 
+	/**
+	 * Tries to find an item with the provided id.
+	 * @param id - Id of the object that is being searched.
+	 * @returns Item, or `undefined`.
+	**/
 	find(id: K): UniqueArrayItem<K, T> | undefined {
 		return this.values.find(v => v.id === id);
 	}
 
+	/**
+	 * Tries to find an index of the item with the provided id.
+	 * @param id - Id of the object that is being searched.
+	 * @returns Index of the item, or `undefined`.
+	**/
+	findIndex(id: K): number | undefined {
+		return this.values.findIndex(v => v.id === id);
+	}
+
+	/**
+	 * Calls a defined callback function on each element of an array, and returns an array that contains the results.
+	 * @param callback - `(value: UniqueArrayItem<K, T>, index: number, array: UniqueArrayItem<K, T>[]) => R`
+	 * @returns `R[]`.
+	**/
 	map<R>(callback: (value: UniqueArrayItem<K, T>, index: number, array: UniqueArrayItem<K, T>[]) => R): R[] {
 		return this.values.map(callback);
 	}
 
-	forEach<R>(callback: (value: UniqueArrayItem<K, T>, index: number, array: UniqueArrayItem<K, T>[]) => R): void {
+	/**
+	 * Performs the specified action for each element in an array.
+	 * @param callback - `(value: UniqueArrayItem<K, T>, index: number, array: UniqueArrayItem<K, T>[]) => void`
+	 * @returns `void`.
+	**/
+	forEach(callback: (value: UniqueArrayItem<K, T>, index: number, array: UniqueArrayItem<K, T>[]) => void): void {
 		return this.values.forEach(callback);
 	}
 
+	/**
+	 * Returns the elements of an array that meet the condition specified in a callback function..
+	 * @param callback - `(value: UniqueArrayItem<K, T>, index: number, array: UniqueArrayItem<K, T>[]) => boolean`
+	 * @returns `UniqueArrayItem<K, T>[]`.
+	**/
 	filter(callback: (value: UniqueArrayItem<K, T>, index: number, array: UniqueArrayItem<K, T>[]) => boolean): UniqueArrayItem<K, T>[] {
 		return this.values.filter(callback);
 	}
