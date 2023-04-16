@@ -30,6 +30,7 @@ export class UniqueArray<K, T> {
 
 	/**
 	 * Adds a new item to the UniqueArray if the `id` property of the object is not found.
+	 * Otherwise it replaces the value of the item with the same `id`.
 	 * @param item - `UniqueArrayItem<K, T>`
 	 * @returns `UniqueArray<K, T>`
 	**/
