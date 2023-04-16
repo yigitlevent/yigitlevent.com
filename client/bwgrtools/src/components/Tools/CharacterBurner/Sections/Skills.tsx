@@ -3,12 +3,12 @@ import { Fragment } from "react";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 
+import { useCharacterBurnerStore } from "../../../../hooks/featureStores/useCharacterBurnerStore";
 import { UniqueArrayItem } from "../../../../utils/uniqueArray";
 
 import { GenericGrid } from "../../../Shared/Grids";
 import { AbilityButton } from "../../../Shared/AbilityButton";
 import { BlockSkillPopover } from "../BlockText";
-import { useCharacterBurnerStore } from "../../../../hooks/featureStores/useCharacterBurnerStore";
 
 
 function SkillsList({ skill }: { skill: UniqueArrayItem<SkillId, CharacterSkill>; }) {
@@ -20,7 +20,7 @@ function SkillsList({ skill }: { skill: UniqueArrayItem<SkillId, CharacterSkill>
 			<GenericGrid columns={5} center="h" hasBackground={1}>
 				<BlockSkillPopover
 					skill={[skill.id, skill.name]}
-					checkbox={{ checked: skill.isOpen, disabled: skill.isMandatory, onClick: () => openSkill(skill.id) }}
+					checkbox={{ checked: skill.isOpen, disabled: skill.type === "Mandatory", onClick: () => openSkill(skill.id) }}
 				/>
 				<Grid item>
 					<AbilityButton name={skill.name} disabled>
@@ -46,7 +46,7 @@ function MandatorySkills() {
 
 			<Fragment>
 				{skills
-					.filter(s => s.isMandatory && !s.isGeneral)
+					.filter(s => s.type === "Mandatory")
 					// TODO: re-enable .filter(v => !SpecialSkills.includes(v as SkillPath))
 					.map((skill, i) => <SkillsList key={i} skill={skill} />)}
 			</Fragment>
@@ -65,7 +65,7 @@ function LifepathSkills() {
 
 			<Fragment>
 				{skills
-					.filter(s => !s.isMandatory && !s.isGeneral)
+					.filter(s => s.type === "Lifepath")
 					// TODO: re-enable .filter(v => !SpecialSkills.includes(v as SkillPath))
 					.map((skill, i) => <SkillsList key={i} skill={skill} />)}
 			</Fragment>
@@ -84,7 +84,7 @@ function GeneralSkills() {
 
 			<Fragment>
 				{skills
-					.filter(s => s.isGeneral)
+					.filter(s => s.type === "General")
 					// TODO: re-enable .filter(v => !SpecialSkills.includes(v as SkillPath))
 					.map((skill, i) => <SkillsList key={i} skill={skill} />)}
 			</Fragment>
@@ -114,9 +114,9 @@ export function Skills() {
 				<Button variant="outlined" size="small" onClick={() => setOpen(true)} fullWidth>Add General Skill</Button>
 			</Grid>*/}
 
-			{skills.existsAny("isMandatory", true) > 0 ? <MandatorySkills /> : null}
-			{skills.existsAny("isMandatory", false) > 0 ? <LifepathSkills /> : null}
-			{skills.existsAny("isGeneral", true) > 0 ? <GeneralSkills /> : null}
+			{skills.existsAny("type", "Mandatory") > 0 ? <MandatorySkills /> : null}
+			{skills.existsAny("type", "Lifepath") > 0 ? <LifepathSkills /> : null}
+			{skills.existsAny("type", "General") > 0 ? <GeneralSkills /> : null}
 
 			{/* TODO: <GeneralSkillModal open={open} setOpen={setOpen} />*/}
 		</GenericGrid>

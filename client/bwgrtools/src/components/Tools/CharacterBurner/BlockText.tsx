@@ -63,16 +63,16 @@ export function BlockSkillPopover({ skill, checkbox, deleteCallback }: BlockSkil
 }
 
 interface BlockTraitPopoverProps {
-	traitId: TraitId;
+	trait: [id: TraitId, name: string];
 	checkbox?: {
 		checked: boolean;
 		disabled?: boolean;
-		onChange?: (event: React.ChangeEvent<HTMLInputElement>, checked: boolean) => void;
+		onClick?: (event: React.ChangeEvent<HTMLInputElement>, checked: boolean) => void;
 	};
 	deleteCallback?: () => void;
 }
 
-export function BlockTraitPopover({ traitId, checkbox, deleteCallback }: BlockTraitPopoverProps) {
+export function BlockTraitPopover({ trait, checkbox, deleteCallback }: BlockTraitPopoverProps) {
 	const { getTrait } = useRulesetStore();
 
 	return (
@@ -81,13 +81,13 @@ export function BlockTraitPopover({ traitId, checkbox, deleteCallback }: BlockTr
 				? <Checkbox
 					checked={checkbox.checked}
 					disabled={checkbox.disabled}
-					onChange={checkbox.onChange}
+					onChange={checkbox.onClick}
 					sx={{ margin: "0 0 4px 0", padding: "0" }}
 				/>
 				: null
 			}
 			<Typography sx={{ cursor: "pointer", display: "inline-block", margin: "6px 0 0 8px" }}>
-				<PopoverLink data={getTrait(traitId)} />
+				<PopoverLink data={getTrait(trait[0])} />
 			</Typography>
 
 			{deleteCallback

@@ -6,6 +6,7 @@ import { Basics } from "./Sections/Basics";
 import { Stats } from "./Sections/Stats";
 import { Skills } from "./Sections/Skills";
 import { LifepathSelection } from "./Modals/LifepathSelection";
+import { Traits } from "./Sections/Traits";
 
 
 export function CharacterBurner(): JSX.Element {
@@ -21,8 +22,8 @@ export function CharacterBurner(): JSX.Element {
 			<Basics openModal={openModal} />
 			<Stats />
 			<Skills />
-			{/* TODO
 			<Traits />
+			{/* TODO
 			<Attributes />
 			<Resources />
 			<Tolerances />

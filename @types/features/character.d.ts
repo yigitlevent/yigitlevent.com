@@ -10,10 +10,9 @@ interface CharacterAttribute {
 interface CharacterSkill {
 	id: SkillId;
 	name: string;
-	isMandatory: boolean;
+	type: "Mandatory" | "Lifepath" | "General";
 	isSpecial: boolean;
 	isDoubleOpen: boolean;
-	isGeneral: boolean;
 	isOpen: boolean;
 	advancement: { general: number; lifepath: number; };
 }
@@ -21,9 +20,7 @@ interface CharacterSkill {
 interface CharacterTrait {
 	id: TraitId;
 	name: string;
-	isLifepath: boolean;
-	isMandatory: boolean;
-	isGeneral: boolean;
+	type: "Mandatory" | "Lifepath" | "Common" | "General";
 	isOpen: boolean;
 }
 
@@ -59,8 +56,8 @@ type ShadesList = "B" | "G" | "W";
 
 type HuntingGroundsList = "Waste" | "Marginal" | "Typical" | "Plentiful" | "Untouched";
 
-interface Points { 
-	total: number; 
-	spent: number; 
+interface Points {
+	total: number;
+	spent: number;
 	remaining: number;
- }
+}

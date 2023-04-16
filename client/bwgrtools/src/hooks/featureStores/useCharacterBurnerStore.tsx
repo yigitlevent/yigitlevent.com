@@ -44,6 +44,7 @@ interface CharacterBurnerMethods {
 	modifyStatExponent: (statName: string, decrease?: boolean) => void;
 	openSkill: (skillId: SkillId) => void;
 	modifySkillExponent: (skillId: SkillId, decrease?: boolean) => void;
+	openTrait: (traitId: TraitId) => void;
 
 	getLeadCount: () => number;
 	getAge: () => number;
@@ -55,6 +56,8 @@ interface CharacterBurnerMethods {
 	getStat: (statName: string) => { shade: ShadesList, exponent: number; };
 	getSkillPools: () => { general: Points; lifepath: Points; };
 	getSkill: (skillId: SkillId) => { shade: ShadesList; exponent: number; };
+	getTraitPools: () => Points;
+	getTrait: (traitId: TraitId) => { open: boolean; };
 
 	updateAvailableLifepaths: () => Lifepath[];
 
@@ -195,6 +198,17 @@ export const useCharacterBurnerStore = create<CharacterBurnerState>()(
 			}));
 		},
 
+		openTrait: (traitId: TraitId) => {
+			set(produce<CharacterBurnerState>((state) => {
+				// TODO: Check remaining counts, use either pool too
+				const charTrait = state.traits.find(traitId);
+				if (charTrait) {
+					charTrait.isOpen = !charTrait.isOpen;
+					state.traits = new UniqueArray(state.traits.add(charTrait).items);
+				}
+			}));
+		},
+
 		getLeadCount: () => {
 			const state = get();
 			if (state.lifepaths.length === 0) return 0;
@@ -276,7 +290,7 @@ export const useCharacterBurnerStore = create<CharacterBurnerState>()(
 
 			state.skills.forEach(skill => {
 				if (skill.isOpen) {
-					if (skill.isGeneral) {
+					if (skill.type === "General") {
 						if (skill.isDoubleOpen) gpSpent += 2;
 						else if (!skill.isDoubleOpen) gpSpent += 1;
 						gpSpent += skill.advancement.general;
@@ -314,6 +328,30 @@ export const useCharacterBurnerStore = create<CharacterBurnerState>()(
 			}
 
 			return { shade, exponent };
+		},
+
+		getTraitPools: (): Points => {
+			const { getTrait } = useRulesetStore.getState();
+			const state = get();
+
+			const tTotal = state.lifepaths.reduce((pv, cv) => pv + cv.pools.traitPool, 0);
+			let tSpent = 0;
+
+			state.traits.forEach(trait => {
+				if (trait.isOpen) {
+					if (trait.type === "Mandatory" || trait.type === "Lifepath") tSpent += 1;
+					else if (trait.type === "General") tSpent += getTrait(trait.id).cost;
+				}
+			});
+
+			return { total: tTotal, spent: tSpent, remaining: tTotal - tSpent };
+		},
+
+		getTrait: (traitId: TraitId): { open: boolean; } => {
+			const state = get();
+			const charTrait = state.traits.find(traitId);
+			const open = (charTrait && state.hasTraitOpen(traitId)) ? true : false;
+			return { open };
 		},
 
 		updateAvailableLifepaths: () => {
@@ -412,13 +450,14 @@ export const useCharacterBurnerStore = create<CharacterBurnerState>()(
 			const skills = state.lifepaths.map(lp => {
 				return lp.skills ? lp.skills.map((sk, i) => {
 					const skill = getSkill(sk);
-					const isMandatory = (i === 0); // TODO: repeat lifepaths also should be checked
+					const isMandatory = (i === 0);
+					// TODO: Repeat lifepaths also should be checked
+					// TODO: General skills should be kept
 					const entry: CharacterSkill = {
 						id: skill.id,
 						name: skill.name,
-						isGeneral: false,
+						type: isMandatory ? "Mandatory" : "Lifepath", 
 						isDoubleOpen: skill.flags.isMagical || skill.flags.isTraining,
-						isMandatory: isMandatory,
 						isSpecial: skill.subskillIds ? true : false,
 						isOpen: isMandatory,
 						advancement: { general: 0, lifepath: 0 }
@@ -439,14 +478,15 @@ export const useCharacterBurnerStore = create<CharacterBurnerState>()(
 			const traits = state.lifepaths.map(lp => {
 				return lp.traits ? lp.traits.map((tr, i) => {
 					const trait = getTrait(tr);
-					const isMandatory = (i === 0); // TODO: repeat lifepaths also should be checked
+					const isMandatory = (i === 0);
+					// TODO: Repeat lifepaths also should be checked
+					// TODO: Common traits should be added
+					// TODO: General traits should be kept
 					const entry: CharacterTrait = {
 						id: trait.id,
 						name: trait.name,
-						isLifepath: true,
-						isMandatory: isMandatory,
-						isOpen: isMandatory,
-						isGeneral: false
+						type: isMandatory ? "Mandatory" : "Lifepath",
+						isOpen: isMandatory
 					};
 					return entry;
 				}) : [];
