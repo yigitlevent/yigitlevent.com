@@ -121,7 +121,8 @@ export function MagicWheel() {
 		};
 
 		setFunction(getStartAngle());
-		setStoreFunction(value as any);
+		const func: ((id: any) => void) = setStoreFunction;
+		func(value);
 	}, [getFacetMapping, spellFacets, entryAngleSpan]);
 
 	const rotateBand = useCallback((amount: number, type: keyof SpellFacets) => {

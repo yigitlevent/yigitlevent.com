@@ -5,7 +5,7 @@ import { Fragment } from "react";
 import { GetOrdinalSuffix } from "../../../utils/misc";
 
 
-function ResolveRequirementBlockItem(item: LifepathRequirementItem): string {
+function ResolveRequirementBlockItem(item: RequirementItem): string {
 	const subject = "forCompanion" in item && item.forCompanion ? "Companion of this character" : "Character";
 
 	if ("isUnique" in item) return "This lifepath cannot be selected twice.";
@@ -25,6 +25,7 @@ function ResolveRequirementBlockItem(item: LifepathRequirementItem): string {
 	else if ("trait" in item) return `${subject} must have ${item.trait[1]} trait.`;
 	else if ("lifepath" in item) return `${subject} must have ${item.lifepath[1]} lifepath.`;
 	else if ("setting" in item) return `${subject} must have ${item.setting[1]} setting.`;
+	else if ("question" in item) return `Answer for ${item.question[1]} must be yes.`;
 	else throw new Error(`Unidentified requirement block item: ${item}`);
 }
 

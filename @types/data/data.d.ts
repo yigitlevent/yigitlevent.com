@@ -98,7 +98,7 @@ interface Trait {
 	description?: string;
 }
 
-type LifepathRequirementItem =
+type RequirementItem =
 	{ logicType: [id: LogicTypeId, name: string]; } &
 	({ isUnique: true; } |
 	{ isSettingEntry: true; } |
@@ -112,13 +112,14 @@ type LifepathRequirementItem =
 	{ skill: [id: SkillId, name: string]; forCompanion: boolean; } |
 	{ trait: [id: TraitId, name: string]; forCompanion: boolean; } |
 	{ lifepath: [id: LifepathId, name: string]; forCompanion: boolean; } |
-	{ setting: [id: SettingId, name: string]; forCompanion: boolean; });
+	{ setting: [id: SettingId, name: string]; forCompanion: boolean; } |
+	{ question: [id: QuestionId, name: string] });
 
 interface LifepathRequirementBlock {
 	logicType: [id: LogicTypeId, name: string];
 	mustFulfill: boolean;
 	fulfillmentAmount: number;
-	items: LifepathRequirementItem[];
+	items: RequirementItem[];
 }
 
 interface Lifepath {

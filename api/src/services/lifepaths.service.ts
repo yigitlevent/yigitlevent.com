@@ -58,7 +58,7 @@ export async function GetLifepaths() {
 						items: []
 					};
 
-					const items: LifepathRequirementItem[] = lri.filter(a => a.RequirementId === vrb.Id).map(vrbi => {
+					const items: RequirementItem[] = lri.filter(a => a.RequirementId === vrb.Id).map(vrbi => {
 						const rbi = {
 							logicType: [vrbi.RequirementTypeId as unknown as LogicTypeId, vrbi.RequirementType] as [id: LogicTypeId, name: string]
 						};
@@ -77,7 +77,7 @@ export async function GetLifepaths() {
 						else if (vrbi.RequirementType === "MALE") return { ...rbi, gender: "Male" };
 						else if (vrbi.RequirementType === "OLDESTBY") return { ...rbi, oldestBy: vrbi.Max as number };
 						else if (vrbi.RequirementType === "ATTRIBUTE") {
-							const atr: LifepathRequirementItem = {
+							const atr: RequirementItem = {
 								...rbi,
 								attribute: [vrbi.AttributeId as unknown as AbilityId, vrbi.Attribute as string] as [id: AbilityId, name: string],
 								forCompanion: vrbi.ForCompanion

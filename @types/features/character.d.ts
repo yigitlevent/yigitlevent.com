@@ -26,6 +26,14 @@ interface CharacterTrait {
 	isOpen: boolean;
 }
 
+interface CharacterResource {
+	id: ResourceId;
+	name: string;
+	type: [id: ResourceTypeId, name: string];
+	modifiers: string[];
+	cost: number;
+}
+
 interface CharacterStockSpecific {
 	brutalLife?: {
 		traits: (TraitId | undefined)[];
@@ -61,4 +69,9 @@ interface Points {
 	total: number;
 	spent: number;
 	remaining: number;
+}
+
+interface AbilityPoints {
+	shade: Shades;
+	exponent: number;
 }

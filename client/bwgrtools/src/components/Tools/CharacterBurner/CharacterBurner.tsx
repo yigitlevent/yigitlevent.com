@@ -2,11 +2,13 @@ import { Fragment, useState } from "react";
 
 import Typography from "@mui/material/Typography";
 
+import { LifepathSelection } from "./Modals/LifepathSelection";
+
 import { Basics } from "./Sections/Basics";
 import { Stats } from "./Sections/Stats";
 import { Skills } from "./Sections/Skills";
-import { LifepathSelection } from "./Modals/LifepathSelection";
 import { Traits } from "./Sections/Traits";
+import { Attributes } from "./Sections/Attributes";
 
 
 export function CharacterBurner(): JSX.Element {
@@ -23,8 +25,9 @@ export function CharacterBurner(): JSX.Element {
 			<Stats />
 			<Skills />
 			<Traits />
-			{/* TODO
 			<Attributes />
+			{/* TODO
+			
 			<Resources />
 			<Tolerances />
 			<Beliefs />
