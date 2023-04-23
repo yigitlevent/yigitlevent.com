@@ -12,7 +12,7 @@ export function processGeneric(): Processed {
 		return `(${i}, '${l}')`;
 	});
 
-	const datRequirementItemTypes = ["UNIQUE", "MALE", "FEMALE", "SETTINGENTRY", "YEARS", "LPINDEX", "OLDESTBY", "SETTING", "LIFEPATH", "SKILL", "TRAIT", "ATTRIBUTE"].map((l, i) => {
+	const datRequirementItemTypes = ["UNIQUE", "MALE", "FEMALE", "SETTINGENTRY", "YEARS", "LPINDEX", "OLDESTBY", "SETTING", "LIFEPATH", "SKILL", "TRAIT", "ATTRIBUTE", "QUESTION"].map((l, i) => {
 		requirementItemRef.push([i, l]);
 		return `(${i}, '${l}')`;
 	});

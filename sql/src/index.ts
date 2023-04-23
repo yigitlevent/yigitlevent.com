@@ -12,6 +12,7 @@ import { processRangeAndCover } from "./groups/p8_rangeandcover";
 import { processFight } from "./groups/p9_fight";
 import { processMagic } from "./groups/p10_magic";
 import { processResources } from "./groups/p11_resources";
+import { processQuestions } from "./groups/p12_questions";
 
 
 // REFERENCE AND DATA
@@ -31,7 +32,8 @@ const process = [
 	(refs: References) => processRangeAndCover(refs),
 	(refs: References) => processFight(refs),
 	() => processMagic(),
-	(refs: References) => processResources(refs)
+	(refs: References) => processResources(refs),
+	() => processQuestions()
 ];
 
 process.forEach(func => {

@@ -19,7 +19,8 @@ VALUES
 	(8, 'LIFEPATH'),
 	(9, 'SKILL'),
 	(10, 'TRAIT'),
-	(11, 'ATTRIBUTE');
+	(11, 'ATTRIBUTE'),
+	(12, 'QUESTION');
 
 INSERT INTO dat."AbilityTypes"
 	("Id", "Name")

@@ -8,7 +8,8 @@ type ReferenceKeys = "Stocks" | "Settings" | "Lifepaths"
 	| "RangeAndCoverActionGroups" | "RangeAndCoverActions"
 	| "FightActionGroups" | "FightActions"
 	| "SpellFacetTypes" | "SpellOriginFacets" | "SpellDurationFacets" | "SpellAreaOfEffectFacets" | "SpellElementFacets" | "SpellImpetusFacets"
-	| "ResourceTypes" | "Resources";
+	| "ResourceTypes" | "Resources"
+	| "Questions";
 
 export function findIndex(type: ReferenceKeys, name: string, references: { [key: string]: Reference[]; }) {
 	if (type in references) {
