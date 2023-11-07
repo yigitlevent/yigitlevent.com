@@ -1,11 +1,10 @@
-/* eslint-disable react/no-unescaped-entities */
-import { Fragment } from "react";
 import Grid from "@mui/material/Grid";
 import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
+import { Fragment } from "react";
 
 
-export function MyOldProjects() {
+export function MyOldProjects(): JSX.Element {
 	return (
 		<Fragment>
 			<Grid item xs={2} md={1}>

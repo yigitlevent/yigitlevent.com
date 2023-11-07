@@ -1,10 +1,10 @@
-import { Fragment } from "react";
 import Grid from "@mui/material/Grid";
 import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
+import { Fragment } from "react";
 
 
-export function MyCurrentProjects() {
+export function MyCurrentProjects(): JSX.Element {
 	return (
 		<Fragment>
 			<Grid item xs={2} md={1}>
