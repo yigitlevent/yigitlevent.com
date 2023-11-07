@@ -13,7 +13,7 @@ module.exports = {
 		sourceType: "module",
 		project: ["./tsconfig.json"]
 	},
-	ignorePatterns: ["node_modules", "dist", "build", ".eslintrc.cjs"],
+	ignorePatterns: ["node_modules", "dist", "build", "package.json", "tsconfig.json", ".eslintrc.cjs"],
 	plugins: ["import", "@typescript-eslint", "json"],
 	rules: {
 		"json/*": ["error", "allowComments"],
