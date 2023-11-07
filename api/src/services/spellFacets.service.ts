@@ -1,8 +1,8 @@
 import { PgPool } from "../index";
 
 
-export async function GetSpellFacets() {
-	const query = 'select "Id" as "id", "Name" as "name", "Obstacle" as "obstacle", "Actions" as "actions", "Resource" as "resource"';
+export async function GetSpellFacets(): Promise<SpellFacets> {
+	const query = "select \"Id\" as \"id\", \"Name\" as \"name\", \"Obstacle\" as \"obstacle\", \"Actions\" as \"actions\", \"Resource\" as \"resource\"";
 	const query1 = `${query} from dat."SpellOriginFacets";`;
 	const query2 = `${query} from dat."SpellElementFacets";`;
 	const query3 = `${query} from dat."SpellImpetusFacets";`;

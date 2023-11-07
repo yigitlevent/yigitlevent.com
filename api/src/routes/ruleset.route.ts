@@ -6,6 +6,6 @@ import { GetRulesetsData, GetRulesetsList } from "../controllers/ruleset.control
 const Router = express.Router();
 
 Router.get("/list", GetRulesetsList);
-Router.get("/data", GetRulesetsData);
+Router.post("/data", GetRulesetsData);
 
 export default Router;

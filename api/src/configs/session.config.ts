@@ -1,17 +1,18 @@
 import { SessionOptions } from "express-session";
 
-import { SECRET } from "./constants.config";
+import { IsDev, SECRET } from "./constants.config";
+
 
 export const SessionConfig: SessionOptions = {
 	secret: SECRET,
 	saveUninitialized: false,
 	resave: false,
-	proxy: process.env.API_ENV === "production",
+	proxy: !IsDev,
 	//rolling: true,
 	cookie: {
-		secure: process.env.API_ENV === "production",
-		httpOnly: true,
-		sameSite: "strict",
+		secure: !IsDev,
+		httpOnly: !IsDev,
+		sameSite: IsDev ? "none" : "strict",
 		maxAge: 1000 * 60 * 60 * 24
 	}
 };

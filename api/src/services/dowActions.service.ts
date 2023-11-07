@@ -1,7 +1,7 @@
 import { PgPool } from "../index";
 
 
-export async function GetDoWActions() {
+export async function GetDoWActions(): Promise<DoWAction[]> {
 	const convert = (a: DoWActionDBO[], at: ActionTestDBO[], ar: ActionResolutionDBO[]): DoWAction[] => {
 		const r: DoWAction[] = a.map(v => {
 			const act: DoWAction = {
@@ -55,9 +55,9 @@ export async function GetDoWActions() {
 		return r;
 	};
 
-	const query1 = 'select * from dat."DuelOfWitsActions";';
-	const query2 = 'select * from dat."DoWActionTestList";';
-	const query3 = 'select * from dat."DoWActionResolutionList";';
+	const query1 = "select * from dat.\"DuelOfWitsActions\";";
+	const query2 = "select * from dat.\"DoWActionTestList\";";
+	const query3 = "select * from dat.\"DoWActionResolutionList\";";
 	return Promise.all([
 		PgPool.query<DoWActionDBO>(query1),
 		PgPool.query<ActionTestDBO>(query2),

@@ -1,7 +1,7 @@
 import { PgPool } from "../index";
 
 
-export async function GetTraits() {
+export async function GetTraits(): Promise<Trait[]> {
 	const convert = (v: TraitDBO): Trait => {
 		const r: Trait = {
 			rulesets: v.Rulesets as unknown[] as RulesetId[],
@@ -18,7 +18,7 @@ export async function GetTraits() {
 		return r;
 	};
 
-	const query = 'select * from dat."TraitsList";';
+	const query = "select * from dat.\"TraitsList\";";
 	return PgPool.query<TraitDBO>(query)
 		.then(result => result.rows.map(convert));
 }

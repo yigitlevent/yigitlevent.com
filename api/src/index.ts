@@ -1,23 +1,26 @@
+import pgsimple from "connect-pg-simple";
+import cors from "cors";
 import express from "express";
 import session from "express-session";
-import cors from "cors";
 import Pg from "pg";
-import pgsimple from "connect-pg-simple";
 
 import { PORT } from "./configs/constants.config";
-import { PgConfig } from "./configs/postgres.config";
-
 import { CorsConfig } from "./configs/cors.config";
+import { PgConfig } from "./configs/postgres.config";
 import { SessionConfig } from "./configs/session.config";
-
-import userRouter from "./routes/user.route";
 import rulesetRouter from "./routes/ruleset.route";
+import userRouter from "./routes/user.route";
 
 
 export const App = express();
 export const PgPool = new Pg.Pool(PgConfig);
 
-const SessionStore = new (pgsimple(session))({ pool: PgPool, schemaName: "usr", tableName: "UserSessions" });
+const SessionStore = new (pgsimple(session))({
+	pool: PgPool,
+	schemaName: "usr",
+	tableName: "UserSessions",
+	errorLog: (e) => console.error(e)
+});
 
 App.use(express.json());
 App.use(express.urlencoded({ extended: true }));
@@ -26,8 +29,6 @@ App.use(session({ store: SessionStore, ...SessionConfig }));
 
 App.use("/user", userRouter);
 App.use("/ruleset", rulesetRouter);
-
-
 
 /*
 App.get("/campaigns", CheckAuth, GetCampaigns);

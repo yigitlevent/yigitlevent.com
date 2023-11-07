@@ -1,7 +1,7 @@
 import { PgPool } from "../index";
 
 
-export async function GetRulesets() {
+export async function GetRulesets(): Promise<Ruleset[]> {
 	const convert = (v: RulesetDBO): Ruleset => {
 		const r: Ruleset = {
 			id: v.Id as unknown as RulesetId,
@@ -17,7 +17,7 @@ export async function GetRulesets() {
 		return r;
 	};
 
-	const query = 'select * from dat."RulesetsList";';
+	const query = "select * from dat.\"RulesetsList\";";
 	return PgPool.query<RulesetDBO>(query)
 		.then(result => result.rows.map(convert));
 }

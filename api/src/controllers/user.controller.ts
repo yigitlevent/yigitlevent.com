@@ -1,15 +1,15 @@
-import { Request, Response } from "express";
 import bcrypt from "bcrypt";
+import { Request, Response } from "express";
 
 import { PgPool } from "../index";
 import { FindUserByEmail, UpdateUserLastSignInAt } from "../services/user.service";
 
 
-export async function UserAuth(request: Request, response: Response) {
+export async function UserAuth(request: Request, response: Response): UntypedControllerReturn {
 	return response.json({ user: request.session.user });
 }
 
-export async function UserSignUp(request: Request, response: Response) {
+export async function UserSignUp(request: Request<unknown, unknown, UserSignupRequest>, response: Response<UserResponse>): UntypedControllerReturn {
 	const { username, email, password } = request.body;
 
 	try {
@@ -30,7 +30,7 @@ export async function UserSignUp(request: Request, response: Response) {
 	}
 }
 
-export async function UserSignIn(request: Request, response: Response) {
+export async function UserSignIn(request: Request<unknown, unknown, UserSigninRequest>, response: Response<UserResponse>): UntypedControllerReturn {
 	const { email, password } = request.body;
 
 	try {
@@ -47,7 +47,7 @@ export async function UserSignIn(request: Request, response: Response) {
 			return response.json({ user: request.session.user });
 		}
 
-		throw new Error("username not found");
+		throw new Error("email not found");
 	}
 	catch (e) {
 		console.error(e);
@@ -55,7 +55,7 @@ export async function UserSignIn(request: Request, response: Response) {
 	}
 }
 
-export async function UserSignOut(request: Request, response: Response) {
+export async function UserSignOut(request: Request, response: Response): UntypedControllerReturn {
 	try {
 		request.session.destroy(() => { /* console.log("session destroyed") */ });
 		response.clearCookie("connect.sid");

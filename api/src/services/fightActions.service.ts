@@ -1,7 +1,7 @@
 import { PgPool } from "../index";
 
 
-export async function GetFightActions() {
+export async function GetFightActions(): Promise<FightAction[]> {
 	const convert = (a: FightActionDBO[], at: ActionTestDBO[], ar: ActionResolutionDBO[]): FightAction[] => {
 		const r: FightAction[] = a.map(v => {
 			const act: FightAction = {
@@ -60,9 +60,9 @@ export async function GetFightActions() {
 		return r;
 	};
 
-	const query1 = 'select * from dat."FightActionsList";';
-	const query2 = 'select * from dat."FightActionTestList";';
-	const query3 = 'select * from dat."FightActionResolutionList";';
+	const query1 = "select * from dat.\"FightActionsList\";";
+	const query2 = "select * from dat.\"FightActionTestList\";";
+	const query3 = "select * from dat.\"FightActionResolutionList\";";
 	return Promise.all([
 		PgPool.query<FightActionDBO>(query1),
 		PgPool.query<ActionTestDBO>(query2),

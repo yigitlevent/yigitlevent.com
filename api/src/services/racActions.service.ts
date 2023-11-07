@@ -1,7 +1,7 @@
 import { PgPool } from "../index";
 
 
-export async function GetRaCActions() {
+export async function GetRaCActions(): Promise<RaCAction[]> {
 	const convert = (a: RaCActionDBO[], ar: ActionResolutionDBO[]): RaCAction[] => {
 		const r: RaCAction[] = a.map(v => {
 			const act: RaCAction = {
@@ -52,8 +52,8 @@ export async function GetRaCActions() {
 		return r;
 	};
 
-	const query1 = 'select * from dat."RangeAndCoverActionsList";';
-	const query2 = 'select * from dat."RangeAndCoverActionResolutionList";';
+	const query1 = "select * from dat.\"RangeAndCoverActionsList\";";
+	const query2 = "select * from dat.\"RangeAndCoverActionResolutionList\";";
 	return Promise.all([
 		PgPool.query<RaCActionDBO>(query1),
 		PgPool.query<ActionResolutionDBO>(query2)

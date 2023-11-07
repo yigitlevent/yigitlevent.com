@@ -1,7 +1,7 @@
 import { PgPool } from "../index";
 
 
-export async function GetStocks() {
+export async function GetStocks(rulesets: RulesetId[]): Promise<Stock[]> {
 	const convert = (v: StockDBO[], a: AgePoolDBO[]): Stock[] => {
 		return v.map(stock => {
 			return {
@@ -16,8 +16,9 @@ export async function GetStocks() {
 		});
 	};
 
-	const query1 = 'select * from dat."StocksList";';
-	const query2 = 'select * from dat."AgePools";';
+
+	const query1 = `select * from dat."StocksList" where "Rulesets"::text[] && ARRAY['${rulesets.join("','")}'];`;
+	const query2 = "select * from dat.\"AgePools\";";
 	return Promise.all([
 		PgPool.query<StockDBO>(query1),
 		PgPool.query<AgePoolDBO>(query2)

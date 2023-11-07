@@ -1,7 +1,7 @@
 import { PgPool } from "../index";
 
 
-export async function GetLifepaths() {
+export async function GetLifepaths(): Promise<Lifepath[]> {
 	const convert = (l: LifepathDBO[], lr: LifepathRequirementBlockDBO[], lri: LifepathRequirementBlockItemDBO[]): Lifepath[] => {
 		const r: Lifepath[] = l.map(v => {
 			const lp: Lifepath = {
@@ -58,7 +58,7 @@ export async function GetLifepaths() {
 						items: []
 					};
 
-					const items: RequirementItem[] = lri.filter(a => a.RequirementId === vrb.Id).map(vrbi => {
+					const items: LifepathRequirementItem[] = lri.filter(a => a.RequirementId === vrb.Id).map(vrbi => {
 						const rbi = {
 							logicType: [vrbi.RequirementTypeId as unknown as LogicTypeId, vrbi.RequirementType] as [id: LogicTypeId, name: string]
 						};
@@ -77,7 +77,7 @@ export async function GetLifepaths() {
 						else if (vrbi.RequirementType === "MALE") return { ...rbi, gender: "Male" };
 						else if (vrbi.RequirementType === "OLDESTBY") return { ...rbi, oldestBy: vrbi.Max as number };
 						else if (vrbi.RequirementType === "ATTRIBUTE") {
-							const atr: RequirementItem = {
+							const atr: LifepathRequirementItem = {
 								...rbi,
 								attribute: [vrbi.AttributeId as unknown as AbilityId, vrbi.Attribute as string] as [id: AbilityId, name: string],
 								forCompanion: vrbi.ForCompanion
@@ -113,9 +113,9 @@ export async function GetLifepaths() {
 		return r;
 	};
 
-	const query1 = 'select * from dat."LifepathsList";';
-	const query2 = 'select * from dat."LifepathRequirementBlocks";';
-	const query3 = 'select * from dat."LifepathRequirementBlockItems";';
+	const query1 = "select * from dat.\"LifepathsList\";";
+	const query2 = "select * from dat.\"LifepathRequirementBlocks\";";
+	const query3 = "select * from dat.\"LifepathRequirementBlockItems\";";
 	return Promise.all([
 		PgPool.query<LifepathDBO>(query1),
 		PgPool.query<LifepathRequirementBlockDBO>(query2),

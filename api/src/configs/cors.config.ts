@@ -1,8 +1,11 @@
 import { CorsOptions } from "cors";
 
+import { IsDev } from "./constants.config";
+
+
 export const CorsConfig: CorsOptions = {
-	origin: process.env.API_ENV === "development" ? "*" : ["https://yigitlevent.com", /\.yigitlevent\.com$/],
+	origin: IsDev ? "*" : ["https://yigitlevent.com", /\.yigitlevent\.com$/],
 	methods: ["POST", "GET", "PUT", "DELETE", "OPTIONS", "HEAD"],
-	credentials: true
+	credentials: false
 	//allowedHeaders: ["Content-Type", "Authorization"]
 };

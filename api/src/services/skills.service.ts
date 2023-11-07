@@ -1,7 +1,7 @@
 import { PgPool } from "../index";
 
 
-export async function GetSkills() {
+export async function GetSkills(rulesets: RulesetId[]): Promise<Skill[]> {
 	const convert = (v: SkillDBO): Skill => {
 		const r: Skill = {
 			rulesets: v.Rulesets as unknown[] as RulesetId[],
@@ -26,15 +26,15 @@ export async function GetSkills() {
 		if (v.Description !== null) r.description = v.Description;
 		if (v.SubskillIds.length > 0) r.subskillIds = v.SubskillIds as unknown[] as SkillId[];
 		if (v.RestrictionOnlyStockId !== null && v.RestrictionOnlyStock !== null) {
-			r.restriction = { onlyStock: [v.RestrictionOnlyStockId, v.RestrictionOnlyStock] };
+			r.restriction = { onlyStock: [v.RestrictionOnlyStockId as unknown as StockId, v.RestrictionOnlyStock] };
 			if (v.RestrictionWhenBurning !== null) r.restriction.onlyAtBurn = v.RestrictionWhenBurning;
-			if (v.RestrictionAbilityId !== null && v.RestrictionAbility !== null) r.restriction.onlyWithAbility = [v.RestrictionAbilityId, v.RestrictionAbility];
+			if (v.RestrictionAbilityId !== null && v.RestrictionAbility !== null) r.restriction.onlyWithAbility = [v.RestrictionAbilityId as unknown as AbilityId, v.RestrictionAbility];
 		}
 
 		return r;
 	};
 
-	const query = 'select * from dat."SkillsList";';
+	const query = `select * from dat."SkillsList" where "Rulesets"::text[] && ARRAY['${rulesets.join("','")}'];`;
 	return PgPool.query<SkillDBO>(query)
 		.then(result => result.rows.map(convert));
 }

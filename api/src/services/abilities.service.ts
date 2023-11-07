@@ -1,7 +1,7 @@
 import { PgPool } from "../index";
 
 
-export async function GetAbilities() {
+export async function GetAbilities(): Promise<Ability[]> {
 	const convert = (v: AbilityDBO): Ability => {
 		const r: Ability = {
 			id: v.Id as unknown as AbilityId,
@@ -26,7 +26,7 @@ export async function GetAbilities() {
 		return r;
 	};
 
-	const query = 'select * from dat."AbilitiesList";';
+	const query = "select * from dat.\"AbilitiesList\";";
 	return PgPool.query<AbilityDBO>(query)
 		.then(result => result.rows.map(convert));
 }

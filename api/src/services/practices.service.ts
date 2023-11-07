@@ -1,7 +1,7 @@
 import { PgPool } from "../index";
 
 
-export async function GetPractices() {
+export async function GetPractices(): Promise<Practice[]> {
 	const convert = (v: PracticeDBO): Practice => {
 		if (v.Ability !== null && v.AbilityId !== null) {
 			return {
@@ -26,7 +26,7 @@ export async function GetPractices() {
 		else throw new Error("shall not happen");
 	};
 
-	const query = 'select * from dat."PracticeList";';
+	const query = "select * from dat.\"PracticeList\";";
 	return PgPool.query<PracticeDBO>(query)
 		.then(result => result.rows.map(convert));
 }

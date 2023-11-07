@@ -1,7 +1,7 @@
 import { PgPool } from "../index";
 
 
-export async function GetResources() {
+export async function GetResources(): Promise<Resource[]> {
 	const convert = (re: ResourceDBO[], rmd: ResourceMagicDetailsDBO[], rmo: ResourceMagicObstaclesDBO[]): Resource[] => {
 		const r: Resource[] = re.map(v => {
 			const res: Resource = {
@@ -73,9 +73,9 @@ export async function GetResources() {
 		return r;
 	};
 
-	const query1 = 'select * from dat."ResourcesList";';
-	const query2 = 'select * from dat."ResourceMagicDetailsList";';
-	const query3 = 'select * from dat."ResourceMagicObstaclesList";';
+	const query1 = "select * from dat.\"ResourcesList\";";
+	const query2 = "select * from dat.\"ResourceMagicDetailsList\";";
+	const query3 = "select * from dat.\"ResourceMagicObstaclesList\";";
 	return Promise.all([
 		PgPool.query<ResourceDBO>(query1),
 		PgPool.query<ResourceMagicDetailsDBO>(query2),
