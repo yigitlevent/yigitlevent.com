@@ -1,14 +1,13 @@
+import Typography from "@mui/material/Typography";
 import { Fragment, useState } from "react";
 
-import Typography from "@mui/material/Typography";
 
 import { LifepathSelection } from "./Modals/LifepathSelection";
-
-import { Basics } from "./Sections/Basics";
-import { Stats } from "./Sections/Stats";
-import { Skills } from "./Sections/Skills";
-import { Traits } from "./Sections/Traits";
 import { Attributes } from "./Sections/Attributes";
+import { Basics } from "./Sections/Basics";
+import { Skills } from "./Sections/Skills";
+import { Stats } from "./Sections/Stats";
+import { Traits } from "./Sections/Traits";
 
 
 export function CharacterBurner(): JSX.Element {
@@ -22,10 +21,15 @@ export function CharacterBurner(): JSX.Element {
 			<Typography variant="h3">Character Burner</Typography>
 
 			<Basics openModal={openModal} />
+
 			<Stats />
+
 			<Skills />
+
 			<Traits />
+
 			<Attributes />
+
 			{/* TODO
 			
 			<Resources />
@@ -35,6 +39,7 @@ export function CharacterBurner(): JSX.Element {
 			*/}
 
 			<LifepathSelection isOpen={currentModal === "lp"} close={closeModals} />
+
 			{/*
 			<AnswerQuestions />
 			<ChooseResources />

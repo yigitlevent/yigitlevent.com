@@ -1,16 +1,14 @@
-import { Fragment, useCallback } from "react";
-
+import Autocomplete from "@mui/material/Autocomplete";
 import Grid from "@mui/material/Grid";
 import Modal from "@mui/material/Modal";
 import Paper from "@mui/material/Paper";
-import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
-import Autocomplete from "@mui/material/Autocomplete";
+import Typography from "@mui/material/Typography";
+import { Fragment, useCallback } from "react";
 
 import { useCharacterBurnerStoreOld } from "../../../../hooks/oldStores/useCharacterBurnerStoreOld";
-
-import { GenericGrid } from "../../../Shared/Grids";
 import { AbilityButton } from "../../../Shared/AbilityButton";
+import { GenericGrid } from "../../../Shared/Grids";
 
 
 export function SpecialLifepathsModal({ openSl, openSlModal }: { openSl: boolean; openSlModal: (open: boolean) => void; }) {
@@ -37,8 +35,8 @@ export function SpecialLifepathsModal({ openSl, openSlModal }: { openSl: boolean
 	};
 
 	const getPossibleLifepaths = useCallback(() => {
-		const possibilities =
-			Object.values(Stocks["Human"].settings)
+		const possibilities
+			= Object.values(Stocks["Human"].settings)
 				.map(setting => setting.lifepaths.filter(lp => !lp.born && ["City Dweller", "Noble", "Professional Soldier", "Villager"].includes(lp.setting)))
 				.flat()
 				.filter(v => checkRulesets( v.allowed));
@@ -69,8 +67,7 @@ export function SpecialLifepathsModal({ openSl, openSlModal }: { openSl: boolean
 								/>
 							</Grid>
 						</Fragment>
-						: null
-					}
+						: null}
 					{lifepathPaths.includes("Human➞Noble Court➞Advisor to the Court")
 						? <Fragment>
 							<Grid item xs={1}>
@@ -82,8 +79,7 @@ export function SpecialLifepathsModal({ openSl, openSlModal }: { openSl: boolean
 								</AbilityButton>
 							</Grid>
 						</Fragment>
-						: null
-					}
+						: null}
 					{lifepathPaths.includes("Human➞Noble➞Prince of the Blood")
 						? <Fragment>
 							<Grid item xs={1}>
@@ -95,8 +91,7 @@ export function SpecialLifepathsModal({ openSl, openSlModal }: { openSl: boolean
 								</AbilityButton>
 							</Grid>
 						</Fragment>
-						: null
-					}
+						: null}
 				</GenericGrid>
 			</Paper>
 		</Modal>

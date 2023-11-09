@@ -1,18 +1,16 @@
-import { useEffect, useState } from "react";
-
 import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
+import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
+import Typography from "@mui/material/Typography";
+import { useEffect, useState } from "react";
 
 import { useCharacterBurnerStoreOld } from "../../../../hooks/oldStores/useCharacterBurnerStoreOld";
 import { GetAverage } from "../../../../utils/misc";
-
 import { GenericGrid } from "../../../Shared/Grids";
 
 
@@ -61,16 +59,16 @@ export function TolerancesBlock() {
 			<Grid item xs={16}>
 				<Typography variant="h4">Tolerances</Typography>
 			</Grid>
-
 			<Grid item xs={16}>
 				<TableContainer component={Paper}>
 					<Table size="small">
 						<TableHead>
 							<TableRow>
-								{Array.from(Array(16).keys()).map(v =>
+								{Array.from(Array(16).keys()).map(v => (
 									<TableCell key={v} sx={{ textAlign: "center" }}>
 										B{v + 1}
 									</TableCell>
+								)
 								)}
 							</TableRow>
 						</TableHead>

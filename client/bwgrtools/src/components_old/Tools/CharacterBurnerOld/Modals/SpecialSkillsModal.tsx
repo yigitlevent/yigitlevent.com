@@ -1,5 +1,3 @@
-import { Fragment } from "react";
-
 import Checkbox from "@mui/material/Checkbox";
 import FormControl from "@mui/material/FormControl";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -10,9 +8,9 @@ import Modal from "@mui/material/Modal";
 import Paper from "@mui/material/Paper";
 import Select from "@mui/material/Select";
 import Typography from "@mui/material/Typography";
+import { Fragment } from "react";
 
 import { useCharacterBurnerStoreOld } from "../../../../hooks/oldStores/useCharacterBurnerStoreOld";
-
 import { GenericGrid } from "../../../Shared/Grids";
 
 
@@ -35,7 +33,6 @@ export function AppropriateWeaponsSelection() {
 			<Grid item xs={2}>
 				<Typography variant="h5">Appropriate Weapons</Typography>
 			</Grid>
-
 			<Grid item xs={2}>
 				<FormControl fullWidth>
 					<InputLabel>Mandatory Weapon Skill</InputLabel>
@@ -46,9 +43,8 @@ export function AppropriateWeaponsSelection() {
 					</Select>
 				</FormControl>
 			</Grid>
-
 			<Grid item xs={2}>
-				{subskills.map((skillPaths, i) =>
+				{subskills.map((skillPaths, i) => (
 					<FormControlLabel
 						key={i}
 						label={skillPaths.split("➞")[1]}
@@ -59,6 +55,7 @@ export function AppropriateWeaponsSelection() {
 							/>
 						}
 					/>
+				)
 				)}
 			</Grid>
 		</Fragment>
@@ -73,7 +70,6 @@ export function JavelinOrBowSelection() {
 			<Grid item xs={2}>
 				<Typography variant="h5">Javelin or Bow</Typography>
 			</Grid>
-
 			<Grid item xs={2}>
 				<FormControl fullWidth>
 					<InputLabel>Javelin or Bow</InputLabel>
@@ -97,9 +93,8 @@ export function AnySmithSelection() {
 			<Grid item xs={2}>
 				<Typography variant="h5">Any Smithing</Typography>
 			</Grid>
-
 			<Grid item xs={2}>
-				{subskills.map((skillName, i) =>
+				{subskills.map((skillName, i) => (
 					<FormControlLabel
 						key={i}
 						label={skillName.split("➞")[1]}
@@ -110,6 +105,7 @@ export function AnySmithSelection() {
 							/>
 						}
 					/>
+				)
 				)}
 			</Grid>
 		</Fragment>

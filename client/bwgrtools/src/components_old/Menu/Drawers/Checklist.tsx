@@ -1,15 +1,14 @@
+import Step from "@mui/material/Step";
+import StepContent from "@mui/material/StepContent";
+import StepLabel from "@mui/material/StepLabel";
+import Stepper from "@mui/material/Stepper";
+import Typography from "@mui/material/Typography";
 import { useEffect, useState } from "react";
 
-import Typography from "@mui/material/Typography";
-import Stepper from "@mui/material/Stepper";
-import Step from "@mui/material/Step";
-import StepLabel from "@mui/material/StepLabel";
-import StepContent from "@mui/material/StepContent";
 
-import { useCharacterBurnerStoreOld } from "../hooks/oldStores/useCharacterBurnerStoreOld";
-
-import { StepIcon } from "../components/Shared/StepIcon";
 import { DrawerBox } from "../components/Shared/DrawerBox";
+import { StepIcon } from "../components/Shared/StepIcon";
+import { useCharacterBurnerStoreOld } from "../hooks/oldStores/useCharacterBurnerStoreOld";
 
 
 const ChecklistSteps: { label: string, description: string[]; }[] = [
@@ -92,8 +91,8 @@ export function Checklist({ expanded }: { expanded: boolean; }) {
 	const resourceRemainings = getResourceRemainings();
 
 	useEffect(() => {
-		const stockSpecificFulfilled =
-			!(stock === "Orc" && stockSpecific.brutalLife.traits.length < lifepathPaths.length - 5)
+		const stockSpecificFulfilled
+			= !(stock === "Orc" && stockSpecific.brutalLife.traits.length < lifepathPaths.length - 5)
 			&& !(stock === "Great Wolf" && stockSpecific.territory.huntingGround === undefined);
 
 		if (concept === "") setActiveStep(0);
@@ -133,10 +132,11 @@ export function Checklist({ expanded }: { expanded: boolean; }) {
 							<Typography variant="body1" sx={{ marginBottom: "4px" }} color={activeStep !== i ? "gray" : undefined}>{step.label}</Typography>
 						</StepLabel>
 						<StepContent>
-							{step.description.map((desc, ii) =>
+							{step.description.map((desc, ii) => (
 								<Typography key={ii} variant="body2" sx={{ fontSize: "13px" }} color={activeStep !== i ? "gray" : undefined}>
 									{desc}
 								</Typography>
+							)
 							)}
 						</StepContent>
 					</Step>

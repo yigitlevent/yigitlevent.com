@@ -1,9 +1,9 @@
-import { createTheme } from "@mui/material/styles";
 import { blue, green, grey, lightBlue, orange, purple, red } from "@mui/material/colors";
+import { createTheme } from "@mui/material/styles";
 
+import hand from "/src/assets/fonts/CormorantUpright-SemiBold.woff";
 import text from "/src/assets/fonts/literata.woff";
 import title from "/src/assets/fonts/thryromanes.woff";
-import hand from "/src/assets/fonts/CormorantUpright-SemiBold.woff";
 
 
 declare module "@mui/material/styles" {

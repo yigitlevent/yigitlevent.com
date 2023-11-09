@@ -1,18 +1,8 @@
 import { createRef, useCallback, useEffect, useState } from "react";
-import styled from "styled-components";
-
-import { THEME } from "../../../theme/theme";
 
 import { MWCONST } from "./MagicWheel";
+import { THEME } from "../../../theme/theme";
 
-
-const Canvas = styled.canvas`
-	position: absolute;
-	left: 0;
-	top: 0; 
-	z-index: 103;
-	width: 100%;
-`;
 
 export function FrontCanvas({ show }: { show: boolean; }): JSX.Element {
 	const canvasRef = createRef<HTMLCanvasElement>();
@@ -42,6 +32,13 @@ export function FrontCanvas({ show }: { show: boolean; }): JSX.Element {
 	}, [canvasRef]);
 
 	return (
-		<Canvas ref={canvasRef} height={MWCONST.canvasSize} width={MWCONST.canvasSize}>Your browser does not support canvas.</Canvas>
+		<canvas
+			ref={canvasRef}
+			height={MWCONST.canvasSize}
+			width={MWCONST.canvasSize}
+			style={{ position: "absolute", left: 0, top: 0, zIndex: 103, width: "100%" }}
+		>
+			Your browser does not support canvas.
+		</canvas>
 	);
 }

@@ -1,11 +1,10 @@
-import { Dispatch, FormEvent, SetStateAction } from "react";
 import { produce } from "immer";
+import { Dispatch, FormEvent, SetStateAction } from "react";
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 
-import { Clamp } from "../../utils/misc";
-
 import { Notification } from "../../components/Shared/Notification";
+import { Clamp } from "../../utils/misc";
 
 
 interface PracticePlannerState {
@@ -108,7 +107,7 @@ export const usePracticePlannerStore = create<PracticePlannerState>()(
 					const newCells = state.cells;
 					state.cells = newCells.map((v, i) => {
 						if (i === cellIndex) {
-							const placed = v.placed.filter((v, i) => i !== practiceIndex);
+							const placed = v.placed.filter((_, i) => i !== practiceIndex);
 							const hours = v.remaining + v.placed[practiceIndex].hours;
 							return { ...v, remaining: hours, placed: placed };
 						}

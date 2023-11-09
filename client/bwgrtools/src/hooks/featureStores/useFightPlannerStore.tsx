@@ -2,9 +2,8 @@ import { produce } from "immer";
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 
-import { Clamp } from "../../utils/misc";
-
 import { Notification } from "../../components/Shared/Notification";
+import { Clamp } from "../../utils/misc";
 
 
 interface FightPlannerState {
@@ -77,7 +76,7 @@ export const useFightPlannerStore = create<FightPlannerState>()(
 				set(produce<FightPlannerState>((state) => {
 					const newActions = state.actions;
 					state.actions = newActions.map((v, i) => {
-						if (i === volleyIndex) { return v.filter((vv, ii) => ii !== actionIndex); }
+						if (i === volleyIndex) { return v.filter((_, ii) => ii !== actionIndex); }
 						return v;
 					}) as [FightActionExtended[], FightActionExtended[], FightActionExtended[]];
 				}));

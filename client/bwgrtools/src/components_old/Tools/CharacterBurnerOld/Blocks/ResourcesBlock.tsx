@@ -1,19 +1,17 @@
+import ArrowForwardIosSharp from "@mui/icons-material/ArrowForwardIosSharp";
+import DeleteIcon from "@mui/icons-material/Delete";
+import Accordion from "@mui/material/Accordion";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import Button from "@mui/material/Button";
+import Divider from "@mui/material/Divider";
+import Grid from "@mui/material/Grid";
+import IconButton from "@mui/material/IconButton";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
 import { Fragment } from "react";
 
-import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import Accordion from "@mui/material/Accordion";
-import AccordionSummary from "@mui/material/AccordionSummary";
-import AccordionDetails from "@mui/material/AccordionDetails";
-import IconButton from "@mui/material/IconButton";
-import Divider from "@mui/material/Divider";
-import TextField from "@mui/material/TextField";
-import DeleteIcon from "@mui/icons-material/Delete";
-import ArrowForwardIosSharp from "@mui/icons-material/ArrowForwardIosSharp";
-
 import { useCharacterBurnerStoreOld } from "../../../../hooks/oldStores/useCharacterBurnerStoreOld";
-
 import { GenericGrid } from "../../../Shared/Grids";
 
 
@@ -27,17 +25,14 @@ export function ResourcesBlock({ openReModal }: { openReModal: (open: boolean) =
 			<Grid item xs={6}>
 				<Typography variant="h4">Resources</Typography>
 			</Grid>
-
 			<Grid item xs={6} sm={5}>
 				<Typography>Trait Points: {totals.resources.points}, Remaining: {resourceRemaining ? resourceRemaining.resourcePoints : -1}</Typography>
 			</Grid>
-
 			<Grid item xs={6} sm={1}>
 				<Button variant="outlined" size="small" onClick={() => openReModal(true)} fullWidth>Add Resource</Button>
 			</Grid>
-
 			<Fragment>
-				{Object.keys(spendings.resources).map((resourceKey, i) =>
+				{Object.keys(spendings.resources).map((resourceKey, i) => (
 					<Grid key={i} item xs={6} sm={3}>
 						<Accordion disableGutters>
 							<AccordionSummary
@@ -67,8 +62,7 @@ export function ResourcesBlock({ openReModal }: { openReModal: (open: boolean) =
 										? <Grid item xs={2}>
 											<Typography variant="body2">Modifiers: {spendings.resources[resourceKey].modifiers.join(", ")}</Typography>
 										</Grid>
-										: null
-									}
+										: null}
 									<Grid item xs={2}>
 										<TextField
 											label="Description"
@@ -82,6 +76,7 @@ export function ResourcesBlock({ openReModal }: { openReModal: (open: boolean) =
 							</AccordionDetails>
 						</Accordion>
 					</Grid>
+				)
 				)}
 			</Fragment>
 		</GenericGrid>

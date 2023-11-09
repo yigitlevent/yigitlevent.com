@@ -1,9 +1,7 @@
 import { createRef, useCallback, useEffect, useState } from "react";
-import styled from "styled-components";
-
-import { THEME } from "../../../theme/theme";
 
 import { MWCONST } from "./MagicWheel";
+import { THEME } from "../../../theme/theme";
 
 
 const Canvas = styled.canvas`

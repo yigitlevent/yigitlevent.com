@@ -1,10 +1,9 @@
+import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
-import Box from "@mui/material/Box";
 
-import { TraitOld, TraitCategories } from "../../../../../data/traits/_traits";
 import { SkillOld, SkillCategories } from "../../../../../data/skills/_skills";
-
+import { TraitOld, TraitCategories } from "../../../../../data/traits/_traits";
 import { PopoverLink } from "../../../../Shared/PopoverLink";
 
 
@@ -40,46 +39,46 @@ export function RandomLifepathsLists({ totals }: { totals: LifepathTotals; }) {
 			<Grid item xs={1}>
 				Mandatory Skills:
 				{mandSkills.length > 0
-					? mandSkills.map((skill, i) =>
+					? mandSkills.map((skill, i) => (
 						<Paper key={i} elevation={2} sx={{ cursor: "pointer", padding: "0 4px", margin: "3px 3px 0", width: "max-content", display: "inline-block" }}>
 							<PopoverLink data={skill} />
 						</Paper>
 					)
-					: <Box sx={{ padding: "0 4px", display: "inline-block" }}>—</Box>
-				}
+					)
+					: <Box sx={{ padding: "0 4px", display: "inline-block" }}>—</Box>}
 			</Grid>
 			<Grid item xs={1}>
 				Skills:
 				{skills.length > 0
-					? skills.map((skill, i) =>
+					? skills.map((skill, i) => (
 						<Paper key={i} elevation={2} sx={{ cursor: "pointer", padding: "0 4px", margin: "3px 3px 0", width: "max-content", display: "inline-block" }}>
 							<PopoverLink data={skill} />
 						</Paper>
 					)
-					: <Box sx={{ padding: "0 4px", display: "inline-block" }}>—</Box>
-				}
+					)
+					: <Box sx={{ padding: "0 4px", display: "inline-block" }}>—</Box>}
 			</Grid>
 			<Grid item xs={1}>
 				Mandatory Traits:
 				{mandTraits.length > 0
-					? mandTraits.map((trait, i) =>
+					? mandTraits.map((trait, i) => (
 						<Paper key={i} elevation={2} sx={{ cursor: "pointer", padding: "0 4px", margin: "3px 3px 0", width: "max-content", display: "inline-block" }}>
 							<PopoverLink data={trait} />
 						</Paper>
 					)
-					: <Box sx={{ padding: "0 4px", display: "inline-block" }}>—</Box>
-				}
+					)
+					: <Box sx={{ padding: "0 4px", display: "inline-block" }}>—</Box>}
 			</Grid>
 			<Grid item xs={1}>
 				Traits:
 				{traits.length > 0
-					? traits.map((trait, i) =>
+					? traits.map((trait, i) => (
 						<Paper key={i} elevation={2} sx={{ cursor: "pointer", padding: "0 4px", margin: "3px 3px 0", width: "max-content", display: "inline-block" }}>
 							<PopoverLink data={trait} />
 						</Paper>
 					)
-					: <Box sx={{ padding: "0 4px", display: "inline-block" }}>—</Box>
-				}
+					)
+					: <Box sx={{ padding: "0 4px", display: "inline-block" }}>—</Box>}
 			</Grid>
 		</Grid>
 	);

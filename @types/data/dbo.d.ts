@@ -75,10 +75,10 @@ interface SkillDBO {
 	Tool: string;
 	ToolDescription: string | null;
 	Description: string | null;
-	RestrictionOnlyStockId: integer | null;
+	RestrictionOnlyStockId: number | null;
 	RestrictionOnlyStock: string | null;
 	RestrictionWhenBurning: boolean | null;
-	RestrictionAbilityId: integer | null;
+	RestrictionAbilityId: number | null;
 	RestrictionAbility: string | null;
 	SubskillIds: number[];
 }
@@ -172,7 +172,7 @@ interface ResourceDBO {
 	VariableCost: boolean;
 	Costs: number[];
 	CostDescriptions: string[];
-	Modifiers: int[];
+	Modifiers: number[];
 	ModifierIsPerCosts: boolean[];
 	ModifierDescriptions: string[];
 }
@@ -290,4 +290,10 @@ interface PracticeDBO {
 	Routine: number;
 	Difficult: number;
 	Challenging: number;
+}
+
+interface QuestionDTO {
+	id: number;
+	name: string;
+	question: string;
 }

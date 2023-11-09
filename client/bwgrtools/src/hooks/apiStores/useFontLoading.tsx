@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
-export function useFontLoading(font: string) {
+
+export function useFontLoading(font: string): { isFontLoaded: boolean; } {
 	const [isFontLoaded, setIsFontLoaded] = useState(false);
 
 	useEffect(() => {

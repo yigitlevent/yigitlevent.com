@@ -1,18 +1,16 @@
+import Box from "@mui/material/Box";
+import Paper from "@mui/material/Paper";
 import { Fragment } from "react";
 
-import Paper from "@mui/material/Paper";
-import Box from "@mui/material/Box";
-
 import { useRulesetStore } from "../../../hooks/apiStores/useRulesetStore";
-
 import { PopoverLink } from "../../Shared/PopoverLink";
 
 
-export function LifepathTraits({ lifepath }: { lifepath: Lifepath; }) {
+export function LifepathTraits({ lifepath }: { lifepath: Lifepath; }): JSX.Element {
 	const { getTrait } = useRulesetStore();
 
-	const lifepathTraits =
-		lifepath.traits
+	const lifepathTraits
+		= lifepath.traits
 			? lifepath.traits
 				.map(traitId => {
 					const trait = getTrait(traitId);
@@ -33,8 +31,7 @@ export function LifepathTraits({ lifepath }: { lifepath: Lifepath; }) {
 						</Paper>
 					);
 				})
-				: <Box sx={{ padding: "0 4px", display: "inline-block" }}>—</Box>
-			}
+				: <Box sx={{ padding: "0 4px", display: "inline-block" }}>—</Box>}
 		</Fragment>
 	);
 }

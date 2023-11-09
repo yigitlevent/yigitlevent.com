@@ -1,16 +1,14 @@
-import { useCallback, useEffect, useState } from "react";
-
-import Grid from "@mui/material/Grid";
-import TextField from "@mui/material/TextField";
+import Autocomplete from "@mui/material/Autocomplete";
 import Button from "@mui/material/Button";
+import Grid from "@mui/material/Grid";
 import Modal from "@mui/material/Modal";
 import Paper from "@mui/material/Paper";
-import Autocomplete from "@mui/material/Autocomplete";
+import TextField from "@mui/material/TextField";
+import { useCallback, useEffect, useState } from "react";
 
 import { useRulesetStore } from "../../../../hooks/apiStores/useRulesetStore";
 import { useCharacterBurnerStoreOld } from "../../../../hooks/oldStores/useCharacterBurnerStoreOld";
 import { FilterLifepaths } from "../../../../utils/lifepathFilter";
-
 import { GenericGrid } from "../../../Shared/Grids";
 import { LifepathBox } from "../../LifepathLists/LifepathBox";
 
@@ -61,14 +59,11 @@ export function LifepathModal({ openLp, openLpModal }: { openLp: boolean; openLp
 							disableClearable
 						/>
 					</Grid>
-
 					{(chosenLP.length > 0)
 						? <Grid item xs={1}>
 							<LifepathBox lifepath={GetLifepathFromPath(chosenLP)} />
 						</Grid>
-						: null
-					}
-
+						: null}
 					<Grid item xs={1}>
 						<Button variant="outlined" size="medium" onClick={addNewLifepath} fullWidth>Add Lifepath</Button>
 					</Grid>

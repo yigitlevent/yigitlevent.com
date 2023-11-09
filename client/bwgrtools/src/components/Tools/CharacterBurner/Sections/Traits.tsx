@@ -1,11 +1,10 @@
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
 import { Fragment } from "react";
 
-import Typography from "@mui/material/Typography";
-import Grid from "@mui/material/Grid";
 
 import { useCharacterBurnerStore } from "../../../../hooks/featureStores/useCharacterBurnerStore";
 import { UniqueArrayItem } from "../../../../utils/uniqueArray";
-
 import { GenericGrid } from "../../../Shared/Grids";
 import { BlockTraitPopover } from "../../CharacterBurner/BlockText";
 
@@ -121,8 +120,11 @@ export function Traits() {
 			</Grid>*/}
 
 			{traits.existsAny("type", "Common") > 0 ? <CommonTraitsBlock /> : null}
+
 			{traits.existsAny("type", "Mandatory") > 0 ? <MandatoryTraitsBlock /> : null}
+
 			{traits.existsAny("type", "Lifepath") > 0 ? <LifepathTraitsBlock /> : null}
+
 			{traits.existsAny("type", "General") > 0 ? <GeneralTraitsBlock /> : null}
 
 			{/*<GeneralTraitModal open={open} setOpen={setOpen} />*/}

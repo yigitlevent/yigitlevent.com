@@ -1,25 +1,24 @@
-import { Fragment, useState } from "react";
-
-import Typography from "@mui/material/Typography";
-import Grid from "@mui/material/Grid";
-import FormControl from "@mui/material/FormControl";
-import InputLabel from "@mui/material/InputLabel";
-import Select from "@mui/material/Select";
-import MenuItem from "@mui/material/MenuItem";
-import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Button from "@mui/material/Button";
-import LooksOneIcon from "@mui/icons-material/LooksOne";
-import LooksTwoIcon from "@mui/icons-material/LooksTwo";
 import Looks3Icon from "@mui/icons-material/Looks3";
 import Looks4Icon from "@mui/icons-material/Looks4";
 import Looks5Icon from "@mui/icons-material/Looks5";
 import Looks6Icon from "@mui/icons-material/Looks6";
+import LooksOneIcon from "@mui/icons-material/LooksOne";
+import LooksTwoIcon from "@mui/icons-material/LooksTwo";
+import Button from "@mui/material/Button";
+import Checkbox from "@mui/material/Checkbox";
+import FormControl from "@mui/material/FormControl";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Grid from "@mui/material/Grid";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
+import { Fragment, useState } from "react";
 
 import { RandomNumber } from "../../../utils/misc";
-
 import { GenericGrid } from "../../Shared/Grids";
+
 
 interface Tests {
 	[key: number]: { routineMaxObstacle: number; };
@@ -53,7 +52,7 @@ interface TestResult {
 	usedFate: boolean;
 }
 
-export function DiceRoller() {
+export function DiceRoller(): JSX.Element {
 	const [shade, setShade] = useState("Black");
 	const [dicePool, setDicePool] = useState(1);
 	const [obstacle, setObstacle] = useState(1);
@@ -113,6 +112,7 @@ export function DiceRoller() {
 		return (
 			<Fragment>
 				<Typography variant="h6">Result</Typography>
+
 				<Typography>{pre}</Typography>
 			</Fragment>
 		);
@@ -133,6 +133,7 @@ export function DiceRoller() {
 		return (
 			<Fragment>
 				<Typography variant="h6">Dice</Typography>
+
 				<Typography>{diceIcons()}</Typography>
 			</Fragment>
 		);
@@ -142,6 +143,7 @@ export function DiceRoller() {
 		return (
 			<Fragment>
 				<Typography variant="h6">Test</Typography>
+
 				<Typography>{testResult.test}</Typography>
 			</Fragment>
 		);
@@ -155,9 +157,12 @@ export function DiceRoller() {
 				<Grid item xs={6} sm={2} md={1}>
 					<FormControl fullWidth variant="standard">
 						<InputLabel>Shade</InputLabel>
+
 						<Select value={shade} onChange={e => setShade(e.target.value)}>
 							<MenuItem value={"Black"}>Black</MenuItem>
+
 							<MenuItem value={"Gray"}>Gray</MenuItem>
+
 							<MenuItem value={"White"}>White</MenuItem>
 						</Select>
 					</FormControl>
@@ -189,7 +194,7 @@ export function DiceRoller() {
 					<FormControlLabel
 						label="Is Open Ended?"
 						labelPlacement="start"
-						control={<Checkbox checked={isOpenEnded} onChange={(e, c) => setIsOpenEnded(c)} />}
+						control={<Checkbox checked={isOpenEnded} onChange={(_, c) => setIsOpenEnded(c)} />}
 					/>
 				</Grid>
 
@@ -197,7 +202,7 @@ export function DiceRoller() {
 					<FormControlLabel
 						label="Is Double Obstacle?"
 						labelPlacement="start"
-						control={<Checkbox checked={isDoubleObstacle} onChange={(e, c) => setIsDoubleObstacle(c)} />}
+						control={<Checkbox checked={isDoubleObstacle} onChange={(_, c) => setIsDoubleObstacle(c)} />}
 					/>
 				</Grid>
 
@@ -217,21 +222,18 @@ export function DiceRoller() {
 
 						{!isOpenEnded && result.dice.includes(6) && !result.usedFate
 							? <Button variant="outlined" size="medium" onClick={() => rerollSixes(result.dice, true)} sx={{ margin: "24px 0 0" }}>Reroll sixes using Fate</Button>
-							: null
-						}
+							: null}
 
 						{isOpenEnded && result.failures > 0 && !result.usedFate
 							? <Button variant="outlined" size="medium" onClick={() => rerollFailure(result.dice)} sx={{ margin: "6px 0 0" }}>Reroll a single failure using Fate</Button>
-							: null
-						}
+							: null}
 					</Grid>
 
 					<Grid item xs={3} sm={1}>
 						{getTest(result)}
 					</Grid>
 				</GenericGrid>
-				: null
-			}
+				: null}
 		</Fragment>
 	);
 }

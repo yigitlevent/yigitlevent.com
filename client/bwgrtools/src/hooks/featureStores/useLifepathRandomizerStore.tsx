@@ -52,7 +52,7 @@ export const useLifepathRandomizerStore = create<LifepathRandomizerState>()(
 			},
 			randomizerToggleNoDuplicates: () => {
 				set(produce<LifepathRandomizerState>((state) => {
-					state.noDuplicates != state.noDuplicates;
+					state.noDuplicates !== state.noDuplicates;
 				}));
 			}
 		})

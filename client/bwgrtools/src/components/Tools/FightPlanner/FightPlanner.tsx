@@ -1,32 +1,29 @@
-import { Fragment, useState } from "react";
-
-import Typography from "@mui/material/Typography";
-import IconButton from "@mui/material/IconButton";
-import FormControl from "@mui/material/FormControl";
-import InputLabel from "@mui/material/InputLabel";
-import Select from "@mui/material/Select";
-import MenuItem from "@mui/material/MenuItem";
-import Grid from "@mui/material/Grid";
-import Button from "@mui/material/Button";
-import Divider from "@mui/material/Divider";
-import TextField from "@mui/material/TextField";
-import ListSubheader from "@mui/material/ListSubheader";
-
 import DeleteOutline from "@mui/icons-material/DeleteOutline";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import Button from "@mui/material/Button";
+import Divider from "@mui/material/Divider";
+import FormControl from "@mui/material/FormControl";
+import Grid from "@mui/material/Grid";
+import IconButton from "@mui/material/IconButton";
+import InputLabel from "@mui/material/InputLabel";
+import ListSubheader from "@mui/material/ListSubheader";
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
+import { Fragment, useState } from "react";
 
+import { FightPlannerActionDetails } from "./FightActionDetails";
 import { useRulesetStore } from "../../../hooks/apiStores/useRulesetStore";
 import { useFightPlannerStore } from "../../../hooks/featureStores/useFightPlannerStore";
 import { GroupBy } from "../../../utils/misc";
-
-import { FightPlannerActionDetails } from "./FightActionDetails";
 import { GenericGrid } from "../../Shared/Grids";
 
 
-export function FightPlanner() {
+export function FightPlanner(): JSX.Element {
 	const { fightActions } = useRulesetStore();
 	const groupedActions = GroupBy(fightActions, a => a.group[1]);
 
@@ -58,9 +55,12 @@ export function FightPlanner() {
 				<Grid item xs={4} sm={2} md={1}>
 					<FormControl fullWidth variant="standard">
 						<InputLabel>Volley</InputLabel>
+
 						<Select label="Volley" value={volleyIndex} onChange={(e) => changeVolleyIndex(parseInt(e.target.value as string))}>
 							<MenuItem value={0}>Volley 1</MenuItem>
+
 							<MenuItem value={1}>Volley 2</MenuItem>
+
 							<MenuItem value={2}>Volley 3</MenuItem>
 						</Select>
 					</FormControl>
@@ -69,6 +69,7 @@ export function FightPlanner() {
 				<Grid item xs={4} sm={2} md={1}>
 					<FormControl fullWidth variant="standard">
 						<InputLabel>Action</InputLabel>
+
 						<Select label="Action" value={selectedAction} onChange={(e) => changeSelectedAction(e.target.value)}>
 							{Object.keys(groupedActions).map((groupKey, groupIndex) => {
 								const elements = [
@@ -89,12 +90,12 @@ export function FightPlanner() {
 			</GenericGrid>
 
 			<GenericGrid columns={1}>
-				{actions.map((action, volleyIndex) =>
+				{actions.map((action, volleyIndex) => (
 					<Grid item xs={1} key={volleyIndex}>
 						<Typography variant="h5" sx={{ padding: "6px 10px" }}>Volley {volleyIndex + 1}</Typography>
 
 						{action.length > 0
-							? action.map((action, actionIndex) =>
+							? action.map((action, actionIndex) => (
 								<Grid key={actionIndex} container columns={3} justifyContent="space-between" sx={{ padding: "10px" }}>
 									<Grid item xs={3} sm={2} md={2}>
 										<Typography variant="h6" sx={{ display: "inline-block" }}>
@@ -106,9 +107,11 @@ export function FightPlanner() {
 										<IconButton size="small" sx={{ margin: "0 8px" }} onClick={() => toggleActionDetails(volleyIndex, actionIndex)}>
 											{action.open ? <KeyboardArrowDownIcon /> : <KeyboardArrowUpIcon />}
 										</IconButton>
+
 										<IconButton size="small" sx={{ margin: "0 8px" }} onClick={() => toggleActionVisibility(volleyIndex, actionIndex)}>
 											{action.visible ? <VisibilityIcon /> : <VisibilityOffIcon />}
 										</IconButton>
+
 										<IconButton size="small" sx={{ margin: "0 8px" }} onClick={() => deleteAction(volleyIndex, actionIndex)}>
 											<DeleteOutline />
 										</IconButton>
@@ -121,9 +124,10 @@ export function FightPlanner() {
 									{action.visible && action.open ? <FightPlannerActionDetails action={action} /> : null}
 								</Grid>
 							)
-							: <Typography variant="body2">No action selected</Typography>
-						}
+							)
+							: <Typography variant="body2">No action selected</Typography>}
 					</Grid>
+				)
 				)}
 			</GenericGrid>
 		</Fragment >

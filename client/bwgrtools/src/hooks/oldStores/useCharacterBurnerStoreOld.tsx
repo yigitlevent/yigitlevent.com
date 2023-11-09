@@ -36,7 +36,6 @@ interface CharacterBurnerStateOld {
 	getResourceRemainings: () => ResourceRemaining;
 
 
-
 	changeStatShade: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, statId: AbilityId) => void;
 	changeStatExponent: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, statId: AbilityId, change: 1 | -1) => void;
 
@@ -74,7 +73,6 @@ export const useCharacterBurnerStoreOld = create<CharacterBurnerStateOld>()(
 
 
 			/*
-			
 			
 			
 			calculateTotals: (chosenLifepaths: LifepathOld[]) => {

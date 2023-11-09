@@ -1,29 +1,27 @@
-import { Fragment, useCallback, useState } from "react";
-
-import Grid from "@mui/material/Grid";
-import TextField from "@mui/material/TextField";
+import Alert from "@mui/material/Alert";
 import Button from "@mui/material/Button";
+import Checkbox from "@mui/material/Checkbox";
+import Divider from "@mui/material/Divider";
+import FormControl from "@mui/material/FormControl";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Grid from "@mui/material/Grid";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
 import Modal from "@mui/material/Modal";
 import Paper from "@mui/material/Paper";
-import Divider from "@mui/material/Divider";
-import Typography from "@mui/material/Typography";
-import FormControl from "@mui/material/FormControl";
-import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
-import MenuItem from "@mui/material/MenuItem";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import Stack from "@mui/material/Stack";
-import Alert from "@mui/material/Alert";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
+import { Fragment, useCallback, useState } from "react";
 
-import { useCharacterBurnerStoreOld } from "../../../../hooks/oldStores/useCharacterBurnerStoreOld";
-import { useLifepathRandomizerStore } from "../../../../hooks/featureStores/useLifepathRandomizerStore";
-import { FilterLifepaths } from "../../../../utils/lifepathFilter";
-import { RandomNumber } from "../../../../utils/misc";
-
-import { GenericGrid } from "../../../Shared/Grids";
 import { RandomLifepathsBasics } from "./RandomLifepathsModal/RandomLifepathsBasics";
 import { RandomLifepathsLists } from "./RandomLifepathsModal/RandomLifepathsLists";
+import { useLifepathRandomizerStore } from "../../../../hooks/featureStores/useLifepathRandomizerStore";
+import { useCharacterBurnerStoreOld } from "../../../../hooks/oldStores/useCharacterBurnerStoreOld";
+import { FilterLifepaths } from "../../../../utils/lifepathFilter";
+import { RandomNumber } from "../../../../utils/misc";
+import { GenericGrid } from "../../../Shared/Grids";
 
 
 export function RandomLifepathsModal({ openRl, openRlModal }: { openRl: boolean; openRlModal: (open: boolean) => void; }) {
@@ -114,7 +112,6 @@ export function RandomLifepathsModal({ openRl, openRlModal }: { openRl: boolean;
 							</Select>
 						</FormControl>
 					</Grid>
-
 					<Grid item xs={7} sm={4} md={1}>
 						<TextField
 							label="Max Leads"
@@ -125,7 +122,6 @@ export function RandomLifepathsModal({ openRl, openRlModal }: { openRl: boolean;
 							variant="standard"
 						/>
 					</Grid>
-
 					<Grid item xs={7} sm={2} md={1}>
 						<TextField
 							label="Min Lifepaths"
@@ -136,7 +132,6 @@ export function RandomLifepathsModal({ openRl, openRlModal }: { openRl: boolean;
 							variant="standard"
 						/>
 					</Grid>
-
 					<Grid item xs={7} sm={2} md={1}>
 						<TextField
 							label="Max Lifepaths"
@@ -147,7 +142,6 @@ export function RandomLifepathsModal({ openRl, openRlModal }: { openRl: boolean;
 							variant="standard"
 						/>
 					</Grid>
-
 					<Grid item xs={7} sm={3} md={2}>
 						<FormControlLabel
 							label="No Duplicates"
@@ -155,57 +149,45 @@ export function RandomLifepathsModal({ openRl, openRlModal }: { openRl: boolean;
 							control={<Checkbox checked={noDuplicates} onChange={randomizerToggleNoDuplicates} />}
 						/>
 					</Grid>
-
 					<Grid item xs={7}>
 						<Alert severity="info">Random lifepath selection does not consider the gender, lifepaths with variable ages, and emotional attribute limits. Please make sure to check those requirements seperately.</Alert>
 					</Grid>
-
 					<Grid item xs={7}>
 						<Button variant="outlined" onClick={() => createRandom()} fullWidth>Generate Random Character</Button>
 					</Grid>
 				</GenericGrid>
-
 				{chosenLifepaths.length > 0 && totals
 					? <GenericGrid columns={2}>
 						{triedTooMuch
 							? <Grid item xs={2}>
 								<Alert severity="warning">There might be lifepaths missing because of the chosen options.</Alert>
 							</Grid>
-							: <Fragment></Fragment>
-						}
-
+							: <Fragment />}
 						<Grid item xs={2} md={1}>
 							<Divider sx={{ margin: "0 0 6px" }}>
 								<Typography>Lifepaths</Typography>
 							</Divider>
-
 							<Stack spacing={2}>
 								{chosenLifepaths.map((v, i) =>
 									<Paper key={i}>{i + 1}. {`${v.stock}➞${v.setting}➞${v.name}`}</Paper>
 								)}
 							</Stack>
-
 							<Divider sx={{ margin: "30px 0 6px" }}>
 								<Typography>Basic Information</Typography>
 							</Divider>
-
 							<RandomLifepathsBasics />
 						</Grid>
-
 						<Grid item xs={2} md={1}>
 							<Divider sx={{ margin: "0 0 6px" }}>
 								<Typography>Skills, Traits, and Misc</Typography>
 							</Divider>
-
 							<RandomLifepathsLists totals={totals} />
 						</Grid>
-
 						<Grid item xs={2}>
 							<Button variant="outlined" onClick={() => transferCharacter()} fullWidth>I like this Character</Button>
 						</Grid>
 					</GenericGrid>
-					: null
-				}
+					: null}
 			</Paper>
 		</Modal>
 	);

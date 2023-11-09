@@ -1,79 +1,84 @@
-import produce from "immer";
+import { produce } from "immer";
 import { create } from "zustand";
-import { devtools } from "zustand/middleware";
+import { NamedSet, devtools } from "zustand/middleware";
 
-import { Clamp, Pairwise } from "../../utils/misc";
+import { LifepathState, LifepathFunctions, LifepathProperties } from "./CharacterBurnerSlices/CharacterBurnerLifepaths";
+import { SkillState, SkillFunctions, SkillProperties } from "./CharacterBurnerSlices/CharacterBurnerSkills";
+import { TraitState, TraitFunctions, TraitProperties } from "./CharacterBurnerSlices/CharacterBurnerTraits";
+import { Clamp, GetAverage, Pairwise } from "../../utils/misc";
 import { UniqueArray } from "../../utils/uniqueArray";
 import { useRulesetStore } from "../apiStores/useRulesetStore";
 
 
-interface CharacterBurnerProperties {
-	stock: [id: StockId, name: string];
-	concept: string;
-	name: string;
-	gender: string;
+export type CharacterBurnerState =
+	{
+		stock: [id: StockId, name: string];
+		concept: string;
+		name: string;
+		gender: string;
 
-	beliefs: { name: string, belief: string; }[];
-	instincts: { name: string, instinct: string; }[];
+		beliefs: { name: string, belief: string; }[];
+		instincts: { name: string, instinct: string; }[];
 
-	availableLifepaths: Lifepath[];
-	lifepaths: Lifepath[];
+		stats: { [key: string]: { poolType: "Mental" | "Physical", shadeShifted: boolean, poolSpent: number; eitherSpent: number; }; };
 
-	stats: { [key: string]: { poolType: "Mental" | "Physical", shadeShifted: boolean, poolSpent: number; eitherSpent: number; }; };
+		attributes: UniqueArray<AbilityId, CharacterAttribute>;
 
-	skills: UniqueArray<SkillId, CharacterSkill>;
-	traits: UniqueArray<TraitId, CharacterTrait>;
-	attributes: UniqueArray<AbilityId, CharacterAttribute>;
+		resources: CharacterResource[];
+		questions: CharacterQuestion[];
+		stockSpecific: CharacterStockSpecific;
+		limits: CharacterStockLimits;
 
-	questions: CharacterQuestions;
-	stockSpecific: CharacterStockSpecific;
-	limits: CharacterStockLimits;
-}
+		reset: (stock?: [id: StockId, name: string]) => void;
 
-interface CharacterBurnerMethods {
-	reset: (stock?: [id: StockId, name: string]) => void;
+		setName: (name: string) => void;
+		setConcept: (concept: string) => void;
+		setGender: (gender: string) => void;
 
-	addLifepath: (lifepath: Lifepath) => void;
-	removeLastLifepath: () => void;
+		shiftStatShade: (statName: string) => void;
+		modifyStatExponent: (statName: string, decrease?: boolean) => void;
+		shiftAttributeShade: (attributeId: AbilityId) => void;
 
-	setName: (name: string) => void;
-	setConcept: (concept: string) => void;
-	setGender: (gender: string) => void;
+		getLeadCount: () => number;
+		getAge: () => number;
+		getResourcePoints: () => number;
+		getAgePool: () => { minAge: number; mentalPool: number; physicalPool: number; };
+		getMentalPool: () => { total: number, spent: number; remaining: number; };
+		getPhysicalPool: () => { total: number, spent: number; remaining: number; };
+		getEitherPool: () => { total: number, spent: number; remaining: number; };
+		getStat: (statName: string) => { shade: Shades, exponent: number; };
+		getMortalWound: () => AbilityPoints;
+		getReflexes: () => AbilityPoints;
+		getHealth: () => AbilityPoints;
+		getSteel: () => AbilityPoints;
+		getHesitation: () => AbilityPoints;
+		getGreed: () => AbilityPoints;
+		getGriefOrSpite: (isSpite: boolean) => AbilityPoints;
+		getFaith: () => AbilityPoints;
+		getFaithInDeadGods: () => AbilityPoints;
+		getHatred: () => AbilityPoints;
+		getVoidEmbrace: () => AbilityPoints;
+		getAncestralTaint: () => AbilityPoints;
+		getCorruption: () => AbilityPoints;
+		getResources: () => AbilityPoints;
+		getCircles: () => AbilityPoints;
+		getAttribute: (attributeId: AbilityId) => AbilityPoints;
+		hasAttribute: (id: AbilityId) => boolean;
+		hasSetting: (id: SettingId) => number;
+		hasQuestionTrue: (id: QuestionId) => boolean;
 
-	shiftStatShade: (statName: string) => void;
-	modifyStatExponent: (statName: string, decrease?: boolean) => void;
-	openSkill: (skillId: SkillId) => void;
-	modifySkillExponent: (skillId: SkillId, decrease?: boolean) => void;
-	openTrait: (traitId: TraitId) => void;
+		hasAttributeByName: (name: string) => boolean;
+		hasSettingByName: (name: string) => number;
+		hasQuestionTrueByName: (name: string) => boolean;
 
-	getLeadCount: () => number;
-	getAge: () => number;
-	getResourcePoints: () => number;
-	getAgePool: () => { minAge: number; mentalPool: number; physicalPool: number; };
-	getMentalPool: () => { total: number, spent: number; remaining: number; };
-	getPhysicalPool: () => { total: number, spent: number; remaining: number; };
-	getEitherPool: () => { total: number, spent: number; remaining: number; };
-	getStat: (statName: string) => { shade: ShadesList, exponent: number; };
-	getSkillPools: () => { general: Points; lifepath: Points; };
-	getSkill: (skillId: SkillId) => { shade: ShadesList; exponent: number; };
-	getTraitPools: () => Points;
-	getTrait: (traitId: TraitId) => { open: boolean; };
+		updateAttributes: () => void;
+	} &
+	LifepathState &
+	SkillState &
+	TraitState;
 
-	updateAvailableLifepaths: () => Lifepath[];
 
-	hasSkillOpen: (id: SkillId) => boolean;
-	hasTraitOpen: (id: TraitId) => boolean;
-	hasAttribute: (id: AbilityId) => boolean;
-	hasLifepath: (id: LifepathId) => number;
-	hasSetting: (id: SettingId) => number;
-
-	updateSkills: () => void;
-	updateTraits: () => void;
-}
-
-type CharacterBurnerState = CharacterBurnerProperties & CharacterBurnerMethods;
-
-const InitialState: CharacterBurnerProperties = {
+export const InitialState: NonFunctionPropertyNames<CharacterBurnerState> = {
 	stock: [0 as unknown as StockId, "Dwarf"] as [id: StockId, name: string],
 	concept: "",
 	name: "",
@@ -92,9 +97,6 @@ const InitialState: CharacterBurnerProperties = {
 		{ name: "Special Instinct", instinct: "" }
 	],
 
-	availableLifepaths: [],
-	lifepaths: [],
-
 	stats: {
 		"Will": { poolType: "Mental", shadeShifted: false, poolSpent: 0, eitherSpent: 0 },
 		"Perception": { poolType: "Mental", shadeShifted: false, poolSpent: 0, eitherSpent: 0 },
@@ -104,11 +106,10 @@ const InitialState: CharacterBurnerProperties = {
 		"Speed": { poolType: "Physical", shadeShifted: false, poolSpent: 0, eitherSpent: 0 }
 	},
 
-	skills: new UniqueArray<SkillId, CharacterSkill>(),
-	traits: new UniqueArray<TraitId, CharacterTrait>(),
 	attributes: new UniqueArray<AbilityId, CharacterAttribute>(),
 
-	questions: {},
+	resources: [],
+	questions: [],
 	stockSpecific: {},
 	limits: {
 		beliefs: 3,
@@ -125,6 +126,12 @@ const InitialState: CharacterBurnerProperties = {
 	}
 };
 
+
+export interface BurnerFunc {
+	set: NamedSet<CharacterBurnerState>;
+	get: () => CharacterBurnerState;
+}
+
 export const useCharacterBurnerStore = create<CharacterBurnerState>()(
 	devtools((set, get) => ({
 		...InitialState,
@@ -134,26 +141,6 @@ export const useCharacterBurnerStore = create<CharacterBurnerState>()(
 			if (stock) init.stock = stock;
 			set(init);
 			get().updateAvailableLifepaths();
-		},
-
-		addLifepath: (lifepath: Lifepath) => {
-			set(produce<CharacterBurnerState>((state) => {
-				state.lifepaths.push(lifepath);
-			}));
-			const state = get();
-			state.updateAvailableLifepaths();
-			state.updateSkills();
-			state.updateTraits();
-		},
-
-		removeLastLifepath: () => {
-			set(produce<CharacterBurnerState>((state) => {
-				state.lifepaths = state.lifepaths.slice(0, state.lifepaths.length - 1);
-			}));
-			const state = get();
-			state.updateAvailableLifepaths();
-			state.updateSkills();
-			state.updateTraits();
 		},
 
 		setName: (name: string): void => { set({ name }); },
@@ -176,38 +163,54 @@ export const useCharacterBurnerStore = create<CharacterBurnerState>()(
 			}));
 		},
 
-		openSkill: (skillId: SkillId) => {
+		////////////////// LIFEPATHS //////////////////
+		...LifepathProperties,
+		addLifepath: (lifepath: Lifepath) => LifepathFunctions.Add({ get, set }, lifepath),
+		removeLastLifepath: () => LifepathFunctions.RemoveLast({ get, set }),
+		hasLifepath: (id: LifepathId): number => LifepathFunctions.Has({ get, set }, id),
+		hasAttributeByName: (name: string) => LifepathFunctions.HasByName({ get, set }, name),
+		updateAvailableLifepaths: () => LifepathFunctions.UpdateAvailable({ get, set }),
+
+		////////////////// SKILLS //////////////////
+		...SkillProperties,
+		openSkill: (skillId: SkillId) => SkillFunctions.SetOpen({ get, set }, skillId),
+		modifySkillExponent: (skillId: SkillId, decrease?: boolean) => SkillFunctions.SetExponent({ get, set }, skillId, decrease),
+		getSkillPools: () => SkillFunctions.GetPools({ set, get }),
+		getSkill: (skillId: SkillId) => SkillFunctions.GetSkill({ set, get }, skillId),
+		hasSkillOpen: (id: SkillId) => SkillFunctions.IsOpen({ get, set }, id),
+		hasSkillOpenByName: (name: string) => SkillFunctions.IsOpenByName({ get, set }, name),
+		/**
+		 * Updates the character's skills list.
+		 * It re-adds previously selected general skills, if they are not present in the lifepath skills list.
+		 * @remarks TODO: Repated lifepaths should be checked to determine the mandatory-ness.
+		**/
+		updateSkills: () => SkillFunctions.Update({ get, set }),
+
+		////////////////// TRAITS //////////////////
+		...TraitProperties,
+		openTrait: (traitId: TraitId) => TraitFunctions.SetOpen({ get, set }, traitId),
+		getTrait: (traitId: TraitId): { open: boolean; } => TraitFunctions.GetTrait({ get, set }, traitId),
+		getTraitPools: (): Points => TraitFunctions.GetPools({ get, set }),
+		hasTraitOpen: (id: TraitId) => TraitFunctions.IsOpen({ get, set }, id),
+		hasTraitOpenByName: (name: string) => TraitFunctions.IsOpenByName({ get, set }, name),
+		/**
+		 * Updates the character's traits list.
+		 * It preserves the common traits, and re-adds previously selected general traits, if they are not present in the lifepath trait list.
+		 * @remarks TODO: Repated lifepaths should be checked to determine the mandatory-ness.
+		**/
+		updateTraits: () => TraitFunctions.Update({ get, set }),
+
+
+		shiftAttributeShade: (attributeId: AbilityId) => {
 			set(produce<CharacterBurnerState>((state) => {
-				// TODO: Check remaining counts, use either pool too
-				const charSkill = state.skills.find(skillId);
-				if (charSkill) {
-					charSkill.isOpen = !charSkill.isOpen;
-					state.skills = new UniqueArray(state.skills.add(charSkill).items);
+				const charAttribute = state.attributes.find(attributeId);
+				if (charAttribute) {
+					charAttribute.shadeShifted = !charAttribute.shadeShifted;
+					state.attributes = new UniqueArray(state.attributes.add(charAttribute).items);
 				}
 			}));
 		},
 
-		modifySkillExponent: (skillId: SkillId, decrease?: boolean) => {
-			set(produce<CharacterBurnerState>((state) => {
-				// TODO: Check remaining counts, use either pool too
-				const charSkill = state.skills.find(skillId);
-				if (charSkill) {
-					charSkill.advancement.lifepath = Clamp(charSkill.advancement.lifepath + (decrease ? -1 : 1), 0, 10);
-					state.skills = new UniqueArray(state.skills.add(charSkill).items);
-				}
-			}));
-		},
-
-		openTrait: (traitId: TraitId) => {
-			set(produce<CharacterBurnerState>((state) => {
-				// TODO: Check remaining counts, use either pool too
-				const charTrait = state.traits.find(traitId);
-				if (charTrait) {
-					charTrait.isOpen = !charTrait.isOpen;
-					state.traits = new UniqueArray(state.traits.add(charTrait).items);
-				}
-			}));
-		},
 
 		getLeadCount: () => {
 			const state = get();
@@ -272,228 +275,414 @@ export const useCharacterBurnerStore = create<CharacterBurnerState>()(
 			return { total, spent, remaining: total - spent };
 		},
 
-		getStat: (statName: string): { shade: ShadesList; exponent: number; } => {
+		getStat: (statName: string): { shade: Shades; exponent: number; } => {
 			const state = get();
 			const shade = state.stats[statName].shadeShifted ? "G" : "B";
 			const exponent = state.stats[statName].eitherSpent + state.stats[statName].poolSpent + (state.stats[statName].shadeShifted ? -5 : 0);
 			return { shade, exponent };
 		},
 
-		getSkillPools: (): { general: Points; lifepath: Points; } => {
+		// TODO: if shade shifted, remove points from exponent
+		getMortalWound: (): AbilityPoints => {
 			const state = get();
+			const power = state.getStat("Power");
+			const forte = state.getStat("Forte");
 
-			const gpTotal = state.lifepaths.reduce((pv, cv) => pv + cv.pools.generalSkillPool, 0);
-			const lpTotal = state.lifepaths.reduce((pv, cv) => pv + cv.pools.lifepathSkillPool, 0);
+			const shades = [power.shade, forte.shade];
+			const roots = [power.exponent, forte.exponent];
 
-			let gpSpent = 0;
-			let lpSpent = 0;
+			if (shades.some(v => v === "G") && shades.some(v => v === "B")) { roots.push(2); }
 
-			state.skills.forEach(skill => {
-				if (skill.isOpen) {
-					if (skill.type === "General") {
-						if (skill.isDoubleOpen) gpSpent += 2;
-						else if (!skill.isDoubleOpen) gpSpent += 1;
-						gpSpent += skill.advancement.general;
-					}
-					else {
-						// TODO: maybe gp spent for lp skill
-						if (skill.isDoubleOpen) lpSpent += 2;
-						else if (!skill.isDoubleOpen) lpSpent += 1;
-						lpSpent += skill.advancement.lifepath;
-						gpSpent += skill.advancement.general;
-					}
-				}
-			});
-
-			return {
-				general: { total: gpTotal, spent: gpSpent, remaining: gpTotal - gpSpent },
-				lifepath: { total: lpTotal, spent: lpSpent, remaining: lpTotal - lpSpent }
-			};
+			return { shade: shades.every(v => v === "G") ? "G" : "B", exponent: GetAverage(roots) };
 		},
 
-		getSkill: (skillId: SkillId): { shade: ShadesList; exponent: number; } => {
-			const { getSkill } = useRulesetStore.getState();
+		// TODO: if shade shifted, remove points from exponent
+		getReflexes: (): AbilityPoints => {
 			const state = get();
+			const perception = state.getStat("Perception");
+			const agility = state.getStat("Ability");
+			const speed = state.getStat("Speed");
 
-			const charSkill = state.skills.find(skillId);
+			const shades = [perception.shade, agility.shade, speed.shade];
+			const roots = [perception.exponent, agility.exponent, speed.exponent];
 
-			let shade: ShadesList = "B";
-			// TODO: exponent starts from root average
-			let exponent: number = 0;
+			if (shades.some(v => v === "G") && shades.some(v => v === "B")) { roots[0] += 2; }
 
-			if (charSkill && state.hasSkillOpen(skillId)) {
-				exponent = charSkill.advancement.general + charSkill.advancement.lifepath;
-				const skillRoots = getSkill(skillId).roots;
-				if (skillRoots) shade = skillRoots.map(s => state.getStat(s[1]).shade).every(v => v === "G") ? "G" : "B";
+			return { shade: shades.every(v => v === "G") ? "G" : "B", exponent: Math.floor(GetAverage(roots)) };
+		},
+
+		// TODO: if shade shifted, remove points from exponent
+		getHealth: (): AbilityPoints => {
+			const state = get();
+			const will = state.getStat("Will");
+			const forte = state.getStat("Forte");
+
+			const shades = [will.shade, forte.shade];
+			const roots = [will.exponent, forte.exponent];
+			if (shades.some(v => v === "G") && shades.some(v => v === "B")) { roots.push(2); }
+
+			let bonus = 0;
+			if (state.hasQuestionTrueByName("FILTH")) bonus -= 1;
+			if (state.hasQuestionTrueByName("SICKLY")) bonus -= 1;
+			if (state.hasQuestionTrueByName("WOUND")) bonus -= 1;
+			if (state.hasQuestionTrueByName("TORTURE") && state.hasQuestionTrueByName("ENSLAVED")) bonus -= 1;
+			if (["Dwarf", "Elf", "Orc"].includes(state.stock[1])) bonus += 1;
+			if (state.hasQuestionTrueByName("ACTIVE")) bonus += 1;
+			if (state.hasQuestionTrueByName("HAPPY")) bonus += 1;
+
+			return { shade: shades.every(v => v === "G") ? "G" : "B", exponent: Math.floor(GetAverage(roots)) + bonus };
+		},
+
+		// TODO: if shade shifted, remove points from exponent
+		getSteel: (): AbilityPoints => {
+			const state = get();
+			const will = state.getStat("Will");
+			const forte = state.getStat("Forte");
+
+			let bonus = 0;
+			if (state.hasQuestionTrueByName("SOLDIER")) bonus += 1;
+			if (state.hasQuestionTrueByName("WOUND") && state.hasQuestionTrueByName("SOLDIER")) bonus += 1;
+			if (state.hasQuestionTrueByName("WOUND") && !state.hasQuestionTrueByName("SOLDIER")) bonus -= 1;
+			if (state.hasQuestionTrueByName("KILLER")) bonus += 1;
+			if (state.hasQuestionTrueByName("TORTURED") || state.hasQuestionTrueByName("ENSLAVED") || state.hasQuestionTrueByName("BEATEN")) {
+				if (will.exponent >= 5) bonus += 1;
+				if (will.exponent <= 3) bonus -= 1;
+			}
+			if (state.hasQuestionTrueByName("SHELTER")) bonus -= 1;
+			if (state.hasQuestionTrueByName("COMPETITIVE")) bonus += 1;
+			if (state.hasQuestionTrueByName("BIRTH")) bonus += 1;
+			if (state.hasQuestionTrueByName("GIFTED")) bonus += 1;
+			if (will.exponent >= 7) bonus += 2;
+			else if (will.exponent >= 5) bonus += 1;
+			if (forte.exponent >= 6) bonus += 2;
+
+			return { shade: "B", exponent: 3 + bonus };
+		},
+
+		// TODO: if shade shifted, remove points from exponent
+		getHesitation: (): AbilityPoints => {
+			const state = get();
+			const will = state.getStat("Will");
+
+			return { shade: "B", exponent: 10 - will.exponent };
+		},
+
+		// TODO: if shade shifted, remove points from exponent
+		getGreed: (): AbilityPoints => {
+			const state = get();
+			const will = state.getStat("Will");
+			const age = state.getAge();
+			const resourcePoints = state.getResourcePoints();
+
+			const lifepathsToCheck = ["Trader", "Mask Bearer", "Master of Arches", "Master of Forges", "Master Engraver", "Treasurer", "Quartermaster", "Seneschal", "Prince"];
+
+			const relationships = Object.values(state.resources).filter(v => v.type[1] === "Relationship");
+
+			let bonus = 0;
+			if (will.exponent <= 4) bonus += 1;
+			bonus += Math.floor(resourcePoints / 60);
+			bonus += state.lifepaths.filter(v => lifepathsToCheck.includes(v.name)).length;
+
+			if (state.hasQuestionTrueByName("COVET")) bonus += 1;
+			if (state.hasQuestionTrueByName("STOLE")) bonus += 1;
+			if (state.hasQuestionTrueByName("STOLEN")) bonus += 1;
+			if (state.hasQuestionTrueByName("MASTERCRAFT")) bonus += 1;
+			if (state.hasQuestionTrueByName("POSSESSION")) bonus += 1;
+
+			if (age > 400) bonus += 2;
+			else if (age > 200) bonus += 1;
+			bonus += -1 * relationships.filter(v => v.modifiers.includes("Romantic")).length;
+			bonus += 1 * relationships.filter(v => v.modifiers.includes("Hateful")).length;
+			bonus += 2 * relationships.filter(v => v.modifiers.includes("Immediate family") && v.modifiers.includes("Hateful")).length;
+			if (state.hasTraitOpenByName("Virtuous")) bonus += 1;
+
+			return { shade: "B", exponent: bonus };
+		},
+
+		// TODO: if shade shifted, remove points from exponent
+		getGriefOrSpite: (isSpite: boolean): AbilityPoints => {
+			const state = get();
+			const perception = state.getStat("Perception");
+			const age = state.getAge();
+			const steel = state.getSteel();
+
+			const lifepathsToCheck = ["Lancer", "Lieutenant", "Captain"];
+			const lifepathsToCheck2 = ["Lord Protector", "Soother"];
+			const lifepathsToCheck3 = ["Loremaster", "Adjutant", "Althing"];
+
+			const knowsLament
+				= state.skills.filter(v => v.name.toLowerCase().includes("lament") && v.isOpen);
+
+			let bonus = 0;
+			if (state.hasLifepathByName("Protector")) bonus += 1;
+			if (state.hasLifepathByName("Born Etharch")) bonus += 1;
+			if (state.hasLifepathByName("Elder")) bonus += 1;
+			if (lifepathsToCheck.some(v => state.hasLifepathByName(v))) bonus += 1;
+			if (lifepathsToCheck2.some(v => state.hasLifepathByName(v))) bonus += 1;
+			if (lifepathsToCheck3.some(v => state.hasLifepathByName(v))) bonus += 1;
+			bonus += knowsLament ? 0 : 1;
+
+			if (state.hasQuestionTrueByName("TRAGEDY")) bonus += 1;
+			if (state.hasQuestionTrueByName("OUTSIDER")) bonus += 1;
+
+			if (steel.exponent > 5) bonus += (steel.exponent - 5);
+			if (perception.exponent > 5) bonus += 1;
+			if (age > 1000) bonus += 3;
+			else if (age > 750) bonus += 2;
+			else if (age > 500) bonus += 1;
+
+			if (isSpite) {
+				const traitsToCheck = ["Slayer", "Exile", "Feral", "Murderous", "Saturnine", "Femme Fatale/Homme Fatal", "Cold", "Bitter"];
+				if (traitsToCheck.some(v => state.traits.filter(t => t.name === v && t.isOpen))) bonus += 1;
+				const bitterReminders = Object.values(state.resources).filter(v => v.name === "Bitter Reminder");
+				bonus += bitterReminders.length > 0 ? Math.floor(bitterReminders.map(v => v.cost).reduce((a, b) => a + b) / 10) : 0;
+
+				if (state.hasQuestionTrueByName("OUTSIDER")) bonus += 1;
+				if (state.hasQuestionTrueByName("LOVESICK")) bonus += 1;
+				if (state.hasQuestionTrueByName("ABANDON")) bonus += 1;
+				if (state.hasQuestionTrueByName("ABUSED")) bonus += 1;
+				if (state.hasQuestionTrueByName("RESPECT")) bonus -= 1;
+				if (state.hasQuestionTrueByName("LOVE")) bonus -= 1;
 			}
 
-			return { shade, exponent };
+			return { shade: "B", exponent: bonus };
 		},
 
-		getTraitPools: (): Points => {
-			const { getTrait } = useRulesetStore.getState();
+		// TODO: if shade shifted, remove points from exponent
+		getFaith: (): AbilityPoints => {
 			const state = get();
 
-			const tTotal = state.lifepaths.reduce((pv, cv) => pv + cv.pools.traitPool, 0);
-			let tSpent = 0;
+			let bonus = 0;
+			if (state.hasQuestionTrueByName("TRUST")) bonus += 1;
+			if (state.hasQuestionTrueByName("CONSULT")) bonus += 1;
+			if (state.hasQuestionTrueByName("SERVE")) bonus += 1;
 
-			state.traits.forEach(trait => {
-				if (trait.isOpen) {
-					if (trait.type === "Mandatory" || trait.type === "Lifepath") tSpent += 1;
-					else if (trait.type === "General") tSpent += getTrait(trait.id).cost;
-				}
-			});
-
-			return { total: tTotal, spent: tSpent, remaining: tTotal - tSpent };
+			return { shade: "B", exponent: 3 + bonus };
 		},
 
-		getTrait: (traitId: TraitId): { open: boolean; } => {
+		// TODO: if shade shifted, remove points from exponent
+		getFaithInDeadGods: (): AbilityPoints => {
 			const state = get();
-			const charTrait = state.traits.find(traitId);
-			const open = (charTrait && state.hasTraitOpen(traitId)) ? true : false;
-			return { open };
+
+			let bonus = 0;
+			if (state.hasQuestionTrueByName("DEADTRUST")) bonus += 1;
+			if (state.hasQuestionTrueByName("DEADCONSULT")) bonus += 1;
+			if (state.hasQuestionTrueByName("DEADSERVE")) bonus += 1;
+
+			return { shade: "B", exponent: 3 + bonus };
 		},
 
-		updateAvailableLifepaths: () => {
-			const { lifepaths } = useRulesetStore.getState();
+		// TODO: if shade shifted, remove points from exponent
+		getHatred: (): AbilityPoints => {
+			const state = get();
+			const steel = state.getSteel();
+			const perception = state.getStat("Perception");
+			const will = state.getStat("Will");
 
+			let bonus = 0;
+			bonus += state.stockSpecific.brutalLife.traits.filter(v => v !== undefined && v !== null).length;
+			if (state.hasQuestionTrueByName("WOUND")) bonus += 1;
+			if (state.hasQuestionTrueByName("TORTURE")) bonus += 1;
+			if (state.hasQuestionTrueByName("SLAVE")) bonus += 1;
+			if (state.hasQuestionTrueByName("FRATRICIDE")) bonus += 1;
+			if (state.hasQuestionTrueByName("HOBGOBLIN")) bonus += 1;
+			if (will.exponent <= 2) bonus + 1;
+			if (steel.exponent >= 5) bonus + 1;
+			if (perception.exponent >= 6) bonus + 1;
+
+			return { shade: "B", exponent: bonus };
+		},
+
+		// TODO: if shade shifted, remove points from exponent
+		getVoidEmbrace: (): AbilityPoints => {
 			const state = get();
 
-			if (state.lifepaths.length === 0) {
-				const bornLps = lifepaths.filter(lp => lp.flags.isBorn && state.stock[0] === lp.stock[0]);
+			let bonus = 0;
+			if (state.hasQuestionTrueByName("MASTER")) bonus += 1;
+			if (state.hasQuestionTrueByName("FATE")) bonus += 1;
+			if (state.hasQuestionTrueByName("WELLSPRING")) bonus += 1;
 
-				set(produce<CharacterBurnerState>((state) => {
-					state.availableLifepaths = lifepaths.filter(lp => lp.flags.isBorn && state.stock[0] === lp.stock[0]);
-				}));
+			return { shade: "B", exponent: 3 + bonus };
+		},
 
-				return bornLps;
-			}
+		// TODO: if shade shifted, remove points from exponent
+		getAncestralTaint: (): AbilityPoints => {
+			const state = get();
 
-			const checkRequirementBlock = (lifepath: Lifepath, block: LifepathRequirementBlock): boolean => {
-				const itemResults = block.items.map((item): boolean => {
-					// TODO: item.forCompanion
+			let bonus = 0;
+			if (state.hasTraitOpenByName("Ancestral Taint")) bonus += 1;
+			if (state.hasTraitOpenByName("Spirit Nose")) bonus += 1;
+			if (state.hasTraitOpenByName("Stink of the Ancient")) bonus += 1;
+			if (state.hasSkillOpenByName("Primal Bark")) bonus += 1;
+			if (state.hasSkillOpenByName("Ancestral Jaw")) bonus += 1;
+			if (state.hasSkillOpenByName("Grandfather's Song")) bonus += 1;
 
-					if ("isUnique" in item) return state.hasLifepath(lifepath.id) === 0;
-					else if ("isSettingEntry" in item) return true; // TODO: Check if any other lifepath from this setting chosen (true), else, other lifepaths should be disabled
-					else if ("minLpIndex" in item) return state.lifepaths.length >= item.minLpIndex;
-					else if ("maxLpIndex" in item) return state.lifepaths.length <= item.maxLpIndex;
-					else if ("minYears" in item) return state.getAge() >= item.minYears;
-					else if ("maxYears" in item) return state.getAge() <= item.maxYears;
-					else if ("gender" in item) return item.gender === state.gender;
-					else if ("oldestBy" in item) return true; // TODO: Implementable only by having the campaign 
-					else if ("attribute" in item) {
-						const exp = state.attributes.find(item.attribute[0])?.exponent;
-						if (item.min) return exp ? exp >= item.min : false;
-						else if (item.max) return exp ? exp <= item.max : false;
-						else return state.hasAttribute(item.attribute[0]);
+			return { shade: "B", exponent: bonus };
+		},
+
+		// TODO: if shade shifted, remove points from exponent
+		getCorruption: (): AbilityPoints => {
+			const state = get();
+
+			const spiritMarks = state.resources.filter(v => v.name === "Spirit Binding — Spirit Mark Levels");
+			const orders = state.resources.filter(v => v.name === "Summoning — Affiliated Order Levels");
+			let bonus = 0;
+			if (state.hasTraitOpenByName("Gifted")) bonus += 1;
+			if (state.hasTraitOpenByName("Faithful") || state.hasTraitOpenByName("Faith in Dead Gods")) bonus += 1;
+			if (state.hasTraitOpenByName("Chosen One")) bonus += 1;
+			bonus += spiritMarks.length > 0 ? spiritMarks.map(v => v.cost).reduce((a, b) => a + (b === 10 ? 1 : b === 25 ? 2 : 3), 0) : 0;
+			bonus += orders.length > 0 ? orders.map(v => v.cost).reduce((a, b) => a + (b === 10 ? 1 : b === 20 ? 2 : b === 25 ? 3 : 4), 0) : 0;
+			if (state.hasQuestionTrueByName("PRAY")) bonus += 1;
+			if (state.hasQuestionTrueByName("PACT")) bonus += 1;
+
+			return { shade: "B", exponent: bonus };
+		},
+
+		// TODO: if shade shifted, remove points from exponent
+		getResources: (): AbilityPoints => {
+			const state = get();
+
+			let bonus = 0;
+			const res = state.resources.filter(v => ["Property", "Reputation", "Affiliation"].includes(v.type[1]));
+			if (res.length > 0) { bonus += Math.floor(res.map(v => v.cost).reduce((a, b) => a + b) / 15); }
+
+			return { shade: "B", exponent: bonus };
+		},
+
+		// TODO: if shade shifted, remove points from exponent
+		getCircles: (): AbilityPoints => {
+			const state = get();
+			const will = state.getStat("Will");
+
+			let bonus = 0;
+			const res = state.resources.filter(v => ["Property", "Relationship"].includes(v.type[1]));
+			if (res.length > 0 && res.map(v => v.cost).reduce((a, b) => a + b) >= 50) { bonus += 1; }
+
+			return { shade: "B", exponent: Math.floor(will.exponent / 2) + bonus };
+		},
+
+		getAttribute: (attributeId: AbilityId): AbilityPoints => {
+			const state = get();
+			const attribute = state.attributes.find(attributeId);
+
+			if (attribute) {
+				const getAttributePoints = (attributeName: string): AbilityPoints => {
+					switch (attributeName) {
+						case "Mortal Wound":
+							return state.getMortalWound();
+						case "Reflexes":
+							return state.getReflexes();
+						case "Health":
+							return state.getHealth();
+						case "Steel":
+							return state.getSteel();
+						case "Hesitation":
+							return state.getHesitation();
+						case "Greed":
+							return state.getGreed();
+						case "Grief":
+						case "Spite":
+							return state.getGriefOrSpite(attribute.name === "Spite");
+						case "Faith":
+							return state.getFaith();
+						case "Faith in Dead Gods":
+							return state.getFaithInDeadGods();
+						case "Hatred":
+							return state.getHatred();
+						case "Void Embrace":
+							return state.getVoidEmbrace();
+						case "Ancestral Taint":
+							return state.getAncestralTaint();
+						case "Corruption":
+							return state.getCorruption();
+						case "Resources":
+							return state.getResources();
+						case "Circles":
+							return state.getCircles();
+						default:
+							throw `Unhandled Attribute id: ${attributeId} ${attribute?.name}`;
 					}
-					else if ("skill" in item) return state.hasSkillOpen(item.skill[0]);
-					else if ("trait" in item) return state.hasTraitOpen(item.trait[0]);
-					else if ("lifepath" in item) return state.hasLifepath(item.lifepath[0]) >= block.fulfillmentAmount;
-					else if ("setting" in item) return state.hasSetting(item.setting[0]) >= block.fulfillmentAmount;
-					else throw new Error(`Unidentified requirement block item: ${item}`);
-				});
+				};
 
-				if (block.logicType[1] === "OR") return itemResults.some(v => v === true);
-				else if (block.logicType[1] === "AND") return itemResults.every(v => v === true);
-				else if (block.logicType[1] === "NOT") return !itemResults.every(v => v === false);
-				return false;
-			};
+				attribute.shadeShifted;
+				const charAttr = getAttributePoints(attribute.name);
+				const isGreyByRoots = getAttributePoints(attribute.name).shade === "G";
 
-			const lastLifepath = state.lifepaths[state.lifepaths.length - 1];
-			const possibleSettingIds = lastLifepath.leads ? [lastLifepath.setting[0], ...lastLifepath.leads] : [lastLifepath.setting[0]];
-			const possibleLifepaths =
-				possibleSettingIds
-					.map(settingId => lifepaths.filter(x => state.stock[0] === x.stock[0] && x.setting[0] === settingId && x.flags.isBorn === false))
-					.flat()
-					.filter(lifepath => {
-						if (lifepath.requirements) {
-							const blockResults = lifepath.requirements.map(block => ({ mustFulfill: block.mustFulfill, result: checkRequirementBlock(lifepath, block) }));
-							const musts = blockResults.every(v => v.mustFulfill && v.result);
-							const atLeastOne = blockResults.some(v => v.result);
-							return musts && atLeastOne;
-						}
-						return true;
-					});
-
-			set(produce<CharacterBurnerState>((state) => {
-				state.availableLifepaths = possibleLifepaths;
-			}));
-
-			return possibleLifepaths;
+				return {
+					shade: attribute.shadeShifted || isGreyByRoots ? "G" : "B",
+					exponent: charAttr.exponent - (attribute.shadeShifted ? 5 : 0)
+				};
+			}
+			else throw `Cannot find attribute with id: ${attributeId}`;
 		},
 
-		hasSkillOpen: (id: SkillId) => {
-			return get().skills.exists(id, "isOpen", true);
-		},
-
-		hasTraitOpen: (id: TraitId) => {
-			return get().traits.exists(id, "isOpen", true);
-		},
 
 		hasAttribute: (id: AbilityId) => {
 			return get().attributes.has(id);
 		},
 
-		hasLifepath: (id: LifepathId): number => {
-			return get().lifepaths.filter(v => v.id === id).length;
-		},
 
 		hasSetting: (id: SettingId): number => {
 			return get().lifepaths.filter(v => v.setting[0] === id).length;
 		},
 
-		updateSkills: () => {
-			const { getSkill } = useRulesetStore.getState();
-			const state = get();
-
-			const skills = state.lifepaths.map(lp => {
-				return lp.skills ? lp.skills.map((sk, i) => {
-					const skill = getSkill(sk);
-					const isMandatory = (i === 0);
-					// TODO: Repeat lifepaths also should be checked
-					// TODO: General skills should be kept
-					const entry: CharacterSkill = {
-						id: skill.id,
-						name: skill.name,
-						type: isMandatory ? "Mandatory" : "Lifepath", 
-						isDoubleOpen: skill.flags.isMagical || skill.flags.isTraining,
-						isSpecial: skill.subskillIds ? true : false,
-						isOpen: isMandatory,
-						advancement: { general: 0, lifepath: 0 }
-					};
-					return entry;
-				}) : [];
-			}).flat();
-
-			set(produce<CharacterBurnerState>((state) => {
-				state.skills = new UniqueArray(skills);
-			}));
+		hasQuestionTrue: (id: QuestionId): boolean => {
+			return get().questions.some(v => v.id === id && v.answer);
 		},
 
-		updateTraits: () => {
-			const { getTrait } = useRulesetStore.getState();
+
+		hasLifepathByName: (name: string): number => {
+			return get().lifepaths.filter(v => v.name === name).length;
+		},
+
+		hasSettingByName: (name: string): number => {
+			return get().lifepaths.filter(v => v.setting[1] === name).length;
+		},
+
+		hasQuestionTrueByName: (name: string): boolean => {
+			return get().questions.some(v => v.name === name && v.answer);
+		},
+
+
+		/**
+		 * Updates the character's attributes list.
+		 * It calculates the attribute exponents, filters the ones that are not available to the character.
+		 * @remarks TODO: Calculate exponents.
+		 * @remarks TODO: Preserve shades.
+		**/
+		updateAttributes: () => {
+			const { abilities } = useRulesetStore.getState();
 			const state = get();
 
-			const traits = state.lifepaths.map(lp => {
-				return lp.traits ? lp.traits.map((tr, i) => {
-					const trait = getTrait(tr);
-					const isMandatory = (i === 0);
-					// TODO: Repeat lifepaths also should be checked
-					// TODO: Common traits should be added
-					// TODO: General traits should be kept
-					const entry: CharacterTrait = {
-						id: trait.id,
-						name: trait.name,
-						type: isMandatory ? "Mandatory" : "Lifepath",
-						isOpen: isMandatory
-					};
-					return entry;
-				}) : [];
-			}).flat();
+			const characterAttributes: UniqueArray<AbilityId, CharacterAttribute> = new UniqueArray(
+				abilities
+					.filter(ability => ability.abilityType[1].endsWith("Attribute"))
+					.map(ability => {
+						const attr = state.getAttribute(ability.id);
+
+						if (ability.abilityType[1] === "Attribute") {
+							return {
+								id: ability.id,
+								name: ability.name,
+								hasShade: ability.hasShades,
+								shadeShifted: attr.shade === "G",
+								exponent: state.getAttribute(ability.id).exponent - (attr.shade === "G" ? 5 : 0)
+							};
+						}
+						else if (ability.requiredTrait && state.hasTraitOpen(ability.requiredTrait[0])) {
+							return {
+								id: ability.id,
+								name: ability.name,
+								hasShade: ability.hasShades,
+								shadeShifted: attr.shade === "G",
+								exponent: state.getAttribute(ability.id).exponent - (attr.shade === "G" ? 5 : 0)
+							};
+						}
+						else return [];
+					}).flat());
 
 			set(produce<CharacterBurnerState>((state) => {
-				state.traits = new UniqueArray(traits);
+				state.attributes = characterAttributes;
 			}));
 		}
 	}))

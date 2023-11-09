@@ -5,14 +5,6 @@ interface User {
 	password: string;
 }
 
-type UserSigninRequest = Omit<User, "id" | "username">;
-type UserSignupRequest = Omit<User, "id">;
-type UserSession = Omit<User, "password">;
-
-interface UserResponse {
-	user: UserSession;
-}
-
 interface Ruleset {
 	id: RulesetId;
 	name: string;
@@ -98,7 +90,7 @@ interface Trait {
 	description?: string;
 }
 
-type RequirementItem =
+type LifepathRequirementItem =
 	{ logicType: [id: LogicTypeId, name: string]; } &
 	({ isUnique: true; } |
 	{ isSettingEntry: true; } |
@@ -113,13 +105,13 @@ type RequirementItem =
 	{ trait: [id: TraitId, name: string]; forCompanion: boolean; } |
 	{ lifepath: [id: LifepathId, name: string]; forCompanion: boolean; } |
 	{ setting: [id: SettingId, name: string]; forCompanion: boolean; } |
-	{ question: [id: QuestionId, name: string] });
+	{ question: [id: QuestionId, name: string]; });
 
 interface LifepathRequirementBlock {
 	logicType: [id: LogicTypeId, name: string];
 	mustFulfill: boolean;
 	fulfillmentAmount: number;
-	items: RequirementItem[];
+	items: LifepathRequirementItem[];
 }
 
 interface Lifepath {
@@ -195,7 +187,7 @@ interface Resource {
 	costs: [cost: number, description: string][];
 	modifiers: [cost: number, isPer: boolean, description: string][];
 	magical?: ResourceMagicDetails;
-};
+}
 
 interface Facet {
 	name: string;
@@ -313,6 +305,12 @@ type Practice = RequireOnlyOne<{
 
 interface RulesetList {
 	rulesets: Ruleset[];
+}
+
+interface Question {
+	id: QuestionId;
+	name: string;
+	question: string;
 }
 
 interface RulesetData {

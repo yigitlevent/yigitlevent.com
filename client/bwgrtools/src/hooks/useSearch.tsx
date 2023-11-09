@@ -1,11 +1,19 @@
+import Fuse from "fuse.js";
 import { useCallback, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import Fuse from "fuse.js";
 
 
 type List<T> = (T & { rulesets: RulesetId[]; })[];
 
-export function useSearch<T>(mainList: List<T>, filterKeys: string[], initialFilterValues?: { [key: string]: string; }) {
+interface SearchReturn<T> {
+	searchString: string,
+	searchFields: string[],
+	filters: { [key: string]: string; },
+	setFilter: (filtersToApply: { key: string; value: string; }[]) => void,
+	searchResults: List<T>;
+}
+
+export function useSearch<T>(mainList: List<T>, filterKeys: string[], initialFilterValues?: { [key: string]: string; }): SearchReturn<T> {
 	const [originalList] = useState(mainList);
 	const [urlParams, setUrlParams] = useSearchParams();
 
@@ -36,7 +44,7 @@ export function useSearch<T>(mainList: List<T>, filterKeys: string[], initialFil
 				const filterValue = filters[filterKey];
 				if (filterValue !== "Any") {
 					res = res.filter(v => {
-						const itemValue = (v as any)[filterKey];
+						const itemValue = (v as never)[filterKey];
 						if (itemValue) return itemValue[1] === filters[filterKey];
 						return false;
 					});
@@ -87,7 +95,7 @@ export function useSearch<T>(mainList: List<T>, filterKeys: string[], initialFil
 			const filterValue = filters[filterKey];
 			if (filterValue !== "Any") {
 				res = res.filter(v => {
-					const itemValue = (v as any)[filterKey];
+					const itemValue = (v as never)[filterKey];
 					if (itemValue) return itemValue[1] === filters[filterKey];
 					return false;
 				});

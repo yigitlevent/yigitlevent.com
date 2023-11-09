@@ -1,16 +1,15 @@
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
 import { Fragment, useState } from "react";
 
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 
-import { useDrawerStore } from "../../hooks/apiStores/useDrawerStore";
-
+import { RulesetSelector } from "./Drawers/RulesetSelector";
+import { Tools } from "./Drawers/Tools";
 import { MenuButtons } from "./MenuButtons";
 import { Signin } from "./Signin/Signin";
 import { Signup } from "./Signup/Signup";
-import { Tools } from "./Drawers/Tools";
-import { RulesetSelector } from "./Drawers/RulesetSelector";
+import { useDrawerStore } from "../../hooks/apiStores/useDrawerStore";
 
 
 export function Menu() {
@@ -34,10 +33,13 @@ export function Menu() {
 			</Grid>
 
 			<Signin open={signinOpen} handleClose={() => setSigninOpen(false)} />
+
 			<Signup open={signupOpen} handleClose={() => setSignupOpen(false)} />
 
 			<Tools expanded={drawer === "Tools"} />
+
 			<RulesetSelector expanded={drawer === "Datasets"} />
+
 			{/*<Checklist expanded={drawer === "Checklist"} />
 			<MyThings expanded={drawer === "My Things"} />*/}
 		</Fragment>

@@ -1,15 +1,13 @@
-import { useCallback, useEffect, useState } from "react";
-
-import Grid from "@mui/material/Grid";
-import TextField from "@mui/material/TextField";
+import Autocomplete from "@mui/material/Autocomplete";
 import Button from "@mui/material/Button";
+import Grid from "@mui/material/Grid";
 import Modal from "@mui/material/Modal";
 import Paper from "@mui/material/Paper";
-import Autocomplete from "@mui/material/Autocomplete";
+import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
+import { useCallback, useEffect, useState } from "react";
 
 import { useCharacterBurnerStoreOld } from "../../../../hooks/oldStores/useCharacterBurnerStoreOld";
-
 import { GenericGrid } from "../../../Shared/Grids";
 
 
@@ -79,47 +77,36 @@ export function GeneralTraitModal({ open, setOpen }: { open: boolean; setOpen: (
 								disableClearable
 							/>
 						</Grid>
-						: null
-					}
-
+						: null}
 					{trait
 						? <Grid item xs={1}>
 							<Grid container spacing={1} columns={3}>
 								<Grid item xs={3}>
 									<Typography variant="h6">{trait.name}</Typography>
 								</Grid>
-
 								<Grid item sm={3} md={1}>
 									<Typography variant="caption">Type: {trait.type}</Typography>
 								</Grid>
-
 								{trait.cost !== 0
 									? <Grid item sm={3} md={1}>
 										<Typography variant="caption">
 											Cost: {trait.cost}
 										</Typography>
 									</Grid>
-									: null
-								}
-
+									: null}
 								{trait.stock !== "Any"
 									? <Grid item sm={3} md={1}>
 										<Typography variant="caption">Stock: {trait.stock}</Typography>
 									</Grid>
-									: null
-								}
-
+									: null}
 								{trait.description
 									? <Grid item xs={3}>
 										{trait.description.split("<br>").map(v => <Typography key={v} variant="body2" sx={{ textIndent: "8px" }}>{v}</Typography>)}
 									</Grid>
-									: null
-								}
+									: null}
 							</Grid>
 						</Grid>
-						: null
-					}
-
+						: null}
 					<Grid item xs={1}>
 						<Button variant="outlined" size="medium" onClick={addNewTrait} fullWidth>Add Trait</Button>
 					</Grid>

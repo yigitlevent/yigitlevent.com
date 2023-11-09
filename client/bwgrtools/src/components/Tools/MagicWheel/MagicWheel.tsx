@@ -1,46 +1,31 @@
-import { createRef, Fragment, useCallback, useEffect, useState } from "react";
-import styled from "styled-components";
-
-import codeFont from "../../../assets/fonts/SourceCodePro-SemiBold.woff";
-
-import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import Divider from "@mui/material/Divider";
-import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import CircularProgress from "@mui/material/CircularProgress";
+import Divider from "@mui/material/Divider";
+import FormControl from "@mui/material/FormControl";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Grid from "@mui/material/Grid";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
+import { createRef, Fragment, useCallback, useEffect, useState } from "react";
 
+import { BackCanvas } from "./BackCanvas";
+import { FrontCanvas } from "./FrontCanvas";
+import { MainCanvas } from "./MainCanvas";
+import codeFont from "../../../assets/fonts/SourceCodePro-SemiBold.woff";
+import { useFontLoading } from "../../../hooks/apiStores/useFontLoading";
 import { useRulesetStore } from "../../../hooks/apiStores/useRulesetStore";
 import { useMagicWheelStore } from "../../../hooks/featureStores/useMagicWheelStore";
-import { useFontLoading } from "../../../hooks/apiStores/useFontLoading";
 import { RandomNumber } from "../../../utils/misc";
-
 import { GenericGrid } from "../../Shared/Grids";
-import { BackCanvas } from "./BackCanvas";
-import { MainCanvas } from "./MainCanvas";
-import { FrontCanvas } from "./FrontCanvas";
 
-
-const CanvasWrapper = styled.div<{ size: string; }>`
-	max-width: 100%;
-	width: ${p => (p.size === "0px") ? "580px" : p.size};
-	height: ${p => (p.size === "0px") ? "580px" : p.size};
-
-	position: relative;
-	margin: 0 auto;
-
-	z-index: 100;
-`;
 
 export const MWCONST = { canvasSize: 580, circleRadius: 32, circleOffset: 90, textOffset: 100 };
 
-export function MagicWheel() {
+export function MagicWheel(): JSX.Element {
 	const { isFontLoaded } = useFontLoading(codeFont);
 
 	const wrapperRef = createRef<HTMLDivElement>();
@@ -121,8 +106,8 @@ export function MagicWheel() {
 		};
 
 		setFunction(getStartAngle());
-		const func: ((id: any) => void) = setStoreFunction;
-		func(value);
+		const func = setStoreFunction;
+		func(value as never);
 	}, [getFacetMapping, spellFacets, entryAngleSpan]);
 
 	const rotateBand = useCallback((amount: number, type: keyof SpellFacets) => {
@@ -203,6 +188,7 @@ export function MagicWheel() {
 				<Grid item xs={5} sm={2} md={1}>
 					<FormControl fullWidth variant="standard">
 						<InputLabel>Area of Effect</InputLabel>
+
 						<Select
 							label="Area of Effect"
 							name="Area of Effect"
@@ -218,6 +204,7 @@ export function MagicWheel() {
 				<Grid item xs={5} sm={2} md={1}>
 					<FormControl fullWidth variant="standard">
 						<InputLabel>Element</InputLabel>
+
 						<Select
 							label="Element"
 							name="Element"
@@ -233,6 +220,7 @@ export function MagicWheel() {
 				<Grid item xs={5} sm={2} md={1}>
 					<FormControl fullWidth variant="standard">
 						<InputLabel>Impetus</InputLabel>
+
 						<Select
 							label="Impetus"
 							name="Impetus"
@@ -248,6 +236,7 @@ export function MagicWheel() {
 				<Grid item xs={5} sm={2} md={1}>
 					<FormControl fullWidth variant="standard">
 						<InputLabel>Duration</InputLabel>
+
 						<Select
 							label="Duration"
 							name="Duration"
@@ -263,6 +252,7 @@ export function MagicWheel() {
 				<Grid item xs={5} sm={2} md={1}>
 					<FormControl fullWidth variant="standard">
 						<InputLabel>Origin</InputLabel>
+
 						<Select
 							label="Origin"
 							name="Origin"
@@ -295,8 +285,10 @@ export function MagicWheel() {
 				<Grid item xs={2} sm={1}>
 					<FormControl fullWidth variant="standard">
 						<InputLabel>Direction</InputLabel>
+
 						<Select label="Direction" value={direction} onChange={e => changeDirection(e.target.value)} disabled={isRotating > 0}>
 							<MenuItem value={"Clockwise"}>Clockwise</MenuItem>
+
 							<MenuItem value={"Counterclockwise"}>Counterclockwise</MenuItem>
 						</Select>
 					</FormControl>
@@ -307,7 +299,7 @@ export function MagicWheel() {
 						label="Steps"
 						inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
 						value={steps}
-						onChange={(e: any) => changeSteps(e.target.value)}
+						onChange={(e) => changeSteps(e.target.value)}
 						fullWidth
 						disabled={isRotating > 0}
 						variant="standard"
@@ -331,18 +323,29 @@ export function MagicWheel() {
 			{isFontLoaded
 				? <GenericGrid columns={1} center="c">
 					<Grid item xs={1}>
-						<CanvasWrapper ref={wrapperRef} size={size}>
+						<div
+							ref={wrapperRef}
+							style={{
+								maxWidth: "100%",
+								width: (size === "0px") ? "580px" : size,
+								height: (size === "0px") ? "580px" : size,
+								position: "relative",
+								margin: "0 auto",
+								zIndex: 100
+							}}
+						>
 							<BackCanvas />
+
 							<MainCanvas
 								currentAngles={[currentOriginAngle, currentDurationAngle, currentImpetusAngle, currentElementAngle, currentAOEAngle]}
 								blockAngle={entryAngleSpan}
 								spellFacets={spellFacets}
 								getFacetMapping={getFacetMapping}
 							/>
-							<FrontCanvas show={cover} />
-						</CanvasWrapper>
-					</Grid>
 
+							<FrontCanvas show={cover} />
+						</div>
+					</Grid>
 
 					<Grid item>
 						<FormControlLabel
@@ -352,8 +355,7 @@ export function MagicWheel() {
 						/>
 					</Grid>
 				</GenericGrid>
-				: <CircularProgress />
-			}
+				: <CircularProgress />}
 		</Fragment>
 	);
 }

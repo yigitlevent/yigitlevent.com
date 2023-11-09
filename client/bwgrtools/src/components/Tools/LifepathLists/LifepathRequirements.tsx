@@ -1,11 +1,11 @@
-import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 import { Fragment } from "react";
 
 import { GetOrdinalSuffix } from "../../../utils/misc";
 
 
-function ResolveRequirementBlockItem(item: RequirementItem): string {
+function ResolveRequirementBlockItem(item: LifepathRequirementItem): string {
 	const subject = "forCompanion" in item && item.forCompanion ? "Companion of this character" : "Character";
 
 	if ("isUnique" in item) return "This lifepath cannot be selected twice.";
@@ -29,7 +29,7 @@ function ResolveRequirementBlockItem(item: RequirementItem): string {
 	else throw new Error(`Unidentified requirement block item: ${item}`);
 }
 
-function BlockTitle(logicType: string, fulfillmentAmount: number) {
+function BlockTitle(logicType: string, fulfillmentAmount: number): string {
 	const fa = fulfillmentAmount > 1 ? ` ${fulfillmentAmount} times` : "";
 
 	switch (logicType) {
@@ -52,19 +52,22 @@ function ResolveRequirementBlocks(requirementBlocks: LifepathRequirementBlock[])
 	return (
 		<Fragment>
 			{!hasOneBlock ? <Box>{BlockTitle(parentLogic, 1)}</Box> : null}
-			{requirementBlocks.map((block, i) =>
+
+			{requirementBlocks.map((block, i) => (
 				<Fragment key={i}>
 					<Box sx={{ marginLeft: hasOneBlock ? 0 : 1 }}>{BlockTitle(block.logicType[1], block.fulfillmentAmount)}</Box>
+
 					<Box sx={{ marginLeft: hasOneBlock ? 0 : 1 }}>
 						{block.items.map((item, ii) => <Box key={ii} sx={{ marginLeft: 1 }}>{ResolveRequirementBlockItem(item)}</Box>)}
 					</Box>
 				</Fragment>
+			)
 			)}
 		</Fragment>
 	);
 }
 
-export function LifepathRequirements({ lifepath }: { lifepath: Lifepath; }) {
+export function LifepathRequirements({ lifepath }: { lifepath: Lifepath; }): JSX.Element {
 	return (
 		<Fragment>
 			<b>Requirements:</b>

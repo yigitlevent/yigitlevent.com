@@ -1,13 +1,13 @@
-export function RandomNumber(min: number, max: number) {
+export function RandomNumber(min: number, max: number): number {
 	return (min - 1) + Math.ceil(Math.random() * (max - min + 1));
 }
 
-export function Clamp(num: number, min: number, max: number) {
+export function Clamp(num: number, min: number, max: number): number {
 	const val = isNaN(num) ? min : num;
 	return Math.min(Math.max(val, min), max);
 }
 
-export function GetOrdinalSuffix(number: number) {
+export function GetOrdinalSuffix(number: number): string {
 	const div10 = number % 10;
 	const div100 = number % 100;
 	if (div10 === 1 && div100 !== 11) return `${number}st`;
@@ -16,7 +16,7 @@ export function GetOrdinalSuffix(number: number) {
 	return `${number}th`;
 }
 
-export function MakeName(name: string, index: number, extension?: [singular: string, plural: string]) {
+export function MakeName(name: string, index: number, extension?: [singular: string, plural: string]): string {
 	const split = name.split("➞");
 
 	if (split[index].includes("*")) {
@@ -41,13 +41,13 @@ export function GetAverage(arr: number[]): number {
 	return arr.reduce((a, b) => a + b) / arr.length;
 }
 
-export const GroupBy = <T, K extends keyof any>(list: T[], getKey: (item: T) => K) =>
+export const GroupBy = <T>(list: T[], getKey: (item: T) => string): Record<string, T[]> =>
 	list.reduce((previous, currentItem) => {
 		const group = getKey(currentItem);
 		if (!previous[group]) previous[group] = [];
 		previous[group].push(currentItem);
 		return previous;
-	}, {} as Record<K, T[]>);
+	}, {} as Record<string, T[]>);
 
 
 export function Pairwise<T>(arr: T[]): T[][] {

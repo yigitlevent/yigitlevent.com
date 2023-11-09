@@ -1,20 +1,20 @@
-import { Fragment } from "react";
-
-import Paper from "@mui/material/Paper";
-import IconButton from "@mui/material/IconButton";
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-
-//import FactCheckOutlinedIcon from "@mui/icons-material/FactCheckOutlined";
-import ListAltOutlinedIcon from "@mui/icons-material/ListAltOutlined";
+import AutoStoriesOutlinedIcon from "@mui/icons-material/AutoStoriesOutlined";
 import DatasetOutlinedIcon from "@mui/icons-material/DatasetOutlined";
+import ListAltOutlinedIcon from "@mui/icons-material/ListAltOutlined";
 import LoginOutlinedIcon from "@mui/icons-material/LoginOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import OpenInBrowserOutlinedIcon from "@mui/icons-material/OpenInBrowserOutlined";
-import AutoStoriesOutlinedIcon from "@mui/icons-material/AutoStoriesOutlined";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import IconButton from "@mui/material/IconButton";
+import Paper from "@mui/material/Paper";
+import { Fragment } from "react";
 
-import { useUserStore } from "../../hooks/apiStores/useUserStore";
+
+//import FactCheckOutlinedIcon from "@mui/icons-material/FactCheckOutlined";
+
 import { useDrawerStore, DrawerNames } from "../../hooks/apiStores/useDrawerStore";
+import { useUserStore } from "../../hooks/apiStores/useUserStore";
 
 
 function DrawerIconButton({ title, icon, onClick }: { title: string; icon: JSX.Element; onClick: () => void; }) {
@@ -48,14 +48,13 @@ export function MenuButtons({ openSignin, openSignup }: { openSignin: () => void
 				? <DrawerIconButton title={"Sign out"} icon={<LogoutOutlinedIcon color="primary" />} onClick={signout} />
 				: <Fragment>
 					<DrawerIconButton title={"Sign in"} icon={<LoginOutlinedIcon color="primary" />} onClick={openSignin} />
+
 					<DrawerIconButton title={"Sign up"} icon={<OpenInBrowserOutlinedIcon color="primary" />} onClick={openSignup} />
-				</Fragment>
-			}
+				</Fragment>}
 
 			{buttons.reverse()
 				.filter(v => !v.authOnly || user)
-				.map((v, i) => <DrawerIconButton key={i} title={v.title} icon={v.icon} onClick={() => openDrawer(v.title)} />)
-			}
+				.map((v, i) => <DrawerIconButton key={i} title={v.title} icon={v.icon} onClick={() => openDrawer(v.title)} />)}
 		</Grid>
 	);
 }

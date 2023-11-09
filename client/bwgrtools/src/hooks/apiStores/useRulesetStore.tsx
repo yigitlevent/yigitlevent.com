@@ -2,7 +2,7 @@ import { produce } from "immer";
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 
-import { GenericGet } from "../../utils/genericRequests";
+import { GenericGet, GenericPost } from "../../utils/genericRequests";
 
 
 // TODO: research index key signatures to see if there is a workaround
@@ -44,7 +44,7 @@ interface RulesetStore {
 	fetchData: () => void;
 
 	// TODO: Might be useful to create a hash table of id-index pairs to quicken the search -- name/string search being slow is fine, it should be used veeery rarely
-	serveResult: <T>(row: T[], error: [id: any, msg: string]) => T;
+	serveResult: <T>(row: T[], error: [id: unknown, msg: string]) => T;
 	getAbility: (search: AbilityId | string) => Ability;
 	getStock: (search: StockId | string) => Stock;
 	getSetting: (search: SettingId | string) => Setting;
@@ -70,7 +70,7 @@ export const useRulesetStore = create<RulesetStore>()(
 			fetching: true,
 
 			rulesets: [],
-			chosenRulesets: ["bwgr" as unknown as RulesetId], // TODO: this shouldn't be fixed
+			chosenRulesets: ["bwgr" as unknown as RulesetId, "bwc" as unknown as RulesetId], // TODO: this shouldn't be fixed
 
 			abilities: [],
 			abilityTypes: [],
@@ -122,8 +122,9 @@ export const useRulesetStore = create<RulesetStore>()(
 
 			fetchData: () => {
 				const toggleFetching = get().toggleFetching;
+				const rulesets = get().chosenRulesets;
 
-				GenericGet<RulesetData>("/ruleset/data")
+				GenericPost<RulesetData>("/ruleset/data", { rulesets })
 					.then(response => {
 						if (response.status === 200) {
 							set(produce<RulesetStore>((state) => {
@@ -161,8 +162,8 @@ export const useRulesetStore = create<RulesetStore>()(
 					.finally(() => toggleFetching());
 			},
 
-			serveResult<T>(row: T[], error: [id: any, msg: string]): Readonly<T> {
-				if (row.length == 1) return row[0];
+			serveResult<T>(row: T[], error: [id: unknown, msg: string]): Readonly<T> {
+				if (row.length === 1) return row[0];
 				else if (row.length > 1) throw new Error(`Found multiple ${error[1]} rows with ${typeof error[0] === "string" ? "name" : "id"} '${error[0]}'`);
 				else throw new Error(`Could not find any ${error[1]} with ${typeof error[0] === "string" ? "name" : "id"} '${error[0]}'`);
 			},

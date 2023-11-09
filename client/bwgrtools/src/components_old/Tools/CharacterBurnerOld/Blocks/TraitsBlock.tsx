@@ -1,11 +1,10 @@
+import Button from "@mui/material/Button";
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
 import { Fragment, useState } from "react";
 
-import Typography from "@mui/material/Typography";
-import Grid from "@mui/material/Grid";
-import Button from "@mui/material/Button";
 
 import { useCharacterBurnerStoreOld } from "../../../../hooks/oldStores/useCharacterBurnerStoreOld";
-
 import { GenericGrid } from "../../../Shared/Grids";
 import { BlockTraitPopover } from "../../CharacterBurner/BlockText";
 import { GeneralTraitModal } from "../Modals/GeneralTraitModal";
@@ -19,14 +18,14 @@ function CommonTraitsBlock() {
 			<Grid item xs={6}>
 				<Typography variant="h5" sx={{ margin: "12px 0 0 24px" }}>Common</Typography>
 			</Grid>
-
 			<Fragment>
-				{totals.traits.commonList.map((traitName, i) =>
+				{totals.traits.commonList.map((traitName, i) => (
 					<Grid key={i} item xs={6} sm={3} md={2}>
 						<GenericGrid columns={5} center="h" hasBackground={1}>
 							<BlockTraitPopover traitPath={traitName} checkbox={{ checked: true, disabled: true }} />
 						</GenericGrid>
 					</Grid>
+				)
 				)}
 			</Fragment>
 		</Fragment>
@@ -41,9 +40,8 @@ function MandatoryTraitsBlock() {
 			<Grid item xs={6}>
 				<Typography variant="h5" sx={{ margin: "12px 0 0 24px" }}>Mandatory</Typography>
 			</Grid>
-
 			<Fragment>
-				{totals.traits.mandatoryList.map((traitPath, i) =>
+				{totals.traits.mandatoryList.map((traitPath, i) => (
 					<Grid key={i} item xs={6} sm={3} md={2}>
 						<GenericGrid columns={5} center="h" hasBackground={1}>
 							<BlockTraitPopover
@@ -55,6 +53,7 @@ function MandatoryTraitsBlock() {
 							/>
 						</GenericGrid>
 					</Grid>
+				)
 				)}
 			</Fragment>
 		</Fragment>
@@ -69,8 +68,7 @@ function LifepathTraitsBlock() {
 			<Grid item xs={6}>
 				<Typography variant="h5" sx={{ margin: "12px 0 0 24px" }}>Lifepath</Typography>
 			</Grid>
-
-			{totals.traits.lifepathList.map((traitPath, i) =>
+			{totals.traits.lifepathList.map((traitPath, i) => (
 				<Grid key={i} item xs={6} sm={3} md={2}>
 					<GenericGrid columns={5} center="h" hasBackground={1}>
 						<BlockTraitPopover
@@ -83,6 +81,7 @@ function LifepathTraitsBlock() {
 						/>
 					</GenericGrid>
 				</Grid>
+			)
 			)}
 		</Fragment>
 	);
@@ -96,8 +95,7 @@ function GeneralTraitsBlock() {
 			<Grid item xs={6}>
 				<Typography variant="h5" sx={{ margin: "12px 0 0 24px" }}>General</Typography>
 			</Grid>
-
-			{totals.traits.generalList.map((traitPath, i) =>
+			{totals.traits.generalList.map((traitPath, i) => (
 				<Grid key={i} item xs={6} sm={3} md={2}>
 					<GenericGrid columns={5} center="h" hasBackground={1}>
 						<BlockTraitPopover
@@ -111,6 +109,7 @@ function GeneralTraitsBlock() {
 						/>
 					</GenericGrid>
 				</Grid>
+			)
 			)}
 		</Fragment>
 	);
@@ -125,14 +124,14 @@ function BrutalLifeTraitsBlock() {
 			<Grid item xs={6}>
 				<Typography variant="h5" sx={{ margin: "12px 0 0 24px" }}>Brutal Life</Typography>
 			</Grid>
-
 			<Fragment>
-				{(stockSpecific.brutalLife.traits.filter(v => v !== undefined && v !== null) as TraitPath[]).map((traitName, i) =>
+				{(stockSpecific.brutalLife.traits.filter(v => v !== undefined && v !== null) as TraitPath[]).map((traitName, i) => (
 					<Grid key={i} item xs={6} sm={3} md={2}>
 						<GenericGrid columns={5} center="h" hasBackground={1}>
 							<BlockTraitPopover traitPath={traitName} checkbox={{ checked: true, disabled: true }} />
 						</GenericGrid>
 					</Grid>
+				)
 				)}
 			</Fragment>
 		</Fragment>
@@ -151,21 +150,17 @@ export function TraitsBlock() {
 			<Grid item xs={6}>
 				<Typography variant="h4">Traits</Typography>
 			</Grid>
-
 			<Grid item xs={6} sm={5}>
 				<Typography>Trait Points: {totals.traits.points}, Remaining: {traitRemaining ? traitRemaining.traitPoints : -1}</Typography>
 			</Grid>
-
 			<Grid item xs={6} sm={1}>
 				<Button variant="outlined" size="small" onClick={() => setOpen(true)} fullWidth>Add General Trait</Button>
 			</Grid>
-
 			{totals.traits.commonList.length > 0 ? <CommonTraitsBlock /> : null}
 			{totals.traits.mandatoryList.length > 0 ? <MandatoryTraitsBlock /> : null}
 			{totals.traits.lifepathList.length > 0 ? <LifepathTraitsBlock /> : null}
 			{totals.traits.generalList.length > 0 ? <GeneralTraitsBlock /> : null}
 			{stockSpecific.brutalLife.traits.filter(v => v !== undefined && v !== null).length > 0 ? <BrutalLifeTraitsBlock /> : null}
-
 			<GeneralTraitModal open={open} setOpen={setOpen} />
 		</GenericGrid>
 	);

@@ -1,15 +1,14 @@
 import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
+import Typography from "@mui/material/Typography";
 
-import { useRulesetStore } from "../../../hooks/apiStores/useRulesetStore";
-
+import { LifepathRequirements } from "./LifepathRequirements";
 import { LifepathSkills } from "./LifepathSkills";
 import { LifepathTraits } from "./LifepathTraits";
-import { LifepathRequirements } from "./LifepathRequirements";
+import { useRulesetStore } from "../../../hooks/apiStores/useRulesetStore";
 
 
-export function LifepathBox({ lifepath }: { lifepath: Lifepath; }) {
+export function LifepathBox({ lifepath }: { lifepath: Lifepath; }): JSX.Element {
 	const { getSetting } = useRulesetStore();
 
 	const getYears = (l: Lifepath) => {
@@ -62,11 +61,13 @@ export function LifepathBox({ lifepath }: { lifepath: Lifepath; }) {
 					<Typography variant="caption">{getYears(lifepath)}</Typography>
 				</Paper>
 			</Grid>
+
 			<Grid item lg={1} md={2} sm={6} xs={6}>
 				<Paper elevation={3} square sx={{ padding: "2px 6px 4px" }}>
 					<Typography variant="caption">{getResources(lifepath)}</Typography>
 				</Paper>
 			</Grid>
+
 			<Grid item lg={1} md={2} sm={6} xs={6}>
 				<Paper elevation={3} square sx={{ padding: "2px 6px 4px" }}>
 					<Typography variant="caption">{getStatPools(lifepath)}</Typography>
@@ -97,8 +98,7 @@ export function LifepathBox({ lifepath }: { lifepath: Lifepath; }) {
 						<LifepathRequirements lifepath={lifepath} />
 					</Typography>
 				</Grid>
-				: null
-			}
+				: null}
 		</Grid>
 	);
 }

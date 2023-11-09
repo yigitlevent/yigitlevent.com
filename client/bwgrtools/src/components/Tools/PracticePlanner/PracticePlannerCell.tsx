@@ -1,19 +1,19 @@
-import Typography from "@mui/material/Typography";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
+import StopIcon from "@mui/icons-material/Stop";
+import Box from "@mui/material/Box";
+import Divider from "@mui/material/Divider";
+import IconButton from "@mui/material/IconButton";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
-import IconButton from "@mui/material/IconButton";
-import Divider from "@mui/material/Divider";
-import Box from "@mui/material/Box";
-import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
-import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
-import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
-import StopIcon from "@mui/icons-material/Stop";
+import Typography from "@mui/material/Typography";
 
 import { useRulesetStore } from "../../../hooks/apiStores/useRulesetStore";
 import { usePracticePlannerStore } from "../../../hooks/featureStores/usePracticePlannerStore";
 
 
-function Placed({ placed, practiceIndex, cellIndex }: { placed: PracticePlaced; practiceIndex: number; cellIndex: number; }) {
+function Placed({ placed, practiceIndex, cellIndex }: { placed: PracticePlaced; practiceIndex: number; cellIndex: number; }): JSX.Element {
 	const { getPractice } = useRulesetStore();
 	const { deletePractice } = usePracticePlannerStore();
 
@@ -23,12 +23,13 @@ function Placed({ placed, practiceIndex, cellIndex }: { placed: PracticePlaced; 
 	return (
 		<Paper key={practiceIndex} elevation={4} sx={{ padding: "2px 4px" }}>
 			{placed.name} <Typography variant="caption">({practice.ability ? practice.ability[1] : practice.skillType[1]}, {placed.testType}, {placed.hours}hr{placed.hours > 1 ? "s" : ""})</Typography>
+
 			<IconButton size="small" sx={{ float: "right" }} onClick={() => deletePractice(cellIndex, practiceIndex)}><DeleteOutlineIcon fontSize="small" /></IconButton>
 		</Paper>
 	);
 }
 
-export function PracticePlannerCell({ cell, cellIndex, setNotification }: { cell: PracticeCell; cellIndex: number; setNotification: (value: React.SetStateAction<JSX.Element | null>) => void; }) {
+export function PracticePlannerCell({ cell, cellIndex, setNotification }: { cell: PracticeCell; cellIndex: number; setNotification: (value: React.SetStateAction<JSX.Element | null>) => void; }): JSX.Element {
 	const { cells, deleteCell, changeCellHour } = usePracticePlannerStore();
 
 	return (
@@ -36,8 +37,11 @@ export function PracticePlannerCell({ cell, cellIndex, setNotification }: { cell
 			<Stack spacing={0}>
 				<Typography>
 					Day {cellIndex + 1}
+
 					<IconButton size="small" sx={{ float: "right" }} onClick={() => deleteCell(cellIndex)}><DeleteOutlineIcon fontSize="small" /></IconButton>
+
 					<IconButton size="small" sx={{ float: "right" }} onClick={() => changeCellHour(cellIndex, -1, cells, setNotification)}><RemoveCircleOutlineIcon fontSize="small" /></IconButton>
+
 					<IconButton size="small" sx={{ float: "right" }} onClick={() => changeCellHour(cellIndex, 1, cells, setNotification)}><AddCircleOutlineIcon fontSize="small" /></IconButton>
 				</Typography>
 

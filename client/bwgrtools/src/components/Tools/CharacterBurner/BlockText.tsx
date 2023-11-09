@@ -1,11 +1,10 @@
+import DeleteIcon from "@mui/icons-material/Delete";
 import Checkbox from "@mui/material/Checkbox";
 import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
-import DeleteIcon from "@mui/icons-material/Delete";
+import Typography from "@mui/material/Typography";
 
 import { useRulesetStore } from "../../../hooks/apiStores/useRulesetStore";
-
 import { PopoverLink } from "../../Shared/PopoverLink";
 
 
@@ -46,8 +45,8 @@ export function BlockSkillPopover({ skill, checkbox, deleteCallback }: BlockSkil
 					onClick={checkbox.onClick}
 					sx={{ margin: "0 0 4px 0", padding: "0" }}
 				/>
-				: null
-			}
+				: null}
+
 			<Typography sx={{ cursor: "pointer", display: "inline-block", margin: "6px 0 0 8px" }}>
 				<PopoverLink data={getSkill(skill[0])} />
 			</Typography>
@@ -56,8 +55,7 @@ export function BlockSkillPopover({ skill, checkbox, deleteCallback }: BlockSkil
 				? <IconButton color="primary" onClick={deleteCallback} sx={{ padding: 0, margin: "0 0 2px 6px" }}>
 					<DeleteIcon />
 				</IconButton>
-				: null
-			}
+				: null}
 		</Grid>
 	);
 }
@@ -84,8 +82,8 @@ export function BlockTraitPopover({ trait, checkbox, deleteCallback }: BlockTrai
 					onChange={checkbox.onClick}
 					sx={{ margin: "0 0 4px 0", padding: "0" }}
 				/>
-				: null
-			}
+				: null}
+
 			<Typography sx={{ cursor: "pointer", display: "inline-block", margin: "6px 0 0 8px" }}>
 				<PopoverLink data={getTrait(trait[0])} />
 			</Typography>
@@ -94,8 +92,7 @@ export function BlockTraitPopover({ trait, checkbox, deleteCallback }: BlockTrai
 				? <IconButton color="primary" onClick={deleteCallback} sx={{ padding: 0, margin: "0 0 2px 6px" }}>
 					<DeleteIcon />
 				</IconButton>
-				: null
-			}
+				: null}
 		</Grid>
 	);
 }

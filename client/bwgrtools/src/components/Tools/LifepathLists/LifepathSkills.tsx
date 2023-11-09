@@ -1,14 +1,12 @@
+import Box from "@mui/material/Box";
+import Paper from "@mui/material/Paper";
 import { Fragment } from "react";
 
-import Paper from "@mui/material/Paper";
-import Box from "@mui/material/Box";
-
 import { useRulesetStore } from "../../../hooks/apiStores/useRulesetStore";
-
 import { PopoverLink } from "../../Shared/PopoverLink";
 
 
-export function LifepathSkills({ lifepath }: { lifepath: Lifepath; }) {
+export function LifepathSkills({ lifepath }: { lifepath: Lifepath; }): JSX.Element {
 	const { getSkill } = useRulesetStore();
 
 	const hasGeneralSkill = lifepath.pools.generalSkillPool !== 0;
@@ -16,8 +14,8 @@ export function LifepathSkills({ lifepath }: { lifepath: Lifepath; }) {
 
 	const generalSkill = getSkill("General");
 
-	const lifepathSkills =
-		lifepath.skills
+	const lifepathSkills
+		= lifepath.skills
 			? lifepath.skills
 				.map(skillId => {
 					const skill = getSkill(skillId);
@@ -32,15 +30,13 @@ export function LifepathSkills({ lifepath }: { lifepath: Lifepath; }) {
 
 			{hasGeneralSkill
 				? <span>{lifepath.pools.generalSkillPool}{(lifepath.pools.generalSkillPool > 1) ? "pts: " : "pt: "}</span>
-				: null
-			}
+				: null}
 
 			{hasGeneralSkill && generalSkill
 				? <Paper elevation={2} sx={{ cursor: "pointer", padding: "0 4px", margin: "0 0 0 2px", width: "max-content", display: "inline-block" }}>
 					<PopoverLink data={generalSkill} />
 				</Paper>
-				: null
-			}
+				: null}
 
 			<Box sx={{ display: "inline-block", margin: "0 6px 0 0" }}>
 				{(hasGeneralSkill && hasLifepathSkill) ? "; " : null}
@@ -48,8 +44,7 @@ export function LifepathSkills({ lifepath }: { lifepath: Lifepath; }) {
 
 			{hasLifepathSkill
 				? <span>{lifepath.pools.lifepathSkillPool}{(lifepath.pools.lifepathSkillPool > 1) ? "pts: " : "pt: "}</span>
-				: null
-			}
+				: null}
 
 			{hasLifepathSkill && lifepathSkills
 				? lifepathSkills.map((skill, i) => {
@@ -59,8 +54,7 @@ export function LifepathSkills({ lifepath }: { lifepath: Lifepath; }) {
 						</Paper>
 					);
 				})
-				: null
-			}
+				: null}
 		</Fragment>
 	);
 }

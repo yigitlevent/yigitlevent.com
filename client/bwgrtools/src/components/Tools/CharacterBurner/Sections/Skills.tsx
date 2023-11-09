@@ -1,17 +1,15 @@
-import { Fragment } from "react";
-
-import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
+import { Fragment } from "react";
 
 import { useCharacterBurnerStore } from "../../../../hooks/featureStores/useCharacterBurnerStore";
 import { UniqueArrayItem } from "../../../../utils/uniqueArray";
-
-import { GenericGrid } from "../../../Shared/Grids";
 import { AbilityButton } from "../../../Shared/AbilityButton";
+import { GenericGrid } from "../../../Shared/Grids";
 import { BlockSkillPopover } from "../BlockText";
 
 
-function SkillsList({ skill }: { skill: UniqueArrayItem<SkillId, CharacterSkill>; }) {
+function SkillsList({ skill }: { skill: UniqueArrayItem<SkillId, CharacterSkill>; }): JSX.Element {
 	const { getSkill, openSkill, modifySkillExponent } = useCharacterBurnerStore();
 	const charSkill = getSkill(skill.id);
 
@@ -22,10 +20,12 @@ function SkillsList({ skill }: { skill: UniqueArrayItem<SkillId, CharacterSkill>
 					skill={[skill.id, skill.name]}
 					checkbox={{ checked: skill.isOpen, disabled: skill.type === "Mandatory", onClick: () => openSkill(skill.id) }}
 				/>
+
 				<Grid item>
 					<AbilityButton name={skill.name} disabled>
 						{charSkill.shade}
 					</AbilityButton>
+
 					<AbilityButton onClick={() => modifySkillExponent(skill.id)} onContextMenu={() => modifySkillExponent(skill.id, true)} disabled={!skill.isOpen}>
 						{charSkill.exponent}
 					</AbilityButton>
@@ -107,6 +107,7 @@ export function Skills() {
 
 			<Grid item xs={6} sm={5}>
 				<Typography>General Skill Points / Total: {skillPools.general.total}, Remaining: {skillPools.general.remaining}</Typography>
+
 				<Typography>Lifepath Skill Points / Total: {skillPools.lifepath.total}, Remaining: {skillPools.lifepath.remaining}</Typography>
 			</Grid>
 
@@ -115,7 +116,9 @@ export function Skills() {
 			</Grid>*/}
 
 			{skills.existsAny("type", "Mandatory") > 0 ? <MandatorySkills /> : null}
+
 			{skills.existsAny("type", "Lifepath") > 0 ? <LifepathSkills /> : null}
+
 			{skills.existsAny("type", "General") > 0 ? <GeneralSkills /> : null}
 
 			{/* TODO: <GeneralSkillModal open={open} setOpen={setOpen} />*/}

@@ -1,31 +1,32 @@
+import CheckIcon from "@mui/icons-material/Check";
+import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
+import CloseIcon from "@mui/icons-material/Close";
 import List from "@mui/material/List";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import CheckIcon from "@mui/icons-material/Check";
-import CloseIcon from "@mui/icons-material/Close";
-import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 
 import { useRulesetStore } from "../../../hooks/apiStores/useRulesetStore";
 import { DrawerBox } from "../../Shared/DrawerBox";
 
 
-export function RulesetSelector({ expanded }: { expanded: boolean; }) {
+export function RulesetSelector({ expanded }: { expanded: boolean; }): JSX.Element {
 	const { rulesets, checkRulesets, checkExactRulesets, toggleDataset } = useRulesetStore();
 
 	return (
 		<DrawerBox title={"Datasets"} expanded={expanded}>
-			{rulesets.filter(ruleset => !ruleset.isExpansion).map((ruleset, i) =>
+			{rulesets.filter(ruleset => !ruleset.isExpansion).map((ruleset, i) => (
 				<List key={i} disablePadding>
 					<ListItemButton onClick={() => toggleDataset(ruleset.id)}>
 						<ListItemIcon sx={{ margin: 0 }}>
 							{checkRulesets([ruleset.id]) ? <CheckIcon color="success" /> : <CloseIcon color="error" />}
 						</ListItemIcon>
+
 						<ListItemText primary={ruleset.name} sx={{ margin: "0 0 2px -10px" }} />
+
 						{ruleset.isOfficial
 							? <CheckCircleOutlineIcon titleAccess="Official" fontSize="small" />
-							: null
-						}
+							: null}
 					</ListItemButton>
 
 					{ruleset.expansionIds
@@ -39,19 +40,20 @@ export function RulesetSelector({ expanded }: { expanded: boolean; }) {
 											<ListItemIcon sx={{ margin: 0 }}>
 												{checkExactRulesets([ruleset.id, expansion.id]) ? <CheckIcon color="success" /> : <CloseIcon color="error" />}
 											</ListItemIcon>
+
 											<ListItemText primary={expansion.name} sx={{ margin: "0 0 2px -10px" }} />
+
 											{ruleset.isOfficial
 												? <CheckCircleOutlineIcon titleAccess="Official" fontSize="small" />
-												: null
-											}
+												: null}
 										</ListItemButton>
 										: null
 								);
 							})}
 						</List>
-						: null
-					}
+						: null}
 				</List>
+			)
 			)}
 		</DrawerBox>
 	);

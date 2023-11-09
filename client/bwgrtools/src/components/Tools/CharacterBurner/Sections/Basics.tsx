@@ -1,16 +1,15 @@
-import { useEffect, useState } from "react";
-import Grid from "@mui/material/Grid";
-import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import Button from "@mui/material/Button";
+import Grid from "@mui/material/Grid";
+import TextField from "@mui/material/TextField";
+import { useEffect, useState } from "react";
 
 import { useRulesetStore } from "../../../../hooks/apiStores/useRulesetStore";
 import { useCharacterBurnerStore } from "../../../../hooks/featureStores/useCharacterBurnerStore";
-
 import { GenericGrid } from "../../../Shared/Grids";
 
 
-export function Basics({ openModal }: { openModal: (name: CharacterBurnerModals) => void; }) {
+export function Basics({ openModal }: { openModal: (name: CharacterBurnerModals) => void; }): JSX.Element {
 	const { stocks, getStock } = useRulesetStore();
 	const {
 		reset, lifepaths,

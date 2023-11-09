@@ -58,10 +58,12 @@ interface CharacterStockLimits {
 	attributes: number;
 }
 
-type CharacterQuestions = {
-	[key: string]: boolean;
+type CharacterQuestion = {
+	id: QuestionId;
+	name: string;
+	question: string;
+	answer: boolean;
 };
-
 
 type HuntingGroundsList = "Waste" | "Marginal" | "Typical" | "Plentiful" | "Untouched";
 

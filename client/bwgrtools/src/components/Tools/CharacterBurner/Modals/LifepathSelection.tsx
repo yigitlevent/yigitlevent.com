@@ -1,13 +1,12 @@
-import { Fragment, useCallback, useEffect, useState } from "react";
+import Autocomplete from "@mui/material/Autocomplete";
+import Button from "@mui/material/Button";
+import Grid from "@mui/material/Grid";
 import Modal from "@mui/material/Modal";
 import Paper from "@mui/material/Paper";
-import Grid from "@mui/material/Grid";
-import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
+import { Fragment, useCallback, useEffect, useState } from "react";
 
 import { useCharacterBurnerStore } from "../../../../hooks/featureStores/useCharacterBurnerStore";
-
 import { GenericGrid } from "../../../Shared/Grids";
 import { LifepathBox } from "../../LifepathLists/LifepathBox";
 
@@ -59,10 +58,11 @@ export function LifepathSelection({ isOpen, close }: { isOpen: boolean; close: (
 					</Grid>
 
 					<Fragment>
-						{lifepaths.map((lp, i) =>
+						{lifepaths.map((lp, i) => (
 							<Grid key={i} item xs={5}>
 								<LifepathBox lifepath={lp} />
 							</Grid>
+						)
 						)}
 					</Fragment>
 				</GenericGrid>

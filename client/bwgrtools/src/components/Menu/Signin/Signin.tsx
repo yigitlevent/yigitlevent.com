@@ -1,24 +1,22 @@
-import { useCallback, useState } from "react";
-
-import Typography from "@mui/material/Typography";
-import Grid from "@mui/material/Grid";
-import Modal from "@mui/material/Modal";
-import TextField from "@mui/material/TextField";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Button from "@mui/material/Button";
-import Paper from "@mui/material/Paper";
 import FormControl from "@mui/material/FormControl";
-import InputLabel from "@mui/material/InputLabel";
+import FormHelperText from "@mui/material/FormHelperText";
+import Grid from "@mui/material/Grid";
+import IconButton from "@mui/material/IconButton";
 import Input from "@mui/material/Input";
 import InputAdornment from "@mui/material/InputAdornment";
-import FormHelperText from "@mui/material/FormHelperText";
-import IconButton from "@mui/material/IconButton";
+import InputLabel from "@mui/material/InputLabel";
+import Modal from "@mui/material/Modal";
+import Paper from "@mui/material/Paper";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
+import { useCallback, useState } from "react";
 
-import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import Visibility from "@mui/icons-material/Visibility";
 
 import { useUserStore } from "../../../hooks/apiStores/useUserStore";
 import { ValidateEmail } from "../../../utils/validation";
-
 import { GenericGrid } from "../../Shared/Grids";
 
 
@@ -76,6 +74,7 @@ export function Signin({ open, handleClose }: { open: boolean; handleClose: (ope
 					<Grid item xs={1}>
 						<FormControl variant="standard" fullWidth required>
 							<InputLabel>Password</InputLabel>
+
 							<Input
 								type={showPass ? "text" : "password"}
 								value={password} onChange={v => changeValue("password", v.target.value)}
@@ -87,6 +86,7 @@ export function Signin({ open, handleClose }: { open: boolean; handleClose: (ope
 									</InputAdornment>
 								}
 							/>
+
 							<FormHelperText error>{passwordError}</FormHelperText>
 						</FormControl>
 					</Grid>

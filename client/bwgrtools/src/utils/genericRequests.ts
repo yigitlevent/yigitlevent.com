@@ -1,15 +1,7 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 
 
-type UserRoutes = `/user${"/auth" | "/signin" | "/signup" | "/signout"}`;
-type UserForms = UserSigninRequest | UserSignupRequest;
-
-type RulesetRoutes = `/ruleset/${"list" | "data"}`;
-
-type Routes = UserRoutes | RulesetRoutes;
-type Forms = UserForms;
-
-export function GenericGet<T>(path: Routes) {
+export function GenericGet<T>(path: Routes): Promise<AxiosResponse<T, unknown>> {
 	return axios.get<T>(
 		`${import.meta.env.VITE_API_URL}${path}`,
 		{
@@ -19,7 +11,7 @@ export function GenericGet<T>(path: Routes) {
 	);
 }
 
-export function GenericPost<T>(path: Routes, formData: Forms | null) {
+export function GenericPost<T>(path: Routes, formData: Forms | null): Promise<AxiosResponse<T, unknown>> {
 	return axios.post<T>(
 		`${import.meta.env.VITE_API_URL}${path}`,
 		formData,

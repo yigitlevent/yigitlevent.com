@@ -1,8 +1,8 @@
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import Slide from "@mui/material/Slide";
 import Card from "@mui/material/Card";
 import Divider from "@mui/material/Divider";
+import Slide from "@mui/material/Slide";
+import Typography from "@mui/material/Typography";
 
 
 export function DrawerBox({ children, title, expanded }: { children: React.ReactNode; title: string; expanded: boolean; }) {

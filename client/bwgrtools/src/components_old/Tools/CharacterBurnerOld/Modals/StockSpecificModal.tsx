@@ -1,15 +1,13 @@
-import { Fragment, useCallback } from "react";
-
+import Alert from "@mui/material/Alert";
+import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Modal from "@mui/material/Modal";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
-import Alert from "@mui/material/Alert";
-import Button from "@mui/material/Button";
+import { Fragment, useCallback } from "react";
 
 import { useCharacterBurnerStoreOld } from "../../../../hooks/oldStores/useCharacterBurnerStoreOld";
 import { Clamp, GetOrdinalSuffix, RandomNumber } from "../../../../utils/misc";
-
 import { GenericGrid } from "../../../Shared/Grids";
 
 
@@ -21,8 +19,8 @@ export function StockSpecificModal({ openSs, openSsModal }: { openSs: boolean; o
 			? RandomNumber(1, 6) <= 4
 			: RandomNumber(1, 6) <= 2;
 
-		const trait: TraitPath | undefined =
-			(!isBrutal || lifepathNumber < 5) ? undefined
+		const trait: TraitPath | undefined
+			= (!isBrutal || lifepathNumber < 5) ? undefined
 				: (lifepathNumber === 5) ? "Any Character➞Missing Digit"
 					: (lifepathNumber === 6) ? "Any Die➞Lame"
 						: (lifepathNumber === 7) ? "Any Die➞Missing Eye"
@@ -66,7 +64,7 @@ export function StockSpecificModal({ openSs, openSsModal }: { openSs: boolean; o
 					<Fragment>
 						{stock === "Orc"
 							? lifepathPaths.length > 4
-								? lifepathPaths.slice(4).map((v, i) =>
+								? lifepathPaths.slice(4).map((v, i) => (
 									<Fragment key={i}>
 										<Grid item xs={1}>
 											<Typography variant="h5" sx={{ display: "inline-block" }}>{GetOrdinalSuffix(i + 5)} Lifepath: {v.split("➞")[2]}</Typography>
@@ -79,13 +77,13 @@ export function StockSpecificModal({ openSs, openSsModal }: { openSs: boolean; o
 										</Grid>
 									</Fragment>
 								)
+								)
 								: <Grid item xs={3}>
 									<Alert severity="info">
 										Orc character only needs to roll for Brutal Life after 5th lifepath.
 									</Alert>
 								</Grid>
-							: null
-						}
+							: null}
 					</Fragment>
 					<Fragment>
 						{stock === "Great Wolf"
@@ -100,8 +98,7 @@ export function StockSpecificModal({ openSs, openSsModal }: { openSs: boolean; o
 									<Button variant="outlined" size="small" onClick={() => rollTerritory()} disabled={stockSpecific.territory.huntingGround !== undefined}>Roll</Button>
 								</Grid>
 							</Fragment>
-							: null
-						}
+							: null}
 					</Fragment>
 				</GenericGrid>
 			</Paper>

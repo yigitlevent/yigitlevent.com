@@ -1,25 +1,23 @@
-import { Fragment, useCallback, useEffect, useState } from "react";
-
-import Grid from "@mui/material/Grid";
-import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import Modal from "@mui/material/Modal";
-import Paper from "@mui/material/Paper";
-import FormControl from "@mui/material/FormControl";
-import InputLabel from "@mui/material/InputLabel";
-import Select from "@mui/material/Select";
-import MenuItem from "@mui/material/MenuItem";
-import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import Divider from "@mui/material/Divider";
-import Typography from "@mui/material/Typography";
-import RadioGroup from "@mui/material/RadioGroup";
+import FormControl from "@mui/material/FormControl";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Grid from "@mui/material/Grid";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import Modal from "@mui/material/Modal";
+import Paper from "@mui/material/Paper";
 import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import Select from "@mui/material/Select";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
+import { Fragment, useCallback, useEffect, useState } from "react";
 
 import { useCharacterBurnerStoreOld } from "../../../../hooks/oldStores/useCharacterBurnerStoreOld";
-
-import { GenericGrid } from "../../../Shared/Grids";
 import { AbilityButton } from "../../../Shared/AbilityButton";
+import { GenericGrid } from "../../../Shared/Grids";
 
 
 interface SelectedCost {
@@ -140,18 +138,14 @@ export function ResourceModal({ openRe, openReModal }: { openRe: boolean; openRe
 							</Select>
 						</FormControl>
 					</Grid>
-
 					<Grid item xs={6}>
 						<Divider>Type: {resource.type}</Divider>
 					</Grid>
-
 					{typeof resource.cost === "number"
 						? <Grid item xs={6} sm={2}>
 							<Typography variant="body2">Cost: {resource.cost}</Typography>
 						</Grid>
-						: null
-					}
-
+						: null}
 					{resource.magical
 						? <Fragment>
 							<Grid item xs={6} sm={2}>
@@ -161,9 +155,7 @@ export function ResourceModal({ openRe, openReModal }: { openRe: boolean; openRe
 								<Typography variant="body2">Actions: {resource.magical.actions}</Typography>
 							</Grid>
 						</Fragment>
-						: null
-					}
-
+						: null}
 					{resource.magical
 						? <Fragment>
 							<Grid item xs={6} sm={2}>
@@ -182,9 +174,7 @@ export function ResourceModal({ openRe, openReModal }: { openRe: boolean; openRe
 								<Typography variant="body2">Impetus: {resource.magical.impetus.join("/")}</Typography>
 							</Grid>
 						</Fragment>
-						: null
-					}
-
+						: null}
 					{resource.description
 						? <Grid item xs={6}>
 							{resource.description.split("<br>").map((v, i) => {
@@ -192,9 +182,7 @@ export function ResourceModal({ openRe, openReModal }: { openRe: boolean; openRe
 								return <Typography key={i} variant="body2">{v}</Typography>;
 							})}
 						</Grid>
-						: null
-					}
-
+						: null}
 					{costs && Array.isArray(resource.cost)
 						? <Grid item xs={6}>
 							<Typography variant="h6">Cost</Typography>
@@ -204,9 +192,7 @@ export function ResourceModal({ openRe, openReModal }: { openRe: boolean; openRe
 								)}
 							</RadioGroup>
 						</Grid>
-						: null
-					}
-
+						: null}
 					{costs && resource.cost === "various"
 						? <Grid item xs={6}>
 							<Typography sx={{ display: "inline", margin: "0 8px 0 0" }}>Cost</Typography>
@@ -217,15 +203,12 @@ export function ResourceModal({ openRe, openReModal }: { openRe: boolean; openRe
 								{costs.baseCost}
 							</AbilityButton>
 						</Grid>
-						: null
-					}
-
+						: null}
 					{costs && resource.modifiers
 						? <Fragment>
 							<Grid item xs={6}>
 								<Typography variant="h6">Modifiers</Typography>
 							</Grid>
-
 							{resource.modifiers.map((v, i) =>
 								(v[0] in costs.modifiers)
 									? <Grid item key={i} xs={2}>
@@ -239,9 +222,7 @@ export function ResourceModal({ openRe, openReModal }: { openRe: boolean; openRe
 									: null
 							)}
 						</Fragment>
-						: null
-					}
-
+						: null}
 					{costs && resource.modifiers && resource.modifiers.some(v => typeof v[1] === "string")
 						? <Grid item xs={6}>
 							<Typography variant="h6">Number of Weapons</Typography>
@@ -252,20 +233,15 @@ export function ResourceModal({ openRe, openReModal }: { openRe: boolean; openRe
 								{numberOfWeapons}
 							</AbilityButton>
 						</Grid>
-						: null
-					}
-
+						: null}
 					<Grid item xs={6}>
 						<TextField label="Add description (optional)" variant="standard" value={resourceDesc} onChange={e => setResourceDesc(e.target.value)} fullWidth />
 					</Grid>
-
 					{costs
 						? <Grid item>
 							<Typography sx={{ marginTop: 2, marginBottom: 2 }}>Total Cost: {getTotalCost(getModifiers(costs))}</Typography>
 						</Grid>
-						: null
-					}
-
+						: null}
 					<Grid item>
 						<Button variant="outlined" size="medium" onClick={() => createResource()}>Add Resource</Button>
 					</Grid>

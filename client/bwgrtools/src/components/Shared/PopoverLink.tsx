@@ -1,9 +1,8 @@
-import { MouseEvent, useState } from "react";
-
-import Typography from "@mui/material/Typography";
+import Grid from "@mui/material/Grid";
 import Link from "@mui/material/Link";
 import Popover from "@mui/material/Popover";
-import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
+import { MouseEvent, useState } from "react";
 
 
 function GetSkillRestrictionString(skill: Skill) {
@@ -27,8 +26,7 @@ function SkillPop({ skill }: { skill: Skill; }) {
 				? <Grid item xs={2} md={1}>
 					<Typography variant="caption">Root: {skill.roots.map(v => v[1]).join("/")}</Typography>
 				</Grid>
-				: null
-			}
+				: null}
 
 			<Grid item xs={2} md={1}>
 				<Typography variant="caption">Type: {skill.type[1]}</Typography>
@@ -46,8 +44,7 @@ function SkillPop({ skill }: { skill: Skill; }) {
 				? <Grid item xs={2}>
 					{skill.description.split("<br>").map(v => <Typography key={v} variant="body2">{v}</Typography>)}
 				</Grid>
-				: null
-			}
+				: null}
 		</Grid>
 	);
 }
@@ -69,8 +66,7 @@ function TraitPop({ trait }: { trait: Trait; }) {
 						Cost: {trait.cost}
 					</Typography>
 				</Grid>
-				: null
-			}
+				: null}
 
 			{trait.stock
 				? <Grid item sm={3} md={1}>
@@ -78,15 +74,13 @@ function TraitPop({ trait }: { trait: Trait; }) {
 				</Grid>
 				: <Grid item sm={3} md={1}>
 					<Typography variant="caption">Stock: Any</Typography>
-				</Grid>
-			}
+				</Grid>}
 
 			{trait.description
 				? <Grid item xs={3}>
 					{trait.description.split("<br>").map(v => <Typography key={v} variant="body2" sx={{ textIndent: "8px" }}>{v}</Typography>)}
 				</Grid>
-				: null
-			}
+				: null}
 		</Grid>
 	);
 }
@@ -118,6 +112,7 @@ export function PopoverLink({ data, noColor }: { data: Skill | Trait; noColor?: 
 	return (
 		<Link underline="hover" onMouseDown={openPopover} color={noColor ? "text.primary" : "primary.main"}>
 			{data.name}
+
 			<Pop anchor={anchor} data={data} onClose={closePopover} />
 		</Link>
 	);

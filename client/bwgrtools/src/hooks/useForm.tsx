@@ -1,7 +1,6 @@
-import { useCallback, useEffect, useState } from "react";
-import { produce } from "immer";
-
 import { TextField } from "@mui/material";
+import { produce } from "immer";
+import { useCallback, useEffect, useState } from "react";
 
 
 interface Field {
@@ -13,7 +12,12 @@ interface Values {
 	[key: string]: string | number | boolean;
 }
 
-export function useForm({ fields }: { fields: Field[]; }) {
+interface UseFormReturn {
+	components: JSX.Element[];
+	values: Values;
+}
+
+export function useForm({ fields }: { fields: Field[]; }): UseFormReturn {
 	const [components, setComponents] = useState<JSX.Element[]>([]);
 	const [values, setValues] = useState<Values>({});
 

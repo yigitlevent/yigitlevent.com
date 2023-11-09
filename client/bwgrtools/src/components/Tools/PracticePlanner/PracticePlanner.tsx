@@ -1,20 +1,18 @@
-import { Fragment, useState } from "react";
-
+import Button from "@mui/material/Button";
+import Divider from "@mui/material/Divider";
+import FormControl from "@mui/material/FormControl";
 import Grid from "@mui/material/Grid";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import FormControl from "@mui/material/FormControl";
-import InputLabel from "@mui/material/InputLabel";
-import Select from "@mui/material/Select";
-import MenuItem from "@mui/material/MenuItem";
-import Divider from "@mui/material/Divider";
+import { Fragment, useState } from "react";
 
+import { PracticePlannerCell } from "./PracticePlannerCell";
 import { useRulesetStore } from "../../../hooks/apiStores/useRulesetStore";
 import { usePracticePlannerStore } from "../../../hooks/featureStores/usePracticePlannerStore";
-
 import { GenericGrid } from "../../Shared/Grids";
-import { PracticePlannerCell } from "./PracticePlannerCell";
 
 
 export function PracticePlanner(): JSX.Element {
@@ -60,6 +58,7 @@ export function PracticePlanner(): JSX.Element {
 					<Grid item xs={4} sm={2} md={1}>
 						<FormControl fullWidth variant="standard">
 							<InputLabel>Day</InputLabel>
+
 							<Select label="Day" defaultValue={""} disabled={cells.length < 1}>
 								{Object.keys(cells).map(v => <MenuItem key={parseInt(v)} value={parseInt(v)}>{parseInt(v) + 1}</MenuItem>)}
 							</Select>
@@ -69,12 +68,12 @@ export function PracticePlanner(): JSX.Element {
 					<Grid item xs={4} sm={2} md={1}>
 						<FormControl fullWidth variant="standard">
 							<InputLabel>Practice Type</InputLabel>
+
 							<Select label="Practice Type" defaultValue={"1"} disabled={cells.length < 1}>
 								{practices.map((v, i) =>
 									v.ability
 										? <MenuItem key={i} value={v.id as unknown as number}>{`${v.ability[1]}`}</MenuItem>
-										: <MenuItem key={i} value={v.id as unknown as number}>{`${v.skillType[1]}`}</MenuItem>)
-								}
+										: <MenuItem key={i} value={v.id as unknown as number}>{`${v.skillType[1]}`}</MenuItem>)}
 							</Select>
 						</FormControl>
 					</Grid>
@@ -82,9 +81,12 @@ export function PracticePlanner(): JSX.Element {
 					<Grid item xs={4} sm={2} md={1}>
 						<FormControl fullWidth variant="standard">
 							<InputLabel>Test Type</InputLabel>
+
 							<Select defaultValue={"Difficult"} disabled={cells.length < 1}>
 								<MenuItem value={"Routine"}>Routine</MenuItem>
+
 								<MenuItem value={"Difficult"}>Difficult</MenuItem>
+
 								<MenuItem value={"Challenging"}>Challenging</MenuItem>
 							</Select>
 						</FormControl>
@@ -109,10 +111,11 @@ export function PracticePlanner(): JSX.Element {
 			{cells.length > 0 ? <Divider sx={{ margin: "10px 0 0 " }}>Timetable</Divider> : null}
 
 			<GenericGrid columns={4}>
-				{cells.map((cell, cellIndex) =>
+				{cells.map((cell, cellIndex) => (
 					<Grid item key={cellIndex} xs={4} sm={4} md={2} lg={2}>
 						<PracticePlannerCell cell={cell} cellIndex={cellIndex} setNotification={setNotification} />
 					</Grid>
+				)
 				)}
 			</GenericGrid>
 		</Fragment>
