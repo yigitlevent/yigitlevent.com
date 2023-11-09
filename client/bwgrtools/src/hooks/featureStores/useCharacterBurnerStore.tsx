@@ -78,7 +78,7 @@ export type CharacterBurnerState =
 	TraitState;
 
 
-export const InitialState: NonFunctionPropertyNames<CharacterBurnerState> = {
+export const InitialState: NonFunctionProperties<CharacterBurnerState> = {
 	stock: [0 as unknown as StockId, "Dwarf"] as [id: StockId, name: string],
 	concept: "",
 	name: "",

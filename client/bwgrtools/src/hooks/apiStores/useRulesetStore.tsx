@@ -62,8 +62,6 @@ interface RulesetStore {
 	checkExactRulesets: (allowed: RulesetId[]) => boolean;
 }
 
-const Name = "RulesetStore";
-
 export const useRulesetStore = create<RulesetStore>()(
 	devtools(
 		(set, get) => ({
@@ -254,6 +252,6 @@ export const useRulesetStore = create<RulesetStore>()(
 				return allowed.every(ruleset => state.chosenRulesets.includes(ruleset));
 			}
 		}),
-		{ name: Name })
+		{ name: "RulesetStore" })
 	// TODO: Enable persistance devtools(persist(Store, { name: Name, version: 1 }), { name: Name })
 );

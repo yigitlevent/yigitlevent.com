@@ -20,7 +20,7 @@ import { ValidateEmail } from "../../../utils/validation";
 import { GenericGrid } from "../../Shared/Grids";
 
 
-export function Signin({ open, handleClose }: { open: boolean; handleClose: (open: boolean) => void; }) {
+export function Signin({ open, handleClose }: { open: boolean; handleClose: (open: boolean) => void; }): JSX.Element {
 	const { fetching, signin } = useUserStore();
 
 	const [email, setEmail] = useState("");

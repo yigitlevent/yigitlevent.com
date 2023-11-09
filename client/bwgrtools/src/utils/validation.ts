@@ -3,8 +3,7 @@ export function ValidateUsername(username: string): boolean {
 }
 
 export function ValidateEmail(email: string): boolean {
-	// eslint-disable-next-line no-useless-escape
-	const emailRegexp = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
+	const emailRegexp = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
 	return emailRegexp.test(email);
 }
 

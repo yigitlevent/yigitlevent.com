@@ -98,12 +98,11 @@ function GeneralTraitsBlock() {
 	);
 }
 
-export function Traits() {
+export function Traits(): JSX.Element {
 	const { traits, getTraitPools } = useCharacterBurnerStore();
-
-	// const [open, setOpen] = useState(false);
-
 	const traitPools = getTraitPools();
+
+	const text = `Trait Points: ${traitPools.total}, Remaining: ${traitPools.remaining}`;
 
 	return (
 		<GenericGrid columns={6} center="v" spacing={[0, 2]}>
@@ -112,7 +111,7 @@ export function Traits() {
 			</Grid>
 
 			<Grid item xs={6} sm={5}>
-				<Typography>Trait Points: {traitPools.total}, Remaining: {traitPools.remaining}</Typography>
+				<Typography>{text}</Typography>
 			</Grid>
 
 			{/*<Grid item xs={6} sm={1}>

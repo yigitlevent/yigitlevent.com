@@ -128,7 +128,7 @@ module.exports = {
 		"react/no-direct-mutation-state": "error",
 		"react/no-is-mounted": "error",
 		"react/no-unused-state": "warn",
-		"react/no-multi-comp": "error",
+		"react/no-multi-comp": ["error", { "ignoreStateless": true }],
 		"react/no-unescaped-entities": "off",
 		"react/jsx-newline": ["error", { prevent: false, allowMultilines: false }],
 		"react/hook-use-state": ["off", { allowDestructuredState: true }],

@@ -23,8 +23,6 @@ import { RandomNumber } from "../../../utils/misc";
 import { GenericGrid } from "../../Shared/Grids";
 
 
-export const MWCONST = { canvasSize: 580, circleRadius: 32, circleOffset: 90, textOffset: 100 };
-
 export function MagicWheel(): JSX.Element {
 	const { isFontLoaded } = useFontLoading(codeFont);
 

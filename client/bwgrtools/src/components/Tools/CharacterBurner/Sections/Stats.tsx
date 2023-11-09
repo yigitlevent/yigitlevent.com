@@ -17,6 +17,10 @@ export function Stats(): JSX.Element {
 	const physical = getPhysicalPool();
 	const either = getEitherPool();
 
+	const mentalText = `Mental Pool / Total: ${mental.total}, Remaining: ${mental.remaining}`;
+	const physicalText = `Physical Pool / Total: ${physical.total}, Remaining: ${physical.remaining}`;
+	const eitherText = `Either Pool / Total: ${either.total}, Remaining: ${either.remaining}`;
+
 	return (
 		<GenericGrid columns={6} center spacing={[0, 2]} sx={{ marginTop: 3 }}>
 			<Grid item xs={6}>
@@ -24,11 +28,11 @@ export function Stats(): JSX.Element {
 			</Grid>
 
 			<Grid item xs={6}>
-				<Typography>Mental Pool / Total: {mental.total}, Remaining: {mental.remaining}</Typography>
+				<Typography>{mentalText}</Typography>
 
-				<Typography>Physical Pool / Total: {physical.total}, Remaining: {physical.remaining}</Typography>
+				<Typography>{physicalText}</Typography>
 
-				<Typography>Either Pool / Total: {either.total}, Remaining: {either.remaining}</Typography>
+				<Typography>{eitherText}</Typography>
 			</Grid>
 
 			<Fragment>

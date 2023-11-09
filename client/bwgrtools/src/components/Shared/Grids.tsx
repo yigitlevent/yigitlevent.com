@@ -11,7 +11,7 @@ interface GenericGridProps {
 	hasBackground?: boolean | number;
 }
 
-export function GenericGrid({ children, columns, center, spacing, sx, hasBackground }: GenericGridProps) {
+export function GenericGrid({ children, columns, center, spacing, sx, hasBackground }: GenericGridProps): JSX.Element {
 	let centered: { [key: string]: string; } = {};
 	if (center === true) centered = { justifyContent: "space-between", alignItems: "center" };
 	else if (center === "h") centered = { justifyContent: "space-between" };

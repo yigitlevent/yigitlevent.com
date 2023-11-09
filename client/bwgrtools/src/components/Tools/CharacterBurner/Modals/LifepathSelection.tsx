@@ -12,7 +12,7 @@ import { LifepathBox } from "../../LifepathLists/LifepathBox";
 
 
 // TODO: random lifepath selection: "Choose Lifepaths" or "Random Lifepaths"
-export function LifepathSelection({ isOpen, close }: { isOpen: boolean; close: () => void; }) {
+export function LifepathSelection({ isOpen, close }: { isOpen: boolean; close: () => void; }): JSX.Element {
 	const { availableLifepaths, lifepaths, addLifepath, removeLastLifepath } = useCharacterBurnerStore();
 
 	const [disabled, setDisabled] = useState(false);
@@ -42,7 +42,7 @@ export function LifepathSelection({ isOpen, close }: { isOpen: boolean; close: (
 							getOptionLabel={(option) => option.name}
 							groupBy={(option) => option.setting[1]}
 							renderInput={(params) => <TextField {...params} label="Lifepath" variant="standard" fullWidth />}
-							onChange={(e, v) => setChosen(v)}
+							onChange={(_, v) => setChosen(v)}
 							fullWidth
 							disableClearable
 							disabled={disabled}

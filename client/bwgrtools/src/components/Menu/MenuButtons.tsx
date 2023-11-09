@@ -17,7 +17,7 @@ import { useDrawerStore, DrawerNames } from "../../hooks/apiStores/useDrawerStor
 import { useUserStore } from "../../hooks/apiStores/useUserStore";
 
 
-function DrawerIconButton({ title, icon, onClick }: { title: string; icon: JSX.Element; onClick: () => void; }) {
+function DrawerIconButton({ title, icon, onClick }: { title: string; icon: JSX.Element; onClick: () => void; }): JSX.Element {
 	return (
 		<Grid item>
 			<Paper variant="outlined" sx={{ padding: "4px 4px" }}>
@@ -27,7 +27,7 @@ function DrawerIconButton({ title, icon, onClick }: { title: string; icon: JSX.E
 	);
 }
 
-export function MenuButtons({ openSignin, openSignup }: { openSignin: () => void; openSignup: () => void; }) {
+export function MenuButtons({ openSignin, openSignup }: { openSignin: () => void; openSignup: () => void; }): JSX.Element {
 	const { user, signout } = useUserStore();
 	const { openDrawer } = useDrawerStore();
 

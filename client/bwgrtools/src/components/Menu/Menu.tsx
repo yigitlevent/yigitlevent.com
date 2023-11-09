@@ -12,7 +12,7 @@ import { Signup } from "./Signup/Signup";
 import { useDrawerStore } from "../../hooks/apiStores/useDrawerStore";
 
 
-export function Menu() {
+export function Menu(): JSX.Element {
 	const { drawer } = useDrawerStore();
 
 	const [signinOpen, setSigninOpen] = useState(false);

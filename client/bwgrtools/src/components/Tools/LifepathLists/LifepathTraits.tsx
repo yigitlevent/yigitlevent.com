@@ -19,9 +19,12 @@ export function LifepathTraits({ lifepath }: { lifepath: Lifepath; }): JSX.Eleme
 				})
 			: undefined;
 
+
+	const text = `${lifepath.pools.traitPool}${lifepath.pools.traitPool > 1 ? "pts: " : "pt: "}`;
+
 	return (
 		<Fragment>
-			<b>Traits: </b> {lifepath.pools.traitPool}{lifepath.pools.traitPool > 1 ? "pts: " : "pt: "}
+			<b>Traits: </b>{text}
 
 			{lifepathTraits
 				? lifepathTraits.map((trait, i) => {

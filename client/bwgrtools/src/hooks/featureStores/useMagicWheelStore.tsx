@@ -6,6 +6,8 @@ import { Clamp } from "../../utils/misc";
 
 
 interface MagicWheelState {
+	constants: { canvasSize: number, circleRadius: number, circleOffset: number, textOffset: number; };
+
 	areaOfEffectId: AreaOfEffectFacetId;
 	elementId: ElementFacetId;
 	impetusId: ImpetusFacetId;
@@ -30,6 +32,8 @@ interface MagicWheelState {
 export const useMagicWheelStore = create<MagicWheelState>()(
 	devtools(
 		(set) => ({
+			constants: { canvasSize: 580, circleRadius: 32, circleOffset: 90, textOffset: 100 },
+
 			areaOfEffectId: 0 as unknown as AreaOfEffectFacetId,
 			elementId: 0 as unknown as ElementFacetId,
 			impetusId: 0 as unknown as ImpetusFacetId,

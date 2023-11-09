@@ -92,12 +92,15 @@ function GeneralSkills() {
 	);
 }
 
-export function Skills() {
+export function Skills(): JSX.Element {
 	const { skills, getSkillPools } = useCharacterBurnerStore();
 
 	// const [open, setOpen] = useState(false);
 
 	const skillPools = getSkillPools();
+
+	const generalText = `General Skill Points / Total: ${skillPools.general.total}, Remaining: ${skillPools.general.remaining}`;
+	const lifepathText = `Lifepath Skill Points / Total: ${skillPools.lifepath.total}, Remaining: ${skillPools.lifepath.remaining}`;
 
 	return (
 		<GenericGrid columns={6} center="v" spacing={[0, 2]} sx={{ marginTop: 3 }}>
@@ -106,9 +109,9 @@ export function Skills() {
 			</Grid>
 
 			<Grid item xs={6} sm={5}>
-				<Typography>General Skill Points / Total: {skillPools.general.total}, Remaining: {skillPools.general.remaining}</Typography>
+				<Typography>{generalText}</Typography>
 
-				<Typography>Lifepath Skill Points / Total: {skillPools.lifepath.total}, Remaining: {skillPools.lifepath.remaining}</Typography>
+				<Typography>{lifepathText}</Typography>
 			</Grid>
 
 			{/*<Grid item xs={6} sm={1}>

@@ -19,7 +19,7 @@ import { ValidateEmail, ValidatePassword, ValidateUsername } from "../../../util
 import { GenericGrid } from "../../Shared/Grids";
 
 
-export function Signup({ open, handleClose }: { open: boolean; handleClose: (open: boolean) => void; }) {
+export function Signup({ open, handleClose }: { open: boolean; handleClose: (open: boolean) => void; }): JSX.Element {
 	const { fetching, signup } = useUserStore();
 
 	const [username, setUsername] = useState("");

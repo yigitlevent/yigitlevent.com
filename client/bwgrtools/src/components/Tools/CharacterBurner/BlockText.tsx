@@ -13,7 +13,7 @@ interface BlockTextProps {
 	hasLeftPadding?: boolean;
 }
 
-export function BlockText({ text, hasLeftPadding }: BlockTextProps) {
+export function BlockText({ text, hasLeftPadding }: BlockTextProps): JSX.Element {
 	return (
 		<Grid item>
 			<Typography sx={{ paddingLeft: hasLeftPadding ? "10px" : undefined, paddingTop: "3px" }}>{text}</Typography>
@@ -32,7 +32,7 @@ interface BlockSkillPopoverProps {
 	deleteCallback?: () => void;
 }
 
-export function BlockSkillPopover({ skill, checkbox, deleteCallback }: BlockSkillPopoverProps) {
+export function BlockSkillPopover({ skill, checkbox, deleteCallback }: BlockSkillPopoverProps): JSX.Element {
 	const { getSkill } = useRulesetStore();
 
 	return (
@@ -70,7 +70,7 @@ interface BlockTraitPopoverProps {
 	deleteCallback?: () => void;
 }
 
-export function BlockTraitPopover({ trait, checkbox, deleteCallback }: BlockTraitPopoverProps) {
+export function BlockTraitPopover({ trait, checkbox, deleteCallback }: BlockTraitPopoverProps): JSX.Element {
 	const { getTrait } = useRulesetStore();
 
 	return (

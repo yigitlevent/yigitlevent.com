@@ -11,40 +11,15 @@ import QuestionAnswerOutlinedIcon from "@mui/icons-material/QuestionAnswerOutlin
 import SportsKabaddiOutlinedIcon from "@mui/icons-material/SportsKabaddiOutlined";
 import Divider from "@mui/material/Divider";
 import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import { OverridableComponent } from "@mui/material/OverridableComponent";
-import { forwardRef, Fragment, useMemo } from "react";
-import { Link as RouterLink, LinkProps as RouterLinkProps, useLocation } from "react-router-dom";
+import SvgIcon from "@mui/material/SvgIcon";
+import { Fragment } from "react";
 
-import { THEME } from "../../../theme/theme";
+import { RouteButton } from "./RouteButton";
 import { DrawerBox } from "../../Shared/DrawerBox";
 
 
-function RouteButton({ title, route, Icon }: { title: string; route: string; Icon: OverridableComponent<any>; }) {
-	const location = useLocation();
-
-	const renderLink = useMemo(() => forwardRef<HTMLAnchorElement, Omit<RouterLinkProps, "to">>(function Link(itemProps, ref) {
-		return <RouterLink to={route} ref={ref} {...itemProps} role={undefined} />;
-	}), [route]);
-
-	return (
-		<ListItem disablePadding>
-			<ListItemButton component={renderLink}>
-				<ListItemIcon sx={{ margin: 0 }}>
-					<Icon color={location.pathname === route ? "primary" : undefined} />
-				</ListItemIcon>
-
-				<ListItemText primary={title} sx={{ margin: "0 0 2px -10px", color: location.pathname === route ? THEME.palette.primary.main : undefined }} />
-			</ListItemButton>
-		</ListItem>
-	);
-}
-
-export function Tools({ expanded }: { expanded: boolean; }) {
-	const items: [string, string, OverridableComponent<any>][] = [
+export function Tools({ expanded }: { expanded: boolean; }): JSX.Element {
+	const items: [string, string, typeof SvgIcon][] = [
 		["Lifepaths List", "/lifepaths", Fingerprint],
 		["Skills List", "/skills", GroupWorkOutlinedIcon],
 		["Traits List", "/traits", CategoryOutlinedIcon],

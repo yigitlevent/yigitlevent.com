@@ -17,12 +17,15 @@ function Placed({ placed, practiceIndex, cellIndex }: { placed: PracticePlaced; 
 	const { getPractice } = useRulesetStore();
 	const { deletePractice } = usePracticePlannerStore();
 
-	console.log(placed.practiceId);
 	const practice = getPractice(placed.practiceId);
+
+	const text = `${practice.ability ? practice.ability[1] : practice.skillType[1]}, ${placed.testType}, ${placed.hours}hr${placed.hours > 1 ? "s" : ""}`;
 
 	return (
 		<Paper key={practiceIndex} elevation={4} sx={{ padding: "2px 4px" }}>
-			{placed.name} <Typography variant="caption">({practice.ability ? practice.ability[1] : practice.skillType[1]}, {placed.testType}, {placed.hours}hr{placed.hours > 1 ? "s" : ""})</Typography>
+			{placed.name}
+
+			<Typography variant="caption">{text}</Typography>
 
 			<IconButton size="small" sx={{ float: "right" }} onClick={() => deletePractice(cellIndex, practiceIndex)}><DeleteOutlineIcon fontSize="small" /></IconButton>
 		</Paper>
@@ -46,7 +49,7 @@ export function PracticePlannerCell({ cell, cellIndex, setNotification }: { cell
 				</Typography>
 
 				<Box sx={{ margin: "0 5px 0" }}>
-					{[...Array(cell.maxHours)].map((vv, ii) => {
+					{[...Array(cell.maxHours)].map((_, ii) => {
 						const filled = (cell.placed.length > 0 ? cell.placed.map(v => v.hours).reduce((pv, cv) => pv + cv) : 0);
 						return (
 							<StopIcon

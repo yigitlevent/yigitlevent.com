@@ -1,27 +1,20 @@
 import { createRef, useCallback, useEffect, useState } from "react";
 
-import { MWCONST } from "./MagicWheel";
+import { useMagicWheelStore } from "../../../hooks/featureStores/useMagicWheelStore";
 import { THEME } from "../../../theme/theme";
 
-
-const Canvas = styled.canvas`
-	position: absolute;
-	left: 0;
-	top: 0; 
-	z-index: 102;
-	width: 100%;
-`;
 
 interface Props {
 	currentAngles: number[];
 	blockAngle: { [key: string]: number; };
 	spellFacets: SpellFacets;
-	getFacetMapping: (type: keyof SpellFacets) => { bandIndex: number; } & any;
+	getFacetMapping: (type: keyof SpellFacets) => { bandIndex: number; } & unknown;
 }
 
 export function MainCanvas({ currentAngles, blockAngle, spellFacets, getFacetMapping }: Props): JSX.Element {
 	const canvasRef = createRef<HTMLCanvasElement>();
 	const [context, setContext] = useState<CanvasRenderingContext2D>();
+	const mwConstants = useMagicWheelStore().constants;
 
 	const drawString = useCallback((string: string, radius: number, anglePerCharacter: number): void => {
 		if (context) {
@@ -49,15 +42,14 @@ export function MainCanvas({ currentAngles, blockAngle, spellFacets, getFacetMap
 				for (const stringKey in spellFacets[key]) {
 					const length = spellFacets[key][stringKey].name.length;
 
-					const radius = MWCONST.circleRadius * (i + 1) + MWCONST.textOffset;
+					const radius = mwConstants.circleRadius * (i + 1) + mwConstants.textOffset;
 					const anglePerCharacter = 8 * (1 / radius);
-
 
 					const stringStartAngle = ((blockAngle[key] - (anglePerCharacter * length)) / 2);
 					const blockStartAngle = ((blockAngle[key] * -parseInt(stringKey) - (anglePerCharacter * 2)) / 2);
 
 					context.save();
-					context.translate(MWCONST.canvasSize / 2, MWCONST.canvasSize / 2);
+					context.translate(mwConstants.canvasSize / 2, mwConstants.canvasSize / 2);
 					context.rotate(rotationArray[i] + stringStartAngle + blockStartAngle - (blockAngle[key] / 2));
 
 					drawString(spellFacets[key][stringKey].name, radius, anglePerCharacter);
@@ -66,20 +58,22 @@ export function MainCanvas({ currentAngles, blockAngle, spellFacets, getFacetMap
 				}
 			}
 		}
-	}, [context, spellFacets, getFacetMapping, blockAngle, drawString]);
+	}, [context, spellFacets, getFacetMapping, mwConstants.circleRadius, mwConstants.textOffset, mwConstants.canvasSize, blockAngle, drawString]);
 
 	useEffect(() => {
 		if (context) {
-			context.clearRect(0, 0, MWCONST.canvasSize, MWCONST.canvasSize);
+			context.clearRect(0, 0, mwConstants.canvasSize, mwConstants.canvasSize);
 			drawText(currentAngles);
 		}
-	}, [context, blockAngle, currentAngles, drawText]);
+	}, [context, blockAngle, currentAngles, drawText, mwConstants.canvasSize]);
 
 	useEffect(() => {
 		setContext(canvasRef.current?.getContext("2d") as CanvasRenderingContext2D);
 	}, [canvasRef]);
 
 	return (
-		<Canvas ref={canvasRef} height={MWCONST.canvasSize} width={MWCONST.canvasSize}>Your browser does not support canvas.</Canvas>
+		<canvas ref={canvasRef} height={mwConstants.canvasSize} width={mwConstants.canvasSize} style={{ position: "absolute", left: 0, top: 0, zIndex: 102, width: "100%" }}>
+			Your browser does not support canvas.
+		</canvas>
 	);
 }

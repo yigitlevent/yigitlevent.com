@@ -5,7 +5,7 @@ import Slide from "@mui/material/Slide";
 import Typography from "@mui/material/Typography";
 
 
-export function DrawerBox({ children, title, expanded }: { children: React.ReactNode; title: string; expanded: boolean; }) {
+export function DrawerBox({ children, title, expanded }: { children: React.ReactNode; title: string; expanded: boolean; }): JSX.Element {
 	return (
 		<Slide direction="left" in={expanded}>
 			<Card variant="outlined" sx={{ overflow: "auto", position: "fixed", width: "350px", maxWidth: "calc(100svw - 32px)", height: "calc(100svh - 118px)", maxHeight: "calc(100svh - 118px)", bottom: "16px", right: "16px", zIndex: 100000 }}>

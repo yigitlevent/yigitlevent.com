@@ -32,7 +32,7 @@ const QontoStepIconRoot = styled("div")<{ ownerState: { active?: boolean; }; }>(
 	})
 );
 
-export function StepIcon(props: StepIconProps) {
+export function StepIcon(props: StepIconProps): JSX.Element {
 	const { active, completed, className } = props;
 
 	return (

@@ -37,7 +37,7 @@ export function Basics({ openModal }: { openModal: (name: CharacterBurnerModals)
 					getOptionLabel={v => v[1]}
 					isOptionEqualToValue={(o, v) => o[0] === v[0] && o[1] === v[1]}
 					value={stock}
-					onChange={(e, v) => setStock(v)}
+					onChange={(_, v) => setStock(v)}
 					disableClearable
 				/>
 			</Grid>
@@ -47,7 +47,7 @@ export function Basics({ openModal }: { openModal: (name: CharacterBurnerModals)
 					value={gender}
 					options={["Male", "Female"]}
 					renderInput={(params) => <TextField {...params} label="Gender" variant="standard" fullWidth />}
-					onChange={(e, v) => setGender(v)}
+					onChange={(_, v) => setGender(v)}
 					fullWidth
 					disableClearable
 				/>
