@@ -20,8 +20,7 @@ module.exports = {
 
 		"import/named": "off",
 		"import/newline-after-import": ["error", { count: 2 }],
-		"import/no-default-export": "off",
-		"import/no-unresolved": "error",
+		"import/no-unresolved": ["error", { ignore: ['\\.woff$'] }],
 		"import/no-self-import": "error",
 		"import/no-duplicates": "error",
 		"import/order": [
@@ -32,13 +31,13 @@ module.exports = {
 				groups: ["builtin", "external", "internal", ["parent", "sibling", "index", "object"], "type", "unknown"],
 				pathGroups: [
 					{
-						pattern: "**/*.+(css|sass|less|scss|pcss|styl)",
+						pattern: "**/*.+(css|sass|less|scss|pcss|styl|woff)",
 						patternOptions: { dot: true, nocomment: true },
 						group: "unknown",
 						position: "after"
 					},
 					{
-						pattern: "{.,..}/**/*.+(css|sass|less|scss|pcss|styl)",
+						pattern: "{.,..}/**/*.+(css|sass|less|scss|pcss|styl|woff)",
 						patternOptions: { dot: true, nocomment: true },
 						group: "unknown",
 						position: "after"

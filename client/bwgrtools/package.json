@@ -25,7 +25,7 @@
 		"@emotion/styled": "^11.11.0",
 		"@mui/icons-material": "^5.14.16",
 		"@mui/material": "^5.14.17",
-		"axios": "^1.6.0",
+		"axios": "^1.6.1",
 		"fuse.js": "^7.0.0",
 		"immer": "^10.0.3",
 		"react": "^18.2.0",
@@ -34,9 +34,9 @@
 		"zustand": "^4.4.6"
 	},
 	"devDependencies": {
-		"@types/node": "^20.8.10",
-		"@types/react": "^18.2.36",
-		"@types/react-dom": "^18.2.14",
+		"@types/node": "^20.9.0",
+		"@types/react": "^18.2.37",
+		"@types/react-dom": "^18.2.15",
 		"@typescript-eslint/eslint-plugin": "^6.10.0",
 		"@typescript-eslint/parser": "^6.10.0",
 		"@vitejs/plugin-react-swc": "^3.4.1",
