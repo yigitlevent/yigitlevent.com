@@ -16,9 +16,11 @@ export function Skills(): JSX.Element {
 	return (
 		<Fragment>
 			<Typography variant="h6">skills</Typography>
+
 			{skills.map((x, i) => (
 				<Box key={i} sx={{ margin: "10px 0", padding: "0 0 0 10px", borderLeft: "1px solid grey" }}>
 					<Typography>{x.name}</Typography>
+
 					{x.things.map((y, ii) =>
 						<Typography key={ii} variant="body2" sx={{ padding: "0 0 0 10px" }}>{y}</Typography>
 					)}

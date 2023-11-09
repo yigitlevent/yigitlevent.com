@@ -18,7 +18,7 @@ module.exports = {
 		project: ["./tsconfig.json"]
 	},
 	parser: "@typescript-eslint/parser",
-	ignorePatterns: ["node_modules", "dist", "build", "dist", "package.json", "tsconfig.json", "tsconfig.node.json", ".eslintrc.cjs", "vite.config.ts"],
+	ignorePatterns: ["node_modules", "dist", "build", "dist", "package.json", "tsconfig.json", "tsconfig.node.json", ".eslintrc.cjs", "vite.config.ts", "**/components_old/**/*.tsx", "**/oldStores/**/*.tsx"],
 	plugins: ["import", "react", "react-hooks", "react-refresh", "@typescript-eslint", "json"],
 	rules: {
 		"json/*": ["error", "allowComments"],
@@ -128,9 +128,9 @@ module.exports = {
 		"react/no-direct-mutation-state": "error",
 		"react/no-is-mounted": "error",
 		"react/no-unused-state": "warn",
-		"react/no-multi-comp": "error",
+		"react/no-multi-comp": ["error", { "ignoreStateless": true }],
 		"react/no-unescaped-entities": "off",
-		"react/jsx-newline": ["error", { prevent: true, allowMultilines: false }],
+		"react/jsx-newline": ["error", { prevent: false, allowMultilines: false }],
 		"react/hook-use-state": ["off", { allowDestructuredState: true }],
 		"react/jsx-curly-newline": ["error", { multiline: "consistent", singleline: "consistent" }],
 		"react/self-closing-comp": ["error", { component: true, html: true }],
