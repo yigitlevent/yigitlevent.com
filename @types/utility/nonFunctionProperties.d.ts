@@ -1,2 +1,0 @@
-// https://stackoverflow.com/questions/54251847/typescript-advanced-type-nonfunctionpropertynames-explained
-type NonFunctionProperties<O> = { [K in keyof O]: O[K] extends Function ? never : K }[keyof O];

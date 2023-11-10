@@ -5,6 +5,6 @@ interface NominalNumber<T extends number> extends Number {
 	readonly __typeName: T;
 }*/
 
-declare const NOMINAL_BRAND: unique symbol;
+declare const NominalBrand: unique symbol;
 
-type Nominal<T> = T & { [NOMINAL_BRAND]: T; };
+type Nominal<T> = T & { [NominalBrand]: T; };
