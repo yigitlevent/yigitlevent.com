@@ -4,14 +4,14 @@ import { PgPool } from "../index";
 export async function GetAbilities(): Promise<Ability[]> {
 	const convert = (v: AbilityDBO): Ability => {
 		const r: Ability = {
-			id: v.Id as unknown as AbilityId,
+			id: v.Id,
 			name: v.Name,
-			abilityType: [v.AbilityTypeId as unknown as AbilityTypeId, v.AbilityType],
+			abilityType: [v.AbilityTypeId, v.AbilityType],
 			hasShades: v.HasShades
 		};
 
 		if (v.RequiredTraitId !== null && v.RequiredTrait) {
-			r.requiredTrait = [v.RequiredTraitId as unknown as TraitId, v.RequiredTrait];
+			r.requiredTrait = [v.RequiredTraitId, v.RequiredTrait];
 		}
 
 		if (v.Cycle !== null && v.Routine !== null && v.Difficult !== null && v.Challenging !== null) {

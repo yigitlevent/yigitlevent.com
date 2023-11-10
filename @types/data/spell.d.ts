@@ -1,8 +1,8 @@
-type OriginFacetId = Nominal<"OriginFacetId">;
-type DurationFacetId = Nominal<"DurationFacetId">;
-type AreaOfEffectFacetId = Nominal<"AreaOfEffectFacetId">;
-type ElementFacetId = Nominal<"ElementFacetId">;
-type ImpetusFacetId = Nominal<"ImpetusFacetId">;
+type OriginFacetId = Nominal<number, "OriginFacetId">;
+type DurationFacetId = Nominal<number, "DurationFacetId">;
+type AreaOfEffectFacetId = Nominal<number, "AreaOfEffectFacetId">;
+type ElementFacetId = Nominal<number, "ElementFacetId">;
+type ImpetusFacetId = Nominal<number, "ImpetusFacetId">;
 
 interface Facet {
 	name: string;

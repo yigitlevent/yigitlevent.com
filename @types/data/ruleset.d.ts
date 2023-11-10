@@ -1,4 +1,4 @@
-type RulesetId = Nominal<"RulesetId">;
+type RulesetId = Nominal<number, "RulesetId">;
 
 interface Ruleset {
 	id: RulesetId;

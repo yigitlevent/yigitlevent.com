@@ -1,4 +1,6 @@
-type AbilityId = Nominal<"AbilityId">;
+type AbilityId = Nominal<number, "AbilityId">;
+
+type AbilityTypeId = Nominal<number, "AbilityTypeId">;
 
 interface Ability {
 	id: AbilityId;

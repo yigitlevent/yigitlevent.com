@@ -1,4 +1,4 @@
-type LifepathId = Nominal<"LifepathId">;
+type LifepathId = Nominal<number, "LifepathId">;
 
 type LifepathRequirementItem =
 	{ logicType: [id: LogicTypeId, name: string]; } &

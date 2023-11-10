@@ -4,11 +4,11 @@ import { PgPool } from "../index";
 export async function GetSettings(rulesets: RulesetId[]): Promise<Setting[]> {
 	const convert = (v: SettingDBO): Setting => {
 		return {
-			rulesets: v.Rulesets as unknown[] as RulesetId[],
-			id: v.Id as unknown as SettingId,
+			rulesets: v.Rulesets,
+			id: v.Id,
 			name: v.Name,
 			nameShort: v.NameShort,
-			stock: [v.StockId as unknown as StockId, v.StockName],
+			stock: [v.StockId, v.StockName],
 			isSubsetting: v.IsSubsetting
 		};
 	};

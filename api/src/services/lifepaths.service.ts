@@ -5,11 +5,11 @@ export async function GetLifepaths(): Promise<Lifepath[]> {
 	const convert = (l: LifepathDBO[], lr: LifepathRequirementBlockDBO[], lri: LifepathRequirementBlockItemDBO[]): Lifepath[] => {
 		const r: Lifepath[] = l.map(v => {
 			const lp: Lifepath = {
-				rulesets: v.Rulesets as unknown[] as RulesetId[],
-				id: v.Id as unknown as LifepathId,
+				rulesets: v.Rulesets,
+				id: v.Id,
 				name: v.Name,
-				stock: [v.StockId as unknown as StockId, v.Stock],
-				setting: [v.SettingId as unknown as SettingId, v.Setting],
+				stock: [v.StockId, v.Stock],
+				setting: [v.SettingId, v.Setting],
 				years: (v.Years.length === 1) ? v.Years[0] : v.Years,
 				pools: {
 					eitherStatPool: v.EitherPool,
@@ -31,14 +31,15 @@ export async function GetLifepaths(): Promise<Lifepath[]> {
 				}
 			};
 
-			if (v.LeadIds.length > 0) lp.leads = v.LeadIds.map(a => a as unknown as SettingId);
-			if (v.SkillIds.length > 0) lp.skills = v.SkillIds.map(a => a as unknown as SkillId);
-			if (v.TraitIds.length > 0) lp.traits = v.TraitIds.map(a => a as unknown as TraitId);
+			if (v.LeadIds.length > 0) lp.leads = v.LeadIds;
+			if (v.SkillIds.length > 0) lp.skills = v.SkillIds;
+			if (v.TraitIds.length > 0) lp.traits = v.TraitIds;
+
 			if (v.CompanionName && v.CompanionGivesSkills && v.CompanionSettingIds) {
 				lp.companion = {
 					name: v.CompanionName,
 					givesSkills: v.CompanionGivesSkills,
-					settingIds: v.CompanionSettingIds as unknown as SettingId[]
+					settingIds: v.CompanionSettingIds
 				};
 
 				if (v.CompanionGSPMultiplier && v.CompanionGSPMultiplier > 0) lp.companion.inheritGSPMultiplier = v.CompanionGSPMultiplier;
@@ -52,7 +53,7 @@ export async function GetLifepaths(): Promise<Lifepath[]> {
 			if (reqBlocks.length > 0) {
 				lp.requirements = reqBlocks.map(vrb => {
 					const rb: LifepathRequirementBlock = {
-						logicType: [vrb.LogicTypeId as unknown as LogicTypeId, vrb.LogicType] as [id: LogicTypeId, name: string],
+						logicType: [vrb.LogicTypeId, vrb.LogicType] as [id: LogicTypeId, name: string],
 						mustFulfill: vrb.MustFulfill,
 						fulfillmentAmount: vrb.FulfillmentAmount,
 						items: []
@@ -60,7 +61,7 @@ export async function GetLifepaths(): Promise<Lifepath[]> {
 
 					const items: LifepathRequirementItem[] = lri.filter(a => a.RequirementId === vrb.Id).map(vrbi => {
 						const rbi = {
-							logicType: [vrbi.RequirementTypeId as unknown as LogicTypeId, vrbi.RequirementType] as [id: LogicTypeId, name: string]
+							logicType: [vrbi.RequirementTypeId, vrbi.RequirementType] as [id: LogicTypeId, name: string]
 						};
 
 						if (vrbi.RequirementType === "UNIQUE") return { ...rbi, isUnique: true };
@@ -76,27 +77,27 @@ export async function GetLifepaths(): Promise<Lifepath[]> {
 						else if (vrbi.RequirementType === "FEMALE") return { ...rbi, gender: "Female" };
 						else if (vrbi.RequirementType === "MALE") return { ...rbi, gender: "Male" };
 						else if (vrbi.RequirementType === "OLDESTBY") return { ...rbi, oldestBy: vrbi.Max as number };
-						else if (vrbi.RequirementType === "ATTRIBUTE") {
+						else if (vrbi.RequirementType === "ATTRIBUTE" && vrbi.AttributeId && vrbi.Attribute) {
 							const atr: LifepathRequirementItem = {
 								...rbi,
-								attribute: [vrbi.AttributeId as unknown as AbilityId, vrbi.Attribute as string] as [id: AbilityId, name: string],
+								attribute: [vrbi.AttributeId, vrbi.Attribute] as [id: AbilityId, name: string],
 								forCompanion: vrbi.ForCompanion
 							};
 							if (vrbi.Min) atr.min = vrbi.Min;
 							if (vrbi.Max) atr.max = vrbi.Max;
 							return atr;
 						}
-						else if (vrbi.RequirementType === "SKILL") {
-							return { ...rbi, skill: [vrbi.SkillId as unknown as SkillId, vrbi.Skill as string], forCompanion: vrbi.ForCompanion };
+						else if (vrbi.RequirementType === "SKILL" && vrbi.SkillId && vrbi.Skill) {
+							return { ...rbi, skill: [vrbi.SkillId, vrbi.Skill], forCompanion: vrbi.ForCompanion };
 						}
-						else if (vrbi.RequirementType === "TRAIT") {
-							return { ...rbi, trait: [vrbi.TraitId as unknown as TraitId, vrbi.Trait as string], forCompanion: vrbi.ForCompanion };
+						else if (vrbi.RequirementType === "TRAIT" && vrbi.TraitId && vrbi.Trait) {
+							return { ...rbi, trait: [vrbi.TraitId, vrbi.Trait], forCompanion: vrbi.ForCompanion };
 						}
-						else if (vrbi.RequirementType === "LIFEPATH") {
-							return { ...rbi, lifepath: [vrbi.LifepathId as unknown as LifepathId, vrbi.Lifepath as string], forCompanion: vrbi.ForCompanion };
+						else if (vrbi.RequirementType === "LIFEPATH" && vrbi.LifepathId && vrbi.Lifepath) {
+							return { ...rbi, lifepath: [vrbi.LifepathId, vrbi.Lifepath as string], forCompanion: vrbi.ForCompanion };
 						}
-						else if (vrbi.RequirementType === "SETTING") {
-							return { ...rbi, setting: [vrbi.SettingId as unknown as SettingId, vrbi.Setting as string], forCompanion: vrbi.ForCompanion };
+						else if (vrbi.RequirementType === "SETTING" && vrbi.SettingId && vrbi.Setting) {
+							return { ...rbi, setting: [vrbi.SettingId, vrbi.Setting as string], forCompanion: vrbi.ForCompanion };
 						}
 						else throw new Error(`unidentified requirement block item type: ${vrbi.RequirementType}`);
 					});

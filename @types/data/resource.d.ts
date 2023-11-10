@@ -1,4 +1,6 @@
-type ResourceId = Nominal<"ResourceId">;
+type ResourceId = Nominal<number, "ResourceId">;
+
+type ResourceTypeId = Nominal<number, "ResourceTypeId">;
 
 interface ResourceMagicObstacleDetails {
 	obstacle?: number;

@@ -2,12 +2,12 @@ import { PgPool } from "../index";
 
 
 export async function GetRaCActions(): Promise<RaCAction[]> {
-	const convert = (a: RaCActionDBO[], ar: ActionResolutionDBO[]): RaCAction[] => {
+	const convert = (a: RaCActionDBO[], ar: RaCActionResolutionDBO[]): RaCAction[] => {
 		const r: RaCAction[] = a.map(v => {
 			const act: RaCAction = {
-				id: v.Id as unknown as RaCActionId,
+				id: v.Id,
 				name: v.Name,
-				group: [v.GroupId as unknown as RaCActionGroupId, v.Group],
+				group: [v.GroupId, v.Group],
 				flags: {},
 				effect: v.Effect
 			};
@@ -29,18 +29,18 @@ export async function GetRaCActions(): Promise<RaCAction[]> {
 
 				r.forEach(res => {
 					const actionRes: ActionResolution<RaCActionId> = {
-						opposingAction: [res.OpposingActionId as unknown as RaCActionId, res.OpposingAction],
-						type: [res.ResolutionTypeId as unknown as ActionResolutionTypeId, res.ResolutionType]
+						opposingAction: [res.OpposingActionId, res.OpposingAction],
+						type: [res.ResolutionTypeId, res.ResolutionType]
 					};
 
 					if (res.IsAgainstSkill) actionRes.isAgainstSkill = res.IsAgainstSkill;
 					if (res.Obstacle) actionRes.obstacle = res.Obstacle;
 					if (res.OpposingModifier) actionRes.opposingModifier = res.OpposingModifier;
 
-					if (res.SkillId !== null && res.Skill !== null) actionRes.skill = [res.SkillId as unknown as SkillId, res.Skill];
-					if (res.AbilityId !== null && res.Ability !== null) actionRes.ability = [res.AbilityId as unknown as AbilityId, res.Ability];
-					if (res.OpposingSkillId !== null && res.OpposingSkill) actionRes.opposingSkill = [res.OpposingSkillId as unknown as SkillId, res.OpposingSkill];
-					if (res.OpposingAbilityId !== null && res.OpposingAbility) actionRes.opposingAbility = [res.OpposingAbilityId as unknown as AbilityId, res.OpposingAbility];
+					if (res.SkillId !== null && res.Skill !== null) actionRes.skill = [res.SkillId, res.Skill];
+					if (res.AbilityId !== null && res.Ability !== null) actionRes.ability = [res.AbilityId, res.Ability];
+					if (res.OpposingSkillId !== null && res.OpposingSkill) actionRes.opposingSkill = [res.OpposingSkillId, res.OpposingSkill];
+					if (res.OpposingAbilityId !== null && res.OpposingAbility) actionRes.opposingAbility = [res.OpposingAbilityId, res.OpposingAbility];
 
 					act.resolutions?.push(actionRes);
 				});
@@ -56,6 +56,6 @@ export async function GetRaCActions(): Promise<RaCAction[]> {
 	const query2 = "select * from dat.\"RangeAndCoverActionResolutionList\";";
 	return Promise.all([
 		PgPool.query<RaCActionDBO>(query1),
-		PgPool.query<ActionResolutionDBO>(query2)
+		PgPool.query<RaCActionResolutionDBO>(query2)
 	]).then(result => convert(result[0].rows, result[1].rows));
 }

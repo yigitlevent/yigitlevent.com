@@ -5,11 +5,11 @@ export async function GetResources(): Promise<Resource[]> {
 	const convert = (re: ResourceDBO[], rmd: ResourceMagicDetailsDBO[], rmo: ResourceMagicObstaclesDBO[]): Resource[] => {
 		const r: Resource[] = re.map(v => {
 			const res: Resource = {
-				rulesets: v.Rulesets as unknown[] as RulesetId[],
-				id: v.Id as unknown as ResourceId,
+				rulesets: v.Rulesets,
+				id: v.Id,
 				name: v.Name,
-				stock: [v.StockId as unknown as StockId, v.Stock],
-				type: [v.ResourceTypeId as unknown as ResourceTypeId, v.ResourceType],
+				stock: [v.StockId, v.Stock],
+				type: [v.ResourceTypeId, v.ResourceType],
 				costs: [],
 				modifiers: []
 			};
@@ -22,9 +22,9 @@ export async function GetResources(): Promise<Resource[]> {
 			const mDetails = rmd.find(a => a.ResourceId === v.Id);
 			if (mDetails) {
 				const mdet: ResourceMagicDetails = {
-					origin: [mDetails.OriginId as unknown as OriginFacetId, mDetails.Origin],
-					duration: [mDetails.DurationId as unknown as DurationFacetId, mDetails.Duration],
-					areaOfEffect: [mDetails.AreaOfEffectId as unknown as AreaOfEffectFacetId, mDetails.AreaOfEffect],
+					origin: [mDetails.OriginId, mDetails.Origin],
+					duration: [mDetails.DurationId, mDetails.Duration],
+					areaOfEffect: [mDetails.AreaOfEffectId, mDetails.AreaOfEffect],
 					elements: [],
 					impetus: [],
 					actions: mDetails.Actions,
@@ -33,17 +33,17 @@ export async function GetResources(): Promise<Resource[]> {
 
 				if (mDetails.AreaOfEffectModifierId !== null || mDetails.AreaofEffectModifier || mDetails.AreaOfEffectUnitId !== null || mDetails.AreaOfEffectUnit) mdet.areaOfEffectDetails = {};
 				if (mdet.areaOfEffectDetails && mDetails.AreaOfEffectUnitId !== null && mDetails.AreaOfEffectUnit) {
-					mdet.areaOfEffectDetails.unit = [mDetails.AreaOfEffectUnitId as unknown as DistanceUnitId, mDetails.AreaOfEffectUnit];
+					mdet.areaOfEffectDetails.unit = [mDetails.AreaOfEffectUnitId, mDetails.AreaOfEffectUnit];
 				}
 				if (mdet.areaOfEffectDetails && mDetails.AreaOfEffectModifierId !== null && mDetails.AreaofEffectModifier) {
-					mdet.areaOfEffectDetails.modifier = [mDetails.AreaOfEffectModifierId as unknown as UnitModifierId, mDetails.AreaofEffectModifier];
+					mdet.areaOfEffectDetails.modifier = [mDetails.AreaOfEffectModifierId, mDetails.AreaofEffectModifier];
 				}
 
-				if (mDetails.Element1Id !== null && mDetails.Element1) mdet.elements.push([mDetails.Element1Id as unknown as ElementFacetId, mDetails.Element1]);
-				if (mDetails.Element2Id !== null && mDetails.Element2) mdet.elements.push([mDetails.Element2Id as unknown as ElementFacetId, mDetails.Element2]);
-				if (mDetails.Element3Id !== null && mDetails.Element3) mdet.elements.push([mDetails.Element3Id as unknown as ElementFacetId, mDetails.Element3]);
-				if (mDetails.Impetus1Id !== null && mDetails.Impetus1) mdet.impetus.push([mDetails.Impetus1Id as unknown as ImpetusFacetId, mDetails.Impetus1]);
-				if (mDetails.Impetus2Id !== null && mDetails.Impetus2) mdet.impetus.push([mDetails.Impetus2Id as unknown as ImpetusFacetId, mDetails.Impetus2]);
+				if (mDetails.Element1Id !== null && mDetails.Element1) mdet.elements.push([mDetails.Element1Id, mDetails.Element1]);
+				if (mDetails.Element2Id !== null && mDetails.Element2) mdet.elements.push([mDetails.Element2Id, mDetails.Element2]);
+				if (mDetails.Element3Id !== null && mDetails.Element3) mdet.elements.push([mDetails.Element3Id, mDetails.Element3]);
+				if (mDetails.Impetus1Id !== null && mDetails.Impetus1) mdet.impetus.push([mDetails.Impetus1Id, mDetails.Impetus1]);
+				if (mDetails.Impetus2Id !== null && mDetails.Impetus2) mdet.impetus.push([mDetails.Impetus2Id, mDetails.Impetus2]);
 
 				const mObs = rmo.filter(a => a.ResourceId === v.Id);
 				if (mObs.length > 0) {
@@ -53,10 +53,10 @@ export async function GetResources(): Promise<Resource[]> {
 						else if (mo.ObstacleAbility1Id !== null || mo.ObstacleAbility1 !== null || mo.ObstacleAbility2Id !== null || mo.ObstacleAbility2 !== null) {
 							obsDet.abilities = [];
 							if (obsDet.abilities && mo.ObstacleAbility1Id !== null && mo.ObstacleAbility1 !== null) {
-								obsDet.abilities.push([mo.ObstacleAbility1Id as unknown as AbilityId, mo.ObstacleAbility1]);
+								obsDet.abilities.push([mo.ObstacleAbility1Id, mo.ObstacleAbility1]);
 							}
 							if (obsDet.abilities && mo.ObstacleAbility2Id !== null && mo.ObstacleAbility2 !== null) {
-								obsDet.abilities.push([mo.ObstacleAbility2Id as unknown as AbilityId, mo.ObstacleAbility2]);
+								obsDet.abilities.push([mo.ObstacleAbility2Id, mo.ObstacleAbility2]);
 							}
 						}
 

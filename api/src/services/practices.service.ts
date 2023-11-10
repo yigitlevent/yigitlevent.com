@@ -5,8 +5,8 @@ export async function GetPractices(): Promise<Practice[]> {
 	const convert = (v: PracticeDBO): Practice => {
 		if (v.Ability !== null && v.AbilityId !== null) {
 			return {
-				id: v.Id as unknown as PracticeId,
-				ability: [v.AbilityId as unknown as AbilityId, v.Ability],
+				id: v.Id,
+				ability: [v.AbilityId, v.Ability],
 				cycle: v.Cycle,
 				routine: v.Routine,
 				difficult: v.Difficult,
@@ -15,8 +15,8 @@ export async function GetPractices(): Promise<Practice[]> {
 		}
 		else if (v.SkillType !== null && v.SkillTypeId !== null) {
 			return {
-				id: v.Id as unknown as PracticeId,
-				skillType: [v.SkillTypeId as unknown as SkillTypeId, v.SkillType],
+				id: v.Id,
+				skillType: [v.SkillTypeId, v.SkillType],
 				cycle: v.Cycle,
 				routine: v.Routine,
 				difficult: v.Difficult,

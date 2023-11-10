@@ -2,10 +2,10 @@ import { PgPool } from "../index";
 
 
 export async function GetDoWActions(): Promise<DoWAction[]> {
-	const convert = (a: DoWActionDBO[], at: ActionTestDBO[], ar: ActionResolutionDBO[]): DoWAction[] => {
+	const convert = (a: DoWActionDBO[], at: ActionTestDBO[], ar: DoWActionResolutionDBO[]): DoWAction[] => {
 		const r: DoWAction[] = a.map(v => {
 			const act: DoWAction = {
-				id: v.Id as unknown as DoWActionId,
+				id: v.Id,
 				name: v.Name
 			};
 
@@ -21,8 +21,8 @@ export async function GetDoWActions(): Promise<DoWAction[]> {
 				};
 
 				t.forEach(test => {
-					if (test.Ability && test.AbilityId !== null) act.tests?.abilities.push([test.AbilityId as unknown as AbilityId, test.Ability]);
-					if (test.Skill && test.SkillId !== null) act.tests?.skills.push([test.SkillId as unknown as SkillId, test.Skill]);
+					if (test.Ability && test.AbilityId !== null) act.tests?.abilities.push([test.AbilityId, test.Ability]);
+					if (test.Skill && test.SkillId !== null) act.tests?.skills.push([test.SkillId, test.Skill]);
 				});
 			}
 
@@ -32,18 +32,18 @@ export async function GetDoWActions(): Promise<DoWAction[]> {
 
 				r.forEach(res => {
 					const actionRes: ActionResolution<DoWActionId> = {
-						opposingAction: [res.OpposingActionId as unknown as DoWActionId, res.OpposingAction],
-						type: [res.ResolutionTypeId as unknown as ActionResolutionTypeId, res.ResolutionType]
+						opposingAction: [res.OpposingActionId, res.OpposingAction],
+						type: [res.ResolutionTypeId, res.ResolutionType]
 					};
 
 					if (res.IsAgainstSkill) actionRes.isAgainstSkill = res.IsAgainstSkill;
 					if (res.Obstacle) actionRes.obstacle = res.Obstacle;
 					if (res.OpposingModifier) actionRes.opposingModifier = res.OpposingModifier;
 
-					if (res.SkillId !== null && res.Skill !== null) actionRes.skill = [res.SkillId as unknown as SkillId, res.Skill];
-					if (res.AbilityId !== null && res.Ability !== null) actionRes.ability = [res.AbilityId as unknown as AbilityId, res.Ability];
-					if (res.OpposingSkillId !== null && res.OpposingSkill) actionRes.opposingSkill = [res.OpposingSkillId as unknown as SkillId, res.OpposingSkill];
-					if (res.OpposingAbilityId !== null && res.OpposingAbility) actionRes.opposingAbility = [res.OpposingAbilityId as unknown as AbilityId, res.OpposingAbility];
+					if (res.SkillId !== null && res.Skill !== null) actionRes.skill = [res.SkillId, res.Skill];
+					if (res.AbilityId !== null && res.Ability !== null) actionRes.ability = [res.AbilityId, res.Ability];
+					if (res.OpposingSkillId !== null && res.OpposingSkill) actionRes.opposingSkill = [res.OpposingSkillId, res.OpposingSkill];
+					if (res.OpposingAbilityId !== null && res.OpposingAbility) actionRes.opposingAbility = [res.OpposingAbilityId, res.OpposingAbility];
 
 					act.resolutions?.push(actionRes);
 				});
@@ -61,6 +61,6 @@ export async function GetDoWActions(): Promise<DoWAction[]> {
 	return Promise.all([
 		PgPool.query<DoWActionDBO>(query1),
 		PgPool.query<ActionTestDBO>(query2),
-		PgPool.query<ActionResolutionDBO>(query3)
+		PgPool.query<DoWActionResolutionDBO>(query3)
 	]).then(result => convert(result[0].rows, result[1].rows, result[2].rows));
 }

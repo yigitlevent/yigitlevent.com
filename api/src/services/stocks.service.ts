@@ -5,12 +5,12 @@ export async function GetStocks(rulesets: RulesetId[]): Promise<Stock[]> {
 	const convert = (v: StockDBO[], a: AgePoolDBO[]): Stock[] => {
 		return v.map(stock => {
 			return {
-				rulesets: stock.Rulesets as unknown[] as RulesetId[],
-				id: stock.Id as unknown as StockId,
+				rulesets: stock.Rulesets,
+				id: stock.Id,
 				name: stock.Name,
 				namePlural: stock.NamePlural,
 				stride: stock.Stride,
-				settingIds: stock.SettingIds as unknown[] as SettingId[],
+				settingIds: stock.SettingIds,
 				agePool: a.filter(ap => ap.StockId === stock.Id).map(ap => ({ minAge: ap.MinAge, mentalPool: ap.MentalPool, physicalPool: ap.PhysicalPool }))
 			};
 		});

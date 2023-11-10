@@ -1,113 +1,106 @@
-interface UserDBO {
-	Id: string;
-	Username: string;
-	Email: string;
-	Password: string;
-}
-
 interface RulesetDBO {
-	Id: string;
+	Id: RulesetId;
 	Name: string;
 	IsOfficial: boolean;
 	IsPublic: boolean;
 	IsExpansion: boolean;
 	User: string | null;
-	ExpansionIds: string[];
+	ExpansionIds: RulesetId[];
 }
 
 interface AbilityDBO {
-	Id: number;
+	Id: AbilityId;
 	Name: string;
-	AbilityTypeId: number;
+	AbilityTypeId: AbilityTypeId;
 	AbilityType: string;
 	HasShades: boolean;
 	Cycle: number | null;
 	Routine: number | null;
 	Difficult: number | null;
 	Challenging: number | null;
-	RequiredTraitId: number | null;
+	RequiredTraitId: TraitId | null;
 	RequiredTrait: string | null;
 }
 
 interface StockDBO {
-	Rulesets: string[];
-	Id: number;
+	Rulesets: RulesetId[];
+	Id: StockId;
 	Name: string;
 	NamePlural: string;
 	Stride: number;
-	SettingIds: string[];
+	SettingIds: SettingId[];
 }
 
 interface AgePoolDBO {
 	Id: number;
-	StockId: number;
+	StockId: StockId;
 	MinAge: number;
 	MentalPool: number;
 	PhysicalPool: number;
 }
 
 interface SettingDBO {
-	Rulesets: string[];
-	Id: number;
+	Rulesets: RulesetId[];
+	Id: SettingId;
 	Name: string;
 	NameShort: string;
-	StockId: number;
+	StockId: StockId;
 	StockName: string;
 	IsSubsetting: boolean;
 }
 
 interface SkillDBO {
-	Rulesets: string[];
-	Id: number;
+	Rulesets: RulesetId[];
+	Id: SkillId;
 	Name: string;
-	StockId: number | null;
+	StockId: StockId | null;
 	Stock: string | null;
-	CategoryId: number;
+	CategoryId: SkillCategoryId;
 	Category: string;
-	TypeId: number;
+	TypeId: SkillTypeId;
 	Type: string;
-	RootIds: number[];
+	RootIds: AbilityId[];
 	Roots: string[];
 	DontList: boolean;
 	IsMagical: boolean;
 	IsTraining: boolean;
-	ToolTypeId: number;
+	ToolTypeId: SkillToolTypeId;
 	Tool: string;
 	ToolDescription: string | null;
 	Description: string | null;
-	RestrictionOnlyStockId: number | null;
+	RestrictionOnlyStockId: StockId | null;
 	RestrictionOnlyStock: string | null;
 	RestrictionWhenBurning: boolean | null;
-	RestrictionAbilityId: number | null;
+	RestrictionAbilityId: AbilityId | null;
 	RestrictionAbility: string | null;
-	SubskillIds: number[];
+	SubskillIds: SkillId[];
 }
 
 interface TraitDBO {
-	Rulesets: string[];
-	Id: number;
+	Rulesets: RulesetId[];
+	Id: TraitId;
 	Name: string;
-	StockId: number | null;
+	StockId: StockId | null;
 	Stock: string | null;
-	CategoryId: number;
+	CategoryId: TraitCategoryId;
 	Category: string;
-	TypeId: number;
+	TypeId: TraitTypeId;
 	Type: string;
 	Cost: number;
 	Description: string | null;
 }
 
 interface LifepathDBO {
-	Rulesets: string[];
-	Id: number;
+	Rulesets: RulesetId[];
+	Id: LifepathId;
 	Name: string;
-	StockId: number;
+	StockId: StockId;
 	Stock: string;
-	SettingId: number;
+	SettingId: SettingId;
 	Setting: string;
-	LeadIds: number[];
-	SkillIds: number[];
-	TraitIds: number[];
+	LeadIds: SettingId[];
+	SkillIds: SkillId[];
+	TraitIds: TraitId[];
 	Born: boolean;
 	Years: number[];
 	EitherPool: number;
@@ -129,7 +122,7 @@ interface LifepathDBO {
 	CompanionGSPMultiplier: number | null;
 	CompanionLSPMultiplier: number | null;
 	CompanionRPMultiplier: number | null;
-	CompanionSettingIds: number[];
+	CompanionSettingIds: SettingId[];
 }
 
 interface LifepathRequirementBlockDBO {
@@ -148,25 +141,25 @@ interface LifepathRequirementBlockItemDBO {
 	ForCompanion: boolean;
 	Min: number | null;
 	Max: number | null;
-	SettingId: number | null;
+	SettingId: SettingId | null;
 	Setting: string | null;
-	LifepathId: number | null;
+	LifepathId: LifepathId | null;
 	Lifepath: string | null;
-	SkillId: number | null;
+	SkillId: SkillId | null;
 	Skill: string | null;
-	TraitId: number | null;
+	TraitId: TraitId | null;
 	Trait: string | null;
 	AttributeId: number | null;
 	Attribute: string | null;
 }
 
 interface ResourceDBO {
-	Rulesets: string[];
-	Id: number;
+	Rulesets: RulesetId[];
+	Id: ResourceId;
 	Name: string;
-	StockId: number;
+	StockId: StockId;
 	Stock: string;
-	ResourceTypeId: number;
+	ResourceTypeId: ResourceTypeId;
 	ResourceType: string;
 	Description: string | null;
 	VariableCost: boolean;
@@ -179,26 +172,26 @@ interface ResourceDBO {
 
 interface ResourceMagicDetailsDBO {
 	Id: number;
-	ResourceId: number;
-	OriginId: number;
+	ResourceId: ResourceId;
+	OriginId: OriginFacetId;
 	Origin: string;
-	DurationId: number;
+	DurationId: DurationFacetId;
 	Duration: string;
-	AreaOfEffectId: number;
+	AreaOfEffectId: AreaOfEffectFacetId;
 	AreaOfEffect: string;
-	AreaOfEffectUnitId: number | null;
+	AreaOfEffectUnitId: DistanceUnitId | null;
 	AreaOfEffectUnit: string | null;
-	AreaOfEffectModifierId: number | null;
+	AreaOfEffectModifierId: UnitModifierId | null;
 	AreaofEffectModifier: string | null;
-	Element1Id: number;
+	Element1Id: ElementFacetId;
 	Element1: string;
-	Element2Id: number | null;
+	Element2Id: ElementFacetId | null;
 	Element2: string | null;
-	Element3Id: number | null;
+	Element3Id: ElementFacetId | null;
 	Element3: string | null;
-	Impetus1Id: number;
+	Impetus1Id: ImpetusFacetId;
 	Impetus1: string;
-	Impetus2Id: number | null;
+	Impetus2Id: ImpetusFacetId | null;
 	Impetus2: string | null;
 	Actions: number;
 	ActionsMultiply: boolean;
@@ -206,18 +199,18 @@ interface ResourceMagicDetailsDBO {
 
 interface ResourceMagicObstaclesDBO {
 	Id: number;
-	ResourceId: number;
+	ResourceId: ResourceId;
 	Obstacle: number | null;
-	ObstacleAbility1Id: number | null;
+	ObstacleAbility1Id: AbilityId | null;
 	ObstacleAbility1: string | null;
-	ObstacleAbility2Id: number | null;
+	ObstacleAbility2Id: AbilityId | null;
 	ObstacleAbility2: string | null;
 	ObstacleCaret: boolean;
 	Description: string | null;
 }
 
 interface DoWActionDBO {
-	Id: number;
+	Id: DoWActionId;
 	Name: string;
 	SpeakingThePart: string | null;
 	Special: string | null;
@@ -225,9 +218,9 @@ interface DoWActionDBO {
 }
 
 interface RaCActionDBO {
-	Id: number;
+	Id: RaCActionId;
 	Name: string;
-	GroupId: number;
+	GroupId: RaCActionGroupId;
 	Group: string;
 	UseForks: boolean;
 	UseWeaponRangeAdvantage: boolean;
@@ -241,9 +234,9 @@ interface RaCActionDBO {
 }
 
 interface FightActionDBO {
-	Id: number;
+	Id: FightActionId;
 	Name: string;
-	GroupId: number;
+	GroupId: FightActionGroupId;
 	Group: string;
 	ActionCost: number | null;
 	TestExtra: string | null;
@@ -261,11 +254,11 @@ interface ActionTestDBO {
 	Ability: string | null;
 }
 
-interface ActionResolutionDBO {
+interface ActionResolutionDBO<T> {
 	ActionId: number;
-	OpposingActionId: number;
+	OpposingActionId: T;
 	OpposingAction: string;
-	ResolutionTypeId: number;
+	ResolutionTypeId: ActionResolutionTypeId;
 	ResolutionType: string;
 	IsAgainstSkill: boolean | null;
 	Obstacle: number | null;
@@ -280,11 +273,15 @@ interface ActionResolutionDBO {
 	OpposingAbility: string;
 }
 
+type DoWActionResolutionDBO = ActionResolutionDBO<DoWActionId>
+type RaCActionResolutionDBO = ActionResolutionDBO<RaCActionId>
+type FightActionResolutionDBO = ActionResolutionDBO<FightActionId>
+
 interface PracticeDBO {
-	Id: number;
-	AbilityId: number | null;
+	Id: PracticeId;
+	AbilityId: AbilityId | null;
 	Ability: string | null;
-	SkillTypeId: number | null;
+	SkillTypeId: SkillTypeId | null;
 	SkillType: string | null;
 	Cycle: number;
 	Routine: number;
@@ -293,7 +290,7 @@ interface PracticeDBO {
 }
 
 interface QuestionDTO {
-	id: number;
-	name: string;
-	question: string;
+	Id: QuestionId;
+	Name: string;
+	Question: string;
 }

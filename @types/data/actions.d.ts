@@ -1,63 +1,12 @@
-interface Stock {
-	rulesets: RulesetId[];
-	id: StockId;
-	name: string;
-	namePlural: string;
-	stride: number;
-	settingIds: SettingId[];
-	agePool: {
-		minAge: number;
-		mentalPool: number;
-		physicalPool: number;
-	}[];
-}
+type DoWActionId = Nominal<number, "DoWActionId">;
 
-interface Setting {
-	rulesets: RulesetId[];
-	id: SettingId;
-	name: string;
-	nameShort: string;
-	stock: [id: StockId, name: string];
-	isSubsetting: boolean;
-}
+type RaCActionId = Nominal<number, "RaCActionId">;
+type RaCActionGroupId = Nominal<number, "RaCActionGroupId">;
 
-interface Skill {
-	rulesets: RulesetId[];
-	id: SkillId;
-	name: string;
-	stock?: [id: StockId, name: string];
-	category: [id: SkillCategoryId, name: string];
-	type: [id: SkillTypeId, name: string];
-	roots?: [id: AbilityId, name: string][];
-	flags: {
-		dontList: boolean;
-		isMagical: boolean;
-		isTraining: boolean;
-	};
-	tool: {
-		typeId: SkillToolTypeId;
-		tool: string;
-		description?: string;
-	};
-	description?: string;
-	restriction?: {
-		onlyStock: [id: StockId, name: string];
-		onlyWithAbility?: [id: AbilityId, name: string];
-		onlyAtBurn?: boolean;
-	};
-	subskillIds?: SkillId[];
-}
+type FightActionGroupId = Nominal<number, "FightActionGroupId">;
+type FightActionId = Nominal<number, "FightActionId">;
 
-interface Trait {
-	rulesets: RulesetId[];
-	id: TraitId;
-	name: string;
-	stock?: [id: StockId, name: string];
-	category: [id: TraitCategoryId, name: string];
-	type: [id: TraitTypeId, name: string];
-	cost: number;
-	description?: string;
-}
+type ActionResolutionTypeId = Nominal<number, "ActionResolutionTypeId">;
 
 
 interface ActionResolution<T> {
@@ -121,22 +70,6 @@ interface FightAction {
 	resolutions?: ActionResolution<FightActionId>[];
 }
 
-type Practice = RequireOnlyOne<{
-	id: PracticeId;
-	ability?: [id: AbilityId, name: string];
-	skillType?: [id: SkillTypeId, name: string];
-	cycle: number;
-	routine: number;
-	difficult: number;
-	challenging: number;
-}, "ability" | "skillType">;
-
-interface Question {
-	id: QuestionId;
-	name: string;
-	question: string;
-}
-
 interface ActionPlannerExtension {
 	open: boolean;
 	visible: boolean;
@@ -145,5 +78,3 @@ interface ActionPlannerExtension {
 type DoWActionExtended = DoWAction & ActionPlannerExtension;
 type RaCActionExtended = RaCAction & ActionPlannerExtension;
 type FightActionExtended = FightAction & ActionPlannerExtension;
-
-
