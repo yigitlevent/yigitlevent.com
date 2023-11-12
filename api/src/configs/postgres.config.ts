@@ -9,8 +9,8 @@ export const PgConfig: PoolConfig = {
 	port: parseInt(process.env.API_PGPORT as string),
 	max: 20,
 	idleTimeoutMillis: 0,
-	connectionTimeoutMillis: 0,
-	log: (messages) => console.log(messages)
+	connectionTimeoutMillis: 0
+	//log: (messages) => console.log(messages)
 };
 
 declare module "express-session" {

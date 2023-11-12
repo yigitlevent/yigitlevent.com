@@ -7,7 +7,7 @@ import { PopoverLink } from "../../Shared/PopoverLink";
 
 
 export function LifepathSkills({ lifepath }: { lifepath: Lifepath; }): JSX.Element {
-	const { getSkill } = useRulesetStore();
+	const { skills, getSkill } = useRulesetStore();
 
 	const hasGeneralSkill = lifepath.pools.generalSkillPool !== 0;
 	const hasLifepathSkill = lifepath.pools.lifepathSkillPool !== 0;
@@ -17,6 +17,7 @@ export function LifepathSkills({ lifepath }: { lifepath: Lifepath; }): JSX.Eleme
 	const lifepathSkills
 		= lifepath.skills
 			? lifepath.skills
+				.filter(skillId => skills.findIndex(x => x.id === skillId) > -1)
 				.map(skillId => {
 					const skill = getSkill(skillId);
 					if (skill) return skill;

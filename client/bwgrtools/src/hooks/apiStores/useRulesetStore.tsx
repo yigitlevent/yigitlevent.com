@@ -68,7 +68,7 @@ export const useRulesetStore = create<RulesetStore>()(
 			fetching: true,
 
 			rulesets: [],
-			chosenRulesets: ["bwgr" as unknown as RulesetId, "bwc" as unknown as RulesetId], // TODO: this shouldn't be fixed
+			chosenRulesets: ["bwgr" as RulesetId, "bwc" as RulesetId], // TODO: this shouldn't be fixed
 
 			abilities: [],
 			abilityTypes: [],

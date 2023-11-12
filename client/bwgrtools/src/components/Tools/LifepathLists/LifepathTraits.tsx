@@ -7,11 +7,12 @@ import { PopoverLink } from "../../Shared/PopoverLink";
 
 
 export function LifepathTraits({ lifepath }: { lifepath: Lifepath; }): JSX.Element {
-	const { getTrait } = useRulesetStore();
+	const { traits, getTrait } = useRulesetStore();
 
 	const lifepathTraits
 		= lifepath.traits
 			? lifepath.traits
+				.filter(traitId => traits.findIndex(x => x.id === traitId) > -1)
 				.map(traitId => {
 					const trait = getTrait(traitId);
 					if (trait) return trait;

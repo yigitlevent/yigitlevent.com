@@ -9,7 +9,7 @@ import { useRulesetStore } from "../../../hooks/apiStores/useRulesetStore";
 
 
 export function LifepathBox({ lifepath }: { lifepath: Lifepath; }): JSX.Element {
-	const { getSetting } = useRulesetStore();
+	const { settings, getSetting } = useRulesetStore();
 
 	const getYears = (l: Lifepath) => {
 		const years = typeof l.years === "number"
@@ -38,6 +38,7 @@ export function LifepathBox({ lifepath }: { lifepath: Lifepath; }): JSX.Element 
 	const getLeads = (l: Lifepath) => {
 		const leads = (l.leads && l.leads.length > 0)
 			? l.leads
+				.filter(settingId => settings.findIndex(x => x.id === settingId) > -1)
 				.map(settingId => {
 					const s = getSetting(settingId);
 					if (s) return s.nameShort;
