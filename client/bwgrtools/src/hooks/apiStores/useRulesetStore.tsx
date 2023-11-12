@@ -108,7 +108,7 @@ export const useRulesetStore = create<RulesetStore>()(
 			},
 
 			fetchList: () => {
-				GenericGet<RulesetList>("/ruleset/list")
+				GenericGet<RulesetsResponse>("/ruleset/list")
 					.then(response => {
 						if (response.status === 200) {
 							set(produce<RulesetStore>((state) => { state.rulesets = response.data.rulesets; }));
@@ -122,36 +122,36 @@ export const useRulesetStore = create<RulesetStore>()(
 				const toggleFetching = get().toggleFetching;
 				const rulesets = get().chosenRulesets;
 
-				GenericPost<RulesetData>("/ruleset/data", { rulesets })
+				GenericPost<RulesetResponse>("/ruleset/data", { rulesets })
 					.then(response => {
 						if (response.status === 200) {
 							set(produce<RulesetStore>((state) => {
-								state.abilities = response.data.abilities;
-								state.abilityTypes = [...response.data.abilities.reduce((a, v) => a.add(v.abilityType[1]), new Set<string>())];
+								state.abilities = response.data.ruleset.abilities;
+								state.abilityTypes = [...response.data.ruleset.abilities.reduce((a, v) => a.add(v.abilityType[1]), new Set<string>())];
 
-								state.stocks = response.data.stocks;
-								state.settings = response.data.settings;
+								state.stocks = response.data.ruleset.stocks;
+								state.settings = response.data.ruleset.settings;
 
-								state.skills = response.data.skills;
-								state.skillCategories = [...response.data.skills.reduce((a, v) => a.add(v.category[1]), new Set<string>())];
-								state.skillTypes = [...response.data.skills.reduce((a, v) => a.add(v.type[1]), new Set<string>())];
+								state.skills = response.data.ruleset.skills;
+								state.skillCategories = [...response.data.ruleset.skills.reduce((a, v) => a.add(v.category[1]), new Set<string>())];
+								state.skillTypes = [...response.data.ruleset.skills.reduce((a, v) => a.add(v.type[1]), new Set<string>())];
 
-								state.traits = response.data.traits;
-								state.traitCategories = [...response.data.traits.reduce((a, v) => a.add(v.category[1]), new Set<string>())];
-								state.traitTypes = [...response.data.traits.reduce((a, v) => a.add(v.type[1]), new Set<string>())];
+								state.traits = response.data.ruleset.traits;
+								state.traitCategories = [...response.data.ruleset.traits.reduce((a, v) => a.add(v.category[1]), new Set<string>())];
+								state.traitTypes = [...response.data.ruleset.traits.reduce((a, v) => a.add(v.type[1]), new Set<string>())];
 
-								state.lifepaths = response.data.lifepaths;
+								state.lifepaths = response.data.ruleset.lifepaths;
 
-								state.resources = response.data.resources;
-								state.resourceTypes = [...response.data.resources.reduce((a, v) => a.add(v.type[1]), new Set<string>())];
+								state.resources = response.data.ruleset.resources;
+								state.resourceTypes = [...response.data.ruleset.resources.reduce((a, v) => a.add(v.type[1]), new Set<string>())];
 
-								state.spellFacets = response.data.spellFacets;
+								state.spellFacets = response.data.ruleset.spellFacets;
 
-								state.dowActions = response.data.dowActions;
-								state.racActions = response.data.racActions;
-								state.fightActions = response.data.fightActions;
+								state.dowActions = response.data.ruleset.dowActions;
+								state.racActions = response.data.ruleset.racActions;
+								state.fightActions = response.data.ruleset.fightActions;
 
-								state.practices = response.data.practices;
+								state.practices = response.data.ruleset.practices;
 							}));
 						}
 						else throw new Error();
