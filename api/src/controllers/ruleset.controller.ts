@@ -15,7 +15,7 @@ import { GetStocks } from "../services/stocks.service";
 import { GetTraits } from "../services/traits.service";
 
 
-export async function GetRulesetsData(request: Request<unknown, unknown, RulesetForms>, response: Response): UntypedControllerReturn {
+export async function GetRulesetsData(request: Request<unknown, unknown, RulesetForms>, response: Response): Promise<Response<RulesetResponse, Record<string, unknown>>> {
 	try {
 		const { rulesets } = request.body;
 
@@ -32,10 +32,10 @@ export async function GetRulesetsData(request: Request<unknown, unknown, Ruleset
 		const fightActions = await GetFightActions();
 		const practices = await GetPractices();
 
-		const data: RulesetData = { abilities, stocks, settings, skills, traits, lifepaths, resources, spellFacets, dowActions, racActions, fightActions, practices };
+		const responseData: RulesetResponse = { ruleset: { abilities, stocks, settings, skills, traits, lifepaths, resources, spellFacets, dowActions, racActions, fightActions, practices } };
 
 		response.status(200);
-		return response.json(data);
+		return response.json(responseData);
 	}
 	catch (e) {
 		console.error(e);
@@ -43,12 +43,14 @@ export async function GetRulesetsData(request: Request<unknown, unknown, Ruleset
 	}
 }
 
-export async function GetRulesetsList(request: Request, response: Response): UntypedControllerReturn {
+export async function GetRulesetsList(request: Request, response: Response): Promise<Response<RulesetsResponse, Record<string, unknown>>> {
 	try {
 		const data = await GetRulesets();
 
+		const responseData: RulesetsResponse = { rulesets: data };
+
 		response.status(200);
-		return response.json({ rulesets: data });
+		return response.json(responseData);
 	}
 	catch (e) {
 		console.error(e);

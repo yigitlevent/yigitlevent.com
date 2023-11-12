@@ -10,10 +10,6 @@ interface Ruleset {
 	expansionIds?: RulesetId[];
 }
 
-interface RulesetList {
-	rulesets: Ruleset[];
-}
-
 interface RulesetData {
 	abilities: Ability[];
 	stocks: Stock[];

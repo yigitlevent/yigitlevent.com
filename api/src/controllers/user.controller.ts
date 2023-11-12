@@ -5,11 +5,11 @@ import { PgPool } from "../index";
 import { FindUserByEmail, UpdateUserLastSignInAt } from "../services/user.service";
 
 
-export async function UserAuth(request: Request, response: Response): UntypedControllerReturn {
+export async function UserAuth(request: Request, response: Response): Promise<Response<unknown, Record<string, unknown>>> {
 	return response.json({ user: request.session.user });
 }
 
-export async function UserSignUp(request: Request<unknown, unknown, UserSignupRequest>, response: Response<UserResponse>): UntypedControllerReturn {
+export async function UserSignUp(request: Request<unknown, unknown, UserSignupRequest>, response: Response<UserResponse>): Promise<Response<UserResponse, Record<string, unknown>>> {
 	const { username, email, password } = request.body;
 
 	try {
@@ -30,7 +30,7 @@ export async function UserSignUp(request: Request<unknown, unknown, UserSignupRe
 	}
 }
 
-export async function UserSignIn(request: Request<unknown, unknown, UserSigninRequest>, response: Response<UserResponse>): UntypedControllerReturn {
+export async function UserSignIn(request: Request<unknown, unknown, UserSigninRequest>, response: Response<UserResponse>): Promise<Response<UserResponse, Record<string, unknown>>> {
 	const { email, password } = request.body;
 
 	try {
@@ -55,7 +55,7 @@ export async function UserSignIn(request: Request<unknown, unknown, UserSigninRe
 	}
 }
 
-export async function UserSignOut(request: Request, response: Response): UntypedControllerReturn {
+export async function UserSignOut(request: Request, response: Response): Promise<Response<unknown, Record<string, unknown>>> {
 	try {
 		request.session.destroy(() => { /* console.log("session destroyed") */ });
 		response.clearCookie("connect.sid");

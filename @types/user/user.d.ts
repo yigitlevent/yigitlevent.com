@@ -4,3 +4,5 @@ interface User {
 	email: string;
 	password: string;
 }
+
+type UserSession = Omit<User, "password">;
