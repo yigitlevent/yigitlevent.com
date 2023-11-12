@@ -6,14 +6,14 @@ import Paper from "@mui/material/Paper";
 import TextField from "@mui/material/TextField";
 import { Fragment, useCallback, useEffect, useState } from "react";
 
-import { useCharacterBurnerStore } from "../../../../hooks/featureStores/useCharacterBurnerStore";
+import { useCharacterBurnerLifepathStore } from "../../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerLifepath";
 import { GenericGrid } from "../../../Shared/Grids";
 import { LifepathBox } from "../../LifepathLists/LifepathBox";
 
 
 // TODO: random lifepath selection: "Choose Lifepaths" or "Random Lifepaths"
 export function LifepathSelection({ isOpen, close }: { isOpen: boolean; close: () => void; }): JSX.Element {
-	const { availableLifepaths, lifepaths, addLifepath, removeLastLifepath } = useCharacterBurnerStore();
+	const { availableLifepaths, lifepaths, addLifepath, removeLastLifepath } = useCharacterBurnerLifepathStore();
 
 	const [disabled, setDisabled] = useState(false);
 	const [chosen, setChosen] = useState<Lifepath>(availableLifepaths[0]);

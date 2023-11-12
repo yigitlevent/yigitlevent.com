@@ -5,24 +5,21 @@ import TextField from "@mui/material/TextField";
 import { useEffect, useState } from "react";
 
 import { useRulesetStore } from "../../../../hooks/apiStores/useRulesetStore";
-import { useCharacterBurnerStore } from "../../../../hooks/featureStores/useCharacterBurnerStore";
+import { useCharacterBurnerBasicsStore } from "../../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerBasics";
+import { useCharacterBurnerLifepathStore } from "../../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerLifepath";
 import { GenericGrid } from "../../../Shared/Grids";
 
 
 export function Basics({ openModal }: { openModal: (name: CharacterBurnerModals) => void; }): JSX.Element {
 	const { stocks, getStock } = useRulesetStore();
-	const {
-		reset, lifepaths,
-		name, gender, concept,
-		setName, setGender, setConcept,
-		getAge
-	} = useCharacterBurnerStore();
+	const { setStockAndReset, name, gender, concept, setName, setGender, setConcept } = useCharacterBurnerBasicsStore();
+	const { getAge, lifepaths } = useCharacterBurnerLifepathStore();
 
 	const [stock, setStock] = useState<[StockId, string]>([0 as unknown as StockId, "Dwarf"]);
 
 	useEffect(() => {
-		reset(stock);
-	}, [reset, stock]);
+		setStockAndReset(stock);
+	}, [setStockAndReset, stock]);
 
 	return (
 		<GenericGrid columns={6} center>

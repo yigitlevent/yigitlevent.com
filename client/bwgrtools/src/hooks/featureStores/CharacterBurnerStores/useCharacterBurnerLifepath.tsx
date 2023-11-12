@@ -2,6 +2,7 @@ import { produce } from "immer";
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 
+import { useCharacterBurnerMiscStore } from "./useCharacterBurnerMisc";
 import { Pairwise } from "../../../utils/misc";
 import { useCharacterBurnerAttributeStore } from "../CharacterBurnerStores/useCharacterBurnerAttribute";
 import { useCharacterBurnerBasicsStore } from "../CharacterBurnerStores/useCharacterBurnerBasics";
@@ -13,6 +14,8 @@ import { useCharacterBurnerTraitStore } from "../CharacterBurnerStores/useCharac
 export type CharacterBurnerLifepathState = {
 	availableLifepaths: Lifepath[];
 	lifepaths: Lifepath[];
+
+	reset: () => void;
 
 	addLifepath: (lifepath: Lifepath) => void;
 	removeLastLifepath: () => void;
@@ -39,6 +42,13 @@ export const useCharacterBurnerLifepathStore = create<CharacterBurnerLifepathSta
 		(set, get) => ({
 			availableLifepaths: [],
 			lifepaths: [],
+
+			reset: (): void => {
+				set({
+					availableLifepaths: [],
+					lifepaths: []
+				});
+			},
 
 			addLifepath: (lifepath: Lifepath): void => {
 				set(produce<CharacterBurnerLifepathState>((state) => {
@@ -149,7 +159,8 @@ export const useCharacterBurnerLifepathStore = create<CharacterBurnerLifepathSta
 			updateAvailableLifepaths: (): Lifepath[] => {
 				const { lifepaths, hasLifepath, hasSetting, getAge } = get();
 
-				const { gender, stock, hasQuestionTrue } = useCharacterBurnerBasicsStore.getState();
+				const { gender, stock } = useCharacterBurnerBasicsStore.getState();
+				const { hasQuestionTrue } = useCharacterBurnerMiscStore.getState();
 				const { hasSkillOpen } = useCharacterBurnerSkillStore.getState();
 				const { hasTraitOpen } = useCharacterBurnerTraitStore.getState();
 				const { attributes, hasAttribute } = useCharacterBurnerAttributeStore.getState();

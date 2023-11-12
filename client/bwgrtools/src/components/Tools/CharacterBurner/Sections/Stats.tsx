@@ -3,7 +3,8 @@ import Typography from "@mui/material/Typography";
 import { Fragment } from "react";
 
 import { useRulesetStore } from "../../../../hooks/apiStores/useRulesetStore";
-import { useCharacterBurnerStore } from "../../../../hooks/featureStores/useCharacterBurnerStore";
+import { useCharacterBurnerLifepathStore } from "../../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerLifepath";
+import { useCharacterBurnerStatStore } from "../../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerStat";
 import { AbilityButton } from "../../../Shared/AbilityButton";
 import { GenericGrid } from "../../../Shared/Grids";
 import { BlockText } from "../BlockText";
@@ -11,7 +12,8 @@ import { BlockText } from "../BlockText";
 
 export function Stats(): JSX.Element {
 	const { abilities } = useRulesetStore();
-	const { getMentalPool, getPhysicalPool, getEitherPool, shiftStatShade, modifyStatExponent, getStat } = useCharacterBurnerStore();
+	const { getMentalPool, getPhysicalPool, getEitherPool } = useCharacterBurnerLifepathStore();
+	const { shiftStatShade, modifyStatExponent, getStat } = useCharacterBurnerStatStore();
 
 	const mental = getMentalPool();
 	const physical = getPhysicalPool();

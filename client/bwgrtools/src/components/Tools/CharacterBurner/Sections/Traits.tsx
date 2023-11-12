@@ -3,14 +3,14 @@ import Typography from "@mui/material/Typography";
 import { Fragment } from "react";
 
 
-import { useCharacterBurnerStore } from "../../../../hooks/featureStores/useCharacterBurnerStore";
+import { useCharacterBurnerTraitStore } from "../../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerTrait";
 import { UniqueArrayItem } from "../../../../utils/uniqueArray";
 import { GenericGrid } from "../../../Shared/Grids";
 import { BlockTraitPopover } from "../../CharacterBurner/BlockText";
 
 
 function TraitsList({ trait }: { trait: UniqueArrayItem<TraitId, CharacterTrait>; }) {
-	const { openTrait } = useCharacterBurnerStore();
+	const { openTrait } = useCharacterBurnerTraitStore();
 
 	return (
 		<Grid item xs={6} sm={3} md={2}>
@@ -29,7 +29,7 @@ function TraitsList({ trait }: { trait: UniqueArrayItem<TraitId, CharacterTrait>
 }
 
 function CommonTraitsBlock() {
-	const { traits } = useCharacterBurnerStore();
+	const { traits } = useCharacterBurnerTraitStore();
 
 	return (
 		<Fragment>
@@ -47,7 +47,7 @@ function CommonTraitsBlock() {
 }
 
 function MandatoryTraitsBlock() {
-	const { traits } = useCharacterBurnerStore();
+	const { traits } = useCharacterBurnerTraitStore();
 
 	return (
 		<Fragment>
@@ -65,7 +65,7 @@ function MandatoryTraitsBlock() {
 }
 
 function LifepathTraitsBlock() {
-	const { traits } = useCharacterBurnerStore();
+	const { traits } = useCharacterBurnerTraitStore();
 
 	return (
 		<Fragment>
@@ -81,7 +81,7 @@ function LifepathTraitsBlock() {
 }
 
 function GeneralTraitsBlock() {
-	const { traits } = useCharacterBurnerStore();
+	const { traits } = useCharacterBurnerTraitStore();
 
 	return (
 		<Fragment>
@@ -99,7 +99,7 @@ function GeneralTraitsBlock() {
 }
 
 export function Traits(): JSX.Element {
-	const { traits, getTraitPools } = useCharacterBurnerStore();
+	const { traits, getTraitPools } = useCharacterBurnerTraitStore();
 	const traitPools = getTraitPools();
 
 	const text = `Trait Points: ${traitPools.total}, Remaining: ${traitPools.remaining}`;

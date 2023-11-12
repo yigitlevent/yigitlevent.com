@@ -4,6 +4,7 @@ import { devtools } from "zustand/middleware";
 
 import { useCharacterBurnerAttributeStore } from "./useCharacterBurnerAttribute";
 import { useCharacterBurnerLifepathStore } from "./useCharacterBurnerLifepath";
+import { useCharacterBurnerMiscStore } from "./useCharacterBurnerMisc";
 import { useCharacterBurnerSkillStore } from "./useCharacterBurnerSkill";
 import { useCharacterBurnerStatStore } from "./useCharacterBurnerStat";
 import { useCharacterBurnerTraitStore } from "./useCharacterBurnerTrait";
@@ -19,12 +20,6 @@ export type CharacterBurnerBasicsState = {
 	beliefs: { name: string, belief: string; }[];
 	instincts: { name: string, instinct: string; }[];
 
-	resources: CharacterResource[];
-
-	stockSpecific: CharacterStockSpecific;
-	limits: CharacterStockLimits;
-	questions: CharacterQuestion[];
-
 	setName: (name: string) => void;
 	setConcept: (concept: string) => void;
 	setGender: (gender: string) => void;
@@ -35,9 +30,6 @@ export type CharacterBurnerBasicsState = {
 	setInstinct: (index: number, instinct: string) => void;
 
 	getAgePool: () => { minAge: number; mentalPool: number; physicalPool: number; };
-
-	hasQuestionTrue: (id: QuestionId) => boolean;
-	hasQuestionTrueByName: (name: string) => boolean;
 };
 
 export const useCharacterBurnerBasicsStore = create<CharacterBurnerBasicsState>()(
@@ -61,36 +53,6 @@ export const useCharacterBurnerBasicsStore = create<CharacterBurnerBasicsState>(
 				{ name: "Special Instinct", instinct: "" }
 			],
 
-			resources: [],
-
-			stockSpecific: {},
-			limits: {
-				beliefs: 3,
-				instincts: 3,
-				stats: {
-					Will: { min: 1, max: 8 },
-					Perception: { min: 1, max: 8 },
-					Power: { min: 1, max: 8 },
-					Agility: { min: 1, max: 8 },
-					Forte: { min: 1, max: 8 },
-					Speed: { min: 1, max: 8 }
-				},
-				attributes: 9
-			},
-			questions: [],
-
-			setName: (name: string): void => {
-				set({ name });
-			},
-
-			setConcept: (concept: string): void => {
-				set({ concept });
-			},
-
-			setGender: (gender: string): void => {
-				set({ gender });
-			},
-
 			setStockAndReset: (stock?: [id: StockId, name: string]): void => {
 				set({
 					stock: [0 as StockId, "Dwarf"],
@@ -109,23 +71,7 @@ export const useCharacterBurnerBasicsStore = create<CharacterBurnerBasicsState>(
 						{ name: "Instinct 2", instinct: "" },
 						{ name: "Instinct 3", instinct: "" },
 						{ name: "Special Instinct", instinct: "" }
-					],
-
-					stockSpecific: {},
-					limits: {
-						beliefs: 3,
-						instincts: 3,
-						stats: {
-							Will: { min: 1, max: 8 },
-							Perception: { min: 1, max: 8 },
-							Power: { min: 1, max: 8 },
-							Agility: { min: 1, max: 8 },
-							Forte: { min: 1, max: 8 },
-							Speed: { min: 1, max: 8 }
-						},
-						attributes: 9
-					},
-					questions: []
+					]
 				});
 
 				if (stock) set({ stock });
@@ -134,6 +80,19 @@ export const useCharacterBurnerBasicsStore = create<CharacterBurnerBasicsState>(
 				useCharacterBurnerAttributeStore.getState().reset();
 				useCharacterBurnerSkillStore.getState().reset();
 				useCharacterBurnerTraitStore.getState().reset();
+				useCharacterBurnerMiscStore.getState().reset();
+			},
+
+			setName: (name: string): void => {
+				set({ name });
+			},
+
+			setConcept: (concept: string): void => {
+				set({ concept });
+			},
+
+			setGender: (gender: string): void => {
+				set({ gender });
 			},
 
 			setBelief: (index: number, belief: string): void => {
@@ -157,14 +116,6 @@ export const useCharacterBurnerBasicsStore = create<CharacterBurnerBasicsState>(
 				if (age === 0) return { minAge: 0, mentalPool: 0, physicalPool: 0 };
 				const agePool = getStock(stock[0]).agePool;
 				return agePool.filter(a => age > a.minAge).reduce((pv, cv) => pv.minAge < cv.minAge ? pv : cv);
-			},
-
-			hasQuestionTrue: (id: QuestionId): boolean => {
-				return get().questions.some(v => v.id === id && v.answer);
-			},
-
-			hasQuestionTrueByName: (name: string): boolean => {
-				return get().questions.some(v => v.name === name && v.answer);
 			}
 		})
 	)

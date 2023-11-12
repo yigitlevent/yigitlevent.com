@@ -11,6 +11,8 @@ import { useRulesetStore } from "../../apiStores/useRulesetStore";
 export type CharacterBurnerTraitState = {
 	traits: UniqueArray<TraitId, CharacterTrait>;
 
+	reset: () => void;
+
 	openTrait: (traitId: TraitId) => void;
 
 	getTraitPools: () => Points;
@@ -31,6 +33,12 @@ export const useCharacterBurnerTraitStore = create<CharacterBurnerTraitState>()(
 	devtools(
 		(set, get) => ({
 			traits: new UniqueArray<TraitId, CharacterTrait>(),
+
+			reset: (): void => {
+				set({
+					traits: new UniqueArray<TraitId, CharacterTrait>()
+				});
+			},
 
 			openTrait: (traitId: TraitId): void => {
 				set(produce<CharacterBurnerTraitState>((state) => {

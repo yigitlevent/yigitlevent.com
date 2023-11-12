@@ -2,7 +2,7 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { Fragment } from "react";
 
-import { useCharacterBurnerStore } from "../../../../hooks/featureStores/useCharacterBurnerStore";
+import { useCharacterBurnerAttributeStore } from "../../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerAttribute";
 import { UniqueArrayItem } from "../../../../utils/uniqueArray";
 import { AbilityButton } from "../../../Shared/AbilityButton";
 import { GenericGrid } from "../../../Shared/Grids";
@@ -10,7 +10,7 @@ import { BlockText } from "../BlockText";
 
 
 function Attribute({ attribute }: { attribute: UniqueArrayItem<AbilityId, CharacterAttribute>; }): JSX.Element {
-	const { getAttribute, shiftAttributeShade } = useCharacterBurnerStore();
+	const { getAttribute, shiftAttributeShade } = useCharacterBurnerAttributeStore();
 
 	const attributeDetails = getAttribute(attribute.id);
 
@@ -35,7 +35,7 @@ function Attribute({ attribute }: { attribute: UniqueArrayItem<AbilityId, Charac
 }
 
 export function Attributes(): JSX.Element {
-	const { attributes } = useCharacterBurnerStore();
+	const { attributes } = useCharacterBurnerAttributeStore();
 
 	return (
 		<GenericGrid columns={6} center spacing={[0, 2]}>

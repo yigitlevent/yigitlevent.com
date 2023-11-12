@@ -4,6 +4,7 @@ import { devtools } from "zustand/middleware";
 
 import { useCharacterBurnerBasicsStore } from "./useCharacterBurnerBasics";
 import { useCharacterBurnerLifepathStore } from "./useCharacterBurnerLifepath";
+import { useCharacterBurnerMiscStore } from "./useCharacterBurnerMisc";
 import { useCharacterBurnerSkillStore } from "./useCharacterBurnerSkill";
 import { useCharacterBurnerStatStore } from "./useCharacterBurnerStat";
 import { useCharacterBurnerTraitStore } from "./useCharacterBurnerTrait";
@@ -14,6 +15,8 @@ import { useRulesetStore } from "../../apiStores/useRulesetStore";
 
 export type CharacterBurnerAttributeState = {
 	attributes: UniqueArray<AbilityId, CharacterAttribute>;
+
+	reset: () => void;
 
 	shiftAttributeShade: (attributeId: AbilityId) => void;
 
@@ -51,13 +54,10 @@ export const useCharacterBurnerAttributeStore = create<CharacterBurnerAttributeS
 		(set, get) => ({
 			attributes: new UniqueArray<AbilityId, CharacterAttribute>(),
 
-			stats: {
-				"Will": { poolType: "Mental", shadeShifted: false, poolSpent: 0, eitherSpent: 0 },
-				"Perception": { poolType: "Mental", shadeShifted: false, poolSpent: 0, eitherSpent: 0 },
-				"Power": { poolType: "Physical", shadeShifted: false, poolSpent: 0, eitherSpent: 0 },
-				"Agility": { poolType: "Physical", shadeShifted: false, poolSpent: 0, eitherSpent: 0 },
-				"Forte": { poolType: "Physical", shadeShifted: false, poolSpent: 0, eitherSpent: 0 },
-				"Speed": { poolType: "Physical", shadeShifted: false, poolSpent: 0, eitherSpent: 0 }
+			reset: (): void => {
+				set({
+					attributes: new UniqueArray<AbilityId, CharacterAttribute>()
+				});
 			},
 
 			shiftAttributeShade: (attributeId: AbilityId): void => {
@@ -103,7 +103,8 @@ export const useCharacterBurnerAttributeStore = create<CharacterBurnerAttributeS
 
 			// TODO: if shade shifted, remove points from exponent
 			getHealth: (): AbilityPoints => {
-				const { stock, hasQuestionTrueByName } = useCharacterBurnerBasicsStore.getState();
+				const { stock } = useCharacterBurnerBasicsStore.getState();
+				const { hasQuestionTrueByName } = useCharacterBurnerMiscStore.getState();
 				const { getStat } = useCharacterBurnerStatStore.getState();
 
 				const will = getStat("Will");
@@ -127,7 +128,7 @@ export const useCharacterBurnerAttributeStore = create<CharacterBurnerAttributeS
 
 			// TODO: if shade shifted, remove points from exponent
 			getSteel: (): AbilityPoints => {
-				const { hasQuestionTrueByName } = useCharacterBurnerBasicsStore.getState();
+				const { hasQuestionTrueByName } = useCharacterBurnerMiscStore.getState();
 				const { getStat } = useCharacterBurnerStatStore.getState();
 
 				const will = getStat("Will");
@@ -164,7 +165,7 @@ export const useCharacterBurnerAttributeStore = create<CharacterBurnerAttributeS
 
 			// TODO: if shade shifted, remove points from exponent
 			getGreed: (): AbilityPoints => {
-				const { resources, hasQuestionTrueByName } = useCharacterBurnerBasicsStore.getState();
+				const { resources, hasQuestionTrueByName } = useCharacterBurnerMiscStore.getState();
 				const { getStat } = useCharacterBurnerStatStore.getState();
 				const { getAge, getResourcePoints, lifepaths } = useCharacterBurnerLifepathStore.getState();
 				const { hasTraitOpenByName } = useCharacterBurnerTraitStore.getState();
@@ -200,7 +201,7 @@ export const useCharacterBurnerAttributeStore = create<CharacterBurnerAttributeS
 
 			// TODO: if shade shifted, remove points from exponent
 			getGriefOrSpite: (isSpite: boolean): AbilityPoints => {
-				const { resources, hasQuestionTrueByName } = useCharacterBurnerBasicsStore.getState();
+				const { resources, hasQuestionTrueByName } = useCharacterBurnerMiscStore.getState();
 				const { getStat } = useCharacterBurnerStatStore.getState();
 				const { getAge, hasLifepathByName } = useCharacterBurnerLifepathStore.getState();
 				const { skills } = useCharacterBurnerSkillStore.getState();
@@ -253,8 +254,8 @@ export const useCharacterBurnerAttributeStore = create<CharacterBurnerAttributeS
 
 			// TODO: if shade shifted, remove points from exponent
 			getFaith: (): AbilityPoints => {
-				const { hasQuestionTrueByName } = useCharacterBurnerBasicsStore.getState();
-				
+				const { hasQuestionTrueByName } = useCharacterBurnerMiscStore.getState();
+
 				let bonus = 0;
 				if (hasQuestionTrueByName("TRUST")) bonus += 1;
 				if (hasQuestionTrueByName("CONSULT")) bonus += 1;
@@ -265,7 +266,7 @@ export const useCharacterBurnerAttributeStore = create<CharacterBurnerAttributeS
 
 			// TODO: if shade shifted, remove points from exponent
 			getFaithInDeadGods: (): AbilityPoints => {
-				const { hasQuestionTrueByName } = useCharacterBurnerBasicsStore.getState();
+				const { hasQuestionTrueByName } = useCharacterBurnerMiscStore.getState();
 
 				let bonus = 0;
 				if (hasQuestionTrueByName("DEADTRUST")) bonus += 1;
@@ -277,7 +278,7 @@ export const useCharacterBurnerAttributeStore = create<CharacterBurnerAttributeS
 
 			// TODO: if shade shifted, remove points from exponent
 			getHatred: (): AbilityPoints => {
-				const { stockSpecific, hasQuestionTrueByName } = useCharacterBurnerBasicsStore.getState();
+				const { stockSpecific, hasQuestionTrueByName } = useCharacterBurnerMiscStore.getState();
 				const { getStat } = useCharacterBurnerStatStore.getState();
 
 				const steel = get().getSteel();
@@ -300,7 +301,7 @@ export const useCharacterBurnerAttributeStore = create<CharacterBurnerAttributeS
 
 			// TODO: if shade shifted, remove points from exponent
 			getVoidEmbrace: (): AbilityPoints => {
-				const { hasQuestionTrueByName } = useCharacterBurnerBasicsStore.getState();
+				const { hasQuestionTrueByName } = useCharacterBurnerMiscStore.getState();
 
 				let bonus = 0;
 				if (hasQuestionTrueByName("MASTER")) bonus += 1;
@@ -328,10 +329,9 @@ export const useCharacterBurnerAttributeStore = create<CharacterBurnerAttributeS
 
 			// TODO: if shade shifted, remove points from exponent
 			getCorruption: (): AbilityPoints => {
-				const { resources } = useCharacterBurnerBasicsStore.getState();
-				const { hasQuestionTrueByName } = useCharacterBurnerBasicsStore.getState();
+				const { resources, hasQuestionTrueByName } = useCharacterBurnerMiscStore.getState();
 				const { hasTraitOpenByName } = useCharacterBurnerTraitStore.getState();
-				
+
 				const spiritMarks = resources.filter(v => v.name === "Spirit Binding — Spirit Mark Levels");
 				const orders = resources.filter(v => v.name === "Summoning — Affiliated Order Levels");
 
@@ -349,7 +349,7 @@ export const useCharacterBurnerAttributeStore = create<CharacterBurnerAttributeS
 
 			// TODO: if shade shifted, remove points from exponent
 			getResources: (): AbilityPoints => {
-				const { resources } = useCharacterBurnerBasicsStore.getState();
+				const { resources } = useCharacterBurnerMiscStore.getState();
 
 				let bonus = 0;
 				const res = resources.filter(v => ["Property", "Reputation", "Affiliation"].includes(v.type[1]));
@@ -360,7 +360,7 @@ export const useCharacterBurnerAttributeStore = create<CharacterBurnerAttributeS
 
 			// TODO: if shade shifted, remove points from exponent
 			getCircles: (): AbilityPoints => {
-				const { resources } = useCharacterBurnerBasicsStore.getState();
+				const { resources } = useCharacterBurnerMiscStore.getState();
 				const { getStat } = useCharacterBurnerStatStore.getState();
 
 				const will = getStat("Will");

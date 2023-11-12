@@ -2,7 +2,7 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { Fragment } from "react";
 
-import { useCharacterBurnerStore } from "../../../../hooks/featureStores/useCharacterBurnerStore";
+import { useCharacterBurnerSkillStore } from "../../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerSkill";
 import { UniqueArrayItem } from "../../../../utils/uniqueArray";
 import { AbilityButton } from "../../../Shared/AbilityButton";
 import { GenericGrid } from "../../../Shared/Grids";
@@ -10,7 +10,7 @@ import { BlockSkillPopover } from "../BlockText";
 
 
 function SkillsList({ skill }: { skill: UniqueArrayItem<SkillId, CharacterSkill>; }): JSX.Element {
-	const { getSkill, openSkill, modifySkillExponent } = useCharacterBurnerStore();
+	const { getSkill, openSkill, modifySkillExponent } = useCharacterBurnerSkillStore();
 	const charSkill = getSkill(skill.id);
 
 	return (
@@ -36,7 +36,7 @@ function SkillsList({ skill }: { skill: UniqueArrayItem<SkillId, CharacterSkill>
 }
 
 function MandatorySkills() {
-	const { skills } = useCharacterBurnerStore();
+	const { skills } = useCharacterBurnerSkillStore();
 
 	return (
 		<Fragment>
@@ -55,7 +55,7 @@ function MandatorySkills() {
 }
 
 function LifepathSkills() {
-	const { skills } = useCharacterBurnerStore();
+	const { skills } = useCharacterBurnerSkillStore();
 
 	return (
 		<Fragment>
@@ -74,7 +74,7 @@ function LifepathSkills() {
 }
 
 function GeneralSkills() {
-	const { skills } = useCharacterBurnerStore();
+	const { skills } = useCharacterBurnerSkillStore();
 
 	return (
 		<Fragment>
@@ -93,7 +93,7 @@ function GeneralSkills() {
 }
 
 export function Skills(): JSX.Element {
-	const { skills, getSkillPools } = useCharacterBurnerStore();
+	const { skills, getSkillPools } = useCharacterBurnerSkillStore();
 
 	// const [open, setOpen] = useState(false);
 

@@ -12,6 +12,8 @@ import { useRulesetStore } from "../../apiStores/useRulesetStore";
 export type CharacterBurnerSkillState = {
 	skills: UniqueArray<SkillId, CharacterSkill>;
 
+	reset: () => void;
+
 	openSkill: (skillId: SkillId) => void;
 	modifySkillExponent: (skillId: SkillId, decrease?: boolean) => void;
 
@@ -34,6 +36,12 @@ export const useCharacterBurnerSkillStore = create<CharacterBurnerSkillState>()(
 	devtools(
 		(set, get) => ({
 			skills: new UniqueArray<SkillId, CharacterSkill>(),
+
+			reset: (): void => {
+				set({
+					skills: new UniqueArray<SkillId, CharacterSkill>()
+				});
+			},
 
 			openSkill: (skillId: SkillId): void => {
 				set(produce<CharacterBurnerSkillState>((state) => {

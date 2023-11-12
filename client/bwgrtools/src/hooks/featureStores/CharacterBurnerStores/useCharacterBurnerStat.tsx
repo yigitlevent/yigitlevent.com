@@ -2,12 +2,14 @@ import { produce } from "immer";
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 
-import { useCharacterBurnerBasicsStore } from "./useCharacterBurnerBasics";
+import { useCharacterBurnerMiscStore } from "./useCharacterBurnerMisc";
 import { Clamp } from "../../../utils/misc";
 
 
 export type CharacterBurnerStatState = {
 	stats: { [key: string]: { poolType: "Mental" | "Physical", shadeShifted: boolean, poolSpent: number; eitherSpent: number; }; };
+
+	reset: () => void;
 
 	getStat: (statName: string) => { shade: Shades, exponent: number; };
 
@@ -27,6 +29,19 @@ export const useCharacterBurnerStatStore = create<CharacterBurnerStatState>()(
 				"Speed": { poolType: "Physical", shadeShifted: false, poolSpent: 0, eitherSpent: 0 }
 			},
 
+			reset: (): void => {
+				set({
+					stats: {
+						"Will": { poolType: "Mental", shadeShifted: false, poolSpent: 0, eitherSpent: 0 },
+						"Perception": { poolType: "Mental", shadeShifted: false, poolSpent: 0, eitherSpent: 0 },
+						"Power": { poolType: "Physical", shadeShifted: false, poolSpent: 0, eitherSpent: 0 },
+						"Agility": { poolType: "Physical", shadeShifted: false, poolSpent: 0, eitherSpent: 0 },
+						"Forte": { poolType: "Physical", shadeShifted: false, poolSpent: 0, eitherSpent: 0 },
+						"Speed": { poolType: "Physical", shadeShifted: false, poolSpent: 0, eitherSpent: 0 }
+					}
+				});
+			},
+
 			getStat: (statName: string): { shade: Shades; exponent: number; } => {
 				const state = get();
 				const shade = state.stats[statName].shadeShifted ? "G" : "B";
@@ -43,7 +58,7 @@ export const useCharacterBurnerStatStore = create<CharacterBurnerStatState>()(
 			},
 
 			modifyStatExponent: (statName: string, decrease?: boolean): void => {
-				const { limits } = useCharacterBurnerBasicsStore.getState();
+				const { limits } = useCharacterBurnerMiscStore.getState();
 
 				set(produce<CharacterBurnerStatState>((state) => {
 					// TODO: Check remaining counts, use either pool too
