@@ -9,7 +9,7 @@ import { GenericGrid } from "../../../Shared/Grids";
 import { BlockTraitPopover } from "../../CharacterBurner/BlockText";
 
 
-function TraitsList({ trait }: { trait: UniqueArrayItem<TraitId, CharacterTrait>; }) {
+function Trait({ trait }: { trait: UniqueArrayItem<TraitId, CharacterTrait>; }) {
 	const { openTrait } = useCharacterBurnerTraitStore();
 
 	return (
@@ -40,7 +40,7 @@ function CommonTraitsBlock() {
 			<Fragment>
 				{traits
 					.filter(t => t.type === "Common")
-					.map((trait, i) => <TraitsList key={i} trait={trait} />)}
+					.map((trait, i) => <Trait key={i} trait={trait} />)}
 			</Fragment>
 		</Fragment>
 	);
@@ -58,7 +58,7 @@ function MandatoryTraitsBlock() {
 			<Fragment>
 				{traits
 					.filter(t => t.type === "Mandatory")
-					.map((trait, i) => <TraitsList key={i} trait={trait} />)}
+					.map((trait, i) => <Trait key={i} trait={trait} />)}
 			</Fragment>
 		</Fragment>
 	);
@@ -75,7 +75,7 @@ function LifepathTraitsBlock() {
 
 			{traits
 				.filter(t => t.type === "Lifepath")
-				.map((trait, i) => <TraitsList key={i} trait={trait} />)}
+				.map((trait, i) => <Trait key={i} trait={trait} />)}
 		</Fragment>
 	);
 }
@@ -92,7 +92,7 @@ function GeneralTraitsBlock() {
 			<Fragment>
 				{traits
 					.filter(t => t.type === "General")
-					.map((trait, i) => <TraitsList key={i} trait={trait} />)}
+					.map((trait, i) => <Trait key={i} trait={trait} />)}
 			</Fragment>
 		</Fragment>
 	);

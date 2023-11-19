@@ -73,7 +73,7 @@ export const useCharacterBurnerSkillStore = create<CharacterBurnerSkillState>()(
 			modifySkillExponent: (skillId: SkillId, decrease?: boolean): void => {
 				const skill = get().skills.find(skillId);
 
-				if (skill) {
+				if (skill && skill.isOpen !== "no") {
 					set(produce<CharacterBurnerSkillState>((state) => {
 						if (decrease) {
 							const hasGeneralSpending = skill.advancement.general > 0;
@@ -145,8 +145,6 @@ export const useCharacterBurnerSkillStore = create<CharacterBurnerSkillState>()(
 
 					exponent += charSkill.advancement.general + charSkill.advancement.lifepath;
 				}
-
-				console.log({ shade, exponent });
 
 				return { shade, exponent };
 			},

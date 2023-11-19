@@ -9,7 +9,7 @@ import { GenericGrid } from "../../../Shared/Grids";
 import { BlockSkillPopover } from "../BlockText";
 
 
-function SkillsList({ skill }: { skill: UniqueArrayItem<SkillId, CharacterSkill>; }): JSX.Element {
+function Skill({ skill }: { skill: UniqueArrayItem<SkillId, CharacterSkill>; }): JSX.Element {
 	const { getSkill, openSkill, modifySkillExponent } = useCharacterBurnerSkillStore();
 	const charSkill = getSkill(skill.id);
 
@@ -48,7 +48,7 @@ function MandatorySkills() {
 				{skills
 					.filter(s => s.type === "Mandatory")
 					// TODO: re-enable .filter(v => !SpecialSkills.includes(v as SkillPath))
-					.map((skill, i) => <SkillsList key={i} skill={skill} />)}
+					.map((skill, i) => <Skill key={i} skill={skill} />)}
 			</Fragment>
 		</Fragment>
 	);
@@ -67,7 +67,7 @@ function LifepathSkills() {
 				{skills
 					.filter(s => s.type === "Lifepath")
 					// TODO: re-enable .filter(v => !SpecialSkills.includes(v as SkillPath))
-					.map((skill, i) => <SkillsList key={i} skill={skill} />)}
+					.map((skill, i) => <Skill key={i} skill={skill} />)}
 			</Fragment>
 		</Fragment>
 	);
@@ -86,7 +86,7 @@ function GeneralSkills() {
 				{skills
 					.filter(s => s.type === "General")
 					// TODO: re-enable .filter(v => !SpecialSkills.includes(v as SkillPath))
-					.map((skill, i) => <SkillsList key={i} skill={skill} />)}
+					.map((skill, i) => <Skill key={i} skill={skill} />)}
 			</Fragment>
 		</Fragment>
 	);
