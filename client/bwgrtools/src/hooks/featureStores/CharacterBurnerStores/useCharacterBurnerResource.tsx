@@ -58,6 +58,9 @@ export const useCharacterBurnerResourceStore = create<CharacterBurnerResourceSta
 					state.resources[guid].description = description;
 				}));
 			}
+
+			// TODO: auto resources from traits list
+			// state.totals.resources.fromTraitsList = newResources;
 		}),
 		{ name: "useCharacterBurnerResourceStore" }
 	)

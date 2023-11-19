@@ -65,6 +65,12 @@ type CharacterQuestion = {
 	answer: boolean;
 };
 
+type CharacterTraitEffect =
+	{ roundUp: AbilityId; }
+	| { roundUp: "Mortal Wound"; }
+	| { callOn: AbilityId; }
+	| { callOn: SkillId; };
+
 type HuntingGroundsList = "Waste" | "Marginal" | "Typical" | "Plentiful" | "Untouched";
 
 interface Points {

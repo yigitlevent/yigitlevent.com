@@ -2,7 +2,6 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { Fragment } from "react";
 
-
 import { useCharacterBurnerTraitStore } from "../../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerTrait";
 import { UniqueArrayItem } from "../../../../utils/uniqueArray";
 import { GenericGrid } from "../../../Shared/Grids";

@@ -1,7 +1,6 @@
 import Typography from "@mui/material/Typography";
 import { Fragment, useEffect, useState } from "react";
 
-
 import { LifepathSelection } from "./Modals/LifepathSelection";
 import { ResourceSelection } from "./Modals/ResourceSelection";
 import { Attributes } from "./Sections/Attributes";
@@ -51,7 +50,6 @@ export function CharacterBurner(): JSX.Element {
 					<Instincts />
 				</Fragment>
 				: null}
-
 
 
 			<LifepathSelection isOpen={currentModal === "lp"} close={closeModals} />

@@ -4,6 +4,7 @@ import { devtools } from "zustand/middleware";
 
 import { useCharacterBurnerBasicsStore } from "./useCharacterBurnerBasics";
 import { useCharacterBurnerLifepathStore } from "./useCharacterBurnerLifepath";
+import { useCharacterBurnerMiscStore } from "./useCharacterBurnerMisc";
 import { UniqueArray } from "../../../utils/uniqueArray";
 import { useRulesetStore } from "../../apiStores/useRulesetStore";
 
@@ -86,14 +87,14 @@ export const useCharacterBurnerTraitStore = create<CharacterBurnerTraitState>()(
 
 			updateTraits: (): void => {
 				const { stock } = useCharacterBurnerBasicsStore.getState();
-				const { getTrait, traits } = useRulesetStore.getState();
+				const ruleset = useRulesetStore.getState();
 				const { lifepaths } = useCharacterBurnerLifepathStore.getState();
 				const state = get();
 
 				// Add Lifepath Traits
 				const characterTraits = new UniqueArray(lifepaths.map(lp => {
 					return lp.traits ? lp.traits.map((tr, i) => {
-						const trait = getTrait(tr);
+						const trait = ruleset.getTrait(tr);
 						const isMandatory = (i === 0);
 						// TODO: Repeat lifepaths also should be checked
 						const entry: CharacterTrait = {
@@ -106,7 +107,7 @@ export const useCharacterBurnerTraitStore = create<CharacterBurnerTraitState>()(
 					}) : [];
 				}).flat());
 
-				traits
+				ruleset.traits
 					.filter(trait => trait.stock && trait.stock[0] === stock[0] && trait.category[1] === "Common")
 					.forEach(trait => {
 						if (characterTraits.existsAny("id", trait.id) === 0) {
@@ -123,6 +124,8 @@ export const useCharacterBurnerTraitStore = create<CharacterBurnerTraitState>()(
 				set(produce<CharacterBurnerTraitState>((state) => {
 					state.traits = characterTraits;
 				}));
+
+				useCharacterBurnerMiscStore.getState().refreshTraitEffects();
 			}
 		}),
 		{ name: "useCharacterBurnerTraitStore" }

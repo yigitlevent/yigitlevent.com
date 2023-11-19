@@ -77,10 +77,10 @@ export const useCharacterBurnerBasicsStore = create<CharacterBurnerBasicsState>(
 				if (stock) set({ stock });
 				useCharacterBurnerLifepathStore.getState().reset();
 				useCharacterBurnerStatStore.getState().reset();
-				useCharacterBurnerAttributeStore.getState().reset();
 				useCharacterBurnerSkillStore.getState().reset();
 				useCharacterBurnerTraitStore.getState().reset();
 				useCharacterBurnerMiscStore.getState().reset();
+				useCharacterBurnerAttributeStore.getState().reset();
 			},
 
 			setName: (name: string): void => {

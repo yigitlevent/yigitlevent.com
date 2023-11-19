@@ -169,7 +169,8 @@ export const useCharacterBurnerAttributeStore = create<CharacterBurnerAttributeS
 
 			// TODO: if shade shifted, remove points from exponent
 			getGreed: (): AbilityPoints => {
-				const { resources, hasQuestionTrueByName } = useCharacterBurnerMiscStore.getState();
+				const { resources } = useCharacterBurnerResourceStore.getState();
+				const { hasQuestionTrueByName } = useCharacterBurnerMiscStore.getState();
 				const { getStat } = useCharacterBurnerStatStore.getState();
 				const { getAge, lifepaths } = useCharacterBurnerLifepathStore.getState();
 				const { hasTraitOpenByName } = useCharacterBurnerTraitStore.getState();
@@ -206,7 +207,8 @@ export const useCharacterBurnerAttributeStore = create<CharacterBurnerAttributeS
 
 			// TODO: if shade shifted, remove points from exponent
 			getGriefOrSpite: (isSpite: boolean): AbilityPoints => {
-				const { resources, hasQuestionTrueByName } = useCharacterBurnerMiscStore.getState();
+				const { resources } = useCharacterBurnerResourceStore.getState();
+				const { hasQuestionTrueByName } = useCharacterBurnerMiscStore.getState();
 				const { getStat } = useCharacterBurnerStatStore.getState();
 				const { getAge, hasLifepathByName } = useCharacterBurnerLifepathStore.getState();
 				const { skills } = useCharacterBurnerSkillStore.getState();
@@ -334,11 +336,12 @@ export const useCharacterBurnerAttributeStore = create<CharacterBurnerAttributeS
 
 			// TODO: if shade shifted, remove points from exponent
 			getCorruption: (): AbilityPoints => {
-				const { resources, hasQuestionTrueByName } = useCharacterBurnerMiscStore.getState();
+				const { resources } = useCharacterBurnerResourceStore.getState();
+				const { hasQuestionTrueByName } = useCharacterBurnerMiscStore.getState();
 				const { hasTraitOpenByName } = useCharacterBurnerTraitStore.getState();
 
-				const spiritMarks = resources.filter(v => v.name === "Spirit Binding — Spirit Mark Levels");
-				const orders = resources.filter(v => v.name === "Summoning — Affiliated Order Levels");
+				const spiritMarks = Object.values(resources).filter(v => v.name === "Spirit Binding — Spirit Mark Levels");
+				const orders = Object.values(resources).filter(v => v.name === "Summoning — Affiliated Order Levels");
 
 				let bonus = 0;
 				if (hasTraitOpenByName("Gifted")) bonus += 1;
@@ -354,10 +357,10 @@ export const useCharacterBurnerAttributeStore = create<CharacterBurnerAttributeS
 
 			// TODO: if shade shifted, remove points from exponent
 			getResources: (): AbilityPoints => {
-				const { resources } = useCharacterBurnerMiscStore.getState();
+				const { resources } = useCharacterBurnerResourceStore.getState();
 
 				let bonus = 0;
-				const res = resources.filter(v => ["Property", "Reputation", "Affiliation"].includes(v.type[1]));
+				const res = Object.values(resources).filter(v => ["Property", "Reputation", "Affiliation"].includes(v.type[1]));
 				if (res.length > 0) { bonus += Math.floor(res.map(v => v.cost).reduce((a, b) => a + b) / 15); }
 
 				return { shade: "B", exponent: bonus };
@@ -365,13 +368,13 @@ export const useCharacterBurnerAttributeStore = create<CharacterBurnerAttributeS
 
 			// TODO: if shade shifted, remove points from exponent
 			getCircles: (): AbilityPoints => {
-				const { resources } = useCharacterBurnerMiscStore.getState();
+				const { resources } = useCharacterBurnerResourceStore.getState();
 				const { getStat } = useCharacterBurnerStatStore.getState();
 
 				const will = getStat("Will");
 
 				let bonus = 0;
-				const res = resources.filter(v => ["Property", "Relationship"].includes(v.type[1]));
+				const res = Object.values(resources).filter(v => ["Property", "Relationship"].includes(v.type[1]));
 				if (res.length > 0 && res.map(v => v.cost).reduce((a, b) => a + b) >= 50) { bonus += 1; }
 
 				return { shade: "B", exponent: Math.floor(will.exponent / 2) + bonus };

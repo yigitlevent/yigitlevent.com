@@ -3,7 +3,6 @@ import Container from "@mui/material/Container";
 import Paper from "@mui/material/Paper";
 import { Navigate, Route, Routes } from "react-router-dom";
 
-
 import { Menu } from "./Menu/Menu";
 import { CharacterBurner } from "./Tools/CharacterBurner/CharacterBurner";
 import { DiceRoller } from "./Tools/DiceRoller/DiceRoller";
