@@ -35,7 +35,7 @@ export type CharacterBurnerAttributeState = {
 	getCorruption: () => AbilityPoints;
 	getResources: () => AbilityPoints;
 	getCircles: () => AbilityPoints;
-	getAttribute: (attributeId: AbilityId) => AbilityPoints;
+	getAttribute: (attribute: [id: AbilityId, name: string]) => AbilityPoints;
 
 	hasAttribute: (id: AbilityId) => boolean;
 	hasAttributeByName: (name: string) => boolean;
@@ -90,7 +90,7 @@ export const useCharacterBurnerAttributeStore = create<CharacterBurnerAttributeS
 				const { getStat } = useCharacterBurnerStatStore.getState();
 
 				const perception = getStat("Perception");
-				const agility = getStat("Ability");
+				const agility = getStat("Agility");
 				const speed = getStat("Speed");
 
 				const shades = [perception.shade, agility.shade, speed.shade];
@@ -215,7 +215,7 @@ export const useCharacterBurnerAttributeStore = create<CharacterBurnerAttributeS
 				const lifepathsToCheck2 = ["Lord Protector", "Soother"];
 				const lifepathsToCheck3 = ["Loremaster", "Adjutant", "Althing"];
 
-				const knowsLament = skills.filter(v => v.name.toLowerCase().includes("lament") && v.isOpen);
+				const knowsLament = skills.filter(v => v.name.toLowerCase().includes("lament") && v.isOpen !== "no");
 
 				let bonus = 0;
 				if (hasLifepathByName("Protector")) bonus += 1;
@@ -372,59 +372,54 @@ export const useCharacterBurnerAttributeStore = create<CharacterBurnerAttributeS
 				return { shade: "B", exponent: Math.floor(will.exponent / 2) + bonus };
 			},
 
-			getAttribute: (attributeId: AbilityId): AbilityPoints => {
+			getAttribute: (attribute: [id: AbilityId, name: string]): AbilityPoints => {
 				const state = get();
-				const attribute = state.attributes.find(attributeId);
 
-				if (attribute) {
-					const getAttributePoints = (attributeName: string): AbilityPoints => {
-						switch (attributeName) {
-							case "Mortal Wound":
-								return state.getMortalWound();
-							case "Reflexes":
-								return state.getReflexes();
-							case "Health":
-								return state.getHealth();
-							case "Steel":
-								return state.getSteel();
-							case "Hesitation":
-								return state.getHesitation();
-							case "Greed":
-								return state.getGreed();
-							case "Grief":
-							case "Spite":
-								return state.getGriefOrSpite(attribute.name === "Spite");
-							case "Faith":
-								return state.getFaith();
-							case "Faith in Dead Gods":
-								return state.getFaithInDeadGods();
-							case "Hatred":
-								return state.getHatred();
-							case "Void Embrace":
-								return state.getVoidEmbrace();
-							case "Ancestral Taint":
-								return state.getAncestralTaint();
-							case "Corruption":
-								return state.getCorruption();
-							case "Resources":
-								return state.getResources();
-							case "Circles":
-								return state.getCircles();
-							default:
-								throw `Unhandled Attribute id: ${attributeId} ${attribute?.name}`;
-						}
-					};
+				const getAttributePoints = (attributeName: string): AbilityPoints => {
+					switch (attributeName) {
+						case "Mortal Wound":
+							return state.getMortalWound();
+						case "Reflexes":
+							return state.getReflexes();
+						case "Health":
+							return state.getHealth();
+						case "Steel":
+							return state.getSteel();
+						case "Hesitation":
+							return state.getHesitation();
+						case "Greed":
+							return state.getGreed();
+						case "Grief":
+						case "Spite":
+							return state.getGriefOrSpite(attribute[1] === "Spite");
+						case "Faith":
+							return state.getFaith();
+						case "Faith in Dead Gods":
+							return state.getFaithInDeadGods();
+						case "Hatred":
+							return state.getHatred();
+						case "Void Embrace":
+							return state.getVoidEmbrace();
+						case "Ancestral Taint":
+							return state.getAncestralTaint();
+						case "Corruption":
+							return state.getCorruption();
+						case "Resources":
+							return state.getResources();
+						case "Circles":
+							return state.getCircles();
+						default:
+							throw `Unhandled Attribute: ${attributeName}`;
+					}
+				};
 
-					attribute.shadeShifted;
-					const charAttr = getAttributePoints(attribute.name);
-					const isGreyByRoots = getAttributePoints(attribute.name).shade === "G";
+				const prevAttributeState = state.attributes.find(attribute[0]);
+				const newAttributeState = getAttributePoints(attribute[1]);
 
-					return {
-						shade: attribute.shadeShifted || isGreyByRoots ? "G" : "B",
-						exponent: charAttr.exponent - (attribute.shadeShifted ? 5 : 0)
-					};
-				}
-				else throw `Cannot find attribute with id: ${attributeId}`;
+				return {
+					shade: newAttributeState.shade || prevAttributeState?.shadeShifted ? "G" : "B",
+					exponent: newAttributeState.exponent - (prevAttributeState?.shadeShifted ? 5 : 0)
+				};
 			},
 
 			hasAttribute: (id: AbilityId): boolean => {
@@ -438,13 +433,13 @@ export const useCharacterBurnerAttributeStore = create<CharacterBurnerAttributeS
 			updateAttributes: (): void => {
 				const { abilities } = useRulesetStore.getState();
 				const { hasTraitOpen } = useCharacterBurnerTraitStore.getState();
-				const state = get();
+				const { getAttribute } = get();
 
 				const characterAttributes: UniqueArray<AbilityId, CharacterAttribute> = new UniqueArray(
 					abilities
 						.filter(ability => ability.abilityType[1].endsWith("Attribute"))
 						.map(ability => {
-							const attr = state.getAttribute(ability.id);
+							const attr = getAttribute([ability.id, ability.name]);
 
 							if (ability.abilityType[1] === "Attribute") {
 								return {
@@ -452,7 +447,7 @@ export const useCharacterBurnerAttributeStore = create<CharacterBurnerAttributeS
 									name: ability.name,
 									hasShade: ability.hasShades,
 									shadeShifted: attr.shade === "G",
-									exponent: state.getAttribute(ability.id).exponent - (attr.shade === "G" ? 5 : 0)
+									exponent: getAttribute([ability.id, ability.name]).exponent - (attr.shade === "G" ? 5 : 0)
 								};
 							}
 							else if (ability.requiredTrait && hasTraitOpen(ability.requiredTrait[0])) {
@@ -461,7 +456,7 @@ export const useCharacterBurnerAttributeStore = create<CharacterBurnerAttributeS
 									name: ability.name,
 									hasShade: ability.hasShades,
 									shadeShifted: attr.shade === "G",
-									exponent: state.getAttribute(ability.id).exponent - (attr.shade === "G" ? 5 : 0)
+									exponent: getAttribute([ability.id, ability.name]).exponent - (attr.shade === "G" ? 5 : 0)
 								};
 							}
 							else return [];

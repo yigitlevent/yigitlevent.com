@@ -17,7 +17,10 @@ export class UniqueArray<K, T> {
 	 * @param newArray - Optional. Array of objects.
 	**/
 	constructor(newArray?: UniqueArrayItem<K, T>[]) {
-		if (newArray) this.values = newArray;
+		if (newArray) {
+			const remade: UniqueArrayItem<K, T>[] = JSON.parse(JSON.stringify(newArray));
+			this.values = remade;
+		}
 	}
 
 	/**
@@ -29,6 +32,14 @@ export class UniqueArray<K, T> {
 	}
 
 	/**
+	 * Returns the length of the underlying array.
+	 * @returns `number`
+	**/
+	get length(): number {
+		return this.values.length;
+	}
+
+	/**
 	 * Adds a new item to the UniqueArray if the `id` property of the object is not found.
 	 * Otherwise it replaces the value of the item with the same `id`.
 	 * @param item - `UniqueArrayItem<K, T>`
@@ -36,7 +47,7 @@ export class UniqueArray<K, T> {
 	**/
 	add(item: UniqueArrayItem<K, T>): UniqueArray<K, T> {
 		const index = this.findIndex(item.id);
-		if (index) this.values[index] = item;
+		if (index !== undefined && index >= 0) this.values[index] = item;
 		else this.values.push(item);
 		return this;
 	}
@@ -48,7 +59,7 @@ export class UniqueArray<K, T> {
 	**/
 	remove(id: K): UniqueArray<K, T> {
 		const index = this.findIndex(id);
-		if (index) this.values.splice(index, 1);
+		if (index !== undefined && index >= 0) this.values.splice(index, 1);
 		return this;
 	}
 
@@ -116,6 +127,17 @@ export class UniqueArray<K, T> {
 	**/
 	existsAny(key: keyof T, value: T[keyof T]): number {
 		return this.values.filter(v => v[key] === value).length;
+	}
+
+	/**
+	 * Checks if any element with the given `id` satisfies the pair of key and any of the given values.
+	 * @param id - id of the element `T`.
+	 * @param key - key of the element type of `T`.
+	 * @param value - value conditions for the key of the element type of `T`.
+	 * @returns boolean.
+	**/
+	existsWithValues(id: K, key: keyof T, value: T[keyof T][]): boolean {
+		return this.values.some(v => v.id === id && value.includes(v[key]));
 	}
 
 	/**

@@ -125,22 +125,61 @@ export const useRulesetStore = create<RulesetStore>()(
 				GenericPost<RulesetResponse>("/ruleset/data", { rulesets })
 					.then(response => {
 						if (response.status === 200) {
+							const abilities = response.data.ruleset.abilities;
+							const abilityTypes = [...response.data.ruleset.abilities.reduce((a, v) => a.add(v.abilityType[1]), new Set<string>())];
+							const stocks = response.data.ruleset.stocks;
+							const settings = response.data.ruleset.settings;
+							const skills = response.data.ruleset.skills;
+							const skillCategories = [...response.data.ruleset.skills.reduce((a, v) => a.add(v.category[1]), new Set<string>())];
+							const skillTypes = [...response.data.ruleset.skills.reduce((a, v) => a.add(v.type[1]), new Set<string>())];
+
+							const traits = response.data.ruleset.traits;
+							const traitCategories = [...response.data.ruleset.traits.reduce((a, v) => a.add(v.category[1]), new Set<string>())];
+							const traitTypes = [...response.data.ruleset.traits.reduce((a, v) => a.add(v.type[1]), new Set<string>())];
+
 							set(produce<RulesetStore>((state) => {
-								state.abilities = response.data.ruleset.abilities;
-								state.abilityTypes = [...response.data.ruleset.abilities.reduce((a, v) => a.add(v.abilityType[1]), new Set<string>())];
+								state.abilities = abilities;
+								state.abilityTypes = abilityTypes;
 
-								state.stocks = response.data.ruleset.stocks;
-								state.settings = response.data.ruleset.settings;
+								state.stocks = stocks;
+								state.settings = settings;
 
-								state.skills = response.data.ruleset.skills;
-								state.skillCategories = [...response.data.ruleset.skills.reduce((a, v) => a.add(v.category[1]), new Set<string>())];
-								state.skillTypes = [...response.data.ruleset.skills.reduce((a, v) => a.add(v.type[1]), new Set<string>())];
+								state.skills = skills;
+								state.skillCategories = skillCategories;
+								state.skillTypes = skillTypes;
 
-								state.traits = response.data.ruleset.traits;
-								state.traitCategories = [...response.data.ruleset.traits.reduce((a, v) => a.add(v.category[1]), new Set<string>())];
-								state.traitTypes = [...response.data.ruleset.traits.reduce((a, v) => a.add(v.type[1]), new Set<string>())];
+								state.traits = traits;
+								state.traitCategories = traitCategories;
+								state.traitTypes = traitTypes;
 
-								state.lifepaths = response.data.ruleset.lifepaths;
+								state.lifepaths
+									= response.data.ruleset.lifepaths
+										.map(lifepath => {
+											const lp = { ...lifepath };
+											if (lifepath.leads) lp.leads = lifepath.leads.filter(leadId => settings.some(x => x.id === leadId));
+											if (lifepath.skills) lp.skills = lifepath.skills.filter(skillId => skills.some(x => x.id === skillId));
+											if (lifepath.traits) lp.traits = lifepath.traits.filter(traitId => traits.some(x => x.id === traitId));
+
+											if (lp.requirements) {
+												lp.requirements
+													= lp.requirements
+														.map(rb => {
+															return {
+																...rb,
+																items: rb.items
+																	.filter(item => {
+																		if ("setting" in item) return state.settings.some(x => x.id === item.setting[0]);
+																		else if ("lifepath" in item) return response.data.ruleset.lifepaths.some(x => x.id === item.lifepath[0]);
+																		else if ("skill" in item) return state.skills.some(x => x.id === item.skill[0]);
+																		else if ("trait" in item) return state.traits.some(x => x.id === item.trait[0]);
+																		return true;
+																	})
+															};
+														});
+											}
+
+											return lp;
+										});
 
 								state.resources = response.data.ruleset.resources;
 								state.resourceTypes = [...response.data.ruleset.resources.reduce((a, v) => a.add(v.type[1]), new Set<string>())];

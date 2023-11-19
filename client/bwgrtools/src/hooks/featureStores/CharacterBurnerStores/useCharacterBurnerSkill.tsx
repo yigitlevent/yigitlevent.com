@@ -4,7 +4,7 @@ import { devtools } from "zustand/middleware";
 
 import { useCharacterBurnerLifepathStore } from "./useCharacterBurnerLifepath";
 import { useCharacterBurnerStatStore } from "./useCharacterBurnerStat";
-import { Clamp } from "../../../utils/misc";
+import { GetAverage } from "../../../utils/misc";
 import { UniqueArray } from "../../../utils/uniqueArray";
 import { useRulesetStore } from "../../apiStores/useRulesetStore";
 
@@ -22,7 +22,6 @@ export type CharacterBurnerSkillState = {
 
 	hasSkillOpen: (id: SkillId) => boolean;
 	hasSkillOpenByName: (name: string) => boolean;
-
 
 	/**
 	 * Updates the character's skills list.
@@ -44,25 +43,53 @@ export const useCharacterBurnerSkillStore = create<CharacterBurnerSkillState>()(
 			},
 
 			openSkill: (skillId: SkillId): void => {
-				set(produce<CharacterBurnerSkillState>((state) => {
-					// TODO: Check remaining counts, use either pool too
-					const charSkill = state.skills.find(skillId);
-					if (charSkill) {
-						charSkill.isOpen = !charSkill.isOpen;
-						state.skills = new UniqueArray(state.skills.add(charSkill).items);
+				const { getSkill } = useRulesetStore.getState();
+				const { skills, getSkillPools } = get();
+				const { general, lifepath } = getSkillPools();
+				const skill = skills.find(skillId);
+
+				if (skill) {
+					const rulesetSkill = getSkill(skill.id);
+
+					if (skill.isOpen === "no") {
+						if (skill.type === "General" && general.remaining > 0) {
+							skill.isOpen = rulesetSkill.flags.isMagical || rulesetSkill.flags.isTraining ? "double" : "yes";
+						}
+						else if (skill.type !== "General" && (general.remaining > 0 || lifepath.remaining > 0)) {
+							skill.isOpen = rulesetSkill.flags.isMagical || rulesetSkill.flags.isTraining ? "double" : "yes";
+						}
 					}
-				}));
+					else {
+						skill.isOpen = "no";
+						skill.advancement = { general: 0, lifepath: 0 };
+					}
+
+					set(produce<CharacterBurnerSkillState>((state) => {
+						state.skills = new UniqueArray(state.skills.add(skill).items);
+					}));
+				}
 			},
 
 			modifySkillExponent: (skillId: SkillId, decrease?: boolean): void => {
-				set(produce<CharacterBurnerSkillState>((state) => {
-					// TODO: Check remaining counts, use either pool too
-					const charSkill = state.skills.find(skillId);
-					if (charSkill) {
-						charSkill.advancement.lifepath = Clamp(charSkill.advancement.lifepath + (decrease ? -1 : 1), 0, 10);
-						state.skills = new UniqueArray(state.skills.add(charSkill).items);
-					}
-				}));
+				const skill = get().skills.find(skillId);
+
+				if (skill) {
+					set(produce<CharacterBurnerSkillState>((state) => {
+						if (decrease) {
+							const hasGeneralSpending = skill.advancement.general > 0;
+							const hasLifepathSpending = skill.advancement.lifepath > 0;
+
+							if (hasGeneralSpending) state.skills = new UniqueArray(state.skills.add({ ...skill, advancement: { ...skill.advancement, general: skill.advancement.general - 1 } }).items);
+							else if (hasLifepathSpending) state.skills = new UniqueArray(state.skills.add({ ...skill, advancement: { ...skill.advancement, lifepath: skill.advancement.lifepath - 1 } }).items);
+						}
+						else {
+							const { general, lifepath } = get().getSkillPools();
+
+							if (lifepath.remaining > 0) state.skills = new UniqueArray(state.skills.add({ ...skill, advancement: { ...skill.advancement, lifepath: skill.advancement.lifepath + 1 } }).items);
+							else if (general.remaining > 0) state.skills = new UniqueArray(state.skills.add({ ...skill, advancement: { ...skill.advancement, general: skill.advancement.general + 1 } }).items);
+						}
+					}));
+				}
 			},
 
 			getSkillPools: (): { general: Points; lifepath: Points; } => {
@@ -72,29 +99,26 @@ export const useCharacterBurnerSkillStore = create<CharacterBurnerSkillState>()(
 				const gpTotal = lifepaths.reduce((pv, cv) => pv + cv.pools.generalSkillPool, 0);
 				const lpTotal = lifepaths.reduce((pv, cv) => pv + cv.pools.lifepathSkillPool, 0);
 
-				let gpSpent = 0;
-				let lpSpent = 0;
+				let gpRemaining = gpTotal;
+				let lpRemaining = lpTotal;
 
 				state.skills.forEach(skill => {
-					if (skill.isOpen) {
-						if (skill.type === "General") {
-							if (skill.isDoubleOpen) gpSpent += 2;
-							else if (!skill.isDoubleOpen) gpSpent += 1;
-							gpSpent += skill.advancement.general;
-						}
-						else {
-							// TODO: maybe gp spent for lp skill
-							if (skill.isDoubleOpen) lpSpent += 2;
-							else if (!skill.isDoubleOpen) lpSpent += 1;
-							lpSpent += skill.advancement.lifepath;
-							gpSpent += skill.advancement.general;
-						}
+					if (skill.type === "General") {
+						if (skill.isOpen === "double") gpRemaining -= 2;
+						else if (skill.isOpen === "yes") gpRemaining -= 1;
+						gpRemaining -= skill.advancement.general;
+					}
+					else {
+						if (skill.isOpen === "double") (lpRemaining > 0) ? lpRemaining -= 2 : lpRemaining -= 2;
+						else if (skill.isOpen === "yes") (lpRemaining > 0) ? lpRemaining -= 1 : lpRemaining -= 1;
+						lpRemaining -= skill.advancement.lifepath;
+						gpRemaining -= skill.advancement.general;
 					}
 				});
 
 				return {
-					general: { total: gpTotal, spent: gpSpent, remaining: gpTotal - gpSpent },
-					lifepath: { total: lpTotal, spent: lpSpent, remaining: lpTotal - lpSpent }
+					general: { total: gpTotal, spent: gpTotal - gpRemaining, remaining: gpRemaining },
+					lifepath: { total: lpTotal, spent: lpTotal - lpRemaining, remaining: lpRemaining }
 				};
 			},
 
@@ -106,24 +130,33 @@ export const useCharacterBurnerSkillStore = create<CharacterBurnerSkillState>()(
 				const charSkill = skills.find(skillId);
 
 				let shade: Shades = "B";
-				// TODO: exponent starts from root average
 				let exponent = 0;
 
 				if (charSkill && hasSkillOpen(skillId)) {
-					exponent = charSkill.advancement.general + charSkill.advancement.lifepath;
 					const skillRoots = ruleset.getSkill(skillId).roots;
-					if (skillRoots) shade = skillRoots.map(s => getStat(s[1]).shade).every(v => v === "G") ? "G" : "B";
+
+					if (skillRoots) {
+						const rootShades = skillRoots.map(s => getStat(s[1]).shade);
+						const rootExponents = skillRoots.map(s => getStat(s[1]).exponent);
+
+						shade = rootShades.every(v => v === "G") ? "G" : "B";
+						exponent = Math.floor(GetAverage(rootExponents) / 2);
+					}
+
+					exponent += charSkill.advancement.general + charSkill.advancement.lifepath;
 				}
+
+				console.log({ shade, exponent });
 
 				return { shade, exponent };
 			},
 
 			hasSkillOpen: (skillId: SkillId): boolean => {
-				return get().skills.exists(skillId, "isOpen", true);
+				return get().skills.existsWithValues(skillId, "isOpen", ["yes", "double"]);
 			},
 
 			hasSkillOpenByName: (name: string): boolean => {
-				return get().skills.filter(v => v.name === name).some(v => v.isOpen);
+				return get().skills.filter(v => v.name === name).some(v => v.isOpen !== "no");
 			},
 
 			updateSkills: (): void => {
@@ -140,9 +173,8 @@ export const useCharacterBurnerSkillStore = create<CharacterBurnerSkillState>()(
 							id: skill.id,
 							name: skill.name,
 							type: isMandatory ? "Mandatory" : "Lifepath",
-							isDoubleOpen: skill.flags.isMagical || skill.flags.isTraining,
 							isSpecial: skill.subskillIds ? true : false,
-							isOpen: isMandatory,
+							isOpen: isMandatory ? skill.flags.isMagical || skill.flags.isTraining ? "double" : "yes" : "no",
 							advancement: { general: 0, lifepath: 0 }
 						};
 						return entry;
@@ -157,6 +189,8 @@ export const useCharacterBurnerSkillStore = create<CharacterBurnerSkillState>()(
 					state.skills = characterSkills;
 				}));
 			}
-		})
+		}),
+		{ name: "useCharacterBurnerSkillStore" }
 	)
 );
+

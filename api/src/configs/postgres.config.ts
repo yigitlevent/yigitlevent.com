@@ -1,5 +1,7 @@
 import { PoolConfig } from "pg";
 
+import { IsDev } from "./constants.config";
+
 
 export const PgConfig: PoolConfig = {
 	user: process.env.API_PGUSER,
@@ -9,7 +11,8 @@ export const PgConfig: PoolConfig = {
 	port: parseInt(process.env.API_PGPORT as string),
 	max: 20,
 	idleTimeoutMillis: 0,
-	connectionTimeoutMillis: 0
+	connectionTimeoutMillis: 0,
+	ssl: { rejectUnauthorized: !IsDev }
 	//log: (messages) => console.log(messages)
 };
 

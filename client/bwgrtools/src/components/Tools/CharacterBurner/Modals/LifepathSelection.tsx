@@ -62,8 +62,7 @@ export function LifepathSelection({ isOpen, close }: { isOpen: boolean; close: (
 							<Grid key={i} item xs={5}>
 								<LifepathBox lifepath={lp} />
 							</Grid>
-						)
-						)}
+						))}
 					</Fragment>
 				</GenericGrid>
 			</Paper>

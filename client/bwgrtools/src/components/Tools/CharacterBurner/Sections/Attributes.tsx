@@ -12,7 +12,7 @@ import { BlockText } from "../BlockText";
 function Attribute({ attribute }: { attribute: UniqueArrayItem<AbilityId, CharacterAttribute>; }): JSX.Element {
 	const { getAttribute, shiftAttributeShade } = useCharacterBurnerAttributeStore();
 
-	const attributeDetails = getAttribute(attribute.id);
+	const attributeDetails = getAttribute([attribute.id, attribute.name]);
 
 	return (
 		<Fragment>

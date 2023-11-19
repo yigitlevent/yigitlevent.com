@@ -1,5 +1,5 @@
 import Typography from "@mui/material/Typography";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 
 
 import { LifepathSelection } from "./Modals/LifepathSelection";
@@ -8,13 +8,26 @@ import { Basics } from "./Sections/Basics";
 import { Skills } from "./Sections/Skills";
 import { Stats } from "./Sections/Stats";
 import { Traits } from "./Sections/Traits";
+import { useCharacterBurnerAttributeStore } from "../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerAttribute";
+import { useCharacterBurnerLifepathStore } from "../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerLifepath";
+import { useCharacterBurnerSkillStore } from "../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerSkill";
+import { useCharacterBurnerTraitStore } from "../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerTrait";
 
 
 export function CharacterBurner(): JSX.Element {
+	const { updateAvailableLifepaths } = useCharacterBurnerLifepathStore();
+	const { skills } = useCharacterBurnerSkillStore();
+	const { traits } = useCharacterBurnerTraitStore();
+	const { attributes } = useCharacterBurnerAttributeStore();
+
 	const [currentModal, setCurrentModal] = useState<CharacterBurnerModals | null>(null);
 
 	const openModal = (name: CharacterBurnerModals) => setCurrentModal(name);
 	const closeModals = () => setCurrentModal(null);
+
+	useEffect(() => {
+		updateAvailableLifepaths();
+	}, [updateAvailableLifepaths]);
 
 	return (
 		<Fragment>
@@ -24,11 +37,11 @@ export function CharacterBurner(): JSX.Element {
 
 			<Stats />
 
-			<Skills />
+			{skills.length > 0 ? <Skills /> : null}
 
-			<Traits />
+			{traits.length > 0 ? <Traits /> : null}
 
-			<Attributes />
+			{attributes.length > 0 ? <Attributes /> : null}
 
 			{/* TODO
 			

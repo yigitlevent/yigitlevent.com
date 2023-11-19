@@ -14,8 +14,7 @@ interface CharacterSkill {
 	name: string;
 	type: "Mandatory" | "Lifepath" | "General";
 	isSpecial: boolean;
-	isDoubleOpen: boolean;
-	isOpen: boolean;
+	isOpen: "no" | "yes" | "double";
 	advancement: { general: number; lifepath: number; };
 }
 

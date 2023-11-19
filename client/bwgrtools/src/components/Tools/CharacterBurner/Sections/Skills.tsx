@@ -18,7 +18,7 @@ function SkillsList({ skill }: { skill: UniqueArrayItem<SkillId, CharacterSkill>
 			<GenericGrid columns={5} center="h" hasBackground={1}>
 				<BlockSkillPopover
 					skill={[skill.id, skill.name]}
-					checkbox={{ checked: skill.isOpen, disabled: skill.type === "Mandatory", onClick: () => openSkill(skill.id) }}
+					checkbox={{ checked: skill.isOpen !== "no", disabled: skill.type === "Mandatory", onClick: () => openSkill(skill.id) }}
 				/>
 
 				<Grid item>

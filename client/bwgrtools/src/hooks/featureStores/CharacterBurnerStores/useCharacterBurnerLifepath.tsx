@@ -4,6 +4,7 @@ import { devtools } from "zustand/middleware";
 
 import { useCharacterBurnerMiscStore } from "./useCharacterBurnerMisc";
 import { Pairwise } from "../../../utils/misc";
+import { useRulesetStore } from "../../apiStores/useRulesetStore";
 import { useCharacterBurnerAttributeStore } from "../CharacterBurnerStores/useCharacterBurnerAttribute";
 import { useCharacterBurnerBasicsStore } from "../CharacterBurnerStores/useCharacterBurnerBasics";
 import { useCharacterBurnerSkillStore } from "../CharacterBurnerStores/useCharacterBurnerSkill";
@@ -51,10 +52,9 @@ export const useCharacterBurnerLifepathStore = create<CharacterBurnerLifepathSta
 			},
 
 			addLifepath: (lifepath: Lifepath): void => {
-				set(produce<CharacterBurnerLifepathState>((state) => {
-					state.lifepaths.push(lifepath);
-				}));
+				set(produce<CharacterBurnerLifepathState>((state) => { state.lifepaths.push(lifepath); }));
 				get().updateAvailableLifepaths();
+				useCharacterBurnerStatStore.getState().reset();
 				useCharacterBurnerSkillStore.getState().updateSkills();
 				useCharacterBurnerTraitStore.getState().updateTraits();
 				useCharacterBurnerAttributeStore.getState().updateAttributes();
@@ -65,6 +65,7 @@ export const useCharacterBurnerLifepathStore = create<CharacterBurnerLifepathSta
 					state.lifepaths = state.lifepaths.slice(0, state.lifepaths.length - 1);
 				}));
 				get().updateAvailableLifepaths();
+				useCharacterBurnerStatStore.getState().reset();
 				useCharacterBurnerSkillStore.getState().updateSkills();
 				useCharacterBurnerTraitStore.getState().updateTraits();
 				useCharacterBurnerAttributeStore.getState().updateAttributes();
@@ -115,13 +116,17 @@ export const useCharacterBurnerLifepathStore = create<CharacterBurnerLifepathSta
 				const { stats } = useCharacterBurnerStatStore.getState();
 
 				const stockAgePool = getAgePool().mentalPool;
-				const lifepathPool = lifepaths.length > 0 ? lifepaths.map(lp => lp.pools.mentalStatPool).reduce((pv, cv) => pv + cv) : 0;
+				const lifepathPool
+					= lifepaths.length > 0
+						? lifepaths.map(lp => lp.pools.mentalStatPool).reduce((pv, cv) => pv + cv)
+						: 0;
 				const total = stockAgePool + lifepathPool;
 
 				const spent
 					= Object.values(stats)
 						.filter(s => s.poolType === "Mental")
-						.map((v): number => v.poolSpent).reduce((pv, cv) => pv + cv);
+						.map((v): number => v.mainPoolSpent.shade + v.mainPoolSpent.exponent)
+						.reduce((pv, cv) => pv + cv);
 
 				return { total: total, spent, remaining: total - spent };
 			},
@@ -138,7 +143,8 @@ export const useCharacterBurnerLifepathStore = create<CharacterBurnerLifepathSta
 				const spent
 					= Object.values(stats)
 						.filter(s => s.poolType === "Physical")
-						.map((v): number => v.poolSpent).reduce((pv, cv) => pv + cv);
+						.map((v): number => v.mainPoolSpent.shade + v.mainPoolSpent.exponent)
+						.reduce((pv, cv) => pv + cv);
 
 				return { total: total, spent, remaining: total - spent };
 			},
@@ -150,7 +156,7 @@ export const useCharacterBurnerLifepathStore = create<CharacterBurnerLifepathSta
 				const total = lifepaths.length > 0 ? lifepaths.map(lp => lp.pools.eitherStatPool).reduce((pv, cv) => pv + cv) : 0;
 				const spent
 					= Object.values(stats)
-						.map((v): number => v.eitherSpent)
+						.map((v): number => v.eitherPoolSpent.shade + v.eitherPoolSpent.exponent)
 						.reduce((pv, cv) => pv + cv);
 
 				return { total, spent, remaining: total - spent };
@@ -159,21 +165,12 @@ export const useCharacterBurnerLifepathStore = create<CharacterBurnerLifepathSta
 			updateAvailableLifepaths: (): Lifepath[] => {
 				const { lifepaths, hasLifepath, hasSetting, getAge } = get();
 
+				const ruleset = useRulesetStore.getState();
 				const { gender, stock } = useCharacterBurnerBasicsStore.getState();
 				const { hasQuestionTrue } = useCharacterBurnerMiscStore.getState();
 				const { hasSkillOpen } = useCharacterBurnerSkillStore.getState();
 				const { hasTraitOpen } = useCharacterBurnerTraitStore.getState();
 				const { attributes, hasAttribute } = useCharacterBurnerAttributeStore.getState();
-
-				if (lifepaths.length === 0) {
-					const bornLps = lifepaths.filter(lp => lp.flags.isBorn && stock[0] === lp.stock[0]);
-
-					set(produce<CharacterBurnerLifepathState>((state) => {
-						state.availableLifepaths = state.lifepaths.filter(lp => lp.flags.isBorn && stock[0] === lp.stock[0]);
-					}));
-
-					return bornLps;
-				}
 
 				const checkRequirementBlock = (lifepath: Lifepath, block: LifepathRequirementBlock): boolean => {
 					const itemResults = block.items.map((item): boolean => {
@@ -207,21 +204,30 @@ export const useCharacterBurnerLifepathStore = create<CharacterBurnerLifepathSta
 					return false;
 				};
 
-				const lastLifepath = lifepaths[lifepaths.length - 1];
-				const possibleSettingIds = lastLifepath.leads ? [lastLifepath.setting[0], ...lastLifepath.leads] : [lastLifepath.setting[0]];
-				const possibleLifepaths
-					= possibleSettingIds
-						.map(settingId => lifepaths.filter(x => stock[0] === x.stock[0] && x.setting[0] === settingId && x.flags.isBorn === false))
-						.flat()
-						.filter(lifepath => {
-							if (lifepath.requirements) {
-								const blockResults = lifepath.requirements.map(block => ({ mustFulfill: block.mustFulfill, result: checkRequirementBlock(lifepath, block) }));
-								const musts = blockResults.every(v => v.mustFulfill && v.result);
-								const atLeastOne = blockResults.some(v => v.result);
-								return musts && atLeastOne;
-							}
-							return true;
-						});
+				let possibleLifepaths: Lifepath[] = [];
+
+				if (lifepaths.length === 0) {
+					possibleLifepaths = ruleset.lifepaths.filter(lp => lp.flags.isBorn && stock[0] === lp.stock[0]);
+				}
+				else {
+					const lastLifepath = lifepaths[lifepaths.length - 1];
+					const possibleSettingIds = lastLifepath.leads ? [lastLifepath.setting[0], ...lastLifepath.leads] : [lastLifepath.setting[0]];
+
+					possibleLifepaths
+						= possibleSettingIds
+							.map(settingId => ruleset.lifepaths.filter(x => stock[0] === x.stock[0] && x.setting[0] === settingId && x.flags.isBorn === false))
+							.flat()
+							.filter(lifepath => {
+								if (lifepath.requirements) {
+									const blockResults = lifepath.requirements.map(block => ({ mustFulfill: block.mustFulfill, result: checkRequirementBlock(lifepath, block) }));
+									const musts = blockResults.every(v => v.mustFulfill && v.result);
+									const atLeastOne = blockResults.some(v => v.result);
+									return musts && atLeastOne;
+								}
+								return true;
+							});
+				}
+
 
 				set(produce<CharacterBurnerLifepathState>((state) => {
 					state.availableLifepaths = possibleLifepaths;
