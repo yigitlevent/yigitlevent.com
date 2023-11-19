@@ -32,7 +32,6 @@ export function TraitLists(): JSX.Element {
 
 						<Select label="Stock" value={filters["stock"]} onChange={v => setFilter([{ key: "stock", value: v.target.value }])}>
 							<MenuItem value="Any">Any</MenuItem>
-
 							{stocks.map(v => v.name).map((v, i) => <MenuItem key={i} value={v}>{v}</MenuItem>)}
 						</Select>
 					</FormControl>
@@ -44,7 +43,6 @@ export function TraitLists(): JSX.Element {
 
 						<Select label="Category" value={filters["category"]} onChange={v => setFilter([{ key: "category", value: v.target.value }])}>
 							<MenuItem value="Any">Any</MenuItem>
-
 							{traitCategories.map((v, i) => <MenuItem key={i} value={v}>{v}</MenuItem>)}
 						</Select>
 					</FormControl>
@@ -56,7 +54,6 @@ export function TraitLists(): JSX.Element {
 
 						<Select label="Type" value={filters["type"]} onChange={v => setFilter([{ key: "type", value: v.target.value }])}>
 							<MenuItem value="Any">Any</MenuItem>
-
 							{traitTypes.map((v, i) => <MenuItem key={i} value={v}>{v}</MenuItem>)}
 						</Select>
 					</FormControl>
@@ -85,7 +82,6 @@ export function TraitLists(): JSX.Element {
 							{["Name", "Description"].map((name) => (
 								<MenuItem key={name} value={name}>
 									<Checkbox checked={searchFields.indexOf(name) > -1} />
-
 									<ListItemText primary={name} />
 								</MenuItem>
 							))}

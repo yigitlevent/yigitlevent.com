@@ -7,15 +7,16 @@ export type DrawerNames = "Tools" | "Datasets" | "Checklist" | "My Things";
 
 interface DrawerState {
 	drawer: undefined | DrawerNames;
-	openDrawer: (drawer: DrawerNames) => void;
+	toggleDrawer: (drawer?: DrawerNames) => void;
 }
 
 export const useDrawerStore = create<DrawerState>()(
+
 	devtools(
 		(set) => ({
 			drawer: undefined,
 
-			openDrawer: (drawer: DrawerNames) => {
+			toggleDrawer: (drawer?: DrawerNames) => {
 				set(produce<DrawerState>((state) => {
 					if (state.drawer === drawer) state.drawer = undefined;
 					else state.drawer = drawer;

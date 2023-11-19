@@ -11,14 +11,12 @@ export function FightPlannerActionDetails({ action }: { action: FightAction; }):
 			{action.tests
 				? <Box sx={{ margin: "0 0 10px" }}>
 					<b>Tests:</b>
-
 					<Typography variant="body2">{[...action.tests.abilities, ...action.tests.skills].map(v => v[1]).join(", ")}</Typography>
 				</Box>
 				: null}
 
 			<Box sx={{ margin: "0 0 10px" }}>
 				<b>Action Group:</b>
-
 				<Typography variant="body2">{action.group[1]}</Typography>
 			</Box>
 
@@ -55,7 +53,6 @@ export function FightPlannerActionDetails({ action }: { action: FightAction; }):
 			{action.actionCost
 				? <Box sx={{ margin: "0 0 10px" }}>
 					<b>Action Cost:</b>
-
 					{<Typography variant="body2">{action.actionCost}</Typography>}
 				</Box>
 				: null}
@@ -63,7 +60,6 @@ export function FightPlannerActionDetails({ action }: { action: FightAction; }):
 			{action.resolutions
 				? <Box sx={{ margin: "0 0 10px" }}>
 					<b>Resolution:</b>
-
 					{action.resolutions.map((v, i) => <Typography variant="body2" key={i}>{GetResolutionString(v)}</Typography>)}
 				</Box>
 				: null}

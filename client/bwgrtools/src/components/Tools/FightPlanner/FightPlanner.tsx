@@ -37,7 +37,6 @@ export function FightPlanner(): JSX.Element {
 	return (
 		<Fragment>
 			{notification}
-
 			<Typography variant="h3">Fight Planner</Typography>
 
 			<GenericGrid columns={4} center>
@@ -58,9 +57,7 @@ export function FightPlanner(): JSX.Element {
 
 						<Select label="Volley" value={volleyIndex} onChange={(e) => changeVolleyIndex(parseInt(e.target.value as string))}>
 							<MenuItem value={0}>Volley 1</MenuItem>
-
 							<MenuItem value={1}>Volley 2</MenuItem>
-
 							<MenuItem value={2}>Volley 3</MenuItem>
 						</Select>
 					</FormControl>

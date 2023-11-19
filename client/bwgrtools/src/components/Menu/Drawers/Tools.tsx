@@ -40,7 +40,6 @@ export function Tools({ expanded }: { expanded: boolean; }): JSX.Element {
 					return (
 						<Fragment key={i}>
 							<RouteButton title={item[0]} route={item[1]} Icon={item[2]} />
-
 							{[3, 7].includes(i) ? <Divider /> : null}
 						</Fragment>
 					);

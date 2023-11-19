@@ -76,7 +76,6 @@ export function LifepathLists(): JSX.Element {
 							{["Name"/*, "Leads", "Skills", "Traits"*/].map((name) => (
 								<MenuItem key={name} value={name}>
 									<Checkbox checked={searchFields.indexOf(name) > -1} />
-
 									<ListItemText primary={name} />
 								</MenuItem>
 							))}

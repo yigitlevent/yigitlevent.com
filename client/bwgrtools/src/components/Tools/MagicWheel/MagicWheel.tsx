@@ -286,7 +286,6 @@ export function MagicWheel(): JSX.Element {
 
 						<Select label="Direction" value={direction} onChange={e => changeDirection(e.target.value)} disabled={isRotating > 0}>
 							<MenuItem value={"Clockwise"}>Clockwise</MenuItem>
-
 							<MenuItem value={"Counterclockwise"}>Counterclockwise</MenuItem>
 						</Select>
 					</FormControl>

@@ -31,9 +31,7 @@ export function Stats(): JSX.Element {
 
 			<Grid item xs={6}>
 				<Typography>{mentalText}</Typography>
-
 				<Typography>{physicalText}</Typography>
-
 				<Typography>{eitherText}</Typography>
 			</Grid>
 
@@ -50,7 +48,6 @@ export function Stats(): JSX.Element {
 
 									<Grid item>
 										<AbilityButton name={v.name} onClick={() => shiftStatShade(v.name)}>{stat.shade}</AbilityButton>
-
 										<AbilityButton name={v.name} onClick={() => modifyStatExponent(v.name)} onContextMenu={() => modifyStatExponent(v.name, true)}>{stat.exponent}</AbilityButton>
 									</Grid>
 								</GenericGrid>

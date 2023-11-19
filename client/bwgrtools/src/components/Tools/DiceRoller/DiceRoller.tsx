@@ -112,7 +112,6 @@ export function DiceRoller(): JSX.Element {
 		return (
 			<Fragment>
 				<Typography variant="h6">Result</Typography>
-
 				<Typography>{pre}</Typography>
 			</Fragment>
 		);
@@ -133,7 +132,6 @@ export function DiceRoller(): JSX.Element {
 		return (
 			<Fragment>
 				<Typography variant="h6">Dice</Typography>
-
 				<Typography>{diceIcons()}</Typography>
 			</Fragment>
 		);
@@ -143,7 +141,6 @@ export function DiceRoller(): JSX.Element {
 		return (
 			<Fragment>
 				<Typography variant="h6">Test</Typography>
-
 				<Typography>{testResult.test}</Typography>
 			</Fragment>
 		);
@@ -160,9 +157,7 @@ export function DiceRoller(): JSX.Element {
 
 						<Select value={shade} onChange={e => setShade(e.target.value)}>
 							<MenuItem value={"Black"}>Black</MenuItem>
-
 							<MenuItem value={"Gray"}>Gray</MenuItem>
-
 							<MenuItem value={"White"}>White</MenuItem>
 						</Select>
 					</FormControl>

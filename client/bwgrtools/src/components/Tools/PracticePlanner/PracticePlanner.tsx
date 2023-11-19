@@ -24,7 +24,6 @@ export function PracticePlanner(): JSX.Element {
 	return (
 		<Fragment>
 			{notification}
-
 			<Typography variant="h3">Practice Planner</Typography>
 
 			<GenericGrid columns={3} center={"v"}>
@@ -84,9 +83,7 @@ export function PracticePlanner(): JSX.Element {
 
 							<Select defaultValue={"Difficult"} disabled={cells.length < 1}>
 								<MenuItem value={"Routine"}>Routine</MenuItem>
-
 								<MenuItem value={"Difficult"}>Difficult</MenuItem>
-
 								<MenuItem value={"Challenging"}>Challenging</MenuItem>
 							</Select>
 						</FormControl>

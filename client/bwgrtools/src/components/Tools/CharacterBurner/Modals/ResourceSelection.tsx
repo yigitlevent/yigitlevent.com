@@ -84,11 +84,7 @@ export function ResourceSelection({ isOpen, close }: { isOpen: boolean; close: (
 
 	const changeModifier = useCallback((name: string) => {
 		const newCosts = JSON.parse(JSON.stringify(costs)) as SelectedCost;
-		console.log(newCosts);
-		console.log(name);
-		console.log(newCosts.modifiers);
 		newCosts.modifiers[name] = { ...newCosts.modifiers[name], selected: !newCosts.modifiers[name].selected };
-		console.log(newCosts.modifiers);
 		setCosts({ ...newCosts });
 	}, [costs]);
 

@@ -29,7 +29,7 @@ function DrawerIconButton({ title, icon, onClick }: { title: string; icon: JSX.E
 
 export function MenuButtons({ openSignin, openSignup }: { openSignin: () => void; openSignup: () => void; }): JSX.Element {
 	const { user, signout } = useUserStore();
-	const { openDrawer } = useDrawerStore();
+	const { toggleDrawer } = useDrawerStore();
 
 	const buttons: { title: DrawerNames, icon: JSX.Element; authOnly: boolean; }[] = [
 		{ title: "Tools", icon: <ListAltOutlinedIcon color="primary" />, authOnly: false },
@@ -48,13 +48,12 @@ export function MenuButtons({ openSignin, openSignup }: { openSignin: () => void
 				? <DrawerIconButton title={"Sign out"} icon={<LogoutOutlinedIcon color="primary" />} onClick={signout} />
 				: <Fragment>
 					<DrawerIconButton title={"Sign in"} icon={<LoginOutlinedIcon color="primary" />} onClick={openSignin} />
-
 					<DrawerIconButton title={"Sign up"} icon={<OpenInBrowserOutlinedIcon color="primary" />} onClick={openSignup} />
 				</Fragment>}
 
 			{buttons.reverse()
 				.filter(v => !v.authOnly || user)
-				.map((v, i) => <DrawerIconButton key={i} title={v.title} icon={v.icon} onClick={() => openDrawer(v.title)} />)}
+				.map((v, i) => <DrawerIconButton key={i} title={v.title} icon={v.icon} onClick={() => toggleDrawer(v.title)} />)}
 		</Grid>
 	);
 }

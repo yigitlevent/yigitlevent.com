@@ -112,7 +112,6 @@ export function PopoverLink({ data, noColor }: { data: Skill | Trait; noColor?: 
 	return (
 		<Link underline="hover" onMouseDown={openPopover} color={noColor ? "text.primary" : "primary.main"}>
 			{data.name}
-
 			<Pop anchor={anchor} data={data} onClose={closePopover} />
 		</Link>
 	);

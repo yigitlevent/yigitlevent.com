@@ -10,7 +10,6 @@ export function RangeAndCoverActionDetails({ action }: { action: RaCAction; }): 
 		<Stack spacing={0} sx={{ width: "100%" }}>
 			<Box sx={{ margin: "0 0 10px" }}>
 				<b>Action Group:</b>
-
 				<Typography variant="body2">{action.group[1]}</Typography>
 			</Box>
 
@@ -57,7 +56,6 @@ export function RangeAndCoverActionDetails({ action }: { action: RaCAction; }): 
 			{action.resolutions
 				? <Box sx={{ margin: "0 0 10px" }}>
 					<b>Resolution:</b>
-
 					{action.resolutions.map((v, i) => <Typography variant="body2" key={i}>{GetResolutionString(v)}</Typography>)}
 				</Box>
 				: null}

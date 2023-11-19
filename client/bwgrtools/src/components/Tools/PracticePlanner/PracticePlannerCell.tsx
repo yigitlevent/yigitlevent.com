@@ -24,9 +24,7 @@ function Placed({ placed, practiceIndex, cellIndex }: { placed: PracticePlaced; 
 	return (
 		<Paper key={practiceIndex} elevation={4} sx={{ padding: "2px 4px" }}>
 			{placed.name}
-
 			<Typography variant="caption">{text}</Typography>
-
 			<IconButton size="small" sx={{ float: "right" }} onClick={() => deletePractice(cellIndex, practiceIndex)}><DeleteOutlineIcon fontSize="small" /></IconButton>
 		</Paper>
 	);
@@ -40,11 +38,8 @@ export function PracticePlannerCell({ cell, cellIndex, setNotification }: { cell
 			<Stack spacing={0}>
 				<Typography>
 					Day {cellIndex + 1}
-
 					<IconButton size="small" sx={{ float: "right" }} onClick={() => deleteCell(cellIndex)}><DeleteOutlineIcon fontSize="small" /></IconButton>
-
 					<IconButton size="small" sx={{ float: "right" }} onClick={() => changeCellHour(cellIndex, -1, cells, setNotification)}><RemoveCircleOutlineIcon fontSize="small" /></IconButton>
-
 					<IconButton size="small" sx={{ float: "right" }} onClick={() => changeCellHour(cellIndex, 1, cells, setNotification)}><AddCircleOutlineIcon fontSize="small" /></IconButton>
 				</Typography>
 
