@@ -103,7 +103,7 @@ export function Skills(): JSX.Element {
 	const lifepathText = `Lifepath Skill Points / Total: ${skillPools.lifepath.total}, Remaining: ${skillPools.lifepath.remaining}`;
 
 	return (
-		<GenericGrid columns={6} center="v" spacing={[0, 2]} sx={{ marginTop: 3 }}>
+		<GenericGrid columns={6} center="v" spacing={[0, 2]} extraBottomMargin>
 			<Grid item xs={6}>
 				<Typography variant="h4">Skills</Typography>
 			</Grid>

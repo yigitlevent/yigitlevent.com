@@ -22,7 +22,7 @@ export function Basics({ openModal }: { openModal: (name: CharacterBurnerModals)
 	}, [setStockAndReset, stock]);
 
 	return (
-		<GenericGrid columns={6} center>
+		<GenericGrid columns={6} center extraBottomMargin>
 			<Grid item xs={6} sm={6} md={2}>
 				<TextField label="Name" value={name} onChange={(e) => setName(e.target.value)} fullWidth variant="standard" />
 			</Grid>

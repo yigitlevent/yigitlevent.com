@@ -24,7 +24,7 @@ export function Stats(): JSX.Element {
 	const eitherText = `Either Pool / Total: ${either.total}, Remaining: ${either.remaining}`;
 
 	return (
-		<GenericGrid columns={6} center spacing={[0, 2]} sx={{ marginTop: 3 }}>
+		<GenericGrid columns={6} center spacing={[0, 2]} sx={{ marginTop: 3 }} extraBottomMargin>
 			<Grid item xs={6}>
 				<Typography variant="h4">Stats</Typography>
 			</Grid>

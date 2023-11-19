@@ -6,9 +6,12 @@ import { LifepathSelection } from "./Modals/LifepathSelection";
 import { ResourceSelection } from "./Modals/ResourceSelection";
 import { Attributes } from "./Sections/Attributes";
 import { Basics } from "./Sections/Basics";
+import { Beliefs } from "./Sections/Beliefs";
+import { Instincts } from "./Sections/InstinctsBlock";
 import { Resources } from "./Sections/Resources";
 import { Skills } from "./Sections/Skills";
 import { Stats } from "./Sections/Stats";
+import { Tolerances } from "./Sections/Tolerances";
 import { Traits } from "./Sections/Traits";
 import { useCharacterBurnerAttributeStore } from "../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerAttribute";
 import { useCharacterBurnerLifepathStore } from "../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerLifepath";
@@ -39,27 +42,27 @@ export function CharacterBurner(): JSX.Element {
 			{skills.length > 0 ? <Skills /> : null}
 			{traits.length > 0 ? <Traits /> : null}
 			{attributes.length > 0 ? <Attributes /> : null}
-			{lifepaths.length > 0 ? <Resources openModal={openModal} /> : null}
 
-			{
-				/* TODO
-				<Tolerances />
-				<Beliefs />
-				<Instincts />
-				*/
-			}
+			{lifepaths.length > 0
+				? <Fragment>
+					<Resources openModal={openModal} />
+					<Tolerances />
+					<Beliefs />
+					<Instincts />
+				</Fragment>
+				: null}
+
+
 
 			<LifepathSelection isOpen={currentModal === "lp"} close={closeModals} />
 			<ResourceSelection isOpen={currentModal === "re"} close={closeModals} />
 
-			{
-				/* TODO
+			{/* TODO
 				<AnswerQuestions />
 				<ChooseGeneralSkills />
 				<ChooseGeneralLifepaths />
 				<ChooseSpecial /> --- StockSpecific, SpecialLifepaths, SpecialSkills
-				*/
-			}
+			*/}
 		</Fragment>
 	);
 }

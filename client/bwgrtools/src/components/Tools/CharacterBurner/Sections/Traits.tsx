@@ -105,7 +105,7 @@ export function Traits(): JSX.Element {
 	const text = `Trait Points: ${traitPools.total}, Remaining: ${traitPools.remaining}`;
 
 	return (
-		<GenericGrid columns={6} center="v" spacing={[0, 2]}>
+		<GenericGrid columns={6} center="v" spacing={[0, 2]} extraBottomMargin>
 			<Grid item xs={6}>
 				<Typography variant="h4">Traits</Typography>
 			</Grid>

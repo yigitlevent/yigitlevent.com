@@ -38,7 +38,7 @@ export function Attributes(): JSX.Element {
 	const { attributes } = useCharacterBurnerAttributeStore();
 
 	return (
-		<GenericGrid columns={6} center spacing={[0, 2]}>
+		<GenericGrid columns={6} center spacing={[0, 2]} extraBottomMargin>
 			<Grid item xs={6}>
 				<Typography variant="h4">Attributes</Typography>
 			</Grid>

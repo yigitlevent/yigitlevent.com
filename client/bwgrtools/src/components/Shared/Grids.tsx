@@ -9,9 +9,10 @@ interface GenericGridProps {
 	spacing?: [row: 0 | 1 | 2 | 3, column: 0 | 1 | 2 | 3];
 	sx?: SxProps<Theme>;
 	hasBackground?: boolean | number;
+	extraBottomMargin?: boolean;
 }
 
-export function GenericGrid({ children, columns, center, spacing, sx, hasBackground }: GenericGridProps): JSX.Element {
+export function GenericGrid({ children, columns, center, spacing, sx, hasBackground, extraBottomMargin }: GenericGridProps): JSX.Element {
 	let centered: { [key: string]: string; } = {};
 	if (center === true) centered = { justifyContent: "space-between", alignItems: "center" };
 	else if (center === "h") centered = { justifyContent: "space-between" };
@@ -33,6 +34,7 @@ export function GenericGrid({ children, columns, center, spacing, sx, hasBackgro
 			columnSpacing={spacing ? spacing[1] : 1}
 			sx={{
 				marginTop: 1,
+				marginBottom: extraBottomMargin ? 4 : 0,
 				paddingBottom: hasBackground ? 1 : undefined,
 				...bg,
 				...sx

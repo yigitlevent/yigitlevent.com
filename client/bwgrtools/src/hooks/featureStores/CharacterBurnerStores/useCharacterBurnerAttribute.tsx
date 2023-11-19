@@ -418,16 +418,13 @@ export const useCharacterBurnerAttributeStore = create<CharacterBurnerAttributeS
 					}
 				};
 
-
 				const prevAttributeState = state.attributes.find(attribute[0]);
 				const newAttributeState = getAttributePoints(attribute[1]);
 
-				const asdf: AbilityPoints = {
+				return {
 					shade: prevAttributeState?.shadeShifted ? "G" : "B" || newAttributeState.shade,
 					exponent: newAttributeState.exponent - (prevAttributeState?.shadeShifted ? 5 : 0)
 				};
-
-				return asdf;
 			},
 
 			hasAttribute: (id: AbilityId): boolean => {
@@ -448,7 +445,6 @@ export const useCharacterBurnerAttributeStore = create<CharacterBurnerAttributeS
 						.filter(ability => ability.abilityType[1].endsWith("Attribute"))
 						.map(ability => {
 							const attr = getAttribute([ability.id, ability.name]);
-							console.log({ attr });
 
 							if (ability.abilityType[1] === "Attribute") {
 								return {

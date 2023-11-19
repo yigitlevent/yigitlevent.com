@@ -9,33 +9,36 @@ import TableRow from "@mui/material/TableRow";
 import Typography from "@mui/material/Typography";
 import { useEffect, useState } from "react";
 
-import { useCharacterBurnerStoreOld } from "../../../../hooks/oldStores/useCharacterBurnerStoreOld";
+import { useCharacterBurnerStatStore } from "../../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerStat";
+import { useCharacterBurnerTraitStore } from "../../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerTrait";
 import { GetAverage } from "../../../../utils/misc";
 import { GenericGrid } from "../../../Shared/Grids";
 
 
-export function TolerancesBlock() {
-	const { checkHasTrait, getStatExponent } = useCharacterBurnerStoreOld();
+export function Tolerances(): JSX.Element {
+	const { getStat } = useCharacterBurnerStatStore();
+	const { hasTraitOpenByName } = useCharacterBurnerTraitStore();
 
 	const [tolerances, setTolerances] = useState<string[]>(Array(16).fill("—"));
+
+	const power = getStat("Power");
+	const forte = getStat("Forte");
 
 	useEffect(() => {
 		const ptgs: string[] = Array(16).fill("—");
 
-		const powerExp = getStatExponent("Power");
-		const forteExp = getStatExponent("Forte");
+		const maxDistance = Math.ceil(forte.exponent / 2);
 
-		const maxDistance = Math.ceil(forteExp / 2);
-
-		const mortalWound = (checkHasTrait("Any Die➞Tough") || checkHasTrait("Dwarf Common➞Tough") || checkHasTrait("Troll Common➞Tough"))
-			? Math.ceil(GetAverage([powerExp, forteExp])) + 6
-			: Math.floor(GetAverage([powerExp, forteExp])) + 6;
+		const mortalWound
+			= hasTraitOpenByName("Tough")
+				? Math.ceil(GetAverage([power.exponent, forte.exponent])) + 6
+				: Math.floor(GetAverage([power.exponent, forte.exponent])) + 6;
 
 		let traumatic = mortalWound - 1;
 		let severe = mortalWound - 2;
 		let midi = mortalWound - 3;
 		let light = mortalWound - 4;
-		const superficial = Math.floor(forteExp / 2) + 1;
+		const superficial = Math.floor(forte.exponent / 2) + 1;
 
 		while (light - superficial > maxDistance) light--;
 		while (midi - light > maxDistance) midi--;
@@ -52,13 +55,14 @@ export function TolerancesBlock() {
 		}
 
 		setTolerances(ptgs);
-	}, [checkHasTrait, getStatExponent]);
+	}, [forte.exponent, getStat, hasTraitOpenByName, power.exponent]);
 
 	return (
-		<GenericGrid columns={16} spacing={[0, 1]} center>
+		<GenericGrid columns={16} spacing={[0, 1]} center extraBottomMargin>
 			<Grid item xs={16}>
 				<Typography variant="h4">Tolerances</Typography>
 			</Grid>
+
 			<Grid item xs={16}>
 				<TableContainer component={Paper}>
 					<Table size="small">
@@ -68,10 +72,10 @@ export function TolerancesBlock() {
 									<TableCell key={v} sx={{ textAlign: "center" }}>
 										B{v + 1}
 									</TableCell>
-								)
-								)}
+								))}
 							</TableRow>
 						</TableHead>
+
 						<TableBody>
 							<TableRow sx={{ margin: "8px 0 0", "&:last-child td": { border: 0 } }}>
 								{tolerances.map((tolerance, i) => (

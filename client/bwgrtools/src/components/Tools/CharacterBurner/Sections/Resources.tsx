@@ -22,7 +22,7 @@ export function Resources({ openModal }: { openModal: (name: CharacterBurnerModa
 	const spending = getSpending();
 
 	return (
-		<GenericGrid columns={6} center="h">
+		<GenericGrid columns={6} center="h" extraBottomMargin>
 			<Grid item xs={6}>
 				<Typography variant="h4">Resources</Typography>
 			</Grid>
