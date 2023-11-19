@@ -5,6 +5,7 @@ import { devtools } from "zustand/middleware";
 import { useCharacterBurnerBasicsStore } from "./useCharacterBurnerBasics";
 import { useCharacterBurnerLifepathStore } from "./useCharacterBurnerLifepath";
 import { useCharacterBurnerMiscStore } from "./useCharacterBurnerMisc";
+import { useCharacterBurnerResourceStore } from "./useCharacterBurnerResource";
 import { useCharacterBurnerSkillStore } from "./useCharacterBurnerSkill";
 import { useCharacterBurnerStatStore } from "./useCharacterBurnerStat";
 import { useCharacterBurnerTraitStore } from "./useCharacterBurnerTrait";
@@ -167,8 +168,9 @@ export const useCharacterBurnerAttributeStore = create<CharacterBurnerAttributeS
 			getGreed: (): AbilityPoints => {
 				const { resources, hasQuestionTrueByName } = useCharacterBurnerMiscStore.getState();
 				const { getStat } = useCharacterBurnerStatStore.getState();
-				const { getAge, getResourcePoints, lifepaths } = useCharacterBurnerLifepathStore.getState();
+				const { getAge, lifepaths } = useCharacterBurnerLifepathStore.getState();
 				const { hasTraitOpenByName } = useCharacterBurnerTraitStore.getState();
+				const { getResourcePoints } = useCharacterBurnerResourceStore.getState();
 
 				const will = getStat("Will");
 				const age = getAge();
@@ -466,6 +468,7 @@ export const useCharacterBurnerAttributeStore = create<CharacterBurnerAttributeS
 					state.attributes = characterAttributes;
 				}));
 			}
-		})
+		}),
+		{ name: "useCharacterBurnerAttributeStore" }
 	)
 );

@@ -114,6 +114,7 @@ export const useCharacterBurnerStatStore = create<CharacterBurnerStatState>()(
 
 				useCharacterBurnerSkillStore.getState().updateSkills();
 			}
-		})
+		}),
+		{ name: "useCharacterBurnerStatStore" }
 	)
 );

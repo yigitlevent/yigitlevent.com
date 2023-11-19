@@ -1,4 +1,4 @@
-type CharacterBurnerModals = "lp" | "st";
+type CharacterBurnerModals = "lp" | "re";
 type Shades = "B" | "G" | "W";
 
 interface CharacterAttribute {
@@ -31,6 +31,7 @@ interface CharacterResource {
 	type: [id: ResourceTypeId, name: string];
 	modifiers: string[];
 	cost: number;
+	description: string;
 }
 
 interface CharacterStockSpecific {

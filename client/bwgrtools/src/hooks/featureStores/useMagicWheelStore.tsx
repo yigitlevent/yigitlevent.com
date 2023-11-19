@@ -86,6 +86,7 @@ export const useMagicWheelStore = create<MagicWheelState>()(
 					state.cover = !state.cover;
 				}));
 			}
-		})
+		}),
+		{ name: "useMagicWheelStore" }
 	)
 );

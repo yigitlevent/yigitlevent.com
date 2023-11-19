@@ -55,6 +55,7 @@ export const useLifepathRandomizerStore = create<LifepathRandomizerState>()(
 					state.noDuplicates !== state.noDuplicates;
 				}));
 			}
-		})
+		}),
+		{ name: "useLifepathRandomizerStore" }
 	)
 );

@@ -110,6 +110,7 @@ export const useUserStore = create<UserState>()(
 					})
 					.finally(() => toggleFetching());
 			}
-		})
+		}),
+		{ name: "useUserStore" }
 	)
 );

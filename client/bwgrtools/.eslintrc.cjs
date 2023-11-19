@@ -130,7 +130,7 @@ module.exports = {
 		"react/no-unused-state": "warn",
 		"react/no-multi-comp": ["error", { "ignoreStateless": true }],
 		"react/no-unescaped-entities": "off",
-		"react/jsx-newline": ["error", { prevent: false, allowMultilines: false }],
+		"react/jsx-newline": ["error", { prevent: true, allowMultilines: true }],
 		"react/hook-use-state": ["off", { allowDestructuredState: true }],
 		"react/jsx-curly-newline": ["error", { multiline: "consistent", singleline: "consistent" }],
 		"react/self-closing-comp": ["error", { component: true, html: true }],

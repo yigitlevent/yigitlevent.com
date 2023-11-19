@@ -70,6 +70,7 @@ export const useRangeAndCoverPlannerStore = create<RangeAndCoverPlannerState>()(
 					}) as [RaCActionExtended, RaCActionExtended, RaCActionExtended];
 				}));
 			}
-		})
+		}),
+		{ name: "useRangeAndCoverPlannerStore" }
 	)
 );

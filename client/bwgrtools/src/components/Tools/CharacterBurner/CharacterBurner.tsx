@@ -3,8 +3,10 @@ import { Fragment, useEffect, useState } from "react";
 
 
 import { LifepathSelection } from "./Modals/LifepathSelection";
+import { ResourceSelection } from "./Modals/ResourceSelection";
 import { Attributes } from "./Sections/Attributes";
 import { Basics } from "./Sections/Basics";
+import { Resources } from "./Sections/Resources";
 import { Skills } from "./Sections/Skills";
 import { Stats } from "./Sections/Stats";
 import { Traits } from "./Sections/Traits";
@@ -15,7 +17,7 @@ import { useCharacterBurnerTraitStore } from "../../../hooks/featureStores/Chara
 
 
 export function CharacterBurner(): JSX.Element {
-	const { updateAvailableLifepaths } = useCharacterBurnerLifepathStore();
+	const { lifepaths, updateAvailableLifepaths } = useCharacterBurnerLifepathStore();
 	const { skills } = useCharacterBurnerSkillStore();
 	const { traits } = useCharacterBurnerTraitStore();
 	const { attributes } = useCharacterBurnerAttributeStore();
@@ -32,34 +34,32 @@ export function CharacterBurner(): JSX.Element {
 	return (
 		<Fragment>
 			<Typography variant="h3">Character Burner</Typography>
-
 			<Basics openModal={openModal} />
-
 			<Stats />
-
 			{skills.length > 0 ? <Skills /> : null}
-
 			{traits.length > 0 ? <Traits /> : null}
-
 			{attributes.length > 0 ? <Attributes /> : null}
+			{lifepaths.length > 0 ? <Resources openModal={openModal} /> : null}
 
-			{/* TODO
-			
-			<Resources />
-			<Tolerances />
-			<Beliefs />
-			<Instincts />
-			*/}
+			{
+				/* TODO
+				<Tolerances />
+				<Beliefs />
+				<Instincts />
+				*/
+			}
 
 			<LifepathSelection isOpen={currentModal === "lp"} close={closeModals} />
+			<ResourceSelection isOpen={currentModal === "re"} close={closeModals} />
 
-			{/*
-			<AnswerQuestions />
-			<ChooseResources />
-			<ChooseGeneralSkills />
-			<ChooseGeneralLifepaths />
-			<ChooseSpecial /> --- StockSpecific, SpecialLifepaths, SpecialSkills
-			*/}
+			{
+				/* TODO
+				<AnswerQuestions />
+				<ChooseGeneralSkills />
+				<ChooseGeneralLifepaths />
+				<ChooseSpecial /> --- StockSpecific, SpecialLifepaths, SpecialSkills
+				*/
+			}
 		</Fragment>
 	);
 }

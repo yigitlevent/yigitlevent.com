@@ -124,6 +124,7 @@ export const useCharacterBurnerTraitStore = create<CharacterBurnerTraitState>()(
 					state.traits = characterTraits;
 				}));
 			}
-		})
+		}),
+		{ name: "useCharacterBurnerTraitStore" }
 	)
 );

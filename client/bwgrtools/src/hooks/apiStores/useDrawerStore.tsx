@@ -21,6 +21,7 @@ export const useDrawerStore = create<DrawerState>()(
 					else state.drawer = drawer;
 				}));
 			}
-		})
+		}),
+		{ name: "useDrawerStore" }
 	)
 );

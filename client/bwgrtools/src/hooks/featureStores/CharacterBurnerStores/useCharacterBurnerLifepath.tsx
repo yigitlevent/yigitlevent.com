@@ -29,8 +29,6 @@ export type CharacterBurnerLifepathState = {
 	getLeadCount: () => number;
 	getAge: () => number;
 
-	getResourcePoints: () => number;
-
 	getMentalPool: () => Points;
 	getPhysicalPool: () => Points;
 	getEitherPool: () => Points;
@@ -100,14 +98,6 @@ export const useCharacterBurnerLifepathStore = create<CharacterBurnerLifepathSta
 				const sum = yrs.reduce((prev, curr) => prev + curr);
 				// TODO: Special lifepaths should matter here
 				return sum + get().getLeadCount();
-			},
-
-			getResourcePoints: (): number => {
-				const state = get();
-				if (state.lifepaths.length === 0) return 0;
-				const rps = state.lifepaths.map(v => v.pools.resourcePoints).reduce((pv, cv) => pv + cv);
-				// TODO: Special lifepaths should matter here
-				return rps;
 			},
 
 			getMentalPool: (): Points => {
@@ -235,6 +225,7 @@ export const useCharacterBurnerLifepathStore = create<CharacterBurnerLifepathSta
 
 				return possibleLifepaths;
 			}
-		})
+		}),
+		{ name: "useCharacterBurnerLifepathStore" }
 	)
 );

@@ -117,6 +117,7 @@ export const useCharacterBurnerBasicsStore = create<CharacterBurnerBasicsState>(
 				const agePool = getStock(stock[0]).agePool;
 				return agePool.filter(a => age > a.minAge).reduce((pv, cv) => pv.minAge < cv.minAge ? pv : cv);
 			}
-		})
+		}),
+		{ name: "useCharacterBurnerBasicsStore" }
 	)
 );

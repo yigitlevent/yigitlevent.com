@@ -291,6 +291,7 @@ export const useRulesetStore = create<RulesetStore>()(
 				return allowed.every(ruleset => state.chosenRulesets.includes(ruleset));
 			}
 		}),
-		{ name: "RulesetStore" })
+		{ name: "RulesetStore" }
+	)
 	// TODO: Enable persistance devtools(persist(Store, { name: Name, version: 1 }), { name: Name })
 );

@@ -11,28 +11,32 @@ import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import { Fragment } from "react";
 
-import { useCharacterBurnerStoreOld } from "../../../../hooks/oldStores/useCharacterBurnerStoreOld";
+import { useCharacterBurnerResourceStore } from "../../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerResource";
 import { GenericGrid } from "../../../Shared/Grids";
 
 
-export function ResourcesBlock({ openReModal }: { openReModal: (open: boolean) => void; }) {
-	const { totals, spendings, removeResource, editResourceDescription, getResourceRemainings } = useCharacterBurnerStoreOld();
+export function Resources({ openModal }: { openModal: (name: CharacterBurnerModals) => void; }): JSX.Element {
+	const { resources, getResourcePoints, getSpending, removeResource, editResourceDescription } = useCharacterBurnerResourceStore();
 
-	const resourceRemaining = getResourceRemainings();
+	const total = getResourcePoints();
+	const spending = getSpending();
 
 	return (
 		<GenericGrid columns={6} center="h">
 			<Grid item xs={6}>
 				<Typography variant="h4">Resources</Typography>
 			</Grid>
+
 			<Grid item xs={6} sm={5}>
-				<Typography>Trait Points: {totals.resources.points}, Remaining: {resourceRemaining ? resourceRemaining.resourcePoints : -1}</Typography>
+				<Typography>Trait Points: {total}, Remaining: {total - spending}</Typography>
 			</Grid>
+
 			<Grid item xs={6} sm={1}>
-				<Button variant="outlined" size="small" onClick={() => openReModal(true)} fullWidth>Add Resource</Button>
+				<Button variant="outlined" size="small" onClick={() => openModal("re")} fullWidth>Add Resource</Button>
 			</Grid>
+
 			<Fragment>
-				{Object.keys(spendings.resources).map((resourceKey, i) => (
+				{(Object.keys(resources) as Guid[]).map((resourceKey, i) => (
 					<Grid key={i} item xs={6} sm={3}>
 						<Accordion disableGutters>
 							<AccordionSummary
@@ -44,30 +48,35 @@ export function ResourcesBlock({ openReModal }: { openReModal: (open: boolean) =
 								}}
 							>
 								<Typography sx={{ fontSize: "18px", margin: "0 0 0 12px" }}>
-									{spendings.resources[resourceKey].name} ({spendings.resources[resourceKey].cost}rps)
+									{resources[resourceKey].name} ({resources[resourceKey].cost}rps)
 								</Typography>
+
 								<IconButton color="primary" onClick={() => removeResource(resourceKey)} sx={{ position: "absolute", right: "0", margin: "2px 12px 0 0", padding: 0 }}>
 									<DeleteIcon />
 								</IconButton>
 							</AccordionSummary>
+
 							<AccordionDetails sx={{ padding: "0 16px 16px" }}>
 								<GenericGrid columns={2} spacing={[1, 0]} center sx={{ padding: "0", margin: "0" }}>
 									<Grid item xs={2}>
 										<Divider />
 									</Grid>
+
 									<Grid item xs={2}>
-										<Typography variant="body2">Type: {spendings.resources[resourceKey].type}</Typography>
+										<Typography variant="body2">Type: {resources[resourceKey].type[1]}</Typography>
 									</Grid>
-									{spendings.resources[resourceKey].modifiers.length > 0
+
+									{resources[resourceKey].modifiers.length > 0
 										? <Grid item xs={2}>
-											<Typography variant="body2">Modifiers: {spendings.resources[resourceKey].modifiers.join(", ")}</Typography>
+											<Typography variant="body2">Modifiers: {resources[resourceKey].modifiers.join(", ")}</Typography>
 										</Grid>
 										: null}
+
 									<Grid item xs={2}>
 										<TextField
 											label="Description"
 											variant="standard"
-											value={spendings.resources[resourceKey].description}
+											value={resources[resourceKey].description}
 											onChange={e => editResourceDescription(resourceKey, e.target.value)}
 											fullWidth
 										/>

@@ -115,6 +115,7 @@ export const usePracticePlannerStore = create<PracticePlannerState>()(
 					});
 				}));
 			}
-		})
+		}),
+		{ name: "usePracticePlannerStore" }
 	)
 );

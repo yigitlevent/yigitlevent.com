@@ -114,6 +114,7 @@ export const useFightPlannerStore = create<FightPlannerState>()(
 					}) as [FightActionExtended[], FightActionExtended[], FightActionExtended[]];
 				}));
 			}
-		})
+		}),
+		{ name: "useFightPlannerStore" }
 	)
 );

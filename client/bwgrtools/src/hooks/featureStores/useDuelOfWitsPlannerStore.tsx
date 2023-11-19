@@ -72,6 +72,7 @@ export const useDuelOfWitsPlannerStore = create<DuelOfWitsPlannerState>()(
 
 				}));
 			}
-		})
+		}),
+		{ name: "useDuelOfWitsPlannerStore" }
 	)
 );

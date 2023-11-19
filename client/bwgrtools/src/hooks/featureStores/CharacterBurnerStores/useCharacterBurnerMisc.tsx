@@ -62,6 +62,7 @@ export const useCharacterBurnerMiscStore = create<CharacterBurnerMiscState>()(
 			hasQuestionTrueByName: (name: string): boolean => {
 				return get().questions.some(v => v.name === name && v.answer);
 			}
-		})
+		}),
+		{ name: "useCharacterBurnerMiscStore" }
 	)
 );

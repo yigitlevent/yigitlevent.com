@@ -272,30 +272,6 @@ export const useCharacterBurnerStoreOld = create<CharacterBurnerStateOld>()(
 				}))*/
 			/*},
 			
-				
-			refreshAttributeSpendings: () => {
-				set(produce<CharacterBurnerState>((state) => {
-					for (const key in Attributes) {
-						const attr = Attributes[key];
-			
-						if (attr.requiredTrait) {
-							if (state.checkIfTraitInCommonOrOpen(attr.requiredTrait)) {
-								if (!(attr.name in state.spendings.attributes)) {
-									state.spendings.attributes[attr.name] = { shadeShifted: 0 };
-								}
-							}
-							else {
-								delete state.spendings.attributes[attr.name];
-							}
-						}
-						else {
-							if (!(attr.name in state.spendings.attributes)) {
-								state.spendings.attributes[attr.name] = { shadeShifted: 0 };
-							}
-						}
-					}
-				}));
-			},
 			refreshQuestions: () => {
 				set(produce<CharacterBurnerState>((state) => {
 					const newQuestions: CharacterQuestions = {};
@@ -343,351 +319,109 @@ export const useCharacterBurnerStoreOld = create<CharacterBurnerStateOld>()(
 				}));
 			},
 			
+		
 			
-			getStatRemainings: () => {
-				const state = get();
-				const eitherSpending =
-					Object.values(state.spendings.stats).map(v => v.eitherPool.exponent + v.eitherPool.shade).reduce((v, a) => v + a);
-			
-				const mentalSpending =
-					Object.values(state.spendings.stats).map(v => ("mentalPool" in v) ? (v.mentalPool as StatSpending).exponent + (v.mentalPool as StatSpending).shade : 0).reduce((v, a) => v + a);
-			
-				const physicalSpending =
-					Object.values(state.spendings.stats).map(v => ("physicalPool" in v) ? (v.physicalPool as StatSpending).exponent + (v.physicalPool as StatSpending).shade : 0).reduce((v, a) => v + a);
-			
-				return {
-					eitherPool: state.totals.stats.fromLifepaths.eitherPoints - eitherSpending,
-					mentalPool: (state.totals.stats.fromAge[0] + state.totals.stats.fromLifepaths.mentalPoints) - mentalSpending,
-					physicalPool: (state.totals.stats.fromAge[1] + state.totals.stats.fromLifepaths.physicalPoints) - physicalSpending
-				};
-			},
-			getAttributeShade: (attributeName: AttributesList) => {
-				const state = get();
-				let shade: ShadesList = "B";
-				if (attributeName in state.spendings.attributes) {
-					if (attributeName === "Faith in Dead Gods" || attributeName === "Ancestral Taint") {
-						shade = (state.spendings.stats.Will.mentalPool as StatSpending).shade + state.spendings.stats.Will.eitherPool.shade > 0 ? "G" : "B";
-					}
-					else { shade = state.spendings.attributes[attributeName].shadeShifted === 5 ? "G" : state.spendings.attributes[attributeName].shadeShifted === 10 ? "W" : "B"; }
-				}
-			
-				return shade;
-			},
-			getSkillShade: (skillName: SkillPath) => {
-				const state = get();
-				const skill = GetSkillFromPath(skillName);
-				const statShades = [
-					...Stats.filter(v => skill.root.length ? skill.root.includes(v.name) : false).map(v => state.getStatShade(v.name)),
-					...Attributes.filter(v => skill.root.length ? skill.root.includes(v.name) : false).map(v => state.getAttributeShade(v.name))
-				];
-				return statShades.every(v => v === "G") ? "G" : "B";
-			},
-			getSkillExponent: (skillName: SkillPath) => {
-				const state = get();
-				const skill = GetSkillFromPath(skillName);
-				return Math.floor(GetAverage([
-					...Stats.filter(v => skill.root.length ? skill.root.includes(v.name) : false).map(v => state.getStatExponent(v.name)),
-					...Attributes.filter(v => skill.root.length ? skill.root.includes(v.name) : false).map(v => state.getAttributeExponent(v.name))
-				]) / 2) + state.spendings.skills[skillName].general.advance + state.spendings.skills[skillName].lifepath.advance;
-			},
-			getSkillRemainings: () => {
-				const state = get();
-				const generalSpending =
-					Object.values(state.spendings.skills).map(v => v.general.open + v.general.advance);
-			
-				const lifepathSpending =
-					Object.values(state.spendings.skills).map(v => v.lifepath.open + v.lifepath.advance);
-			
-				return {
-					generalPoints: state.totals.skills.generalPoints.points - ((generalSpending.length > 0) ? generalSpending.reduce((v, a) => v + a) : 0),
-					lifepathPoints: state.totals.skills.lifepathPoints.points - ((lifepathSpending.length > 0) ? lifepathSpending.reduce((v, a) => v + a) : 0)
-				};
-			},
-			getTraitRemainings: () => {
-				const state = get();
-				const traitPointSpending = Object.values(state.spendings.traits).map(v => v.open);
-				return {
-					traitPoints: state.totals.traits.points - ((traitPointSpending.length > 0) ? traitPointSpending.reduce((v, a) => v + a) : 0)
-				};
-			},
-			getResourceRemainings: () => {
-				const state = get();
-				const costs = Object.values(state.spendings.resources).map(v => v.cost);
-				const resourcePointSpending = costs.length > 0 ? costs.reduce((a, b) => a + b) : 0;
-				return {
-					resourcePoints: state.totals.resources.points - resourcePointSpending
-				};
-			},
-			
-			
-			changeStatShade: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, statName: StatsList) => {
-				e.preventDefault();
-				set(produce<CharacterBurnerState>((state) => {
-					const remaining = state.getStatRemainings();
-					const key = (Stats.find(v => v.name === statName) as Stat).pool === "Mental" ? "mentalPool" : "physicalPool";
-					const shadeSpending = state.spendings.stats[statName].eitherPool.shade + (state.spendings.stats[statName][key] as StatSpending).shade;
-			
-					if (shadeSpending === 0) {
-						// if mental pool has enough points, add that
-						if (remaining[key] >= 5) {
-							(state.spendings.stats[statName][key] as StatSpending).shade += 5;
-						}
-						// otherwise add as many as possible from mental pool, then deduct either
-						else if (remaining.eitherPool + remaining[key] >= 5) {
-							(state.spendings.stats[statName][key] as StatSpending).shade += remaining[key];
-							state.spendings.stats[statName].eitherPool.shade += (5 - remaining[key]);
-						}
-					}
-					else if (shadeSpending === 5) {
-						(state.spendings.stats[statName][key] as StatSpending).shade = 0;
-						state.spendings.stats[statName].eitherPool.shade = 0;
-					}
-				}));
-			},
-			changeStatExponent: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, statName: StatsList, change: 1 | -1) => {
-				e.preventDefault();
-				set(produce<CharacterBurnerState>((state) => {
-					const remaining = state.getStatRemainings();
-					const key = (Stats.find(v => v.name === statName) as Stat).pool === "Mental" ? "mentalPool" : "physicalPool";
-			
-					const totalSpent = (state.spendings.stats[statName][key] as StatSpending).exponent + state.spendings.stats[statName].eitherPool.exponent;
-			
-					if (change === 1) {
-						if (totalSpent < 10 ) { //state.limits.stats[statName].max
-			if(remaining[key] > 0)(state.spendings.stats[statName][key] as StatSpending).exponent += 1;
-							else if (remaining.eitherPool > 0) state.spendings.stats[statName].eitherPool.exponent += 1;
-						}
-					}
-					else if (change === -1) {
-			//if (totalSpent > state.limits.stats[statName].min) {
-			if (state.spendings.stats[statName].eitherPool.exponent > 0) state.spendings.stats[statName].eitherPool.exponent -= 1;
-			else if ((state.spendings.stats[statName][key] as StatSpending).exponent > 0) (state.spendings.stats[statName][key] as StatSpending).exponent -= 1;
-			//}
-			}
-				}));
-			},
-			
-			changeAttributeShade: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, attributeName: AttributesList, change: 5 | -5) => {
-			e.preventDefault();
-			set(produce<CharacterBurnerState>((state) => {
-			const shade = state.getAttributeShade(attributeName);
-			const exponent = state.getAttributeExponent(attributeName);
-			
-			if (change === 5 && exponent > 5 && shade !== "W") {
-			state.spendings.attributes[attributeName].shadeShifted += change;
-			}
-			else if (change === -5 && state.spendings.attributes[attributeName].shadeShifted > 0 && shade !== "B") {
-			state.spendings.attributes[attributeName].shadeShifted -= change;
-			}
-			}));
-			},
-			
-			openSkill: (skillPath: SkillPath, toOpen: boolean, isLifepath: boolean) => {
-			set(produce<CharacterBurnerState>((state) => {
-			const skill = GetSkillFromPath(skillPath);
-			const remainings = state.getSkillRemainings();
-			
-			if (toOpen) {
-				const cost = skill.magical || skill.training ? 2 : 1;
-			
-				if (isLifepath && remainings.lifepathPoints >= cost) {
-					state.spendings.skills[skillPath].lifepath.open = cost;
-				}
-				else if (isLifepath && cost === 2 && remainings.lifepathPoints > 0 && remainings.generalPoints > 0) {
-					state.spendings.skills[skillPath].lifepath.open = 1;
-					state.spendings.skills[skillPath].general.open = 1;
-				}
-				else if (remainings.generalPoints >= cost) {
-					state.spendings.skills[skillPath].general.open = cost;
-				}
-			}
-			else {
-				state.spendings.skills[skillPath].lifepath.open = 0;
-				state.spendings.skills[skillPath].general.open = 0;
-			}
-			}));
-			const state = get();
-			state.refreshAttributeSpendings();
-			state.refreshQuestions();
-			},
-			changeSkillExponent: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, skillPath: SkillPath, change: 1 | -1, isLifepath: boolean) => {
-			e.preventDefault();
-			set(produce<CharacterBurnerState>((state) => {
-				const remainings = state.getSkillRemainings();
-				if (change === 1) {
-					if (isLifepath && remainings.lifepathPoints > 0) state.spendings.skills[skillPath].lifepath.advance += 1;
-					else if (isLifepath && remainings.generalPoints > 0) state.spendings.skills[skillPath].general.advance += 1;
-					else if (!isLifepath && remainings.generalPoints > 0) state.spendings.skills[skillPath].general.advance += 1;
-				}
-				else if (change === -1) {
-					if (state.spendings.skills[skillPath].general.advance > 0) state.spendings.skills[skillPath].general.advance -= 1;
-					else if (state.spendings.skills[skillPath].lifepath.advance > 0) state.spendings.skills[skillPath].lifepath.advance -= 1;
-				}
-			}));
-			},
-			addSkill: (skillPath: SkillPath) => {
-				set(produce<CharacterBurnerState>((state) => {
-					const generalSkills = state.totals.skills.generalList;
-					generalSkills.push(skillPath);
-					state.totals.skills.generalList = generalSkills;
-				}));
-				const state = get();
-				state.refreshSkillSpendings();
-				state.refreshAttributeSpendings();
-			},
-				removeSkill: (skillPath: SkillPath) => {
-					set(produce<CharacterBurnerState>((state) => {
-						state.totals.skills.generalList = state.totals.skills.generalList.filter(v => v !== skillPath);
-					}));
-					const state = get();
-					state.refreshSkillSpendings();
-					state.refreshAttributeSpendings();
-				},
-			
-					openTrait: (traitPath: TraitPath, toOpen: boolean, isLifepath: boolean) => {
-						set(produce<CharacterBurnerState>((state) => {
-							const trait = GetTraitFromPath(traitPath);
-							const traitRemainings = state.getTraitRemainings();
-			
-							if (toOpen) {
-								if (!(traitPath in state.spendings.traits)) {
-									state.spendings.traits[traitPath] = { open: 0 };
-								}
-			
-								if (isLifepath && traitRemainings.traitPoints >= 1) state.spendings.traits[traitPath].open = 1;
-								else if (!isLifepath && traitRemainings.traitPoints >= trait.cost) state.spendings.traits[traitPath].open = trait.cost;
-							}
-							else {
-								state.spendings.traits[traitPath].open = 0;
-							}
-						}));
-						const state = get();
-						state.refreshAttributeSpendings();
-						state.refreshQuestions();
-					},
-						addTrait: (traitPath: TraitPath) => {
-							set(produce<CharacterBurnerState>((state) => {
-								const generalTraits = state.totals.traits.generalList;
-								generalTraits.push(traitPath);
-								state.totals.traits.generalList = generalTraits;
-							}));
-							const state = get();
-							state.refreshTraitSpendings();
-							state.refreshAttributeSpendings();
-							state.refreshQuestions();
-						},
-							removeTrait: (traitPath: TraitPath) => {
-								set(produce<CharacterBurnerState>((state) => {
-									state.totals.traits.generalList = state.totals.traits.generalList.filter(v => v !== traitPath);
-								}));
-								const state = get();
-								state.refreshTraitSpendings();
-								state.refreshAttributeSpendings();
-								state.refreshQuestions();
-							},
-			
-								switchAnswer: (questionKey: AttributeQuestionsKeys) => {
-									set(produce<CharacterBurnerState>((state) => {
-										state.questions[questionKey] = !state.questions[questionKey];
-									}));
-								},
-			
-									selectAppropriateWeapon: (skillPath: SkillPath) => {
-										set(produce<CharacterBurnerState>((state) => {
-											if (state.specialSkills.appropriateWeapons.selected.length > 1 && state.specialSkills.appropriateWeapons.selected.includes(skillPath)) {
-												state.specialSkills.appropriateWeapons.selected = state.specialSkills.appropriateWeapons.selected.filter(v => v !== skillPath);
-											}
-											else {
-												const selectedSkills = state.specialSkills.appropriateWeapons.selected;
-												selectedSkills.push(skillPath);
-												state.specialSkills.appropriateWeapons.selected = selectedSkills;
-											}
-			
-											state.specialSkills.appropriateWeapons.mandatory =
-												(state.specialSkills.appropriateWeapons.selected.includes(state.specialSkills.appropriateWeapons.mandatory))
-													? state.specialSkills.appropriateWeapons.mandatory
-													: state.specialSkills.appropriateWeapons.selected[0];
-										}));
-										const state = get();
-										state.refreshTotals(state.totals.skills.generalList, state.totals.traits.generalList);
-										state.refreshSkillSpendings();
-										state.refreshAttributeSpendings();
-									},
-										selectMandatoryAppropriateWeapon: (skillPath: SkillPath) => {
-											set(produce<CharacterBurnerState>((state) => {
-												state.specialSkills.appropriateWeapons.mandatory =
-													(state.specialSkills.appropriateWeapons.selected.includes(skillPath))
-														? skillPath
-														: state.specialSkills.appropriateWeapons.selected[0];
-											}));
-											const state = get();
-											state.refreshTotals(state.totals.skills.generalList, state.totals.traits.generalList);
-											state.refreshSkillSpendings();
-											state.refreshAttributeSpendings();
-										},
-											selectJavelinOrBow: (skillPath: SkillPath) => {
-												set(produce<CharacterBurnerState>((state) => {
-													state.specialSkills.javelinOrBow = skillPath;
-												}));
-												const state = get();
-												state.refreshTotals(state.totals.skills.generalList, state.totals.traits.generalList);
-												state.refreshSkillSpendings();
-												state.refreshAttributeSpendings();
-											},
-												selectAnySmith: (skillPath: SkillPath) => {
-													set(produce<CharacterBurnerState>((state) => {
-														if (state.specialSkills.anySmith.includes(skillPath)) {
-															state.specialSkills.anySmith = state.specialSkills.anySmith.filter(v => v !== skillPath);
-														}
-														else {
-															const selectedSkills = state.specialSkills.anySmith;
-															selectedSkills.push(skillPath);
-															state.specialSkills.anySmith = selectedSkills;
-														}
-													}));
-													const state = get();
-													state.refreshTotals(state.totals.skills.generalList, state.totals.traits.generalList);
-													state.refreshSkillSpendings();
-													state.refreshAttributeSpendings();
-												},
-			
-													addResource: (resource: SpendingForResource) => {
-														set(produce<CharacterBurnerState>((state) => {
-															const newUUID = self.crypto.randomUUID();
-															state.spendings.resources[newUUID] = resource;
-														}));
-													},
-														removeResource: (guid: string) => {
-															set(produce<CharacterBurnerState>((state) => {
-																delete state.spendings.resources[guid];
-															}));
-														},
-															editResourceDescription: (guid: string, description: string) => {
-																set(produce<CharacterBurnerState>((state) => {
-																	state.spendings.resources[guid].description = description;
-																}));
-															},
-			
-																addBrutalLifeTrait: (traitPath: TraitId | undefined) => {
-																	set(produce<CharacterBurnerState>((state) => {
-																		const brutalLifeTraits = state.stockSpecific.brutalLife.traits;
-																		brutalLifeTraits.push(traitPath);
-																		state.stockSpecific.brutalLife.traits = brutalLifeTraits;
-																	}));
-																},
-																	setHuntingGround: (huntingGround: HuntingGroundsList) => {
-																		set(produce<CharacterBurnerState>((state) => {
-																			state.stockSpecific.territory.huntingGround = huntingGround;
-																		}));
-																	},
-			
-																		modifySpecialLifepathValue: (value: { advisorToTheCourtYears: number; } | { princeOfTheBloodYears: number; } | { bondsmanOwnerLifepathPath: LifepathId; }) => {
-																			set(produce<CharacterBurnerState>((state) => {
-																				if ("advisorToTheCourtYears" in value) state.specialLifepaths.advisorToTheCourt.years = value.advisorToTheCourtYears;
-																				if ("bondsmanOwnerLifepathPath" in value) state.specialLifepaths.bondsman.ownerLifepathPath = value.bondsmanOwnerLifepathPath;
-																				if ("princeOfTheBloodYears" in value) state.specialLifepaths.princeOfTheBlood.years = value.princeOfTheBloodYears;
-																			}));
-																		}
+switchAnswer: (questionKey: AttributeQuestionsKeys) => {
+set(produce<CharacterBurnerState>((state) => {
+state.questions[questionKey] = !state.questions[questionKey];
+}));
+},
+
+selectAppropriateWeapon: (skillPath: SkillPath) => {
+set(produce<CharacterBurnerState>((state) => {
+if (state.specialSkills.appropriateWeapons.selected.length > 1 && state.specialSkills.appropriateWeapons.selected.includes(skillPath)) {
+state.specialSkills.appropriateWeapons.selected = state.specialSkills.appropriateWeapons.selected.filter(v => v !== skillPath);
+}
+else {
+const selectedSkills = state.specialSkills.appropriateWeapons.selected;
+selectedSkills.push(skillPath);
+state.specialSkills.appropriateWeapons.selected = selectedSkills;
+}
+
+state.specialSkills.appropriateWeapons.mandatory =
+(state.specialSkills.appropriateWeapons.selected.includes(state.specialSkills.appropriateWeapons.mandatory))
+? state.specialSkills.appropriateWeapons.mandatory
+: state.specialSkills.appropriateWeapons.selected[0];
+}));
+const state = get();
+state.refreshTotals(state.totals.skills.generalList, state.totals.traits.generalList);
+state.refreshSkillSpendings();
+state.refreshAttributeSpendings();
+},
+
+
+selectMandatoryAppropriateWeapon: (skillPath: SkillPath) => {
+set(produce<CharacterBurnerState>((state) => {
+state.specialSkills.appropriateWeapons.mandatory =
+(state.specialSkills.appropriateWeapons.selected.includes(skillPath))
+? skillPath
+: state.specialSkills.appropriateWeapons.selected[0];
+}));
+const state = get();
+state.refreshTotals(state.totals.skills.generalList, state.totals.traits.generalList);
+state.refreshSkillSpendings();
+state.refreshAttributeSpendings();
+},
+
+
+selectJavelinOrBow: (skillPath: SkillPath) => {
+set(produce<CharacterBurnerState>((state) => {
+state.specialSkills.javelinOrBow = skillPath;
+}));
+const state = get();
+state.refreshTotals(state.totals.skills.generalList, state.totals.traits.generalList);
+state.refreshSkillSpendings();
+state.refreshAttributeSpendings();
+},,
+
+
+selectAnySmith: (skillPath: SkillPath) => {
+set(produce<CharacterBurnerState>((state) => {
+if (state.specialSkills.anySmith.includes(skillPath)) {
+state.specialSkills.anySmith = state.specialSkills.anySmith.filter(v => v !== skillPath);
+}
+else {
+const selectedSkills = state.specialSkills.anySmith;
+selectedSkills.push(skillPath);
+state.specialSkills.anySmith = selectedSkills;
+}
+}));
+const state = get();
+state.refreshTotals(state.totals.skills.generalList, state.totals.traits.generalList);
+state.refreshSkillSpendings();
+state.refreshAttributeSpendings();
+},
+
+
+
+addBrutalLifeTrait: (traitPath: TraitId | undefined) => {
+set(produce<CharacterBurnerState>((state) => {
+const brutalLifeTraits = state.stockSpecific.brutalLife.traits;
+brutalLifeTraits.push(traitPath);
+state.stockSpecific.brutalLife.traits = brutalLifeTraits;
+}));
+},
+
+
+
+setHuntingGround: (huntingGround: HuntingGroundsList) => {
+set(produce<CharacterBurnerState>((state) => {
+state.stockSpecific.territory.huntingGround = huntingGround;
+}));
+},
+
+
+
+modifySpecialLifepathValue: (value: { advisorToTheCourtYears: number; } | { princeOfTheBloodYears: number; } | { bondsmanOwnerLifepathPath: LifepathId; }) => {
+set(produce<CharacterBurnerState>((state) => {
+	if ("advisorToTheCourtYears" in value) state.specialLifepaths.advisorToTheCourt.years = value.advisorToTheCourtYears;
+	if ("bondsmanOwnerLifepathPath" in value) state.specialLifepaths.bondsman.ownerLifepathPath = value.bondsmanOwnerLifepathPath;
+	if ("princeOfTheBloodYears" in value) state.specialLifepaths.princeOfTheBlood.years = value.princeOfTheBloodYears;
+}));
+}
+
+
+
 			*/
 		})
 	)
