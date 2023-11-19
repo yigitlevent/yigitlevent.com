@@ -97,9 +97,12 @@ export const useCharacterBurnerAttributeStore = create<CharacterBurnerAttributeS
 				const shades = [perception.shade, agility.shade, speed.shade];
 				const roots = [perception.exponent, agility.exponent, speed.exponent];
 
-				if (shades.some(v => v === "G") && shades.some(v => v === "B")) { roots[0] += 2; }
+				if (shades.some(v => v === "G") && shades.some(v => v === "B")) roots[0] += 2;
 
-				return { shade: shades.every(v => v === "G") ? "G" : "B", exponent: Math.floor(GetAverage(roots)) };
+				const shade = shades.every(v => v === "G") ? "G" : "B";
+				const exponent = Math.floor(GetAverage(roots));
+
+				return { shade, exponent };
 			},
 
 			// TODO: if shade shifted, remove points from exponent
@@ -415,13 +418,16 @@ export const useCharacterBurnerAttributeStore = create<CharacterBurnerAttributeS
 					}
 				};
 
+
 				const prevAttributeState = state.attributes.find(attribute[0]);
 				const newAttributeState = getAttributePoints(attribute[1]);
 
-				return {
-					shade: newAttributeState.shade || prevAttributeState?.shadeShifted ? "G" : "B",
+				const asdf: AbilityPoints = {
+					shade: prevAttributeState?.shadeShifted ? "G" : "B" || newAttributeState.shade,
 					exponent: newAttributeState.exponent - (prevAttributeState?.shadeShifted ? 5 : 0)
 				};
+
+				return asdf;
 			},
 
 			hasAttribute: (id: AbilityId): boolean => {
@@ -442,6 +448,7 @@ export const useCharacterBurnerAttributeStore = create<CharacterBurnerAttributeS
 						.filter(ability => ability.abilityType[1].endsWith("Attribute"))
 						.map(ability => {
 							const attr = getAttribute([ability.id, ability.name]);
+							console.log({ attr });
 
 							if (ability.abilityType[1] === "Attribute") {
 								return {
