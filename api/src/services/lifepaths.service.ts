@@ -114,9 +114,9 @@ export async function GetLifepaths(): Promise<Lifepath[]> {
 		return r;
 	};
 
-	const query1 = "select * from dat.\"LifepathsList\";";
-	const query2 = "select * from dat.\"LifepathRequirementBlocks\";";
-	const query3 = "select * from dat.\"LifepathRequirementBlockItems\";";
+	const query1 = "select * from bwgr.\"LifepathsList\";";
+	const query2 = "select * from bwgr.\"LifepathRequirementBlocks\";";
+	const query3 = "select * from bwgr.\"LifepathRequirementBlockItems\";";
 	return Promise.all([
 		PgPool.query<LifepathDBO>(query1),
 		PgPool.query<LifepathRequirementBlockDBO>(query2),

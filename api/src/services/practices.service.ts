@@ -26,7 +26,7 @@ export async function GetPractices(): Promise<Practice[]> {
 		else throw new Error("shall not happen");
 	};
 
-	const query = "select * from dat.\"PracticeList\";";
+	const query = "select * from bwgr.\"PracticeList\";";
 	return PgPool.query<PracticeDBO>(query)
 		.then(result => result.rows.map(convert));
 }

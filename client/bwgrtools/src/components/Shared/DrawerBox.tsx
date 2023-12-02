@@ -4,7 +4,7 @@ import Divider from "@mui/material/Divider";
 import Drawer from "@mui/material/Drawer";
 import Typography from "@mui/material/Typography";
 
-import { useDrawerStore } from "../../hooks/apiStores/useDrawerStore";
+import { useDrawerStore } from "../../hooks/useDrawerStore";
 
 
 export function DrawerBox({ children, title, expanded }: { children: React.ReactNode; title: string; expanded: boolean; }): JSX.Element {

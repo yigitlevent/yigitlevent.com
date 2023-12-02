@@ -52,8 +52,8 @@ export async function GetRaCActions(): Promise<RaCAction[]> {
 		return r;
 	};
 
-	const query1 = "select * from dat.\"RangeAndCoverActionsList\";";
-	const query2 = "select * from dat.\"RangeAndCoverActionResolutionList\";";
+	const query1 = "select * from bwgr.\"RangeAndCoverActionsList\";";
+	const query2 = "select * from bwgr.\"RangeAndCoverActionResolutionList\";";
 	return Promise.all([
 		PgPool.query<RaCActionDBO>(query1),
 		PgPool.query<RaCActionResolutionDBO>(query2)

@@ -16,7 +16,7 @@ import { BackCanvas } from "./BackCanvas";
 import { FrontCanvas } from "./FrontCanvas";
 import { MainCanvas } from "./MainCanvas";
 import codeFont from "../../../assets/fonts/SourceCodePro-SemiBold.woff";
-import { useFontLoading } from "../../../hooks/apiStores/useFontLoading";
+import { useFontLoading } from "../../../hooks/useFontLoading";
 import { useRulesetStore } from "../../../hooks/apiStores/useRulesetStore";
 import { useMagicWheelStore } from "../../../hooks/featureStores/useMagicWheelStore";
 import { RandomNumber } from "../../../utils/misc";

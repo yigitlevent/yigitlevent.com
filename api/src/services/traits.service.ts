@@ -18,7 +18,7 @@ export async function GetTraits(): Promise<Trait[]> {
 		return r;
 	};
 
-	const query = "select * from dat.\"TraitsList\";";
+	const query = "select * from bwgr.\"TraitsList\";";
 	return PgPool.query<TraitDBO>(query)
 		.then(result => result.rows.map(convert));
 }

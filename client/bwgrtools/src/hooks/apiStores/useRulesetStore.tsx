@@ -108,7 +108,7 @@ export const useRulesetStore = create<RulesetStore>()(
 			},
 
 			fetchList: () => {
-				GenericGet<RulesetsResponse>("/ruleset/list")
+				GenericGet<RulesetsResponse>("/bwgr/ruleset/list")
 					.then(response => {
 						if (response.status === 200) {
 							set(produce<RulesetStore>((state) => { state.rulesets = response.data.rulesets; }));
@@ -122,7 +122,7 @@ export const useRulesetStore = create<RulesetStore>()(
 				const toggleFetching = get().toggleFetching;
 				const rulesets = get().chosenRulesets;
 
-				GenericPost<RulesetResponse>("/ruleset/data", { rulesets })
+				GenericPost<RulesetResponse>("/bwgr/ruleset/data", { rulesets })
 					.then(response => {
 						if (response.status === 200) {
 							const abilities = response.data.ruleset.abilities;

@@ -17,8 +17,8 @@ export async function GetStocks(rulesets: RulesetId[]): Promise<Stock[]> {
 	};
 
 
-	const query1 = `select * from dat."StocksList" where "Rulesets"::text[] && ARRAY['${rulesets.join("','")}'];`;
-	const query2 = "select * from dat.\"AgePools\";";
+	const query1 = `select * from bwgr."StocksList" where "Rulesets"::text[] && ARRAY['${rulesets.join("','")}'];`;
+	const query2 = "select * from bwgr.\"AgePools\";";
 	return Promise.all([
 		PgPool.query<StockDBO>(query1),
 		PgPool.query<AgePoolDBO>(query2)

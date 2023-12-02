@@ -1,8 +1,8 @@
--- View: dat."RulesetsList"
+-- View: bwgr."RulesetsList"
 
--- DROP VIEW dat."RulesetsList";
+-- DROP VIEW bwgr."RulesetsList";
 
-CREATE OR REPLACE VIEW dat."RulesetsList" AS
+CREATE OR REPLACE VIEW bwgr."RulesetsList" AS
  SELECT r."Id",
     r."Name",
     r."IsOfficial",
@@ -10,19 +10,19 @@ CREATE OR REPLACE VIEW dat."RulesetsList" AS
     r."IsExpansion",
     r."User",
     ARRAY( SELECT re."ExpansionId"
-           FROM dat."RulesetExpansions" re
+           FROM bwgr."RulesetExpansions" re
           WHERE r."Id"::text = re."RulesetId"::text) AS "ExpansionIds"
-   FROM dat."Rulesets" r;
+   FROM bwgr."Rulesets" r;
 
-ALTER TABLE dat."RulesetsList"
+ALTER TABLE bwgr."RulesetsList"
     OWNER TO apiuser;
 
 
--- View: dat."AbilitiesList"
+-- View: bwgr."AbilitiesList"
 
--- DROP VIEW dat."AbilitiesList";
+-- DROP VIEW bwgr."AbilitiesList";
 
-CREATE OR REPLACE VIEW dat."AbilitiesList" AS
+CREATE OR REPLACE VIEW bwgr."AbilitiesList" AS
  SELECT a."Id",
     a."Name",
     a."AbilityTypeId",
@@ -34,42 +34,42 @@ CREATE OR REPLACE VIEW dat."AbilitiesList" AS
     a."Challenging",
     a."RequiredTraitId",
     t."Name" as "RequiredTrait"
-   FROM dat."Abilities" a
-     LEFT JOIN dat."AbilityTypes" aty ON aty."Id" = a."AbilityTypeId"
-     LEFT JOIN dat."Traits" t ON t."Id" = a."RequiredTraitId";
+   FROM bwgr."Abilities" a
+     LEFT JOIN bwgr."AbilityTypes" aty ON aty."Id" = a."AbilityTypeId"
+     LEFT JOIN bwgr."Traits" t ON t."Id" = a."RequiredTraitId";
 
-ALTER TABLE dat."AbilitiesList"
+ALTER TABLE bwgr."AbilitiesList"
     OWNER TO apiuser;
 
 
--- View: dat."StocksList"
+-- View: bwgr."StocksList"
 
--- DROP VIEW dat."StocksList";
+-- DROP VIEW bwgr."StocksList";
 
-CREATE OR REPLACE VIEW dat."StocksList" AS
+CREATE OR REPLACE VIEW bwgr."StocksList" AS
  SELECT ARRAY( SELECT rs."RulesetId"
-           FROM dat."RulesetStocks" rs
+           FROM bwgr."RulesetStocks" rs
           WHERE rs."StockId" = s."Id") AS "Rulesets",
     s."Id",
     s."Name",
     s."NamePlural",
     s."Stride",
     ARRAY( SELECT ss."Id"
-           FROM dat."Settings" ss
+           FROM bwgr."Settings" ss
           WHERE ss."StockId" = s."Id") AS "SettingIds"
-   FROM dat."Stocks" s;
+   FROM bwgr."Stocks" s;
 
-ALTER TABLE dat."StocksList"
+ALTER TABLE bwgr."StocksList"
     OWNER TO apiuser;
 
 
--- View: dat."SettingsList"
+-- View: bwgr."SettingsList"
 
--- DROP VIEW dat."SettingsList";
+-- DROP VIEW bwgr."SettingsList";
 
-CREATE OR REPLACE VIEW dat."SettingsList" AS
+CREATE OR REPLACE VIEW bwgr."SettingsList" AS
  SELECT ARRAY( SELECT rs."RulesetId"
-           FROM dat."RulesetSettings" rs
+           FROM bwgr."RulesetSettings" rs
           WHERE rs."SettingId" = s."Id") AS "Rulesets",
     s."Id",
     s."Name",
@@ -77,20 +77,20 @@ CREATE OR REPLACE VIEW dat."SettingsList" AS
     s."StockId",
     ss."Name" AS "StockName",
     s."IsSubsetting"
-   FROM dat."Settings" s
-     LEFT JOIN dat."Stocks" ss ON ss."Id" = s."StockId";
+   FROM bwgr."Settings" s
+     LEFT JOIN bwgr."Stocks" ss ON ss."Id" = s."StockId";
 
-ALTER TABLE dat."SettingsList"
+ALTER TABLE bwgr."SettingsList"
     OWNER TO apiuser;
 
 
--- View: dat."SkillsList"
+-- View: bwgr."SkillsList"
 
--- DROP VIEW dat."SkillsList";
+-- DROP VIEW bwgr."SkillsList";
 
-CREATE OR REPLACE VIEW dat."SkillsList" AS
+CREATE OR REPLACE VIEW bwgr."SkillsList" AS
  SELECT ARRAY( SELECT rs."RulesetId"
-           FROM dat."RulesetSkills" rs
+           FROM bwgr."RulesetSkills" rs
           WHERE rs."SkillId" = s."Id") AS "Rulesets",
     s."Id",
     s."Name",
@@ -115,29 +115,29 @@ CREATE OR REPLACE VIEW dat."SkillsList" AS
 	s."RestrictionAbilityId",
 	ab3."Name" as "RestrictionAbility",
     ARRAY( SELECT ss."SubskillId"
-           FROM dat."SkillSubskills" ss
+           FROM bwgr."SkillSubskills" ss
           WHERE ss."SkillId" = s."Id") AS "SubskillIds"
-   FROM dat."Skills" s
-     LEFT JOIN dat."Stocks" sto ON sto."Id" = s."StockId"
-     LEFT JOIN dat."Stocks" sto2 ON sto2."Id" = s."RestrictionOnlyStockId"
-     LEFT JOIN dat."SkillCategories" sc ON sc."Id" = s."CategoryId"
-     LEFT JOIN dat."SkillTypes" sty ON sty."Id" = s."TypeId"
-     LEFT JOIN dat."SkillToolTypes" stt ON stt."Id" = s."ToolTypeId"
-     LEFT JOIN dat."Abilities" ab1 ON ab1."Id" = s."Root1Id"
-     LEFT JOIN dat."Abilities" ab2 ON ab2."Id" = s."Root2Id"
-     LEFT JOIN dat."Abilities" ab3 ON ab3."Id" = s."RestrictionAbilityId";
+   FROM bwgr."Skills" s
+     LEFT JOIN bwgr."Stocks" sto ON sto."Id" = s."StockId"
+     LEFT JOIN bwgr."Stocks" sto2 ON sto2."Id" = s."RestrictionOnlyStockId"
+     LEFT JOIN bwgr."SkillCategories" sc ON sc."Id" = s."CategoryId"
+     LEFT JOIN bwgr."SkillTypes" sty ON sty."Id" = s."TypeId"
+     LEFT JOIN bwgr."SkillToolTypes" stt ON stt."Id" = s."ToolTypeId"
+     LEFT JOIN bwgr."Abilities" ab1 ON ab1."Id" = s."Root1Id"
+     LEFT JOIN bwgr."Abilities" ab2 ON ab2."Id" = s."Root2Id"
+     LEFT JOIN bwgr."Abilities" ab3 ON ab3."Id" = s."RestrictionAbilityId";
 
-ALTER TABLE dat."SkillsList"
+ALTER TABLE bwgr."SkillsList"
     OWNER TO apiuser;
 
 
--- View: dat."TraitsList"
+-- View: bwgr."TraitsList"
 
--- DROP VIEW dat."TraitsList";
+-- DROP VIEW bwgr."TraitsList";
 
-CREATE OR REPLACE VIEW dat."TraitsList" AS
+CREATE OR REPLACE VIEW bwgr."TraitsList" AS
  SELECT ARRAY( SELECT rt."RulesetId"
-           FROM dat."RulesetTraits" rt
+           FROM bwgr."RulesetTraits" rt
           WHERE rt."TraitId" = t."Id") AS "Rulesets",
     t."Id",
     t."Name",
@@ -149,22 +149,22 @@ CREATE OR REPLACE VIEW dat."TraitsList" AS
     tty."Name" AS "Type",
     t."Cost",
     t."Description"
-   FROM dat."Traits" t
-     LEFT JOIN dat."Stocks" sto ON sto."Id" = t."StockId"
-     LEFT JOIN dat."TraitCategories" tc ON tc."Id" = t."CategoryId"
-     LEFT JOIN dat."TraitTypes" tty ON tty."Id" = t."TypeId";
+   FROM bwgr."Traits" t
+     LEFT JOIN bwgr."Stocks" sto ON sto."Id" = t."StockId"
+     LEFT JOIN bwgr."TraitCategories" tc ON tc."Id" = t."CategoryId"
+     LEFT JOIN bwgr."TraitTypes" tty ON tty."Id" = t."TypeId";
 
-ALTER TABLE dat."TraitsList"
+ALTER TABLE bwgr."TraitsList"
     OWNER TO apiuser;
 
 
--- View: dat."LifepathsList"
+-- View: bwgr."LifepathsList"
 
--- DROP VIEW dat."LifepathsList";
+-- DROP VIEW bwgr."LifepathsList";
 
-CREATE OR REPLACE VIEW dat."LifepathsList" AS
+CREATE OR REPLACE VIEW bwgr."LifepathsList" AS
  SELECT ARRAY( SELECT rl."RulesetId"
-           FROM dat."RulesetLifepaths" rl
+           FROM bwgr."RulesetLifepaths" rl
           WHERE rl."LifepathId" = l."Id") AS "Rulesets",
     l."Id",
     l."Name",
@@ -173,14 +173,14 @@ CREATE OR REPLACE VIEW dat."LifepathsList" AS
     l."SettingId",
     stt."Name" AS "Setting",
     ARRAY( SELECT ll."SettingId"
-           FROM dat."LifepathLeads" ll
+           FROM bwgr."LifepathLeads" ll
           WHERE ll."LifepathId" = l."Id") AS "LeadIds",
     ARRAY( SELECT ls."SkillId"
-           FROM dat."LifepathSkills" ls
+           FROM bwgr."LifepathSkills" ls
           WHERE ls."LifepathId" = l."Id"
           ORDER BY ls."Index") AS "SkillIds",
     ARRAY( SELECT lt."TraitId"
-           FROM dat."LifepathTraits" lt
+           FROM bwgr."LifepathTraits" lt
           WHERE lt."LifepathId" = l."Id"
           ORDER BY lt."Index") AS "TraitIds",
     l."Born",
@@ -205,40 +205,40 @@ CREATE OR REPLACE VIEW dat."LifepathsList" AS
     lc."LSPMultiplier" AS "CompanionLSPMultiplier",
     lc."RPMultiplier" AS "CompanionRPMultiplier",
     ARRAY( SELECT lcs."CompanionSettingId"
-           FROM dat."LifepathCompanionSettings" lcs
+           FROM bwgr."LifepathCompanionSettings" lcs
           WHERE lcs."LifepathId" = l."Id") AS "CompanionSettingIds"
-   FROM dat."Lifepaths" l
-     LEFT JOIN dat."Stocks" sto ON sto."Id" = l."StockId"
-     LEFT JOIN dat."Settings" stt ON stt."Id" = l."SettingId"
-     LEFT JOIN dat."LifepathCompanions" lc ON lc."LifepathId" = l."Id";
+   FROM bwgr."Lifepaths" l
+     LEFT JOIN bwgr."Stocks" sto ON sto."Id" = l."StockId"
+     LEFT JOIN bwgr."Settings" stt ON stt."Id" = l."SettingId"
+     LEFT JOIN bwgr."LifepathCompanions" lc ON lc."LifepathId" = l."Id";
 
-ALTER TABLE dat."LifepathsList"
+ALTER TABLE bwgr."LifepathsList"
     OWNER TO apiuser;
 
 
--- View: dat."LifepathRequirementBlocks"
+-- View: bwgr."LifepathRequirementBlocks"
 
--- DROP VIEW dat."LifepathRequirementBlocks";
+-- DROP VIEW bwgr."LifepathRequirementBlocks";
 
-CREATE OR REPLACE VIEW dat."LifepathRequirementBlocks" AS
+CREATE OR REPLACE VIEW bwgr."LifepathRequirementBlocks" AS
  SELECT lr."Id",
     lr."LifepathId",
     lr."LogicTypeId",
     lt."Name" AS "LogicType",
     lr."MustFulfill",
     lr."FulfillmentAmount"
-   FROM dat."LifepathRequirements" lr
-     LEFT JOIN dat."LogicTypes" lt ON lr."LogicTypeId" = lt."Id";
+   FROM bwgr."LifepathRequirements" lr
+     LEFT JOIN bwgr."LogicTypes" lt ON lr."LogicTypeId" = lt."Id";
 
-ALTER TABLE dat."LifepathRequirementBlocks"
+ALTER TABLE bwgr."LifepathRequirementBlocks"
     OWNER TO apiuser;
 
 
--- View: dat."LifepathRequirementBlockItems"
+-- View: bwgr."LifepathRequirementBlockItems"
 
--- DROP VIEW dat."LifepathRequirementBlockItems";
+-- DROP VIEW bwgr."LifepathRequirementBlockItems";
 
-CREATE OR REPLACE VIEW dat."LifepathRequirementBlockItems" AS
+CREATE OR REPLACE VIEW bwgr."LifepathRequirementBlockItems" AS
  SELECT lri."RequirementId",
     lri."RequirementTypeId",
     rit."Name" AS "RequirementType",
@@ -255,25 +255,25 @@ CREATE OR REPLACE VIEW dat."LifepathRequirementBlockItems" AS
     t."Name" AS "Trait",
     lri."AttributeId",
     a."Name" AS "Attribute"
-   FROM dat."LifepathRequirementItems" lri
-     LEFT JOIN dat."RequirementItemTypes" rit ON rit."Id" = lri."RequirementTypeId"
-     LEFT JOIN dat."Settings" s ON s."Id" = lri."SettingId"
-     LEFT JOIN dat."Lifepaths" l ON l."Id" = lri."LifepathId"
-     LEFT JOIN dat."Skills" sk ON sk."Id" = lri."SkillId"
-     LEFT JOIN dat."Traits" t ON t."Id" = lri."TraitId"
-     LEFT JOIN dat."Abilities" a ON a."Id" = lri."AttributeId";
+   FROM bwgr."LifepathRequirementItems" lri
+     LEFT JOIN bwgr."RequirementItemTypes" rit ON rit."Id" = lri."RequirementTypeId"
+     LEFT JOIN bwgr."Settings" s ON s."Id" = lri."SettingId"
+     LEFT JOIN bwgr."Lifepaths" l ON l."Id" = lri."LifepathId"
+     LEFT JOIN bwgr."Skills" sk ON sk."Id" = lri."SkillId"
+     LEFT JOIN bwgr."Traits" t ON t."Id" = lri."TraitId"
+     LEFT JOIN bwgr."Abilities" a ON a."Id" = lri."AttributeId";
 
-ALTER TABLE dat."LifepathRequirementBlockItems"
+ALTER TABLE bwgr."LifepathRequirementBlockItems"
     OWNER TO apiuser;
 
 
--- View: dat."ResourcesList"
+-- View: bwgr."ResourcesList"
 
--- DROP VIEW dat."ResourcesList";
+-- DROP VIEW bwgr."ResourcesList";
 
-CREATE OR REPLACE VIEW dat."ResourcesList" AS
+CREATE OR REPLACE VIEW bwgr."ResourcesList" AS
  SELECT ARRAY( SELECT rr."RulesetId"
-           FROM dat."RulesetResources" rr
+           FROM bwgr."RulesetResources" rr
           WHERE rr."ResourceId" = r."Id") AS "Rulesets",
     r."Id",
     r."Name",
@@ -284,38 +284,38 @@ CREATE OR REPLACE VIEW dat."ResourcesList" AS
     r."Description",
     r."VariableCost",
     ARRAY( SELECT rc."Cost"
-           FROM dat."ResourceCosts" rc
+           FROM bwgr."ResourceCosts" rc
           WHERE r."Id" = rc."ResourceId"
           ORDER BY rc."Id") AS "Costs",
     array_remove(ARRAY( SELECT rc."Description"
-           FROM dat."ResourceCosts" rc
+           FROM bwgr."ResourceCosts" rc
           WHERE r."Id" = rc."ResourceId"
           ORDER BY rc."Id"), NULL::character varying) AS "CostDescriptions",
     ARRAY( SELECT rc."Cost"
-           FROM dat."ResourceModifiers" rc
+           FROM bwgr."ResourceModifiers" rc
           WHERE r."Id" = rc."ResourceId"
           ORDER BY rc."Id") AS "Modifiers",
     ARRAY( SELECT rc."IsPerCost"
-           FROM dat."ResourceModifiers" rc
+           FROM bwgr."ResourceModifiers" rc
           WHERE r."Id" = rc."ResourceId"
           ORDER BY rc."Id") AS "ModifierIsPerCosts",
     ARRAY( SELECT rc."Description"
-           FROM dat."ResourceModifiers" rc
+           FROM bwgr."ResourceModifiers" rc
           WHERE r."Id" = rc."ResourceId"
           ORDER BY rc."Id") AS "ModifierDescriptions"
-   FROM dat."Resources" r
-     LEFT JOIN dat."Stocks" s ON s."Id" = r."StockId"
-     LEFT JOIN dat."ResourceTypes" rt ON rt."Id" = r."ResourceTypeId";
+   FROM bwgr."Resources" r
+     LEFT JOIN bwgr."Stocks" s ON s."Id" = r."StockId"
+     LEFT JOIN bwgr."ResourceTypes" rt ON rt."Id" = r."ResourceTypeId";
 
-ALTER TABLE dat."ResourcesList"
+ALTER TABLE bwgr."ResourcesList"
     OWNER TO apiuser;
 
 
--- View: dat."ResourceMagicDetailsList"
+-- View: bwgr."ResourceMagicDetailsList"
 
--- DROP VIEW dat."ResourceMagicDetailsList";
+-- DROP VIEW bwgr."ResourceMagicDetailsList";
 
-CREATE OR REPLACE VIEW dat."ResourceMagicDetailsList" AS
+CREATE OR REPLACE VIEW bwgr."ResourceMagicDetailsList" AS
  SELECT rmd."Id",
     rmd."ResourceId",
     rmd."OriginId",
@@ -340,27 +340,27 @@ CREATE OR REPLACE VIEW dat."ResourceMagicDetailsList" AS
     sif2."Name" AS "Impetus2",
     rmd."Actions",
     rmd."ActionsMultiply"
-   FROM dat."ResourceMagicDetails" rmd
-     LEFT JOIN dat."SpellOriginFacets" sof ON sof."Id" = rmd."OriginId"
-     LEFT JOIN dat."SpellDurationFacets" sdf ON sdf."Id" = rmd."DurationId"
-     LEFT JOIN dat."SpellAreaOfEffectFacets" saf ON saf."Id" = rmd."AreaOfEffectId"
-     LEFT JOIN dat."SpellElementFacets" sef1 ON sef1."Id" = rmd."Element1Id"
-     LEFT JOIN dat."SpellElementFacets" sef2 ON sef2."Id" = rmd."Element2Id"
-     LEFT JOIN dat."SpellElementFacets" sef3 ON sef3."Id" = rmd."Element3Id"
-     LEFT JOIN dat."SpellImpetusFacets" sif1 ON sif1."Id" = rmd."Impetus1Id"
-     LEFT JOIN dat."SpellImpetusFacets" sif2 ON sif2."Id" = rmd."Impetus2Id"
-     LEFT JOIN dat."DistanceUnits" du ON du."Id" = rmd."AreaOfEffectUnitId"
-     LEFT JOIN dat."UnitModifiers" um ON um."Id" = rmd."AreaOfEffectModifierId";
+   FROM bwgr."ResourceMagicDetails" rmd
+     LEFT JOIN bwgr."SpellOriginFacets" sof ON sof."Id" = rmd."OriginId"
+     LEFT JOIN bwgr."SpellDurationFacets" sdf ON sdf."Id" = rmd."DurationId"
+     LEFT JOIN bwgr."SpellAreaOfEffectFacets" saf ON saf."Id" = rmd."AreaOfEffectId"
+     LEFT JOIN bwgr."SpellElementFacets" sef1 ON sef1."Id" = rmd."Element1Id"
+     LEFT JOIN bwgr."SpellElementFacets" sef2 ON sef2."Id" = rmd."Element2Id"
+     LEFT JOIN bwgr."SpellElementFacets" sef3 ON sef3."Id" = rmd."Element3Id"
+     LEFT JOIN bwgr."SpellImpetusFacets" sif1 ON sif1."Id" = rmd."Impetus1Id"
+     LEFT JOIN bwgr."SpellImpetusFacets" sif2 ON sif2."Id" = rmd."Impetus2Id"
+     LEFT JOIN bwgr."DistanceUnits" du ON du."Id" = rmd."AreaOfEffectUnitId"
+     LEFT JOIN bwgr."UnitModifiers" um ON um."Id" = rmd."AreaOfEffectModifierId";
 
-ALTER TABLE dat."ResourceMagicDetailsList"
+ALTER TABLE bwgr."ResourceMagicDetailsList"
     OWNER TO apiuser;
 
 
--- View: dat."ResourceMagicObstaclesList"
+-- View: bwgr."ResourceMagicObstaclesList"
 
--- DROP VIEW dat."ResourceMagicObstaclesList";
+-- DROP VIEW bwgr."ResourceMagicObstaclesList";
 
-CREATE OR REPLACE VIEW dat."ResourceMagicObstaclesList" AS
+CREATE OR REPLACE VIEW bwgr."ResourceMagicObstaclesList" AS
  SELECT rmo."Id",
     rmo."ResourceId",
     rmo."Obstacle",
@@ -370,37 +370,37 @@ CREATE OR REPLACE VIEW dat."ResourceMagicObstaclesList" AS
     a2."Name" AS "ObstacleAbility2",
     rmo."ObstacleCaret",
     rmo."Description"
-   FROM dat."ResourceMagicObstacles" rmo
-     LEFT JOIN dat."Abilities" a1 ON a1."Id" = rmo."ObstacleAbility1Id"
-     LEFT JOIN dat."Abilities" a2 ON a2."Id" = rmo."ObstacleAbility2Id";
+   FROM bwgr."ResourceMagicObstacles" rmo
+     LEFT JOIN bwgr."Abilities" a1 ON a1."Id" = rmo."ObstacleAbility1Id"
+     LEFT JOIN bwgr."Abilities" a2 ON a2."Id" = rmo."ObstacleAbility2Id";
 
-ALTER TABLE dat."ResourceMagicObstaclesList"
+ALTER TABLE bwgr."ResourceMagicObstaclesList"
     OWNER TO apiuser;
 
 
--- View: dat."DoWActionTestList"
+-- View: bwgr."DoWActionTestList"
 
--- DROP VIEW dat."DoWActionTestList";
+-- DROP VIEW bwgr."DoWActionTestList";
 
-CREATE OR REPLACE VIEW dat."DoWActionTestList" AS
+CREATE OR REPLACE VIEW bwgr."DoWActionTestList" AS
  SELECT a."ActionId",
     a."SkillId",
     s."Name" AS "Skill",
     a."AbilityId",
     ab."Name" AS "Ability"
-   FROM dat."DuelOfWitsActionTests" a
-     LEFT JOIN dat."Skills" s ON s."Id" = a."SkillId"
-     LEFT JOIN dat."Abilities" ab ON ab."Id" = a."AbilityId";
+   FROM bwgr."DuelOfWitsActionTests" a
+     LEFT JOIN bwgr."Skills" s ON s."Id" = a."SkillId"
+     LEFT JOIN bwgr."Abilities" ab ON ab."Id" = a."AbilityId";
 
-ALTER TABLE dat."DoWActionTestList"
+ALTER TABLE bwgr."DoWActionTestList"
     OWNER TO apiuser;
 
 
--- View: dat."DoWActionResolutionList"
+-- View: bwgr."DoWActionResolutionList"
 
--- DROP VIEW dat."DoWActionResolutionList";
+-- DROP VIEW bwgr."DoWActionResolutionList";
 
-CREATE OR REPLACE VIEW dat."DoWActionResolutionList" AS
+CREATE OR REPLACE VIEW bwgr."DoWActionResolutionList" AS
  SELECT a."ActionId",
     a."OpposingActionId",
     oa."Name" AS "OpposingAction",
@@ -417,23 +417,23 @@ CREATE OR REPLACE VIEW dat."DoWActionResolutionList" AS
     os."Name" AS "OpposingSkill",
     a."OpposingAbilityId",
     oab."Name" AS "OpposingAbility"
-   FROM dat."DuelOfWitsActionResolutions" a
-     LEFT JOIN dat."DuelOfWitsActions" oa ON oa."Id" = a."OpposingActionId"
-     LEFT JOIN dat."ActionResolutionTypes" rt ON rt."Id" = a."ResolutionTypeId"
-     LEFT JOIN dat."Skills" s ON s."Id" = a."SkillId"
-     LEFT JOIN dat."Skills" os ON os."Id" = a."SkillId"
-     LEFT JOIN dat."Abilities" ab ON ab."Id" = a."AbilityId"
-     LEFT JOIN dat."Abilities" oab ON ab."Id" = a."AbilityId";
+   FROM bwgr."DuelOfWitsActionResolutions" a
+     LEFT JOIN bwgr."DuelOfWitsActions" oa ON oa."Id" = a."OpposingActionId"
+     LEFT JOIN bwgr."ActionResolutionTypes" rt ON rt."Id" = a."ResolutionTypeId"
+     LEFT JOIN bwgr."Skills" s ON s."Id" = a."SkillId"
+     LEFT JOIN bwgr."Skills" os ON os."Id" = a."SkillId"
+     LEFT JOIN bwgr."Abilities" ab ON ab."Id" = a."AbilityId"
+     LEFT JOIN bwgr."Abilities" oab ON ab."Id" = a."AbilityId";
 
-ALTER TABLE dat."DoWActionResolutionList"
+ALTER TABLE bwgr."DoWActionResolutionList"
     OWNER TO apiuser;
 
 
--- View: dat."RangeAndCoverActionsList"
+-- View: bwgr."RangeAndCoverActionsList"
 
--- DROP VIEW dat."RangeAndCoverActionsList";
+-- DROP VIEW bwgr."RangeAndCoverActionsList";
 
-CREATE OR REPLACE VIEW dat."RangeAndCoverActionsList" AS
+CREATE OR REPLACE VIEW bwgr."RangeAndCoverActionsList" AS
  SELECT r."Id",
     r."Name",
     r."GroupId",
@@ -447,18 +447,18 @@ CREATE OR REPLACE VIEW dat."RangeAndCoverActionsList" AS
     r."SpecialRestriction",
     r."SpecialAction",
     r."However"
-   FROM dat."RangeAndCoverActions" r
-     LEFT JOIN dat."RangeAndCoverActionGroups" rg ON rg."Id" = r."GroupId";
+   FROM bwgr."RangeAndCoverActions" r
+     LEFT JOIN bwgr."RangeAndCoverActionGroups" rg ON rg."Id" = r."GroupId";
 
-ALTER TABLE dat."RangeAndCoverActionsList"
+ALTER TABLE bwgr."RangeAndCoverActionsList"
     OWNER TO apiuser;
 
 
--- View: dat."RangeAndCoverActionResolutionList"
+-- View: bwgr."RangeAndCoverActionResolutionList"
 
--- DROP VIEW dat."RangeAndCoverActionResolutionList";
+-- DROP VIEW bwgr."RangeAndCoverActionResolutionList";
 
-CREATE OR REPLACE VIEW dat."RangeAndCoverActionResolutionList" AS
+CREATE OR REPLACE VIEW bwgr."RangeAndCoverActionResolutionList" AS
  SELECT a."ActionId",
     a."OpposingActionId",
     oa."Name" AS "OpposingAction",
@@ -475,23 +475,23 @@ CREATE OR REPLACE VIEW dat."RangeAndCoverActionResolutionList" AS
     os."Name" AS "OpposingSkill",
     a."OpposingAbilityId",
     oab."Name" AS "OpposingAbility"
-   FROM dat."RangeAndCoverActionResolutions" a
-     LEFT JOIN dat."RangeAndCoverActions" oa ON oa."Id" = a."OpposingActionId"
-     LEFT JOIN dat."ActionResolutionTypes" rt ON rt."Id" = a."ResolutionTypeId"
-     LEFT JOIN dat."Skills" s ON s."Id" = a."SkillId"
-     LEFT JOIN dat."Skills" os ON os."Id" = a."SkillId"
-     LEFT JOIN dat."Abilities" ab ON ab."Id" = a."AbilityId"
-     LEFT JOIN dat."Abilities" oab ON ab."Id" = a."AbilityId";
+   FROM bwgr."RangeAndCoverActionResolutions" a
+     LEFT JOIN bwgr."RangeAndCoverActions" oa ON oa."Id" = a."OpposingActionId"
+     LEFT JOIN bwgr."ActionResolutionTypes" rt ON rt."Id" = a."ResolutionTypeId"
+     LEFT JOIN bwgr."Skills" s ON s."Id" = a."SkillId"
+     LEFT JOIN bwgr."Skills" os ON os."Id" = a."SkillId"
+     LEFT JOIN bwgr."Abilities" ab ON ab."Id" = a."AbilityId"
+     LEFT JOIN bwgr."Abilities" oab ON ab."Id" = a."AbilityId";
 
-ALTER TABLE dat."RangeAndCoverActionResolutionList"
+ALTER TABLE bwgr."RangeAndCoverActionResolutionList"
     OWNER TO apiuser;
 
 
--- View: dat."FightActionsList"
+-- View: bwgr."FightActionsList"
 
--- DROP VIEW dat."FightActionsList";
+-- DROP VIEW bwgr."FightActionsList";
 
-CREATE OR REPLACE VIEW dat."FightActionsList" AS
+CREATE OR REPLACE VIEW bwgr."FightActionsList" AS
  SELECT f."Id",
     f."Name",
     f."GroupId",
@@ -502,36 +502,36 @@ CREATE OR REPLACE VIEW dat."FightActionsList" AS
     f."Effect",
     f."Special",
     f."CountsAsNoAction"
-   FROM dat."FightActions" f
-     LEFT JOIN dat."FightActionGroups" fg ON fg."Id" = f."GroupId";
+   FROM bwgr."FightActions" f
+     LEFT JOIN bwgr."FightActionGroups" fg ON fg."Id" = f."GroupId";
 
-ALTER TABLE dat."FightActionsList"
+ALTER TABLE bwgr."FightActionsList"
     OWNER TO apiuser;
 
 
--- View: dat."FightActionTestList"
+-- View: bwgr."FightActionTestList"
 
--- DROP VIEW dat."FightActionTestList";
+-- DROP VIEW bwgr."FightActionTestList";
 
-CREATE OR REPLACE VIEW dat."FightActionTestList" AS
+CREATE OR REPLACE VIEW bwgr."FightActionTestList" AS
  SELECT a."ActionId",
     a."SkillId",
     s."Name" AS "Skill",
     a."AbilityId",
     ab."Name" AS "Ability"
-   FROM dat."FightActionTests" a
-     LEFT JOIN dat."Skills" s ON s."Id" = a."SkillId"
-     LEFT JOIN dat."Abilities" ab ON ab."Id" = a."AbilityId";
+   FROM bwgr."FightActionTests" a
+     LEFT JOIN bwgr."Skills" s ON s."Id" = a."SkillId"
+     LEFT JOIN bwgr."Abilities" ab ON ab."Id" = a."AbilityId";
 
-ALTER TABLE dat."FightActionTestList"
+ALTER TABLE bwgr."FightActionTestList"
     OWNER TO apiuser;
 
 
--- View: dat."FightActionResolutionList"
+-- View: bwgr."FightActionResolutionList"
 
--- DROP VIEW dat."FightActionResolutionList";
+-- DROP VIEW bwgr."FightActionResolutionList";
 
-CREATE OR REPLACE VIEW dat."FightActionResolutionList" AS
+CREATE OR REPLACE VIEW bwgr."FightActionResolutionList" AS
  SELECT a."ActionId",
     a."OpposingActionId",
     oa."Name" AS "OpposingAction",
@@ -548,23 +548,23 @@ CREATE OR REPLACE VIEW dat."FightActionResolutionList" AS
     os."Name" AS "OpposingSkill",
     a."OpposingAbilityId",
     oab."Name" AS "OpposingAbility"
-   FROM dat."FightActionResolutions" a
-     LEFT JOIN dat."FightActions" oa ON oa."Id" = a."OpposingActionId"
-     LEFT JOIN dat."ActionResolutionTypes" rt ON rt."Id" = a."ResolutionTypeId"
-     LEFT JOIN dat."Skills" s ON s."Id" = a."SkillId"
-     LEFT JOIN dat."Skills" os ON os."Id" = a."SkillId"
-     LEFT JOIN dat."Abilities" ab ON ab."Id" = a."AbilityId"
-     LEFT JOIN dat."Abilities" oab ON ab."Id" = a."AbilityId";
+   FROM bwgr."FightActionResolutions" a
+     LEFT JOIN bwgr."FightActions" oa ON oa."Id" = a."OpposingActionId"
+     LEFT JOIN bwgr."ActionResolutionTypes" rt ON rt."Id" = a."ResolutionTypeId"
+     LEFT JOIN bwgr."Skills" s ON s."Id" = a."SkillId"
+     LEFT JOIN bwgr."Skills" os ON os."Id" = a."SkillId"
+     LEFT JOIN bwgr."Abilities" ab ON ab."Id" = a."AbilityId"
+     LEFT JOIN bwgr."Abilities" oab ON ab."Id" = a."AbilityId";
 
-ALTER TABLE dat."FightActionResolutionList"
+ALTER TABLE bwgr."FightActionResolutionList"
     OWNER TO apiuser;
 
 
--- View: dat."PracticeList"
+-- View: bwgr."PracticeList"
 
--- DROP VIEW dat."PracticeList";
+-- DROP VIEW bwgr."PracticeList";
 
-CREATE OR REPLACE VIEW dat."PracticeList" AS
+CREATE OR REPLACE VIEW bwgr."PracticeList" AS
  SELECT row_number() OVER (ORDER BY x."SkillTypeId", x."AbilityId") AS "Id",
     x."AbilityId",
     x."Ability",
@@ -582,7 +582,7 @@ CREATE OR REPLACE VIEW dat."PracticeList" AS
             "Abilities"."Routine",
             "Abilities"."Difficult",
             "Abilities"."Challenging"
-           FROM dat."Abilities"
+           FROM bwgr."Abilities"
           WHERE "Abilities"."Cycle" IS NOT NULL
         UNION
          SELECT NULL::integer AS "AbilityId",
@@ -593,8 +593,8 @@ CREATE OR REPLACE VIEW dat."PracticeList" AS
             "SkillTypes"."Routine",
             "SkillTypes"."Difficult",
             "SkillTypes"."Challenging"
-           FROM dat."SkillTypes"
+           FROM bwgr."SkillTypes"
           WHERE "SkillTypes"."Cycle" IS NOT NULL) x;
 
-ALTER TABLE dat."PracticeList"
+ALTER TABLE bwgr."PracticeList"
     OWNER TO apiuser;

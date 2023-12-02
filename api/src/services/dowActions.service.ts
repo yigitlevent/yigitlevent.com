@@ -55,9 +55,9 @@ export async function GetDoWActions(): Promise<DoWAction[]> {
 		return r;
 	};
 
-	const query1 = "select * from dat.\"DuelOfWitsActions\";";
-	const query2 = "select * from dat.\"DoWActionTestList\";";
-	const query3 = "select * from dat.\"DoWActionResolutionList\";";
+	const query1 = "select * from bwgr.\"DuelOfWitsActions\";";
+	const query2 = "select * from bwgr.\"DoWActionTestList\";";
+	const query3 = "select * from bwgr.\"DoWActionResolutionList\";";
 	return Promise.all([
 		PgPool.query<DoWActionDBO>(query1),
 		PgPool.query<ActionTestDBO>(query2),

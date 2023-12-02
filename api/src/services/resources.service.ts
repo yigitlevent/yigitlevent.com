@@ -73,9 +73,9 @@ export async function GetResources(): Promise<Resource[]> {
 		return r;
 	};
 
-	const query1 = "select * from dat.\"ResourcesList\";";
-	const query2 = "select * from dat.\"ResourceMagicDetailsList\";";
-	const query3 = "select * from dat.\"ResourceMagicObstaclesList\";";
+	const query1 = "select * from bwgr.\"ResourcesList\";";
+	const query2 = "select * from bwgr.\"ResourceMagicDetailsList\";";
+	const query3 = "select * from bwgr.\"ResourceMagicObstaclesList\";";
 	return Promise.all([
 		PgPool.query<ResourceDBO>(query1),
 		PgPool.query<ResourceMagicDetailsDBO>(query2),

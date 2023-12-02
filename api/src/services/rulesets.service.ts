@@ -17,7 +17,7 @@ export async function GetRulesets(): Promise<Ruleset[]> {
 		return r;
 	};
 
-	const query = "select * from dat.\"RulesetsList\";";
+	const query = "select * from bwgr.\"RulesetsList\";";
 	return PgPool.query<RulesetDBO>(query)
 		.then(result => result.rows.map(convert));
 }

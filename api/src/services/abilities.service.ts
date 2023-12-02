@@ -26,7 +26,7 @@ export async function GetAbilities(): Promise<Ability[]> {
 		return r;
 	};
 
-	const query = "select * from dat.\"AbilitiesList\";";
+	const query = "select * from bwgr.\"AbilitiesList\";";
 	return PgPool.query<AbilityDBO>(query)
 		.then(result => result.rows.map(convert));
 }

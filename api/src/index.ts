@@ -8,7 +8,7 @@ import { PORT } from "./configs/constants.config";
 import { CorsConfig } from "./configs/cors.config";
 import { PgConfig } from "./configs/postgres.config";
 import { SessionConfig } from "./configs/session.config";
-import rulesetRouter from "./routes/ruleset.route";
+import bwgrRouter from "./routes/bwgr.route";
 import userRouter from "./routes/user.route";
 
 
@@ -28,7 +28,7 @@ App.use(cors(CorsConfig));
 App.use(session({ store: SessionStore, ...SessionConfig }));
 
 App.use("/user", userRouter);
-App.use("/ruleset", rulesetRouter);
+App.use("/bwgr", bwgrRouter);
 
 /*
 App.get("/campaigns", CheckAuth, GetCampaigns);

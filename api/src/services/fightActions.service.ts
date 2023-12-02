@@ -60,9 +60,9 @@ export async function GetFightActions(): Promise<FightAction[]> {
 		return r;
 	};
 
-	const query1 = "select * from dat.\"FightActionsList\";";
-	const query2 = "select * from dat.\"FightActionTestList\";";
-	const query3 = "select * from dat.\"FightActionResolutionList\";";
+	const query1 = "select * from bwgr.\"FightActionsList\";";
+	const query2 = "select * from bwgr.\"FightActionTestList\";";
+	const query3 = "select * from bwgr.\"FightActionResolutionList\";";
 	return Promise.all([
 		PgPool.query<FightActionDBO>(query1),
 		PgPool.query<ActionTestDBO>(query2),

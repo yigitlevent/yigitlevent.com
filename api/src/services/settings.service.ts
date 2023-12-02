@@ -13,7 +13,7 @@ export async function GetSettings(rulesets: RulesetId[]): Promise<Setting[]> {
 		};
 	};
 
-	const query = `select * from dat."SettingsList" where "Rulesets"::text[] && ARRAY['${rulesets.join("','")}'];`;
+	const query = `select * from bwgr."SettingsList" where "Rulesets"::text[] && ARRAY['${rulesets.join("','")}'];`;
 	return PgPool.query<SettingDBO>(query)
 		.then(result => result.rows.map(convert));
 }
