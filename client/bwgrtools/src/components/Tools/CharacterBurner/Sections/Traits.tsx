@@ -1,3 +1,4 @@
+import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { Fragment } from "react";
@@ -8,7 +9,7 @@ import { GenericGrid } from "../../../Shared/Grids";
 import { BlockTraitPopover } from "../../CharacterBurner/BlockText";
 
 
-function Trait({ trait }: { trait: UniqueArrayItem<TraitId, CharacterTrait>; }) {
+function Trait({ trait, remove }: { trait: UniqueArrayItem<TraitId, CharacterTrait>; remove?: (traitId: TraitId) => void; }) {
 	const { openTrait } = useCharacterBurnerTraitStore();
 
 	return (
@@ -16,11 +17,8 @@ function Trait({ trait }: { trait: UniqueArrayItem<TraitId, CharacterTrait>; }) 
 			<GenericGrid columns={5} center="h" hasBackground={1}>
 				<BlockTraitPopover
 					trait={[trait.id, trait.name]}
-					checkbox={{
-						checked: trait.isOpen,
-						disabled: trait.type === "Mandatory" || trait.type === "Common",
-						onClick: () => openTrait(trait.id)
-					}}
+					checkbox={{ checked: trait.isOpen, disabled: trait.type === "Mandatory" || trait.type === "Common", onClick: () => openTrait(trait.id) }}
+					deleteCallback={remove ? () => remove(trait.id) : undefined}
 				/>
 			</GenericGrid>
 		</Grid>
@@ -79,8 +77,8 @@ function LifepathTraitsBlock() {
 	);
 }
 
-function GeneralTraitsBlock() {
-	const { traits } = useCharacterBurnerTraitStore();
+function GeneralTraitsBlock({ openModal }: { openModal: (name: CharacterBurnerModals) => void; }) {
+	const { traits, removeGeneralTrait } = useCharacterBurnerTraitStore();
 
 	return (
 		<Fragment>
@@ -91,13 +89,15 @@ function GeneralTraitsBlock() {
 			<Fragment>
 				{traits
 					.filter(t => t.type === "General")
-					.map((trait, i) => <Trait key={i} trait={trait} />)}
+					.map((trait, i) => <Trait key={i} trait={trait} remove={removeGeneralTrait} />)}
 			</Fragment>
+
+			<Button variant="outlined" style={{ margin: "10px" }} onClick={() => openModal("geTr")}>Add General Trait</Button>
 		</Fragment>
 	);
 }
 
-export function Traits(): JSX.Element {
+export function Traits({ openModal }: { openModal: (name: CharacterBurnerModals) => void; }): JSX.Element {
 	const { traits, getTraitPools } = useCharacterBurnerTraitStore();
 	const traitPools = getTraitPools();
 
@@ -118,14 +118,9 @@ export function Traits(): JSX.Element {
 			</Grid>*/}
 
 			{traits.existsAny("type", "Common") > 0 ? <CommonTraitsBlock /> : null}
-
 			{traits.existsAny("type", "Mandatory") > 0 ? <MandatoryTraitsBlock /> : null}
-
 			{traits.existsAny("type", "Lifepath") > 0 ? <LifepathTraitsBlock /> : null}
-
-			{traits.existsAny("type", "General") > 0 ? <GeneralTraitsBlock /> : null}
-
-			{/*<GeneralTraitModal open={open} setOpen={setOpen} />*/}
+			<GeneralTraitsBlock openModal={openModal} />
 		</GenericGrid>
 	);
 }

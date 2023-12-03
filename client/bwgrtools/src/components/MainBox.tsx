@@ -1,6 +1,8 @@
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Paper from "@mui/material/Paper";
+import Typography from "@mui/material/Typography";
+import { useEffect } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 
 import { Menu } from "./Menu/Menu";
@@ -18,26 +20,28 @@ import { TraitLists } from "./Tools/TraitLists/TraitLists";
 import { useRulesetStore } from "../hooks/apiStores/useRulesetStore";
 
 
-let Once = true;
-
 export function MainBox(): JSX.Element {
-	const store = useRulesetStore();
+	const { fetchState, fetchList, fetchData } = useRulesetStore();
 
-	if (Once) {
-		// TODO: move this to a better place, think about how to actually do this properly
-		store.fetchList();
-		store.fetchData();
-		Once = false;
-	}
+	useEffect(() => {
+		if (fetchState === "fetch-full") fetchList();
+	}, [fetchList, fetchState]);
+
+	useEffect(() => {
+		if (fetchState === "fetch-data") fetchData();
+	}, [fetchData, fetchState]);
 
 	return (
 		<Container maxWidth="lg" sx={{ margin: "10px auto" }}>
 			<Menu />
 
 			<Paper sx={{ padding: "10px 20px" }}>
-				{store.fetching
-					? <span>Loading</span>
-					: <Routes>
+				{fetchState === "failed"
+					? <Typography>Data fetching failed.</Typography>
+					: null}
+
+				{fetchState === "done"
+					? <Routes>
 						<Route path="/" element={<Navigate replace to="/diceroller" />} />
 						<Route path="/diceroller" element={<DiceRoller />} />
 						<Route path="/lifepaths" element={<LifepathLists />} />
@@ -50,7 +54,8 @@ export function MainBox(): JSX.Element {
 						<Route path="/racplanner" element={<RangeAndCoverPlanner />} />
 						<Route path="/fightplanner" element={<FightPlanner />} />
 						<Route path="/characterburner" element={<CharacterBurner />} />
-					</Routes>}
+					</Routes>
+					: <Typography>Loading</Typography>}
 			</Paper>
 
 			<Box sx={{ margin: "0 0 200px" }} />

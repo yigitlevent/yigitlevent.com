@@ -5,9 +5,17 @@ import { devtools } from "zustand/middleware";
 import { GenericGet, GenericPost } from "../../utils/genericRequests";
 
 
+type FetchState =
+	| "fetch-full"
+	| "fetching-list"
+	| "fetch-data"
+	| "fetching-data"
+	| "done"
+	| "failed";
+
 // TODO: research index key signatures to see if there is a workaround
 interface RulesetStore {
-	readonly fetching: boolean;
+	readonly fetchState: FetchState;
 
 	readonly rulesets: Ruleset[];
 	readonly chosenRulesets: RulesetId[];
@@ -39,7 +47,7 @@ interface RulesetStore {
 
 	readonly practices: Practice[];
 
-	toggleFetching: () => void;
+	setFetchState: (fetchState: FetchState) => void;
 	fetchList: () => void;
 	fetchData: () => void;
 
@@ -65,10 +73,10 @@ interface RulesetStore {
 export const useRulesetStore = create<RulesetStore>()(
 	devtools(
 		(set, get) => ({
-			fetching: true,
+			fetchState: "fetch-full",
 
 			rulesets: [],
-			chosenRulesets: ["bwgr" as RulesetId, "bwc" as RulesetId], // TODO: this shouldn't be fixed
+			chosenRulesets: [],
 
 			abilities: [],
 			abilityTypes: [],
@@ -103,15 +111,22 @@ export const useRulesetStore = create<RulesetStore>()(
 				duration: []
 			},
 
-			toggleFetching: () => {
-				set(produce<RulesetStore>((state) => { state.fetching = !state.fetching; }));
+			setFetchState: (fetchState: FetchState) => {
+				set(produce<RulesetStore>((state) => { state.fetchState = fetchState; }));
 			},
 
 			fetchList: () => {
+				const fetching = get().setFetchState;
+				fetching("fetching-list");
+
 				GenericGet<RulesetsResponse>("/bwgr/ruleset/list")
 					.then(response => {
 						if (response.status === 200) {
-							set(produce<RulesetStore>((state) => { state.rulesets = response.data.rulesets; }));
+							set(produce<RulesetStore>((state) => {
+								state.rulesets = response.data.rulesets;
+								state.chosenRulesets = [response.data.rulesets[0].id];
+							}));
+							fetching("fetch-data");
 						}
 						else throw new Error();
 					})
@@ -119,9 +134,10 @@ export const useRulesetStore = create<RulesetStore>()(
 			},
 
 			fetchData: () => {
-				const toggleFetching = get().toggleFetching;
-				const rulesets = get().chosenRulesets;
+				const fetching = get().setFetchState;
+				fetching("fetching-data");
 
+				const rulesets = get().chosenRulesets;
 				GenericPost<RulesetResponse>("/bwgr/ruleset/data", { rulesets })
 					.then(response => {
 						if (response.status === 200) {
@@ -192,11 +208,18 @@ export const useRulesetStore = create<RulesetStore>()(
 
 								state.practices = response.data.ruleset.practices;
 							}));
+
+							fetching("done");
 						}
-						else throw new Error();
+						else {
+							fetching("failed");
+							throw new Error();
+						}
 					})
-					.catch(reason => console.error(reason))
-					.finally(() => toggleFetching());
+					.catch(reason => {
+						console.error(reason);
+						fetching("failed");
+					});
 			},
 
 			serveResult<T>(row: T[], error: [id: unknown, msg: string]): Readonly<T> {
@@ -273,10 +296,12 @@ export const useRulesetStore = create<RulesetStore>()(
 
 			toggleDataset: (ruleset: RulesetId) => {
 				set(produce<RulesetStore>((state) => {
-					if (state.chosenRulesets.includes(ruleset)) {
+					if (state.chosenRulesets.includes(ruleset) && state.chosenRulesets.length > 1) {
+						state.fetchState = "fetch-data";
 						state.chosenRulesets = state.chosenRulesets.filter(v => v !== ruleset);
 					}
 					else {
+						state.fetchState = "fetch-data";
 						state.chosenRulesets = [...state.chosenRulesets, ruleset];
 					}
 				}));

@@ -15,6 +15,8 @@ export type CharacterBurnerTraitState = {
 	reset: () => void;
 
 	openTrait: (traitId: TraitId) => void;
+	addGeneralTrait: (trait: Trait) => void;
+	removeGeneralTrait: (traitId: TraitId) => void;
 
 	getTraitPools: () => Points;
 	getTrait: (traitId: TraitId) => { open: boolean; };
@@ -49,6 +51,17 @@ export const useCharacterBurnerTraitStore = create<CharacterBurnerTraitState>()(
 						charTrait.isOpen = !charTrait.isOpen;
 						state.traits = new UniqueArray(state.traits.add(charTrait).items);
 					}
+				}));
+			},
+
+			addGeneralTrait: (trait: Trait): void => {
+				const charTrait: CharacterTrait = { id: trait.id, name: trait.name, isOpen: false, type: "General" };
+				set(produce<CharacterBurnerTraitState>((state) => { state.traits = new UniqueArray(state.traits.add(charTrait).items); }));
+			},
+
+			removeGeneralTrait: (traitId: TraitId): void => {
+				set(produce<CharacterBurnerTraitState>((state) => {
+					state.traits = new UniqueArray(state.traits.remove(traitId).items);
 				}));
 			},
 

@@ -16,6 +16,8 @@ import { useCharacterBurnerAttributeStore } from "../../../hooks/featureStores/C
 import { useCharacterBurnerLifepathStore } from "../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerLifepath";
 import { useCharacterBurnerSkillStore } from "../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerSkill";
 import { useCharacterBurnerTraitStore } from "../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerTrait";
+import { GeneralSkillModal } from "./Modals/GeneralSkillModal";
+import { GeneralTraitModal } from "./Modals/GeneralTraitModal";
 
 
 export function CharacterBurner(): JSX.Element {
@@ -38,8 +40,8 @@ export function CharacterBurner(): JSX.Element {
 			<Typography variant="h3">Character Burner</Typography>
 			<Basics openModal={openModal} />
 			<Stats />
-			{skills.length > 0 ? <Skills /> : null}
-			{traits.length > 0 ? <Traits /> : null}
+			{skills.length > 0 ? <Skills openModal={openModal} /> : null}
+			{traits.length > 0 ? <Traits openModal={openModal} /> : null}
 			{attributes.length > 0 ? <Attributes /> : null}
 
 			{lifepaths.length > 0
@@ -54,6 +56,8 @@ export function CharacterBurner(): JSX.Element {
 
 			<LifepathSelection isOpen={currentModal === "lp"} close={closeModals} />
 			<ResourceSelection isOpen={currentModal === "re"} close={closeModals} />
+			<GeneralSkillModal isOpen={currentModal === "geSk"} close={closeModals} />
+			<GeneralTraitModal isOpen={currentModal === "geTr"} close={closeModals} />
 
 			{/* TODO
 				<AnswerQuestions />

@@ -1,3 +1,4 @@
+import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { Fragment } from "react";
@@ -9,9 +10,9 @@ import { GenericGrid } from "../../../Shared/Grids";
 import { BlockSkillPopover } from "../BlockText";
 
 
-function Skill({ skill }: { skill: UniqueArrayItem<SkillId, CharacterSkill>; }): JSX.Element {
+function Skill({ skill, remove }: { skill: UniqueArrayItem<SkillId, CharacterSkill>; remove?: (skillId: SkillId) => void; }): JSX.Element {
 	const { getSkill, openSkill, modifySkillExponent } = useCharacterBurnerSkillStore();
-	const charSkill = getSkill(skill.id);
+	const skillPoints = getSkill(skill.id);
 
 	return (
 		<Grid item xs={6} sm={3} md={2}>
@@ -19,15 +20,16 @@ function Skill({ skill }: { skill: UniqueArrayItem<SkillId, CharacterSkill>; }):
 				<BlockSkillPopover
 					skill={[skill.id, skill.name]}
 					checkbox={{ checked: skill.isOpen !== "no", disabled: skill.type === "Mandatory", onClick: () => openSkill(skill.id) }}
+					deleteCallback={remove ? () => remove(skill.id) : undefined}
 				/>
 
 				<Grid item>
 					<AbilityButton name={skill.name} disabled>
-						{charSkill.shade}
+						{skillPoints.shade}
 					</AbilityButton>
 
 					<AbilityButton onClick={() => modifySkillExponent(skill.id)} onContextMenu={() => modifySkillExponent(skill.id, true)} disabled={!skill.isOpen}>
-						{charSkill.exponent}
+						{skillPoints.exponent}
 					</AbilityButton>
 				</Grid>
 			</GenericGrid>
@@ -73,8 +75,8 @@ function LifepathSkills() {
 	);
 }
 
-function GeneralSkills() {
-	const { skills } = useCharacterBurnerSkillStore();
+function GeneralSkills({ openModal }: { openModal: (name: CharacterBurnerModals) => void; }) {
+	const { skills, removeGeneralSkill } = useCharacterBurnerSkillStore();
 
 	return (
 		<Fragment>
@@ -86,13 +88,15 @@ function GeneralSkills() {
 				{skills
 					.filter(s => s.type === "General")
 					// TODO: re-enable .filter(v => !SpecialSkills.includes(v as SkillPath))
-					.map((skill, i) => <Skill key={i} skill={skill} />)}
+					.map((skill, i) => <Skill key={i} skill={skill} remove={removeGeneralSkill} />)}
 			</Fragment>
+
+			<Button variant="outlined" style={{ margin: "10px" }} onClick={() => openModal("geSk")}>Add General Skill</Button>
 		</Fragment>
 	);
 }
 
-export function Skills(): JSX.Element {
+export function Skills({ openModal }: { openModal: (name: CharacterBurnerModals) => void; }): JSX.Element {
 	const { skills, getSkillPools } = useCharacterBurnerSkillStore();
 
 	// const [open, setOpen] = useState(false);
@@ -110,7 +114,6 @@ export function Skills(): JSX.Element {
 
 			<Grid item xs={6} sm={5}>
 				<Typography>{generalText}</Typography>
-
 				<Typography>{lifepathText}</Typography>
 			</Grid>
 
@@ -119,12 +122,8 @@ export function Skills(): JSX.Element {
 			</Grid>*/}
 
 			{skills.existsAny("type", "Mandatory") > 0 ? <MandatorySkills /> : null}
-
 			{skills.existsAny("type", "Lifepath") > 0 ? <LifepathSkills /> : null}
-
-			{skills.existsAny("type", "General") > 0 ? <GeneralSkills /> : null}
-
-			{/* TODO: <GeneralSkillModal open={open} setOpen={setOpen} />*/}
+			<GeneralSkills openModal={openModal} />
 		</GenericGrid>
 	);
 }

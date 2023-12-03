@@ -16,6 +16,8 @@ export type CharacterBurnerSkillState = {
 
 	openSkill: (skillId: SkillId) => void;
 	modifySkillExponent: (skillId: SkillId, decrease?: boolean) => void;
+	addGeneralSkill: (skill: Skill) => void;
+	removeGeneralSkill: (skillId: SkillId) => void;
 
 	getSkillPools: () => { general: Points; lifepath: Points; };
 	getSkill: (skillId: SkillId) => AbilityPoints;
@@ -90,6 +92,17 @@ export const useCharacterBurnerSkillStore = create<CharacterBurnerSkillState>()(
 						}
 					}));
 				}
+			},
+
+			addGeneralSkill: (skill: Skill): void => {
+				const charSkill: CharacterSkill = { id: skill.id, name: skill.name, isOpen: "no", type: "General", isSpecial: skill.subskillIds ? true : false, advancement: { general: 0, lifepath: 0 } };
+				set(produce<CharacterBurnerSkillState>((state) => { state.skills = new UniqueArray(state.skills.add(charSkill).items); }));
+			},
+
+			removeGeneralSkill: (skillId: SkillId): void => {
+				set(produce<CharacterBurnerSkillState>((state) => {
+					state.skills = new UniqueArray(state.skills.remove(skillId).items);
+				}));
 			},
 
 			getSkillPools: (): { general: Points; lifepath: Points; } => {
