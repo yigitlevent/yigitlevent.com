@@ -18,6 +18,7 @@ interface FilterLifepathsProps {
 
 export function FilterLifepaths({ rulesetLifepaths, stock, age, lifepaths, gender, attributes, hasAttribute, hasSkillOpen, hasTraitOpen, hasSetting, hasQuestionTrue, noLeads }: FilterLifepathsProps): Lifepath[] {
 	const checkLifepath = (id: LifepathId) => lifepaths.findIndex(lp => lp.id === id);
+	const countLifepath = (id: LifepathId) => lifepaths.filter(lp => lp.id === id).length;
 
 	const checkRequirementBlock = (lifepath: Lifepath, block: LifepathRequirementBlock): boolean => {
 		const itemResults = block.items.map((item): boolean => {
@@ -49,7 +50,7 @@ export function FilterLifepaths({ rulesetLifepaths, stock, age, lifepaths, gende
 				if (hasTraitOpen) return hasTraitOpen(item.trait[0]);
 				else return true;
 			}
-			else if ("lifepath" in item) return checkLifepath(item.lifepath[0]) >= block.fulfillmentAmount;
+			else if ("lifepath" in item) return countLifepath(item.lifepath[0]) >= block.fulfillmentAmount;
 			else if ("setting" in item) {
 				if (hasSetting) return hasSetting(item.setting[0]) >= block.fulfillmentAmount;
 				else return true;
