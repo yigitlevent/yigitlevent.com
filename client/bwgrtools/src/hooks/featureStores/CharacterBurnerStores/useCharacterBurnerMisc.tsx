@@ -92,15 +92,18 @@ export const useCharacterBurnerMiscStore = create<CharacterBurnerMiscState>()(
 			},
 
 			switchQuestion: (id: QuestionId): void => {
-				get().questions.some(v => v.id === id && v.answer);
+				const index = get().questions.findIndex(v => v.id === id);
+
+				set(produce<CharacterBurnerMiscState>((state) => {
+					const prev = state.questions[index];
+					state.questions[index] = { ...prev, answer: !prev.answer };
+				}));
 			},
 
 			refreshQuestions: () => {
 				const ruleset = useRulesetStore.getState();
 				const { hasAttribute } = useCharacterBurnerAttributeStore.getState();
 				const { questions } = get();
-
-				console.log(ruleset.questions);
 
 				const newQuestions: CharacterQuestion[]
 					= ruleset.questions
