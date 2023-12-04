@@ -7,17 +7,17 @@ import { Clamp } from "../../utils/misc";
 
 interface LifepathRandomizerState {
 	stock: StockId | "Random";
-	setting: "Random";
+	setting: SettingId | "Random";
 	noDuplicates: boolean;
 	maxLeads: number;
 	maxLifepaths: number;
 	minLifepaths: number;
 
-	randomizerChangeStock: (stock: StockId | "Random") => void;
-	randomizerChangeMaxLeads: (value: string) => void;
-	randomizerChangeMaxLifepaths: (value: string) => void;
-	randomizerChangeMinLifepaths: (value: string) => void;
-	randomizerToggleNoDuplicates: () => void;
+	changeStock: (stock: StockId | "Random") => void;
+	changeMaxLeads: (value: string) => void;
+	changeMaxLifepaths: (value: string) => void;
+	changeMinLifepaths: (value: string) => void;
+	toggleNoDuplicates: () => void;
 }
 
 export const useLifepathRandomizerStore = create<LifepathRandomizerState>()(
@@ -30,27 +30,26 @@ export const useLifepathRandomizerStore = create<LifepathRandomizerState>()(
 			maxLifepaths: 6,
 			minLifepaths: 5,
 
-			randomizerChangeStock: (stock: StockId | "Random") => {
-				set(produce<LifepathRandomizerState>((state) => {
-					state.stock = stock;
-				}));
+			changeStock: (stock: StockId | "Random") => {
+				set(produce<LifepathRandomizerState>((state) => { state.stock = stock; }));
 			},
-			randomizerChangeMaxLeads: (value: string) => {
+
+			changeMaxLeads: (value: string) => {
 				set(produce<LifepathRandomizerState>((state) => {
 					state.maxLeads = Clamp(value === "" ? 0 : parseInt(value), 0, 10);
 				}));
 			},
-			randomizerChangeMaxLifepaths: (value: string) => {
+			changeMaxLifepaths: (value: string) => {
 				set(produce<LifepathRandomizerState>((state) => {
 					state.maxLifepaths = Clamp(value === "" ? 0 : parseInt(value), 0, 10);
 				}));
 			},
-			randomizerChangeMinLifepaths: (value: string) => {
+			changeMinLifepaths: (value: string) => {
 				set(produce<LifepathRandomizerState>((state) => {
 					state.minLifepaths = Clamp(value === "" ? 0 : parseInt(value), 0, 10);
 				}));
 			},
-			randomizerToggleNoDuplicates: () => {
+			toggleNoDuplicates: () => {
 				set(produce<LifepathRandomizerState>((state) => {
 					state.noDuplicates !== state.noDuplicates;
 				}));

@@ -2,44 +2,26 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 
-import { SkillOld, SkillCategories } from "../../../../../data/skills/_skills";
-import { TraitOld, TraitCategories } from "../../../../../data/traits/_traits";
+import { useRulesetStore } from "../../../../../hooks/apiStores/useRulesetStore";
+import { UniqueArray } from "../../../../../utils/uniqueArray";
 import { PopoverLink } from "../../../../Shared/PopoverLink";
 
 
-export function RandomLifepathsLists({ totals }: { totals: LifepathTotals; }) {
-	const mandSkills = [...totals.skills.mandatoryList].map(path => {
-		const [category, name] = path.split("➞");
-		let s = SkillCategories[category].skills.find(v => v.name === name);
-		if (name === "1*ANY") s = SkillCategories[category].skills.find(v => v.name === "Any wise");
-		return s as SkillOld;
-	});
+export function RandomLifepathsLists({ chosenLifepaths }: { chosenLifepaths: Lifepath[]; }): JSX.Element {
+	const { getSkill, getTrait } = useRulesetStore();
 
-	const skills = [...totals.skills.lifepathList].map(path => {
-		const [category, name] = path.split("➞");
-		let s = SkillCategories[category].skills.find(v => v.name === name);
-		if (name === "1*ANY") s = SkillCategories[category].skills.find(v => v.name === "Any wise");
-		return s as SkillOld;
-	});
+	const mandatorySkills = new UniqueArray(chosenLifepaths.map(lp => lp.skills ? [getSkill(lp.skills[0])] : []).flat());
+	const lifepathSkills = new UniqueArray(chosenLifepaths.map(lp => lp.skills ? lp.skills.filter(skillId => !mandatorySkills.has(skillId)).map(getSkill) : []).flat());
 
-	const mandTraits = [...totals.traits.mandatoryList].map(path => {
-		const [category, name] = path.split("➞");
-		const t = TraitCategories[category].traits.find(v => v.name === name);
-		return t as TraitOld;
-	});
-
-	const traits = [...totals.traits.lifepathList].map(path => {
-		const [category, name] = path.split("➞");
-		const t = TraitCategories[category].traits.find(v => v.name === name);
-		return t as TraitOld;
-	});
+	const mandatoryTraits = new UniqueArray(chosenLifepaths.map(lp => lp.traits ? [getTrait(lp.traits[0])] : []).flat());
+	const lifepathTraits = new UniqueArray(chosenLifepaths.map(lp => lp.traits ? lp.traits.filter(traitId => !mandatoryTraits.has(traitId)).map(getTrait) : []).flat());
 
 	return (
 		<Grid container columns={1} spacing={1}>
 			<Grid item xs={1}>
 				Mandatory Skills:
-				{mandSkills.length > 0
-					? mandSkills.map((skill, i) => (
+				{mandatorySkills.length > 0
+					? mandatorySkills.map((skill, i) => (
 						<Paper key={i} elevation={2} sx={{ cursor: "pointer", padding: "0 4px", margin: "3px 3px 0", width: "max-content", display: "inline-block" }}>
 							<PopoverLink data={skill} />
 						</Paper>
@@ -47,10 +29,11 @@ export function RandomLifepathsLists({ totals }: { totals: LifepathTotals; }) {
 					)
 					: <Box sx={{ padding: "0 4px", display: "inline-block" }}>—</Box>}
 			</Grid>
+
 			<Grid item xs={1}>
 				Skills:
-				{skills.length > 0
-					? skills.map((skill, i) => (
+				{lifepathSkills.length > 0
+					? lifepathSkills.map((skill, i) => (
 						<Paper key={i} elevation={2} sx={{ cursor: "pointer", padding: "0 4px", margin: "3px 3px 0", width: "max-content", display: "inline-block" }}>
 							<PopoverLink data={skill} />
 						</Paper>
@@ -58,10 +41,11 @@ export function RandomLifepathsLists({ totals }: { totals: LifepathTotals; }) {
 					)
 					: <Box sx={{ padding: "0 4px", display: "inline-block" }}>—</Box>}
 			</Grid>
+
 			<Grid item xs={1}>
 				Mandatory Traits:
-				{mandTraits.length > 0
-					? mandTraits.map((trait, i) => (
+				{mandatoryTraits.length > 0
+					? mandatoryTraits.map((trait, i) => (
 						<Paper key={i} elevation={2} sx={{ cursor: "pointer", padding: "0 4px", margin: "3px 3px 0", width: "max-content", display: "inline-block" }}>
 							<PopoverLink data={trait} />
 						</Paper>
@@ -69,10 +53,11 @@ export function RandomLifepathsLists({ totals }: { totals: LifepathTotals; }) {
 					)
 					: <Box sx={{ padding: "0 4px", display: "inline-block" }}>—</Box>}
 			</Grid>
+
 			<Grid item xs={1}>
 				Traits:
-				{traits.length > 0
-					? traits.map((trait, i) => (
+				{lifepathTraits.length > 0
+					? lifepathTraits.map((trait, i) => (
 						<Paper key={i} elevation={2} sx={{ cursor: "pointer", padding: "0 4px", margin: "3px 3px 0", width: "max-content", display: "inline-block" }}>
 							<PopoverLink data={trait} />
 						</Paper>

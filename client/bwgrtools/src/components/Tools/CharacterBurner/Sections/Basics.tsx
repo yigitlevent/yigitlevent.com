@@ -62,12 +62,16 @@ export function Basics({ openModal }: { openModal: (name: CharacterBurnerModals)
 				<TextField label="Concept" value={concept} onChange={(e) => setConcept(e.target.value)} fullWidth variant="standard" />
 			</Grid>
 
-			<Grid item xs={6} sm={5} md={5}>
+			<Grid item xs={6} sm={4} md={4}>
 				<TextField label="Lifepaths" value={lifepaths.map(v => v.name).join(", ")} fullWidth variant="standard" disabled />
 			</Grid>
 
 			<Grid item xs={6} sm={1} md={1}>
 				<Button variant="outlined" size="medium" onClick={() => openModal("lp")} fullWidth>Select Lifepaths</Button>
+			</Grid>
+
+			<Grid item xs={6} sm={1} md={1}>
+				<Button variant="outlined" size="medium" onClick={() => openModal("randLp")} fullWidth>Random Lifepaths</Button>
 			</Grid>
 		</GenericGrid>
 	);

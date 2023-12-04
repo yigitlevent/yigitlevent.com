@@ -1,8 +1,8 @@
 import Typography from "@mui/material/Typography";
 import { Fragment, useEffect, useState } from "react";
 
-import { LifepathSelection } from "./Modals/LifepathSelection";
-import { ResourceSelection } from "./Modals/ResourceSelection";
+import { LifepathSelectionModal } from "./Modals/LifepathSelectionModal";
+import { ResourceSelectionModal } from "./Modals/ResourceSelectionModal";
 import { Attributes } from "./Sections/Attributes";
 import { Basics } from "./Sections/Basics";
 import { Beliefs } from "./Sections/Beliefs";
@@ -18,6 +18,7 @@ import { useCharacterBurnerSkillStore } from "../../../hooks/featureStores/Chara
 import { useCharacterBurnerTraitStore } from "../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerTrait";
 import { GeneralSkillModal } from "./Modals/GeneralSkillModal";
 import { GeneralTraitModal } from "./Modals/GeneralTraitModal";
+import { RandomLifepathsModal } from "./Modals/RandomLifepathsModal";
 
 
 export function CharacterBurner(): JSX.Element {
@@ -54,15 +55,14 @@ export function CharacterBurner(): JSX.Element {
 				: null}
 
 
-			<LifepathSelection isOpen={currentModal === "lp"} close={closeModals} />
-			<ResourceSelection isOpen={currentModal === "re"} close={closeModals} />
+			<LifepathSelectionModal isOpen={currentModal === "lp"} close={closeModals} />
+			<RandomLifepathsModal isOpen={currentModal === "randLp"} close={closeModals} />
+			<ResourceSelectionModal isOpen={currentModal === "re"} close={closeModals} />
 			<GeneralSkillModal isOpen={currentModal === "geSk"} close={closeModals} />
 			<GeneralTraitModal isOpen={currentModal === "geTr"} close={closeModals} />
 
 			{/* TODO
 				<AnswerQuestions />
-				<ChooseGeneralSkills />
-				<ChooseGeneralLifepaths />
 				<ChooseSpecial /> --- StockSpecific, SpecialLifepaths, SpecialSkills
 			*/}
 		</Fragment>

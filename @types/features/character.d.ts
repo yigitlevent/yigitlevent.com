@@ -1,4 +1,4 @@
-type CharacterBurnerModals = "lp" | "re" | "geSk" | "geTr";
+type CharacterBurnerModals = "lp" | "randLp" | "re" | "geSk" | "geTr";
 type Shades = "B" | "G" | "W";
 
 interface CharacterAttribute {
