@@ -2,7 +2,7 @@ import Autocomplete from "@mui/material/Autocomplete";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
-import { Fragment, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { useRulesetStore } from "../../../../hooks/apiStores/useRulesetStore";
 import { useCharacterBurnerBasicsStore } from "../../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerBasics";

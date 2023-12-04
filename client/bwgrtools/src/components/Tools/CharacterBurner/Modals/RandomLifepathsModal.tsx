@@ -100,8 +100,6 @@ export function RandomLifepathsModal({ isOpen, close }: { isOpen: boolean; close
 		}
 	}, [addLifepath, chosenLifepaths, close, newStock, setStockAndReset]);
 
-	//const totals = (chosenLifepaths.length > 0) ? calculateTotals(chosenLifepaths) : undefined;
-
 	return (
 		<Modal open={isOpen} onClose={() => close()}>
 			<Paper sx={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", maxWidth: "800px", width: "100%", padding: "0 24px 24px", border: "none", overflow: "auto" }}>
