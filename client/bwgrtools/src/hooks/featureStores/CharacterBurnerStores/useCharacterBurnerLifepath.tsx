@@ -57,6 +57,7 @@ export const useCharacterBurnerLifepathStore = create<CharacterBurnerLifepathSta
 				useCharacterBurnerSkillStore.getState().updateSkills();
 				useCharacterBurnerTraitStore.getState().updateTraits();
 				useCharacterBurnerAttributeStore.getState().updateAttributes();
+				useCharacterBurnerMiscStore.getState().refreshQuestions();
 			},
 
 			removeLastLifepath: (): void => {
@@ -68,6 +69,7 @@ export const useCharacterBurnerLifepathStore = create<CharacterBurnerLifepathSta
 				useCharacterBurnerSkillStore.getState().updateSkills();
 				useCharacterBurnerTraitStore.getState().updateTraits();
 				useCharacterBurnerAttributeStore.getState().updateAttributes();
+				useCharacterBurnerMiscStore.getState().refreshQuestions();
 			},
 
 			hasLifepath: (id: LifepathId): number => {

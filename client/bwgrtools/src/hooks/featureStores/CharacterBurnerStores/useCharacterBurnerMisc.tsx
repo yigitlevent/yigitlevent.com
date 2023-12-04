@@ -100,14 +100,20 @@ export const useCharacterBurnerMiscStore = create<CharacterBurnerMiscState>()(
 				const { hasAttribute } = useCharacterBurnerAttributeStore.getState();
 				const { questions } = get();
 
+				console.log(ruleset.questions);
+
 				const newQuestions: CharacterQuestion[]
 					= ruleset.questions
 						.filter(v => {
-							if (v.attributes && (hasAttribute(v.attributes[0][0]) || hasAttribute(v.attributes[1][0]))) return true;
-							return true;
+							const attrIds = [];
+							if (v.attributes?.[0]?.[0]) attrIds.push(v.attributes[0][0]);
+							if (v.attributes?.[1]?.[0]) attrIds.push(v.attributes[1][0]);
+							if (attrIds.length === 0) return true;
+							else if (attrIds.length > 0 && attrIds.some(v => hasAttribute(v))) return true;
+							else return false;
 						})
 						.map(question => {
-							const idx = questions.findIndex(v => v.id = question.id);
+							const idx = questions.findIndex(v => v.id === question.id);
 							return {
 								id: question.id,
 								name: question.name,
@@ -115,6 +121,8 @@ export const useCharacterBurnerMiscStore = create<CharacterBurnerMiscState>()(
 								answer: (idx > -1) ? questions[idx].answer : false
 							};
 						});
+
+				console.log({ newQuestions });
 
 				set(produce<CharacterBurnerMiscState>((state) => {
 					state.questions = newQuestions;
