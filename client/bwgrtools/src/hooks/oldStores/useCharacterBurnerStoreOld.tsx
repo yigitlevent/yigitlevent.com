@@ -1,40 +1,5 @@
 /*
-refreshQuestions: () => {
-	set(produce<CharacterBurnerState>((state) => {
-		const newQuestions: CharacterQuestions = {};
-		for (const questionKey in AttributeQuestions) {
-			const key = questionKey as AttributeQuestionsKeys;
-			const question = AttributeQuestions[key];
 
-			if (typeof question.attribute !== "string") {
-				const attributes = Array.from(question.attribute);
-
-				for (const attrKey in attributes) {
-					const attr = attributes[attrKey];
-					const questionTrait = (Attributes.find(v => v.name === attr) as Attribute).requiredTrait as TraitPath;
-
-					if (state.checkIfTraitInCommonOrOpen(questionTrait)) {
-						if (questionKey in state.questions) newQuestions[key] = state.questions[key];
-						else newQuestions[key] = false;
-					}
-				}
-			}
-			else if (question.attribute === "Always") {
-				if (questionKey in state.questions) newQuestions[key] = state.questions[key];
-				else newQuestions[key] = false;
-			}
-			else {
-				const questionTrait = (Attributes.find(v => v.name === question.attribute) as Attribute).requiredTrait as TraitPath;
-
-				if (state.checkIfTraitInCommonOrOpen(questionTrait)) {
-					if (questionKey in state.questions) newQuestions[key] = state.questions[key];
-					else newQuestions[key] = false;
-				}
-			}
-		}
-		state.questions = newQuestions;
-	}));
-},
 resetStockSpecifics: () => {
 	set(produce<CharacterBurnerState>((state) => {
 		if (state.stockSpecific.brutalLife.traits.length > 0) {
@@ -45,16 +10,6 @@ resetStockSpecifics: () => {
 		state.stockSpecific.territory.huntingGround = undefined;
 	}));
 },
-
-
-			
-switchAnswer: (questionKey: AttributeQuestionsKeys) => {
-set(produce<CharacterBurnerState>((state) => {
-state.questions[questionKey] = !state.questions[questionKey];
-}));
-},
-
-
 
 
 selectAppropriateWeapon: (skillPath: SkillPath) => {

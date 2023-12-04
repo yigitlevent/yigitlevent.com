@@ -2,6 +2,7 @@ import { produce } from "immer";
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 
+import { useCharacterBurnerAttributeStore } from "./useCharacterBurnerAttribute";
 import { useCharacterBurnerLifepathStore } from "./useCharacterBurnerLifepath";
 import { useCharacterBurnerStatStore } from "./useCharacterBurnerStat";
 import { GetAverage } from "../../../utils/misc";
@@ -139,6 +140,7 @@ export const useCharacterBurnerSkillStore = create<CharacterBurnerSkillState>()(
 				const { skills, hasSkillOpen } = get();
 				const ruleset = useRulesetStore.getState();
 				const { getStat } = useCharacterBurnerStatStore.getState();
+				const { getAttribute, hasAttribute } = useCharacterBurnerAttributeStore.getState();
 
 				const charSkill = skills.find(skillId);
 
@@ -149,8 +151,15 @@ export const useCharacterBurnerSkillStore = create<CharacterBurnerSkillState>()(
 					const skillRoots = ruleset.getSkill(skillId).roots;
 
 					if (skillRoots) {
-						const rootShades = skillRoots.map(s => getStat(s[1]).shade);
-						const rootExponents = skillRoots.map(s => getStat(s[1]).exponent);
+						const rootShades = skillRoots.map(s => {
+							if (hasAttribute(s[0])) return getAttribute(s).shade;
+							else return getStat(s[1]).shade;
+						});
+
+						const rootExponents = skillRoots.map(s => {
+							if (hasAttribute(s[0])) return getAttribute(s).exponent;
+							else return getStat(s[1]).exponent;
+						});
 
 						shade = rootShades.every(v => v === "G") ? "G" : "B";
 						exponent = Math.floor(GetAverage(rootExponents) / 2);
