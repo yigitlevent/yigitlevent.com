@@ -23,4 +23,5 @@ interface RulesetData {
 	racActions: RaCAction[];
 	fightActions: FightAction[];
 	practices: Practice[];
+	questions: Question[]
 }

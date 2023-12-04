@@ -1,7 +1,7 @@
 import { PgPool } from "../index";
 
 
-export async function GetLifepaths(): Promise<Lifepath[]> {
+export async function GetLifepaths(rulesets: RulesetId[]): Promise<Lifepath[]> {
 	const convert = (l: LifepathDBO[], lr: LifepathRequirementBlockDBO[], lri: LifepathRequirementBlockItemDBO[]): Lifepath[] => {
 		const r: Lifepath[] = l.map(v => {
 			const lp: Lifepath = {
@@ -114,7 +114,7 @@ export async function GetLifepaths(): Promise<Lifepath[]> {
 		return r;
 	};
 
-	const query1 = "select * from bwgr.\"LifepathsList\";";
+	const query1 = `select * from bwgr."LifepathsList" where "Rulesets"::text[] && ARRAY['${rulesets.join("','")}'];`;
 	const query2 = "select * from bwgr.\"LifepathRequirementBlocks\";";
 	const query3 = "select * from bwgr.\"LifepathRequirementBlockItems\";";
 	return Promise.all([

@@ -46,6 +46,7 @@ interface RulesetStore {
 	readonly fightActions: FightAction[];
 
 	readonly practices: Practice[];
+	readonly questions: Question[];
 
 	setFetchState: (fetchState: FetchState) => void;
 	fetchList: () => void;
@@ -102,6 +103,7 @@ export const useRulesetStore = create<RulesetStore>()(
 			fightActions: [],
 
 			practices: [],
+			questions: [],
 
 			spellFacets: {
 				origins: [],
@@ -138,6 +140,7 @@ export const useRulesetStore = create<RulesetStore>()(
 				fetching("fetching-data");
 
 				const rulesets = get().chosenRulesets;
+
 				GenericPost<RulesetResponse>("/bwgr/ruleset/data", { rulesets })
 					.then(response => {
 						if (response.status === 200) {
@@ -207,6 +210,7 @@ export const useRulesetStore = create<RulesetStore>()(
 								state.fightActions = response.data.ruleset.fightActions;
 
 								state.practices = response.data.ruleset.practices;
+								state.questions = response.data.ruleset.questions;
 							}));
 
 							fetching("done");

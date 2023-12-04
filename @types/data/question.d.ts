@@ -4,6 +4,7 @@ interface Question {
 	id: QuestionId;
 	name: string;
 	question: string;
+	attributes?: [id: AbilityId, name: string][];
 }
 
 

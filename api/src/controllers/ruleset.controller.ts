@@ -5,6 +5,7 @@ import { GetDoWActions } from "../services/dowActions.service";
 import { GetFightActions } from "../services/fightActions.service";
 import { GetLifepaths } from "../services/lifepaths.service";
 import { GetPractices } from "../services/practices.service";
+import { GetQuestions } from "../services/questions.service";
 import { GetRaCActions } from "../services/racActions.service";
 import { GetResources } from "../services/resources.service";
 import { GetRulesets } from "../services/rulesets.service";
@@ -23,16 +24,17 @@ export async function GetRulesetsData(request: Request<unknown, unknown, Ruleset
 		const stocks = await GetStocks(rulesets);
 		const settings = await GetSettings(rulesets);
 		const skills = await GetSkills(rulesets);
-		const traits = await GetTraits();
-		const lifepaths = await GetLifepaths();
-		const resources = await GetResources();
+		const traits = await GetTraits(rulesets);
+		const lifepaths = await GetLifepaths(rulesets);
+		const resources = await GetResources(rulesets);
 		const spellFacets = await GetSpellFacets();
 		const dowActions = await GetDoWActions();
 		const racActions = await GetRaCActions();
 		const fightActions = await GetFightActions();
 		const practices = await GetPractices();
+		const questions = await GetQuestions();
 
-		const responseData: RulesetResponse = { ruleset: { abilities, stocks, settings, skills, traits, lifepaths, resources, spellFacets, dowActions, racActions, fightActions, practices } };
+		const responseData: RulesetResponse = { ruleset: { abilities, stocks, settings, skills, traits, lifepaths, resources, spellFacets, dowActions, racActions, fightActions, practices, questions } };
 
 		response.status(200);
 		return response.json(responseData);

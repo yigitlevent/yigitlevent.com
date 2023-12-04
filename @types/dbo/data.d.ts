@@ -273,9 +273,9 @@ interface ActionResolutionDBO<T> {
 	OpposingAbility: string;
 }
 
-type DoWActionResolutionDBO = ActionResolutionDBO<DoWActionId>
-type RaCActionResolutionDBO = ActionResolutionDBO<RaCActionId>
-type FightActionResolutionDBO = ActionResolutionDBO<FightActionId>
+type DoWActionResolutionDBO = ActionResolutionDBO<DoWActionId>;
+type RaCActionResolutionDBO = ActionResolutionDBO<RaCActionId>;
+type FightActionResolutionDBO = ActionResolutionDBO<FightActionId>;
 
 interface PracticeDBO {
 	Id: PracticeId;
@@ -289,8 +289,12 @@ interface PracticeDBO {
 	Challenging: number;
 }
 
-interface QuestionDTO {
+interface QuestionDBO {
 	Id: QuestionId;
 	Name: string;
 	Question: string;
+	AttributeId1: AbilityId | null;
+	AttributeName1: string | null;
+	AttributeId2: AbilityId | null;
+	AttributeName2: string | null;
 }

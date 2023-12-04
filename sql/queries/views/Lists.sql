@@ -598,3 +598,24 @@ CREATE OR REPLACE VIEW bwgr."PracticeList" AS
 
 ALTER TABLE bwgr."PracticeList"
     OWNER TO apiuser;
+
+
+-- View: bwgr."QuestionList"
+
+-- DROP VIEW bwgr."QuestionList";
+
+CREATE OR REPLACE VIEW bwgr."QuestionList" AS
+ SELECT
+    a."Id",
+    a."Name",
+    a."Question",
+    a."AttributeId1",
+    att1."Name" as "AttributeName1",
+    a."AttributeId2",
+    att2."Name" as "AttributeName2"
+   FROM bwgr."Questions" a
+     LEFT JOIN bwgr."Abilities" att1 ON att1."Id" = a."AttributeId1"
+     LEFT JOIN bwgr."Abilities" att2 ON att2."Id" = a."AttributeId2";
+
+ALTER TABLE bwgr."QuestionList"
+    OWNER TO apiuser;
