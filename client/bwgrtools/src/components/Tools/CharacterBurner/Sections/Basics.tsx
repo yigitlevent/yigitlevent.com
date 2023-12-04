@@ -2,7 +2,7 @@ import Autocomplete from "@mui/material/Autocomplete";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 
 import { useRulesetStore } from "../../../../hooks/apiStores/useRulesetStore";
 import { useCharacterBurnerBasicsStore } from "../../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerBasics";
@@ -67,15 +67,15 @@ export function Basics({ openModal }: { openModal: (name: CharacterBurnerModals)
 			</Grid>
 
 			<Grid item xs={6} sm={1} md={1}>
-				<Button variant="outlined" size="medium" onClick={() => openModal("lp")} fullWidth>Select Lifepaths</Button>
+				<Button variant="outlined" size="medium" onClick={() => openModal("lp")} fullWidth>Select</Button>
 			</Grid>
 
 			<Grid item xs={6} sm={1} md={1}>
-				<Button variant="outlined" size="medium" onClick={() => openModal("randLp")} fullWidth>Random Lifepaths</Button>
+				<Button variant="outlined" size="medium" onClick={() => openModal("randLp")} fullWidth>Randomize</Button>
 			</Grid>
 
 			<Grid item xs={6} sm={2} md={2}>
-				<Button variant="outlined" size="medium" onClick={() => openModal("qu")} fullWidth>Questions</Button>
+				<Button variant="outlined" size="medium" onClick={() => openModal("qu")} disabled={lifepaths.length === 0} fullWidth>Questions</Button>
 			</Grid>
 		</GenericGrid>
 	);
