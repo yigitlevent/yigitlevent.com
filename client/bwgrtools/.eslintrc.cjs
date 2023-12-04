@@ -66,6 +66,7 @@ module.exports = {
 		"no-empty": "off",
 		"no-empty-function": "off",
 		"no-unused-vars": "off",
+		"no-cond-assign": "error",
 		"comma-dangle": "off",
 		"no-multi-spaces": ["error"],
 		"no-multiple-empty-lines": "error",
