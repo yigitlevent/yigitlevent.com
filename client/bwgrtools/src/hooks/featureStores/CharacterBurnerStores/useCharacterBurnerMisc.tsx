@@ -2,10 +2,12 @@ import { produce } from "immer";
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 
+import { useCharacterBurnerAttributeStore } from "./useCharacterBurnerAttribute";
 import { useCharacterBurnerBasicsStore } from "./useCharacterBurnerBasics";
 import { useCharacterBurnerStatStore } from "./useCharacterBurnerStat";
 import { useCharacterBurnerTraitStore } from "./useCharacterBurnerTrait";
 import { GetAverage } from "../../../utils/misc";
+import { useRulesetStore } from "../../apiStores/useRulesetStore";
 
 
 export type CharacterBurnerMiscState = {
@@ -14,8 +16,10 @@ export type CharacterBurnerMiscState = {
 	limits: CharacterStockLimits;
 	traitEffects: CharacterTraitEffect[];
 
-	reset: () => void,
+	reset: () => void;
 
+	switchQuestion: (id: QuestionId) => void;
+	refreshQuestions: () => void;
 	hasQuestionTrue: (id: QuestionId) => boolean;
 	hasQuestionTrueByName: (name: string) => boolean;
 
@@ -85,6 +89,36 @@ export const useCharacterBurnerMiscStore = create<CharacterBurnerMiscState>()(
 				}));
 
 				get().refreshTraitEffects();
+			},
+
+			switchQuestion: (id: QuestionId): void => {
+				get().questions.some(v => v.id === id && v.answer);
+			},
+
+			refreshQuestions: () => {
+				const ruleset = useRulesetStore.getState();
+				const { hasAttribute } = useCharacterBurnerAttributeStore.getState();
+				const { questions } = get();
+
+				const newQuestions: CharacterQuestion[]
+					= ruleset.questions
+						.filter(v => {
+							if (v.attributes && (hasAttribute(v.attributes[0][0]) || hasAttribute(v.attributes[1][0]))) return true;
+							return true;
+						})
+						.map(question => {
+							const idx = questions.findIndex(v => v.id = question.id);
+							return {
+								id: question.id,
+								name: question.name,
+								question: question.question,
+								answer: (idx > -1) ? questions[idx].answer : false
+							};
+						});
+
+				set(produce<CharacterBurnerMiscState>((state) => {
+					state.questions = newQuestions;
+				}));
 			},
 
 			hasQuestionTrue: (id: QuestionId): boolean => {

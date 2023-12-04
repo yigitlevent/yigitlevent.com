@@ -19,6 +19,7 @@ import { useCharacterBurnerTraitStore } from "../../../hooks/featureStores/Chara
 import { GeneralSkillModal } from "./Modals/GeneralSkillModal";
 import { GeneralTraitModal } from "./Modals/GeneralTraitModal";
 import { RandomLifepathsModal } from "./Modals/RandomLifepathsModal";
+import { QuestionsModal } from "./Modals/QuestionsModal";
 
 
 export function CharacterBurner(): JSX.Element {
@@ -60,6 +61,7 @@ export function CharacterBurner(): JSX.Element {
 			<ResourceSelectionModal isOpen={currentModal === "re"} close={closeModals} />
 			<GeneralSkillModal isOpen={currentModal === "geSk"} close={closeModals} />
 			<GeneralTraitModal isOpen={currentModal === "geTr"} close={closeModals} />
+			<QuestionsModal isOpen={currentModal === "qu"} close={closeModals} />
 
 			{/* TODO
 				<AnswerQuestions />

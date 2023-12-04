@@ -4,27 +4,25 @@ import Modal from "@mui/material/Modal";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 
-import { useCharacterBurnerStoreOld } from "../../../../hooks/oldStores/useCharacterBurnerStoreOld";
+import { useCharacterBurnerMiscStore } from "../../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerMisc";
 import { GenericGrid } from "../../../Shared/Grids";
 
 
-export function QuestionModal({ openQu, openQuModal }: { openQu: boolean; openQuModal: (open: boolean) => void; }) {
-	const { questions, switchAnswer } = useCharacterBurnerStoreOld();
+export function QuestionsModal({ isOpen, close }: { isOpen: boolean; close: () => void; }): JSX.Element {
+	const { questions, switchQuestion, hasQuestionTrue } = useCharacterBurnerMiscStore();
 
 	return (
-		<Modal open={openQu} onClose={() => openQuModal(false)}>
+		<Modal open={isOpen} onClose={() => close()}>
 			<Paper sx={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", maxWidth: "800px", width: "100%", padding: "0 24px 24px", border: "none", overflow: "auto" }}>
 				<GenericGrid columns={1} spacing={[2, 2]} center>
-					{Object.keys(questions)
+					{questions
 						.map((v, i) => {
-							const qkey = v as AttributeQuestionsKeys;
-							const question = AttributeQuestions[qkey].text;
-							const isTrue = questions[qkey];
 							return (
 								<Grid key={i} item xs={1}>
-									<Checkbox checked={isTrue} onChange={() => switchAnswer(qkey)} sx={{ margin: "0 0 3px", padding: 0, display: "inline-block", height: "24px" }} />
+									<Checkbox checked={hasQuestionTrue(v.id)} onChange={() => switchQuestion(v.id)} sx={{ margin: "0 0 3px", padding: 0, display: "inline-block", height: "24px" }} />
+
 									<Typography sx={{ display: "inline", margin: "6px 0 0 8px" }}>
-										{question}
+										{v.question}
 									</Typography>
 								</Grid>
 							);

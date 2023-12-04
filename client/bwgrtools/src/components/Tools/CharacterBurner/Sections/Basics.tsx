@@ -73,6 +73,10 @@ export function Basics({ openModal }: { openModal: (name: CharacterBurnerModals)
 			<Grid item xs={6} sm={1} md={1}>
 				<Button variant="outlined" size="medium" onClick={() => openModal("randLp")} fullWidth>Random Lifepaths</Button>
 			</Grid>
+
+			<Grid item xs={6} sm={2} md={2}>
+				<Button variant="outlined" size="medium" onClick={() => openModal("qu")} fullWidth>Questions</Button>
+			</Grid>
 		</GenericGrid>
 	);
 }
