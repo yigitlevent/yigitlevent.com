@@ -29,20 +29,36 @@ export function FilterLifepaths({ rulesetLifepaths, stock, age, lifepaths, gende
 			else if ("maxLpIndex" in item) return lifepaths.length <= item.maxLpIndex;
 			else if ("minYears" in item) return age >= item.minYears;
 			else if ("maxYears" in item) return age <= item.maxYears;
-			else if (gender && "gender" in item) return item.gender === gender;
+			else if ("gender" in item) {
+				if (gender) return item.gender === gender;
+				else return true;
+			}
 			else if ("oldestBy" in item) return true; // TODO: Implementable only by having the campaign 
-			else if (hasAttribute && attributes && "attribute" in item) {
+			else if (attributes && "attribute" in item) {
 				const exp = attributes.find(item.attribute[0])?.exponent;
 				if (item.min) return exp ? exp >= item.min : false;
 				else if (item.max) return exp ? exp <= item.max : false;
-				else return hasAttribute(item.attribute[0]);
+				else if (hasAttribute) return hasAttribute(item.attribute[0]);
+				else return true;
 			}
-			else if (hasSkillOpen && "skill" in item) return hasSkillOpen(item.skill[0]);
-			else if (hasTraitOpen && "trait" in item) return hasTraitOpen(item.trait[0]);
+			else if ("skill" in item) {
+				if (hasSkillOpen) return hasSkillOpen(item.skill[0]);
+				else return true;
+			}
+			else if ("trait" in item) {
+				if (hasTraitOpen) return hasTraitOpen(item.trait[0]);
+				else return true;
+			}
 			else if ("lifepath" in item) return checkLifepath(item.lifepath[0]) >= block.fulfillmentAmount;
-			else if (hasSetting && "setting" in item) return hasSetting(item.setting[0]) >= block.fulfillmentAmount;
-			else if (hasQuestionTrue && "question" in item) return hasQuestionTrue(item.question[0]);
-			else throw new Error(`Unidentified requirement block item: ${item}`);
+			else if ("setting" in item) {
+				if (hasSetting) return hasSetting(item.setting[0]) >= block.fulfillmentAmount;
+				else return true;
+			}
+			else if ("question" in item) {
+				if (hasQuestionTrue) return hasQuestionTrue(item.question[0]);
+				else return true;
+			}
+			else throw new Error(`Unidentified requirement block item: ${item.logicType}`);
 		});
 
 		if (block.logicType[1] === "OR") return itemResults.some(v => v === true);
@@ -53,9 +69,7 @@ export function FilterLifepaths({ rulesetLifepaths, stock, age, lifepaths, gende
 
 	let possibleLifepaths: Lifepath[] = [];
 
-	if (lifepaths.length === 0) {
-		possibleLifepaths = rulesetLifepaths.filter(lp => lp.flags.isBorn && stock[0] === lp.stock[0]);
-	}
+	if (lifepaths.length === 0) possibleLifepaths = rulesetLifepaths.filter(lp => lp.flags.isBorn && stock[0] === lp.stock[0]);
 	else {
 		const lastLifepath = lifepaths[lifepaths.length - 1];
 		const possibleSettingIds = lastLifepath.leads ? [lastLifepath.setting[0], ...lastLifepath.leads] : [lastLifepath.setting[0]];
@@ -75,7 +89,7 @@ export function FilterLifepaths({ rulesetLifepaths, stock, age, lifepaths, gende
 				});
 	}
 
-	if (noLeads) possibleLifepaths = possibleLifepaths.filter(lp => lp.setting[0] = noLeads[0]);
+	if (noLeads) possibleLifepaths = possibleLifepaths.filter(lp => lp.setting[0] === noLeads[0]);
 
 	return possibleLifepaths;
 }
