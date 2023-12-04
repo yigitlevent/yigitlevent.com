@@ -61,7 +61,7 @@ function processBWGR() {
 		(refs: References) => processFight(refs),
 		() => processMagic(),
 		(refs: References) => processResources(refs),
-		() => processQuestions()
+		(refs: References) => processQuestions(refs)
 	];
 
 	processor(process, "data_bwgr");
