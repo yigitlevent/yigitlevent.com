@@ -10,7 +10,7 @@ export type CharacterBurnerResourceState = {
 
 	reset: () => void;
 
-	getResourcePoints: () => number;
+	getResourcePoints: (lifepaths?: Lifepath[]) => number;
 	getSpending: () => number;
 
 	addResource: (resource: CharacterResource) => void;
@@ -29,10 +29,11 @@ export const useCharacterBurnerResourceStore = create<CharacterBurnerResourceSta
 				}));
 			},
 
-			getResourcePoints: (): number => {
+			getResourcePoints: (lifepaths?: Lifepath[]): number => {
 				const state = useCharacterBurnerLifepathStore.getState();
-				if (state.lifepaths.length === 0) return 0;
-				const rps = state.lifepaths.map(v => v.pools.resourcePoints).reduce((pv, cv) => pv + cv, 0);
+				const lps = lifepaths || state.lifepaths;
+				if (lps.length === 0) return 0;
+				const rps = lps.map(v => v.pools.resourcePoints).reduce((pv, cv) => pv + cv, 0);
 				// TODO: Special lifepaths should matter here
 				return rps;
 			},

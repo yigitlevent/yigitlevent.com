@@ -7,26 +7,28 @@ import { useCharacterBurnerSkillStore } from "../../../../../hooks/featureStores
 import { useCharacterBurnerTraitStore } from "../../../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerTrait";
 
 
-export function RandomLifepathsBasics(): JSX.Element {
+export function RandomLifepathsBasics({ chosenLifepaths }: { chosenLifepaths: Lifepath[]; }): JSX.Element {
 	const { getAge, getMentalPool, getPhysicalPool, getEitherPool } = useCharacterBurnerLifepathStore();
 	const { getResourcePoints } = useCharacterBurnerResourceStore();
 	const { getSkillPools } = useCharacterBurnerSkillStore();
 	const { getTraitPools } = useCharacterBurnerTraitStore();
 
-	const mentalPool = getMentalPool();
-	const physicalPool = getPhysicalPool();
-	const eitherPool = getEitherPool();
-	const skillPools = getSkillPools();
-	const traitPools = getTraitPools();
+	const age = getAge(chosenLifepaths);
+	const resourcePoints = getResourcePoints(chosenLifepaths);
+	const mentalPool = getMentalPool(chosenLifepaths);
+	const physicalPool = getPhysicalPool(chosenLifepaths);
+	const eitherPool = getEitherPool(chosenLifepaths);
+	const skillPools = getSkillPools(chosenLifepaths);
+	const traitPools = getTraitPools(chosenLifepaths);
 
 	return (
 		<Grid container columns={2}>
 			<Grid item xs={1}>
-				<Typography variant="caption">Years: {getAge()}</Typography>
+				<Typography variant="caption">Years: {age}</Typography>
 			</Grid>
 
 			<Grid item xs={1}>
-				<Typography variant="caption">Resources: {getResourcePoints()}</Typography>
+				<Typography variant="caption">Resources: {resourcePoints}</Typography>
 			</Grid>
 
 			<Grid item xs={1}>

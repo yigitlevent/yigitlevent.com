@@ -19,7 +19,7 @@ export type CharacterBurnerSkillState = {
 	addGeneralSkill: (skill: Skill) => void;
 	removeGeneralSkill: (skillId: SkillId) => void;
 
-	getSkillPools: () => { general: Points; lifepath: Points; };
+	getSkillPools: (lifepaths?: Lifepath[]) => { general: Points; lifepath: Points; };
 	getSkill: (skillId: SkillId) => AbilityPoints;
 
 	hasSkillOpen: (id: SkillId) => boolean;
@@ -105,12 +105,12 @@ export const useCharacterBurnerSkillStore = create<CharacterBurnerSkillState>()(
 				}));
 			},
 
-			getSkillPools: (): { general: Points; lifepath: Points; } => {
+			getSkillPools: (lifepaths?: Lifepath[]): { general: Points; lifepath: Points; } => {
 				const state = get();
-				const { lifepaths } = useCharacterBurnerLifepathStore.getState();
+				const lps = lifepaths || useCharacterBurnerLifepathStore.getState().lifepaths;
 
-				const gpTotal = lifepaths.reduce((pv, cv) => pv + cv.pools.generalSkillPool, 0);
-				const lpTotal = lifepaths.reduce((pv, cv) => pv + cv.pools.lifepathSkillPool, 0);
+				const gpTotal = lps.reduce((pv, cv) => pv + cv.pools.generalSkillPool, 0);
+				const lpTotal = lps.reduce((pv, cv) => pv + cv.pools.lifepathSkillPool, 0);
 
 				let gpRemaining = gpTotal;
 				let lpRemaining = lpTotal;

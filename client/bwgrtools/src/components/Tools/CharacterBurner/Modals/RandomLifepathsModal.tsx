@@ -47,17 +47,11 @@ export function RandomLifepathsModal({ isOpen, close }: { isOpen: boolean; close
 		let chosenAmount = 0;
 		const lpAmount = RandomNumber(minLifepaths - 1, maxLifepaths - 1);
 
-		const chosenStock
-			= (stock === "Random")
-				? ruleset.stocks[ruleset.stocks[RandomNumber(0, ruleset.stocks.length - 1)].id]
-				: ruleset.stocks[stock];
+		const chosenStock = ruleset.stocks.find(v => v.id === stock) || ruleset.stocks[RandomNumber(0, ruleset.stocks.length - 1)];
 		setNewStock(chosenStock);
 
 		const possibleSettings = ruleset.settings.filter(setting => chosenStock.settingIds.includes(setting.id) && !setting.isSubsetting);
-		const chosenSetting
-			= (setting === "Random")
-				? possibleSettings[possibleSettings[RandomNumber(0, possibleSettings.length - 1)].id]
-				: ruleset.settings[setting];
+		const chosenSetting = ruleset.settings[ruleset.settings.findIndex(v => v.id === setting)] || possibleSettings[RandomNumber(0, possibleSettings.length - 1)];
 
 		const bornLPs = ruleset.lifepaths.filter(v => v.stock[0] === chosenStock.id && v.setting[0] === chosenSetting.id && v.flags.isBorn);
 		tempChosenLifepaths.push(bornLPs[RandomNumber(0, bornLPs.length - 1)]);
@@ -118,7 +112,7 @@ export function RandomLifepathsModal({ isOpen, close }: { isOpen: boolean; close
 
 							<Select label="Stock" value={stock} onChange={e => changeStock(e.target.value as StockId | "Random")}>
 								<MenuItem key={"Random"} value={"Random"}>Random</MenuItem>
-								{ruleset.stocks.map(v => { return <MenuItem key={v.name} value={v.name}>{v.name}</MenuItem>; })}
+								{ruleset.stocks.map(v => { return <MenuItem key={v.name} value={v.id}>{v.name}</MenuItem>; })}
 							</Select>
 						</FormControl>
 					</Grid>
@@ -188,7 +182,7 @@ export function RandomLifepathsModal({ isOpen, close }: { isOpen: boolean; close
 
 							<Stack spacing={2}>
 								{chosenLifepaths.map((v, i) =>
-									<Paper key={i}>{i + 1}. {`${v.stock}➞${v.setting}➞${v.name}`}</Paper>
+									<Paper key={i}>{i + 1}. {`${v.setting[1]}➞${v.name}`}</Paper>
 								)}
 							</Stack>
 
@@ -196,7 +190,7 @@ export function RandomLifepathsModal({ isOpen, close }: { isOpen: boolean; close
 								<Typography>Basic Information</Typography>
 							</Divider>
 
-							<RandomLifepathsBasics />
+							<RandomLifepathsBasics chosenLifepaths={chosenLifepaths} />
 						</Grid>
 
 						<Grid item xs={2} md={1}>

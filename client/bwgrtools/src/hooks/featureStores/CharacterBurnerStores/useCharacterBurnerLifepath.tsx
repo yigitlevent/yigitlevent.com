@@ -28,11 +28,11 @@ export type CharacterBurnerLifepathState = {
 	hasSettingByName: (name: string) => number;
 
 	getLeadCount: () => number;
-	getAge: () => number;
+	getAge: (lifepaths?: Lifepath[]) => number;
 
-	getMentalPool: () => Points;
-	getPhysicalPool: () => Points;
-	getEitherPool: () => Points;
+	getMentalPool: (lifepaths?: Lifepath[]) => Points;
+	getPhysicalPool: (lifepaths?: Lifepath[]) => Points;
+	getEitherPool: (lifepaths?: Lifepath[]) => Points;
 
 	updateAvailableLifepaths: () => Lifepath[];
 };
@@ -92,25 +92,25 @@ export const useCharacterBurnerLifepathStore = create<CharacterBurnerLifepathSta
 				return Pairwise(state.lifepaths).reduce((pv, cv) => cv[0].setting[0] !== cv[1].setting[0] ? pv + 1 : pv, 0);
 			},
 
-			getAge: (): number => {
+			getAge: (lifepaths?: Lifepath[]): number => {
 				const state = get();
-				if (state.lifepaths.length === 0) return 0;
-				const yrs = state.lifepaths.map(v => v.years).filter(v => typeof v === "number") as number[];
-				const sum = yrs.reduce((prev, curr) => prev + curr);
+				const lps = (lifepaths || state.lifepaths);
+
+				if (lps.length === 0) return 0;
+
 				// TODO: Special lifepaths should matter here
+				const yrs = lps.map(v => v.years).filter(v => typeof v === "number") as number[];
+				const sum = yrs.reduce((prev, curr) => prev + curr);
 				return sum + get().getLeadCount();
 			},
 
-			getMentalPool: (): Points => {
-				const { lifepaths } = get();
+			getMentalPool: (lifepaths?: Lifepath[]): Points => {
+				const lps = lifepaths || get().lifepaths;
 				const { getAgePool } = useCharacterBurnerBasicsStore.getState();
 				const { stats } = useCharacterBurnerStatStore.getState();
 
 				const stockAgePool = getAgePool().mentalPool;
-				const lifepathPool
-					= lifepaths.length > 0
-						? lifepaths.map(lp => lp.pools.mentalStatPool).reduce((pv, cv) => pv + cv)
-						: 0;
+				const lifepathPool = lps.length > 0 ? lps.map(lp => lp.pools.mentalStatPool).reduce((pv, cv) => pv + cv) : 0;
 				const total = stockAgePool + lifepathPool;
 
 				const spent
@@ -122,13 +122,13 @@ export const useCharacterBurnerLifepathStore = create<CharacterBurnerLifepathSta
 				return { total: total, spent, remaining: total - spent };
 			},
 
-			getPhysicalPool: (): Points => {
-				const { lifepaths } = get();
+			getPhysicalPool: (lifepaths?: Lifepath[]): Points => {
+				const lps = lifepaths || get().lifepaths;
 				const { getAgePool } = useCharacterBurnerBasicsStore.getState();
 				const { stats } = useCharacterBurnerStatStore.getState();
 
 				const stockAgePool = getAgePool().physicalPool;
-				const lifepathPool = lifepaths.length > 0 ? lifepaths.map(lp => lp.pools.physicalStatPool).reduce((pv, cv) => pv + cv) : 0;
+				const lifepathPool = lps.length > 0 ? lps.map(lp => lp.pools.physicalStatPool).reduce((pv, cv) => pv + cv) : 0;
 				const total = stockAgePool + lifepathPool;
 
 				const spent
@@ -140,11 +140,11 @@ export const useCharacterBurnerLifepathStore = create<CharacterBurnerLifepathSta
 				return { total: total, spent, remaining: total - spent };
 			},
 
-			getEitherPool: (): Points => {
-				const { lifepaths } = get();
+			getEitherPool: (lifepaths?: Lifepath[]): Points => {
+				const lps = lifepaths || get().lifepaths;
 				const { stats } = useCharacterBurnerStatStore.getState();
 
-				const total = lifepaths.length > 0 ? lifepaths.map(lp => lp.pools.eitherStatPool).reduce((pv, cv) => pv + cv) : 0;
+				const total = lps.length > 0 ? lps.map(lp => lp.pools.eitherStatPool).reduce((pv, cv) => pv + cv) : 0;
 				const spent
 					= Object.values(stats)
 						.map((v): number => v.eitherPoolSpent.shade + v.eitherPoolSpent.exponent)

@@ -22,7 +22,7 @@ interface LifepathRandomizerState {
 
 export const useLifepathRandomizerStore = create<LifepathRandomizerState>()(
 	devtools(
-		(set) => ({
+		(set, get) => ({
 			stock: "Random",
 			setting: "Random",
 			noDuplicates: true,
@@ -36,17 +36,17 @@ export const useLifepathRandomizerStore = create<LifepathRandomizerState>()(
 
 			changeMaxLeads: (value: string) => {
 				set(produce<LifepathRandomizerState>((state) => {
-					state.maxLeads = Clamp(value === "" ? 0 : parseInt(value), 0, 10);
+					state.maxLeads = Clamp(value === "" ? 0 : parseInt(value), 0, 20);
 				}));
 			},
 			changeMaxLifepaths: (value: string) => {
 				set(produce<LifepathRandomizerState>((state) => {
-					state.maxLifepaths = Clamp(value === "" ? 0 : parseInt(value), 0, 10);
+					state.maxLifepaths = Clamp(value === "" ? 0 : parseInt(value), 0, 20);
 				}));
 			},
 			changeMinLifepaths: (value: string) => {
 				set(produce<LifepathRandomizerState>((state) => {
-					state.minLifepaths = Clamp(value === "" ? 0 : parseInt(value), 0, 10);
+					state.minLifepaths = Clamp(value === "" ? 0 : parseInt(value), 0, get().maxLifepaths);
 				}));
 			},
 			toggleNoDuplicates: () => {

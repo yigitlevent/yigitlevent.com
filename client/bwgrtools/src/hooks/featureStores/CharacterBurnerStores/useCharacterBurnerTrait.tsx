@@ -18,7 +18,7 @@ export type CharacterBurnerTraitState = {
 	addGeneralTrait: (trait: Trait) => void;
 	removeGeneralTrait: (traitId: TraitId) => void;
 
-	getTraitPools: () => Points;
+	getTraitPools: (lifepaths?: Lifepath[]) => Points;
 	getTrait: (traitId: TraitId) => { open: boolean; };
 
 	hasTraitOpen: (id: TraitId) => boolean;
@@ -65,12 +65,12 @@ export const useCharacterBurnerTraitStore = create<CharacterBurnerTraitState>()(
 				}));
 			},
 
-			getTraitPools: (): Points => {
+			getTraitPools: (lifepaths?: Lifepath[]): Points => {
 				const { getTrait } = useRulesetStore.getState();
-				const { lifepaths } = useCharacterBurnerLifepathStore.getState();
+				const lps = lifepaths || useCharacterBurnerLifepathStore.getState().lifepaths;
 				const state = get();
 
-				const tTotal = lifepaths.reduce((pv, cv) => pv + cv.pools.traitPool, 0);
+				const tTotal = lps.reduce((pv, cv) => pv + cv.pools.traitPool, 0);
 				let tSpent = 0;
 
 				state.traits.forEach(trait => {
