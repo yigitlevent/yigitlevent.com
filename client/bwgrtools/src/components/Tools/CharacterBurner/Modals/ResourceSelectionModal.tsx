@@ -33,7 +33,7 @@ interface SelectedCost {
 	};
 }
 
-export function ResourceSelection({ isOpen, close }: { isOpen: boolean; close: () => void; }): JSX.Element {
+export function ResourceSelectionModal({ isOpen, close }: { isOpen: boolean; close: () => void; }): JSX.Element {
 	const { stock } = useCharacterBurnerBasicsStore();
 	const ruleset = useRulesetStore();
 	const { getResourcePoints, getSpending, addResource } = useCharacterBurnerResourceStore();

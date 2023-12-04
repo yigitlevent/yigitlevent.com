@@ -14,7 +14,7 @@ import { useRulesetStore } from "../../apiStores/useRulesetStore";
 export type CharacterBurnerBasicsState = {
 	name: string;
 	concept: string;
-	gender: string;
+	gender: "Male" | "Female";
 	stock: [id: StockId, name: string];
 
 	beliefs: { name: string, belief: string; }[];
@@ -22,7 +22,7 @@ export type CharacterBurnerBasicsState = {
 
 	setName: (name: string) => void;
 	setConcept: (concept: string) => void;
-	setGender: (gender: string) => void;
+	setGender: (gender: "Male" | "Female") => void;
 
 	setStockAndReset: (stock?: [id: StockId, name: string]) => void;
 
@@ -91,7 +91,7 @@ export const useCharacterBurnerBasicsStore = create<CharacterBurnerBasicsState>(
 				set({ concept });
 			},
 
-			setGender: (gender: string): void => {
+			setGender: (gender: "Male" | "Female"): void => {
 				set({ gender });
 			},
 

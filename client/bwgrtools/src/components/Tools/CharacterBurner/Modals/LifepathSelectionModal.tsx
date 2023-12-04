@@ -12,7 +12,7 @@ import { LifepathBox } from "../../LifepathLists/LifepathBox";
 
 
 // TODO: random lifepath selection: "Choose Lifepaths" or "Random Lifepaths"
-export function LifepathSelection({ isOpen, close }: { isOpen: boolean; close: () => void; }): JSX.Element {
+export function LifepathSelectionModal({ isOpen, close }: { isOpen: boolean; close: () => void; }): JSX.Element {
 	const { availableLifepaths, lifepaths, addLifepath, removeLastLifepath } = useCharacterBurnerLifepathStore();
 
 	const [disabled, setDisabled] = useState(false);

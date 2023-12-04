@@ -44,7 +44,7 @@ export function Basics({ openModal }: { openModal: (name: CharacterBurnerModals)
 					value={gender}
 					options={["Male", "Female"]}
 					renderInput={(params) => <TextField {...params} label="Gender" variant="standard" fullWidth />}
-					onChange={(_, v) => setGender(v)}
+					onChange={(_, v) => setGender(v as "Male" | "Female")}
 					fullWidth
 					disableClearable
 				/>
