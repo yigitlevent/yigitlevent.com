@@ -57,7 +57,7 @@ export async function UserSignIn(request: Request<unknown, unknown, UserSigninRe
 
 export async function UserSignOut(request: Request, response: Response): Promise<Response<unknown, Record<string, unknown>>> {
 	try {
-		request.session.destroy(() => { /* console.log("session destroyed") */ });
+		request.session.destroy(() => { /* console.warning("session destroyed") */ });
 		response.clearCookie("connect.sid");
 		return response.sendStatus(200);
 	}

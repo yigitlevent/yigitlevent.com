@@ -74,4 +74,4 @@ DELETE /campaign -- delete a campaign
 DELETE /campaign/journal -- delete a campaign journal entry
 */
 
-App.listen(PORT, () => console.log(`App started on port ${PORT}`));
+App.listen(PORT, () => console.info(`App started on port ${PORT}`));

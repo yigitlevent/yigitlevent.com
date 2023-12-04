@@ -13,7 +13,7 @@ export const PgConfig: PoolConfig = {
 	idleTimeoutMillis: 0,
 	connectionTimeoutMillis: 0,
 	ssl: { rejectUnauthorized: !IsDev }
-	//log: (messages) => console.log(messages)
+	//log: (messages) => console.debug(messages)
 };
 
 declare module "express-session" {

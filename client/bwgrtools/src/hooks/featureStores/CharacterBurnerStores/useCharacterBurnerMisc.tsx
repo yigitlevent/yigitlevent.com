@@ -125,8 +125,6 @@ export const useCharacterBurnerMiscStore = create<CharacterBurnerMiscState>()(
 							};
 						});
 
-				console.log({ newQuestions });
-
 				set(produce<CharacterBurnerMiscState>((state) => {
 					state.questions = newQuestions;
 				}));
