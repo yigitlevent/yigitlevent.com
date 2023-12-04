@@ -3,6 +3,7 @@ import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 
 import { useCharacterBurnerMiscStore } from "./useCharacterBurnerMisc";
+import { FilterLifepaths } from "../../../utils/filterLifepaths";
 import { Pairwise } from "../../../utils/misc";
 import { useRulesetStore } from "../../apiStores/useRulesetStore";
 import { useCharacterBurnerAttributeStore } from "../CharacterBurnerStores/useCharacterBurnerAttribute";
@@ -152,8 +153,8 @@ export const useCharacterBurnerLifepathStore = create<CharacterBurnerLifepathSta
 				return { total, spent, remaining: total - spent };
 			},
 
-			updateAvailableLifepaths: (): Lifepath[] => {
-				const { lifepaths, hasLifepath, hasSetting, getAge } = get();
+			updateAvailableLifepaths: (onlyReturn?: boolean): Lifepath[] => {
+				const { lifepaths, hasSetting, getAge } = get();
 
 				const ruleset = useRulesetStore.getState();
 				const { gender, stock } = useCharacterBurnerBasicsStore.getState();
@@ -162,67 +163,24 @@ export const useCharacterBurnerLifepathStore = create<CharacterBurnerLifepathSta
 				const { hasTraitOpen } = useCharacterBurnerTraitStore.getState();
 				const { attributes, hasAttribute } = useCharacterBurnerAttributeStore.getState();
 
-				const checkRequirementBlock = (lifepath: Lifepath, block: LifepathRequirementBlock): boolean => {
-					const itemResults = block.items.map((item): boolean => {
-						// TODO: item.forCompanion
 
-						if ("isUnique" in item) return hasLifepath(lifepath.id) === 0;
-						else if ("isSettingEntry" in item) return true; // TODO: Check if any other lifepath from this setting chosen (true), else, other lifepaths should be disabled
-						else if ("minLpIndex" in item) return lifepaths.length >= item.minLpIndex;
-						else if ("maxLpIndex" in item) return lifepaths.length <= item.maxLpIndex;
-						else if ("minYears" in item) return getAge() >= item.minYears;
-						else if ("maxYears" in item) return getAge() <= item.maxYears;
-						else if ("gender" in item) return item.gender === gender;
-						else if ("oldestBy" in item) return true; // TODO: Implementable only by having the campaign 
-						else if ("attribute" in item) {
-							const exp = attributes.find(item.attribute[0])?.exponent;
-							if (item.min) return exp ? exp >= item.min : false;
-							else if (item.max) return exp ? exp <= item.max : false;
-							else return hasAttribute(item.attribute[0]);
-						}
-						else if ("skill" in item) return hasSkillOpen(item.skill[0]);
-						else if ("trait" in item) return hasTraitOpen(item.trait[0]);
-						else if ("lifepath" in item) return hasLifepath(item.lifepath[0]) >= block.fulfillmentAmount;
-						else if ("setting" in item) return hasSetting(item.setting[0]) >= block.fulfillmentAmount;
-						else if ("question" in item) return hasQuestionTrue(item.question[0]);
-						else throw new Error(`Unidentified requirement block item: ${item}`);
-					});
+				const possibleLifepaths: Lifepath[] = FilterLifepaths({
+					rulesetLifepaths: ruleset.lifepaths,
+					stock: stock,
+					age: getAge(),
+					gender: gender,
+					lifepaths: lifepaths,
+					attributes: attributes,
+					hasAttribute: hasAttribute,
+					hasSkillOpen: hasSkillOpen,
+					hasTraitOpen: hasTraitOpen,
+					hasSetting: hasSetting,
+					hasQuestionTrue: hasQuestionTrue
+				});
 
-					if (block.logicType[1] === "OR") return itemResults.some(v => v === true);
-					else if (block.logicType[1] === "AND") return itemResults.every(v => v === true);
-					else if (block.logicType[1] === "NOT") return !itemResults.every(v => v === false);
-					return false;
-				};
+				if (onlyReturn) return possibleLifepaths;
 
-				let possibleLifepaths: Lifepath[] = [];
-
-				if (lifepaths.length === 0) {
-					possibleLifepaths = ruleset.lifepaths.filter(lp => lp.flags.isBorn && stock[0] === lp.stock[0]);
-				}
-				else {
-					const lastLifepath = lifepaths[lifepaths.length - 1];
-					const possibleSettingIds = lastLifepath.leads ? [lastLifepath.setting[0], ...lastLifepath.leads] : [lastLifepath.setting[0]];
-
-					possibleLifepaths
-						= possibleSettingIds
-							.map(settingId => ruleset.lifepaths.filter(x => stock[0] === x.stock[0] && x.setting[0] === settingId && x.flags.isBorn === false))
-							.flat()
-							.filter(lifepath => {
-								if (lifepath.requirements) {
-									const blockResults = lifepath.requirements.map(block => ({ mustFulfill: block.mustFulfill, result: checkRequirementBlock(lifepath, block) }));
-									const musts = blockResults.every(v => v.mustFulfill && v.result);
-									const atLeastOne = blockResults.some(v => v.result);
-									return musts && atLeastOne;
-								}
-								return true;
-							});
-				}
-
-
-				set(produce<CharacterBurnerLifepathState>((state) => {
-					state.availableLifepaths = possibleLifepaths;
-				}));
-
+				set(produce<CharacterBurnerLifepathState>((state) => { state.availableLifepaths = possibleLifepaths; }));
 				return possibleLifepaths;
 			}
 		}),
