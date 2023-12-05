@@ -9,12 +9,12 @@ import { useCharacterBurnerTraitStore } from "../../../../../hooks/featureStores
 
 export function RandomLifepathsBasics({ chosenLifepaths }: { chosenLifepaths: Lifepath[]; }): JSX.Element {
 	const { getAge, getMentalPool, getPhysicalPool, getEitherPool } = useCharacterBurnerLifepathStore();
-	const { getResourcePoints } = useCharacterBurnerResourceStore();
+	const { getResourcePools } = useCharacterBurnerResourceStore();
 	const { getSkillPools } = useCharacterBurnerSkillStore();
 	const { getTraitPools } = useCharacterBurnerTraitStore();
 
 	const age = getAge(chosenLifepaths);
-	const resourcePoints = getResourcePoints(chosenLifepaths);
+	const resourcePoints = getResourcePools(chosenLifepaths);
 	const mentalPool = getMentalPool(chosenLifepaths);
 	const physicalPool = getPhysicalPool(chosenLifepaths);
 	const eitherPool = getEitherPool(chosenLifepaths);
@@ -28,7 +28,7 @@ export function RandomLifepathsBasics({ chosenLifepaths }: { chosenLifepaths: Li
 			</Grid>
 
 			<Grid item xs={1}>
-				<Typography variant="caption">Resources: {resourcePoints}</Typography>
+				<Typography variant="caption">Resources: {resourcePoints.total}</Typography>
 			</Grid>
 
 			<Grid item xs={1}>

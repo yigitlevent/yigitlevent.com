@@ -36,11 +36,9 @@ interface SelectedCost {
 export function ResourceSelectionModal({ isOpen, close }: { isOpen: boolean; close: () => void; }): JSX.Element {
 	const { stock } = useCharacterBurnerBasicsStore();
 	const ruleset = useRulesetStore();
-	const { getResourcePoints, getSpending, addResource } = useCharacterBurnerResourceStore();
+	const { getResourcePools, addResource } = useCharacterBurnerResourceStore();
 
-	const total = getResourcePoints();
-	const spending = getSpending();
-	const remaining = total - spending;
+	const resourcePool = getResourcePools();
 
 	const [resource, setResource] = useState<Resource>(ruleset.resources.filter(x => x.stock[0] === stock[0])[0] as Resource);
 	const [resourceDesc, setResourceDesc] = useState("");
@@ -113,7 +111,7 @@ export function ResourceSelectionModal({ isOpen, close }: { isOpen: boolean; clo
 			const modifiers = getModifiers(costs);
 			const totalCost = getTotalCost(modifiers);
 
-			if (totalCost !== undefined && totalCost <= remaining) {
+			if (totalCost !== undefined && totalCost <= resourcePool.remaining) {
 				addResource({
 					id: resource.id,
 					name: resource.name,
@@ -125,7 +123,7 @@ export function ResourceSelectionModal({ isOpen, close }: { isOpen: boolean; clo
 				close();
 			}
 		}
-	}, [addResource, close, costs, getModifiers, getTotalCost, remaining, resource.id, resource.name, resource.type, resourceDesc]);
+	}, [addResource, close, costs, getModifiers, getTotalCost, resource.id, resource.name, resource.type, resourceDesc, resourcePool.remaining]);
 
 	useEffect(() => {
 		resetCosts();

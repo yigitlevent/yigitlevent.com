@@ -174,11 +174,11 @@ export const useCharacterBurnerAttributeStore = create<CharacterBurnerAttributeS
 				const { getStat } = useCharacterBurnerStatStore.getState();
 				const { getAge, lifepaths } = useCharacterBurnerLifepathStore.getState();
 				const { hasTraitOpenByName } = useCharacterBurnerTraitStore.getState();
-				const { getResourcePoints } = useCharacterBurnerResourceStore.getState();
+				const { getResourcePools } = useCharacterBurnerResourceStore.getState();
 
 				const will = getStat("Will");
 				const age = getAge();
-				const resourcePoints = getResourcePoints();
+				const resourcePoints = getResourcePools();
 
 				const lifepathsToCheck = ["Trader", "Mask Bearer", "Master of Arches", "Master of Forges", "Master Engraver", "Treasurer", "Quartermaster", "Seneschal", "Prince"];
 
@@ -186,7 +186,7 @@ export const useCharacterBurnerAttributeStore = create<CharacterBurnerAttributeS
 
 				let bonus = 0;
 				if (will.exponent <= 4) bonus += 1;
-				bonus += Math.floor(resourcePoints / 60);
+				bonus += Math.floor(resourcePoints.spent / 60);
 				bonus += lifepaths.filter(v => lifepathsToCheck.includes(v.name)).length;
 
 				if (hasQuestionTrueByName("COVET")) bonus += 1;
@@ -285,15 +285,14 @@ export const useCharacterBurnerAttributeStore = create<CharacterBurnerAttributeS
 
 			// TODO: if shade shifted, remove points from exponent
 			getHatred: (): AbilityPoints => {
-				const { stockSpecific, hasQuestionTrueByName } = useCharacterBurnerMiscStore.getState();
+				const { special, hasQuestionTrueByName } = useCharacterBurnerMiscStore.getState();
 				const { getStat } = useCharacterBurnerStatStore.getState();
 
 				const steel = get().getSteel();
 				const perception = getStat("Perception");
 				const will = getStat("Will");
 
-				let bonus = 0;
-				if (stockSpecific.brutalLife) bonus += stockSpecific.brutalLife.traits.filter(v => v !== undefined && v !== null).length;
+				let bonus = special.stock.brutalLifeTraits.filter(v => v !== undefined && v !== null).length;
 				if (hasQuestionTrueByName("WOUND")) bonus += 1;
 				if (hasQuestionTrueByName("TORTURE")) bonus += 1;
 				if (hasQuestionTrueByName("SLAVE")) bonus += 1;

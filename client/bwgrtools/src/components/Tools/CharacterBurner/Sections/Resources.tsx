@@ -16,10 +16,9 @@ import { GenericGrid } from "../../../Shared/Grids";
 
 
 export function Resources({ openModal }: { openModal: (name: CharacterBurnerModals) => void; }): JSX.Element {
-	const { resources, getResourcePoints, getSpending, removeResource, editResourceDescription } = useCharacterBurnerResourceStore();
+	const { resources, getResourcePools, removeResource, editResourceDescription } = useCharacterBurnerResourceStore();
 
-	const total = getResourcePoints();
-	const spending = getSpending();
+	const resourcePools = getResourcePools();
 
 	return (
 		<GenericGrid columns={6} center="h" extraBottomMargin>
@@ -28,7 +27,7 @@ export function Resources({ openModal }: { openModal: (name: CharacterBurnerModa
 			</Grid>
 
 			<Grid item xs={6} sm={5}>
-				<Typography>Trait Points: {total}, Remaining: {total - spending}</Typography>
+				<Typography>Total Points: {resourcePools.total}, Remaining: {resourcePools.remaining}</Typography>
 			</Grid>
 
 			<Grid item xs={6} sm={1}>
