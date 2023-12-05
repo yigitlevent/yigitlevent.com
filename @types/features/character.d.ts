@@ -1,4 +1,4 @@
-type CharacterBurnerModals = "lp" | "randLp" | "re" | "geSk" | "geTr" | "qu";
+type CharacterBurnerModals = "lp" | "randLp" | "re" | "geSk" | "geTr" | "qu" | "so";
 type Shades = "B" | "G" | "W";
 
 interface CharacterAttribute {
@@ -34,13 +34,17 @@ interface CharacterResource {
 	description: string;
 }
 
-interface CharacterStockSpecific {
-	brutalLife?: {
-		traits: (TraitId | undefined)[];
-	};
-	territory?: {
-		huntingGround: undefined | HuntingGroundsList;
-	};
+interface CharacterSpecialStock {
+	brutalLifeTraits: (TraitId | undefined)[];
+	huntingGround: undefined | HuntingGroundsList;
+}
+
+interface CharacterSpecial {
+	stock: CharacterSpecialStock;
+	companionLifepath: { [key: string]: LifepathId; };
+	variableAge: { [key: LifepathId]: number; };
+	companionSkills: { [key: string]: SkillId[]; };
+	chosenSubskills: { [key: SkillId]: SkillId[]; };
 }
 
 interface CharacterStockLimits {

@@ -20,6 +20,7 @@ import { GeneralSkillModal } from "./Modals/GeneralSkillModal";
 import { GeneralTraitModal } from "./Modals/GeneralTraitModal";
 import { RandomLifepathsModal } from "./Modals/RandomLifepathsModal";
 import { QuestionsModal } from "./Modals/QuestionsModal";
+import { SpecialOptionsModal } from "./Modals/SpecialOptionsModal";
 
 
 export function CharacterBurner(): JSX.Element {
@@ -62,6 +63,7 @@ export function CharacterBurner(): JSX.Element {
 			<GeneralSkillModal isOpen={currentModal === "geSk"} close={closeModals} />
 			<GeneralTraitModal isOpen={currentModal === "geTr"} close={closeModals} />
 			<QuestionsModal isOpen={currentModal === "qu"} close={closeModals} />
+			<SpecialOptionsModal isOpen={currentModal === "so"} close={closeModals} />
 
 			{/* TODO
 				<AnswerQuestions />

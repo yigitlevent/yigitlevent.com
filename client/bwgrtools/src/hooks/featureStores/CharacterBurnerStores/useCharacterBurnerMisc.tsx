@@ -6,17 +6,26 @@ import { useCharacterBurnerAttributeStore } from "./useCharacterBurnerAttribute"
 import { useCharacterBurnerBasicsStore } from "./useCharacterBurnerBasics";
 import { useCharacterBurnerStatStore } from "./useCharacterBurnerStat";
 import { useCharacterBurnerTraitStore } from "./useCharacterBurnerTrait";
-import { GetAverage } from "../../../utils/misc";
+import { Clamp, GetAverage } from "../../../utils/misc";
 import { useRulesetStore } from "../../apiStores/useRulesetStore";
 
 
 export type CharacterBurnerMiscState = {
-	stockSpecific: CharacterStockSpecific;
+	special: CharacterSpecial;
 	questions: CharacterQuestion[];
 	limits: CharacterStockLimits;
 	traitEffects: CharacterTraitEffect[];
 
 	reset: () => void;
+
+	modifyCompanionLifepath: (companionName: string, companionLifepathId: LifepathId) => void;
+	modifyVariableAge: (lifepathId: LifepathId, age: number, minmax: number[]) => void;
+	modifyCompanionSkills: (companionLifepathId: LifepathId, skills: SkillId[] | undefined) => void;
+	modifySkillSubskills: (skillId: SkillId, subskillIds: SkillId[] | null, canSelectMultiple: boolean) => void;
+	resetSkillSubskills: (skillIds: SkillId[]) => void;
+
+	addBrutalLifeTrait: (traitId: TraitId | undefined) => void;
+	setHuntingGround: (huntingGround: HuntingGroundsList) => void;
 
 	switchQuestion: (id: QuestionId) => void;
 	refreshQuestions: () => void;
@@ -30,9 +39,18 @@ export type CharacterBurnerMiscState = {
 export const useCharacterBurnerMiscStore = create<CharacterBurnerMiscState>()(
 	devtools(
 		(set, get) => ({
-			stockSpecific: {},
+			special: {
+				stock: { brutalLifeTraits: [], huntingGround: undefined },
+				companionLifepath: {},
+				variableAge: {},
+				companionSkills: {},
+				chosenSubskills: {}
+			},
+
 			questions: [],
+
 			traitEffects: [],
+
 			limits: {
 				beliefs: 3,
 				instincts: 3,
@@ -66,7 +84,13 @@ export const useCharacterBurnerMiscStore = create<CharacterBurnerMiscState>()(
 				};
 
 				set(produce<CharacterBurnerMiscState>((state) => {
-					state.stockSpecific = {};
+					state.special = {
+						stock: { brutalLifeTraits: [], huntingGround: undefined },
+						companionLifepath: {},
+						variableAge: {},
+						companionSkills: {},
+						chosenSubskills: {}
+					};
 					state.questions = [];
 					state.traitEffects = [];
 
@@ -89,6 +113,64 @@ export const useCharacterBurnerMiscStore = create<CharacterBurnerMiscState>()(
 				}));
 
 				get().refreshTraitEffects();
+			},
+
+			modifyCompanionLifepath: (companionName: string, companionLifepathId: LifepathId): void => {
+				set(produce<CharacterBurnerMiscState>((state) => {
+					state.special.companionLifepath[companionName] === companionLifepathId;
+				}));
+			},
+
+			modifyVariableAge: (lifepathId: LifepathId, age: number, minmax: number[]): void => {
+				set(produce<CharacterBurnerMiscState>((state) => {
+					state.special.variableAge[lifepathId] = Clamp(age, minmax[0], minmax[1]);
+				}));
+			},
+
+			modifyCompanionSkills: (companionLifepathId: LifepathId, skills: SkillId[] | undefined): void => {
+				if (skills) {
+					set(produce<CharacterBurnerMiscState>((state) => {
+						state.special.companionSkills[companionLifepathId] = skills;
+					}));
+				}
+			},
+
+			modifySkillSubskills: (skillId: SkillId, subskillIds: SkillId[] | null, canSelectMultiple: boolean): void => {
+				const prev = get().special.chosenSubskills[skillId];
+
+				if (canSelectMultiple && subskillIds) {
+					set(produce<CharacterBurnerMiscState>((state) => {
+						state.special.chosenSubskills[skillId] = [...subskillIds];
+					}));
+				}
+				else {
+					set(produce<CharacterBurnerMiscState>((state) => {
+						if (subskillIds === null) state.special.chosenSubskills[skillId] = [];
+						else if (prev.includes(subskillIds[0])) state.special.chosenSubskills[skillId] = [];
+						else state.special.chosenSubskills[skillId] = [subskillIds[0]];
+					}));
+				}
+			},
+
+			resetSkillSubskills: (skillIds: SkillId[]): void => {
+				skillIds.forEach(skillId =>
+					set(produce<CharacterBurnerMiscState>((state) => {
+						state.special.chosenSubskills[skillId] = [];
+					}))
+				);
+			},
+
+			addBrutalLifeTrait: (traitId: TraitId | undefined) => {
+				set(produce<CharacterBurnerMiscState>((state) => {
+					const prev = state.special.stock.brutalLifeTraits;
+					state.special.stock.brutalLifeTraits = [...prev, traitId];
+				}));
+			},
+
+			setHuntingGround: (huntingGround: HuntingGroundsList) => {
+				set(produce<CharacterBurnerMiscState>((state) => {
+					state.special.stock.huntingGround = huntingGround;
+				}));
 			},
 
 			switchQuestion: (id: QuestionId): void => {
