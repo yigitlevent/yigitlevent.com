@@ -1,5 +1,6 @@
 import AutoStoriesOutlinedIcon from "@mui/icons-material/AutoStoriesOutlined";
 import DatasetOutlinedIcon from "@mui/icons-material/DatasetOutlined";
+import FactCheckOutlinedIcon from "@mui/icons-material/FactCheckOutlined";
 import ListAltOutlinedIcon from "@mui/icons-material/ListAltOutlined";
 import LoginOutlinedIcon from "@mui/icons-material/LoginOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
@@ -31,7 +32,7 @@ export function MenuButtons({ openSignin, openSignup }: { openSignin: () => void
 	const buttons: { title: DrawerNames, icon: JSX.Element; authOnly: boolean; }[] = [
 		{ title: "Tools", icon: <ListAltOutlinedIcon color="primary" />, authOnly: false },
 		{ title: "Datasets", icon: <DatasetOutlinedIcon color="primary" />, authOnly: false },
-		//{ title: "Checklist", icon: <FactCheckOutlinedIcon color="primary" />, authOnly: false },
+		{ title: "Checklist", icon: <FactCheckOutlinedIcon color="primary" />, authOnly: false },
 		{ title: "My Things", icon: <AutoStoriesOutlinedIcon color="primary" />, authOnly: true }
 	];
 

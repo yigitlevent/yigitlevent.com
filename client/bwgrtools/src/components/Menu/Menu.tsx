@@ -9,6 +9,7 @@ import { MenuButtons } from "./MenuButtons";
 import { Signin } from "./Signin/Signin";
 import { Signup } from "./Signup/Signup";
 import { useDrawerStore } from "../../hooks/useDrawerStore";
+import { Checklist } from "./Drawers/Checklist";
 
 
 export function Menu(): JSX.Element {
@@ -39,8 +40,9 @@ export function Menu(): JSX.Element {
 
 			<RulesetSelector expanded={drawer === "Datasets"} />
 
-			{/*<Checklist expanded={drawer === "Checklist"} />
-			<MyThings expanded={drawer === "My Things"} />*/}
+			<Checklist expanded={drawer === "Checklist"} />
+
+			{/*<MyThings expanded={drawer === "My Things"} />*/}
 		</Fragment>
 	);
 }
