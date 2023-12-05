@@ -1,0 +1,58 @@
+name: deploy-client-hearttools
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/deploy-client-hearttools.yml"
+      - "client/hearttools/**"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: Clean, Copy
+      uses: appleboy/scp-action@master
+      env:
+        HOST: ${{ secrets.HOST }}
+        USERNAME: ${{ secrets.USERNAME }}
+        PORT: ${{ secrets.PORT }}
+        KEY: ${{ secrets.SSHKEY }}
+      with:
+        source: "@types/**"
+        target: ${{ secrets.SOURCEDIR }}
+        rm: true
+
+    - name: Copy
+      uses: appleboy/scp-action@master
+      env:
+        HOST: ${{ secrets.HOST }}
+        USERNAME: ${{ secrets.USERNAME }}
+        PORT: ${{ secrets.PORT }}
+        KEY: ${{ secrets.SSHKEY }}
+      with:
+        source: "client/hearttools/**"
+        target: ${{ secrets.SOURCEDIR }}/client/hearttools-src
+        strip_components: 2
+        rm: true
+
+    - name: Build, Target Cleanup, Copy
+      uses: appleboy/ssh-action@master
+      with:
+        HOST: ${{ secrets.HOST }}
+        USERNAME: ${{ secrets.USERNAME }}
+        PORT: ${{ secrets.PORT }}
+        KEY: ${{ secrets.SSHKEY }}
+        script: |
+          export NVM_DIR=~/.nvm
+          source ~/.nvm/nvm.sh
+          cd ${{ secrets.SOURCEDIR }}/client/hearttools-src
+          nvm use 21.4.0
+          npm i
+          npm run build
+          sudo rm -rf ${{ secrets.TARGETDIR }}/client/hearttools
+          sudo cp -R ${{ secrets.SOURCEDIR }}/client/hearttools-src/dist ${{ secrets.TARGETDIR }}/client/hearttools

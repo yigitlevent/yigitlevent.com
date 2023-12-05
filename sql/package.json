@@ -1,0 +1,19 @@
+{
+	"name": "yigitlevent-bwgrtools-data-converter",
+	"author": "Yiğit Levent",
+	"version": "0.0.0",
+	"private": true,
+	"type": "commonjs",
+	"license": "MIT",
+	"scripts": {
+		"process": "npx tsc && node dist/index.js"
+	},
+	"devDependencies": {
+		"@types/node": "^20.10.3",
+		"@typescript-eslint/eslint-plugin": "^6.13.2",
+		"@typescript-eslint/parser": "^6.13.2",
+		"eslint": "^8.55.0",
+		"eslint-plugin-json": "^3.1.0",
+		"typescript": "^5.3.2"
+	}
+}
