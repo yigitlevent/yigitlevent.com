@@ -5,6 +5,7 @@ import StepLabel from "@mui/material/StepLabel";
 import Stepper from "@mui/material/Stepper";
 import Typography from "@mui/material/Typography";
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 import { useCharacterBurnerBasicsStore } from "../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerBasics";
 import { useCharacterBurnerLifepathStore } from "../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerLifepath";
@@ -89,6 +90,8 @@ export function Checklist({ expanded }: { expanded: boolean; }): JSX.Element {
 	const { getResourcePools } = useCharacterBurnerResourceStore();
 	const { special, questions, limits } = useCharacterBurnerMiscStore();
 
+	const location = useLocation();
+
 	// TODO: also check special lifepath and skill stuff
 
 	const [activeStep, setActiveStep] = useState(0);
@@ -120,24 +123,28 @@ export function Checklist({ expanded }: { expanded: boolean; }): JSX.Element {
 
 	return (
 		<DrawerBox title={"Checklist"} expanded={expanded}>
-			<Stepper activeStep={activeStep} orientation="vertical">
-				{ChecklistSteps.map((step, i) => (
-					<Step key={i} expanded>
-						<StepLabel StepIconComponent={StepIcon}>
-							<Typography variant="body1" sx={{ marginBottom: "4px" }} color={activeStep !== i ? "gray" : undefined}>{step.label}</Typography>
-						</StepLabel>
+			{location.pathname === "/characterburner"
+				? <Stepper activeStep={activeStep} orientation="vertical">
+					{ChecklistSteps.map((step, i) => (
+						<Step key={i} expanded>
+							<StepLabel StepIconComponent={StepIcon}>
+								<Typography variant="body1" sx={{ marginBottom: "4px" }} color={activeStep !== i ? "gray" : undefined}>{step.label}</Typography>
+							</StepLabel>
 
-						<StepContent>
-							{step.description.map((desc, ii) => (
-								<Typography key={ii} variant="body2" sx={{ fontSize: "13px" }} color={activeStep !== i ? "gray" : undefined}>
-									{desc}
-								</Typography>
-							)
-							)}
-						</StepContent>
-					</Step>
-				))}
-			</Stepper>
+							<StepContent>
+								{step.description.map((desc, ii) => (
+									<Typography key={ii} variant="body2" sx={{ fontSize: "13px" }} color={activeStep !== i ? "gray" : undefined}>
+										{desc}
+									</Typography>
+								)
+								)}
+							</StepContent>
+						</Step>
+					))}
+				</Stepper>
+				: <Typography>
+					Checlkist is only available when using the Character Burner tool.
+				</Typography>}
 		</DrawerBox>
 	);
 }
