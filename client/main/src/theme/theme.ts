@@ -1,8 +1,8 @@
 import { blue, green, grey, lightBlue, orange, purple, red } from "@mui/material/colors";
 import { createTheme } from "@mui/material/styles";
 
-import text from "./src/assets/fonts/AlegreyaSans-Regular.woff";
-import code from "./src/assets/fonts/PTMono-Regular.woff";
+import text from "/src/assets/fonts/AlegreyaSans-Regular.woff";
+import code from "/src/assets/fonts/PTMono-Regular.woff";
 
 
 const White = "#ffffff";
