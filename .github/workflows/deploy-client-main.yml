@@ -15,14 +15,13 @@ jobs:
     steps:
     - uses: actions/checkout@v1
 
-    - name: Copy
+    - name: Clean and Copy Source
       uses: appleboy/scp-action@master
-      env:
+      with:
         HOST: ${{ secrets.HOST }}
         USERNAME: ${{ secrets.USERNAME }}
         PORT: ${{ secrets.PORT }}
         KEY: ${{ secrets.SSHKEY }}
-      with:
         source: "client/main/**"
         target: ${{ secrets.SOURCEDIR }}/client/main-src
         strip_components: 2

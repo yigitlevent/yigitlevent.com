@@ -15,26 +15,24 @@ jobs:
     steps:
     - uses: actions/checkout@v1
 
-    - name: Clean, Copy
+    - name: Clean and Copy Types
       uses: appleboy/scp-action@master
-      env:
+      with:
         HOST: ${{ secrets.HOST }}
         USERNAME: ${{ secrets.USERNAME }}
         PORT: ${{ secrets.PORT }}
         KEY: ${{ secrets.SSHKEY }}
-      with:
         source: "@types/**"
         target: ${{ secrets.SOURCEDIR }}
         rm: true
 
-    - name: Copy
+    - name: Clean and Copy Source
       uses: appleboy/scp-action@master
-      env:
+      with:
         HOST: ${{ secrets.HOST }}
         USERNAME: ${{ secrets.USERNAME }}
         PORT: ${{ secrets.PORT }}
         KEY: ${{ secrets.SSHKEY }}
-      with:
         source: "client/bwgrtools/**"
         target: ${{ secrets.SOURCEDIR }}/client/bwgrtools-src
         strip_components: 2
