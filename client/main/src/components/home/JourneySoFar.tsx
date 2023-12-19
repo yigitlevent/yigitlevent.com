@@ -1,9 +1,8 @@
-/* eslint-disable react/no-unescaped-entities */
-import { Fragment } from "react";
 import Typography from "@mui/material/Typography";
+import { Fragment } from "react";
 
 
-export function JourneySoFar() {
+export function JourneySoFar(): JSX.Element {
 	return (
 		<Fragment>
 			<Typography variant="h6">journey so far</Typography>

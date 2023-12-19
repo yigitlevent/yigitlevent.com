@@ -1,107 +1,68 @@
-import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
 
-import { FightActionExtended } from "../../../hooks/stores/useFightPlannerStore";
+import { GetResolutionString } from "../../../utils/getActionResolutionString";
 
 
-const FightResolutionActions = [
-	"Great Strike", "Strike", "Avoid", "Block", "Counterstrike", "Beat", "Disarm", "Faint", "Charge/Tackle", "Lock", "Push", "Throw"
-];
-
-export function FightPlannerActionDetails({ action }: { action: FightActionExtended; }) {
+export function FightPlannerActionDetails({ action }: { action: FightAction; }): JSX.Element {
 	return (
 		<Stack spacing={0} sx={{ width: "100%" }}>
-			{action.test
+			{action.tests
 				? <Box sx={{ margin: "0 0 10px" }}>
 					<b>Tests:</b>
-					<Typography variant="body2">{action.test}</Typography>
+					<Typography variant="body2">{[...action.tests.abilities, ...action.tests.skills].map(v => v[1]).join(", ")}</Typography>
 				</Box>
-				: null
-			}
+				: null}
 
 			<Box sx={{ margin: "0 0 10px" }}>
-				<b>Action Type:</b>
-				<Typography variant="body2">{action.group}</Typography>
+				<b>Action Group:</b>
+				<Typography variant="body2">{action.group[1]}</Typography>
 			</Box>
 
 			{action.restrictions
 				? <Box sx={{ margin: "0 0 10px" }}>
 					<b>Restrictions:</b>
+
 					{action.restrictions.split("<br>").map((v, i) =>
 						<Typography variant="body2" key={i}>{v}</Typography>
 					)}
 				</Box>
-				: null
-			}
+				: null}
 
 			{action.effect
 				? <Box sx={{ margin: "0 0 10px" }}>
 					<b>Effect:</b>
+
 					{action.effect.split("<br>").map((v, i) =>
 						<Typography variant="body2" key={i}>{v}</Typography>
 					)}
 				</Box>
-				: null
-			}
+				: null}
 
 			{action.special
 				? <Box sx={{ margin: "0 0 10px" }}>
 					<b>Special:</b>
+
 					{action.special.split("<br>").map((v, i) =>
 						<Typography variant="body2" key={i}>{v}</Typography>
 					)}
 				</Box>
-				: null
-			}
+				: null}
 
-			{action.cost
+			{action.actionCost
 				? <Box sx={{ margin: "0 0 10px" }}>
 					<b>Action Cost:</b>
-					{action.cost.split("<br>").map((v, i) =>
-						<Typography variant="body2" key={i}>{v}</Typography>
-					)}
+					{<Typography variant="body2">{action.actionCost}</Typography>}
 				</Box>
-				: null
-			}
+				: null}
 
-			{action.interactions
-				? <Box sx={{ margin: "0 0 10px" }}>
-					<b>Interactions:</b>
-					{action.interactions.split("<br>").map((v, i) =>
-						<Typography variant="body2" key={i}>{v}</Typography>
-					)}
-				</Box>
-				: null
-			}
-
-			{action.resolution
+			{action.resolutions
 				? <Box sx={{ margin: "0 0 10px" }}>
 					<b>Resolution:</b>
-					{FightResolutionActions.map((v, i) => {
-						if (action.resolution) {
-							const res = action.resolution[v] ? action.resolution[v] : "—";
-							return <Typography variant="body2" key={i}>{v}: {res}</Typography>;
-						}
-						return null;
-					})}
+					{action.resolutions.map((v, i) => <Typography variant="body2" key={i}>{GetResolutionString(v)}</Typography>)}
 				</Box>
-				: null
-			}
-
-			{action.resolutionAgainst
-				? <Box sx={{ margin: "0 0 10px" }}>
-					<b>Resolution (against):</b>
-					{FightResolutionActions.map((v, i) => {
-						if (action.resolutionAgainst) {
-							const res = action.resolutionAgainst[v] ? action.resolutionAgainst[v] : "—";
-							return <Typography variant="body2" key={i}>{v}: {res}</Typography>;
-						}
-						return null;
-					})}
-				</Box>
-				: null
-			}
+				: null}
 		</Stack>
 	);
 }

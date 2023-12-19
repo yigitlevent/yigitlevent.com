@@ -1,7 +1,7 @@
-import { styled } from "@mui/material/styles";
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
 import { StepIconProps } from "@mui/material/StepIcon";
+import { styled } from "@mui/material/styles";
 
 
 const QontoStepIconRoot = styled("div")<{ ownerState: { active?: boolean; }; }>(
@@ -32,7 +32,7 @@ const QontoStepIconRoot = styled("div")<{ ownerState: { active?: boolean; }; }>(
 	})
 );
 
-export function StepIcon(props: StepIconProps) {
+export function StepIcon(props: StepIconProps): JSX.Element {
 	const { active, completed, className } = props;
 
 	return (
@@ -41,8 +41,7 @@ export function StepIcon(props: StepIconProps) {
 				? <CheckIcon className="QontoStepIcon-completedIcon" />
 				: active
 					? <div className="QontoStepIcon-circle" />
-					: <CloseIcon className="QontoStepIcon-nextIcon" />
-			}
+					: <CloseIcon className="QontoStepIcon-nextIcon" />}
 		</QontoStepIconRoot>
 	);
 }

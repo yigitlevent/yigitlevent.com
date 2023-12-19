@@ -1,14 +1,18 @@
-import { useEffect, useState } from "react";
-
-import Typography from "@mui/material/Typography";
-import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
-import StepLabel from "@mui/material/StepLabel";
 import StepContent from "@mui/material/StepContent";
+import StepIcon from "@mui/material/StepIcon";
+import StepLabel from "@mui/material/StepLabel";
+import Stepper from "@mui/material/Stepper";
+import Typography from "@mui/material/Typography";
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
-import { useCharacterBurnerStore } from "../../../hooks/stores/useCharacterBurnerStore";
-
-import { StepIcon } from "../../Shared/StepIcon";
+import { useCharacterBurnerBasicsStore } from "../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerBasics";
+import { useCharacterBurnerLifepathStore } from "../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerLifepath";
+import { useCharacterBurnerMiscStore } from "../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerMisc";
+import { useCharacterBurnerResourceStore } from "../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerResource";
+import { useCharacterBurnerSkillStore } from "../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerSkill";
+import { useCharacterBurnerTraitStore } from "../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerTrait";
 import { DrawerBox } from "../../Shared/DrawerBox";
 
 
@@ -78,70 +82,69 @@ const ChecklistSteps: { label: string, description: string[]; }[] = [
 	}
 ];
 
-export function Checklist({ expanded }: { expanded: boolean; }) {
-	const {
-		stock, concept, name, beliefs, instincts, /*limits,*/ lifepathPaths, stockSpecific, questions,
-		getStatRemainings, getSkillRemainings, getTraitRemainings, getResourceRemainings
-	} = useCharacterBurnerStore();
+export function Checklist({ expanded }: { expanded: boolean; }): JSX.Element {
+	const { stock, concept, name, beliefs, instincts } = useCharacterBurnerBasicsStore();
+	const { lifepaths, getEitherPool, getMentalPool, getPhysicalPool } = useCharacterBurnerLifepathStore();
+	const { getSkillPools } = useCharacterBurnerSkillStore();
+	const { getTraitPools } = useCharacterBurnerTraitStore();
+	const { getResourcePools } = useCharacterBurnerResourceStore();
+	const { special, questions, limits } = useCharacterBurnerMiscStore();
+
+	const location = useLocation();
+
+	// TODO: also check special lifepath and skill stuff
 
 	const [activeStep, setActiveStep] = useState(0);
 
-	const statRemainings = getStatRemainings();
-	const skillRemainings = getSkillRemainings();
-	const traitRemainings = getTraitRemainings();
-	const resourceRemainings = getResourceRemainings();
-
 	useEffect(() => {
-		const stockSpecificFulfilled =
-			!(stock === "Orc" && stockSpecific.brutalLife.traits.length < lifepathPaths.length - 5)
-			&& !(stock === "Great Wolf" && stockSpecific.territory.huntingGround === undefined);
+		const remainingStatPoints = getEitherPool().remaining + getMentalPool().remaining + getPhysicalPool().remaining;
+		const skillPoints = getSkillPools();
+		const remainingSkillPoints = skillPoints.general.remaining + skillPoints.lifepath.remaining;
+		const remainingTraitPoints = getTraitPools().remaining;
+		const remainingResourcePoints = getResourcePools().remaining;
+
+		const stockSpecificFulfilled
+			= !(stock[1] === "Orc" && special.stock.brutalLifeTraits.length < lifepaths.length - 5)
+			&& !(stock[1] === "Great Wolf" && special.stock.huntingGround === undefined);
 
 		if (concept === "") setActiveStep(0);
-		else if (lifepathPaths.length === 0) setActiveStep(1);
+		else if (lifepaths.length === 0) setActiveStep(1);
 		else if (!stockSpecificFulfilled) setActiveStep(2);
-		else if ((statRemainings.mentalPool + statRemainings.physicalPool + statRemainings.eitherPool) !== 0) setActiveStep(3);
-		else if (skillRemainings.generalPoints + skillRemainings.lifepathPoints !== 0) setActiveStep(4);
-		else if (traitRemainings.traitPoints !== 0) setActiveStep(5);
-		else if (!Object.values(questions).includes(true)) setActiveStep(6);
-		else if (resourceRemainings.resourcePoints !== 0) setActiveStep(7);
-		else if ((beliefs.list.filter(v => v !== "").length < 4 /* limits.beliefs - 1*/ || instincts.list.filter(v => v !== "").length < 4/*limits.instincts - 1*/)) setActiveStep(8);
+		else if (remainingStatPoints !== 0) setActiveStep(3);
+		else if (remainingSkillPoints !== 0) setActiveStep(4);
+		else if (remainingTraitPoints !== 0) setActiveStep(5);
+		else if (questions.some(q => q.answer)) setActiveStep(6);
+		else if (remainingResourcePoints !== 0) setActiveStep(7);
+		else if ((beliefs.filter(v => v.belief !== "").length === limits.beliefs || instincts.filter(v => v.instinct !== "").length === limits.instincts)) setActiveStep(8);
 		else if (name === "") setActiveStep(9);
 		else setActiveStep(10);
-	}, [beliefs,
-		concept,
-		instincts,
-		lifepathPaths.length,
-		name,
-		questions,
-		resourceRemainings.resourcePoints,
-		skillRemainings.generalPoints,
-		skillRemainings.lifepathPoints,
-		statRemainings.eitherPool,
-		statRemainings.mentalPool,
-		statRemainings.physicalPool,
-		stock,
-		stockSpecific.brutalLife.traits.length,
-		stockSpecific.territory.huntingGround,
-		traitRemainings.traitPoints]);
+	}, [beliefs, concept, instincts, lifepaths, limits, name, questions, special, stock,
+		getEitherPool, getMentalPool, getPhysicalPool, getResourcePools, getSkillPools, getTraitPools]);
 
 	return (
 		<DrawerBox title={"Checklist"} expanded={expanded}>
-			<Stepper activeStep={activeStep} orientation="vertical">
-				{ChecklistSteps.map((step, i) => (
-					<Step key={i} expanded>
-						<StepLabel StepIconComponent={StepIcon}>
-							<Typography variant="body1" sx={{ marginBottom: "4px" }} color={activeStep !== i ? "gray" : undefined}>{step.label}</Typography>
-						</StepLabel>
-						<StepContent>
-							{step.description.map((desc, ii) =>
-								<Typography key={ii} variant="body2" sx={{ fontSize: "13px" }} color={activeStep !== i ? "gray" : undefined}>
-									{desc}
-								</Typography>
-							)}
-						</StepContent>
-					</Step>
-				))}
-			</Stepper>
+			{location.pathname === "/characterburner"
+				? <Stepper activeStep={activeStep} orientation="vertical">
+					{ChecklistSteps.map((step, i) => (
+						<Step key={i} expanded>
+							<StepLabel StepIconComponent={StepIcon}>
+								<Typography variant="body1" sx={{ marginBottom: "4px" }} color={activeStep !== i ? "gray" : undefined}>{step.label}</Typography>
+							</StepLabel>
+
+							<StepContent>
+								{step.description.map((desc, ii) => (
+									<Typography key={ii} variant="body2" sx={{ fontSize: "13px" }} color={activeStep !== i ? "gray" : undefined}>
+										{desc}
+									</Typography>
+								)
+								)}
+							</StepContent>
+						</Step>
+					))}
+				</Stepper>
+				: <Typography>
+					Checlkist is only available when using the Character Burner tool.
+				</Typography>}
 		</DrawerBox>
 	);
 }

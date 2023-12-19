@@ -1,77 +1,71 @@
-import { Fragment, useState } from "react";
-
 import Typography from "@mui/material/Typography";
+import { Fragment, useEffect, useState } from "react";
 
-import { useCharacterBurnerStore } from "../../../hooks/stores/useCharacterBurnerStore";
-
-import { BlockDivider } from "./BlockDivider";
-import { StatsBlock } from "./Blocks/StatsBlock";
-import { AttributesBlock } from "./Blocks/AttributesBlock";
-import { SkillsBlock } from "./Blocks/SkillsBlock";
-import { TraitsBlock } from "./Blocks/TraitsBlock";
-import { BasicsBlock } from "./Blocks/BasicsBlock";
-import { LifepathsBlock } from "./Blocks/LifepathsBlock";
-import { ResourcesBlock } from "./Blocks/ResourcesBlock";
-import { TolerancesBlock } from "./Blocks/TolerancesBlock";
-import { LifepathModal } from "./Modals/LifepathModal";
+import { GeneralSkillModal } from "./Modals/GeneralSkillModal";
+import { GeneralTraitModal } from "./Modals/GeneralTraitModal";
+import { LifepathSelectionModal } from "./Modals/LifepathSelectionModal";
+import { QuestionsModal } from "./Modals/QuestionsModal";
 import { RandomLifepathsModal } from "./Modals/RandomLifepathsModal";
-import { QuestionModal } from "./Modals/QuestionModal";
-import { SpecialLifepathsModal } from "./Modals/SpecialLifepathsModal";
-import { SpecialSkillsModal } from "./Modals/SpecialSkillsModal";
-import { ResourceModal } from "./Modals/ResourceModal";
-import { StockSpecificModal } from "./Modals/StockSpecificModal";
-import { BeliefsBlock } from "./Blocks/BeliefsBlock";
-import { InstinctsBlock } from "./Blocks/InstinctsBlock";
+import { ResourceSelectionModal } from "./Modals/ResourceSelectionModal";
+import { SpecialOptionsModal } from "./Modals/SpecialOptionsModal";
+import { Attributes } from "./Sections/Attributes";
+import { Basics } from "./Sections/Basics";
+import { Beliefs } from "./Sections/Beliefs";
+import { Instincts } from "./Sections/InstinctsBlock";
+import { Resources } from "./Sections/Resources";
+import { Skills } from "./Sections/Skills";
+import { Stats } from "./Sections/Stats";
+import { Tolerances } from "./Sections/Tolerances";
+import { Traits } from "./Sections/Traits";
+import { useCharacterBurnerAttributeStore } from "../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerAttribute";
+import { useCharacterBurnerBasicsStore } from "../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerBasics";
+import { useCharacterBurnerLifepathStore } from "../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerLifepath";
+import { useCharacterBurnerSkillStore } from "../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerSkill";
+import { useCharacterBurnerTraitStore } from "../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerTrait";
 
 
 export function CharacterBurner(): JSX.Element {
-	const { totals } = useCharacterBurnerStore();
+	const { stock } = useCharacterBurnerBasicsStore();
+	const { lifepaths, updateAvailableLifepaths } = useCharacterBurnerLifepathStore();
+	const { skills } = useCharacterBurnerSkillStore();
+	const { traits } = useCharacterBurnerTraitStore();
+	const { attributes } = useCharacterBurnerAttributeStore();
 
-	const [openLp, openLpModal] = useState(false);
-	const [openRl, openRlModal] = useState(false);
-	const [openQu, openQuModal] = useState(false);
-	const [openSl, openSlModal] = useState(false);
-	const [openSu, openSuModal] = useState(false);
-	const [openRe, openReModal] = useState(false);
-	const [openSs, openSsModal] = useState(false);
+	const [currentModal, setCurrentModal] = useState<CharacterBurnerModals | null>(null);
+
+	const openModal = (name: CharacterBurnerModals) => setCurrentModal(name);
+	const closeModals = () => setCurrentModal(null);
+
+	useEffect(() => {
+		updateAvailableLifepaths();
+	}, [updateAvailableLifepaths, stock]);
 
 	return (
 		<Fragment>
 			<Typography variant="h3">Character Burner</Typography>
+			<Basics openModal={openModal} />
+			<Stats />
+			{skills.length > 0 ? <Skills openModal={openModal} /> : null}
+			{traits.length > 0 ? <Traits openModal={openModal} /> : null}
+			{attributes.length > 0 ? <Attributes /> : null}
 
-			<LifepathModal openLp={openLp} openLpModal={openLpModal} />
-			<RandomLifepathsModal openRl={openRl} openRlModal={openRlModal} />
-			<QuestionModal openQu={openQu} openQuModal={openQuModal} />
-			<SpecialLifepathsModal openSl={openSl} openSlModal={openSlModal} />
-			<SpecialSkillsModal openSu={openSu} openSuModal={openSuModal} />
-			<ResourceModal openRe={openRe} openReModal={openReModal} />
-			<StockSpecificModal openSs={openSs} openSsModal={openSsModal} />
-
-			<BasicsBlock />
-			<BlockDivider />
-			<BeliefsBlock />
-			<BlockDivider />
-			<InstinctsBlock />
-			<BlockDivider />
-			<LifepathsBlock openLpModal={openLpModal} openRlModal={openRlModal} openQuModal={openQuModal} openSlModal={openSlModal} openSuModal={openSuModal} openSsModal={openSsModal} />
-
-			{totals.years.points > 0
+			{lifepaths.length > 0
 				? <Fragment>
-					<BlockDivider />
-					<StatsBlock />
-					<BlockDivider />
-					<AttributesBlock />
-					<BlockDivider />
-					<TolerancesBlock />
-					<BlockDivider />
-					<SkillsBlock />
-					<BlockDivider />
-					<TraitsBlock />
-					<BlockDivider />
-					<ResourcesBlock openReModal={openReModal} />
+					<Resources openModal={openModal} />
+					<Tolerances />
+					<Beliefs />
+					<Instincts />
 				</Fragment>
-				: null
-			}
+				: null}
+
+
+			<LifepathSelectionModal isOpen={currentModal === "lp"} close={closeModals} />
+			<RandomLifepathsModal isOpen={currentModal === "randLp"} close={closeModals} />
+			<ResourceSelectionModal isOpen={currentModal === "re"} close={closeModals} />
+			<GeneralSkillModal isOpen={currentModal === "geSk"} close={closeModals} />
+			<GeneralTraitModal isOpen={currentModal === "geTr"} close={closeModals} />
+			<QuestionsModal isOpen={currentModal === "qu"} close={closeModals} />
+			<SpecialOptionsModal isOpen={currentModal === "so"} close={closeModals} />
 		</Fragment>
 	);
 }

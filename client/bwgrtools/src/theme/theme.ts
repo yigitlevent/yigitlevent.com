@@ -1,10 +1,28 @@
-import { createTheme } from "@mui/material/styles";
 import { blue, green, grey, lightBlue, orange, purple, red } from "@mui/material/colors";
+import { createTheme } from "@mui/material/styles";
 
-import text from "/src/assets/fonts/literata.woff"; 
-import title from "/src/assets/fonts/thryromanes.woff"; 
-import hand from "/src/assets/fonts/CormorantUpright-SemiBold.woff"; 
+import hand from "/src/assets/fonts/CormorantUpright-SemiBold.woff";
+import text from "/src/assets/fonts/literata.woff";
+import title from "/src/assets/fonts/thryromanes.woff";
 
+
+declare module "@mui/material/styles" {
+	interface TypographyVariants {
+		body3: React.CSSProperties;
+	}
+
+	// allow configuration using `createTheme`
+	interface TypographyVariantsOptions {
+		body3?: React.CSSProperties;
+	}
+}
+
+// Update the Typography's variant prop options
+declare module "@mui/material/Typography" {
+	interface TypographyPropsVariantOverrides {
+		body3: true;
+	}
+}
 
 const White = "#ffffff";
 const Black = "#000000";
@@ -141,6 +159,14 @@ export const THEME = createTheme({
 			textAlign: "justify",
 			textJustify: "inter-word",
 			marginTop: "3px"
+		},
+		body3: {
+			fontFamily: "text",
+			textIndent: "8px",
+			textAlign: "justify",
+			textJustify: "inter-word",
+			marginTop: "3px",
+			whiteSpace: "pre-line"
 		},
 		button: {
 			fontFamily: "text"

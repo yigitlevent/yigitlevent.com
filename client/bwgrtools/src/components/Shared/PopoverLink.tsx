@@ -1,32 +1,39 @@
-import { MouseEvent, useState } from "react";
-
-import Typography from "@mui/material/Typography";
+import Grid from "@mui/material/Grid";
 import Link from "@mui/material/Link";
 import Popover from "@mui/material/Popover";
-import Grid from "@mui/material/Grid";
-
-import { Skill } from "../../data/skills/_skills";
-import { Trait } from "../../data/traits/_traits";
-import { GetSkillRestrictionString } from "../../utils/getSkillRestriction";
+import Typography from "@mui/material/Typography";
+import { MouseEvent, useState } from "react";
 
 
-function SkillPop({ skill }: { skill: Skill; }) {
+function GetSkillRestrictionString(skill: Skill): string {
+	if (skill.restriction) {
+		const attribute = (skill.restriction.onlyWithAbility) ? ` with ${skill.restriction.onlyWithAbility[1]} ` : " ";
+		const type = (skill.restriction.onlyAtBurn) ? " in character burning" : "";
+		return `${skill.restriction.onlyStock[1]}${attribute}only${type}.`;
+	}
+
+	return "N/A";
+}
+
+function SkillPop({ skill }: { skill: Skill; }): JSX.Element {
 	return (
 		<Grid container spacing={1} columns={2}>
 			<Grid item xs={2}>
 				<Typography variant="h6">{skill.name}</Typography>
 			</Grid>
 
-			<Grid item xs={2} md={1}>
-				<Typography variant="caption">Root: {skill.root.join("/")}</Typography>
-			</Grid>
+			{skill.roots
+				? <Grid item xs={2} md={1}>
+					<Typography variant="caption">Root: {skill.roots.map(v => v[1]).join("/")}</Typography>
+				</Grid>
+				: null}
 
 			<Grid item xs={2} md={1}>
-				<Typography variant="caption">Type: {skill.type}</Typography>
+				<Typography variant="caption">Type: {skill.type[1]}</Typography>
 			</Grid>
 
 			<Grid item xs={2}>
-				<Typography variant="caption">Tools: {skill.tools.filter(v => v !== "").join(", ")}</Typography>
+				<Typography variant="caption">Tools: {skill.tool.tool}{skill.tool.description ? ` ${skill.tool.description}` : ""}</Typography>
 			</Grid>
 
 			<Grid item xs={2}>
@@ -37,13 +44,12 @@ function SkillPop({ skill }: { skill: Skill; }) {
 				? <Grid item xs={2}>
 					{skill.description.split("<br>").map(v => <Typography key={v} variant="body2">{v}</Typography>)}
 				</Grid>
-				: null
-			}
+				: null}
 		</Grid>
 	);
 }
 
-function TraitPop({ trait }: { trait: Trait; }) {
+function TraitPop({ trait }: { trait: Trait; }): JSX.Element {
 	return (
 		<Grid container spacing={1} columns={3}>
 			<Grid item xs={3}>
@@ -51,7 +57,7 @@ function TraitPop({ trait }: { trait: Trait; }) {
 			</Grid>
 
 			<Grid item sm={3} md={1}>
-				<Typography variant="caption">Type: {trait.type}</Typography>
+				<Typography variant="caption">Type: {trait.type[1]}</Typography>
 			</Grid>
 
 			{trait.cost !== 0
@@ -60,27 +66,26 @@ function TraitPop({ trait }: { trait: Trait; }) {
 						Cost: {trait.cost}
 					</Typography>
 				</Grid>
-				: null
-			}
+				: null}
 
-			{trait.stock !== "Any"
+			{trait.stock
 				? <Grid item sm={3} md={1}>
-					<Typography variant="caption">Stock: {trait.stock}</Typography>
+					<Typography variant="caption">Stock: {trait.stock[1]}</Typography>
 				</Grid>
-				: null
-			}
+				: <Grid item sm={3} md={1}>
+					<Typography variant="caption">Stock: Any</Typography>
+				</Grid>}
 
 			{trait.description
 				? <Grid item xs={3}>
 					{trait.description.split("<br>").map(v => <Typography key={v} variant="body2" sx={{ textIndent: "8px" }}>{v}</Typography>)}
 				</Grid>
-				: null
-			}
+				: null}
 		</Grid>
 	);
 }
 
-function Pop({ anchor, data, onClose }: { anchor: HTMLElement | null; data: Skill | Trait; onClose: () => void; }) {
+function Pop({ anchor, data, onClose }: { anchor: HTMLElement | null; data: Skill | Trait; onClose: () => void; }): JSX.Element {
 	return (
 		<Popover
 			open={Boolean(anchor)}
@@ -90,13 +95,13 @@ function Pop({ anchor, data, onClose }: { anchor: HTMLElement | null; data: Skil
 			transformOrigin={{ vertical: "top", horizontal: "left" }}
 		>
 			<Grid container spacing={1} sx={{ maxWidth: "400px", padding: "12px 16px" }} columns={2}>
-				{"root" in data ? <SkillPop skill={data} /> : <TraitPop trait={data} />}
+				{"flags" in data ? <SkillPop skill={data} /> : <TraitPop trait={data} />}
 			</Grid>
 		</Popover>
 	);
 }
 
-export function PopoverLink({ data, noColor }: { data: Skill | Trait; noColor?: boolean; }) {
+export function PopoverLink({ data, noColor }: { data: Skill | Trait; noColor?: boolean; }): JSX.Element {
 	const [anchor, setAnchor] = useState<HTMLElement | null>(null);
 
 	const closePopover = () => { setAnchor(null); };

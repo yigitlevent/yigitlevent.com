@@ -1,41 +1,50 @@
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 
-import { useCharacterBurnerStore } from "../../../../../hooks/stores/useCharacterBurnerStore";
+import { useCharacterBurnerLifepathStore } from "../../../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerLifepath";
+import { useCharacterBurnerResourceStore } from "../../../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerResource";
+import { useCharacterBurnerSkillStore } from "../../../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerSkill";
+import { useCharacterBurnerTraitStore } from "../../../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerTrait";
 
 
-export function RandomLifepathsBasics() {
-	const { totals, getMentalPointsTotal, getPhysicalPointsTotal } = useCharacterBurnerStore();
-	
-	const yearsExtension = totals.years.extensions.length > 0 ? `, plus ${totals.years.extensions.join(" ")}` : "";
-	const resourcesExtension = totals.resources.extensions.length > 0 ? `, plus ${totals.resources.extensions.join(" ")}` : "";
+export function RandomLifepathsBasics({ chosenLifepaths }: { chosenLifepaths: Lifepath[]; }): JSX.Element {
+	const { getAge, getMentalPool, getPhysicalPool, getEitherPool } = useCharacterBurnerLifepathStore();
+	const { getResourcePools } = useCharacterBurnerResourceStore();
+	const { getSkillPools } = useCharacterBurnerSkillStore();
+	const { getTraitPools } = useCharacterBurnerTraitStore();
 
-	const mentalPool = getMentalPointsTotal();
-	const physicalPool = getPhysicalPointsTotal();
-	const eitherPool = (totals.stats.fromLifepaths.eitherPoints !== 0) ? `, (${totals.stats.fromLifepaths.eitherPoints > 0 ? "+" : ""}${totals.stats.fromLifepaths.eitherPoints}M/P)` : "";
-
-	const generalSkillExtension = totals.skills.generalPoints.extensions.length > 0 ? `, plus ${totals.skills.generalPoints.extensions.join(" ")}` : "";
-	const lifepathSkillExtension = totals.skills.lifepathPoints.extensions.length > 0 ? `, plus ${totals.skills.lifepathPoints.extensions.join(" ")}` : "";
+	const age = getAge(chosenLifepaths);
+	const resourcePoints = getResourcePools(chosenLifepaths);
+	const mentalPool = getMentalPool(chosenLifepaths);
+	const physicalPool = getPhysicalPool(chosenLifepaths);
+	const eitherPool = getEitherPool(chosenLifepaths);
+	const skillPools = getSkillPools(chosenLifepaths);
+	const traitPools = getTraitPools(chosenLifepaths);
 
 	return (
 		<Grid container columns={2}>
 			<Grid item xs={1}>
-				<Typography variant="caption">Years: {totals.years.points}{yearsExtension}</Typography>
+				<Typography variant="caption">Years: {age}</Typography>
 			</Grid>
+
 			<Grid item xs={1}>
-				<Typography variant="caption">Resources: {totals.resources.points}{resourcesExtension}</Typography>
+				<Typography variant="caption">Resources: {resourcePoints.total}</Typography>
 			</Grid>
+
 			<Grid item xs={1}>
-				<Typography variant="caption">Stats: {mentalPool}M, {physicalPool}P {eitherPool}</Typography>
+				<Typography variant="caption">Stats: {mentalPool.total}M, {physicalPool.total}P, {eitherPool.total}M/P</Typography>
 			</Grid>
+
 			<Grid item xs={1}>
-				<Typography variant="caption">Trait Points: {totals.traits.points}</Typography>
+				<Typography variant="caption">Trait Points: {traitPools.total}</Typography>
 			</Grid>
+
 			<Grid item xs={1}>
-				<Typography variant="caption">General Skill Points: {totals.skills.generalPoints.points}{generalSkillExtension}</Typography>
+				<Typography variant="caption">General Skill Points: {skillPools.general.total}</Typography>
 			</Grid>
+
 			<Grid item xs={1}>
-				<Typography variant="caption">Lifepath Skill Points: {totals.skills.lifepathPoints.points}{lifepathSkillExtension}</Typography>
+				<Typography variant="caption">Lifepath Skill Points: {skillPools.lifepath.total}</Typography>
 			</Grid>
 		</Grid>
 	);
