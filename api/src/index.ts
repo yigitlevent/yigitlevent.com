@@ -27,7 +27,7 @@ const SessionStore = new (pgsimple(session))({
 });
 
 App.use(morgan("common", {
-	stream: fs.createWriteStream(path.join(__dirname, "access.log"), { flags: "a" })
+	stream: fs.createWriteStream(path.join(__dirname, "express_access.log"), { flags: "a" })
 }));
 
 App.use(express.json());
