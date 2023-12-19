@@ -38,7 +38,7 @@ jobs:
           export NVM_DIR=~/.nvm
           source ~/.nvm/nvm.sh
           cd ${{ secrets.SOURCEDIR }}/client/main-src
-          nvm use 21.4.0
+          nvm use 21.4.0 
           npm i
           npm run build
           sudo rm -rf ${{ secrets.TARGETDIR }}/client/main
