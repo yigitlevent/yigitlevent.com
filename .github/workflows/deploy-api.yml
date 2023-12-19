@@ -39,7 +39,6 @@ jobs:
           source ~/.nvm/nvm.sh
           cd ${{ secrets.SOURCEDIR }}/api-src
           nvm use 21.4.0
-          sudo npm i -g pm2
           npm i
           npm run build
           sudo rm -rf ${{ secrets.TARGETDIR }}/api
