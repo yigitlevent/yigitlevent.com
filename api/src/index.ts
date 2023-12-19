@@ -1,3 +1,6 @@
+import fs from "fs";
+import path from "path";
+
 import pgsimple from "connect-pg-simple";
 import cors from "cors";
 import express from "express";
@@ -23,7 +26,9 @@ const SessionStore = new (pgsimple(session))({
 	errorLog: (e) => console.error(e)
 });
 
-App.use(morgan("combined"));
+App.use(morgan("common", {
+	stream: fs.createWriteStream(path.join(__dirname, "access.log"), { flags: "a" })
+}));
 
 App.use(express.json());
 App.use(express.urlencoded({ extended: true }));
