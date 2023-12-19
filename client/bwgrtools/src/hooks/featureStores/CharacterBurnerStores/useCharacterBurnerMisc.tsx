@@ -24,7 +24,7 @@ export type CharacterBurnerMiscState = {
 	modifySkillSubskills: (skillId: SkillId, subskillIds: SkillId[] | null, canSelectMultiple: boolean) => void;
 	resetSkillSubskills: (skillIds: SkillId[]) => void;
 
-	addBrutalLifeTrait: (traitId: TraitId | undefined) => void;
+	addBrutalLifeTrait: (traitId: [id: TraitId, name: string] | "No Trait") => void;
 	setHuntingGround: (huntingGround: HuntingGroundsList) => void;
 
 	switchQuestion: (id: QuestionId) => void;
@@ -160,7 +160,7 @@ export const useCharacterBurnerMiscStore = create<CharacterBurnerMiscState>()(
 				);
 			},
 
-			addBrutalLifeTrait: (traitId: TraitId | undefined) => {
+			addBrutalLifeTrait: (traitId: [id: TraitId, name: string] | "No Trait") => {
 				set(produce<CharacterBurnerMiscState>((state) => {
 					const prev = state.special.stock.brutalLifeTraits;
 					state.special.stock.brutalLifeTraits = [...prev, traitId];

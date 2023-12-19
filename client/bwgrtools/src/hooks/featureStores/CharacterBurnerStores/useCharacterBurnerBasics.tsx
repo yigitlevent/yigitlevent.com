@@ -55,7 +55,7 @@ export const useCharacterBurnerBasicsStore = create<CharacterBurnerBasicsState>(
 
 			setStockAndReset: (stock?: [id: StockId, name: string]): void => {
 				set({
-					stock: [0 as StockId, "Dwarf"],
+					stock: stock,
 					concept: "",
 					name: "",
 					gender: "Male",
