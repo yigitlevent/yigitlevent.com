@@ -14,10 +14,12 @@ import { GetSkills } from "../services/skills.service";
 import { GetSpellFacets } from "../services/spellFacets.service";
 import { GetStocks } from "../services/stocks.service";
 import { GetTraits } from "../services/traits.service";
+import { Logger } from "../utils/logger";
 
 
 export async function GetRulesetsData(request: Request<unknown, unknown, RulesetForms>, response: Response): Promise<Response<RulesetResponse, Record<string, unknown>>> {
 	try {
+		const log = new Logger("➞ GetRulesetsData", true);
 		const { rulesets } = request.body;
 
 		const abilities = await GetAbilities();
@@ -35,6 +37,7 @@ export async function GetRulesetsData(request: Request<unknown, unknown, Ruleset
 		const questions = await GetQuestions();
 
 		const responseData: RulesetResponse = { ruleset: { abilities, stocks, settings, skills, traits, lifepaths, resources, spellFacets, dowActions, racActions, fightActions, practices, questions } };
+		log.end();
 
 		response.status(200);
 		return response.json(responseData);

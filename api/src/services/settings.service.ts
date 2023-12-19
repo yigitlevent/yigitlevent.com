@@ -1,4 +1,5 @@
 import { PgPool } from "../index";
+import { Logger } from "../utils/logger";
 
 
 export async function GetSettings(rulesets: RulesetId[]): Promise<Setting[]> {
@@ -13,7 +14,13 @@ export async function GetSettings(rulesets: RulesetId[]): Promise<Setting[]> {
 		};
 	};
 
+	const log = new Logger("GetSettings Querying");
 	const query = `select * from bwgr."SettingsList" where "Rulesets"::text[] && ARRAY['${rulesets.join("','")}'];`;
-	return PgPool.query<SettingDBO>(query)
-		.then(result => result.rows.map(convert));
+	return PgPool.query<SettingDBO>(query).then(result => {
+		log.end();
+		const log2 = new Logger("GetSettings Conversion");
+		const res = result.rows.map(convert);
+		log2.end();
+		return res;
+	});
 }

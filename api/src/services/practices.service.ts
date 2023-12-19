@@ -1,8 +1,10 @@
 import { PgPool } from "../index";
+import { Logger } from "../utils/logger";
 
 
 export async function GetPractices(): Promise<Practice[]> {
 	const convert = (v: PracticeDBO): Practice => {
+
 		if (v.Ability !== null && v.AbilityId !== null) {
 			return {
 				id: v.Id,
@@ -26,7 +28,14 @@ export async function GetPractices(): Promise<Practice[]> {
 		else throw new Error("shall not happen");
 	};
 
+	const log = new Logger("GetPractices Querying");
 	const query = "select * from bwgr.\"PracticeList\";";
 	return PgPool.query<PracticeDBO>(query)
-		.then(result => result.rows.map(convert));
+		.then(result => {
+			log.end();
+			const log2 = new Logger("GetPractices Conversion");
+			const res = result.rows.map(convert);
+			log2.end();
+			return res;
+		});
 }

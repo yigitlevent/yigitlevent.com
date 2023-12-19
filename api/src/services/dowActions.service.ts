@@ -1,8 +1,11 @@
 import { PgPool } from "../index";
+import { Logger } from "../utils/logger";
 
 
 export async function GetDoWActions(): Promise<DoWAction[]> {
 	const convert = (a: DoWActionDBO[], at: ActionTestDBO[], ar: DoWActionResolutionDBO[]): DoWAction[] => {
+		const log = new Logger("GetDoWActions Conversion");
+
 		const r: DoWAction[] = a.map(v => {
 			const act: DoWAction = {
 				id: v.Id,
@@ -52,9 +55,11 @@ export async function GetDoWActions(): Promise<DoWAction[]> {
 			return act;
 		});
 
+		log.end();
 		return r;
 	};
 
+	const log = new Logger("GetDoWActions Querying");
 	const query1 = "select * from bwgr.\"DuelOfWitsActions\";";
 	const query2 = "select * from bwgr.\"DoWActionTestList\";";
 	const query3 = "select * from bwgr.\"DoWActionResolutionList\";";
@@ -62,5 +67,9 @@ export async function GetDoWActions(): Promise<DoWAction[]> {
 		PgPool.query<DoWActionDBO>(query1),
 		PgPool.query<ActionTestDBO>(query2),
 		PgPool.query<DoWActionResolutionDBO>(query3)
-	]).then(result => convert(result[0].rows, result[1].rows, result[2].rows));
+	]).then(result => {
+		log.end();
+		const res = convert(result[0].rows, result[1].rows, result[2].rows);
+		return res;
+	});
 }

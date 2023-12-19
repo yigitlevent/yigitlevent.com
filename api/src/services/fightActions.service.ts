@@ -1,8 +1,11 @@
 import { PgPool } from "../index";
+import { Logger } from "../utils/logger";
 
 
 export async function GetFightActions(): Promise<FightAction[]> {
 	const convert = (a: FightActionDBO[], at: ActionTestDBO[], ar: FightActionResolutionDBO[]): FightAction[] => {
+		const log = new Logger("GetFightActions Conversion");
+
 		const r: FightAction[] = a.map(v => {
 			const act: FightAction = {
 				id: v.Id,
@@ -57,9 +60,11 @@ export async function GetFightActions(): Promise<FightAction[]> {
 			return act;
 		});
 
+		log.end();
 		return r;
 	};
 
+	const log = new Logger("GetFightActions Querying");
 	const query1 = "select * from bwgr.\"FightActionsList\";";
 	const query2 = "select * from bwgr.\"FightActionTestList\";";
 	const query3 = "select * from bwgr.\"FightActionResolutionList\";";
@@ -67,5 +72,9 @@ export async function GetFightActions(): Promise<FightAction[]> {
 		PgPool.query<FightActionDBO>(query1),
 		PgPool.query<ActionTestDBO>(query2),
 		PgPool.query<FightActionResolutionDBO>(query3)
-	]).then(result => convert(result[0].rows, result[1].rows, result[2].rows));
+	]).then(result => {
+		log.end();
+		const res = convert(result[0].rows, result[1].rows, result[2].rows);
+		return res;
+	});
 }

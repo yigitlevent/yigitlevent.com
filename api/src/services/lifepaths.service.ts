@@ -1,8 +1,11 @@
 import { PgPool } from "../index";
+import { Logger } from "../utils/logger";
 
 
 export async function GetLifepaths(rulesets: RulesetId[]): Promise<Lifepath[]> {
 	const convert = (l: LifepathDBO[], lr: LifepathRequirementBlockDBO[], lri: LifepathRequirementBlockItemDBO[]): Lifepath[] => {
+		const log = new Logger("GetLifepaths Conversion");
+
 		const r: Lifepath[] = l.map(v => {
 			const lp: Lifepath = {
 				rulesets: v.Rulesets,
@@ -111,9 +114,11 @@ export async function GetLifepaths(rulesets: RulesetId[]): Promise<Lifepath[]> {
 			return lp;
 		});
 
+		log.end();
 		return r;
 	};
 
+	const log = new Logger("GetLifepaths Querying");
 	const query1 = `select * from bwgr."LifepathsList" where "Rulesets"::text[] && ARRAY['${rulesets.join("','")}'];`;
 	const query2 = "select * from bwgr.\"LifepathRequirementBlocks\";";
 	const query3 = "select * from bwgr.\"LifepathRequirementBlockItems\";";
@@ -121,5 +126,9 @@ export async function GetLifepaths(rulesets: RulesetId[]): Promise<Lifepath[]> {
 		PgPool.query<LifepathDBO>(query1),
 		PgPool.query<LifepathRequirementBlockDBO>(query2),
 		PgPool.query<LifepathRequirementBlockItemDBO>(query3)
-	]).then(result => convert(result[0].rows, result[1].rows, result[2].rows));
+	]).then(result => {
+		log.end();
+		const res = convert(result[0].rows, result[1].rows, result[2].rows);
+		return res;
+	});
 }

@@ -1,4 +1,5 @@
 import { PgPool } from "../index";
+import { Logger } from "../utils/logger";
 
 
 export async function GetAbilities(): Promise<Ability[]> {
@@ -26,7 +27,13 @@ export async function GetAbilities(): Promise<Ability[]> {
 		return r;
 	};
 
+	const log = new Logger("GetAbilities Querying");
 	const query = "select * from bwgr.\"AbilitiesList\";";
-	return PgPool.query<AbilityDBO>(query)
-		.then(result => result.rows.map(convert));
+	return PgPool.query<AbilityDBO>(query).then(result => {
+		log.end();
+		const log2 = new Logger("GetAbilities Conversion");
+		const res = result.rows.map(convert);
+		log2.end();
+		return res;
+	});
 }

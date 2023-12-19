@@ -1,8 +1,11 @@
 import { PgPool } from "../index";
+import { Logger } from "../utils/logger";
 
 
 export async function GetResources(rulesets: RulesetId[]): Promise<Resource[]> {
 	const convert = (re: ResourceDBO[], rmd: ResourceMagicDetailsDBO[], rmo: ResourceMagicObstaclesDBO[]): Resource[] => {
+		const log = new Logger("GetResources Conversion");
+
 		const r: Resource[] = re.map(v => {
 			const res: Resource = {
 				rulesets: v.Rulesets,
@@ -70,9 +73,12 @@ export async function GetResources(rulesets: RulesetId[]): Promise<Resource[]> {
 			}
 			return res;
 		});
+
+		log.end();
 		return r;
 	};
 
+	const log = new Logger("GetResources Querying");
 	const query1 = `select * from bwgr."ResourcesList" where "Rulesets"::text[] && ARRAY['${rulesets.join("','")}'];`;
 	const query2 = "select * from bwgr.\"ResourceMagicDetailsList\";";
 	const query3 = "select * from bwgr.\"ResourceMagicObstaclesList\";";
@@ -80,5 +86,9 @@ export async function GetResources(rulesets: RulesetId[]): Promise<Resource[]> {
 		PgPool.query<ResourceDBO>(query1),
 		PgPool.query<ResourceMagicDetailsDBO>(query2),
 		PgPool.query<ResourceMagicObstaclesDBO>(query3)
-	]).then(result => convert(result[0].rows, result[1].rows, result[2].rows));
+	]).then(result => {
+		log.end();
+		const res = convert(result[0].rows, result[1].rows, result[2].rows);
+		return res;
+	});
 }

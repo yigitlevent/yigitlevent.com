@@ -1,4 +1,5 @@
 import { PgPool } from "../index";
+import { Logger } from "../utils/logger";
 
 
 export async function GetSpellFacets(): Promise<SpellFacets> {
@@ -9,6 +10,7 @@ export async function GetSpellFacets(): Promise<SpellFacets> {
 	const query4 = `${query} from bwgr."SpellDurationFacets";`;
 	const query5 = `${query} from bwgr."SpellAreaOfEffectFacets";`;
 
+	const log = new Logger("GetSpellFacets Querying");
 	return Promise.all([
 		PgPool.query<SpellOriginFacet>(query1),
 		PgPool.query<SpellDurationFacet>(query2),
@@ -16,6 +18,8 @@ export async function GetSpellFacets(): Promise<SpellFacets> {
 		PgPool.query<SpellElementFacet>(query4),
 		PgPool.query<SpellImpetusFacet>(query5)
 	]).then((result): SpellFacets => {
-		return { origins: result[0].rows, duration: result[1].rows, areaOfEffects: result[2].rows, elements: result[3].rows, impetus: result[4].rows };
+		log.end();
+		const res = { origins: result[0].rows, duration: result[1].rows, areaOfEffects: result[2].rows, elements: result[3].rows, impetus: result[4].rows };
+		return res;
 	});
 }

@@ -1,8 +1,11 @@
 import { PgPool } from "../index";
+import { Logger } from "../utils/logger";
 
 
 export async function GetRaCActions(): Promise<RaCAction[]> {
 	const convert = (a: RaCActionDBO[], ar: RaCActionResolutionDBO[]): RaCAction[] => {
+		const log = new Logger("GetRaCActions Conversion");
+
 		const r: RaCAction[] = a.map(v => {
 			const act: RaCAction = {
 				id: v.Id,
@@ -49,13 +52,19 @@ export async function GetRaCActions(): Promise<RaCAction[]> {
 			return act;
 		});
 
+		log.end();
 		return r;
 	};
 
+	const log = new Logger("GetRaCActions Querying");
 	const query1 = "select * from bwgr.\"RangeAndCoverActionsList\";";
 	const query2 = "select * from bwgr.\"RangeAndCoverActionResolutionList\";";
 	return Promise.all([
 		PgPool.query<RaCActionDBO>(query1),
 		PgPool.query<RaCActionResolutionDBO>(query2)
-	]).then(result => convert(result[0].rows, result[1].rows));
+	]).then(result => {
+		log.end();
+		const res = convert(result[0].rows, result[1].rows);
+		return res;
+	});
 }
