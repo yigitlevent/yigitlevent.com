@@ -1,8 +1,13 @@
 import Typography from "@mui/material/Typography";
 import { Fragment, useEffect, useState } from "react";
 
+import { GeneralSkillModal } from "./Modals/GeneralSkillModal";
+import { GeneralTraitModal } from "./Modals/GeneralTraitModal";
 import { LifepathSelectionModal } from "./Modals/LifepathSelectionModal";
+import { QuestionsModal } from "./Modals/QuestionsModal";
+import { RandomLifepathsModal } from "./Modals/RandomLifepathsModal";
 import { ResourceSelectionModal } from "./Modals/ResourceSelectionModal";
+import { SpecialOptionsModal } from "./Modals/SpecialOptionsModal";
 import { Attributes } from "./Sections/Attributes";
 import { Basics } from "./Sections/Basics";
 import { Beliefs } from "./Sections/Beliefs";
@@ -13,17 +18,14 @@ import { Stats } from "./Sections/Stats";
 import { Tolerances } from "./Sections/Tolerances";
 import { Traits } from "./Sections/Traits";
 import { useCharacterBurnerAttributeStore } from "../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerAttribute";
+import { useCharacterBurnerBasicsStore } from "../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerBasics";
 import { useCharacterBurnerLifepathStore } from "../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerLifepath";
 import { useCharacterBurnerSkillStore } from "../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerSkill";
 import { useCharacterBurnerTraitStore } from "../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerTrait";
-import { GeneralSkillModal } from "./Modals/GeneralSkillModal";
-import { GeneralTraitModal } from "./Modals/GeneralTraitModal";
-import { RandomLifepathsModal } from "./Modals/RandomLifepathsModal";
-import { QuestionsModal } from "./Modals/QuestionsModal";
-import { SpecialOptionsModal } from "./Modals/SpecialOptionsModal";
 
 
 export function CharacterBurner(): JSX.Element {
+	const { stock } = useCharacterBurnerBasicsStore();
 	const { lifepaths, updateAvailableLifepaths } = useCharacterBurnerLifepathStore();
 	const { skills } = useCharacterBurnerSkillStore();
 	const { traits } = useCharacterBurnerTraitStore();
@@ -36,7 +38,7 @@ export function CharacterBurner(): JSX.Element {
 
 	useEffect(() => {
 		updateAvailableLifepaths();
-	}, [updateAvailableLifepaths]);
+	}, [updateAvailableLifepaths, stock]);
 
 	return (
 		<Fragment>
@@ -64,11 +66,6 @@ export function CharacterBurner(): JSX.Element {
 			<GeneralTraitModal isOpen={currentModal === "geTr"} close={closeModals} />
 			<QuestionsModal isOpen={currentModal === "qu"} close={closeModals} />
 			<SpecialOptionsModal isOpen={currentModal === "so"} close={closeModals} />
-
-			{/* TODO
-				<AnswerQuestions />
-				<ChooseSpecial /> --- StockSpecific, SpecialLifepaths, SpecialSkills
-			*/}
 		</Fragment>
 	);
 }
