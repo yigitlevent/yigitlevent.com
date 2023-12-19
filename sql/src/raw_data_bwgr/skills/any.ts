@@ -3628,7 +3628,7 @@ export const AnyWise: SkillCategory = {
 			allowed: ["bwgr", "bs"],
 			description: "Choose any wise skill.",
 			magical: false,
-			name: "Any wise",
+			name: "Any Wise",
 			noList: false,
 			restriction: "N/A",
 			root: ["Perception"],
