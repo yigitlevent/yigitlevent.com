@@ -20,7 +20,11 @@ export function SpecialSkills(): JSX.Element {
 
 	const getSpecialSkillIds = useCallback((characterSkills: UniqueArray<SkillId, CharacterSkill>): SkillId[] => {
 		return characterSkills
-			.filter(charSkill => charSkill.name === "Any Skill" || charSkill.name === "Any wise" || ruleset.getSkill(charSkill.id).subskillIds !== undefined)
+			.filter(charSkill =>
+				charSkill.name === "Any Skill"
+				|| charSkill.name === "Any Wise"
+				|| ruleset.getSkill(charSkill.id).subskillIds !== undefined
+			)
 			.map(charSkill => charSkill.id);
 	}, [ruleset]);
 
@@ -35,14 +39,39 @@ export function SpecialSkills(): JSX.Element {
 	return (
 		<Fragment>
 			{specialSkillIds.map((charSkillId, i) => {
+				console.log(special.chosenSubskills);
+
 				const skill = ruleset.getSkill(charSkillId);
 				const canSelectMultiple = skill.name === "Appropriate Weapons";
-				const subskills
-					= ruleset.skills.filter(s =>
+
+				const subskillIds = skill.subskillIds;
+				let subskills: Skill[] = [];
+
+				if (skill.name === "Any Skill") {
+					subskills = ruleset.skills.filter(s =>
 						!skills.has(s.id)
 						&& (s.stock === stock || (s.restriction?.onlyStock ? s.restriction.onlyStock[0] === stock[0] ? true : false : true))
 						&& (s.restriction?.onlyWithAbility ? hasAttribute(s.restriction.onlyWithAbility[0]) ? true : false : true)
+						&& !s.flags.dontList
 					);
+				}
+				else if (skill.name === "Any Wise") {
+					subskills = ruleset.skills.filter(s =>
+						!skills.has(s.id)
+						&& (s.stock === stock || (s.restriction?.onlyStock ? s.restriction.onlyStock[0] === stock[0] ? true : false : true))
+						&& (s.restriction?.onlyWithAbility ? hasAttribute(s.restriction.onlyWithAbility[0]) ? true : false : true)
+						&& s.category[1] === "Wise"
+						&& !s.flags.dontList
+					);
+				}
+				else if (subskillIds) {
+					subskills = ruleset.skills.filter(s =>
+						!skills.has(s.id)
+							&& subskillIds.includes(s.id)
+							&& (s.stock === stock || (s.restriction?.onlyStock ? s.restriction.onlyStock[0] === stock[0] ? true : false : true))
+							&& s.restriction?.onlyWithAbility ? hasAttribute(s.restriction.onlyWithAbility[0]) ? true : false : true
+					);
+				}
 
 				if (canSelectMultiple) {
 					return (

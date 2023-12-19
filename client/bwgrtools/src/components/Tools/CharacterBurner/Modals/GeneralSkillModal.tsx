@@ -47,6 +47,7 @@ export function GeneralSkillModal({ isOpen, close }: { isOpen: boolean; close: (
 				!skills.has(skill.id)
 				&& (skill.stock === stock || (skill.restriction?.onlyStock ? skill.restriction.onlyStock[0] === stock[0] ? true : false : true))
 				&& (skill.restriction?.onlyWithAbility ? hasAttribute(skill.restriction.onlyWithAbility[0]) ? true : false : true)
+				&& !skill.flags.dontList
 			);
 			setPossibleSkills(possible);
 		}
