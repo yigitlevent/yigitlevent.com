@@ -35,7 +35,7 @@ interface CharacterResource {
 }
 
 interface CharacterSpecialStock {
-	brutalLifeTraits: (TraitId | undefined)[];
+	brutalLifeTraits: ([id: TraitId, name: string] | "No Trait" | undefined)[];
 	huntingGround: undefined | HuntingGroundsList;
 }
 
