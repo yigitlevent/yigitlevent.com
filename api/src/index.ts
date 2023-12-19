@@ -2,6 +2,7 @@ import pgsimple from "connect-pg-simple";
 import cors from "cors";
 import express from "express";
 import session from "express-session";
+import morgan from "morgan";
 import Pg from "pg";
 
 import { PORT } from "./configs/constants.config";
@@ -21,6 +22,8 @@ const SessionStore = new (pgsimple(session))({
 	tableName: "UserSessions",
 	errorLog: (e) => console.error(e)
 });
+
+App.use(morgan("combined"));
 
 App.use(express.json());
 App.use(express.urlencoded({ extended: true }));
