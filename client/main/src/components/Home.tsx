@@ -1,16 +1,16 @@
-import { Fragment } from "react";
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
+import Paper from "@mui/material/Paper";
+import Typography from "@mui/material/Typography";
+import { Fragment } from "react";
 
 import { JourneySoFar } from "./home/JourneySoFar";
-import { Skills } from "./home/Skills";
 import { MyCurrentProjects } from "./home/MyCurrentProjects";
 import { MyOldProjects } from "./home/MyOldProjects";
+import { Skills } from "./home/Skills";
 
 
-export function Home() {
+export function Home(): JSX.Element {
 	return (
 		<Fragment>
 			<Box sx={{ padding: "10px 20px" }}>
@@ -22,6 +22,7 @@ export function Home() {
 					<Grid item xs={4} md={3}>
 						<JourneySoFar />
 					</Grid>
+
 					<Grid item xs={4} md={1}>
 						<Skills />
 					</Grid>

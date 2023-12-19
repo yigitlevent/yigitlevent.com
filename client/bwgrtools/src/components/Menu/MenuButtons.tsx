@@ -1,23 +1,21 @@
-import { Fragment } from "react";
-
-import Paper from "@mui/material/Paper";
-import IconButton from "@mui/material/IconButton";
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-
-//import FactCheckOutlinedIcon from "@mui/icons-material/FactCheckOutlined";
-import ListAltOutlinedIcon from "@mui/icons-material/ListAltOutlined";
+import AutoStoriesOutlinedIcon from "@mui/icons-material/AutoStoriesOutlined";
 import DatasetOutlinedIcon from "@mui/icons-material/DatasetOutlined";
+import FactCheckOutlinedIcon from "@mui/icons-material/FactCheckOutlined";
+import ListAltOutlinedIcon from "@mui/icons-material/ListAltOutlined";
 import LoginOutlinedIcon from "@mui/icons-material/LoginOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import OpenInBrowserOutlinedIcon from "@mui/icons-material/OpenInBrowserOutlined";
-import AutoStoriesOutlinedIcon from "@mui/icons-material/AutoStoriesOutlined";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import IconButton from "@mui/material/IconButton";
+import Paper from "@mui/material/Paper";
+import { Fragment } from "react";
 
 import { useUserStore } from "../../hooks/apiStores/useUserStore";
-import { useDrawerStore, DrawerNames } from "../../hooks/stores/useDrawerStore";
+import { useDrawerStore, DrawerNames } from "../../hooks/useDrawerStore";
 
 
-function DrawerIconButton({ title, icon, onClick }: { title: string; icon: JSX.Element; onClick: () => void; }) {
+function DrawerIconButton({ title, icon, onClick }: { title: string; icon: JSX.Element; onClick: () => void; }): JSX.Element {
 	return (
 		<Grid item>
 			<Paper variant="outlined" sx={{ padding: "4px 4px" }}>
@@ -27,14 +25,14 @@ function DrawerIconButton({ title, icon, onClick }: { title: string; icon: JSX.E
 	);
 }
 
-export function MenuButtons({ openSignin, openSignup }: { openSignin: () => void; openSignup: () => void; }) {
+export function MenuButtons({ openSignin, openSignup }: { openSignin: () => void; openSignup: () => void; }): JSX.Element {
 	const { user, signout } = useUserStore();
-	const { openDrawer } = useDrawerStore();
+	const { toggleDrawer } = useDrawerStore();
 
 	const buttons: { title: DrawerNames, icon: JSX.Element; authOnly: boolean; }[] = [
 		{ title: "Tools", icon: <ListAltOutlinedIcon color="primary" />, authOnly: false },
 		{ title: "Datasets", icon: <DatasetOutlinedIcon color="primary" />, authOnly: false },
-		//{ title: "Checklist", icon: <FactCheckOutlinedIcon color="primary" />, authOnly: false },
+		{ title: "Checklist", icon: <FactCheckOutlinedIcon color="primary" />, authOnly: false },
 		{ title: "My Things", icon: <AutoStoriesOutlinedIcon color="primary" />, authOnly: true }
 	];
 
@@ -49,13 +47,11 @@ export function MenuButtons({ openSignin, openSignup }: { openSignin: () => void
 				: <Fragment>
 					<DrawerIconButton title={"Sign in"} icon={<LoginOutlinedIcon color="primary" />} onClick={openSignin} />
 					<DrawerIconButton title={"Sign up"} icon={<OpenInBrowserOutlinedIcon color="primary" />} onClick={openSignup} />
-				</Fragment>
-			}
+				</Fragment>}
 
 			{buttons.reverse()
 				.filter(v => !v.authOnly || user)
-				.map((v, i) => <DrawerIconButton key={i} title={v.title} icon={v.icon} onClick={() => openDrawer(v.title)} />)
-			}
+				.map((v, i) => <DrawerIconButton key={i} title={v.title} icon={v.icon} onClick={() => toggleDrawer(v.title)} />)}
 		</Grid>
 	);
 }

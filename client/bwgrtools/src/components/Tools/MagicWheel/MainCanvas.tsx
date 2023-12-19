@@ -1,24 +1,20 @@
 import { createRef, useCallback, useEffect, useState } from "react";
-import styled from "styled-components";
 
-import { MagicFacet } from "../../../data/magic";
-
+import { useMagicWheelStore } from "../../../hooks/featureStores/useMagicWheelStore";
 import { THEME } from "../../../theme/theme";
 
-import { MWCONST } from "./MagicWheel";
 
+interface Props {
+	currentAngles: number[];
+	blockAngle: { [key: string]: number; };
+	spellFacets: SpellFacets;
+	getFacetMapping: (type: keyof SpellFacets) => { bandIndex: number; } & unknown;
+}
 
-const Canvas = styled.canvas`
-	position: absolute;
-	left: 0;
-	top: 0; 
-	z-index: 102;
-	width: 100%;
-`;
-
-export function MainCanvas({ currentAngles, blockAngle, magicData }: { currentAngles: number[]; blockAngle: number[]; magicData: MagicFacet[][]; }): JSX.Element {
+export function MainCanvas({ currentAngles, blockAngle, spellFacets, getFacetMapping }: Props): JSX.Element {
 	const canvasRef = createRef<HTMLCanvasElement>();
 	const [context, setContext] = useState<CanvasRenderingContext2D>();
+	const mwConstants = useMagicWheelStore().constants;
 
 	const drawString = useCallback((string: string, radius: number, anglePerCharacter: number): void => {
 		if (context) {
@@ -39,40 +35,45 @@ export function MainCanvas({ currentAngles, blockAngle, magicData }: { currentAn
 
 	const drawText = useCallback((rotationArray: number[]): void => {
 		if (context) {
-			for (const arrayKey in magicData) {
-				for (const stringKey in magicData[arrayKey]) {
-					const length = magicData[arrayKey][stringKey].name.length;
+			for (const arrayKey in spellFacets) {
+				const key = arrayKey as keyof SpellFacets;
+				const i = getFacetMapping(key).bandIndex;
 
-					const radius = MWCONST.circleRadius * (parseInt(arrayKey) + 1) + MWCONST.textOffset;
+				for (const stringKey in spellFacets[key]) {
+					const length = spellFacets[key][stringKey].name.length;
+
+					const radius = mwConstants.circleRadius * (i + 1) + mwConstants.textOffset;
 					const anglePerCharacter = 8 * (1 / radius);
 
-					const stringStartAngle = ((blockAngle[parseInt(arrayKey)] - (anglePerCharacter * length)) / 2);
-					const blockStartAngle = ((blockAngle[parseInt(arrayKey)] * -parseInt(stringKey) - (anglePerCharacter * 2)) / 2);
+					const stringStartAngle = ((blockAngle[key] - (anglePerCharacter * length)) / 2);
+					const blockStartAngle = ((blockAngle[key] * -parseInt(stringKey) - (anglePerCharacter * 2)) / 2);
 
 					context.save();
-					context.translate(MWCONST.canvasSize / 2, MWCONST.canvasSize / 2);
-					context.rotate(rotationArray[parseInt(arrayKey)] + stringStartAngle + blockStartAngle - (blockAngle[parseInt(arrayKey)] / 2));
+					context.translate(mwConstants.canvasSize / 2, mwConstants.canvasSize / 2);
+					context.rotate(rotationArray[i] + stringStartAngle + blockStartAngle - (blockAngle[key] / 2));
 
-					drawString(magicData[arrayKey][stringKey].name, radius, anglePerCharacter);
+					drawString(spellFacets[key][stringKey].name, radius, anglePerCharacter);
 
 					context.restore();
 				}
 			}
 		}
-	}, [context, magicData, blockAngle, drawString]);
+	}, [context, spellFacets, getFacetMapping, mwConstants.circleRadius, mwConstants.textOffset, mwConstants.canvasSize, blockAngle, drawString]);
 
 	useEffect(() => {
 		if (context) {
-			context.clearRect(0, 0, MWCONST.canvasSize, MWCONST.canvasSize);
+			context.clearRect(0, 0, mwConstants.canvasSize, mwConstants.canvasSize);
 			drawText(currentAngles);
 		}
-	}, [context, blockAngle, currentAngles, drawText]);
+	}, [context, blockAngle, currentAngles, drawText, mwConstants.canvasSize]);
 
 	useEffect(() => {
 		setContext(canvasRef.current?.getContext("2d") as CanvasRenderingContext2D);
 	}, [canvasRef]);
 
 	return (
-		<Canvas ref={canvasRef} height={MWCONST.canvasSize} width={MWCONST.canvasSize}>Your browser does not support canvas.</Canvas>
+		<canvas ref={canvasRef} height={mwConstants.canvasSize} width={mwConstants.canvasSize} style={{ position: "absolute", left: 0, top: 0, zIndex: 102, width: "100%" }}>
+			Your browser does not support canvas.
+		</canvas>
 	);
 }

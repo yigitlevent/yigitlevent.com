@@ -1,52 +1,50 @@
 import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
+import Typography from "@mui/material/Typography";
 
-import { useRulesetStore } from "../../../hooks/stores/useRulesetStore";
-import type { Lifepath } from "../../../data/stocks/_stocks";
-import { Stocks } from "../../../data/stocks/_stocks";
-
+import { LifepathRequirements } from "./LifepathRequirements";
 import { LifepathSkills } from "./LifepathSkills";
 import { LifepathTraits } from "./LifepathTraits";
-import { LifepathRequirements } from "./LifepathRequirements";
+import { useRulesetStore } from "../../../hooks/apiStores/useRulesetStore";
 
 
-export function LifepathBox({ lifepath }: { lifepath: Lifepath; }) {
-	const { checkRulesets } = useRulesetStore();
+export function LifepathBox({ lifepath }: { lifepath: Lifepath; }): JSX.Element {
+	const { getSetting } = useRulesetStore();
 
 	const getYears = (l: Lifepath) => {
-		return l.years + (typeof l.years !== "number" ? "" : (l.skillPool > 1) ? "yrs" : "yr");
+		const years = typeof l.years === "number"
+			? `${l.years}${l.years > 1 ? "yrs" : "yr"}`
+			: l.years.join("-") + "yrs";
+		return years;
 	};
 
 	const getResources = (l: Lifepath) => {
-		return l.resources + (typeof l.resources !== "number" ? "" : (l.resources > 1) ? "rps" : "rp");
+		const rps = `${l.pools.resourcePoints}${l.pools.resourcePoints > 1 ? "rps" : "rp"}`;
+		return rps;
 	};
 
 	const getStatPools = (l: Lifepath) => {
 		const statPoolsString = [];
-		if (l.eitherPool === 0 && l.mentalPool === 0 && l.physicalPool === 0) { statPoolsString.push("—"); }
-		else if (l.eitherPool !== 0) { statPoolsString.push(`${(l.eitherPool > 0) ? `+${l.eitherPool}` : l.eitherPool}M/P`); }
+
+		if (l.pools.eitherStatPool === 0 && l.pools.mentalStatPool === 0 && l.pools.physicalStatPool === 0) statPoolsString.push("—");
+		else if (l.pools.eitherStatPool !== 0) statPoolsString.push(`${(l.pools.eitherStatPool > 0) ? "+" : ""}${l.pools.eitherStatPool}M/P`);
 		else {
-			if (l.mentalPool !== 0) { statPoolsString.push(`${(l.mentalPool > 0) ? `+${l.mentalPool}` : l.mentalPool}M`); }
-			if (l.physicalPool !== 0) { statPoolsString.push(`${(l.physicalPool > 0) ? `+${l.physicalPool}` : l.physicalPool}P`); }
+			if (l.pools.mentalStatPool !== 0) statPoolsString.push(`${(l.pools.mentalStatPool > 0) ? "+" : ""}${l.pools.mentalStatPool}M`);
+			if (l.pools.physicalStatPool !== 0) statPoolsString.push(`${(l.pools.physicalStatPool > 0) ? "+" : ""}${l.pools.physicalStatPool}P`);
 		}
 		return statPoolsString.join(", ");
 	};
 
 	const getLeads = (l: Lifepath) => {
-		const leads = (l.leads.length === 0)
-			? "—"
-			: l.leads
-				.filter((lead) => {
-					const path = lead.split("➞");
-					return checkRulesets(Stocks[path[0]].settings[path[1]].allowed);
+		const leads = (l.leads && l.leads.length > 0)
+			? l.leads
+				.map(settingId => {
+					const s = getSetting(settingId);
+					if (s) return s.nameShort;
+					else throw new Error(`Setting of LeadId '${settingId}' cannot be found.`);
 				})
-				.map((lead) => {
-					const path = lead.split("➞");
-					return Stocks[path[0]].settings[path[1]].short;
-				});
+			: ["—"];
 
-		if (typeof leads === "string") return leads;
 		return leads.join(", ");
 	};
 
@@ -63,11 +61,13 @@ export function LifepathBox({ lifepath }: { lifepath: Lifepath; }) {
 					<Typography variant="caption">{getYears(lifepath)}</Typography>
 				</Paper>
 			</Grid>
+
 			<Grid item lg={1} md={2} sm={6} xs={6}>
 				<Paper elevation={3} square sx={{ padding: "2px 6px 4px" }}>
 					<Typography variant="caption">{getResources(lifepath)}</Typography>
 				</Paper>
 			</Grid>
+
 			<Grid item lg={1} md={2} sm={6} xs={6}>
 				<Paper elevation={3} square sx={{ padding: "2px 6px 4px" }}>
 					<Typography variant="caption">{getStatPools(lifepath)}</Typography>
@@ -92,14 +92,13 @@ export function LifepathBox({ lifepath }: { lifepath: Lifepath; }) {
 				</Typography>
 			</Grid>
 
-			{Object.keys(lifepath.requirements).length > 0
+			{lifepath.requirements
 				? <Grid item md={16}>
 					<Typography variant="caption">
 						<LifepathRequirements lifepath={lifepath} />
 					</Typography>
 				</Grid>
-				: null
-			}
-		</Grid >
+				: null}
+		</Grid>
 	);
 }

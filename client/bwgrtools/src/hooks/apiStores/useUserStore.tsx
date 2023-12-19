@@ -1,13 +1,14 @@
-import produce from "immer";
+import { produce } from "immer";
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 
-import { GenericPost } from "../stores/_genericRequests";
+import { GenericPost } from "../../utils/genericRequests";
 
 
 interface UserState {
 	user: UserSession | undefined;
 	fetching: boolean;
+	triedAuth: boolean;
 	setUser: (user: UserSession | undefined) => void;
 	toggleFetching: () => void;
 	auth: () => void;
@@ -16,12 +17,12 @@ interface UserState {
 	signout: () => void;
 }
 
-
 export const useUserStore = create<UserState>()(
 	devtools(
 		(set, get) => ({
 			user: undefined,
 			fetching: false,
+			triedAuth: false,
 
 			setUser: (user: UserSession | undefined) => {
 				set(produce<UserState>((state) => { state.user = user; }));
@@ -32,21 +33,25 @@ export const useUserStore = create<UserState>()(
 			},
 
 			auth: () => {
-				const setUser = get().setUser;
-				const toggleFetching = get().toggleFetching;
+				if (!get().triedAuth) {
+					set(produce<UserState>((state) => { state.triedAuth = true; }));
 
-				toggleFetching();
+					const setUser = get().setUser;
+					const toggleFetching = get().toggleFetching;
 
-				GenericPost<UserResponse>("/user/auth", null)
-					.then(response => {
-						if (response.status === 200) setUser({ ...response.data.user });
-						else throw new Error();
-					})
-					.catch(reason => {
-						setUser(undefined);
-						console.error(reason);
-					})
-					.finally(() => toggleFetching());
+					toggleFetching();
+
+					GenericPost<UserResponse>("/user/auth", null)
+						.then(response => {
+							if (response.status === 200) setUser({ ...response.data.user });
+							else throw new Error();
+						})
+						.catch(() => {
+							setUser(undefined);
+							//console.error(reason);
+						})
+						.finally(() => toggleFetching());
+				}
 			},
 
 			signup: (formData: UserSignupRequest, handleClose: (open: boolean) => void) => {
@@ -105,6 +110,7 @@ export const useUserStore = create<UserState>()(
 					})
 					.finally(() => toggleFetching());
 			}
-		})
+		}),
+		{ name: "useUserStore" }
 	)
 );

@@ -1,98 +1,85 @@
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 import { Fragment } from "react";
 
-import { Lifepath } from "../../../data/stocks/_stocks";
-import { useRulesetStore } from "../../../hooks/stores/useRulesetStore";
-import { GetOrdinalSuffix, MakeName } from "../../../utils/misc";
-import { GetLifepathFromPath, GetSettingFromPath, GetSkillFromPath, GetTraitFromPath } from "../../../utils/pathFinder";
+import { GetOrdinalSuffix } from "../../../utils/misc";
 
 
-export function LifepathRequirements({ lifepath }: { lifepath: Lifepath; }) {
-	const { checkRulesets } = useRulesetStore();
+function ResolveRequirementBlockItem(item: LifepathRequirementItem): string {
+	const subject = "forCompanion" in item && item.forCompanion ? "Companion of this character" : "Character";
 
-	const requirementsResolver = (conditionsBlock: Condition): string => {
+	if ("isUnique" in item) return "This lifepath cannot be selected twice.";
+	else if ("isSettingEntry" in item) return "If character leads into this setting, this lifepath must be chosen as the first one in this setting.";
+	else if ("minLpIndex" in item) return `This can be selected as the ${GetOrdinalSuffix(item.minLpIndex)} lifepath or higher.`;
+	else if ("maxLpIndex" in item) return `This can be selected as the ${GetOrdinalSuffix(item.maxLpIndex)} lifepath or lower.`;
+	else if ("minYears" in item) return `Character must be at least ${item.minYears} years old.`;
+	else if ("maxYears" in item) return `Character must be at most ${item.maxYears} years old.`;
+	else if ("gender" in item) return `Character must be a ${item.gender.toLowerCase()}.`;
+	else if ("oldestBy" in item) return `Character must be oldest in the party by ${item.oldestBy}.`;
+	else if ("attribute" in item) {
+		if (item.min) return `${subject} must have at least a ${item.min} of ${item.attribute[1]} attribute.`;
+		else if (item.max) return `${subject} must have at most a ${item.max} of ${item.attribute[1]} attribute.`;
+		else return `${subject} must have ${item.attribute[1]} attribute.`;
+	}
+	else if ("skill" in item) return `${subject} must have ${item.skill[1]} skill.`;
+	else if ("trait" in item) return `${subject} must have ${item.trait[1]} trait.`;
+	else if ("lifepath" in item) return `${subject} must have ${item.lifepath[1]} lifepath.`;
+	else if ("setting" in item) return `${subject} must have ${item.setting[1]} setting.`;
+	else if ("question" in item) return `Answer for ${item.question[1]} must be yes.`;
+	else throw new Error(`Unidentified requirement block item: ${item}`);
+}
 
-		const tempSet = new Set<string>();
+function BlockTitle(logicType: string, fulfillmentAmount: number): string {
+	const fa = fulfillmentAmount > 1 ? ` ${fulfillmentAmount} times` : "";
 
-		conditionsBlock.items.forEach(condition => {
-			if (typeof condition === "string") {
-				if (condition.startsWith("Skill") && checkRulesets(GetSkillFromPath(condition).allowed)) {
-					tempSet.add(MakeName(condition, 2, ["skill", "skills"]));
-				}
-				else if (condition.startsWith("Trait") && checkRulesets(GetTraitFromPath(condition).allowed)) {
-					tempSet.add(MakeName(condition, 2, ["trait", "traits"]));
-				}
-				else if (condition.includes("ANY") && checkRulesets(GetSettingFromPath(condition).allowed)) {
-					tempSet.add(MakeName(condition, 2, ["lifepath", "lifepaths"]));
-				}
-				else if (condition.includes("*")) {
-					const split = condition.split("➞");
-					split[2] = split[2].split("*")[1];
-					if (checkRulesets(GetLifepathFromPath(split.join("➞")).allowed)) {
-						tempSet.add(MakeName(condition, 2, ["lifepath", "lifepaths"]));
-					}
-				}
-				else if (!condition.includes("ANY") && checkRulesets(GetLifepathFromPath(condition).allowed)) {
-					tempSet.add(MakeName(condition, 2, ["lifepath", "lifepaths"]));
-				}
-			}
-			else tempSet.add(requirementsResolver(condition));
-		});
+	switch (logicType) {
+		case "AND":
+			return `All of the following must be true${fa}:`;
+		case "OR":
+			return `At least one of the following must be true${fa}:`;
+		case "NOT":
+			return `None of the following must be true${fa}:`;
+		default:
+			throw new Error(`Unidentified requirement block logic type: ${logicType}`);
+	}
+}
 
-		const array = [...tempSet];
+function ResolveRequirementBlocks(requirementBlocks: LifepathRequirementBlock[]): JSX.Element {
+	const parentLogic = requirementBlocks.every(v => v.mustFulfill) ? "AND" : "OR";
 
-		if (array.length > 1 && conditionsBlock.type !== "NOT") {
-			array[array.length - 1] = `${conditionsBlock.type.toLowerCase()} ${array[array.length - 1]}`;
-		}
-		else if (conditionsBlock.type === "NOT") {
-			array[0] = `Character cannot have ${array[0]}`;
-
-			if (array.length > 1) {
-				array[array.length - 1] = `and ${array[array.length - 1]}`;
-			}
-		}
-
-		return (array.length < 3) ? array.join(" ") : array.join(", ");
-	};
-
-	const limitsResolver = (limitsBlock: Limit[]): JSX.Element[] => {
-		const limits: string[] = [];
-		limitsBlock.forEach((limit) => {
-			const temp = limit.split("➞");
-			if (temp[0] === "LP") {
-				if (temp[1] === "UNIQUE") limits.push("This cannot be selected twice.");
-				else if (temp[1] === "MIN") limits.push(`This can be selected as the ${GetOrdinalSuffix(parseInt(temp[2]))} lifepath or higher.`);
-				else if (temp[1] === "MAX") limits.push(`This can be selected as the ${GetOrdinalSuffix(parseInt(temp[2]))} lifepath or lower.`);
-			}
-			else if (temp[0] === "YEARS") {
-				if (temp[1] === "MIN") limits.push(`Character must be at least ${parseInt(temp[2])} years old.`);
-				else if (temp[1] === "MAX") limits.push(`Character must be at most ${parseInt(temp[2])} years old.`);
-			}
-			else if (temp[0] === "GRIEF") {
-				if (temp[1] === "MIN") limits.push(`Character must have at least a ${temp[0].toLowerCase()} of ${parseInt(temp[2])}.`);
-				else if (temp[1] === "MAX") limits.push(`Character must have at most a ${temp[0].toLowerCase()} of ${parseInt(temp[2])}.`);
-			}
-			else if (temp[0] === "GENDER") {
-				limits.push(`Character's must be a ${temp[1].toLowerCase()}.`);
-			}
-		});
-
-		return limits.map((limit, i) => <span key={i}>{limit}</span>);
-	};
+	const hasOneBlock = requirementBlocks.length === 1;
 
 	return (
 		<Fragment>
-			<b>Requirements: </b>
+			{!hasOneBlock ? <Box>{BlockTitle(parentLogic, 1)}</Box> : null}
 
-			{(lifepath.requirements.conditions)
-				? <span>{requirementsResolver(lifepath.requirements.conditions)}. </span>
+			{requirementBlocks.map((block, i) => (
+				<Fragment key={i}>
+					<Box sx={{ marginLeft: hasOneBlock ? 0 : 1 }}>{BlockTitle(block.logicType[1], block.fulfillmentAmount)}</Box>
+
+					<Box sx={{ marginLeft: hasOneBlock ? 0 : 1 }}>
+						{block.items.map((item, ii) => <Box key={ii} sx={{ marginLeft: 1 }}>{ResolveRequirementBlockItem(item)}</Box>)}
+					</Box>
+				</Fragment>
+			)
+			)}
+		</Fragment>
+	);
+}
+
+export function LifepathRequirements({ lifepath }: { lifepath: Lifepath; }): JSX.Element {
+	return (
+		<Fragment>
+			<b>Requirements:</b>
+
+			{lifepath.requirements
+				? <Box>
+					<Typography variant="body3">{ResolveRequirementBlocks(lifepath.requirements)}</Typography>
+				</Box>
 				: null}
 
-			{(lifepath.requirements.limits)
-				? limitsResolver(lifepath.requirements.limits)
-				: null}
-
-			{(lifepath.requirements.texts)
-				? lifepath.requirements.texts.map((text, textIndex) => <span key={textIndex}>{text} </span>)
+			{lifepath.requirementsText
+				? lifepath.requirementsText.split("<br>").map((text, textIndex) => <Typography key={textIndex} variant="body2">{text}</Typography>)
 				: null}
 		</Fragment>
 	);

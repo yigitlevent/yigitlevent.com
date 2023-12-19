@@ -1,60 +1,44 @@
-import { createRef, Fragment, useCallback, useEffect, useState } from "react";
-import styled from "styled-components";
-
-import code from "../../../assets/fonts/SourceCodePro-SemiBold.woff";
-
-import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import Divider from "@mui/material/Divider";
-import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import CircularProgress from "@mui/material/CircularProgress";
+import Divider from "@mui/material/Divider";
+import FormControl from "@mui/material/FormControl";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Grid from "@mui/material/Grid";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
+import { createRef, Fragment, useCallback, useEffect, useState } from "react";
 
-import { useRulesetStore } from "../../../hooks/stores/useRulesetStore";
-import { useMagicWheelStore } from "../../../hooks/stores/useMagicWheelStore";
-import { MagicData, MagicFacet, MiscMagicElements, MiscMagicFacets } from "../../../data/magic";
-import { RandomNumber } from "../../../utils/misc";
-
-import { GenericGrid } from "../../Shared/Grids";
 import { BackCanvas } from "./BackCanvas";
-import { MainCanvas } from "./MainCanvas";
 import { FrontCanvas } from "./FrontCanvas";
+import { MainCanvas } from "./MainCanvas";
+import codeFont from "../../../assets/fonts/SourceCodePro-SemiBold.woff";
+import { useFontLoading } from "../../../hooks/useFontLoading";
+import { useRulesetStore } from "../../../hooks/apiStores/useRulesetStore";
+import { useMagicWheelStore } from "../../../hooks/featureStores/useMagicWheelStore";
+import { RandomNumber } from "../../../utils/misc";
+import { GenericGrid } from "../../Shared/Grids";
 
 
-const CanvasWrapper = styled.div<{ size: string; }>`
-	max-width: 100%;
-	width: ${p => (p.size === "0px") ? "580px" : p.size};
-	height: ${p => (p.size === "0px") ? "580px" : p.size};
-
-	position: relative;
-	margin: 0 auto;
-
-	z-index: 100;
-`;
-
-export const MWCONST = { canvasSize: 580, circleRadius: 32, circleOffset: 90, textOffset: 100 };
-
-export function MagicWheel() {
-	const { checkRulesets } = useRulesetStore();
-	const {
-		aoe, element, impetus, duration, origin, direction, steps, cover, elementIndex,
-		changeAOE, changeElement, changeImpetus, changeDuration, changeOrigin, changeDirection, changeSteps, toggleCover, changeElementIndex
-	} = useMagicWheelStore();
-
-	const hasAmwRuleset = checkRulesets(["amw"]);
+export function MagicWheel(): JSX.Element {
+	const { isFontLoaded } = useFontLoading(codeFont);
 
 	const wrapperRef = createRef<HTMLDivElement>();
 	const [size, setSize] = useState("0px");
-	const [isRotating, setIsRotating] = useState(0);
-	const [isFontLoaded, setIsFontLoaded] = useState(false);
 
-	const [entryAngleSpan, setEntryAngleSpan] = useState([0, 0, 0, 0, 0]);
+	useEffect(() => {
+		if (wrapperRef && wrapperRef.current) setSize(window.getComputedStyle(wrapperRef.current).width);
+	}, [wrapperRef]);
+
+	const { spellFacets } = useRulesetStore();
+
+	const {
+		areaOfEffectId, elementId, impetusId, durationId, originId, direction, steps, cover,
+		changeAOE, changeElement, changeImpetus, changeDuration, changeOrigin, changeDirection, changeSteps, toggleCover
+	} = useMagicWheelStore();
 
 	const [currentOriginAngle, setCurrentOriginAngle] = useState(0);
 	const [currentDurationAngle, setCurrentDurationAngle] = useState(0);
@@ -62,48 +46,72 @@ export function MagicWheel() {
 	const [currentElementAngle, setCurrentElementAngle] = useState(0);
 	const [currentAOEAngle, setCurrentAOEAngle] = useState(0);
 
-	const [magicData, setMagicData] = useState(hasAmwRuleset ? MiscMagicFacets : MagicData);
+	const [isRotating, setIsRotating] = useState(0);
+	const [entryAngleSpan, setEntryAngleSpan] = useState<{ [key: string]: number; }>({ origins: 0, elements: 0, impetus: 0, areaOfEffects: 0, durations: 0 });
 
 	const updateFacets = useCallback((amount: number) => {
-		const selected: string[] = [origin, duration, impetus, element, aoe];
+		for (const key in spellFacets) {
+			const facetKey = key as keyof SpellFacets;
 
-		for (const key in magicData) {
-			const currentIndex = magicData[key].findIndex(v => v.name === selected[key]);
-			let newIndex = currentIndex + amount;
-			if (newIndex > magicData[key].length - 1) { newIndex = newIndex % magicData[key].length; }
-			else if (newIndex < 0) { newIndex = (newIndex % magicData[key].length + magicData[key].length) % magicData[key].length; }
+			let currentIndex = -1;
 
-			selected[key] = magicData[key][newIndex].name;
+			if (facetKey === "origins") currentIndex = spellFacets[facetKey].findIndex(v => v.id === originId);
+			else if (facetKey === "elements") currentIndex = spellFacets[facetKey].findIndex(v => v.id === elementId);
+			else if (facetKey === "impetus") currentIndex = spellFacets[facetKey].findIndex(v => v.id === impetusId);
+			else if (facetKey === "areaOfEffects") currentIndex = spellFacets[facetKey].findIndex(v => v.id === areaOfEffectId);
+			else if (facetKey === "duration") currentIndex = spellFacets[facetKey].findIndex(v => v.id === durationId);
+
+			if (currentIndex > -1) {
+				let newIndex = currentIndex + amount;
+				if (newIndex > spellFacets[facetKey].length - 1) { newIndex = newIndex % spellFacets[facetKey].length; }
+				else if (newIndex < 0) { newIndex = (newIndex % spellFacets[facetKey].length + spellFacets[facetKey].length) % spellFacets[facetKey].length; }
+
+				if (facetKey === "origins") changeOrigin(spellFacets[facetKey][newIndex].id);
+				else if (facetKey === "elements") changeElement(spellFacets[facetKey][newIndex].id);
+				else if (facetKey === "impetus") changeImpetus(spellFacets[facetKey][newIndex].id);
+				else if (facetKey === "areaOfEffects") changeAOE(spellFacets[facetKey][newIndex].id);
+				else if (facetKey === "duration") changeDuration(spellFacets[facetKey][newIndex].id);
+			}
 		}
+	}, [originId, durationId, impetusId, elementId, areaOfEffectId, changeOrigin, changeDuration, changeImpetus, changeElement, changeAOE, spellFacets]);
 
-		changeOrigin(selected[0]);
-		changeDuration(selected[1]);
-		changeImpetus(selected[2]);
-		changeElement(selected[3]);
-		changeAOE(selected[4]);
-	}, [origin, duration, impetus, element, aoe, changeOrigin, changeDuration, changeImpetus, changeElement, changeAOE, magicData]);
-
-	const getFacetMapping = useCallback((type: string) => {
+	const getFacetMapping = useCallback((type: keyof SpellFacets) => {
 		switch (type) {
-			case "Area of Effect":
+			case "areaOfEffects":
 				return { bandIndex: 4, currentAngle: currentAOEAngle, setFunction: setCurrentAOEAngle, setStoreFunction: changeAOE };
-			case "Element":
+			case "elements":
 				return { bandIndex: 3, currentAngle: currentElementAngle, setFunction: setCurrentElementAngle, setStoreFunction: changeElement };
-			case "Impetus":
+			case "impetus":
 				return { bandIndex: 2, currentAngle: currentImpetusAngle, setFunction: setCurrentImpetusAngle, setStoreFunction: changeImpetus };
-			case "Duration":
+			case "duration":
 				return { bandIndex: 1, currentAngle: currentDurationAngle, setFunction: setCurrentDurationAngle, setStoreFunction: changeDuration };
-			case "Origin":
+			case "origins":
 				return { bandIndex: 0, currentAngle: currentOriginAngle, setFunction: setCurrentOriginAngle, setStoreFunction: changeOrigin };
 			default:
 				throw "Facet type invalid.";
 		}
 	}, [currentAOEAngle, currentDurationAngle, currentElementAngle, currentImpetusAngle, currentOriginAngle, changeAOE, changeDuration, changeElement, changeImpetus, changeOrigin]);
 
-	const rotateBand = useCallback((amount: number, type: string) => {
-		const { bandIndex, currentAngle, setFunction } = getFacetMapping(type);
+	const setFacet = useCallback((type: keyof SpellFacets, event: SelectChangeEvent<string>) => {
+		const value = event.target.value; // id of the specific facet
 
-		const targetRotation = currentAngle + (amount * (entryAngleSpan[bandIndex] / 2));
+		const { setFunction, setStoreFunction } = getFacetMapping(type);
+
+		const getStartAngle = () => {
+			const selectionIndex = spellFacets[type].findIndex(v => (v.id as unknown as string) === value);
+			if (selectionIndex > -1) return (entryAngleSpan[type] / 2) * selectionIndex;
+			throw "Facet not found.";
+		};
+
+		setFunction(getStartAngle());
+		const func = setStoreFunction;
+		func(value as never);
+	}, [getFacetMapping, spellFacets, entryAngleSpan]);
+
+	const rotateBand = useCallback((amount: number, type: keyof SpellFacets) => {
+		const { currentAngle, setFunction } = getFacetMapping(type);
+
+		const targetRotation = currentAngle + (amount * (entryAngleSpan[type] / 2));
 		let intermediateRotation = currentAngle;
 
 		let animationFrame = 0;
@@ -136,37 +144,16 @@ export function MagicWheel() {
 	const rotate = useCallback((amount: number) => {
 		updateFacets(amount);
 		setIsRotating(5);
-		const facetTypes = ["Area of Effect", "Element", "Impetus", "Duration", "Origin"];
+		const facetTypes = Object.keys(spellFacets) as (keyof SpellFacets)[];
 		facetTypes.forEach(type => rotateBand(amount, type));
-	}, [rotateBand, updateFacets]);
+	}, [rotateBand, spellFacets, updateFacets]);
 
-	const changeStartingFacet = useCallback((event: SelectChangeEvent<string>) => {
-		const name = event.target.name;
-		const value = event.target.value;
-
-		const getStartAngle = (circleIndex: number) => {
-			const selectionIndex = magicData[circleIndex].findIndex(v => v.name === value);
-			if (selectionIndex > -1) return (entryAngleSpan[circleIndex] / 2) * selectionIndex;
-			throw "Facet not found.";
-		};
-
-		const { bandIndex, setFunction, setStoreFunction } = getFacetMapping(name as any);
-
-		setFunction(getStartAngle(bandIndex));
-		setStoreFunction(value);
-	}, [entryAngleSpan, getFacetMapping, magicData]);
-
-	const changeElementGroup = useCallback((event: SelectChangeEvent<string>) => {
-		const value = event.target.value;
-		changeElementIndex(parseInt(value));
-	}, [changeElementIndex]);
-
-	const resetStartingFacets = useCallback((data: MagicFacet[][]) => {
-		changeAOE(data[4][0].name);
-		changeElement(data[3][0].name);
-		changeImpetus(data[2][0].name);
-		changeDuration(data[1][0].name);
-		changeOrigin(data[0][0].name);
+	const resetStartingFacets = useCallback((facets: SpellFacets) => {
+		changeAOE(facets.areaOfEffects[0].id);
+		changeElement(facets.elements[0].id);
+		changeImpetus(facets.impetus[0].id);
+		changeDuration(facets.duration[0].id);
+		changeOrigin(facets.origins[0].id);
 	}, [changeAOE, changeDuration, changeElement, changeImpetus, changeOrigin]);
 
 	const resetCurrentAngles = useCallback(() => {
@@ -178,103 +165,100 @@ export function MagicWheel() {
 	}, []);
 
 	useEffect(() => {
-		if (wrapperRef && wrapperRef.current) setSize(window.getComputedStyle(wrapperRef.current).width);
-	}, [wrapperRef]);
+		resetStartingFacets(spellFacets);
+		resetCurrentAngles();
+	}, [resetCurrentAngles, resetStartingFacets, spellFacets]);
 
 	useEffect(() => {
-		if (hasAmwRuleset) {
-			const d = MiscMagicFacets;
-			d[3] = MiscMagicElements[elementIndex];
-			setMagicData([...d]);
-			resetStartingFacets(d);
-			resetCurrentAngles();
-		}
-		else {
-			setMagicData(MagicData);
-			resetStartingFacets(MagicData);
-			resetCurrentAngles();
-		}
-	}, [elementIndex, hasAmwRuleset, resetCurrentAngles, resetStartingFacets]);
-
-	useEffect(() => {
-		const tempArr = [0, 0, 0, 0, 0];
-		for (const arrayKey in magicData) {
-			tempArr[parseInt(arrayKey)] = 4 * Math.PI / magicData[arrayKey].length;
+		const tempArr: { [key: string]: number; } = { origins: 0, elements: 0, impetus: 0, areaOfEffects: 0, durations: 0 };
+		for (const arrayKey in spellFacets) {
+			const key = arrayKey as keyof SpellFacets;
+			tempArr[arrayKey] = 4 * Math.PI / spellFacets[key].length;
 		}
 		setEntryAngleSpan(tempArr);
-	}, [aoe, element, impetus, duration, origin, magicData]);
-
-	useEffect(() => {
-		if (!isFontLoaded) {
-			(new FontFace("Code", `url(${code})`)).load().then(
-				(font) => { document.fonts.add(font); setIsFontLoaded(true); },
-				console.error
-			);
-		}
-	}, [isFontLoaded]);
-
-	const columns = hasAmwRuleset ? 6 : 5;
+	}, [areaOfEffectId, elementId, impetusId, durationId, originId, spellFacets]);
 
 	return (
 		<Fragment>
 			<Typography variant="h3">Magic Wheel</Typography>
 
-			<GenericGrid columns={columns} center>
-				<Grid item xs={columns} sm={2} md={1}>
+			<GenericGrid columns={5} center>
+				<Grid item xs={5} sm={2} md={1}>
 					<FormControl fullWidth variant="standard">
 						<InputLabel>Area of Effect</InputLabel>
-						<Select label="Area of Effect" name="Area of Effect" value={isRotating > 0 ? "" : aoe} onChange={changeStartingFacet} disabled={isRotating > 0}>
-							{Object.values(magicData[4]).map(v => { return <MenuItem key={v.name} value={v.name}>{v.name}</MenuItem>; })}
+
+						<Select
+							label="Area of Effect"
+							name="Area of Effect"
+							value={isRotating > 0 ? "" : areaOfEffectId as unknown as string}
+							onChange={v => setFacet("areaOfEffects", v)}
+							disabled={isRotating > 0}
+						>
+							{Object.values(spellFacets.areaOfEffects).map(v => { return <MenuItem key={v.name} value={v.id as unknown as string}>{v.name}</MenuItem>; })}
 						</Select>
 					</FormControl>
 				</Grid>
 
-				{hasAmwRuleset
-					? <Grid item xs={columns} sm={2} md={1}>
-						<FormControl fullWidth variant="standard">
-							<InputLabel>Element Group</InputLabel>
-							<Select label="Element Group" name="Element Group" value={isRotating > 0 ? "" : elementIndex.toString()} onChange={changeElementGroup} disabled={isRotating > 0}>
-								<MenuItem value="0">Prime Elements</MenuItem>
-								<MenuItem value="1">Lower Elements</MenuItem>
-								<MenuItem value="2">Higher Elements</MenuItem>
-							</Select>
-						</FormControl>
-					</Grid>
-					: null
-				}
-
-				<Grid item xs={columns} sm={2} md={1}>
+				<Grid item xs={5} sm={2} md={1}>
 					<FormControl fullWidth variant="standard">
 						<InputLabel>Element</InputLabel>
-						<Select label="Element" name="Element" value={isRotating > 0 ? "" : element} onChange={changeStartingFacet} disabled={isRotating > 0}>
-							{Object.values(magicData[3]).map(v => { return <MenuItem key={v.name} value={v.name}>{v.name}</MenuItem>; })}
+
+						<Select
+							label="Element"
+							name="Element"
+							value={isRotating > 0 ? "" : elementId as unknown as string}
+							onChange={v => setFacet("elements", v)}
+							disabled={isRotating > 0}
+						>
+							{Object.values(spellFacets.elements).map(v => { return <MenuItem key={v.name} value={v.id as unknown as string}>{v.name}</MenuItem>; })}
 						</Select>
 					</FormControl>
 				</Grid>
 
-				<Grid item xs={columns} sm={2} md={1}>
+				<Grid item xs={5} sm={2} md={1}>
 					<FormControl fullWidth variant="standard">
-						<InputLabel>{hasAmwRuleset ? "Law" : "Impetus"}</InputLabel>
-						<Select label="Impetus" name="Impetus" value={isRotating > 0 ? "" : impetus} onChange={changeStartingFacet} disabled={isRotating > 0}>
-							{Object.values(magicData[2]).map(v => { return <MenuItem key={v.name} value={v.name}>{v.name}</MenuItem>; })}
+						<InputLabel>Impetus</InputLabel>
+
+						<Select
+							label="Impetus"
+							name="Impetus"
+							value={isRotating > 0 ? "" : impetusId as unknown as string}
+							onChange={v => setFacet("impetus", v)}
+							disabled={isRotating > 0}
+						>
+							{Object.values(spellFacets.impetus).map(v => { return <MenuItem key={v.name} value={v.id as unknown as string}>{v.name}</MenuItem>; })}
 						</Select>
 					</FormControl>
 				</Grid>
 
-				<Grid item xs={columns} sm={2} md={1}>
+				<Grid item xs={5} sm={2} md={1}>
 					<FormControl fullWidth variant="standard">
 						<InputLabel>Duration</InputLabel>
-						<Select label="Duration" name="Duration" value={isRotating > 0 ? "" : duration} onChange={changeStartingFacet} disabled={isRotating > 0}>
-							{Object.values(magicData[1]).map(v => { return <MenuItem key={v.name} value={v.name}>{v.name}</MenuItem>; })}
+
+						<Select
+							label="Duration"
+							name="Duration"
+							value={isRotating > 0 ? "" : durationId as unknown as string}
+							onChange={v => setFacet("duration", v)}
+							disabled={isRotating > 0}
+						>
+							{Object.values(spellFacets.duration).map(v => { return <MenuItem key={v.name} value={v.id as unknown as string}>{v.name}</MenuItem>; })}
 						</Select>
 					</FormControl>
 				</Grid>
 
-				<Grid item xs={columns} sm={2} md={1}>
+				<Grid item xs={5} sm={2} md={1}>
 					<FormControl fullWidth variant="standard">
 						<InputLabel>Origin</InputLabel>
-						<Select label="Origin" name="Origin" value={isRotating > 0 ? "" : origin} onChange={changeStartingFacet} disabled={isRotating > 0}>
-							{Object.values(magicData[0]).map(v => { return <MenuItem key={v.name} value={v.name}>{v.name}</MenuItem>; })}
+
+						<Select
+							label="Origin"
+							name="Origin"
+							value={isRotating > 0 ? "" : originId as unknown as string}
+							onChange={v => setFacet("origins", v)}
+							disabled={isRotating > 0}
+						>
+							{Object.values(spellFacets.origins).map(v => { return <MenuItem key={v.name} value={v.id as unknown as string}>{v.name}</MenuItem>; })}
 						</Select>
 					</FormControl>
 				</Grid>
@@ -299,6 +283,7 @@ export function MagicWheel() {
 				<Grid item xs={2} sm={1}>
 					<FormControl fullWidth variant="standard">
 						<InputLabel>Direction</InputLabel>
+
 						<Select label="Direction" value={direction} onChange={e => changeDirection(e.target.value)} disabled={isRotating > 0}>
 							<MenuItem value={"Clockwise"}>Clockwise</MenuItem>
 							<MenuItem value={"Counterclockwise"}>Counterclockwise</MenuItem>
@@ -311,7 +296,7 @@ export function MagicWheel() {
 						label="Steps"
 						inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
 						value={steps}
-						onChange={e => changeSteps(e.target.value)}
+						onChange={(e) => changeSteps(e.target.value)}
 						fullWidth
 						disabled={isRotating > 0}
 						variant="standard"
@@ -333,21 +318,41 @@ export function MagicWheel() {
 			<Divider sx={{ margin: "10px 0 8px" }} />
 
 			{isFontLoaded
-				? <Fragment>
-					<CanvasWrapper ref={wrapperRef} size={size}>
-						<BackCanvas />
-						<MainCanvas currentAngles={[currentOriginAngle, currentDurationAngle, currentImpetusAngle, currentElementAngle, currentAOEAngle]} blockAngle={entryAngleSpan} magicData={magicData} />
-						<FrontCanvas show={cover} />
-					</CanvasWrapper>
+				? <GenericGrid columns={1} center="c">
+					<Grid item xs={1}>
+						<div
+							ref={wrapperRef}
+							style={{
+								maxWidth: "100%",
+								width: (size === "0px") ? "580px" : size,
+								height: (size === "0px") ? "580px" : size,
+								position: "relative",
+								margin: "0 auto",
+								zIndex: 100
+							}}
+						>
+							<BackCanvas />
 
-					<FormControlLabel
-						label="Toggle Cover"
-						labelPlacement="start"
-						control={<Checkbox checked={cover} onChange={toggleCover} />}
-					/>
-				</Fragment>
-				: <CircularProgress />
-			}
-		</Fragment >
+							<MainCanvas
+								currentAngles={[currentOriginAngle, currentDurationAngle, currentImpetusAngle, currentElementAngle, currentAOEAngle]}
+								blockAngle={entryAngleSpan}
+								spellFacets={spellFacets}
+								getFacetMapping={getFacetMapping}
+							/>
+
+							<FrontCanvas show={cover} />
+						</div>
+					</Grid>
+
+					<Grid item>
+						<FormControlLabel
+							label="Toggle Cover"
+							labelPlacement="start"
+							control={<Checkbox checked={cover} onChange={toggleCover} />}
+						/>
+					</Grid>
+				</GenericGrid>
+				: <CircularProgress />}
+		</Fragment>
 	);
 }

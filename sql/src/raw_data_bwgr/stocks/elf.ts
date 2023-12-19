@@ -343,7 +343,7 @@ export const Elf: StockOld = {
 						"Elf Skill Song➞Song of Paths and Ways",
 						"Elf Spell Song➞Air of Gates",
 						"Any General➞Foraging",
-						"Any Wise➞Any wise"
+						"Any Wise➞Any Wise"
 					],
 					stock: "Elf",
 					traitPool: 1,

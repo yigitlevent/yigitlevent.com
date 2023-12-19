@@ -1,11 +1,10 @@
+import DeleteIcon from "@mui/icons-material/Delete";
 import Checkbox from "@mui/material/Checkbox";
 import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
-import DeleteIcon from "@mui/icons-material/Delete";
+import Typography from "@mui/material/Typography";
 
-import { GetSkillFromPath, GetTraitFromPath } from "../../../utils/pathFinder";
-
+import { useRulesetStore } from "../../../hooks/apiStores/useRulesetStore";
 import { PopoverLink } from "../../Shared/PopoverLink";
 
 
@@ -14,7 +13,7 @@ interface BlockTextProps {
 	hasLeftPadding?: boolean;
 }
 
-export function BlockText({ text, hasLeftPadding }: BlockTextProps) {
+export function BlockText({ text, hasLeftPadding }: BlockTextProps): JSX.Element {
 	return (
 		<Grid item>
 			<Typography sx={{ paddingLeft: hasLeftPadding ? "10px" : undefined, paddingTop: "3px" }}>{text}</Typography>
@@ -23,16 +22,19 @@ export function BlockText({ text, hasLeftPadding }: BlockTextProps) {
 }
 
 interface BlockSkillPopoverProps {
-	skillName: string;
+	skill: [id: SkillId, name: string];
 	checkbox?: {
 		checked: boolean;
 		disabled?: boolean;
 		onChange?: (event: React.ChangeEvent<HTMLInputElement>, checked: boolean) => void;
+		onClick?: () => void;
 	};
 	deleteCallback?: () => void;
 }
 
-export function BlockSkillPopover({ skillName, checkbox, deleteCallback }: BlockSkillPopoverProps) {
+export function BlockSkillPopover({ skill, checkbox, deleteCallback }: BlockSkillPopoverProps): JSX.Element {
+	const { getSkill } = useRulesetStore();
+
 	return (
 		<Grid item>
 			{checkbox
@@ -40,56 +42,57 @@ export function BlockSkillPopover({ skillName, checkbox, deleteCallback }: Block
 					checked={checkbox.checked}
 					disabled={checkbox.disabled}
 					onChange={checkbox.onChange}
+					onClick={checkbox.onClick}
 					sx={{ margin: "0 0 4px 0", padding: "0" }}
 				/>
-				: null
-			}
+				: null}
+
 			<Typography sx={{ cursor: "pointer", display: "inline-block", margin: "6px 0 0 8px" }}>
-				<PopoverLink data={GetSkillFromPath(skillName)} />
+				<PopoverLink data={getSkill(skill[0])} />
 			</Typography>
 
 			{deleteCallback
 				? <IconButton color="primary" onClick={deleteCallback} sx={{ padding: 0, margin: "0 0 2px 6px" }}>
 					<DeleteIcon />
 				</IconButton>
-				: null
-			}
+				: null}
 		</Grid>
 	);
 }
 
 interface BlockTraitPopoverProps {
-	traitPath: string;
+	trait: [id: TraitId, name: string];
 	checkbox?: {
 		checked: boolean;
 		disabled?: boolean;
-		onChange?: (event: React.ChangeEvent<HTMLInputElement>, checked: boolean) => void;
+		onClick?: (event: React.ChangeEvent<HTMLInputElement>, checked: boolean) => void;
 	};
 	deleteCallback?: () => void;
 }
 
-export function BlockTraitPopover({ traitPath: traitName, checkbox, deleteCallback }: BlockTraitPopoverProps) {
+export function BlockTraitPopover({ trait, checkbox, deleteCallback }: BlockTraitPopoverProps): JSX.Element {
+	const { getTrait } = useRulesetStore();
+
 	return (
 		<Grid item>
 			{checkbox
 				? <Checkbox
 					checked={checkbox.checked}
 					disabled={checkbox.disabled}
-					onChange={checkbox.onChange}
+					onChange={checkbox.onClick}
 					sx={{ margin: "0 0 4px 0", padding: "0" }}
 				/>
-				: null
-			}
+				: null}
+
 			<Typography sx={{ cursor: "pointer", display: "inline-block", margin: "6px 0 0 8px" }}>
-				<PopoverLink data={GetTraitFromPath(traitName)} />
+				<PopoverLink data={getTrait(trait[0])} />
 			</Typography>
 
 			{deleteCallback
 				? <IconButton color="primary" onClick={deleteCallback} sx={{ padding: 0, margin: "0 0 2px 6px" }}>
 					<DeleteIcon />
 				</IconButton>
-				: null
-			}
+				: null}
 		</Grid>
 	);
 }

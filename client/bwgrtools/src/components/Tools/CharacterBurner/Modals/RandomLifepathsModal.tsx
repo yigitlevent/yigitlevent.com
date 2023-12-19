@@ -1,44 +1,42 @@
-import { Fragment, useCallback, useState } from "react";
-
-import Grid from "@mui/material/Grid";
-import TextField from "@mui/material/TextField";
+import Alert from "@mui/material/Alert";
 import Button from "@mui/material/Button";
+import Checkbox from "@mui/material/Checkbox";
+import Divider from "@mui/material/Divider";
+import FormControl from "@mui/material/FormControl";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Grid from "@mui/material/Grid";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
 import Modal from "@mui/material/Modal";
 import Paper from "@mui/material/Paper";
-import Divider from "@mui/material/Divider";
-import Typography from "@mui/material/Typography";
-import FormControl from "@mui/material/FormControl";
-import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
-import MenuItem from "@mui/material/MenuItem";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import Stack from "@mui/material/Stack";
-import Alert from "@mui/material/Alert";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
+import { Fragment, useCallback, useState } from "react";
 
-import { useRulesetStore } from "../../../../hooks/stores/useRulesetStore";
-import { useCharacterBurnerStore } from "../../../../hooks/stores/useCharacterBurnerStore";
-import { useLifepathRandomizerStore } from "../../../../hooks/stores/useLifepathRandomizerStore";
-import { Lifepath, Stocks } from "../../../../data/stocks/_stocks";
-import { FilterLifepaths } from "../../../../utils/lifepathFilter";
-import { RandomNumber } from "../../../../utils/misc";
-
-import { GenericGrid } from "../../../Shared/Grids";
 import { RandomLifepathsBasics } from "./RandomLifepathsModal/RandomLifepathsBasics";
 import { RandomLifepathsLists } from "./RandomLifepathsModal/RandomLifepathsLists";
-import { GetPathFromLifepath } from "../../../../utils/pathFinder";
+import { useRulesetStore } from "../../../../hooks/apiStores/useRulesetStore";
+import { useCharacterBurnerBasicsStore } from "../../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerBasics";
+import { useCharacterBurnerLifepathStore } from "../../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerLifepath";
+import { useLifepathRandomizerStore } from "../../../../hooks/featureStores/useLifepathRandomizerStore";
+import { FilterLifepaths } from "../../../../utils/filterLifepaths";
+import { RandomNumber } from "../../../../utils/misc";
+import { GenericGrid } from "../../../Shared/Grids";
 
 
-export function RandomLifepathsModal({ openRl, openRlModal }: { openRl: boolean; openRlModal: (open: boolean) => void; }) {
-	const { checkRulesets } = useRulesetStore();
+export function RandomLifepathsModal({ isOpen, close }: { isOpen: boolean; close: () => void; }): JSX.Element {
+	const ruleset = useRulesetStore();
 	const {
 		stock, setting, noDuplicates, maxLeads, maxLifepaths, minLifepaths,
-		randomizerChangeStock, randomizerChangeMaxLeads, randomizerChangeMaxLifepaths, randomizerChangeMinLifepaths, randomizerToggleNoDuplicates
+		changeStock, changeMaxLeads, changeMaxLifepaths, changeMinLifepaths, toggleNoDuplicates
 	} = useLifepathRandomizerStore();
 
-	const { changeStock, addLifepath, calculateTotals } = useCharacterBurnerStore();
+	const { setStockAndReset } = useCharacterBurnerBasicsStore();
+	const { addLifepath } = useCharacterBurnerLifepathStore();
 
-	const [newStock, setNewStock] = useState<StocksList>("Dwarf");
+	const [newStock, setNewStock] = useState<Stock>();
 	const [chosenLifepaths, setChosen] = useState<Lifepath[]>([]);
 	const [triedTooMuch, setTriedTooMuch] = useState(false);
 
@@ -46,31 +44,31 @@ export function RandomLifepathsModal({ openRl, openRlModal }: { openRl: boolean;
 		const tempChosenLifepaths: Lifepath[] = [];
 
 		let leadsCounter = 0;
-
-		const stockValues = Object.values(Stocks);
-		const chosenStock = (stock === "Random")
-			? Stocks[stockValues[RandomNumber(0, stockValues.length - 1)].name]
-			: Stocks[stock];
-
-		setNewStock(chosenStock.name);
-
-		const settingValues = Object.values(chosenStock.settings).filter(v => v.type === "Setting");
-		const chosenSetting = (setting === "Random")
-			? chosenStock.settings[settingValues[RandomNumber(0, settingValues.length - 1)].name]
-			: chosenStock.settings[setting];
-
-		const bornLPs = chosenSetting.lifepaths.filter(v => v.born).filter(v => checkRulesets(v.allowed));
-		const bornLPsNum = bornLPs.length - 1;
-		tempChosenLifepaths.push(bornLPs[RandomNumber(0, bornLPsNum)]);
-
-		const lpAmount = RandomNumber(minLifepaths - 1, maxLifepaths - 1);
 		let chosenAmount = 0;
+		const lpAmount = RandomNumber(minLifepaths - 1, maxLifepaths - 1);
+
+		const chosenStock = ruleset.stocks.find(v => v.id === stock) || ruleset.stocks[RandomNumber(0, ruleset.stocks.length - 1)];
+		setNewStock(chosenStock);
+
+		const possibleSettings = ruleset.settings.filter(setting => chosenStock.settingIds.includes(setting.id) && !setting.isSubsetting);
+		const chosenSetting = ruleset.settings[ruleset.settings.findIndex(v => v.id === setting)] || possibleSettings[RandomNumber(0, possibleSettings.length - 1)];
+
+		const bornLPs = ruleset.lifepaths.filter(v => v.stock[0] === chosenStock.id && v.setting[0] === chosenSetting.id && v.flags.isBorn);
+		tempChosenLifepaths.push(bornLPs[RandomNumber(0, bornLPs.length - 1)]);
 
 		const maxTries = 20;
 		let tries = 0;
 
 		while (tries < maxTries && chosenAmount < lpAmount) {
-			const possibilities = FilterLifepaths(chosenStock, tempChosenLifepaths, maxLeads, leadsCounter, checkRulesets);
+			// chosenStock, tempChosenLifepaths, maxLeads, leadsCounter, checkRulesets
+			const possibilities = FilterLifepaths({
+				rulesetLifepaths: ruleset.lifepaths,
+				stock: [chosenStock.id, chosenStock.name],
+				age: tempChosenLifepaths.reduce((p, c) => (typeof c.years === "number") ? p + c.years : p + c.years[0], 0) + leadsCounter,
+				lifepaths: tempChosenLifepaths,
+				noLeads: maxLeads < leadsCounter ? tempChosenLifepaths[tempChosenLifepaths.length - 1].setting : undefined
+			});
+
 			const chosenLP = possibilities[RandomNumber(0, possibilities.length - 1)];
 
 			if (chosenLP.setting !== tempChosenLifepaths[tempChosenLifepaths.length - 1].setting) {
@@ -92,28 +90,27 @@ export function RandomLifepathsModal({ openRl, openRlModal }: { openRl: boolean;
 		if (tempChosenLifepaths.length < minLifepaths) setTriedTooMuch(true);
 
 		setChosen(tempChosenLifepaths);
-	}, [checkRulesets, maxLeads, maxLifepaths, minLifepaths, noDuplicates, setting, stock]);
+	}, [maxLeads, maxLifepaths, minLifepaths, noDuplicates, ruleset.lifepaths, ruleset.settings, ruleset.stocks, setting, stock]);
 
 	const transferCharacter = useCallback(() => {
-		changeStock(newStock);
-		for (const key in chosenLifepaths) {
-			addLifepath(GetPathFromLifepath(chosenLifepaths[key]));
+		if (newStock) {
+			setStockAndReset([newStock.id, newStock.name]);
+			chosenLifepaths.forEach(addLifepath);
+			close();
 		}
-		openRlModal(false);
-	}, [addLifepath, changeStock, chosenLifepaths, newStock, openRlModal]);
-
-	const totals = (chosenLifepaths.length > 0) ? calculateTotals(chosenLifepaths) : undefined;
+	}, [addLifepath, chosenLifepaths, close, newStock, setStockAndReset]);
 
 	return (
-		<Modal open={openRl} onClose={() => openRlModal(false)}>
+		<Modal open={isOpen} onClose={() => close()}>
 			<Paper sx={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", maxWidth: "800px", width: "100%", padding: "0 24px 24px", border: "none", overflow: "auto" }}>
-				<GenericGrid columns={7} center>
+				{<GenericGrid columns={7} center>
 					<Grid item xs={7} sm={3} md={2}>
 						<FormControl fullWidth variant="standard">
 							<InputLabel>Stock</InputLabel>
-							<Select label="Stock" value={stock} onChange={e => randomizerChangeStock(e.target.value as StocksList | "Random")}>
+
+							<Select label="Stock" value={stock} onChange={e => changeStock(e.target.value as StockId | "Random")}>
 								<MenuItem key={"Random"} value={"Random"}>Random</MenuItem>
-								{Object.values(Stocks).map(v => { return <MenuItem key={v.name} value={v.name}>{v.name}</MenuItem>; })}
+								{ruleset.stocks.map(v => { return <MenuItem key={v.name} value={v.id}>{v.name}</MenuItem>; })}
 							</Select>
 						</FormControl>
 					</Grid>
@@ -123,7 +120,7 @@ export function RandomLifepathsModal({ openRl, openRlModal }: { openRl: boolean;
 							label="Max Leads"
 							inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
 							value={maxLeads}
-							onChange={e => randomizerChangeMaxLeads(e.target.value)}
+							onChange={e => changeMaxLeads(e.target.value)}
 							fullWidth
 							variant="standard"
 						/>
@@ -134,7 +131,7 @@ export function RandomLifepathsModal({ openRl, openRlModal }: { openRl: boolean;
 							label="Min Lifepaths"
 							inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
 							value={minLifepaths}
-							onChange={e => randomizerChangeMinLifepaths(e.target.value)}
+							onChange={e => changeMinLifepaths(e.target.value)}
 							fullWidth
 							variant="standard"
 						/>
@@ -145,7 +142,7 @@ export function RandomLifepathsModal({ openRl, openRlModal }: { openRl: boolean;
 							label="Max Lifepaths"
 							inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
 							value={maxLifepaths}
-							onChange={e => randomizerChangeMaxLifepaths(e.target.value)}
+							onChange={e => changeMaxLifepaths(e.target.value)}
 							fullWidth
 							variant="standard"
 						/>
@@ -155,7 +152,7 @@ export function RandomLifepathsModal({ openRl, openRlModal }: { openRl: boolean;
 						<FormControlLabel
 							label="No Duplicates"
 							labelPlacement="start"
-							control={<Checkbox checked={noDuplicates} onChange={randomizerToggleNoDuplicates} />}
+							control={<Checkbox checked={noDuplicates} onChange={toggleNoDuplicates} />}
 						/>
 					</Grid>
 
@@ -166,16 +163,15 @@ export function RandomLifepathsModal({ openRl, openRlModal }: { openRl: boolean;
 					<Grid item xs={7}>
 						<Button variant="outlined" onClick={() => createRandom()} fullWidth>Generate Random Character</Button>
 					</Grid>
-				</GenericGrid>
+				</GenericGrid>}
 
-				{chosenLifepaths.length > 0 && totals
+				{chosenLifepaths.length > 0
 					? <GenericGrid columns={2}>
 						{triedTooMuch
 							? <Grid item xs={2}>
 								<Alert severity="warning">There might be lifepaths missing because of the chosen options.</Alert>
 							</Grid>
-							: <Fragment></Fragment>
-						}
+							: <Fragment />}
 
 						<Grid item xs={2} md={1}>
 							<Divider sx={{ margin: "0 0 6px" }}>
@@ -184,7 +180,7 @@ export function RandomLifepathsModal({ openRl, openRlModal }: { openRl: boolean;
 
 							<Stack spacing={2}>
 								{chosenLifepaths.map((v, i) =>
-									<Paper key={i}>{i + 1}. {`${v.stock}➞${v.setting}➞${v.name}`}</Paper>
+									<Paper key={i}>{i + 1}. {`${v.setting[1]}➞${v.name}`}</Paper>
 								)}
 							</Stack>
 
@@ -192,7 +188,7 @@ export function RandomLifepathsModal({ openRl, openRlModal }: { openRl: boolean;
 								<Typography>Basic Information</Typography>
 							</Divider>
 
-							<RandomLifepathsBasics />
+							<RandomLifepathsBasics chosenLifepaths={chosenLifepaths} />
 						</Grid>
 
 						<Grid item xs={2} md={1}>
@@ -200,15 +196,14 @@ export function RandomLifepathsModal({ openRl, openRlModal }: { openRl: boolean;
 								<Typography>Skills, Traits, and Misc</Typography>
 							</Divider>
 
-							<RandomLifepathsLists totals={totals} />
+							<RandomLifepathsLists chosenLifepaths={chosenLifepaths} />
 						</Grid>
 
 						<Grid item xs={2}>
 							<Button variant="outlined" onClick={() => transferCharacter()} fullWidth>I like this Character</Button>
 						</Grid>
 					</GenericGrid>
-					: null
-				}
+					: null}
 			</Paper>
 		</Modal>
 	);

@@ -1,60 +1,52 @@
+import Box from "@mui/material/Box";
+import Paper from "@mui/material/Paper";
 import { Fragment } from "react";
 
-import Paper from "@mui/material/Paper";
-import Box from "@mui/material/Box";
-
-import { useRulesetStore } from "../../../hooks/stores/useRulesetStore";
-import type { Lifepath } from "../../../data/stocks/_stocks";
-import { Skill, SkillCategories } from "../../../data/skills/_skills";
-
+import { useRulesetStore } from "../../../hooks/apiStores/useRulesetStore";
 import { PopoverLink } from "../../Shared/PopoverLink";
 
 
-export function LifepathSkills({ lifepath }: { lifepath: Lifepath; }) {
-	const { checkRulesets } = useRulesetStore();
+export function LifepathSkills({ lifepath }: { lifepath: Lifepath; }): JSX.Element {
+	const { getSkill } = useRulesetStore();
 
-	const hasGeneralSkill = typeof lifepath.generalSkillPool === "string" || lifepath.generalSkillPool > 0;
-	const hasLifepathSkill = typeof lifepath.skillPool === "string" || lifepath.skillPool > 0;
+	const hasGeneralSkill = lifepath.pools.generalSkillPool !== 0;
+	const hasLifepathSkill = lifepath.pools.lifepathSkillPool !== 0;
 
-	const general = hasGeneralSkill ? SkillCategories["Any General"].skills.find(v => v.name === "General") : undefined;
-	const lifepathSkills =
-		lifepath.skills
-			.filter(entry => {
-				const [category, name] = entry.split("➞");
-				const s = SkillCategories[category].skills.find(v => v.name === name) as Skill;
-				return checkRulesets(s.allowed);
-			})
-			.map(path => {
-				const [category, name] = path.split("➞");
-				return SkillCategories[category].skills.find(v => v.name === name) as Skill;
-			});
+	const generalSkill = getSkill("General");
+
+	const lifepathSkills
+		= lifepath.skills
+			? lifepath.skills
+				.map(skillId => {
+					const skill = getSkill(skillId);
+					if (skill) return skill;
+					else throw new Error(`Skill of SkillId '${skillId}' cannot be found.`);
+				})
+			: undefined;
 
 	return (
 		<Fragment>
 			<b>Skills: </b>
 
 			{hasGeneralSkill
-				? <span>{lifepath.generalSkillPool}{(lifepath.generalSkillPool > 1) ? "pts: " : "pt: "}</span>
-				: null
-			}
+				? <span>{lifepath.pools.generalSkillPool}{(lifepath.pools.generalSkillPool > 1) ? "pts: " : "pt: "}</span>
+				: null}
 
-			{hasGeneralSkill && general
+			{hasGeneralSkill && generalSkill
 				? <Paper elevation={2} sx={{ cursor: "pointer", padding: "0 4px", margin: "0 0 0 2px", width: "max-content", display: "inline-block" }}>
-					<PopoverLink data={general} />
+					<PopoverLink data={generalSkill} />
 				</Paper>
-				: null
-			}
+				: null}
 
 			<Box sx={{ display: "inline-block", margin: "0 6px 0 0" }}>
 				{(hasGeneralSkill && hasLifepathSkill) ? "; " : null}
 			</Box>
 
 			{hasLifepathSkill
-				? <span>{lifepath.skillPool}{(lifepath.skillPool > 1) ? "pts: " : "pt: "}</span>
-				: null
-			}
+				? <span>{lifepath.pools.lifepathSkillPool}{(lifepath.pools.lifepathSkillPool > 1) ? "pts: " : "pt: "}</span>
+				: null}
 
-			{hasLifepathSkill
+			{hasLifepathSkill && lifepathSkills
 				? lifepathSkills.map((skill, i) => {
 					return (
 						<Paper key={i} elevation={2} sx={{ cursor: "pointer", padding: "0 4px", margin: "0 0 0 2px", width: "max-content", display: "inline-block" }}>
@@ -62,8 +54,7 @@ export function LifepathSkills({ lifepath }: { lifepath: Lifepath; }) {
 						</Paper>
 					);
 				})
-				: null
-			}
-		</Fragment >
+				: null}
+		</Fragment>
 	);
 }
