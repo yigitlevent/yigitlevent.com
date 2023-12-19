@@ -1,9 +1,13 @@
-interface UserResponse {
-	user: UserSession;
+interface ErrorResponse {
+	error?: unknown;
+}
+
+interface UserResponse extends ErrorResponse {
+	user: UserSession | null;
 }
 
 interface RulesetsResponse {
-	rulesets: Ruleset[]
+	rulesets: Ruleset[];
 }
 
 interface RulesetResponse {
