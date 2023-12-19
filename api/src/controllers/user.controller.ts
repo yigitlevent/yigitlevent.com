@@ -51,9 +51,7 @@ export async function UserSignIn(request: Request<unknown, unknown, UserSigninRe
 	}
 	catch (e) {
 		console.error(e);
-		response.status(403);
-		response.statusMessage = "Something went really wrong.";
-		return response;
+		return response.status(403);
 	}
 }
 
