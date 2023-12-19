@@ -118,8 +118,8 @@ export const useRulesetStore = create<RulesetStore>()(
 			},
 
 			fetchList: () => {
-				const fetching = get().setFetchState;
-				fetching("fetching-list");
+				const setFetchState = get().setFetchState;
+				setFetchState("fetching-list");
 
 				GenericGet<RulesetsResponse>("/bwgr/ruleset/list")
 					.then(response => {
@@ -128,7 +128,9 @@ export const useRulesetStore = create<RulesetStore>()(
 								state.rulesets = response.data.rulesets;
 								state.chosenRulesets = [response.data.rulesets[0].id];
 							}));
-							fetching("fetch-data");
+
+							// TODO: this should instead use a cancellation token to stop current fetch and start a new one
+							if (get().fetchState !== "fetching-data") setFetchState("fetch-data");
 						}
 						else throw new Error();
 					})
@@ -136,94 +138,97 @@ export const useRulesetStore = create<RulesetStore>()(
 			},
 
 			fetchData: () => {
-				const fetching = get().setFetchState;
-				fetching("fetching-data");
-
+				const fetchState = get().fetchState;
+				const setFetchState = get().setFetchState;
 				const rulesets = get().chosenRulesets;
 
-				GenericPost<RulesetResponse>("/bwgr/ruleset/data", { rulesets })
-					.then(response => {
-						if (response.status === 200) {
-							const abilities = response.data.ruleset.abilities;
-							const abilityTypes = [...response.data.ruleset.abilities.reduce((a, v) => a.add(v.abilityType[1]), new Set<string>())];
-							const stocks = response.data.ruleset.stocks;
-							const settings = response.data.ruleset.settings;
-							const skills = response.data.ruleset.skills;
-							const skillCategories = [...response.data.ruleset.skills.reduce((a, v) => a.add(v.category[1]), new Set<string>())];
-							const skillTypes = [...response.data.ruleset.skills.reduce((a, v) => a.add(v.type[1]), new Set<string>())];
+				if (fetchState === "fetch-data") {
+					setFetchState("fetching-data");
 
-							const traits = response.data.ruleset.traits;
-							const traitCategories = [...response.data.ruleset.traits.reduce((a, v) => a.add(v.category[1]), new Set<string>())];
-							const traitTypes = [...response.data.ruleset.traits.reduce((a, v) => a.add(v.type[1]), new Set<string>())];
+					GenericPost<RulesetResponse>("/bwgr/ruleset/data", { rulesets })
+						.then(response => {
+							if (response.status === 200) {
+								const abilities = response.data.ruleset.abilities;
+								const abilityTypes = [...response.data.ruleset.abilities.reduce((a, v) => a.add(v.abilityType[1]), new Set<string>())];
+								const stocks = response.data.ruleset.stocks;
+								const settings = response.data.ruleset.settings;
+								const skills = response.data.ruleset.skills;
+								const skillCategories = [...response.data.ruleset.skills.reduce((a, v) => a.add(v.category[1]), new Set<string>())];
+								const skillTypes = [...response.data.ruleset.skills.reduce((a, v) => a.add(v.type[1]), new Set<string>())];
 
-							set(produce<RulesetStore>((state) => {
-								state.abilities = abilities;
-								state.abilityTypes = abilityTypes;
+								const traits = response.data.ruleset.traits;
+								const traitCategories = [...response.data.ruleset.traits.reduce((a, v) => a.add(v.category[1]), new Set<string>())];
+								const traitTypes = [...response.data.ruleset.traits.reduce((a, v) => a.add(v.type[1]), new Set<string>())];
 
-								state.stocks = stocks;
-								state.settings = settings;
+								set(produce<RulesetStore>((state) => {
+									state.abilities = abilities;
+									state.abilityTypes = abilityTypes;
 
-								state.skills = skills;
-								state.skillCategories = skillCategories;
-								state.skillTypes = skillTypes;
+									state.stocks = stocks;
+									state.settings = settings;
 
-								state.traits = traits;
-								state.traitCategories = traitCategories;
-								state.traitTypes = traitTypes;
+									state.skills = skills;
+									state.skillCategories = skillCategories;
+									state.skillTypes = skillTypes;
 
-								state.lifepaths
-									= response.data.ruleset.lifepaths
-										.map(lifepath => {
-											const lp = { ...lifepath };
-											if (lifepath.leads) lp.leads = lifepath.leads.filter(leadId => settings.some(x => x.id === leadId));
-											if (lifepath.skills) lp.skills = lifepath.skills.filter(skillId => skills.some(x => x.id === skillId));
-											if (lifepath.traits) lp.traits = lifepath.traits.filter(traitId => traits.some(x => x.id === traitId));
+									state.traits = traits;
+									state.traitCategories = traitCategories;
+									state.traitTypes = traitTypes;
 
-											if (lp.requirements) {
-												lp.requirements
-													= lp.requirements
-														.map(rb => {
-															return {
-																...rb,
-																items: rb.items
-																	.filter(item => {
-																		if ("setting" in item) return state.settings.some(x => x.id === item.setting[0]);
-																		else if ("lifepath" in item) return response.data.ruleset.lifepaths.some(x => x.id === item.lifepath[0]);
-																		else if ("skill" in item) return state.skills.some(x => x.id === item.skill[0]);
-																		else if ("trait" in item) return state.traits.some(x => x.id === item.trait[0]);
-																		return true;
-																	})
-															};
-														});
-											}
+									state.lifepaths
+										= response.data.ruleset.lifepaths
+											.map(lifepath => {
+												const lp = { ...lifepath };
+												if (lifepath.leads) lp.leads = lifepath.leads.filter(leadId => settings.some(x => x.id === leadId));
+												if (lifepath.skills) lp.skills = lifepath.skills.filter(skillId => skills.some(x => x.id === skillId));
+												if (lifepath.traits) lp.traits = lifepath.traits.filter(traitId => traits.some(x => x.id === traitId));
 
-											return lp;
-										});
+												if (lp.requirements) {
+													lp.requirements
+														= lp.requirements
+															.map(rb => {
+																return {
+																	...rb,
+																	items: rb.items
+																		.filter(item => {
+																			if ("setting" in item) return state.settings.some(x => x.id === item.setting[0]);
+																			else if ("lifepath" in item) return response.data.ruleset.lifepaths.some(x => x.id === item.lifepath[0]);
+																			else if ("skill" in item) return state.skills.some(x => x.id === item.skill[0]);
+																			else if ("trait" in item) return state.traits.some(x => x.id === item.trait[0]);
+																			return true;
+																		})
+																};
+															});
+												}
 
-								state.resources = response.data.ruleset.resources;
-								state.resourceTypes = [...response.data.ruleset.resources.reduce((a, v) => a.add(v.type[1]), new Set<string>())];
+												return lp;
+											});
 
-								state.spellFacets = response.data.ruleset.spellFacets;
+									state.resources = response.data.ruleset.resources;
+									state.resourceTypes = [...response.data.ruleset.resources.reduce((a, v) => a.add(v.type[1]), new Set<string>())];
 
-								state.dowActions = response.data.ruleset.dowActions;
-								state.racActions = response.data.ruleset.racActions;
-								state.fightActions = response.data.ruleset.fightActions;
+									state.spellFacets = response.data.ruleset.spellFacets;
 
-								state.practices = response.data.ruleset.practices;
-								state.questions = response.data.ruleset.questions;
-							}));
+									state.dowActions = response.data.ruleset.dowActions;
+									state.racActions = response.data.ruleset.racActions;
+									state.fightActions = response.data.ruleset.fightActions;
 
-							fetching("done");
-						}
-						else {
-							fetching("failed");
-							throw new Error();
-						}
-					})
-					.catch(reason => {
-						console.error(reason);
-						fetching("failed");
-					});
+									state.practices = response.data.ruleset.practices;
+									state.questions = response.data.ruleset.questions;
+								}));
+
+								setFetchState("done");
+							}
+							else {
+								setFetchState("failed");
+								throw new Error();
+							}
+						})
+						.catch(reason => {
+							console.error(reason);
+							setFetchState("failed");
+						});
+				}
 			},
 
 			serveResult<T>(row: T[], error: [id: unknown, msg: string]): Readonly<T> {
