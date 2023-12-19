@@ -12,7 +12,7 @@ export const SessionConfig: SessionOptions = {
 	cookie: {
 		secure: !IsDev,
 		httpOnly: !IsDev,
-		sameSite: IsDev ? "none" : "strict",
+		sameSite: "none",
 		maxAge: 1000 * 60 * 60 * 24
 	}
 };
