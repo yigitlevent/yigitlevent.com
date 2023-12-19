@@ -1,7 +1,9 @@
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
+import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import { useEffect } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 
@@ -18,10 +20,14 @@ import { ResourcesList } from "./Tools/ResourcesList/ResourcesList";
 import { SkillLists } from "./Tools/SkillLists/SkillLists";
 import { TraitLists } from "./Tools/TraitLists/TraitLists";
 import { useRulesetStore } from "../hooks/apiStores/useRulesetStore";
+import { useUserStore } from "../hooks/apiStores/useUserStore";
+import { THEME } from "../theme/theme";
 
 
 export function MainBox(): JSX.Element {
+	const { user } = useUserStore();
 	const { fetchState, fetchList, fetchData } = useRulesetStore();
+	const matches = useMediaQuery(THEME.breakpoints.down("sm"));
 
 	useEffect(() => {
 		if (fetchState === "fetch-full") fetchList();
@@ -33,7 +39,15 @@ export function MainBox(): JSX.Element {
 
 	return (
 		<Container maxWidth="lg" sx={{ margin: "10px auto" }}>
-			<Menu />
+			<Box>
+				<Typography variant="h2">BWGR Tools</Typography>
+			</Box>
+
+			<Grid item>
+				<Box sx={{ textAlign: "right" }}>{user ? `welcome, ${user.username}` : null}</Box>
+			</Grid>
+
+			<Menu bottom={matches} />
 
 			<Paper sx={{ padding: "10px 20px" }}>
 				{fetchState === "failed"
