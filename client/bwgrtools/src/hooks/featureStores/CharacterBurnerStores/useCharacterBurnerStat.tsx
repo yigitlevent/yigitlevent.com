@@ -8,13 +8,6 @@ import { useCharacterBurnerSkillStore } from "./useCharacterBurnerSkill";
 import { Clamp } from "../../../utils/misc";
 
 
-interface StatData {
-	poolType: "Mental" | "Physical",
-	shadeShifted: boolean,
-	mainPoolSpent: { shade: number; exponent: number; };
-	eitherPoolSpent: { shade: number; exponent: number; };
-}
-
 export type CharacterBurnerStatState = {
 	stats: { [key: string]: StatData; };
 

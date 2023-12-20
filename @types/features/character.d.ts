@@ -62,6 +62,13 @@ interface CharacterStockLimits {
 	attributes: number;
 }
 
+interface StatData {
+	poolType: "Mental" | "Physical",
+	shadeShifted: boolean,
+	mainPoolSpent: { shade: number; exponent: number; };
+	eitherPoolSpent: { shade: number; exponent: number; };
+}
+
 type CharacterQuestion = {
 	id: QuestionId;
 	name: string;
@@ -86,4 +93,39 @@ interface Points {
 interface AbilityPoints {
 	shade: Shades;
 	exponent: number;
+}
+
+interface BurningCharacter {
+	basics: {
+		name: string;
+		concept: string;
+		gender: "Male" | "Female";
+		stock: [id: StockId, name: string];
+		beliefs: { name: string, belief: string; }[];
+		instincts: { name: string, instinct: string; }[];
+	};
+	lifepaths: {
+		lifepaths: Lifepath[];
+	};
+	stats: {
+		stats: { [key: string]: StatData; };
+	};
+	skills: {
+		skills: CharacterSkill[];
+	};
+	traits: {
+		traits: CharacterTrait[];
+	};
+	attributes: {
+		attributes: CharacterAttribute[];
+	};
+	resources: {
+		resources: { [key: Guid]: CharacterResource; };
+	};
+	misc: {
+		special: CharacterSpecial;
+		questions: CharacterQuestion[];
+		limits: CharacterStockLimits;
+		traitEffects: CharacterTraitEffect[];
+	};
 }

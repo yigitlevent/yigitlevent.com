@@ -1,18 +1,22 @@
+import Button from "@mui/material/Button";
 import Step from "@mui/material/Step";
 import StepContent from "@mui/material/StepContent";
 import StepIcon from "@mui/material/StepIcon";
 import StepLabel from "@mui/material/StepLabel";
 import Stepper from "@mui/material/Stepper";
 import Typography from "@mui/material/Typography";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
+import { useCharacterBurnerAttributeStore } from "../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerAttribute";
 import { useCharacterBurnerBasicsStore } from "../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerBasics";
 import { useCharacterBurnerLifepathStore } from "../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerLifepath";
 import { useCharacterBurnerMiscStore } from "../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerMisc";
 import { useCharacterBurnerResourceStore } from "../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerResource";
 import { useCharacterBurnerSkillStore } from "../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerSkill";
+import { useCharacterBurnerStatStore } from "../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerStat";
 import { useCharacterBurnerTraitStore } from "../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerTrait";
+import { DownloadFile } from "../../../utils/downloadFile";
 import { DrawerBox } from "../../Shared/DrawerBox";
 
 
@@ -83,18 +87,37 @@ const ChecklistSteps: { label: string, description: string[]; }[] = [
 ];
 
 export function Checklist({ expanded }: { expanded: boolean; }): JSX.Element {
-	const { stock, concept, name, beliefs, instincts } = useCharacterBurnerBasicsStore();
+	const { stock, concept, gender, name, beliefs, instincts } = useCharacterBurnerBasicsStore();
 	const { lifepaths, getEitherPool, getMentalPool, getPhysicalPool } = useCharacterBurnerLifepathStore();
-	const { getSkillPools } = useCharacterBurnerSkillStore();
-	const { getTraitPools } = useCharacterBurnerTraitStore();
-	const { getResourcePools } = useCharacterBurnerResourceStore();
-	const { special, questions, limits } = useCharacterBurnerMiscStore();
+	const { stats } = useCharacterBurnerStatStore();
+	const { attributes } = useCharacterBurnerAttributeStore();
+	const { skills, getSkillPools } = useCharacterBurnerSkillStore();
+	const { traits, getTraitPools } = useCharacterBurnerTraitStore();
+	const { resources, getResourcePools } = useCharacterBurnerResourceStore();
+	const { special, questions, limits, traitEffects } = useCharacterBurnerMiscStore();
 
 	const location = useLocation();
 
 	// TODO: also check special lifepath and skill stuff
 
 	const [activeStep, setActiveStep] = useState(0);
+
+	const exportChar = useCallback(() => {
+		const json: BurningCharacter = {
+			basics: { name, concept, gender, stock, beliefs, instincts },
+			lifepaths: { lifepaths },
+			stats: { stats },
+			skills: { skills: skills.items },
+			traits: { traits: traits.items },
+			attributes: { attributes: attributes.items },
+			resources: { resources },
+			misc: { special, questions, limits, traitEffects }
+		};
+
+		const filename = `character-${json.basics.name.replaceAll(" ", "-")}.json`;
+		const content = "data:application/json;charset=utf-8," + encodeURIComponent(JSON.stringify(json));
+		DownloadFile(filename, content);
+	}, [attributes.items, beliefs, concept, gender, instincts, lifepaths, limits, name, questions, resources, skills.items, special, stats, stock, traitEffects, traits.items]);
 
 	useEffect(() => {
 		const remainingStatPoints = getEitherPool().remaining + getMentalPool().remaining + getPhysicalPool().remaining;
@@ -115,14 +138,16 @@ export function Checklist({ expanded }: { expanded: boolean; }): JSX.Element {
 		else if (remainingTraitPoints !== 0) setActiveStep(5);
 		else if (questions.some(q => q.answer)) setActiveStep(6);
 		else if (remainingResourcePoints !== 0) setActiveStep(7);
-		else if ((beliefs.filter(v => v.belief !== "").length === limits.beliefs || instincts.filter(v => v.instinct !== "").length === limits.instincts)) setActiveStep(8);
+		else if ((beliefs.filter(v => v.belief !== "").length !== limits.beliefs || instincts.filter(v => v.instinct !== "").length !== limits.instincts)) setActiveStep(8);
 		else if (name === "") setActiveStep(9);
 		else setActiveStep(10);
-	}, [beliefs, concept, instincts, lifepaths, limits, name, questions, special, stock,
+	}, [beliefs, concept, instincts, lifepaths, limits, name, questions, special, stock, stats, attributes, skills, traits, resources,
 		getEitherPool, getMentalPool, getPhysicalPool, getResourcePools, getSkillPools, getTraitPools]);
 
 	return (
 		<DrawerBox title={"Checklist"} expanded={expanded}>
+			<Button variant="outlined" size="medium" fullWidth onClick={exportChar}>Export</Button>
+
 			{location.pathname === "/characterburner"
 				? <Stepper activeStep={activeStep} orientation="vertical">
 					{ChecklistSteps.map((step, i) => (
@@ -134,7 +159,7 @@ export function Checklist({ expanded }: { expanded: boolean; }): JSX.Element {
 							<StepContent>
 								{step.description.map((desc, ii) => (
 									<Typography key={ii} variant="body2" sx={{ fontSize: "13px" }} color={activeStep !== i ? "gray" : undefined}>
-										{desc}
+										{activeStep === i ? desc : ""}
 									</Typography>
 								)
 								)}
@@ -143,7 +168,7 @@ export function Checklist({ expanded }: { expanded: boolean; }): JSX.Element {
 					))}
 				</Stepper>
 				: <Typography>
-					Checlkist is only available when using the Character Burner tool.
+					Checklist is only available when using the Character Burner tool.
 				</Typography>}
 		</DrawerBox>
 	);
