@@ -19,7 +19,7 @@ export class UniqueArray<K, T> {
 	constructor(newArray?: UniqueArrayItem<K, T>[]) {
 		if (newArray) {
 			const remade: UniqueArrayItem<K, T>[] = JSON.parse(JSON.stringify(newArray));
-			this.values = remade;
+			remade.forEach(v => this.add(v));
 		}
 	}
 
