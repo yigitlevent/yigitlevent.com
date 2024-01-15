@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
 
-type List<T> = (T & { rulesets: RulesetId[]; })[];
+type List<T> = (T & { rulesets: BwgrRulesetId[]; })[];
 
 interface SearchReturn<T> {
 	searchString: string,

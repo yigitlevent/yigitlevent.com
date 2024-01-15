@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 import { GetResolutionString } from "../../../utils/getActionResolutionString";
 
 
-export function FightPlannerActionDetails({ action }: { action: FightAction; }): JSX.Element {
+export function FightPlannerActionDetails({ action }: { action: BwgrFightAction; }): JSX.Element {
 	return (
 		<Stack spacing={0} sx={{ width: "100%" }}>
 			{action.tests

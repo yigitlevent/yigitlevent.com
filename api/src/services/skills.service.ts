@@ -2,9 +2,9 @@ import { PgPool } from "../index";
 import { Logger } from "../utils/logger";
 
 
-export async function GetSkills(rulesets: RulesetId[]): Promise<Skill[]> {
-	const convert = (v: SkillDBO): Skill => {
-		const r: Skill = {
+export async function GetSkills(rulesets: BwgrRulesetId[]): Promise<BwgrSkill[]> {
+	const convert = (v: BwgrSkillDBO): BwgrSkill => {
+		const r: BwgrSkill = {
 			rulesets: v.Rulesets,
 			id: v.Id,
 			name: v.Name,
@@ -37,7 +37,7 @@ export async function GetSkills(rulesets: RulesetId[]): Promise<Skill[]> {
 
 	const log = new Logger("GetSkills Querying");
 	const query = `select * from bwgr."SkillsList" where "Rulesets"::text[] && ARRAY['${rulesets.join("','")}'];`;
-	return PgPool.query<SkillDBO>(query).then(result => {
+	return PgPool.query<BwgrSkillDBO>(query).then(result => {
 		log.end();
 		const log2 = new Logger("GetSkills Conversion");
 		const res = result.rows.map(convert);

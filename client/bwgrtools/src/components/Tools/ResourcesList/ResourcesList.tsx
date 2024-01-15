@@ -19,7 +19,7 @@ import { GenericGrid } from "../../Shared/Grids";
 
 export function ResourcesList(): JSX.Element {
 	const { stocks, resources, resourceTypes } = useRulesetStore();
-	const { searchString, searchFields, filters, setFilter, searchResults } = useSearch<Resource>(resources, ["stock", "type"]);
+	const { searchString, searchFields, filters, setFilter, searchResults } = useSearch<BwgrResource>(resources, ["stock", "type"]);
 
 	return (
 		<Fragment>

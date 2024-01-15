@@ -15,7 +15,7 @@ import { useCharacterBurnerResourceStore } from "../../../../hooks/featureStores
 import { GenericGrid } from "../../../Shared/Grids";
 
 
-export function Resources({ openModal }: { openModal: (name: CharacterBurnerModals) => void; }): JSX.Element {
+export function Resources({ openModal }: { openModal: (name: BwgrCharacterBurnerModals) => void; }): JSX.Element {
 	const { resources, getResourcePools, removeResource, editResourceDescription } = useCharacterBurnerResourceStore();
 
 	const resourcePools = getResourcePools();

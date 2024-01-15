@@ -15,7 +15,7 @@ export function HuntingGround(): JSX.Element {
 	const { special, setHuntingGround } = useCharacterBurnerMiscStore();
 
 	const rollTerritory = useCallback(() => {
-		const huntingGrounds: HuntingGroundsList[] = ["Waste", "Marginal", "Typical", "Plentiful", "Untouched"];
+		const huntingGrounds: BwgrHuntingGroundsList[] = ["Waste", "Marginal", "Typical", "Plentiful", "Untouched"];
 		const lastLp = lifepaths[lifepaths.length - 1];
 		const roll = RandomNumber(1, 6) + RandomNumber(1, 6) + (lastLp.name === "Dominant" && lastLp.setting[1] === "Wild Pack" ? 1 : 0);
 

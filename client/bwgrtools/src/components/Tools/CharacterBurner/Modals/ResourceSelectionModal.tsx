@@ -40,7 +40,7 @@ export function ResourceSelectionModal({ isOpen, close }: { isOpen: boolean; clo
 
 	const resourcePool = getResourcePools();
 
-	const [resource, setResource] = useState<Resource>(ruleset.resources.filter(x => x.stock[0] === stock[0])[0] as Resource);
+	const [resource, setResource] = useState<BwgrResource>(ruleset.resources.filter(x => x.stock[0] === stock[0])[0] as BwgrResource);
 	const [resourceDesc, setResourceDesc] = useState("");
 	const [costs, setCosts] = useState<SelectedCost>();
 	const [numberOfWeapons, setNumberOfWeapons] = useState(1);

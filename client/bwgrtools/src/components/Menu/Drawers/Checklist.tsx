@@ -103,7 +103,7 @@ export function Checklist({ expanded }: { expanded: boolean; }): JSX.Element {
 	const [activeStep, setActiveStep] = useState(0);
 
 	const exportChar = useCallback(() => {
-		const json: BurningCharacter = {
+		const json: BwgrBurningCharacter = {
 			basics: { name, concept, gender, stock, beliefs, instincts },
 			lifepaths: { lifepaths },
 			stats: { stats },

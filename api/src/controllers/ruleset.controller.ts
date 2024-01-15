@@ -17,7 +17,7 @@ import { GetTraits } from "../services/traits.service";
 import { Logger } from "../utils/logger";
 
 
-export async function GetRulesetsData(request: Request<unknown, unknown, RulesetForms>, response: Response): Promise<Response<RulesetResponse, Record<string, unknown>>> {
+export async function GetRulesetsData(request: Request<unknown, unknown, BwgrRulesetForms>, response: Response): Promise<Response<BwgrRulesetResponse, Record<string, unknown>>> {
 	try {
 		const log = new Logger("➞ GetRulesetsData", true);
 		const { rulesets } = request.body;
@@ -36,7 +36,7 @@ export async function GetRulesetsData(request: Request<unknown, unknown, Ruleset
 		const practices = await GetPractices();
 		const questions = await GetQuestions();
 
-		const responseData: RulesetResponse = { ruleset: { abilities, stocks, settings, skills, traits, lifepaths, resources, spellFacets, dowActions, racActions, fightActions, practices, questions } };
+		const responseData: BwgrRulesetResponse = { ruleset: { abilities, stocks, settings, skills, traits, lifepaths, resources, spellFacets, dowActions, racActions, fightActions, practices, questions } };
 		log.end();
 
 		response.status(200);
@@ -48,11 +48,11 @@ export async function GetRulesetsData(request: Request<unknown, unknown, Ruleset
 	}
 }
 
-export async function GetRulesetsList(request: Request, response: Response): Promise<Response<RulesetsResponse, Record<string, unknown>>> {
+export async function GetRulesetsList(request: Request, response: Response): Promise<Response<BwgrRulesetsResponse, Record<string, unknown>>> {
 	try {
 		const data = await GetRulesets();
 
-		const responseData: RulesetsResponse = { rulesets: data };
+		const responseData: BwgrRulesetsResponse = { rulesets: data };
 
 		response.status(200);
 		return response.json(responseData);

@@ -19,7 +19,7 @@ import { PopoverLink } from "../../Shared/PopoverLink";
 
 export function SkillLists(): JSX.Element {
 	const { stocks, skills, skillCategories, skillTypes } = useRulesetStore();
-	const { searchString, searchFields, filters, setFilter, searchResults } = useSearch<Skill>(skills, ["stock", "category", "type"]);
+	const { searchString, searchFields, filters, setFilter, searchResults } = useSearch<BwgrSkill>(skills, ["stock", "category", "type"]);
 
 	return (
 		<Fragment>

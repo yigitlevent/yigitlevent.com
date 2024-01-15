@@ -2,12 +2,12 @@ import { PgPool } from "../index";
 import { Logger } from "../utils/logger";
 
 
-export async function GetDoWActions(): Promise<DoWAction[]> {
-	const convert = (a: DoWActionDBO[], at: ActionTestDBO[], ar: DoWActionResolutionDBO[]): DoWAction[] => {
+export async function GetDoWActions(): Promise<BwgrDoWAction[]> {
+	const convert = (a: BwgrDoWActionDBO[], at: BwgrActionTestDBO[], ar: BwgrDoWActionResolutionDBO[]): BwgrDoWAction[] => {
 		const log = new Logger("GetDoWActions Conversion");
 
-		const r: DoWAction[] = a.map(v => {
-			const act: DoWAction = {
+		const r: BwgrDoWAction[] = a.map(v => {
+			const act: BwgrDoWAction = {
 				id: v.Id,
 				name: v.Name
 			};
@@ -34,7 +34,7 @@ export async function GetDoWActions(): Promise<DoWAction[]> {
 				act.resolutions = [];
 
 				r.forEach(res => {
-					const actionRes: ActionResolution<DoWActionId> = {
+					const actionRes: BwgrActionResolution<BwgrDoWActionId> = {
 						opposingAction: [res.OpposingActionId, res.OpposingAction],
 						type: [res.ResolutionTypeId, res.ResolutionType]
 					};
@@ -64,9 +64,9 @@ export async function GetDoWActions(): Promise<DoWAction[]> {
 	const query2 = "select * from bwgr.\"DoWActionTestList\";";
 	const query3 = "select * from bwgr.\"DoWActionResolutionList\";";
 	return Promise.all([
-		PgPool.query<DoWActionDBO>(query1),
-		PgPool.query<ActionTestDBO>(query2),
-		PgPool.query<DoWActionResolutionDBO>(query3)
+		PgPool.query<BwgrDoWActionDBO>(query1),
+		PgPool.query<BwgrActionTestDBO>(query2),
+		PgPool.query<BwgrDoWActionResolutionDBO>(query3)
 	]).then(result => {
 		log.end();
 		const res = convert(result[0].rows, result[1].rows, result[2].rows);

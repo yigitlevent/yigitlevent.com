@@ -7,7 +7,7 @@ import { UniqueArray } from "../../../../../utils/uniqueArray";
 import { PopoverLink } from "../../../../Shared/PopoverLink";
 
 
-export function RandomLifepathsLists({ chosenLifepaths }: { chosenLifepaths: Lifepath[]; }): JSX.Element {
+export function RandomLifepathsLists({ chosenLifepaths }: { chosenLifepaths: BwgrLifepath[]; }): JSX.Element {
 	const { getSkill, getTrait } = useRulesetStore();
 
 	const mandatorySkills = new UniqueArray(chosenLifepaths.map(lp => lp.skills ? [getSkill(lp.skills[0])] : []).flat());

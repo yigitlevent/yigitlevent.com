@@ -2,12 +2,12 @@ import { PgPool } from "../index";
 import { Logger } from "../utils/logger";
 
 
-export async function GetFightActions(): Promise<FightAction[]> {
-	const convert = (a: FightActionDBO[], at: ActionTestDBO[], ar: FightActionResolutionDBO[]): FightAction[] => {
+export async function GetFightActions(): Promise<BwgrFightAction[]> {
+	const convert = (a: BwgrFightActionDBO[], at: BwgrActionTestDBO[], ar: BwgrFightActionResolutionDBO[]): BwgrFightAction[] => {
 		const log = new Logger("GetFightActions Conversion");
 
-		const r: FightAction[] = a.map(v => {
-			const act: FightAction = {
+		const r: BwgrFightAction[] = a.map(v => {
+			const act: BwgrFightAction = {
 				id: v.Id,
 				name: v.Name,
 				group: [v.GroupId, v.Group],
@@ -39,7 +39,7 @@ export async function GetFightActions(): Promise<FightAction[]> {
 				act.resolutions = [];
 
 				r.forEach(res => {
-					const actionRes: ActionResolution<FightActionId> = {
+					const actionRes: BwgrActionResolution<BwgrFightActionId> = {
 						opposingAction: [res.OpposingActionId, res.OpposingAction],
 						type: [res.ResolutionTypeId, res.ResolutionType]
 					};
@@ -69,9 +69,9 @@ export async function GetFightActions(): Promise<FightAction[]> {
 	const query2 = "select * from bwgr.\"FightActionTestList\";";
 	const query3 = "select * from bwgr.\"FightActionResolutionList\";";
 	return Promise.all([
-		PgPool.query<FightActionDBO>(query1),
-		PgPool.query<ActionTestDBO>(query2),
-		PgPool.query<FightActionResolutionDBO>(query3)
+		PgPool.query<BwgrFightActionDBO>(query1),
+		PgPool.query<BwgrActionTestDBO>(query2),
+		PgPool.query<BwgrFightActionResolutionDBO>(query3)
 	]).then(result => {
 		log.end();
 		const res = convert(result[0].rows, result[1].rows, result[2].rows);

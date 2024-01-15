@@ -16,9 +16,9 @@ export function SpecialSkills(): JSX.Element {
 	const { skills } = useCharacterBurnerSkillStore();
 	const { special, resetSkillSubskills, modifySkillSubskills } = useCharacterBurnerMiscStore();
 	const { hasAttribute } = useCharacterBurnerAttributeStore();
-	const [specialSkillIds, setSpecialSkillIds] = useState<SkillId[]>([]);
+	const [specialSkillIds, setSpecialSkillIds] = useState<BwgrSkillId[]>([]);
 
-	const getSpecialSkillIds = useCallback((characterSkills: UniqueArray<SkillId, CharacterSkill>): SkillId[] => {
+	const getSpecialSkillIds = useCallback((characterSkills: UniqueArray<BwgrSkillId, BwgrCharacterSkill>): BwgrSkillId[] => {
 		return characterSkills
 			.filter(charSkill =>
 				charSkill.name === "Any Skill"
@@ -45,7 +45,7 @@ export function SpecialSkills(): JSX.Element {
 				const canSelectMultiple = skill.name === "Appropriate Weapons";
 
 				const subskillIds = skill.subskillIds;
-				let subskills: Skill[] = [];
+				let subskills: BwgrSkill[] = [];
 
 				if (skill.name === "Any Skill") {
 					subskills = ruleset.skills.filter(s =>

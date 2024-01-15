@@ -36,12 +36,12 @@ export function RandomLifepathsModal({ isOpen, close }: { isOpen: boolean; close
 	const { setStockAndReset } = useCharacterBurnerBasicsStore();
 	const { addLifepath } = useCharacterBurnerLifepathStore();
 
-	const [newStock, setNewStock] = useState<Stock>();
-	const [chosenLifepaths, setChosen] = useState<Lifepath[]>([]);
+	const [newStock, setNewStock] = useState<BwgrStock>();
+	const [chosenLifepaths, setChosen] = useState<BwgrLifepath[]>([]);
 	const [triedTooMuch, setTriedTooMuch] = useState(false);
 
 	const createRandom = useCallback((): void => {
-		const tempChosenLifepaths: Lifepath[] = [];
+		const tempChosenLifepaths: BwgrLifepath[] = [];
 
 		let leadsCounter = 0;
 		let chosenAmount = 0;
@@ -108,7 +108,7 @@ export function RandomLifepathsModal({ isOpen, close }: { isOpen: boolean; close
 						<FormControl fullWidth variant="standard">
 							<InputLabel>Stock</InputLabel>
 
-							<Select label="Stock" value={stock} onChange={e => changeStock(e.target.value as StockId | "Random")}>
+							<Select label="Stock" value={stock} onChange={e => changeStock(e.target.value as BwgrStockId | "Random")}>
 								<MenuItem key={"Random"} value={"Random"}>Random</MenuItem>
 								{ruleset.stocks.map(v => { return <MenuItem key={v.name} value={v.id}>{v.name}</MenuItem>; })}
 							</Select>

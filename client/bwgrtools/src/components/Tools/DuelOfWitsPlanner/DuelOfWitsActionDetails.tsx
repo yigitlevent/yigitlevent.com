@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 import { GetResolutionString } from "../../../utils/getActionResolutionString";
 
 
-export function DuelOfWitsActionDetails({ action }: { action: DoWAction; }): JSX.Element {
+export function DuelOfWitsActionDetails({ action }: { action: BwgrDoWAction; }): JSX.Element {
 	return (
 		<Stack spacing={0} sx={{ width: "100%" }}>
 			{action.tests

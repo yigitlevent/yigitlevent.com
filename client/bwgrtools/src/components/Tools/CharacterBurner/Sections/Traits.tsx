@@ -9,7 +9,7 @@ import { GenericGrid } from "../../../Shared/Grids";
 import { BlockTraitPopover } from "../../CharacterBurner/BlockText";
 
 
-function Trait({ trait, remove }: { trait: UniqueArrayItem<TraitId, CharacterTrait>; remove?: (traitId: TraitId) => void; }) {
+function Trait({ trait, remove }: { trait: UniqueArrayItem<BwgrTraitId, BwgrCharacterTrait>; remove?: (traitId: BwgrTraitId) => void; }) {
 	const { openTrait } = useCharacterBurnerTraitStore();
 
 	return (
@@ -77,7 +77,7 @@ function LifepathTraitsBlock() {
 	);
 }
 
-function GeneralTraitsBlock({ openModal }: { openModal: (name: CharacterBurnerModals) => void; }) {
+function GeneralTraitsBlock({ openModal }: { openModal: (name: BwgrCharacterBurnerModals) => void; }) {
 	const { traits, removeGeneralTrait } = useCharacterBurnerTraitStore();
 
 	return (
@@ -97,7 +97,7 @@ function GeneralTraitsBlock({ openModal }: { openModal: (name: CharacterBurnerMo
 	);
 }
 
-export function Traits({ openModal }: { openModal: (name: CharacterBurnerModals) => void; }): JSX.Element {
+export function Traits({ openModal }: { openModal: (name: BwgrCharacterBurnerModals) => void; }): JSX.Element {
 	const { traits, getTraitPools } = useCharacterBurnerTraitStore();
 	const traitPools = getTraitPools();
 

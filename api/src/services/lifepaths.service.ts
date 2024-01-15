@@ -2,12 +2,12 @@ import { PgPool } from "../index";
 import { Logger } from "../utils/logger";
 
 
-export async function GetLifepaths(rulesets: RulesetId[]): Promise<Lifepath[]> {
-	const convert = (l: LifepathDBO[], lr: LifepathRequirementBlockDBO[], lri: LifepathRequirementBlockItemDBO[]): Lifepath[] => {
+export async function GetLifepaths(rulesets: BwgrRulesetId[]): Promise<BwgrLifepath[]> {
+	const convert = (l: BwgrLifepathDBO[], lr: BwgrLifepathRequirementBlockDBO[], lri: BwgrLifepathRequirementBlockItemDBO[]): BwgrLifepath[] => {
 		const log = new Logger("GetLifepaths Conversion");
 
-		const r: Lifepath[] = l.map(v => {
-			const lp: Lifepath = {
+		const r: BwgrLifepath[] = l.map(v => {
+			const lp: BwgrLifepath = {
 				rulesets: v.Rulesets,
 				id: v.Id,
 				name: v.Name,
@@ -55,14 +55,14 @@ export async function GetLifepaths(rulesets: RulesetId[]): Promise<Lifepath[]> {
 			const reqBlocks = lr.filter(a => a.LifepathId === v.Id);
 			if (reqBlocks.length > 0) {
 				lp.requirements = reqBlocks.map(vrb => {
-					const rb: LifepathRequirementBlock = {
+					const rb: BwgrLifepathRequirementBlock = {
 						logicType: [vrb.LogicTypeId, vrb.LogicType] as [id: LogicTypeId, name: string],
 						mustFulfill: vrb.MustFulfill,
 						fulfillmentAmount: vrb.FulfillmentAmount,
 						items: []
 					};
 
-					const items: LifepathRequirementItem[] = lri.filter(a => a.RequirementId === vrb.Id).map(vrbi => {
+					const items: BwgrLifepathRequirementItem[] = lri.filter(a => a.RequirementId === vrb.Id).map(vrbi => {
 						const rbi = {
 							logicType: [vrbi.RequirementTypeId, vrbi.RequirementType] as [id: LogicTypeId, name: string]
 						};
@@ -81,9 +81,9 @@ export async function GetLifepaths(rulesets: RulesetId[]): Promise<Lifepath[]> {
 						else if (vrbi.RequirementType === "MALE") return { ...rbi, gender: "Male" };
 						else if (vrbi.RequirementType === "OLDESTBY") return { ...rbi, oldestBy: vrbi.Max as number };
 						else if (vrbi.RequirementType === "ATTRIBUTE" && vrbi.AttributeId && vrbi.Attribute) {
-							const atr: LifepathRequirementItem = {
+							const atr: BwgrLifepathRequirementItem = {
 								...rbi,
-								attribute: [vrbi.AttributeId, vrbi.Attribute] as [id: AbilityId, name: string],
+								attribute: [vrbi.AttributeId, vrbi.Attribute] as [id: BwgrAbilityId, name: string],
 								forCompanion: vrbi.ForCompanion
 							};
 							if (vrbi.Min) atr.min = vrbi.Min;
@@ -123,9 +123,9 @@ export async function GetLifepaths(rulesets: RulesetId[]): Promise<Lifepath[]> {
 	const query2 = "select * from bwgr.\"LifepathRequirementBlocks\";";
 	const query3 = "select * from bwgr.\"LifepathRequirementBlockItems\";";
 	return Promise.all([
-		PgPool.query<LifepathDBO>(query1),
-		PgPool.query<LifepathRequirementBlockDBO>(query2),
-		PgPool.query<LifepathRequirementBlockItemDBO>(query3)
+		PgPool.query<BwgrLifepathDBO>(query1),
+		PgPool.query<BwgrLifepathRequirementBlockDBO>(query2),
+		PgPool.query<BwgrLifepathRequirementBlockItemDBO>(query3)
 	]).then(result => {
 		log.end();
 		const res = convert(result[0].rows, result[1].rows, result[2].rows);

@@ -6,7 +6,7 @@ import { useRulesetStore } from "../../../hooks/apiStores/useRulesetStore";
 import { PopoverLink } from "../../Shared/PopoverLink";
 
 
-export function LifepathTraits({ lifepath }: { lifepath: Lifepath; }): JSX.Element {
+export function LifepathTraits({ lifepath }: { lifepath: BwgrLifepath; }): JSX.Element {
 	const { getTrait } = useRulesetStore();
 
 	const lifepathTraits

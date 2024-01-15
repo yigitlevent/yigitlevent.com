@@ -8,22 +8,22 @@ import { LifepathTraits } from "./LifepathTraits";
 import { useRulesetStore } from "../../../hooks/apiStores/useRulesetStore";
 
 
-export function LifepathBox({ lifepath }: { lifepath: Lifepath; }): JSX.Element {
+export function LifepathBox({ lifepath }: { lifepath: BwgrLifepath; }): JSX.Element {
 	const { getSetting } = useRulesetStore();
 
-	const getYears = (l: Lifepath) => {
+	const getYears = (l: BwgrLifepath) => {
 		const years = typeof l.years === "number"
 			? `${l.years}${l.years > 1 ? "yrs" : "yr"}`
 			: l.years.join("-") + "yrs";
 		return years;
 	};
 
-	const getResources = (l: Lifepath) => {
+	const getResources = (l: BwgrLifepath) => {
 		const rps = `${l.pools.resourcePoints}${l.pools.resourcePoints > 1 ? "rps" : "rp"}`;
 		return rps;
 	};
 
-	const getStatPools = (l: Lifepath) => {
+	const getStatPools = (l: BwgrLifepath) => {
 		const statPoolsString = [];
 
 		if (l.pools.eitherStatPool === 0 && l.pools.mentalStatPool === 0 && l.pools.physicalStatPool === 0) statPoolsString.push("—");
@@ -35,7 +35,7 @@ export function LifepathBox({ lifepath }: { lifepath: Lifepath; }): JSX.Element 
 		return statPoolsString.join(", ");
 	};
 
-	const getLeads = (l: Lifepath) => {
+	const getLeads = (l: BwgrLifepath) => {
 		const leads = (l.leads && l.leads.length > 0)
 			? l.leads
 				.map(settingId => {

@@ -20,8 +20,8 @@ export function GeneralSkillModal({ isOpen, close }: { isOpen: boolean; close: (
 	const { skills, addGeneralSkill } = useCharacterBurnerSkillStore();
 	const { hasAttribute } = useCharacterBurnerAttributeStore();
 
-	const [possibleSkills, setPossibleSkills] = useState<Skill[]>([]);
-	const [chosenSkill, setChosenSkill] = useState<Skill>();
+	const [possibleSkills, setPossibleSkills] = useState<BwgrSkill[]>([]);
+	const [chosenSkill, setChosenSkill] = useState<BwgrSkill>();
 
 	const addNewSkill = () => {
 		if (chosenSkill) {
@@ -30,7 +30,7 @@ export function GeneralSkillModal({ isOpen, close }: { isOpen: boolean; close: (
 		}
 	};
 
-	const getRestrictionString = (skill: Skill) => {
+	const getRestrictionString = (skill: BwgrSkill) => {
 		if (skill.restriction) {
 			const rest = [];
 			if (skill.restriction.onlyStock) rest.push(`Only ${skill.restriction.onlyStock[1]}.`);
@@ -68,7 +68,7 @@ export function GeneralSkillModal({ isOpen, close }: { isOpen: boolean; close: (
 								options={possibleSkills.sort((a, b) => a.category[1].localeCompare(b.category[1]) || a.name.localeCompare(b.name))}
 								getOptionLabel={(option) => option.name}
 								groupBy={(option) => option.category[1]}
-								renderInput={(params) => <TextField {...params} label="Chosen Skill" />}
+								renderInput={(params) => <TextField {...params} label="ChosenBwgrSkill" />}
 								onChange={(_, v) => setChosenSkill(v)}
 								fullWidth
 								disableClearable
@@ -113,7 +113,7 @@ export function GeneralSkillModal({ isOpen, close }: { isOpen: boolean; close: (
 						: null}
 
 					<Grid item xs={1}>
-						<Button variant="outlined" size="medium" onClick={addNewSkill} fullWidth>Add Skill</Button>
+						<Button variant="outlined" size="medium" onClick={addNewSkill} fullWidth>AddBwgrSkill</Button>
 					</Grid>
 				</GenericGrid>
 			</Paper>

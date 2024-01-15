@@ -19,7 +19,7 @@ import { PopoverLink } from "../../Shared/PopoverLink";
 
 export function TraitLists(): JSX.Element {
 	const { stocks, traits, traitCategories, traitTypes } = useRulesetStore();
-	const { searchString, searchFields, filters, setFilter, searchResults } = useSearch<Trait>(traits, ["stock", "category", "type"]);
+	const { searchString, searchFields, filters, setFilter, searchResults } = useSearch<BwgrTrait>(traits, ["stock", "category", "type"]);
 
 	return (
 		<Fragment>

@@ -15,7 +15,7 @@ export type CharacterBurnerBasicsState = {
 	name: string;
 	concept: string;
 	gender: "Male" | "Female";
-	stock: [id: StockId, name: string];
+	stock: [id: BwgrStockId, name: string];
 
 	beliefs: { name: string, belief: string; }[];
 	instincts: { name: string, instinct: string; }[];
@@ -24,7 +24,7 @@ export type CharacterBurnerBasicsState = {
 	setConcept: (concept: string) => void;
 	setGender: (gender: "Male" | "Female") => void;
 
-	setStockAndReset: (stock?: [id: StockId, name: string]) => void;
+	setStockAndReset: (stock?: [id: BwgrStockId, name: string]) => void;
 
 	setBelief: (index: number, belief: string) => void;
 	setInstinct: (index: number, instinct: string) => void;
@@ -35,7 +35,7 @@ export type CharacterBurnerBasicsState = {
 export const useCharacterBurnerBasicsStore = create<CharacterBurnerBasicsState>()(
 	devtools(
 		(set, get) => ({
-			stock: [0 as StockId, "Dwarf"],
+			stock: [0 as BwgrStockId, "Dwarf"],
 			concept: "",
 			name: "",
 			gender: "Male",
@@ -53,7 +53,7 @@ export const useCharacterBurnerBasicsStore = create<CharacterBurnerBasicsState>(
 				{ name: "Special Instinct", instinct: "" }
 			],
 
-			setStockAndReset: (stock?: [id: StockId, name: string]): void => {
+			setStockAndReset: (stock?: [id: BwgrStockId, name: string]): void => {
 				set({
 					stock: stock,
 					concept: "",

@@ -5,7 +5,7 @@ import { Fragment } from "react";
 import { GetOrdinalSuffix } from "../../../utils/misc";
 
 
-function ResolveRequirementBlockItem(item: LifepathRequirementItem): string {
+function ResolveRequirementBlockItem(item: BwgrLifepathRequirementItem): string {
 	const subject = "forCompanion" in item && item.forCompanion ? "Companion of this character" : "Character";
 
 	if ("isUnique" in item) return "This lifepath cannot be selected twice.";
@@ -44,7 +44,7 @@ function BlockTitle(logicType: string, fulfillmentAmount: number): string {
 	}
 }
 
-function ResolveRequirementBlocks(requirementBlocks: LifepathRequirementBlock[]): JSX.Element {
+function ResolveRequirementBlocks(requirementBlocks: BwgrLifepathRequirementBlock[]): JSX.Element {
 	const parentLogic = requirementBlocks.every(v => v.mustFulfill) ? "AND" : "OR";
 
 	const hasOneBlock = requirementBlocks.length === 1;
@@ -67,7 +67,7 @@ function ResolveRequirementBlocks(requirementBlocks: LifepathRequirementBlock[])
 	);
 }
 
-export function LifepathRequirements({ lifepath }: { lifepath: Lifepath; }): JSX.Element {
+export function LifepathRequirements({ lifepath }: { lifepath: BwgrLifepath; }): JSX.Element {
 	return (
 		<Fragment>
 			<b>Requirements:</b>

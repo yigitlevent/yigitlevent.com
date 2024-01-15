@@ -15,30 +15,30 @@ import { useRulesetStore } from "../../apiStores/useRulesetStore";
 
 
 export type CharacterBurnerAttributeState = {
-	attributes: UniqueArray<AbilityId, CharacterAttribute>;
+	attributes: UniqueArray<BwgrAbilityId, BwgrCharacterAttribute>;
 
 	reset: () => void;
 
-	shiftAttributeShade: (attributeId: AbilityId) => void;
+	shiftAttributeShade: (attributeId: BwgrAbilityId) => void;
 
-	getMortalWound: () => AbilityPoints;
-	getReflexes: () => AbilityPoints;
-	getHealth: () => AbilityPoints;
-	getSteel: () => AbilityPoints;
-	getHesitation: () => AbilityPoints;
-	getGreed: () => AbilityPoints;
-	getGriefOrSpite: (isSpite: boolean) => AbilityPoints;
-	getFaith: () => AbilityPoints;
-	getFaithInDeadGods: () => AbilityPoints;
-	getHatred: () => AbilityPoints;
-	getVoidEmbrace: () => AbilityPoints;
-	getAncestralTaint: () => AbilityPoints;
-	getCorruption: () => AbilityPoints;
-	getResources: () => AbilityPoints;
-	getCircles: () => AbilityPoints;
-	getAttribute: (attribute: [id: AbilityId, name: string]) => AbilityPoints;
+	getMortalWound: () => BwgrAbilityPoints;
+	getReflexes: () => BwgrAbilityPoints;
+	getHealth: () => BwgrAbilityPoints;
+	getSteel: () => BwgrAbilityPoints;
+	getHesitation: () => BwgrAbilityPoints;
+	getGreed: () => BwgrAbilityPoints;
+	getGriefOrSpite: (isSpite: boolean) => BwgrAbilityPoints;
+	getFaith: () => BwgrAbilityPoints;
+	getFaithInDeadGods: () => BwgrAbilityPoints;
+	getHatred: () => BwgrAbilityPoints;
+	getVoidEmbrace: () => BwgrAbilityPoints;
+	getAncestralTaint: () => BwgrAbilityPoints;
+	getCorruption: () => BwgrAbilityPoints;
+	getResources: () => BwgrAbilityPoints;
+	getCircles: () => BwgrAbilityPoints;
+	getAttribute: (attribute: [id: BwgrAbilityId, name: string]) => BwgrAbilityPoints;
 
-	hasAttribute: (id: AbilityId) => boolean;
+	hasAttribute: (id: BwgrAbilityId) => boolean;
 	hasAttributeByName: (name: string) => boolean;
 
 	/**
@@ -53,15 +53,15 @@ export type CharacterBurnerAttributeState = {
 export const useCharacterBurnerAttributeStore = create<CharacterBurnerAttributeState>()(
 	devtools(
 		(set, get) => ({
-			attributes: new UniqueArray<AbilityId, CharacterAttribute>(),
+			attributes: new UniqueArray<BwgrAbilityId, BwgrCharacterAttribute>(),
 
 			reset: (): void => {
 				set({
-					attributes: new UniqueArray<AbilityId, CharacterAttribute>()
+					attributes: new UniqueArray<BwgrAbilityId, BwgrCharacterAttribute>()
 				});
 			},
 
-			shiftAttributeShade: (attributeId: AbilityId): void => {
+			shiftAttributeShade: (attributeId: BwgrAbilityId): void => {
 				set(produce<CharacterBurnerAttributeState>((state) => {
 					const charAttribute = state.attributes.find(attributeId);
 					if (charAttribute) {
@@ -72,7 +72,7 @@ export const useCharacterBurnerAttributeStore = create<CharacterBurnerAttributeS
 			},
 
 			// TODO: if shade shifted, remove points from exponent
-			getMortalWound: (): AbilityPoints => {
+			getMortalWound: (): BwgrAbilityPoints => {
 				const { getStat } = useCharacterBurnerStatStore.getState();
 
 				const power = getStat("Power");
@@ -87,7 +87,7 @@ export const useCharacterBurnerAttributeStore = create<CharacterBurnerAttributeS
 			},
 
 			// TODO: if shade shifted, remove points from exponent
-			getReflexes: (): AbilityPoints => {
+			getReflexes: (): BwgrAbilityPoints => {
 				const { getStat } = useCharacterBurnerStatStore.getState();
 
 				const perception = getStat("Perception");
@@ -106,7 +106,7 @@ export const useCharacterBurnerAttributeStore = create<CharacterBurnerAttributeS
 			},
 
 			// TODO: if shade shifted, remove points from exponent
-			getHealth: (): AbilityPoints => {
+			getHealth: (): BwgrAbilityPoints => {
 				const { stock } = useCharacterBurnerBasicsStore.getState();
 				const { hasQuestionTrueByName } = useCharacterBurnerMiscStore.getState();
 				const { getStat } = useCharacterBurnerStatStore.getState();
@@ -131,7 +131,7 @@ export const useCharacterBurnerAttributeStore = create<CharacterBurnerAttributeS
 			},
 
 			// TODO: if shade shifted, remove points from exponent
-			getSteel: (): AbilityPoints => {
+			getSteel: (): BwgrAbilityPoints => {
 				const { hasQuestionTrueByName } = useCharacterBurnerMiscStore.getState();
 				const { getStat } = useCharacterBurnerStatStore.getState();
 
@@ -159,7 +159,7 @@ export const useCharacterBurnerAttributeStore = create<CharacterBurnerAttributeS
 			},
 
 			// TODO: if shade shifted, remove points from exponent
-			getHesitation: (): AbilityPoints => {
+			getHesitation: (): BwgrAbilityPoints => {
 				const { getStat } = useCharacterBurnerStatStore.getState();
 
 				const will = getStat("Will");
@@ -168,7 +168,7 @@ export const useCharacterBurnerAttributeStore = create<CharacterBurnerAttributeS
 			},
 
 			// TODO: if shade shifted, remove points from exponent
-			getGreed: (): AbilityPoints => {
+			getGreed: (): BwgrAbilityPoints => {
 				const { resources } = useCharacterBurnerResourceStore.getState();
 				const { hasQuestionTrueByName } = useCharacterBurnerMiscStore.getState();
 				const { getStat } = useCharacterBurnerStatStore.getState();
@@ -206,7 +206,7 @@ export const useCharacterBurnerAttributeStore = create<CharacterBurnerAttributeS
 			},
 
 			// TODO: if shade shifted, remove points from exponent
-			getGriefOrSpite: (isSpite: boolean): AbilityPoints => {
+			getGriefOrSpite: (isSpite: boolean): BwgrAbilityPoints => {
 				const { resources } = useCharacterBurnerResourceStore.getState();
 				const { hasQuestionTrueByName } = useCharacterBurnerMiscStore.getState();
 				const { getStat } = useCharacterBurnerStatStore.getState();
@@ -260,7 +260,7 @@ export const useCharacterBurnerAttributeStore = create<CharacterBurnerAttributeS
 			},
 
 			// TODO: if shade shifted, remove points from exponent
-			getFaith: (): AbilityPoints => {
+			getFaith: (): BwgrAbilityPoints => {
 				const { hasQuestionTrueByName } = useCharacterBurnerMiscStore.getState();
 
 				let bonus = 0;
@@ -272,7 +272,7 @@ export const useCharacterBurnerAttributeStore = create<CharacterBurnerAttributeS
 			},
 
 			// TODO: if shade shifted, remove points from exponent
-			getFaithInDeadGods: (): AbilityPoints => {
+			getFaithInDeadGods: (): BwgrAbilityPoints => {
 				const { hasQuestionTrueByName } = useCharacterBurnerMiscStore.getState();
 
 				let bonus = 0;
@@ -284,7 +284,7 @@ export const useCharacterBurnerAttributeStore = create<CharacterBurnerAttributeS
 			},
 
 			// TODO: if shade shifted, remove points from exponent
-			getHatred: (): AbilityPoints => {
+			getHatred: (): BwgrAbilityPoints => {
 				const { special, hasQuestionTrueByName } = useCharacterBurnerMiscStore.getState();
 				const { getStat } = useCharacterBurnerStatStore.getState();
 
@@ -306,7 +306,7 @@ export const useCharacterBurnerAttributeStore = create<CharacterBurnerAttributeS
 			},
 
 			// TODO: if shade shifted, remove points from exponent
-			getVoidEmbrace: (): AbilityPoints => {
+			getVoidEmbrace: (): BwgrAbilityPoints => {
 				const { hasQuestionTrueByName } = useCharacterBurnerMiscStore.getState();
 
 				let bonus = 0;
@@ -318,7 +318,7 @@ export const useCharacterBurnerAttributeStore = create<CharacterBurnerAttributeS
 			},
 
 			// TODO: if shade shifted, remove points from exponent
-			getAncestralTaint: (): AbilityPoints => {
+			getAncestralTaint: (): BwgrAbilityPoints => {
 				const { hasSkillOpenByName } = useCharacterBurnerSkillStore.getState();
 				const { hasTraitOpenByName } = useCharacterBurnerTraitStore.getState();
 
@@ -334,7 +334,7 @@ export const useCharacterBurnerAttributeStore = create<CharacterBurnerAttributeS
 			},
 
 			// TODO: if shade shifted, remove points from exponent
-			getCorruption: (): AbilityPoints => {
+			getCorruption: (): BwgrAbilityPoints => {
 				const { resources } = useCharacterBurnerResourceStore.getState();
 				const { hasQuestionTrueByName } = useCharacterBurnerMiscStore.getState();
 				const { hasTraitOpenByName } = useCharacterBurnerTraitStore.getState();
@@ -355,7 +355,7 @@ export const useCharacterBurnerAttributeStore = create<CharacterBurnerAttributeS
 			},
 
 			// TODO: if shade shifted, remove points from exponent
-			getResources: (): AbilityPoints => {
+			getResources: (): BwgrAbilityPoints => {
 				const { resources } = useCharacterBurnerResourceStore.getState();
 
 				let bonus = 0;
@@ -366,7 +366,7 @@ export const useCharacterBurnerAttributeStore = create<CharacterBurnerAttributeS
 			},
 
 			// TODO: if shade shifted, remove points from exponent
-			getCircles: (): AbilityPoints => {
+			getCircles: (): BwgrAbilityPoints => {
 				const { resources } = useCharacterBurnerResourceStore.getState();
 				const { getStat } = useCharacterBurnerStatStore.getState();
 
@@ -379,10 +379,10 @@ export const useCharacterBurnerAttributeStore = create<CharacterBurnerAttributeS
 				return { shade: "B", exponent: Math.floor(will.exponent / 2) + bonus };
 			},
 
-			getAttribute: (attribute: [id: AbilityId, name: string]): AbilityPoints => {
+			getAttribute: (attribute: [id: BwgrAbilityId, name: string]): BwgrAbilityPoints => {
 				const state = get();
 
-				const getAttributePoints = (attributeName: string): AbilityPoints => {
+				const getAttributePoints = (attributeName: string): BwgrAbilityPoints => {
 					switch (attributeName) {
 						case "Mortal Wound":
 							return state.getMortalWound();
@@ -429,7 +429,7 @@ export const useCharacterBurnerAttributeStore = create<CharacterBurnerAttributeS
 				};
 			},
 
-			hasAttribute: (id: AbilityId): boolean => {
+			hasAttribute: (id: BwgrAbilityId): boolean => {
 				return get().attributes.has(id);
 			},
 
@@ -442,7 +442,7 @@ export const useCharacterBurnerAttributeStore = create<CharacterBurnerAttributeS
 				const { hasTraitOpen } = useCharacterBurnerTraitStore.getState();
 				const { getAttribute } = get();
 
-				const characterAttributes: UniqueArray<AbilityId, CharacterAttribute> = new UniqueArray(
+				const characterAttributes: UniqueArray<BwgrAbilityId, BwgrCharacterAttribute> = new UniqueArray(
 					abilities
 						.filter(ability => ability.abilityType[1].endsWith("Attribute"))
 						.map(ability => {

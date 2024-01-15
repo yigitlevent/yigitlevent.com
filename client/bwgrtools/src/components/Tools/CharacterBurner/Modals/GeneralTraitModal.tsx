@@ -20,8 +20,8 @@ export function GeneralTraitModal({ isOpen, close }: { isOpen: boolean; close: (
 	const { traits, addGeneralTrait, getTraitPools } = useCharacterBurnerTraitStore();
 	const { hasAttribute } = useCharacterBurnerAttributeStore();
 
-	const [possibleTraits, setPossibleTraits] = useState<Trait[]>([]);
-	const [chosenTrait, setChosenTrait] = useState<Trait>();
+	const [possibleTraits, setPossibleTraits] = useState<BwgrTrait[]>([]);
+	const [chosenTrait, setChosenTrait] = useState<BwgrTrait>();
 
 	const addNewTrait = () => {
 		if (chosenTrait) {

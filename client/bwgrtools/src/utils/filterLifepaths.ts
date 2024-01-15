@@ -2,25 +2,25 @@ import { UniqueArray } from "./uniqueArray";
 
 
 interface FilterLifepathsProps {
-	rulesetLifepaths: Lifepath[];
-	stock: [id: StockId, name: string];
+	rulesetLifepaths: BwgrLifepath[];
+	stock: [id: BwgrStockId, name: string];
 	age: number;
-	lifepaths: Lifepath[];
+	lifepaths: BwgrLifepath[];
 	gender?: "Male" | "Female";
-	attributes?: UniqueArray<AbilityId, CharacterAttribute>;
-	hasAttribute?: (id: AbilityId) => boolean;
-	hasSkillOpen?: (id: SkillId) => boolean;
-	hasTraitOpen?: (id: TraitId) => boolean;
-	hasSetting?: (id: SettingId) => number;
-	hasQuestionTrue?: (id: QuestionId) => boolean;
-	noLeads?: [id: SettingId, name: string];
+	attributes?: UniqueArray<BwgrAbilityId, BwgrCharacterAttribute>;
+	hasAttribute?: (id: BwgrAbilityId) => boolean;
+	hasSkillOpen?: (id: BwgrSkillId) => boolean;
+	hasTraitOpen?: (id: BwgrTraitId) => boolean;
+	hasSetting?: (id: BwgrSettingId) => number;
+	hasQuestionTrue?: (id: BwgrQuestionId) => boolean;
+	noLeads?: [id: BwgrSettingId, name: string];
 }
 
-export function FilterLifepaths({ rulesetLifepaths, stock, age, lifepaths, gender, attributes, hasAttribute, hasSkillOpen, hasTraitOpen, hasSetting, hasQuestionTrue, noLeads }: FilterLifepathsProps): Lifepath[] {
-	const checkLifepath = (id: LifepathId) => lifepaths.findIndex(lp => lp.id === id);
-	const countLifepath = (id: LifepathId) => lifepaths.filter(lp => lp.id === id).length;
+export function FilterLifepaths({ rulesetLifepaths, stock, age, lifepaths, gender, attributes, hasAttribute, hasSkillOpen, hasTraitOpen, hasSetting, hasQuestionTrue, noLeads }: FilterLifepathsProps): BwgrLifepath[] {
+	const checkLifepath = (id: BwgrLifepathId) => lifepaths.findIndex(lp => lp.id === id);
+	const countLifepath = (id: BwgrLifepathId) => lifepaths.filter(lp => lp.id === id).length;
 
-	const checkRequirementBlock = (lifepath: Lifepath, block: LifepathRequirementBlock): boolean => {
+	const checkRequirementBlock = (lifepath: BwgrLifepath, block: BwgrLifepathRequirementBlock): boolean => {
 		const itemResults = block.items.map((item): boolean => {
 			// TODO: item.forCompanion
 
@@ -68,7 +68,7 @@ export function FilterLifepaths({ rulesetLifepaths, stock, age, lifepaths, gende
 		return false;
 	};
 
-	let possibleLifepaths: Lifepath[] = [];
+	let possibleLifepaths: BwgrLifepath[] = [];
 
 	if (lifepaths.length === 0) possibleLifepaths = rulesetLifepaths.filter(lp => lp.flags.isBorn && stock[0] === lp.stock[0]);
 	else {

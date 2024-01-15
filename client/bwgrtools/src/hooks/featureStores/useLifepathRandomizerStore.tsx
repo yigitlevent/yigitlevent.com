@@ -6,14 +6,14 @@ import { Clamp } from "../../utils/misc";
 
 
 interface LifepathRandomizerState {
-	stock: StockId | "Random";
-	setting: SettingId | "Random";
+	stock: BwgrStockId | "Random";
+	setting: BwgrSettingId | "Random";
 	noDuplicates: boolean;
 	maxLeads: number;
 	maxLifepaths: number;
 	minLifepaths: number;
 
-	changeStock: (stock: StockId | "Random") => void;
+	changeStock: (stock: BwgrStockId | "Random") => void;
 	changeMaxLeads: (value: string) => void;
 	changeMaxLifepaths: (value: string) => void;
 	changeMinLifepaths: (value: string) => void;
@@ -30,7 +30,7 @@ export const useLifepathRandomizerStore = create<LifepathRandomizerState>()(
 			maxLifepaths: 6,
 			minLifepaths: 5,
 
-			changeStock: (stock: StockId | "Random") => {
+			changeStock: (stock: BwgrStockId | "Random") => {
 				set(produce<LifepathRandomizerState>((state) => { state.stock = stock; }));
 			},
 

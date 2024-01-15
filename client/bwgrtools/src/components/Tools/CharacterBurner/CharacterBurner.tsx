@@ -31,9 +31,9 @@ export function CharacterBurner(): JSX.Element {
 	const { traits } = useCharacterBurnerTraitStore();
 	const { attributes } = useCharacterBurnerAttributeStore();
 
-	const [currentModal, setCurrentModal] = useState<CharacterBurnerModals | null>(null);
+	const [currentModal, setCurrentModal] = useState<BwgrCharacterBurnerModals | null>(null);
 
-	const openModal = (name: CharacterBurnerModals) => setCurrentModal(name);
+	const openModal = (name: BwgrCharacterBurnerModals) => setCurrentModal(name);
 	const closeModals = () => setCurrentModal(null);
 
 	useEffect(() => {

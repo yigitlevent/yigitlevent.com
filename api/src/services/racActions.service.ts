@@ -2,12 +2,12 @@ import { PgPool } from "../index";
 import { Logger } from "../utils/logger";
 
 
-export async function GetRaCActions(): Promise<RaCAction[]> {
-	const convert = (a: RaCActionDBO[], ar: RaCActionResolutionDBO[]): RaCAction[] => {
+export async function GetRaCActions(): Promise<BwgrRaCAction[]> {
+	const convert = (a: BwgrRaCActionDBO[], ar: BwgrRaCActionResolutionDBO[]): BwgrRaCAction[] => {
 		const log = new Logger("GetRaCActions Conversion");
 
-		const r: RaCAction[] = a.map(v => {
-			const act: RaCAction = {
+		const r: BwgrRaCAction[] = a.map(v => {
+			const act: BwgrRaCAction = {
 				id: v.Id,
 				name: v.Name,
 				group: [v.GroupId, v.Group],
@@ -31,7 +31,7 @@ export async function GetRaCActions(): Promise<RaCAction[]> {
 				act.resolutions = [];
 
 				r.forEach(res => {
-					const actionRes: ActionResolution<RaCActionId> = {
+					const actionRes: BwgrActionResolution<BwgrRaCActionId> = {
 						opposingAction: [res.OpposingActionId, res.OpposingAction],
 						type: [res.ResolutionTypeId, res.ResolutionType]
 					};
@@ -60,8 +60,8 @@ export async function GetRaCActions(): Promise<RaCAction[]> {
 	const query1 = "select * from bwgr.\"RangeAndCoverActionsList\";";
 	const query2 = "select * from bwgr.\"RangeAndCoverActionResolutionList\";";
 	return Promise.all([
-		PgPool.query<RaCActionDBO>(query1),
-		PgPool.query<RaCActionResolutionDBO>(query2)
+		PgPool.query<BwgrRaCActionDBO>(query1),
+		PgPool.query<BwgrRaCActionResolutionDBO>(query2)
 	]).then(result => {
 		log.end();
 		const res = convert(result[0].rows, result[1].rows);

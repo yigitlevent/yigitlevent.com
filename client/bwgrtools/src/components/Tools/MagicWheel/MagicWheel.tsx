@@ -16,9 +16,9 @@ import { BackCanvas } from "./BackCanvas";
 import { FrontCanvas } from "./FrontCanvas";
 import { MainCanvas } from "./MainCanvas";
 import codeFont from "../../../assets/fonts/SourceCodePro-SemiBold.woff";
-import { useFontLoading } from "../../../hooks/useFontLoading";
 import { useRulesetStore } from "../../../hooks/apiStores/useRulesetStore";
 import { useMagicWheelStore } from "../../../hooks/featureStores/useMagicWheelStore";
+import { useFontLoading } from "../../../hooks/useFontLoading";
 import { RandomNumber } from "../../../utils/misc";
 import { GenericGrid } from "../../Shared/Grids";
 
@@ -51,7 +51,7 @@ export function MagicWheel(): JSX.Element {
 
 	const updateFacets = useCallback((amount: number) => {
 		for (const key in spellFacets) {
-			const facetKey = key as keyof SpellFacets;
+			const facetKey = key as keyof BwgrSpellFacets;
 
 			let currentIndex = -1;
 
@@ -75,7 +75,7 @@ export function MagicWheel(): JSX.Element {
 		}
 	}, [originId, durationId, impetusId, elementId, areaOfEffectId, changeOrigin, changeDuration, changeImpetus, changeElement, changeAOE, spellFacets]);
 
-	const getFacetMapping = useCallback((type: keyof SpellFacets) => {
+	const getFacetMapping = useCallback((type: keyof BwgrSpellFacets) => {
 		switch (type) {
 			case "areaOfEffects":
 				return { bandIndex: 4, currentAngle: currentAOEAngle, setFunction: setCurrentAOEAngle, setStoreFunction: changeAOE };
@@ -92,7 +92,7 @@ export function MagicWheel(): JSX.Element {
 		}
 	}, [currentAOEAngle, currentDurationAngle, currentElementAngle, currentImpetusAngle, currentOriginAngle, changeAOE, changeDuration, changeElement, changeImpetus, changeOrigin]);
 
-	const setFacet = useCallback((type: keyof SpellFacets, event: SelectChangeEvent<string>) => {
+	const setFacet = useCallback((type: keyof BwgrSpellFacets, event: SelectChangeEvent<string>) => {
 		const value = event.target.value; // id of the specific facet
 
 		const { setFunction, setStoreFunction } = getFacetMapping(type);
@@ -108,7 +108,7 @@ export function MagicWheel(): JSX.Element {
 		func(value as never);
 	}, [getFacetMapping, spellFacets, entryAngleSpan]);
 
-	const rotateBand = useCallback((amount: number, type: keyof SpellFacets) => {
+	const rotateBand = useCallback((amount: number, type: keyof BwgrSpellFacets) => {
 		const { currentAngle, setFunction } = getFacetMapping(type);
 
 		const targetRotation = currentAngle + (amount * (entryAngleSpan[type] / 2));
@@ -144,11 +144,11 @@ export function MagicWheel(): JSX.Element {
 	const rotate = useCallback((amount: number) => {
 		updateFacets(amount);
 		setIsRotating(5);
-		const facetTypes = Object.keys(spellFacets) as (keyof SpellFacets)[];
+		const facetTypes = Object.keys(spellFacets) as (keyof BwgrSpellFacets)[];
 		facetTypes.forEach(type => rotateBand(amount, type));
 	}, [rotateBand, spellFacets, updateFacets]);
 
-	const resetStartingFacets = useCallback((facets: SpellFacets) => {
+	const resetStartingFacets = useCallback((facets: BwgrSpellFacets) => {
 		changeAOE(facets.areaOfEffects[0].id);
 		changeElement(facets.elements[0].id);
 		changeImpetus(facets.impetus[0].id);
@@ -172,7 +172,7 @@ export function MagicWheel(): JSX.Element {
 	useEffect(() => {
 		const tempArr: { [key: string]: number; } = { origins: 0, elements: 0, impetus: 0, areaOfEffects: 0, durations: 0 };
 		for (const arrayKey in spellFacets) {
-			const key = arrayKey as keyof SpellFacets;
+			const key = arrayKey as keyof BwgrSpellFacets;
 			tempArr[arrayKey] = 4 * Math.PI / spellFacets[key].length;
 		}
 		setEntryAngleSpan(tempArr);

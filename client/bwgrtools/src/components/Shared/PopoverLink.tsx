@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 import { MouseEvent, useState } from "react";
 
 
-function GetSkillRestrictionString(skill: Skill): string {
+function GetSkillRestrictionString(skill: BwgrSkill): string {
 	if (skill.restriction) {
 		const attribute = (skill.restriction.onlyWithAbility) ? ` with ${skill.restriction.onlyWithAbility[1]} ` : " ";
 		const type = (skill.restriction.onlyAtBurn) ? " in character burning" : "";
@@ -15,7 +15,7 @@ function GetSkillRestrictionString(skill: Skill): string {
 	return "N/A";
 }
 
-function SkillPop({ skill }: { skill: Skill; }): JSX.Element {
+function SkillPop({ skill }: { skill: BwgrSkill; }): JSX.Element {
 	return (
 		<Grid container spacing={1} columns={2}>
 			<Grid item xs={2}>
@@ -49,7 +49,7 @@ function SkillPop({ skill }: { skill: Skill; }): JSX.Element {
 	);
 }
 
-function TraitPop({ trait }: { trait: Trait; }): JSX.Element {
+function TraitPop({ trait }: { trait: BwgrTrait; }): JSX.Element {
 	return (
 		<Grid container spacing={1} columns={3}>
 			<Grid item xs={3}>
@@ -85,7 +85,7 @@ function TraitPop({ trait }: { trait: Trait; }): JSX.Element {
 	);
 }
 
-function Pop({ anchor, data, onClose }: { anchor: HTMLElement | null; data: Skill | Trait; onClose: () => void; }): JSX.Element {
+function Pop({ anchor, data, onClose }: { anchor: HTMLElement | null; data: BwgrSkill | BwgrTrait; onClose: () => void; }): JSX.Element {
 	return (
 		<Popover
 			open={Boolean(anchor)}
@@ -101,7 +101,7 @@ function Pop({ anchor, data, onClose }: { anchor: HTMLElement | null; data: Skil
 	);
 }
 
-export function PopoverLink({ data, noColor }: { data: Skill | Trait; noColor?: boolean; }): JSX.Element {
+export function PopoverLink({ data, noColor }: { data: BwgrSkill | BwgrTrait; noColor?: boolean; }): JSX.Element {
 	const [anchor, setAnchor] = useState<HTMLElement | null>(null);
 
 	const closePopover = () => { setAnchor(null); };

@@ -10,18 +10,18 @@ import { useRulesetStore } from "../../apiStores/useRulesetStore";
 
 
 export type CharacterBurnerTraitState = {
-	traits: UniqueArray<TraitId, CharacterTrait>;
+	traits: UniqueArray<BwgrTraitId, BwgrCharacterTrait>;
 
 	reset: () => void;
 
-	openTrait: (traitId: TraitId) => void;
-	addGeneralTrait: (trait: Trait) => void;
-	removeGeneralTrait: (traitId: TraitId) => void;
+	openTrait: (traitId: BwgrTraitId) => void;
+	addGeneralTrait: (trait: BwgrTrait) => void;
+	removeGeneralTrait: (traitId: BwgrTraitId) => void;
 
-	getTraitPools: (lifepaths?: Lifepath[]) => Points;
-	getTrait: (traitId: TraitId) => { open: boolean; };
+	getTraitPools: (lifepaths?: BwgrLifepath[]) => BwgrPoints;
+	getTrait: (traitId: BwgrTraitId) => { open: boolean; };
 
-	hasTraitOpen: (id: TraitId) => boolean;
+	hasTraitOpen: (id: BwgrTraitId) => boolean;
 	hasTraitOpenByName: (name: string) => boolean;
 
 	/**
@@ -35,15 +35,15 @@ export type CharacterBurnerTraitState = {
 export const useCharacterBurnerTraitStore = create<CharacterBurnerTraitState>()(
 	devtools(
 		(set, get) => ({
-			traits: new UniqueArray<TraitId, CharacterTrait>(),
+			traits: new UniqueArray<BwgrTraitId, BwgrCharacterTrait>(),
 
 			reset: (): void => {
 				set({
-					traits: new UniqueArray<TraitId, CharacterTrait>()
+					traits: new UniqueArray<BwgrTraitId, BwgrCharacterTrait>()
 				});
 			},
 
-			openTrait: (traitId: TraitId): void => {
+			openTrait: (traitId: BwgrTraitId): void => {
 				set(produce<CharacterBurnerTraitState>((state) => {
 					// TODO: Check remaining counts, use either pool too
 					const charTrait = state.traits.find(traitId);
@@ -54,18 +54,18 @@ export const useCharacterBurnerTraitStore = create<CharacterBurnerTraitState>()(
 				}));
 			},
 
-			addGeneralTrait: (trait: Trait): void => {
-				const charTrait: CharacterTrait = { id: trait.id, name: trait.name, isOpen: false, type: "General" };
+			addGeneralTrait: (trait: BwgrTrait): void => {
+				const charTrait: BwgrCharacterTrait = { id: trait.id, name: trait.name, isOpen: false, type: "General" };
 				set(produce<CharacterBurnerTraitState>((state) => { state.traits = new UniqueArray(state.traits.add(charTrait).items); }));
 			},
 
-			removeGeneralTrait: (traitId: TraitId): void => {
+			removeGeneralTrait: (traitId: BwgrTraitId): void => {
 				set(produce<CharacterBurnerTraitState>((state) => {
 					state.traits = new UniqueArray(state.traits.remove(traitId).items);
 				}));
 			},
 
-			getTraitPools: (lifepaths?: Lifepath[]): Points => {
+			getTraitPools: (lifepaths?: BwgrLifepath[]): BwgrPoints => {
 				const { getTrait } = useRulesetStore.getState();
 				const lps = lifepaths || useCharacterBurnerLifepathStore.getState().lifepaths;
 				const state = get();
@@ -83,14 +83,14 @@ export const useCharacterBurnerTraitStore = create<CharacterBurnerTraitState>()(
 				return { total: tTotal, spent: tSpent, remaining: tTotal - tSpent };
 			},
 
-			getTrait: (traitId: TraitId): { open: boolean; } => {
+			getTrait: (traitId: BwgrTraitId): { open: boolean; } => {
 				const state = get();
 				const charTrait = state.traits.find(traitId);
 				const open = (charTrait && state.hasTraitOpen(traitId)) ? true : false;
 				return { open };
 			},
 
-			hasTraitOpen: (id: TraitId): boolean => {
+			hasTraitOpen: (id: BwgrTraitId): boolean => {
 				return get().traits.exists(id, "isOpen", true);
 			},
 
@@ -110,7 +110,7 @@ export const useCharacterBurnerTraitStore = create<CharacterBurnerTraitState>()(
 						const trait = ruleset.getTrait(tr);
 						const isMandatory = (i === 0);
 						// TODO: Repeat lifepaths also should be checked
-						const entry: CharacterTrait = {
+						const entry: BwgrCharacterTrait = {
 							id: trait.id,
 							name: trait.name,
 							type: isMandatory ? "Mandatory" : "Lifepath",

@@ -2,10 +2,10 @@ import { PgPool } from "../index";
 import { Logger } from "../utils/logger";
 
 
-export async function GetRulesets(): Promise<Ruleset[]> {
-	const convert = (v: RulesetDBO): Ruleset => {
+export async function GetRulesets(): Promise<BwgrRuleset[]> {
+	const convert = (v: BwgrRulesetDBO): BwgrRuleset => {
 
-		const r: Ruleset = {
+		const r: BwgrRuleset = {
 			id: v.Id,
 			name: v.Name,
 			isOfficial: v.IsOfficial,
@@ -21,7 +21,7 @@ export async function GetRulesets(): Promise<Ruleset[]> {
 
 	const log = new Logger("GetRulesets Querying");
 	const query = "select * from bwgr.\"RulesetsList\";";
-	return PgPool.query<RulesetDBO>(query).then(result => {
+	return PgPool.query<BwgrRulesetDBO>(query).then(result => {
 		log.end();
 		const log2 = new Logger("GetRulesets Conversion");
 		const res = result.rows.map(convert);

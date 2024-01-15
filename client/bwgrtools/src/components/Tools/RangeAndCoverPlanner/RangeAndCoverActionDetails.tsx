@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 import { GetResolutionString } from "../../../utils/getActionResolutionString";
 
 
-export function RangeAndCoverActionDetails({ action }: { action: RaCAction; }): JSX.Element {
+export function RangeAndCoverActionDetails({ action }: { action: BwgrRaCAction; }): JSX.Element {
 	return (
 		<Stack spacing={0} sx={{ width: "100%" }}>
 			<Box sx={{ margin: "0 0 10px" }}>

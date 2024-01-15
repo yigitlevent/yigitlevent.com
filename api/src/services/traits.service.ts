@@ -2,9 +2,9 @@ import { PgPool } from "../index";
 import { Logger } from "../utils/logger";
 
 
-export async function GetTraits(rulesets: RulesetId[]): Promise<Trait[]> {
-	const convert = (v: TraitDBO): Trait => {
-		const r: Trait = {
+export async function GetTraits(rulesets: BwgrRulesetId[]): Promise<BwgrTrait[]> {
+	const convert = (v: BwgrTraitDBO): BwgrTrait => {
+		const r: BwgrTrait = {
 			rulesets: v.Rulesets,
 			id: v.Id,
 			name: v.Name,
@@ -21,7 +21,7 @@ export async function GetTraits(rulesets: RulesetId[]): Promise<Trait[]> {
 
 	const log = new Logger("GetTraits Querying");
 	const query = `select * from bwgr."TraitsList" where "Rulesets"::text[] && ARRAY['${rulesets.join("','")}'];`;
-	return PgPool.query<TraitDBO>(query).then(result => {
+	return PgPool.query<BwgrTraitDBO>(query).then(result => {
 		log.end();
 		const log2 = new Logger("GetTraits Conversion");
 		const res = result.rows.map(convert);

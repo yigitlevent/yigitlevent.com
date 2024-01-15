@@ -7,7 +7,7 @@ import { useCharacterBurnerSkillStore } from "../../../../../hooks/featureStores
 import { useCharacterBurnerTraitStore } from "../../../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerTrait";
 
 
-export function RandomLifepathsBasics({ chosenLifepaths }: { chosenLifepaths: Lifepath[]; }): JSX.Element {
+export function RandomLifepathsBasics({ chosenLifepaths }: { chosenLifepaths: BwgrLifepath[]; }): JSX.Element {
 	const { getAge, getMentalPool, getPhysicalPool, getEitherPool } = useCharacterBurnerLifepathStore();
 	const { getResourcePools } = useCharacterBurnerResourceStore();
 	const { getSkillPools } = useCharacterBurnerSkillStore();

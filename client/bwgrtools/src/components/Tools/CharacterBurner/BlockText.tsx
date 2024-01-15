@@ -22,7 +22,7 @@ export function BlockText({ text, hasLeftPadding }: BlockTextProps): JSX.Element
 }
 
 interface BlockSkillPopoverProps {
-	skill: [id: SkillId, name: string];
+	skill: [id: BwgrSkillId, name: string];
 	checkbox?: {
 		checked: boolean;
 		disabled?: boolean;
@@ -61,7 +61,7 @@ export function BlockSkillPopover({ skill, checkbox, deleteCallback }: BlockSkil
 }
 
 interface BlockTraitPopoverProps {
-	trait: [id: TraitId, name: string];
+	trait: [id: BwgrTraitId, name: string];
 	checkbox?: {
 		checked: boolean;
 		disabled?: boolean;

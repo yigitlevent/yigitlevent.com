@@ -2,8 +2,8 @@ import { PgPool } from "../index";
 import { Logger } from "../utils/logger";
 
 
-export async function GetPractices(): Promise<Practice[]> {
-	const convert = (v: PracticeDBO): Practice => {
+export async function GetPractices(): Promise<BwgrPractice[]> {
+	const convert = (v: BwgrPracticeDBO): BwgrPractice => {
 
 		if (v.Ability !== null && v.AbilityId !== null) {
 			return {
@@ -30,7 +30,7 @@ export async function GetPractices(): Promise<Practice[]> {
 
 	const log = new Logger("GetPractices Querying");
 	const query = "select * from bwgr.\"PracticeList\";";
-	return PgPool.query<PracticeDBO>(query)
+	return PgPool.query<BwgrPracticeDBO>(query)
 		.then(result => {
 			log.end();
 			const log2 = new Logger("GetPractices Conversion");

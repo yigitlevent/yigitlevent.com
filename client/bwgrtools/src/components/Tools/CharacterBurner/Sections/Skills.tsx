@@ -10,7 +10,7 @@ import { GenericGrid } from "../../../Shared/Grids";
 import { BlockSkillPopover } from "../BlockText";
 
 
-function Skill({ skill, remove }: { skill: UniqueArrayItem<SkillId, CharacterSkill>; remove?: (skillId: SkillId) => void; }): JSX.Element {
+function Skill({ skill, remove }: { skill: UniqueArrayItem<BwgrSkillId, BwgrCharacterSkill>; remove?: (skillId: BwgrSkillId) => void; }): JSX.Element {
 	const { getSkill, openSkill, modifySkillExponent } = useCharacterBurnerSkillStore();
 	const skillPoints = getSkill(skill.id);
 
@@ -75,7 +75,7 @@ function LifepathSkills() {
 	);
 }
 
-function GeneralSkills({ openModal }: { openModal: (name: CharacterBurnerModals) => void; }) {
+function GeneralSkills({ openModal }: { openModal: (name: BwgrCharacterBurnerModals) => void; }) {
 	const { skills, removeGeneralSkill } = useCharacterBurnerSkillStore();
 
 	return (
@@ -96,7 +96,7 @@ function GeneralSkills({ openModal }: { openModal: (name: CharacterBurnerModals)
 	);
 }
 
-export function Skills({ openModal }: { openModal: (name: CharacterBurnerModals) => void; }): JSX.Element {
+export function Skills({ openModal }: { openModal: (name: BwgrCharacterBurnerModals) => void; }): JSX.Element {
 	const { skills, getSkillPools } = useCharacterBurnerSkillStore();
 
 	// const [open, setOpen] = useState(false);

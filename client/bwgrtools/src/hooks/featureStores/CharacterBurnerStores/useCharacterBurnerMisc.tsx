@@ -11,25 +11,25 @@ import { useRulesetStore } from "../../apiStores/useRulesetStore";
 
 
 export type CharacterBurnerMiscState = {
-	special: CharacterSpecial;
-	questions: CharacterQuestion[];
-	limits: CharacterStockLimits;
-	traitEffects: CharacterTraitEffect[];
+	special: BwgrCharacterSpecial;
+	questions: BwgrCharacterQuestion[];
+	limits: BwgrCharacterStockLimits;
+	traitEffects: BwgrCharacterTraitEffect[];
 
 	reset: () => void;
 
-	modifyCompanionLifepath: (companionName: string, companionLifepathId: LifepathId) => void;
-	modifyVariableAge: (lifepathId: LifepathId, age: number, minmax: number[]) => void;
-	modifyCompanionSkills: (companionLifepathId: LifepathId, skills: SkillId[] | undefined) => void;
-	modifySkillSubskills: (skillId: SkillId, subskillIds: SkillId[] | null, canSelectMultiple: boolean) => void;
-	resetSkillSubskills: (skillIds: SkillId[]) => void;
+	modifyCompanionLifepath: (companionName: string, companionLifepathId: BwgrLifepathId) => void;
+	modifyVariableAge: (lifepathId: BwgrLifepathId, age: number, minmax: number[]) => void;
+	modifyCompanionSkills: (companionLifepathId: BwgrLifepathId, skills: BwgrSkillId[] | undefined) => void;
+	modifySkillSubskills: (skillId: BwgrSkillId, subskillIds: BwgrSkillId[] | null, canSelectMultiple: boolean) => void;
+	resetSkillSubskills: (skillIds: BwgrSkillId[]) => void;
 
-	addBrutalLifeTrait: (traitId: [id: TraitId, name: string] | "No Trait") => void;
-	setHuntingGround: (huntingGround: HuntingGroundsList) => void;
+	addBrutalLifeTrait: (traitId: [id: BwgrTraitId, name: string] | "No Trait") => void;
+	setHuntingGround: (huntingGround: BwgrHuntingGroundsList) => void;
 
-	switchQuestion: (id: QuestionId) => void;
+	switchQuestion: (id: BwgrQuestionId) => void;
 	refreshQuestions: () => void;
-	hasQuestionTrue: (id: QuestionId) => boolean;
+	hasQuestionTrue: (id: BwgrQuestionId) => boolean;
 	hasQuestionTrueByName: (name: string) => boolean;
 
 	getTolerances: () => string[];
@@ -69,7 +69,7 @@ export const useCharacterBurnerMiscStore = create<CharacterBurnerMiscState>()(
 				const { stock } = useCharacterBurnerBasicsStore.getState();
 				const { hasTraitOpenByName } = useCharacterBurnerTraitStore.getState();
 
-				const limits: CharacterStockLimits = {
+				const limits: BwgrCharacterStockLimits = {
 					beliefs: 3, // TODO: trait-based belief limit
 					instincts: 3, // TODO: trait-based instinct limit
 					stats: {
@@ -115,19 +115,19 @@ export const useCharacterBurnerMiscStore = create<CharacterBurnerMiscState>()(
 				get().refreshTraitEffects();
 			},
 
-			modifyCompanionLifepath: (companionName: string, companionLifepathId: LifepathId): void => {
+			modifyCompanionLifepath: (companionName: string, companionLifepathId: BwgrLifepathId): void => {
 				set(produce<CharacterBurnerMiscState>((state) => {
 					state.special.companionLifepath[companionName] === companionLifepathId;
 				}));
 			},
 
-			modifyVariableAge: (lifepathId: LifepathId, age: number, minmax: number[]): void => {
+			modifyVariableAge: (lifepathId: BwgrLifepathId, age: number, minmax: number[]): void => {
 				set(produce<CharacterBurnerMiscState>((state) => {
 					state.special.variableAge[lifepathId] = Clamp(age, minmax[0], minmax[1]);
 				}));
 			},
 
-			modifyCompanionSkills: (companionLifepathId: LifepathId, skills: SkillId[] | undefined): void => {
+			modifyCompanionSkills: (companionLifepathId: BwgrLifepathId, skills: BwgrSkillId[] | undefined): void => {
 				if (skills) {
 					set(produce<CharacterBurnerMiscState>((state) => {
 						state.special.companionSkills[companionLifepathId] = skills;
@@ -135,7 +135,7 @@ export const useCharacterBurnerMiscStore = create<CharacterBurnerMiscState>()(
 				}
 			},
 
-			modifySkillSubskills: (skillId: SkillId, subskillIds: SkillId[] | null, canSelectMultiple: boolean): void => {
+			modifySkillSubskills: (skillId: BwgrSkillId, subskillIds: BwgrSkillId[] | null, canSelectMultiple: boolean): void => {
 				const prev = get().special.chosenSubskills[skillId];
 
 				if (canSelectMultiple && subskillIds) {
@@ -152,7 +152,7 @@ export const useCharacterBurnerMiscStore = create<CharacterBurnerMiscState>()(
 				}
 			},
 
-			resetSkillSubskills: (skillIds: SkillId[]): void => {
+			resetSkillSubskills: (skillIds: BwgrSkillId[]): void => {
 				skillIds.forEach(skillId =>
 					set(produce<CharacterBurnerMiscState>((state) => {
 						state.special.chosenSubskills[skillId] = [];
@@ -160,20 +160,20 @@ export const useCharacterBurnerMiscStore = create<CharacterBurnerMiscState>()(
 				);
 			},
 
-			addBrutalLifeTrait: (traitId: [id: TraitId, name: string] | "No Trait") => {
+			addBrutalLifeTrait: (traitId: [id: BwgrTraitId, name: string] | "No Trait") => {
 				set(produce<CharacterBurnerMiscState>((state) => {
 					const prev = state.special.stock.brutalLifeTraits;
 					state.special.stock.brutalLifeTraits = [...prev, traitId];
 				}));
 			},
 
-			setHuntingGround: (huntingGround: HuntingGroundsList) => {
+			setHuntingGround: (huntingGround: BwgrHuntingGroundsList) => {
 				set(produce<CharacterBurnerMiscState>((state) => {
 					state.special.stock.huntingGround = huntingGround;
 				}));
 			},
 
-			switchQuestion: (id: QuestionId): void => {
+			switchQuestion: (id: BwgrQuestionId): void => {
 				const index = get().questions.findIndex(v => v.id === id);
 
 				set(produce<CharacterBurnerMiscState>((state) => {
@@ -187,7 +187,7 @@ export const useCharacterBurnerMiscStore = create<CharacterBurnerMiscState>()(
 				const { hasAttribute } = useCharacterBurnerAttributeStore.getState();
 				const { questions } = get();
 
-				const newQuestions: CharacterQuestion[]
+				const newQuestions: BwgrCharacterQuestion[]
 					= ruleset.questions
 						.filter(v => {
 							const attrIds = [];
@@ -212,7 +212,7 @@ export const useCharacterBurnerMiscStore = create<CharacterBurnerMiscState>()(
 				}));
 			},
 
-			hasQuestionTrue: (id: QuestionId): boolean => {
+			hasQuestionTrue: (id: BwgrQuestionId): boolean => {
 				return get().questions.some(v => v.id === id && v.answer);
 			},
 

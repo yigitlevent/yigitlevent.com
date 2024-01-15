@@ -2,10 +2,10 @@ interface UserResponse {
 	user: UserSession;
 }
 
-interface RulesetsResponse {
-	rulesets: Ruleset[];
+interface BwgrRulesetsResponse {
+	rulesets: BwgrRuleset[];
 }
 
-interface RulesetResponse {
-	ruleset: RulesetData;
+interface BwgrRulesetResponse {
+	ruleset: BwgrRulesetData;
 }

@@ -16,10 +16,10 @@ export function LifepathSelectionModal({ isOpen, close }: { isOpen: boolean; clo
 	const { availableLifepaths, lifepaths, addLifepath, removeLastLifepath } = useCharacterBurnerLifepathStore();
 
 	const [disabled, setDisabled] = useState(false);
-	const [chosen, setChosen] = useState<Lifepath>(availableLifepaths[0]);
+	const [chosen, setChosen] = useState<BwgrLifepath>(availableLifepaths[0]);
 	const [available, setAvailable] = useState(availableLifepaths);
 
-	const handle = useCallback((lifepath?: Lifepath) => {
+	const handle = useCallback((lifepath?: BwgrLifepath) => {
 		setDisabled(true);
 		if (lifepath) addLifepath(lifepath);
 		else removeLastLifepath();

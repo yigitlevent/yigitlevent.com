@@ -13,7 +13,6 @@ ReactDOM
 		<StrictMode>
 			<ThemeProvider theme={THEME}>
 				<CssBaseline />
-
 				<App />
 			</ThemeProvider>
 		</StrictMode>

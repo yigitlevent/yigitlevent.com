@@ -2,10 +2,10 @@ import { PgPool } from "../index";
 import { Logger } from "../utils/logger";
 
 
-export async function GetQuestions(): Promise<Question[]> {
-	const convert = (v: QuestionDBO): Question => {
+export async function GetQuestions(): Promise<BwgrQuestion[]> {
+	const convert = (v: BwgrQuestionDBO): BwgrQuestion => {
 
-		const r: Question = {
+		const r: BwgrQuestion = {
 			id: v.Id,
 			name: v.Name,
 			question: v.Question
@@ -20,7 +20,7 @@ export async function GetQuestions(): Promise<Question[]> {
 
 	const log = new Logger("GetQuestions Querying");
 	const query = "select * from bwgr.\"QuestionList\";";
-	return PgPool.query<QuestionDBO>(query)
+	return PgPool.query<BwgrQuestionDBO>(query)
 		.then(result => {
 			log.end();
 			const log2 = new Logger("GetQuestions Conversion");

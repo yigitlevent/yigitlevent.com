@@ -6,7 +6,7 @@ import { useRulesetStore } from "../../../hooks/apiStores/useRulesetStore";
 import { PopoverLink } from "../../Shared/PopoverLink";
 
 
-export function LifepathSkills({ lifepath }: { lifepath: Lifepath; }): JSX.Element {
+export function LifepathSkills({ lifepath }: { lifepath: BwgrLifepath; }): JSX.Element {
 	const { getSkill } = useRulesetStore();
 
 	const hasGeneralSkill = lifepath.pools.generalSkillPool !== 0;

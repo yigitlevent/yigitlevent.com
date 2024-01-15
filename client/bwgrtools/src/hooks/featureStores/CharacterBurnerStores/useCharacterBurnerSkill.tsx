@@ -11,19 +11,19 @@ import { useRulesetStore } from "../../apiStores/useRulesetStore";
 
 
 export type CharacterBurnerSkillState = {
-	skills: UniqueArray<SkillId, CharacterSkill>;
+	skills: UniqueArray<BwgrSkillId, BwgrCharacterSkill>;
 
 	reset: () => void;
 
-	openSkill: (skillId: SkillId) => void;
-	modifySkillExponent: (skillId: SkillId, decrease?: boolean) => void;
-	addGeneralSkill: (skill: Skill) => void;
-	removeGeneralSkill: (skillId: SkillId) => void;
+	openSkill: (skillId: BwgrSkillId) => void;
+	modifySkillExponent: (skillId: BwgrSkillId, decrease?: boolean) => void;
+	addGeneralSkill: (skill: BwgrSkill) => void;
+	removeGeneralSkill: (skillId: BwgrSkillId) => void;
 
-	getSkillPools: (lifepaths?: Lifepath[]) => { general: Points; lifepath: Points; };
-	getSkill: (skillId: SkillId) => AbilityPoints;
+	getSkillPools: (lifepaths?: BwgrLifepath[]) => { general: BwgrPoints; lifepath: BwgrPoints; };
+	getSkill: (skillId: BwgrSkillId) => BwgrAbilityPoints;
 
-	hasSkillOpen: (id: SkillId) => boolean;
+	hasSkillOpen: (id: BwgrSkillId) => boolean;
 	hasSkillOpenByName: (name: string) => boolean;
 
 	/**
@@ -37,15 +37,15 @@ export type CharacterBurnerSkillState = {
 export const useCharacterBurnerSkillStore = create<CharacterBurnerSkillState>()(
 	devtools(
 		(set, get) => ({
-			skills: new UniqueArray<SkillId, CharacterSkill>(),
+			skills: new UniqueArray<BwgrSkillId, BwgrCharacterSkill>(),
 
 			reset: (): void => {
 				set({
-					skills: new UniqueArray<SkillId, CharacterSkill>()
+					skills: new UniqueArray<BwgrSkillId, BwgrCharacterSkill>()
 				});
 			},
 
-			openSkill: (skillId: SkillId): void => {
+			openSkill: (skillId: BwgrSkillId): void => {
 				const { getSkill } = useRulesetStore.getState();
 				const { skills, getSkillPools } = get();
 				const { general, lifepath } = getSkillPools();
@@ -73,7 +73,7 @@ export const useCharacterBurnerSkillStore = create<CharacterBurnerSkillState>()(
 				}
 			},
 
-			modifySkillExponent: (skillId: SkillId, decrease?: boolean): void => {
+			modifySkillExponent: (skillId: BwgrSkillId, decrease?: boolean): void => {
 				const skill = get().skills.find(skillId);
 
 				if (skill && skill.isOpen !== "no") {
@@ -95,18 +95,18 @@ export const useCharacterBurnerSkillStore = create<CharacterBurnerSkillState>()(
 				}
 			},
 
-			addGeneralSkill: (skill: Skill): void => {
-				const charSkill: CharacterSkill = { id: skill.id, name: skill.name, isOpen: "no", type: "General", isSpecial: skill.subskillIds ? true : false, advancement: { general: 0, lifepath: 0 } };
+			addGeneralSkill: (skill: BwgrSkill): void => {
+				const charSkill: BwgrCharacterSkill = { id: skill.id, name: skill.name, isOpen: "no", type: "General", isSpecial: skill.subskillIds ? true : false, advancement: { general: 0, lifepath: 0 } };
 				set(produce<CharacterBurnerSkillState>((state) => { state.skills = new UniqueArray(state.skills.add(charSkill).items); }));
 			},
 
-			removeGeneralSkill: (skillId: SkillId): void => {
+			removeGeneralSkill: (skillId: BwgrSkillId): void => {
 				set(produce<CharacterBurnerSkillState>((state) => {
 					state.skills = new UniqueArray(state.skills.remove(skillId).items);
 				}));
 			},
 
-			getSkillPools: (lifepaths?: Lifepath[]): { general: Points; lifepath: Points; } => {
+			getSkillPools: (lifepaths?: BwgrLifepath[]): { general: BwgrPoints; lifepath: BwgrPoints; } => {
 				const state = get();
 				const lps = lifepaths || useCharacterBurnerLifepathStore.getState().lifepaths;
 
@@ -136,7 +136,7 @@ export const useCharacterBurnerSkillStore = create<CharacterBurnerSkillState>()(
 				};
 			},
 
-			getSkill: (skillId: SkillId): AbilityPoints => {
+			getSkill: (skillId: BwgrSkillId): BwgrAbilityPoints => {
 				const { skills, hasSkillOpen } = get();
 				const ruleset = useRulesetStore.getState();
 				const { getStat } = useCharacterBurnerStatStore.getState();
@@ -144,7 +144,7 @@ export const useCharacterBurnerSkillStore = create<CharacterBurnerSkillState>()(
 
 				const charSkill = skills.find(skillId);
 
-				let shade: Shades = "B";
+				let shade: BwgrShades = "B";
 				let exponent = 0;
 
 				if (charSkill && hasSkillOpen(skillId)) {
@@ -171,7 +171,7 @@ export const useCharacterBurnerSkillStore = create<CharacterBurnerSkillState>()(
 				return { shade, exponent };
 			},
 
-			hasSkillOpen: (skillId: SkillId): boolean => {
+			hasSkillOpen: (skillId: BwgrSkillId): boolean => {
 				return get().skills.existsWithValues(skillId, "isOpen", ["yes", "double"]);
 			},
 
@@ -189,7 +189,7 @@ export const useCharacterBurnerSkillStore = create<CharacterBurnerSkillState>()(
 						const skill = getSkill(sk);
 						const isMandatory = (i === 0);
 						// TODO: Repeat lifepaths also should be checked
-						const entry: CharacterSkill = {
+						const entry: BwgrCharacterSkill = {
 							id: skill.id,
 							name: skill.name,
 							type: isMandatory ? "Mandatory" : "Lifepath",

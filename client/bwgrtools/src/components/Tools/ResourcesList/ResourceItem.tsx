@@ -7,7 +7,7 @@ import { GetObstacleString } from "../../../utils/getMagicalObstackeString";
 import { GenericGrid } from "../../Shared/Grids";
 
 
-export function ResourceItem({ resource }: { resource: Resource; }): JSX.Element {
+export function ResourceItem({ resource }: { resource: BwgrResource; }): JSX.Element {
 	const getAreaOfEffectDetails = (aoeDetails: { unit?: [id: DistanceUnitId, name: string] | undefined; modifier?: [id: UnitModifierId, name: string] | undefined; }) => {
 		const texts = [];
 		if (aoeDetails.unit) { texts.push(aoeDetails.unit[1]); }

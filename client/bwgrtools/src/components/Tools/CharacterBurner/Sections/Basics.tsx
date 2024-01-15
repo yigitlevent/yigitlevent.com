@@ -10,7 +10,7 @@ import { useCharacterBurnerSkillStore } from "../../../../hooks/featureStores/Ch
 import { GenericGrid } from "../../../Shared/Grids";
 
 
-export function Basics({ openModal }: { openModal: (name: CharacterBurnerModals) => void; }): JSX.Element {
+export function Basics({ openModal }: { openModal: (name: BwgrCharacterBurnerModals) => void; }): JSX.Element {
 	const ruleset = useRulesetStore();
 	const { name, stock, gender, concept, setName, setGender, setConcept, setStockAndReset } = useCharacterBurnerBasicsStore();
 	const { getAge, lifepaths } = useCharacterBurnerLifepathStore();
@@ -41,7 +41,7 @@ export function Basics({ openModal }: { openModal: (name: CharacterBurnerModals)
 			<Grid item xs={12} sm={4}>
 				<Autocomplete
 					renderInput={(params) => <TextField {...params} label="Stock" variant="standard" fullWidth />}
-					options={ruleset.stocks.map(v => [v.id, v.name] as [id: StockId, name: string])}
+					options={ruleset.stocks.map(v => [v.id, v.name] as [id: BwgrStockId, name: string])}
 					getOptionLabel={v => v[1]}
 					isOptionEqualToValue={(o, v) => o[0] === v[0] && o[1] === v[1]}
 					value={stock}

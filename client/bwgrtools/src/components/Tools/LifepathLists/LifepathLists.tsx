@@ -18,7 +18,7 @@ import { GenericGrid } from "../../Shared/Grids";
 
 export function LifepathLists(): JSX.Element {
 	const { stocks, settings, lifepaths } = useRulesetStore();
-	const { searchString, searchFields, filters, setFilter, searchResults } = useSearch<Lifepath>(lifepaths, ["stock", "setting"], { "stock": stocks[0].name, "setting": settings[0].name });
+	const { searchString, searchFields, filters, setFilter, searchResults } = useSearch<BwgrLifepath>(lifepaths, ["stock", "setting"], { "stock": stocks[0].name, "setting": settings[0].name });
 
 	const [allowedSettings, setAllowedSettings] = useState(settings.filter(setting => setting.stock[1] === filters["stock"]).map(v => v.name));
 

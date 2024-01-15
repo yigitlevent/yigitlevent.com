@@ -9,11 +9,11 @@ import { Clamp } from "../../../utils/misc";
 
 
 export type CharacterBurnerStatState = {
-	stats: { [key: string]: StatData; };
+	stats: { [key: string]: BwgrStatData; };
 
 	reset: () => void;
 
-	getStat: (statName: string) => AbilityPoints;
+	getStat: (statName: string) => BwgrAbilityPoints;
 
 	shiftStatShade: (statName: string) => void;
 	modifyStatExponent: (statName: string, decrease?: boolean) => void;
@@ -44,7 +44,7 @@ export const useCharacterBurnerStatStore = create<CharacterBurnerStatState>()(
 				});
 			},
 
-			getStat: (statName: string): AbilityPoints => {
+			getStat: (statName: string): BwgrAbilityPoints => {
 				const state = get();
 				const shade = state.stats[statName].shadeShifted ? "G" : "B";
 				const exponent = state.stats[statName].eitherPoolSpent.exponent + state.stats[statName].mainPoolSpent.exponent;

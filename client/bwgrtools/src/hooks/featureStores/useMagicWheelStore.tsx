@@ -8,21 +8,21 @@ import { Clamp } from "../../utils/misc";
 interface MagicWheelState {
 	constants: { canvasSize: number, circleRadius: number, circleOffset: number, textOffset: number; };
 
-	areaOfEffectId: AreaOfEffectFacetId;
-	elementId: ElementFacetId;
-	impetusId: ImpetusFacetId;
-	durationId: DurationFacetId;
-	originId: OriginFacetId;
+	areaOfEffectId: BwgrAreaOfEffectFacetId;
+	elementId: BwgrElementFacetId;
+	impetusId: BwgrImpetusFacetId;
+	durationId: BwgrDurationFacetId;
+	originId: BwgrOriginFacetId;
 
 	direction: "Clockwise" | "Counterclockwise";
 	steps: number;
 	cover: boolean;
 
-	changeAOE: (aoe: AreaOfEffectFacetId) => void;
-	changeElement: (element: ElementFacetId) => void;
-	changeImpetus: (impetus: ImpetusFacetId) => void;
-	changeDuration: (duration: DurationFacetId) => void;
-	changeOrigin: (origin: OriginFacetId) => void;
+	changeAOE: (aoe: BwgrAreaOfEffectFacetId) => void;
+	changeElement: (element: BwgrElementFacetId) => void;
+	changeImpetus: (impetus: BwgrImpetusFacetId) => void;
+	changeDuration: (duration: BwgrDurationFacetId) => void;
+	changeOrigin: (origin: BwgrOriginFacetId) => void;
 
 	changeDirection: (direction: string) => void;
 	changeSteps: (steps: string) => void;
@@ -34,11 +34,11 @@ export const useMagicWheelStore = create<MagicWheelState>()(
 		(set) => ({
 			constants: { canvasSize: 580, circleRadius: 32, circleOffset: 90, textOffset: 100 },
 
-			areaOfEffectId: 0 as unknown as AreaOfEffectFacetId,
-			elementId: 0 as unknown as ElementFacetId,
-			impetusId: 0 as unknown as ImpetusFacetId,
-			durationId: 0 as unknown as DurationFacetId,
-			originId: 0 as unknown as OriginFacetId,
+			areaOfEffectId: 0 as BwgrAreaOfEffectFacetId,
+			elementId: 0 as BwgrElementFacetId,
+			impetusId: 0 as BwgrImpetusFacetId,
+			durationId: 0 as BwgrDurationFacetId,
+			originId: 0 as BwgrOriginFacetId,
 
 			direction: "Clockwise",
 			steps: 1,
@@ -46,27 +46,27 @@ export const useMagicWheelStore = create<MagicWheelState>()(
 
 			elementIndex: 0,
 
-			changeAOE: (aoe: AreaOfEffectFacetId) => {
+			changeAOE: (aoe: BwgrAreaOfEffectFacetId) => {
 				set(produce<MagicWheelState>((state) => {
 					state.areaOfEffectId = aoe;
 				}));
 			},
-			changeElement: (element: ElementFacetId) => {
+			changeElement: (element: BwgrElementFacetId) => {
 				set(produce<MagicWheelState>((state) => {
 					state.elementId = element;
 				}));
 			},
-			changeImpetus: (impetus: ImpetusFacetId) => {
+			changeImpetus: (impetus: BwgrImpetusFacetId) => {
 				set(produce<MagicWheelState>((state) => {
 					state.impetusId = impetus;
 				}));
 			},
-			changeDuration: (duration: DurationFacetId) => {
+			changeDuration: (duration: BwgrDurationFacetId) => {
 				set(produce<MagicWheelState>((state) => {
 					state.durationId = duration;
 				}));
 			},
-			changeOrigin: (origin: OriginFacetId) => {
+			changeOrigin: (origin: BwgrOriginFacetId) => {
 				set(produce<MagicWheelState>((state) => {
 					state.originId = origin;
 				}));

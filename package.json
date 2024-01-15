@@ -1,12 +1,29 @@
 {
-  "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^6.10.0",
-    "@typescript-eslint/parser": "^6.10.0",
-    "eslint": "^8.53.0",
-    "eslint-plugin-import": "^2.29.0",
-    "eslint-plugin-json": "^3.1.0",
-    "eslint-plugin-react": "^7.33.2",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "typescript": "^5.2.2"
-  }
+	"name": "yigitlevent",
+	"author": "Yiğit Levent",
+	"version": "1.0.0",
+	"private": true,
+	"type": "module",
+	"license": "MIT",
+	"homepage": "http://yigitlevent.com/",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/yigitlevent/yigitlevent.com.git"
+	},
+	"bugs": {
+		"url": "https://github.com/yigitlevent/yigitlevent.com/issues"
+	},
+	"scripts": {
+		"update": "ncu -u && npm i"
+	},
+	"devDependencies": {
+		"@typescript-eslint/eslint-plugin": "^6.18.1",
+		"@typescript-eslint/parser": "^6.18.1",
+		"eslint": "^8.56.0",
+		"eslint-plugin-import": "^2.29.1",
+		"eslint-plugin-json": "^3.1.0",
+		"eslint-plugin-react": "^7.33.2",
+		"eslint-plugin-react-hooks": "^4.6.0",
+		"typescript": "^5.3.3"
+	}
 }

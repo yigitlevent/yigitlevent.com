@@ -17,36 +17,36 @@ type FetchState =
 interface RulesetStore {
 	readonly fetchState: FetchState;
 
-	readonly rulesets: Ruleset[];
-	readonly chosenRulesets: RulesetId[];
+	readonly rulesets: BwgrRuleset[];
+	readonly chosenRulesets: BwgrRulesetId[];
 
-	readonly abilities: Ability[];
+	readonly abilities: BwgrAbility[];
 	readonly abilityTypes: string[];
 
-	readonly stocks: Stock[];
-	readonly settings: Setting[];
+	readonly stocks: BwgrStock[];
+	readonly settings: BwgrSetting[];
 
-	readonly skills: Skill[];
+	readonly skills: BwgrSkill[];
 	readonly skillCategories: string[];
 	readonly skillTypes: string[];
 
-	readonly traits: Trait[];
+	readonly traits: BwgrTrait[];
 	readonly traitCategories: string[];
 	readonly traitTypes: string[];
 
-	readonly lifepaths: Lifepath[];
+	readonly lifepaths: BwgrLifepath[];
 
-	readonly resources: Resource[];
+	readonly resources: BwgrResource[];
 	readonly resourceTypes: string[];
 
-	readonly spellFacets: SpellFacets;
+	readonly spellFacets: BwgrSpellFacets;
 
-	readonly dowActions: DoWAction[];
-	readonly racActions: RaCAction[];
-	readonly fightActions: FightAction[];
+	readonly dowActions: BwgrDoWAction[];
+	readonly racActions: BwgrRaCAction[];
+	readonly fightActions: BwgrFightAction[];
 
-	readonly practices: Practice[];
-	readonly questions: Question[];
+	readonly practices: BwgrPractice[];
+	readonly questions: BwgrQuestion[];
 
 	setFetchState: (fetchState: FetchState) => void;
 	fetchList: () => void;
@@ -54,21 +54,21 @@ interface RulesetStore {
 
 	// TODO: Might be useful to create a hash table of id-index pairs to quicken the search -- name/string search being slow is fine, it should be used veeery rarely
 	serveResult: <T>(row: T[], error: [id: unknown, msg: string]) => T;
-	getAbility: (search: AbilityId | string) => Ability;
-	getStock: (search: StockId | string) => Stock;
-	getSetting: (search: SettingId | string) => Setting;
-	getSkill: (search: SkillId | string) => Skill;
-	getTrait: (search: TraitId | string) => Trait;
-	getLifepath: (search: LifepathId | string) => Lifepath;
-	getResource: (search: ResourceId | string) => Resource;
-	getDoWAction: (search: DoWActionId | string) => DoWAction;
-	getRaCAction: (search: RaCActionId | string) => RaCAction;
-	getFightAction: (search: FightActionId | string) => FightAction;
-	getPractice: (search: PracticeId) => Practice;
+	getAbility: (search: BwgrAbilityId | string) => BwgrAbility;
+	getStock: (search: BwgrStockId | string) => BwgrStock;
+	getSetting: (search: BwgrSettingId | string) => BwgrSetting;
+	getSkill: (search: BwgrSkillId | string) => BwgrSkill;
+	getTrait: (search: BwgrTraitId | string) => BwgrTrait;
+	getLifepath: (search: BwgrLifepathId | string) => BwgrLifepath;
+	getResource: (search: BwgrResourceId | string) => BwgrResource;
+	getDoWAction: (search: BwgrDoWActionId | string) => BwgrDoWAction;
+	getRaCAction: (search: BwgrRaCActionId | string) => BwgrRaCAction;
+	getFightAction: (search: BwgrFightActionId | string) => BwgrFightAction;
+	getPractice: (search: BwgrPracticeId) => BwgrPractice;
 
-	toggleDataset: (dataset: RulesetId) => void;
-	checkRulesets: (allowed: RulesetId[]) => boolean;
-	checkExactRulesets: (allowed: RulesetId[]) => boolean;
+	toggleDataset: (dataset: BwgrRulesetId) => void;
+	checkRulesets: (allowed: BwgrRulesetId[]) => boolean;
+	checkExactRulesets: (allowed: BwgrRulesetId[]) => boolean;
 }
 
 export const useRulesetStore = create<RulesetStore>()(
@@ -121,7 +121,7 @@ export const useRulesetStore = create<RulesetStore>()(
 				const setFetchState = get().setFetchState;
 				setFetchState("fetching-list");
 
-				GenericGet<RulesetsResponse>("/bwgr/ruleset/list")
+				GenericGet<BwgrRulesetsResponse>("/bwgr/ruleset/list")
 					.then(response => {
 						if (response.status === 200) {
 							set(produce<RulesetStore>((state) => {
@@ -145,7 +145,7 @@ export const useRulesetStore = create<RulesetStore>()(
 				if (fetchState === "fetch-data") {
 					setFetchState("fetching-data");
 
-					GenericPost<RulesetResponse>("/bwgr/ruleset/data", { rulesets })
+					GenericPost<BwgrRulesetResponse>("/bwgr/ruleset/data", { rulesets })
 						.then(response => {
 							if (response.status === 200) {
 								const abilities = response.data.ruleset.abilities;
@@ -237,73 +237,73 @@ export const useRulesetStore = create<RulesetStore>()(
 				else throw new Error(`Could not find any ${error[1]} with ${typeof error[0] === "string" ? "name" : "id"} '${error[0]}'`);
 			},
 
-			getAbility(search: AbilityId | string) {
+			getAbility(search: BwgrAbilityId | string) {
 				const abilities = get().abilities;
 				const rows = (typeof search === "string") ? abilities.filter(v => v.name === search) : abilities.filter(v => v.id === search);
 				return get().serveResult(rows, [search, "abilities"]);
 			},
 
-			getStock(search: StockId | string) {
+			getStock(search: BwgrStockId | string) {
 				const stocks = get().stocks;
 				const rows = (typeof search === "string") ? stocks.filter(v => v.name === search) : stocks.filter(v => v.id === search);
 				return get().serveResult(rows, [search, "stocks"]);
 			},
 
-			getSetting(search: SettingId | string) {
+			getSetting(search: BwgrSettingId | string) {
 				const settings = get().settings;
 				const rows = (typeof search === "string") ? settings.filter(v => v.name === search) : settings.filter(v => v.id === search);
 				return get().serveResult(rows, [search, "settings"]);
 			},
 
-			getSkill(search: SkillId | string) {
+			getSkill(search: BwgrSkillId | string) {
 				const skills = get().skills;
 				const rows = (typeof search === "string") ? skills.filter(v => v.name === search) : skills.filter(v => v.id === search);
 				return get().serveResult(rows, [search, "skills"]);
 			},
 
-			getTrait(search: TraitId | string) {
+			getTrait(search: BwgrTraitId | string) {
 				const traits = get().traits;
 				const rows = (typeof search === "string") ? traits.filter(v => v.name === search) : traits.filter(v => v.id === search);
 				return get().serveResult(rows, [search, "traits"]);
 			},
 
-			getLifepath(search: LifepathId | string) {
+			getLifepath(search: BwgrLifepathId | string) {
 				const lifepaths = get().lifepaths;
 				const rows = (typeof search === "string") ? lifepaths.filter(v => v.name === search) : lifepaths.filter(v => v.id === search);
 				return get().serveResult(rows, [search, "lifepaths"]);
 			},
 
-			getResource(search: ResourceId | string) {
+			getResource(search: BwgrResourceId | string) {
 				const resources = get().resources;
 				const rows = (typeof search === "string") ? resources.filter(v => v.name === search) : resources.filter(v => v.id === search);
 				return get().serveResult(rows, [search, "resources"]);
 			},
 
-			getDoWAction(search: DoWActionId | string) {
+			getDoWAction(search: BwgrDoWActionId | string) {
 				const dowActions = get().dowActions;
 				const rows = (typeof search === "string") ? dowActions.filter(v => v.name === search) : dowActions.filter(v => v.id === search);
 				return get().serveResult(rows, [search, "dowActions"]);
 			},
 
-			getRaCAction(search: RaCActionId | string) {
+			getRaCAction(search: BwgrRaCActionId | string) {
 				const racActions = get().racActions;
 				const rows = (typeof search === "string") ? racActions.filter(v => v.name === search) : racActions.filter(v => v.id === search);
 				return get().serveResult(rows, [search, "racActions"]);
 			},
 
-			getFightAction(search: FightActionId | string) {
+			getFightAction(search: BwgrFightActionId | string) {
 				const fightActions = get().fightActions;
 				const rows = (typeof search === "string") ? fightActions.filter(v => v.name === search) : fightActions.filter(v => v.id === search);
 				return get().serveResult(rows, [search, "fightActions"]);
 			},
 
-			getPractice(search: PracticeId) {
+			getPractice(search: BwgrPracticeId) {
 				const practices = get().practices;
 				const rows = practices.filter(v => v.id === search);
 				return get().serveResult(rows, [search, "practices"]);
 			},
 
-			toggleDataset: (ruleset: RulesetId) => {
+			toggleDataset: (ruleset: BwgrRulesetId) => {
 				set(produce<RulesetStore>((state) => {
 					if (state.chosenRulesets.includes(ruleset) && state.chosenRulesets.length > 1) {
 						state.fetchState = "fetch-data";
@@ -316,11 +316,11 @@ export const useRulesetStore = create<RulesetStore>()(
 				}));
 			},
 
-			checkRulesets: (allowed: RulesetId[]) => {
+			checkRulesets: (allowed: BwgrRulesetId[]) => {
 				return get().chosenRulesets.some(ruleset => allowed.includes(ruleset));
 			},
 
-			checkExactRulesets: (allowed: RulesetId[]) => {
+			checkExactRulesets: (allowed: BwgrRulesetId[]) => {
 				const state = get();
 				return allowed.every(ruleset => state.chosenRulesets.includes(ruleset));
 			}

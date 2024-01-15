@@ -2,12 +2,12 @@ import { PgPool } from "../index";
 import { Logger } from "../utils/logger";
 
 
-export async function GetResources(rulesets: RulesetId[]): Promise<Resource[]> {
-	const convert = (re: ResourceDBO[], rmd: ResourceMagicDetailsDBO[], rmo: ResourceMagicObstaclesDBO[]): Resource[] => {
+export async function GetResources(rulesets: BwgrRulesetId[]): Promise<BwgrResource[]> {
+	const convert = (re: BwgrResourceDBO[], rmd: BwgrResourceMagicDetailsDBO[], rmo: BwgrResourceMagicObstaclesDBO[]): BwgrResource[] => {
 		const log = new Logger("GetResources Conversion");
 
-		const r: Resource[] = re.map(v => {
-			const res: Resource = {
+		const r: BwgrResource[] = re.map(v => {
+			const res: BwgrResource = {
 				rulesets: v.Rulesets,
 				id: v.Id,
 				name: v.Name,
@@ -24,7 +24,7 @@ export async function GetResources(rulesets: RulesetId[]): Promise<Resource[]> {
 
 			const mDetails = rmd.find(a => a.ResourceId === v.Id);
 			if (mDetails) {
-				const mdet: ResourceMagicDetails = {
+				const mdet: BwgrResourceMagicDetails = {
 					origin: [mDetails.OriginId, mDetails.Origin],
 					duration: [mDetails.DurationId, mDetails.Duration],
 					areaOfEffect: [mDetails.AreaOfEffectId, mDetails.AreaOfEffect],
@@ -51,7 +51,7 @@ export async function GetResources(rulesets: RulesetId[]): Promise<Resource[]> {
 				const mObs = rmo.filter(a => a.ResourceId === v.Id);
 				if (mObs.length > 0) {
 					mdet.obstacleDetails = mObs.map(mo => {
-						const obsDet: ResourceMagicObstacleDetails = {};
+						const obsDet: BwgrResourceMagicObstacleDetails = {};
 						if (mo.Obstacle) obsDet.obstacle = mo.Obstacle;
 						else if (mo.ObstacleAbility1Id !== null || mo.ObstacleAbility1 !== null || mo.ObstacleAbility2Id !== null || mo.ObstacleAbility2 !== null) {
 							obsDet.abilities = [];
@@ -83,9 +83,9 @@ export async function GetResources(rulesets: RulesetId[]): Promise<Resource[]> {
 	const query2 = "select * from bwgr.\"ResourceMagicDetailsList\";";
 	const query3 = "select * from bwgr.\"ResourceMagicObstaclesList\";";
 	return Promise.all([
-		PgPool.query<ResourceDBO>(query1),
-		PgPool.query<ResourceMagicDetailsDBO>(query2),
-		PgPool.query<ResourceMagicObstaclesDBO>(query3)
+		PgPool.query<BwgrResourceDBO>(query1),
+		PgPool.query<BwgrResourceMagicDetailsDBO>(query2),
+		PgPool.query<BwgrResourceMagicObstaclesDBO>(query3)
 	]).then(result => {
 		log.end();
 		const res = convert(result[0].rows, result[1].rows, result[2].rows);

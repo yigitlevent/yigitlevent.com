@@ -9,7 +9,7 @@ import { GenericGrid } from "../../../Shared/Grids";
 import { BlockText } from "../BlockText";
 
 
-function Attribute({ attribute }: { attribute: UniqueArrayItem<AbilityId, CharacterAttribute>; }): JSX.Element {
+function Attribute({ attribute }: { attribute: UniqueArrayItem<BwgrAbilityId, BwgrCharacterAttribute>; }): JSX.Element {
 	const { getAttribute, shiftAttributeShade } = useCharacterBurnerAttributeStore();
 
 	const attributeDetails = getAttribute([attribute.id, attribute.name]);

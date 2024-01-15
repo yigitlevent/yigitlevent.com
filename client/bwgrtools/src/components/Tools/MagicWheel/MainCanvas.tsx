@@ -7,8 +7,8 @@ import { THEME } from "../../../theme/theme";
 interface Props {
 	currentAngles: number[];
 	blockAngle: { [key: string]: number; };
-	spellFacets: SpellFacets;
-	getFacetMapping: (type: keyof SpellFacets) => { bandIndex: number; } & unknown;
+	spellFacets: BwgrSpellFacets;
+	getFacetMapping: (type: keyof BwgrSpellFacets) => { bandIndex: number; } & unknown;
 }
 
 export function MainCanvas({ currentAngles, blockAngle, spellFacets, getFacetMapping }: Props): JSX.Element {
@@ -36,7 +36,7 @@ export function MainCanvas({ currentAngles, blockAngle, spellFacets, getFacetMap
 	const drawText = useCallback((rotationArray: number[]): void => {
 		if (context) {
 			for (const arrayKey in spellFacets) {
-				const key = arrayKey as keyof SpellFacets;
+				const key = arrayKey as keyof BwgrSpellFacets;
 				const i = getFacetMapping(key).bandIndex;
 
 				for (const stringKey in spellFacets[key]) {

@@ -23,7 +23,7 @@ export function BrutalLife(): JSX.Element {
 				? RandomNumber(1, 6) <= 4
 				: RandomNumber(1, 6) <= 2;
 
-		let traitToAdd: [id: TraitId, name: string] | "No Trait" | undefined = "No Trait";
+		let traitToAdd: [id: BwgrTraitId, name: string] | "No Trait" | undefined = "No Trait";
 
 		if (isBrutal) {
 			if (lifepathNumber === 5) {

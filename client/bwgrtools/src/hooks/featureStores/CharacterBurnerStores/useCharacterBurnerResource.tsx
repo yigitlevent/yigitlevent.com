@@ -6,13 +6,13 @@ import { useCharacterBurnerLifepathStore } from "./useCharacterBurnerLifepath";
 
 
 export type CharacterBurnerResourceState = {
-	resources: { [key: Guid]: CharacterResource; };
+	resources: { [key: Guid]: BwgrCharacterResource; };
 
 	reset: () => void;
 
-	getResourcePools: (lifepaths?: Lifepath[]) => Points;
+	getResourcePools: (lifepaths?: BwgrLifepath[]) => BwgrPoints;
 
-	addResource: (resource: CharacterResource) => void;
+	addResource: (resource: BwgrCharacterResource) => void;
 	removeResource: (guid: Guid) => void;
 	editResourceDescription: (guid: Guid, description: string) => void;
 };
@@ -28,7 +28,7 @@ export const useCharacterBurnerResourceStore = create<CharacterBurnerResourceSta
 				}));
 			},
 
-			getResourcePools: (lifepaths?: Lifepath[]): Points => {
+			getResourcePools: (lifepaths?: BwgrLifepath[]): BwgrPoints => {
 				const spending = Object.values(get().resources).map(v => v.cost).reduce((p, v) => p += v, 0);
 
 				const state = useCharacterBurnerLifepathStore.getState();
@@ -39,7 +39,7 @@ export const useCharacterBurnerResourceStore = create<CharacterBurnerResourceSta
 				return { total: totalRps, spent: spending, remaining: totalRps - spending };
 			},
 
-			addResource: (resource: CharacterResource) => {
+			addResource: (resource: BwgrCharacterResource) => {
 				set(produce<CharacterBurnerResourceState>((state) => {
 					state.resources[self.crypto.randomUUID() as Guid] = resource;
 				}));

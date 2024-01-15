@@ -13,7 +13,7 @@ import { useRulesetStore } from "../../../hooks/apiStores/useRulesetStore";
 import { usePracticePlannerStore } from "../../../hooks/featureStores/usePracticePlannerStore";
 
 
-function Placed({ placed, practiceIndex, cellIndex }: { placed: PracticePlaced; practiceIndex: number; cellIndex: number; }): JSX.Element {
+function Placed({ placed, practiceIndex, cellIndex }: { placed: BwgrPracticePlaced; practiceIndex: number; cellIndex: number; }): JSX.Element {
 	const { getPractice } = useRulesetStore();
 	const { deletePractice } = usePracticePlannerStore();
 
@@ -30,7 +30,7 @@ function Placed({ placed, practiceIndex, cellIndex }: { placed: PracticePlaced; 
 	);
 }
 
-export function PracticePlannerCell({ cell, cellIndex, setNotification }: { cell: PracticeCell; cellIndex: number; setNotification: (value: React.SetStateAction<JSX.Element | null>) => void; }): JSX.Element {
+export function PracticePlannerCell({ cell, cellIndex, setNotification }: { cell: BwgrPracticeCell; cellIndex: number; setNotification: (value: React.SetStateAction<JSX.Element | null>) => void; }): JSX.Element {
 	const { cells, deleteCell, changeCellHour } = usePracticePlannerStore();
 
 	return (

@@ -1,4 +1,4 @@
-export function GetObstacleString(resource: Resource, obstacleDetails: ResourceMagicObstacleDetails[]): string {
+export function GetObstacleString(resource: BwgrResource, obstacleDetails: BwgrResourceMagicObstacleDetails[]): string {
 	const strs = obstacleDetails.map(v => {
 		const desc = v.description ? `${v.description}: ` : "";
 		if (v.obstacle) {

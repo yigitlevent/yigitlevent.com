@@ -8,10 +8,10 @@
 	"homepage": "http://yigitlevent.com/",
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/yigitlevent/yigitlevent-api.git"
+		"url": "git+https://github.com/yigitlevent/yigitlevent.com.git"
 	},
 	"bugs": {
-		"url": "https://github.com/yigitlevent/yigitlevent-api/issues"
+		"url": "https://github.com/yigitlevent/yigitlevent.com/issues"
 	},
 	"scripts": {
 		"build": "npx tsc --build --verbose",
@@ -19,7 +19,8 @@
 		"bstart": "npx tsc && node dist/index.js",
 		"lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
 		"lintfix": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0 --fix",
-		"dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/index.js\""
+		"dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/index.js\"",
+		"update": "ncu -u && npm i"
 	},
 	"dependencies": {
 		"@types/morgan": "^1.9.9",
@@ -39,10 +40,10 @@
 		"@types/cors": "^2.8.17",
 		"@types/express": "^4.17.21",
 		"@types/express-session": "^1.17.10",
-		"@types/node": "^20.10.5",
+		"@types/node": "^20.11.1",
 		"@types/pg": "^8.10.9",
-		"@typescript-eslint/eslint-plugin": "^6.15.0",
-		"@typescript-eslint/parser": "^6.15.0",
+		"@typescript-eslint/eslint-plugin": "^6.18.1",
+		"@typescript-eslint/parser": "^6.18.1",
 		"concurrently": "^8.2.2",
 		"eslint": "^8.56.0",
 		"eslint-plugin-import": "^2.29.1",

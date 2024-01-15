@@ -14,27 +14,27 @@ import { useCharacterBurnerTraitStore } from "../CharacterBurnerStores/useCharac
 
 
 export type CharacterBurnerLifepathState = {
-	availableLifepaths: Lifepath[];
-	lifepaths: Lifepath[];
+	availableLifepaths: BwgrLifepath[];
+	lifepaths: BwgrLifepath[];
 
 	reset: () => void;
 
-	addLifepath: (lifepath: Lifepath) => void;
+	addLifepath: (lifepath: BwgrLifepath) => void;
 	removeLastLifepath: () => void;
 
-	hasLifepath: (id: LifepathId) => number;
+	hasLifepath: (id: BwgrLifepathId) => number;
 	hasLifepathByName: (name: string) => number;
-	hasSetting: (id: SettingId) => number;
+	hasSetting: (id: BwgrSettingId) => number;
 	hasSettingByName: (name: string) => number;
 
 	getLeadCount: () => number;
-	getAge: (lifepaths?: Lifepath[]) => number;
+	getAge: (lifepaths?: BwgrLifepath[]) => number;
 
-	getMentalPool: (lifepaths?: Lifepath[]) => Points;
-	getPhysicalPool: (lifepaths?: Lifepath[]) => Points;
-	getEitherPool: (lifepaths?: Lifepath[]) => Points;
+	getMentalPool: (lifepaths?: BwgrLifepath[]) => BwgrPoints;
+	getPhysicalPool: (lifepaths?: BwgrLifepath[]) => BwgrPoints;
+	getEitherPool: (lifepaths?: BwgrLifepath[]) => BwgrPoints;
 
-	updateAvailableLifepaths: () => Lifepath[];
+	updateAvailableLifepaths: () => BwgrLifepath[];
 };
 
 export const useCharacterBurnerLifepathStore = create<CharacterBurnerLifepathState>()(
@@ -50,7 +50,7 @@ export const useCharacterBurnerLifepathStore = create<CharacterBurnerLifepathSta
 				});
 			},
 
-			addLifepath: (lifepath: Lifepath): void => {
+			addLifepath: (lifepath: BwgrLifepath): void => {
 				set(produce<CharacterBurnerLifepathState>((state) => { state.lifepaths.push(lifepath); }));
 				get().updateAvailableLifepaths();
 				useCharacterBurnerStatStore.getState().reset();
@@ -72,7 +72,7 @@ export const useCharacterBurnerLifepathStore = create<CharacterBurnerLifepathSta
 				useCharacterBurnerMiscStore.getState().refreshQuestions();
 			},
 
-			hasLifepath: (id: LifepathId): number => {
+			hasLifepath: (id: BwgrLifepathId): number => {
 				return get().lifepaths.filter(v => v.id === id).length;
 			},
 
@@ -80,7 +80,7 @@ export const useCharacterBurnerLifepathStore = create<CharacterBurnerLifepathSta
 				return get().lifepaths.filter(v => v.name === name).length;
 			},
 
-			hasSetting: (id: SettingId): number => {
+			hasSetting: (id: BwgrSettingId): number => {
 				return get().lifepaths.filter(v => v.setting[0] === id).length;
 			},
 
@@ -94,7 +94,7 @@ export const useCharacterBurnerLifepathStore = create<CharacterBurnerLifepathSta
 				return Pairwise(state.lifepaths).reduce((pv, cv) => cv[0].setting[0] !== cv[1].setting[0] ? pv + 1 : pv, 0);
 			},
 
-			getAge: (lifepaths?: Lifepath[]): number => {
+			getAge: (lifepaths?: BwgrLifepath[]): number => {
 				const state = get();
 				const lps = (lifepaths || state.lifepaths);
 
@@ -106,7 +106,7 @@ export const useCharacterBurnerLifepathStore = create<CharacterBurnerLifepathSta
 				return sum + get().getLeadCount();
 			},
 
-			getMentalPool: (lifepaths?: Lifepath[]): Points => {
+			getMentalPool: (lifepaths?: BwgrLifepath[]): BwgrPoints => {
 				const lps = lifepaths || get().lifepaths;
 				const { getAgePool } = useCharacterBurnerBasicsStore.getState();
 				const { stats } = useCharacterBurnerStatStore.getState();
@@ -124,7 +124,7 @@ export const useCharacterBurnerLifepathStore = create<CharacterBurnerLifepathSta
 				return { total: total, spent, remaining: total - spent };
 			},
 
-			getPhysicalPool: (lifepaths?: Lifepath[]): Points => {
+			getPhysicalPool: (lifepaths?: BwgrLifepath[]): BwgrPoints => {
 				const lps = lifepaths || get().lifepaths;
 				const { getAgePool } = useCharacterBurnerBasicsStore.getState();
 				const { stats } = useCharacterBurnerStatStore.getState();
@@ -142,7 +142,7 @@ export const useCharacterBurnerLifepathStore = create<CharacterBurnerLifepathSta
 				return { total: total, spent, remaining: total - spent };
 			},
 
-			getEitherPool: (lifepaths?: Lifepath[]): Points => {
+			getEitherPool: (lifepaths?: BwgrLifepath[]): BwgrPoints => {
 				const lps = lifepaths || get().lifepaths;
 				const { stats } = useCharacterBurnerStatStore.getState();
 
@@ -155,7 +155,7 @@ export const useCharacterBurnerLifepathStore = create<CharacterBurnerLifepathSta
 				return { total, spent, remaining: total - spent };
 			},
 
-			updateAvailableLifepaths: (onlyReturn?: boolean): Lifepath[] => {
+			updateAvailableLifepaths: (onlyReturn?: boolean): BwgrLifepath[] => {
 				const { lifepaths, hasSetting, getAge } = get();
 
 				const ruleset = useRulesetStore.getState();
@@ -166,7 +166,7 @@ export const useCharacterBurnerLifepathStore = create<CharacterBurnerLifepathSta
 				const { attributes, hasAttribute } = useCharacterBurnerAttributeStore.getState();
 
 
-				const possibleLifepaths: Lifepath[] = FilterLifepaths({
+				const possibleLifepaths: BwgrLifepath[] = FilterLifepaths({
 					rulesetLifepaths: ruleset.lifepaths,
 					stock: stock,
 					age: getAge(),
