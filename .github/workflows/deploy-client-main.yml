@@ -24,6 +24,7 @@ jobs:
         KEY: ${{ secrets.SSHKEY }}
         source: "utility/**"
         target: ${{ secrets.SOURCEDIR }}/utility
+        strip_components: 1
         rm: true
 
     - name: Clean and Copy Source
