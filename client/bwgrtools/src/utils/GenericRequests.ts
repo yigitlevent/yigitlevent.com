@@ -7,7 +7,7 @@ export function GenericGet<T>(path: Routes): Promise<AxiosResponse<T, unknown>> 
 		{
 			withCredentials: false,
 			headers: {
-				"Access-Control-Allow-Origin": import.meta.env.VITE_API_URL
+				"Access-Control-Allow-Origin": "*"
 			}
 		}
 	);
@@ -20,7 +20,7 @@ export function GenericPost<T>(path: Routes, formData: Forms | null): Promise<Ax
 		{
 			withCredentials: false,
 			headers: {
-				"Access-Control-Allow-Origin": import.meta.env.VITE_API_URL
+				"Access-Control-Allow-Origin": "*"
 			}
 		}
 	);
