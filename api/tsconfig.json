@@ -6,11 +6,16 @@
 		"esModuleInterop": true,
 		"forceConsistentCasingInFileNames": true,
 		"strict": true,
-		"skipLibCheck": false
+		"skipLibCheck": false,
+		"paths": {
+			"@utility/*": [
+				"../utility/src/*"
+			]
+		}
 	},
 	"include": [
 		"src",
 		"vite.config.ts",
-		"../@types"
+		"../utility"
 	]
 }

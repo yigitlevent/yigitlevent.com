@@ -4,6 +4,16 @@ module.exports = {
 		browser: false,
 		es2021: true
 	},
+	settings: {
+		"import/resolver": {
+			"eslint-import-resolver-custom-alias": {
+				alias: {
+					"@utility": "../utility/src"
+				},
+				extensions: [".ts", ".tsx"]
+			}
+		}
+	},
 	extends: ["eslint:recommended", "plugin:import/typescript", "plugin:@typescript-eslint/recommended", "plugin:json/recommended"],
 	parser: "@typescript-eslint/parser",
 	parserOptions: {
