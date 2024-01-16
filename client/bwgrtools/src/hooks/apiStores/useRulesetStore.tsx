@@ -1,7 +1,8 @@
-import { GenericGet, GenericPost } from "@utility/GenericRequests";
 import { produce } from "immer";
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
+
+import { GenericGet, GenericPost } from "../../utils/GenericRequests";
 
 
 type FetchState =
@@ -120,7 +121,7 @@ export const useRulesetStore = create<RulesetStore>()(
 				const setFetchState = get().setFetchState;
 				setFetchState("fetching-list");
 
-				GenericGet<BwgrRulesetsResponse>(import.meta.env.VITE_API_URL, "/bwgr/ruleset/list")
+				GenericGet<BwgrRulesetsResponse>("/bwgr/ruleset/list")
 					.then(response => {
 						if (response.status === 200) {
 							set(produce<RulesetStore>((state) => {
@@ -144,7 +145,7 @@ export const useRulesetStore = create<RulesetStore>()(
 				if (fetchState === "fetch-data") {
 					setFetchState("fetching-data");
 
-					GenericPost<BwgrRulesetResponse>(import.meta.env.VITE_API_URL, "/bwgr/ruleset/data", { rulesets })
+					GenericPost<BwgrRulesetResponse>("/bwgr/ruleset/data", { rulesets })
 						.then(response => {
 							if (response.status === 200) {
 								const abilities = response.data.ruleset.abilities;
