@@ -106,8 +106,7 @@ module.exports = {
 			{ selector: "property", types: ["array", "boolean", "function", "string"], format: ["camelCase", "snake_case", "PascalCase"] },
 
 			{ selector: "classProperty", types: ["number"], format: ["camelCase"], leadingUnderscore: "allow" },
-
-			{ selector: "property", types: ["string"], filter: { regex: "^Access-Control-Allow-Origin$", match: true }, format: null },
+			{ selector: "property", types: ["string", "boolean"], filter: { regex: "^Access-Control-.*", match: true }, format: null },
 
 			{ selector: "method", format: ["camelCase"] },
 

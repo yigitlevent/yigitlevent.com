@@ -96,6 +96,7 @@ module.exports = {
 			{ selector: "property", format: ["camelCase", "snake_case", "PascalCase"] },
 			{ selector: "method", format: ["camelCase"] },
 			{ selector: "classProperty", format: ["camelCase"], leadingUnderscore: "allow" },
+			{ selector: "property", types: ["string", "boolean"], filter: { regex: "^Access-Control-.*", match: true }, format: null },
 
 			{ selector: "enumMember", format: ["PascalCase"] },
 			{ selector: "typeLike", format: ["PascalCase"] },
