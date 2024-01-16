@@ -1,10 +1,10 @@
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
+import { UniqueArray } from "@utility/UniqueArray";
 
 import { useRulesetStore } from "../../../../../hooks/apiStores/useRulesetStore";
 import { PopoverLink } from "../../../../Shared/PopoverLink";
-import { UniqueArray } from "@utility/UniqueArray";
 
 
 export function RandomLifepathsLists({ chosenLifepaths }: { chosenLifepaths: BwgrLifepath[]; }): JSX.Element {

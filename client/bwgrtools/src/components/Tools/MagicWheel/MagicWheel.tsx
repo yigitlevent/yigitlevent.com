@@ -10,6 +10,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
+import { RandomNumber } from "@utility/RandomNumber";
 import { createRef, Fragment, useCallback, useEffect, useState } from "react";
 
 import { BackCanvas } from "./BackCanvas";
@@ -20,7 +21,6 @@ import { useRulesetStore } from "../../../hooks/apiStores/useRulesetStore";
 import { useMagicWheelStore } from "../../../hooks/featureStores/useMagicWheelStore";
 import { useFontLoading } from "../../../hooks/useFontLoading";
 import { GenericGrid } from "../../Shared/Grids";
-import { RandomNumber } from "@utility/RandomNumber";
 
 
 export function MagicWheel(): JSX.Element {

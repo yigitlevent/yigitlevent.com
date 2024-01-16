@@ -1,6 +1,8 @@
 import { Button, Alert } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
+import { GetOrdinalSuffix } from "@utility/GetOrdinalSuffix";
+import { RandomNumber } from "@utility/RandomNumber";
 import { Fragment, useCallback } from "react";
 
 import { useRulesetStore } from "../../../../../hooks/apiStores/useRulesetStore";
@@ -8,8 +10,6 @@ import { useCharacterBurnerBasicsStore } from "../../../../../hooks/featureStore
 import { useCharacterBurnerLifepathStore } from "../../../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerLifepath";
 import { useCharacterBurnerMiscStore } from "../../../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerMisc";
 import { BlockTraitPopover } from "../../BlockText";
-import { GetOrdinalSuffix } from "@utility/GetOrdinalSuffix";
-import { RandomNumber } from "@utility/RandomNumber";
 
 
 export function BrutalLife(): JSX.Element {

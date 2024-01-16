@@ -1,5 +1,6 @@
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
+import { UniqueArray } from "@utility/UniqueArray";
 import { Fragment, useCallback, useEffect, useState } from "react";
 
 import { useRulesetStore } from "../../../../../hooks/apiStores/useRulesetStore";
@@ -7,7 +8,6 @@ import { useCharacterBurnerAttributeStore } from "../../../../../hooks/featureSt
 import { useCharacterBurnerBasicsStore } from "../../../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerBasics";
 import { useCharacterBurnerMiscStore } from "../../../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerMisc";
 import { useCharacterBurnerSkillStore } from "../../../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerSkill";
-import { UniqueArray } from "@utility/UniqueArray";
 
 
 export function SpecialSkills(): JSX.Element {

@@ -13,13 +13,13 @@ import ListSubheader from "@mui/material/ListSubheader";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import Typography from "@mui/material/Typography";
+import { GroupBy } from "@utility/GroupBy";
 import { Fragment } from "react";
 
 import { RangeAndCoverActionDetails } from "./RangeAndCoverActionDetails";
 import { useRulesetStore } from "../../../hooks/apiStores/useRulesetStore";
 import { useRangeAndCoverPlannerStore } from "../../../hooks/featureStores/useRangeAndCoverPlannerStore";
 import { GenericGrid } from "../../Shared/Grids";
-import { GroupBy } from "@utility/GroupBy";
 
 
 export function RangeAndCoverPlanner(): JSX.Element {

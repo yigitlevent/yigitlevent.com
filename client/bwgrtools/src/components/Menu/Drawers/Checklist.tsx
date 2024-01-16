@@ -8,6 +8,7 @@ import Typography from "@mui/material/Typography";
 import { useCallback, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
+import { DownloadFile } from "../../../../../../utility/src/DownloadFile";
 import { useCharacterBurnerAttributeStore } from "../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerAttribute";
 import { useCharacterBurnerBasicsStore } from "../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerBasics";
 import { useCharacterBurnerLifepathStore } from "../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerLifepath";
@@ -16,7 +17,6 @@ import { useCharacterBurnerResourceStore } from "../../../hooks/featureStores/Ch
 import { useCharacterBurnerSkillStore } from "../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerSkill";
 import { useCharacterBurnerStatStore } from "../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerStat";
 import { useCharacterBurnerTraitStore } from "../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerTrait";
-import { DownloadFile } from "../../../../../../utility/src/DownloadFile";
 import { DrawerBox } from "../../Shared/DrawerBox";
 
 

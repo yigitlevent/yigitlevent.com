@@ -14,13 +14,13 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
+import { GroupBy } from "@utility/GroupBy";
 import { Fragment, useState } from "react";
 
 import { FightPlannerActionDetails } from "./FightActionDetails";
 import { useRulesetStore } from "../../../hooks/apiStores/useRulesetStore";
 import { useFightPlannerStore } from "../../../hooks/featureStores/useFightPlannerStore";
 import { GenericGrid } from "../../Shared/Grids";
-import { GroupBy } from "@utility/GroupBy";
 
 
 export function FightPlanner(): JSX.Element {

@@ -1,13 +1,13 @@
 import { Button } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
+import { Clamp } from "@utility/Clamp";
+import { RandomNumber } from "@utility/RandomNumber";
 import { Fragment, useCallback } from "react";
 
 import { useCharacterBurnerBasicsStore } from "../../../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerBasics";
 import { useCharacterBurnerLifepathStore } from "../../../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerLifepath";
 import { useCharacterBurnerMiscStore } from "../../../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerMisc";
-import { Clamp } from "@utility/Clamp";
-import { RandomNumber } from "@utility/RandomNumber";
 
 
 export function HuntingGround(): JSX.Element {

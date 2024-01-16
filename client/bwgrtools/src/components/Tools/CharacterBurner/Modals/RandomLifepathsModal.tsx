@@ -13,6 +13,7 @@ import Select from "@mui/material/Select";
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
+import { RandomNumber } from "@utility/RandomNumber";
 import { Fragment, useCallback, useState } from "react";
 
 import { RandomLifepathsBasics } from "./RandomLifepathsModal/RandomLifepathsBasics";
@@ -23,7 +24,6 @@ import { useCharacterBurnerLifepathStore } from "../../../../hooks/featureStores
 import { useLifepathRandomizerStore } from "../../../../hooks/featureStores/useLifepathRandomizerStore";
 import { FilterLifepaths } from "../../../../utils/FilterLifepaths";
 import { GenericGrid } from "../../../Shared/Grids";
-import { RandomNumber } from "@utility/RandomNumber";
 
 
 export function RandomLifepathsModal({ isOpen, close }: { isOpen: boolean; close: () => void; }): JSX.Element {
