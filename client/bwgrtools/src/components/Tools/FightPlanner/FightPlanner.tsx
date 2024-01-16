@@ -19,8 +19,8 @@ import { Fragment, useState } from "react";
 import { FightPlannerActionDetails } from "./FightActionDetails";
 import { useRulesetStore } from "../../../hooks/apiStores/useRulesetStore";
 import { useFightPlannerStore } from "../../../hooks/featureStores/useFightPlannerStore";
-import { GroupBy } from "../../../utils/misc";
 import { GenericGrid } from "../../Shared/Grids";
+import { GroupBy } from "@utility/GroupBy";
 
 
 export function FightPlanner(): JSX.Element {

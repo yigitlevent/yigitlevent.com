@@ -18,7 +18,7 @@ import { Fragment, useCallback, useEffect, useState } from "react";
 import { useRulesetStore } from "../../../../hooks/apiStores/useRulesetStore";
 import { useCharacterBurnerBasicsStore } from "../../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerBasics";
 import { useCharacterBurnerResourceStore } from "../../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerResource";
-import { GetObstacleString } from "../../../../utils/getMagicalObstackeString";
+import { GetObstacleString } from "../../../../utils/GetMagicalObstacleString";
 import { AbilityButton } from "../../../Shared/AbilityButton";
 import { GenericGrid } from "../../../Shared/Grids";
 

@@ -3,10 +3,10 @@ import Typography from "@mui/material/Typography";
 import { Fragment } from "react";
 
 import { useCharacterBurnerAttributeStore } from "../../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerAttribute";
-import { UniqueArrayItem } from "../../../../utils/uniqueArray";
 import { AbilityButton } from "../../../Shared/AbilityButton";
 import { GenericGrid } from "../../../Shared/Grids";
 import { BlockText } from "../BlockText";
+import { UniqueArrayItem } from "@utility/UniqueArray";
 
 
 function Attribute({ attribute }: { attribute: UniqueArrayItem<BwgrAbilityId, BwgrCharacterAttribute>; }): JSX.Element {

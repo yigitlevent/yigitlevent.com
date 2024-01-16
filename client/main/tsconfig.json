@@ -21,11 +21,16 @@
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
 		"noFallthroughCasesInSwitch": true,
-		"noErrorTruncation": true
+		"noErrorTruncation": true,
+		"paths": {
+			"@utility/*": [
+				"../../utility/src/*"
+			]
+		}
 	},
 	"include": [
 		"src",
-		"../../@types"
+		"../../utility"
 	],
 	"references": [
 		{

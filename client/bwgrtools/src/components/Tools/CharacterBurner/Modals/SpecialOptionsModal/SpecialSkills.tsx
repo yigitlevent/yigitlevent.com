@@ -7,7 +7,7 @@ import { useCharacterBurnerAttributeStore } from "../../../../../hooks/featureSt
 import { useCharacterBurnerBasicsStore } from "../../../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerBasics";
 import { useCharacterBurnerMiscStore } from "../../../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerMisc";
 import { useCharacterBurnerSkillStore } from "../../../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerSkill";
-import { UniqueArray } from "../../../../../utils/uniqueArray";
+import { UniqueArray } from "@utility/UniqueArray";
 
 
 export function SpecialSkills(): JSX.Element {

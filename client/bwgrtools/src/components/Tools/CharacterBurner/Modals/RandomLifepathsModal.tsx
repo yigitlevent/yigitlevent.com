@@ -21,9 +21,9 @@ import { useRulesetStore } from "../../../../hooks/apiStores/useRulesetStore";
 import { useCharacterBurnerBasicsStore } from "../../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerBasics";
 import { useCharacterBurnerLifepathStore } from "../../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerLifepath";
 import { useLifepathRandomizerStore } from "../../../../hooks/featureStores/useLifepathRandomizerStore";
-import { FilterLifepaths } from "../../../../utils/filterLifepaths";
-import { RandomNumber } from "../../../../utils/misc";
+import { FilterLifepaths } from "../../../../utils/FilterLifepaths";
 import { GenericGrid } from "../../../Shared/Grids";
+import { RandomNumber } from "@utility/RandomNumber";
 
 
 export function RandomLifepathsModal({ isOpen, close }: { isOpen: boolean; close: () => void; }): JSX.Element {

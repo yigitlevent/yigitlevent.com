@@ -6,8 +6,9 @@ import { useCharacterBurnerAttributeStore } from "./useCharacterBurnerAttribute"
 import { useCharacterBurnerBasicsStore } from "./useCharacterBurnerBasics";
 import { useCharacterBurnerStatStore } from "./useCharacterBurnerStat";
 import { useCharacterBurnerTraitStore } from "./useCharacterBurnerTrait";
-import { Clamp, GetAverage } from "../../../utils/misc";
 import { useRulesetStore } from "../../apiStores/useRulesetStore";
+import { Clamp } from "@utility/Clamp";
+import { Average } from "@utility/Average";
 
 
 export type CharacterBurnerMiscState = {
@@ -254,8 +255,8 @@ export const useCharacterBurnerMiscStore = create<CharacterBurnerMiscState>()(
 
 				const mortalWound
 					= traitEffects.some(x => "roundUp" in x && x.roundUp === "Mortal Wound")
-						? Math.ceil(GetAverage([power.exponent, forte.exponent])) + 6
-						: Math.floor(GetAverage([power.exponent, forte.exponent])) + 6;
+						? Math.ceil(Average([power.exponent, forte.exponent])) + 6
+						: Math.floor(Average([power.exponent, forte.exponent])) + 6;
 
 				let traumatic = mortalWound - 1;
 				let severe = mortalWound - 2;

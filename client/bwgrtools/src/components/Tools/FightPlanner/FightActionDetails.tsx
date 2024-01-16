@@ -2,7 +2,7 @@ import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 
-import { GetResolutionString } from "../../../utils/getActionResolutionString";
+import { GetResolutionString } from "../../../utils/GetActionResolutionString";
 
 
 export function FightPlannerActionDetails({ action }: { action: BwgrFightAction; }): JSX.Element {

@@ -3,7 +3,7 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { Fragment } from "react";
 
-import { GetObstacleString } from "../../../utils/getMagicalObstackeString";
+import { GetObstacleString } from "../../../utils/GetMagicalObstacleString";
 import { GenericGrid } from "../../Shared/Grids";
 
 

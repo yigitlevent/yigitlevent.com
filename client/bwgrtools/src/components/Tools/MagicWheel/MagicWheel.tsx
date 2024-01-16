@@ -19,8 +19,8 @@ import codeFont from "../../../assets/fonts/SourceCodePro-SemiBold.woff";
 import { useRulesetStore } from "../../../hooks/apiStores/useRulesetStore";
 import { useMagicWheelStore } from "../../../hooks/featureStores/useMagicWheelStore";
 import { useFontLoading } from "../../../hooks/useFontLoading";
-import { RandomNumber } from "../../../utils/misc";
 import { GenericGrid } from "../../Shared/Grids";
+import { RandomNumber } from "@utility/RandomNumber";
 
 
 export function MagicWheel(): JSX.Element {

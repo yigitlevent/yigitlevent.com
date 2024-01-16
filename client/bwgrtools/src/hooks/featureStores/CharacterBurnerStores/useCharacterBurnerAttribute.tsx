@@ -1,3 +1,5 @@
+import { Average } from "@utility/Average";
+import { UniqueArray } from "@utility/UniqueArray";
 import { produce } from "immer";
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
@@ -9,8 +11,6 @@ import { useCharacterBurnerResourceStore } from "./useCharacterBurnerResource";
 import { useCharacterBurnerSkillStore } from "./useCharacterBurnerSkill";
 import { useCharacterBurnerStatStore } from "./useCharacterBurnerStat";
 import { useCharacterBurnerTraitStore } from "./useCharacterBurnerTrait";
-import { GetAverage } from "../../../utils/misc";
-import { UniqueArray } from "../../../utils/uniqueArray";
 import { useRulesetStore } from "../../apiStores/useRulesetStore";
 
 
@@ -83,7 +83,7 @@ export const useCharacterBurnerAttributeStore = create<CharacterBurnerAttributeS
 
 				if (shades.some(v => v === "G") && shades.some(v => v === "B")) { roots.push(2); }
 
-				return { shade: shades.every(v => v === "G") ? "G" : "B", exponent: GetAverage(roots) };
+				return { shade: shades.every(v => v === "G") ? "G" : "B", exponent: Average(roots) };
 			},
 
 			// TODO: if shade shifted, remove points from exponent
@@ -100,7 +100,7 @@ export const useCharacterBurnerAttributeStore = create<CharacterBurnerAttributeS
 				if (shades.some(v => v === "G") && shades.some(v => v === "B")) roots[0] += 2;
 
 				const shade = shades.every(v => v === "G") ? "G" : "B";
-				const exponent = Math.floor(GetAverage(roots));
+				const exponent = Math.floor(Average(roots));
 
 				return { shade, exponent };
 			},
@@ -127,7 +127,7 @@ export const useCharacterBurnerAttributeStore = create<CharacterBurnerAttributeS
 				if (hasQuestionTrueByName("ACTIVE")) bonus += 1;
 				if (hasQuestionTrueByName("HAPPY")) bonus += 1;
 
-				return { shade: shades.every(v => v === "G") ? "G" : "B", exponent: Math.floor(GetAverage(roots)) + bonus };
+				return { shade: shades.every(v => v === "G") ? "G" : "B", exponent: Math.floor(Average(roots)) + bonus };
 			},
 
 			// TODO: if shade shifted, remove points from exponent

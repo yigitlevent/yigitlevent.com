@@ -1,12 +1,15 @@
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
+import { Average } from "@utility/Average";
 
 import { Home } from "./components/Home";
 
 
 export function App(): JSX.Element {
 	if (import.meta.env.MODE === "development") console.debug("This is a debug build.");
+
+	Average([1, 2, 3]);
 
 	return (
 		<Container maxWidth="lg" sx={{ margin: "10px auto" }}>

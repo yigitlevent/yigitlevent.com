@@ -5,7 +5,7 @@ import { devtools } from "zustand/middleware";
 import { useCharacterBurnerLifepathStore } from "./useCharacterBurnerLifepath";
 import { useCharacterBurnerMiscStore } from "./useCharacterBurnerMisc";
 import { useCharacterBurnerSkillStore } from "./useCharacterBurnerSkill";
-import { Clamp } from "../../../utils/misc";
+import { Clamp } from "@utility/Clamp";
 
 
 export type CharacterBurnerStatState = {

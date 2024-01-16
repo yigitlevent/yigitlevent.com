@@ -4,14 +4,6 @@ module.exports = {
 	settings: {
 		react: {
 			version: "detect"
-		},
-		"import/resolver": {
-			"eslint-import-resolver-custom-alias": {
-				alias: {
-					"@utility": "../../utility/src"
-				},
-				extensions: [".ts", ".tsx"]
-			}
 		}
 	},
 	extends: [

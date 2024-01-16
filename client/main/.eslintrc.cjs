@@ -4,6 +4,14 @@ module.exports = {
 	settings: {
 		react: {
 			version: "detect"
+		},
+		"import/resolver": {
+			"eslint-import-resolver-custom-alias": {
+				alias: {
+					"@utility": "../../utility/src"
+				},
+				extensions: [".ts", ".tsx"]
+			}
 		}
 	},
 	extends: [
@@ -129,7 +137,7 @@ module.exports = {
 		"react/no-direct-mutation-state": "error",
 		"react/no-is-mounted": "error",
 		"react/no-unused-state": "warn",
-		"react/no-multi-comp": ["error", { "ignoreStateless": true }],
+		"react/no-multi-comp": ["error", { ignoreStateless: true }],
 		"react/no-unescaped-entities": "off",
 		"react/jsx-newline": ["error", { prevent: true, allowMultilines: true }],
 		"react/hook-use-state": ["off", { allowDestructuredState: true }],

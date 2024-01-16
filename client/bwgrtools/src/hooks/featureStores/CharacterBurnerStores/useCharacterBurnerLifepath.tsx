@@ -3,8 +3,8 @@ import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 
 import { useCharacterBurnerMiscStore } from "./useCharacterBurnerMisc";
-import { FilterLifepaths } from "../../../utils/filterLifepaths";
-import { Pairwise } from "../../../utils/misc";
+import { FilterLifepaths } from "../../../utils/FilterLifepaths";
+import { Pairwise } from "../../../../../../utility/src/Pairwise";
 import { useRulesetStore } from "../../apiStores/useRulesetStore";
 import { useCharacterBurnerAttributeStore } from "../CharacterBurnerStores/useCharacterBurnerAttribute";
 import { useCharacterBurnerBasicsStore } from "../CharacterBurnerStores/useCharacterBurnerBasics";

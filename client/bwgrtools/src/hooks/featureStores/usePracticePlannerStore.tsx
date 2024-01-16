@@ -4,7 +4,7 @@ import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 
 import { Notification } from "../../components/Shared/Notification";
-import { Clamp } from "../../utils/misc";
+import { Clamp } from "@utility/Clamp";
 
 
 interface PracticePlannerState {

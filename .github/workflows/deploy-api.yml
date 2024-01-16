@@ -25,6 +25,17 @@ jobs:
         source: "@types/**"
         target: ${{ secrets.SOURCEDIR }}
         rm: true
+    
+    - name: Clean and Copy Utility
+      uses: appleboy/scp-action@master
+      with:
+        HOST: ${{ secrets.HOST }}
+        USERNAME: ${{ secrets.USERNAME }}
+        PORT: ${{ secrets.PORT }}
+        KEY: ${{ secrets.SSHKEY }}
+        source: "utility/**"
+        target: ${{ secrets.SOURCEDIR }}/utility
+        rm: true
 
     - name: Clean and Copy Source
       uses: appleboy/scp-action@master

@@ -16,7 +16,7 @@ import { useCharacterBurnerResourceStore } from "../../../hooks/featureStores/Ch
 import { useCharacterBurnerSkillStore } from "../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerSkill";
 import { useCharacterBurnerStatStore } from "../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerStat";
 import { useCharacterBurnerTraitStore } from "../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerTrait";
-import { DownloadFile } from "../../../utils/downloadFile";
+import { DownloadFile } from "../../../../../../utility/src/DownloadFile";
 import { DrawerBox } from "../../Shared/DrawerBox";
 
 

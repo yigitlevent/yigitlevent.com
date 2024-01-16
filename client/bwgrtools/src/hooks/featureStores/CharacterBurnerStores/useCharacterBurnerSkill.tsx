@@ -5,9 +5,9 @@ import { devtools } from "zustand/middleware";
 import { useCharacterBurnerAttributeStore } from "./useCharacterBurnerAttribute";
 import { useCharacterBurnerLifepathStore } from "./useCharacterBurnerLifepath";
 import { useCharacterBurnerStatStore } from "./useCharacterBurnerStat";
-import { GetAverage } from "../../../utils/misc";
-import { UniqueArray } from "../../../utils/uniqueArray";
 import { useRulesetStore } from "../../apiStores/useRulesetStore";
+import { Average } from "@utility/Average";
+import { UniqueArray } from "@utility/UniqueArray";
 
 
 export type CharacterBurnerSkillState = {
@@ -162,7 +162,7 @@ export const useCharacterBurnerSkillStore = create<CharacterBurnerSkillState>()(
 						});
 
 						shade = rootShades.every(v => v === "G") ? "G" : "B";
-						exponent = Math.floor(GetAverage(rootExponents) / 2);
+						exponent = Math.floor(Average(rootExponents) / 2);
 					}
 
 					exponent += charSkill.advancement.general + charSkill.advancement.lifepath;

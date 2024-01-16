@@ -18,8 +18,8 @@ import { Fragment } from "react";
 import { RangeAndCoverActionDetails } from "./RangeAndCoverActionDetails";
 import { useRulesetStore } from "../../../hooks/apiStores/useRulesetStore";
 import { useRangeAndCoverPlannerStore } from "../../../hooks/featureStores/useRangeAndCoverPlannerStore";
-import { GroupBy } from "../../../utils/misc";
 import { GenericGrid } from "../../Shared/Grids";
+import { GroupBy } from "@utility/GroupBy";
 
 
 export function RangeAndCoverPlanner(): JSX.Element {

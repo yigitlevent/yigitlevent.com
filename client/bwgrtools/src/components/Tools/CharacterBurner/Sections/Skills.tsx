@@ -4,10 +4,10 @@ import Typography from "@mui/material/Typography";
 import { Fragment } from "react";
 
 import { useCharacterBurnerSkillStore } from "../../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerSkill";
-import { UniqueArrayItem } from "../../../../utils/uniqueArray";
 import { AbilityButton } from "../../../Shared/AbilityButton";
 import { GenericGrid } from "../../../Shared/Grids";
 import { BlockSkillPopover } from "../BlockText";
+import { UniqueArrayItem } from "@utility/UniqueArray";
 
 
 function Skill({ skill, remove }: { skill: UniqueArrayItem<BwgrSkillId, BwgrCharacterSkill>; remove?: (skillId: BwgrSkillId) => void; }): JSX.Element {

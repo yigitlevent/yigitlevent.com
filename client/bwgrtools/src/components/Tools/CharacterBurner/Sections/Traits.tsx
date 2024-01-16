@@ -4,9 +4,9 @@ import Typography from "@mui/material/Typography";
 import { Fragment } from "react";
 
 import { useCharacterBurnerTraitStore } from "../../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerTrait";
-import { UniqueArrayItem } from "../../../../utils/uniqueArray";
 import { GenericGrid } from "../../../Shared/Grids";
 import { BlockTraitPopover } from "../../CharacterBurner/BlockText";
+import { UniqueArrayItem } from "@utility/UniqueArray";
 
 
 function Trait({ trait, remove }: { trait: UniqueArrayItem<BwgrTraitId, BwgrCharacterTrait>; remove?: (traitId: BwgrTraitId) => void; }) {

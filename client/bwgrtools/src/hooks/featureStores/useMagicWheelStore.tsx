@@ -1,8 +1,8 @@
+import { Clamp } from "@utility/Clamp";
 import { produce } from "immer";
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 
-import { Clamp } from "../../utils/misc";
 
 
 interface MagicWheelState {

@@ -1,8 +1,7 @@
+import { GenericPost } from "@utility/GenericRequests";
 import { produce } from "immer";
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
-
-import { GenericPost } from "../../utils/genericRequests";
 
 
 interface UserState {
@@ -41,7 +40,7 @@ export const useUserStore = create<UserState>()(
 
 					toggleFetching();
 
-					GenericPost<UserResponse>("/user/auth", null)
+					GenericPost<UserResponse>(import.meta.env.VITE_API_URL, "/user/auth", null)
 						.then(response => {
 							if (response.status === 200) setUser({ ...response.data.user });
 							else throw new Error();
@@ -60,7 +59,7 @@ export const useUserStore = create<UserState>()(
 
 				toggleFetching();
 
-				GenericPost<UserResponse>("/user/signup", formData)
+				GenericPost<UserResponse>(import.meta.env.VITE_API_URL, "/user/signup", formData)
 					.then(response => {
 						if (response.status === 200) {
 							setUser({ ...response.data.user });
@@ -80,7 +79,7 @@ export const useUserStore = create<UserState>()(
 
 				toggleFetching();
 
-				GenericPost<UserResponse>("/user/signin", formData)
+				GenericPost<UserResponse>(import.meta.env.VITE_API_URL, "/user/signin", formData)
 					.then(response => {
 						if (response.status === 200) {
 							setUser({ ...response.data.user });
@@ -100,7 +99,7 @@ export const useUserStore = create<UserState>()(
 
 				toggleFetching();
 
-				GenericPost("/user/signout", null)
+				GenericPost(import.meta.env.VITE_API_URL, "/user/signout", null)
 					.then(response => {
 						if (response.status === 200) setUser(undefined);
 						else throw new Error();

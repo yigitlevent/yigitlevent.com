@@ -3,8 +3,8 @@ import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 
 import { useRulesetStore } from "../../../../../hooks/apiStores/useRulesetStore";
-import { UniqueArray } from "../../../../../utils/uniqueArray";
 import { PopoverLink } from "../../../../Shared/PopoverLink";
+import { UniqueArray } from "@utility/UniqueArray";
 
 
 export function RandomLifepathsLists({ chosenLifepaths }: { chosenLifepaths: BwgrLifepath[]; }): JSX.Element {

@@ -7,8 +7,9 @@ import { useRulesetStore } from "../../../../../hooks/apiStores/useRulesetStore"
 import { useCharacterBurnerBasicsStore } from "../../../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerBasics";
 import { useCharacterBurnerLifepathStore } from "../../../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerLifepath";
 import { useCharacterBurnerMiscStore } from "../../../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerMisc";
-import { GetOrdinalSuffix, RandomNumber } from "../../../../../utils/misc";
 import { BlockTraitPopover } from "../../BlockText";
+import { GetOrdinalSuffix } from "@utility/GetOrdinalSuffix";
+import { RandomNumber } from "@utility/RandomNumber";
 
 
 export function BrutalLife(): JSX.Element {

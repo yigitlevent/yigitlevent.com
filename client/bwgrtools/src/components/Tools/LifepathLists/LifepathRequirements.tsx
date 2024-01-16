@@ -1,8 +1,7 @@
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
+import { GetOrdinalSuffix } from "@utility/GetOrdinalSuffix";
 import { Fragment } from "react";
-
-import { GetOrdinalSuffix } from "../../../utils/misc";
 
 
 function ResolveRequirementBlockItem(item: BwgrLifepathRequirementItem): string {

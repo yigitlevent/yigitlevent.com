@@ -1,4 +1,4 @@
-import { UniqueArray } from "./uniqueArray";
+import { UniqueArray } from "@utility/UniqueArray";
 
 
 interface FilterLifepathsProps {

@@ -16,8 +16,8 @@ import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import { Fragment, useState } from "react";
 
-import { RandomNumber } from "../../../utils/misc";
 import { GenericGrid } from "../../Shared/Grids";
+import { RandomNumber } from "@utility/RandomNumber";
 
 
 interface Tests {

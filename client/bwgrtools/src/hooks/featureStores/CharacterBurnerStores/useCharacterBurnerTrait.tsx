@@ -5,7 +5,7 @@ import { devtools } from "zustand/middleware";
 import { useCharacterBurnerBasicsStore } from "./useCharacterBurnerBasics";
 import { useCharacterBurnerLifepathStore } from "./useCharacterBurnerLifepath";
 import { useCharacterBurnerMiscStore } from "./useCharacterBurnerMisc";
-import { UniqueArray } from "../../../utils/uniqueArray";
+import { UniqueArray } from "@utility/UniqueArray";
 import { useRulesetStore } from "../../apiStores/useRulesetStore";
 
 
