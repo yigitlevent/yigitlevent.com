@@ -1,5 +1,3 @@
-import { Average } from "@utility/Average";
-
 import { PgPool } from "../index";
 import { Logger } from "../utils/logger";
 
@@ -20,8 +18,6 @@ export async function GetRulesets(): Promise<BwgrRuleset[]> {
 
 		return r;
 	};
-
-	Average([1, 2, 3]);
 
 	const log = new Logger("GetRulesets Querying");
 	const query = "select * from bwgr.\"RulesetsList\";";
