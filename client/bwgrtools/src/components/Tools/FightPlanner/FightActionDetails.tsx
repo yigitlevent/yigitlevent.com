@@ -2,7 +2,7 @@ import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 
-import { GetResolutionString } from "../../../utils/GetActionResolutionString";
+import { GetActionResolutionString } from "../../../utils/GetActionResolutionString";
 
 
 export function FightPlannerActionDetails({ action }: { action: BwgrFightAction; }): JSX.Element {
@@ -60,7 +60,7 @@ export function FightPlannerActionDetails({ action }: { action: BwgrFightAction;
 			{action.resolutions
 				? <Box sx={{ margin: "0 0 10px" }}>
 					<b>Resolution:</b>
-					{action.resolutions.map((v, i) => <Typography variant="body2" key={i}>{GetResolutionString(v)}</Typography>)}
+					{action.resolutions.map((v, i) => <Typography variant="body2" key={i}>{GetActionResolutionString(v)}</Typography>)}
 				</Box>
 				: null}
 		</Stack>

@@ -1,4 +1,4 @@
-export function GetResolutionString<T>(item: BwgrActionResolution<T>): string {
+export function GetActionResolutionString<T>(item: BwgrActionResolution<T>): string {
 	const parts = [];
 
 	if (item.type[1] === "Skill") parts.push("Skill");
