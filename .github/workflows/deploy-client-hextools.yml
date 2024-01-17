@@ -1,12 +1,12 @@
-name: deploy-client-hextools
+name: deploy-client-hexmaptools
 
 on:
   push:
     branches:
       - main
     paths:
-      - ".github/workflows/deploy-client-hextools.yml"
-      - "client/hextools/**"
+      - ".github/workflows/deploy-client-hexmaptools.yml"
+      - "client/hexmaptools/**"
       - "utility/**"
 
 jobs:
@@ -35,8 +35,8 @@ jobs:
         USERNAME: ${{ secrets.USERNAME }}
         PORT: ${{ secrets.PORT }}
         KEY: ${{ secrets.SSHKEY }}
-        source: "client/hextools/**"
-        target: ${{ secrets.SOURCEDIR }}/client/hextools-src
+        source: "client/hexmaptools/**"
+        target: ${{ secrets.SOURCEDIR }}/client/hexmaptools-src
         strip_components: 2
         rm: true
 
@@ -50,10 +50,10 @@ jobs:
         script: |
           export NVM_DIR=~/.nvm
           source ~/.nvm/nvm.sh
-          cd ${{ secrets.SOURCEDIR }}/client/hextools-src
+          cd ${{ secrets.SOURCEDIR }}/client/hexmaptools-src
           nvm install node
           nvm use node
           npm i
           npm run build
-          sudo rm -rf ${{ secrets.TARGETDIR }}/client/hextools
-          sudo cp -R ${{ secrets.SOURCEDIR }}/client/hextools-src/dist ${{ secrets.TARGETDIR }}/client/hextools
+          sudo rm -rf ${{ secrets.TARGETDIR }}/client/hexmaptools
+          sudo cp -R ${{ secrets.SOURCEDIR }}/client/hexmaptools-src/dist ${{ secrets.TARGETDIR }}/client/hexmaptools
