@@ -77,7 +77,7 @@ type BwgrCharacterQuestion = {
 };
 
 type BwgrCharacterTraitEffect =
-	{ roundUp: BwgrAbilityId; }
+	| { roundUp: BwgrAbilityId; }
 	| { roundUp: "Mortal Wound"; }
 	| { callOn: BwgrAbilityId; }
 	| { callOn: BwgrSkillId; };
