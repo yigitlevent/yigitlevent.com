@@ -7,7 +7,7 @@ on:
     paths:
       - ".github/workflows/deploy-client-hexmaptools.yml"
       - "client/hexmaptools/**"
-      - "utility/**"
+      - "utility/**" 
 
 jobs:
   build:
