@@ -33,6 +33,7 @@ export function Scene({ height, width }: { height: number; width: number; }): JS
 
 	const onMove = (event: HmViewportEvent) => {
 		//console.log(event);
+		event;
 	};
 
 	return (

@@ -53,6 +53,7 @@ export const useHexmapStore = create<HexmapState>()(
 
 			loadHexmap: (mapId?: HmHexmapId) => {
 				const state = get();
+				mapId;
 
 				// TODO: some loading api call
 
