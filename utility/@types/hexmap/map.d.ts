@@ -1,6 +1,12 @@
 type HmHexmapId = Nominal<number, "HmHexmapId">;
 
+interface HmHexmapConstants {
+	mapSize: HmSize;
+	hexRadius: number;
+}
+
 interface HmHexmap {
 	id: HmHexmapId;
-	hexes: HmHex[];
+	name: string;
+	constants: HmHexmapConstants;
 }

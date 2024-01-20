@@ -1,15 +1,19 @@
-import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
+import Container from "@mui/joy/Container";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useEffect } from "react";
 
-import { useUserStore } from "../hooks/apiStores/useUserStore";
+import { Scene } from "./Scene/Scene";
+import { useHexmapStore } from "../hooks/apiStores/useHexmapStore";
+import { useDrawerStore } from "../hooks/useDrawerStore";
+import { useWindowSize } from "../hooks/useWindowSize";
+import { THEME } from "../theme/theme";
 
 
 export function MainBox(): JSX.Element {
-	const { user } = useUserStore();
-	//const { fetchState, fetchList, fetchData } = useRulesetStore();
-	//const matches = useMediaQuery(THEME.breakpoints.down("sm"));
+	const [loadHexmap] = useHexmapStore(state => [state.loadHexmap]);
+	const [drawerWidth] = useDrawerStore(state => [state.drawerWidth]);
+	const [width, height] = useWindowSize();
+	const mediumDown = useMediaQuery(THEME.breakpoints.down("md"));
 
 	//useEffect(() => {
 	//	if (fetchState === "fetch-full") fetchList();
@@ -19,32 +23,13 @@ export function MainBox(): JSX.Element {
 	//	if (fetchState === "fetch-data") fetchData();
 	//}, [fetchData, fetchState]);
 
+	useEffect(() => {
+		loadHexmap();
+	}, [loadHexmap]);
+
 	return (
-		<Container maxWidth="lg" sx={{ margin: "10px auto" }}>
-			<Box>
-				<Typography variant="h2">Hexmap Tools</Typography>
-			</Box>
-
-			<Grid item>
-				<Box sx={{ textAlign: "right" }}>{user ? `welcome, ${user.username}` : null}</Box>
-			</Grid>
-
-			<Typography variant="h2">work in progress</Typography>
-			{/*<Menu bottom={matches} />
-
-			<Paper sx={{ padding: "10px 20px" }}>
-				{fetchState === "failed"
-					? <Typography>Data fetching failed.</Typography>
-					: null}
-
-				{fetchState === "done"
-					? <Routes>
-						<Route path="/" element={<Navigate replace to="/generate" />} />
-					</Routes>
-					: <Typography>Loading</Typography>}
-			</Paper>*/}
-
-			<Box sx={{ margin: "0 0 200px" }} />
-		</Container >
+		<Container disableGutters sx={{ display: "inline", height: `${height}px`, width: `${width - (mediumDown ? 0 : drawerWidth)}px`, maxWidth: "none!important" }}>
+			<Scene height={height} width={width - (mediumDown ? 0 : drawerWidth)} />
+		</Container>
 	);
 }

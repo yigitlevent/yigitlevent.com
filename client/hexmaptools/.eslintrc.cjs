@@ -115,6 +115,7 @@ module.exports = {
 
 			{ selector: "classProperty", types: ["number"], format: ["camelCase"], leadingUnderscore: "allow" },
 			{ selector: "property", types: ["string", "boolean"], filter: { regex: "^Access-Control-.*", match: true }, format: null },
+			{ selector: "property", types: ["string", "boolean"], filter: { regex: "^--.*", match: true }, format: null },
 
 			{ selector: "method", format: ["camelCase"] },
 
