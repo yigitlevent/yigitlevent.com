@@ -39,7 +39,8 @@ export function GenericGrid({ children, columns, center, spacing, sx, hasBackgro
 				...bg,
 				...sx
 			}}
-			{...centered}>
+			{...centered}
+		>
 			{children}
 		</Grid>
 	);
