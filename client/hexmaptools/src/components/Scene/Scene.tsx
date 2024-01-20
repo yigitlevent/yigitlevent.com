@@ -10,10 +10,7 @@ export function MainContainer({ position }: { position: [number, number]; }): JS
 	const [showInnerRegions, hexes, areas] = useHexmapStore(state => [state.showInnerRegions, state.hexes, state.areas]);
 
 	return (
-		<Container
-			position={position}
-			rightclick={(e) => console.log(e)}
-		>
+		<Container position={position}>
 			{Array.from(hexes).map((keyValue, index) => <Hex key={index} hex={keyValue[1]} />)}
 			{showInnerRegions && Array.from(areas).map((keyValue, index) => <Area key={index} area={keyValue[1]} />)}
 		</Container>

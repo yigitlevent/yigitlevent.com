@@ -46,7 +46,7 @@ export const useHexmapStore = create<HexmapState>()(
 					fill: { color: "rgba(0, 0, 0, 0.00001)", hoverColor: "rgba(255, 255, 255, 0.2)" }
 				},
 				emptyHex: {
-					stroke: { width: 1, color: "rgba(20, 20, 20, 1.0)", alignment: 0 },
+					stroke: { width: 1, color: "rgba(10, 10, 10, 1.0)", alignment: 0 },
 					fill: { color: "rgba(25, 25, 25, 1.0)", hoverColor: "rgba(60, 60, 60, 1.0)" }
 				}
 			},
