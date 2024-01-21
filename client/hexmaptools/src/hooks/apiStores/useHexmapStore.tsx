@@ -3,20 +3,26 @@ import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 
 import { CommonAngles } from "../../utils/Common";
+import { FillMaker } from "../../utils/FillMaker";
 
 
 interface HexmapState {
-	currentMapId: HmHexmapId | undefined;
-	map: Map<HmHexmapId, HmHexmap>;
+	map: HmHexmap;
 	hexes: Map<HmHexId, HmHex>;
 	areas: Map<HmHexAreaId, HmHexArea>;
 
-	showInnerRegions: boolean;
+	hexTypes: HmHexType[];
 
-	styles: {
-		hex: HmHexStyle;
-		area: HmHexStyle;
-		emptyHex: HmHexStyle;
+	settings: {
+		strokeStyle: HmHexStyleStroke;
+		showInnerRegions: boolean;
+	};
+
+	tools: {
+		selectedTool: HmDrawerTools;
+		paintTool: {
+			selectedType: HmHexTypeId;
+		};
 	};
 
 	loadHexmap: (hexmapId?: HmHexmapId) => void;
@@ -25,29 +31,52 @@ interface HexmapState {
 
 	setHexHover: (hexId: HmHexId, isHovered: boolean) => void;
 	setAreaHover: (areaId: HmHexAreaId, isHovered: boolean) => void;
+
+	setSelectedTool: (tool: HmDrawerTools) => void;
+	setSelectedHexType: (typeId: HmHexTypeId) => void;
+
+	onHexClick: (event: HmHex) => void;
+	onHexRightClick: (event: HmHex) => void;
 }
 
 export const useHexmapStore = create<HexmapState>()(
 	devtools(
 		(set, get) => ({
-			currentMapId: undefined,
-			map: new Map(),
+			map: {
+				id: -1 as HmHexmapId,
+				name: "",
+				constants: {
+					mapSize: { height: 15, width: 15 },
+					hexRadius: 60
+				}
+			},
 			hexes: new Map(),
 			areas: new Map(),
 
-			showInnerRegions: true,
+			hexTypes: [
+				{ id: 0 as HmHexTypeId, name: "Empty", fill: FillMaker("rgba(25, 25, 25, 1.0)") },
+				{ id: 1 as HmHexTypeId, name: "Plains", fill: FillMaker("rgba(118, 156, 110, 1.0)") },
+				{ id: 2 as HmHexTypeId, name: "Forests", fill: FillMaker("rgba(55, 92, 47, 1.0)") },
+				{ id: 3 as HmHexTypeId, name: "Hills", fill: FillMaker("rgba(143, 114, 81, 1.0)") },
+				{ id: 4 as HmHexTypeId, name: "Mountains", fill: FillMaker("rgba(105, 79, 48, 1.0)") },
+				{ id: 5 as HmHexTypeId, name: "Coast", fill: FillMaker("rgba(128, 185, 182, 1.0)") },
+				{ id: 6 as HmHexTypeId, name: "Sea", fill: FillMaker("rgba(92, 146, 177, 1.0)") },
+				{ id: 7 as HmHexTypeId, name: "Ocean", fill: FillMaker("rgba(51, 78, 128, 1.0)") }
+			],
 
-			styles: {
-				hex: {
-					stroke: { width: 1, color: "rgba(200, 0, 0, 1.0)", alignment: 0 },
-					fill: { color: "rgba(70, 0, 0, 1.0)", hoverColor: "rgba(120, 0, 0, 1.0)" }
-				},
-				area: {
-					fill: { color: "rgba(0, 0, 0, 0.00001)", hoverColor: "rgba(255, 255, 255, 0.2)" }
-				},
-				emptyHex: {
-					stroke: { width: 1, color: "rgba(10, 10, 10, 1.0)", alignment: 0 },
-					fill: { color: "rgba(25, 25, 25, 1.0)", hoverColor: "rgba(60, 60, 60, 1.0)" }
+			settings: {
+				showInnerRegions: false,
+				strokeStyle: {
+					width: 1,
+					color: "rgba(10, 10, 10, 1.0)",
+					alignment: 0
+				}
+			},
+
+			tools: {
+				selectedTool: "Pan",
+				paintTool: {
+					selectedType: 0 as HmHexTypeId
 				}
 			},
 
@@ -67,7 +96,7 @@ export const useHexmapStore = create<HexmapState>()(
 						}
 					},
 					hexes: [
-						{ id: "0,0.5" as HmHexId, name: "Hex 1", position: { x: 0, y: 0.5 } }
+						{ id: "0,0.5" as HmHexId, name: "Hex 1", typeId: 1 as HmHexTypeId, position: { x: 0, y: 0.5 } }
 					],
 					areas: [
 						{ id: "0,0.5,0" as HmHexAreaId, parentHexId: "0,0.5" as HmHexId, placement: 0, name: "Hex 0 Area 0" },
@@ -84,29 +113,25 @@ export const useHexmapStore = create<HexmapState>()(
 				const verticalDistance = Math.abs(2 * hexRadius * Math.sin(CommonAngles[120].radian));
 				const horizontalDistance = 1.5 * hexRadius;
 
-				const map = new Map([[
-					hexResponses.map.id,
-					{
-						id: hexResponses.map.id,
-						name: hexResponses.map.name,
-						constants: {
-							mapSize: hexResponses.map.constants.mapSize,
-							hexRadius: hexResponses.map.constants.hexRadius
-						}
+				const map = {
+					id: hexResponses.map.id,
+					name: hexResponses.map.name,
+					constants: {
+						mapSize: hexResponses.map.constants.mapSize,
+						hexRadius: hexResponses.map.constants.hexRadius
 					}
-				]]);
+				};
 
-				const thisMap = map.get(hexResponses.map.id) as HmHexmap;
-				const hexCount = thisMap.constants.mapSize.width * thisMap.constants.mapSize.height;
+				const hexCount = map.constants.mapSize.width * map.constants.mapSize.height;
 
 				const hexes = new Map(
 					Array
 						.from(Array(hexCount))
 						.map((_, index) => {
-							const rowOrder = Math.floor(index / thisMap.constants.mapSize.height);
-							const columnOrder = (index % thisMap.constants.mapSize.height);
-							const rowOffset = Math.floor(thisMap.constants.mapSize.width / 2);
-							const columnOffset = Math.floor(thisMap.constants.mapSize.height / 2);
+							const rowOrder = Math.floor(index / map.constants.mapSize.height);
+							const columnOrder = (index % map.constants.mapSize.height);
+							const rowOffset = Math.floor(map.constants.mapSize.width / 2);
+							const columnOffset = Math.floor(map.constants.mapSize.height / 2);
 							const x = rowOrder - rowOffset;
 							const y = columnOrder + (rowOrder % 2 === 0 ? 0 : 0.5) - columnOffset;
 							const position = { x, y };
@@ -122,6 +147,7 @@ export const useHexmapStore = create<HexmapState>()(
 							const hex: HmHex = {
 								id,
 								name: rHex ? rHex.name : "",
+								typeId: rHex ? rHex.typeId : 0 as HmHexTypeId,
 								position,
 								actualPosition: actualPosition,
 								points: {
@@ -132,8 +158,7 @@ export const useHexmapStore = create<HexmapState>()(
 								state: {
 									isPainted: rHex !== undefined,
 									isHovered: false
-								},
-								style: rHex ? state.styles.hex : state.styles.emptyHex
+								}
 							};
 
 							return [id, hex];
@@ -185,21 +210,19 @@ export const useHexmapStore = create<HexmapState>()(
 
 							return [id, {
 								id,
-								parentHexId,
+								hexId: parentHexId,
 								name: rArea ? rArea.name : "",
 								vertices,
 								placement,
 								state: {
 									isPainted: rArea !== undefined,
 									isHovered: false
-								},
-								style: state.styles.area
+								}
 							}];
 						})
 				);
 
 				set(produce<HexmapState>((state) => {
-					state.currentMapId = thisMap.id;
 					state.map = map;
 					state.hexes = hexes;
 					state.areas = areas;
@@ -245,6 +268,33 @@ export const useHexmapStore = create<HexmapState>()(
 						state.areas = state.areas.set(areaId, { ...area, state: { ...area.state, isHovered } });
 					}));
 				}
+			},
+
+			setSelectedTool: (tool: "Pointer" | "Pan" | "Paint" | "Eyedropper"): void => {
+				set(produce<HexmapState>((state) => {
+					state.tools.selectedTool = tool;
+				}));
+			},
+
+			setSelectedHexType: (typeId: HmHexTypeId): void => {
+				set(produce<HexmapState>((state) => {
+					state.tools.paintTool.selectedType = typeId;
+				}));
+			},
+
+			onHexClick: (event: HmHex): void => {
+				const selectedTool = get().tools.selectedTool;
+
+				if (selectedTool === "Paint") {
+					const typeId = get().tools.paintTool.selectedType;
+					set(produce<HexmapState>((state) => { state.hexes.set(event.id, { ...event, typeId }); }));
+				}
+
+				console.log({ event });
+			},
+
+			onHexRightClick: (event: HmHex): void => {
+				console.log({ event });
 			}
 		}),
 		{ name: "useHexmapStore" }

@@ -1,6 +1,10 @@
 import AddBoxIcon from "@mui/icons-material/AddBox";
+import BrushIcon from "@mui/icons-material/Brush";
 import CloudDownloadIcon from "@mui/icons-material/CloudDownload";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import ColorizeIcon from "@mui/icons-material/Colorize";
+import NearMeIcon from "@mui/icons-material/NearMe";
+import PanToolIcon from "@mui/icons-material/PanTool";
 import Accordion from "@mui/joy/Accordion";
 import AccordionDetails from "@mui/joy/AccordionDetails";
 import AccordionGroup from "@mui/joy/AccordionGroup";
@@ -12,14 +16,24 @@ import List from "@mui/joy/List";
 import Sheet from "@mui/joy/Sheet";
 import Typography from "@mui/joy/Typography";
 import SvgIcon from "@mui/material/SvgIcon";
-import { useState } from "react";
+
 
 import { CategoryItem } from "./Drawer/CategoryItem";
+import { DrawerButton } from "./Drawer/DrawerButton";
 import { ModalButton } from "./Drawer/ModalButton";
+import { PaintTool } from "./Drawer/PaintTool";
 import { UserCard } from "./Drawer/UserCard";
+import { useHexmapStore } from "../hooks/apiStores/useHexmapStore";
 import { useUserStore } from "../hooks/apiStores/useUserStore";
 import { useDrawerStore } from "../hooks/useDrawerStore";
 
+
+interface DrawerButton {
+	title: HmDrawerTools,
+	callback: () => void;
+	icon: typeof SvgIcon;
+	hotkey: string;
+}
 
 interface DrawerCategoryItem {
 	title: string,
@@ -28,15 +42,28 @@ interface DrawerCategoryItem {
 }
 
 interface DrawerCategory {
-	title: string,
-	items: DrawerCategoryItem[];
+	title: HmDrawerCategories,
+	items?: DrawerCategoryItem[];
+	element?: JSX.Element;
 }
 
+interface DrawerModal {
+	title: string,
+	callback: () => void;
+}
 
 export function Drawer(): JSX.Element {
-	const [openCategory, setOpenCategory] = useState<number | null>(0);
-	const [open, width] = useDrawerStore(state => [state.isDrawerOpen, state.drawerWidth]);
+	const [open, width, openCategory, setOpenCategory]
+		= useDrawerStore(state => [state.isDrawerOpen, state.drawerWidth, state.openCategory, state.setOpenCategory]);
+	const [tools, setSelectedTool] = useHexmapStore(state => [state.tools, state.setSelectedTool]);
 	const user = useUserStore(state => state.user);
+
+	const buttons: DrawerButton[] = [
+		{ title: "Pointer", callback: () => setSelectedTool("Pointer"), icon: NearMeIcon, hotkey: "v" },
+		{ title: "Pan", callback: () => setSelectedTool("Pan"), icon: PanToolIcon, hotkey: "p" },
+		{ title: "Paint", callback: () => setSelectedTool("Paint"), icon: BrushIcon, hotkey: "b" },
+		{ title: "Eyedropper", callback: () => setSelectedTool("Eyedropper"), icon: ColorizeIcon, hotkey: "i" }
+	];
 
 	const categories: DrawerCategory[] = [
 		{
@@ -49,14 +76,10 @@ export function Drawer(): JSX.Element {
 		},
 		{
 			title: "Paint",
-			items: [
-				{ title: "New", icon: AddBoxIcon, disabled: () => false },
-				{ title: "Save", icon: CloudUploadIcon, disabled: () => user === undefined },
-				{ title: "Load", icon: CloudDownloadIcon, disabled: () => user === undefined }
-			]
+			element: <PaintTool />
 		},
 		{
-			title: "Map Settings", // map size, disable areas, map name, share button
+			title: "Settings", // map size, disable areas, map name, share button
 			items: [
 				{ title: "New", icon: AddBoxIcon, disabled: () => false },
 				{ title: "Save", icon: CloudUploadIcon, disabled: () => user === undefined },
@@ -65,9 +88,9 @@ export function Drawer(): JSX.Element {
 		}
 	];
 
-	const modals: [string, () => void][] = [
-		["Export map", () => { /** */ }],
-		["Import map", () => { /** */ }]
+	const modals: DrawerModal[] = [
+		{ title: "Export map", callback: () => { /** */ } },
+		{ title: "Import map", callback: () => { /** */ } }
 	];
 
 	return (
@@ -92,26 +115,43 @@ export function Drawer(): JSX.Element {
 				<Typography level="h3">Hexmap Tools</Typography>
 			</Box>
 
+			<Grid container columns={4} justifyContent="space-between">
+				{buttons.map((button, index) => (
+					<Grid key={index} xs={1} sx={{ width: "min-content" }}>
+						<DrawerButton
+							title={`${button.title} (${button.hotkey})`}
+							callback={button.callback}
+							Icon={button.icon}
+							noText
+							selected={tools.selectedTool === button.title}
+						/>
+					</Grid>
+				))}
+			</Grid>
+
 			<Grid container flexGrow={1} flexDirection="column" justifyContent="space-between">
 				<Grid>
 					<AccordionGroup size="md" variant="plain">
 						{categories.map((category, categoryIndex) => (
-							<Accordion key={categoryIndex} expanded={openCategory === categoryIndex} onChange={(_, expanded) => { setOpenCategory(expanded ? categoryIndex : null); }}>
+							<Accordion key={categoryIndex} expanded={openCategory === category.title} onChange={(_, expanded) => { setOpenCategory(expanded ? category.title : undefined); }}>
 								<AccordionSummary>
 									<Typography level="title-lg">{category.title}</Typography>
 								</AccordionSummary>
 
 								<AccordionDetails>
 									<List size="sm">
-										{category.items.map((item, itemIndex) => (
-											<CategoryItem
-												key={itemIndex}
-												title={item.title}
-												isFirst={itemIndex === 0}
-												Icon={item.icon}
-												disabled={item.disabled}
-											/>
-										))}
+										{category.items
+											&& category.items.map((item, itemIndex) => (
+												<CategoryItem
+													key={itemIndex}
+													title={item.title}
+													isFirst={itemIndex === 0}
+													Icon={item.icon}
+													disabled={item.disabled}
+												/>
+											))}
+
+										{category.element}
 									</List>
 								</AccordionDetails>
 							</Accordion>
@@ -121,7 +161,7 @@ export function Drawer(): JSX.Element {
 
 				<Grid>
 					<List size="sm" sx={{ flexGrow: 0 }}>
-						{modals.map((item, index) => <ModalButton key={index} title={item[0]} onClick={item[1]} />)}
+						{modals.map((item, index) => <ModalButton key={index} title={item.title} onClick={item.callback} />)}
 					</List>
 				</Grid>
 			</Grid>

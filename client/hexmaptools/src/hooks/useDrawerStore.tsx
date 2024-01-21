@@ -6,7 +6,10 @@ import { devtools } from "zustand/middleware";
 interface DrawerState {
 	isDrawerOpen: boolean;
 	drawerWidth: number;
+	openCategory: HmDrawerCategories | undefined;
+
 	toggleDrawer: (open?: boolean) => void;
+	setOpenCategory: (categoryName?: HmDrawerCategories) => void;
 }
 
 export const useDrawerStore = create<DrawerState>()(
@@ -14,11 +17,17 @@ export const useDrawerStore = create<DrawerState>()(
 		(set) => ({
 			isDrawerOpen: false,
 			drawerWidth: 240,
+			openCategory: "Paint",
 
 			toggleDrawer: (open?: boolean) => {
 				set(produce<DrawerState>((state) => {
 					if (open !== undefined) state.isDrawerOpen = open;
 					else state.isDrawerOpen = !state.isDrawerOpen;
+				}));
+			},
+			setOpenCategory: (categoryName?: HmDrawerCategories) => {
+				set(produce<DrawerState>((state) => {
+					state.openCategory = categoryName;
 				}));
 			}
 		}),

@@ -1,4 +1,5 @@
 type HmHexId = Nominal<string, "HmHexId">;
+type HmHexTypeId = Nominal<number, "HmHexTypeId">;
 type HmHexAreaId = Nominal<string, "HmHexAreaId">;
 
 interface HmHexPoints {
@@ -10,16 +11,10 @@ interface HmHexPoints {
 	left: HmPoint;
 }
 
-interface HmHexStyle {
-	stroke?: {
-		width: number;
-		color: RgbaColor;
-		alignment: 0 | 0.5 | 1;
-	};
-	fill?: {
-		color: RgbaColor;
-		hoverColor: RgbaColor;
-	};
+interface HmHexType {
+	id: HmHexTypeId,
+	name: string,
+	fill: HmHexStyleFill;
 }
 
 interface HmHexState {
@@ -31,17 +26,17 @@ type HmHexAreaPlacement = 0 | 1 | 2 | 3 | 4 | 5 | 6;
 
 interface HmHexArea {
 	id: HmHexAreaId;
-	parentHexId: HmHexId;
+	hexId: HmHexId;
 	name: string;
 	placement: HmHexAreaPlacement;
 	vertices: number[];
 	state: HmHexState;
-	style: HmHexStyle;
 }
 
 interface HmHex {
 	id: HmHexId;
 	name: string;
+	typeId: HmHexTypeId,
 	position: HmPoint;
 	actualPosition: HmPoint;
 	points: {
@@ -50,5 +45,4 @@ interface HmHex {
 	};
 	vertices: number[];
 	state: HmHexState;
-	style: HmHexStyle;
 }

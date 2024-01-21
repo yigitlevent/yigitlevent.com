@@ -19,6 +19,7 @@ interface HmHexResponseHexmap {
 interface HmHexResponseHexes {
 	id: HmHexId;
 	name: string;
+	typeId: HmHexTypeId;
 	position: HmPoint;
 }
 

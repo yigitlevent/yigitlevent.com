@@ -1,23 +1,27 @@
-import "@pixi/events";
 import { Graphics } from "@pixi/react";
 
 import { useHexmapStore } from "../../../hooks/apiStores/useHexmapStore";
 
 
 export function Hex({ hex }: { hex: HmHex; }): JSX.Element {
-	const [showInnerRegions, setHexHover] = useHexmapStore(state => [state.showInnerRegions, state.setHexHover]);
+	const [settings, setHexHover, hexTypes, onHexClick, onHexRightClick]
+		= useHexmapStore(state => [state.settings, state.setHexHover, state.hexTypes, state.onHexClick, state.onHexRightClick]);
 
 	return (
 		<Graphics
 			eventMode="static"
 			draw={(graphics) => {
+				const hexType = hexTypes.find(v => v.id === hex.typeId) as HmHexType;
+				const stroke = settings.strokeStyle;
+
 				graphics.clear();
-				if (hex.style.stroke) graphics.lineStyle(hex.style.stroke.width, hex.style.stroke.color, undefined, hex.style.stroke.alignment);
-				if (hex.style.fill) graphics.beginFill(hex.state.isHovered && (!showInnerRegions || !hex.state.isPainted) ? hex.style.fill.hoverColor : hex.style.fill.color);
+				graphics.lineStyle(stroke.width, stroke.color, undefined, stroke.alignment);
+				graphics.beginFill(hex.state.isHovered && (!settings.showInnerRegions || !hex.state.isPainted) ? hexType.fill.hover : hexType.fill.color);
 				graphics.drawPolygon(hex.vertices);
-				if (hex.style.fill) graphics.endFill();
+				graphics.endFill();
 			}}
-			click={() => console.log({ name: hex.name, hex })}
+			click={() => onHexClick(hex)}
+			rightclick={() => onHexRightClick(hex)}
 			onmouseenter={() => setHexHover(hex.id, true)}
 			onmouseleave={() => setHexHover(hex.id, false)}
 		/>

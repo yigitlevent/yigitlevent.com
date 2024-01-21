@@ -2,21 +2,20 @@ import { PixiComponent, useApp } from "@pixi/react";
 import { Viewport as PixiViewport } from "pixi-viewport";
 import { Application, EventSystem, ICanvas, IRenderer, ISystemConstructor } from "pixi.js";
 
+import { useHexmapStore } from "../../hooks/apiStores/useHexmapStore";
+
 
 interface ViewportProps {
 	children?: React.ReactNode;
-	size: { height: number; width: number; };
-	onClick: (event: HmViewportEvent) => void;
-	onRightClick: (event: HmViewportEvent) => void;
-	onMove: (event: HmViewportEvent) => void;
 }
 
 interface PixiComponentViewportProps extends ViewportProps {
 	app: Application;
+	selectedTool: HmDrawerTools;
 }
 
 const PixiComponentViewport = PixiComponent("Viewport", {
-	create: ({ app, size, onClick, onRightClick, onMove }: PixiComponentViewportProps) => {
+	create: ({ app }: PixiComponentViewportProps) => {
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		if (!("events" in app.renderer)) (app.renderer as any).addSystem(EventSystem as unknown as ISystemConstructor<IRenderer<ICanvas>>, "events");
 
@@ -33,42 +32,32 @@ const PixiComponentViewport = PixiComponent("Viewport", {
 			.pinch()
 			.decelerate({ friction: 0.9, bounce: 0 });
 
-		viewport.on("click", (event) => {
-			const position = viewport.toWorld(event.global);
-			onClick({
-				mousePosition: { x: position.x - (size.width / 2), y: -(position.y - (size.height / 2)) }
-			});
-		});
-
-		viewport.on("rightclick", (event) => {
-			const position = viewport.toWorld(event.global);
-			onRightClick({
-				mousePosition: { x: position.x - (size.width / 2), y: -(position.y - (size.height / 2)) }
-			});
-		});
-
-		viewport.on("mousemove", (event) => {
-			const position = viewport.toWorld(event.global);
-			onMove({
-				mousePosition: { x: position.x - (size.width / 2), y: -(position.y - (size.height / 2)) }
-			});
-		});
-
-		//viewport.addEventListener("click", (event) => console.log([event.view..x, event.global.y]));
-
 		return viewport;
 	},
 	willUnmount: (viewport: PixiViewport) => {
 		viewport.options.noTicker = true;
 		viewport.destroy({ children: true });
+	},
+	applyProps: (viewport, _, newProps) => {
+		switch (newProps.selectedTool) {
+			case "Pan":
+				viewport.pause = false;
+				break;
+			case "Pointer":
+			case "Paint":
+			case "Eyedropper":
+				viewport.pause = true;
+				break;
+		}
 	}
 });
 
-export function Viewport({ children, size, onClick, onRightClick, onMove }: ViewportProps): JSX.Element {
+export function Viewport({ children }: ViewportProps): JSX.Element {
 	const app = useApp();
+	const selectedTool = useHexmapStore(state => state.tools.selectedTool);
 
 	return (
-		<PixiComponentViewport app={app} size={size} onClick={onClick} onRightClick={onRightClick} onMove={onMove}>
+		<PixiComponentViewport app={app} selectedTool={selectedTool}>
 			{children}
 		</PixiComponentViewport>
 	);
