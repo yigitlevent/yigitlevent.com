@@ -3,6 +3,7 @@ import BrushIcon from "@mui/icons-material/Brush";
 import CloudDownloadIcon from "@mui/icons-material/CloudDownload";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import ColorizeIcon from "@mui/icons-material/Colorize";
+import LaunchIcon from "@mui/icons-material/Launch";
 import NearMeIcon from "@mui/icons-material/NearMe";
 import PanToolIcon from "@mui/icons-material/PanTool";
 import Accordion from "@mui/joy/Accordion";
@@ -13,6 +14,9 @@ import Box from "@mui/joy/Box";
 import Divider from "@mui/joy/Divider";
 import Grid from "@mui/joy/Grid";
 import List from "@mui/joy/List";
+import ListItem from "@mui/joy/ListItem";
+import ListItemButton from "@mui/joy/ListItemButton";
+import ListItemDecorator from "@mui/joy/ListItemDecorator";
 import Sheet from "@mui/joy/Sheet";
 import Typography from "@mui/joy/Typography";
 import SvgIcon from "@mui/material/SvgIcon";
@@ -162,6 +166,15 @@ export function Drawer(): JSX.Element {
 				<Grid>
 					<List size="sm" sx={{ flexGrow: 0 }}>
 						{modals.map((item, index) => <ModalButton key={index} title={item.title} onClick={item.callback} />)}
+
+						<ListItem>
+							<ListItemButton component="a" target="_blank" href="https://github.com/yigitlevent/yigitlevent.com">
+								GitHub
+								<ListItemDecorator>
+									<LaunchIcon fontSize="inherit" />
+								</ListItemDecorator>
+							</ListItemButton>
+						</ListItem>
 					</List>
 				</Grid>
 			</Grid>
