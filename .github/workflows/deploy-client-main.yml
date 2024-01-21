@@ -8,8 +8,8 @@ on:
       - ".github/workflows/deploy-client-main.yml"
       - "client/main/**"
       - "utility/**"
-      - "!utility/@types/bwgr"
-      - "!utility/@types/hexmap"
+      - "!utility/@types/bwgr/**"
+      - "!utility/@types/hexmap/**"
 
 jobs:
   build:
