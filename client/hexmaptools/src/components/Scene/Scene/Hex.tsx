@@ -16,7 +16,7 @@ export function Hex({ hex }: { hex: HmHex; }): JSX.Element {
 
 				graphics.clear();
 				graphics.lineStyle(stroke.width, stroke.color, undefined, stroke.alignment);
-				graphics.beginFill(hex.state.isHovered && (!settings.showInnerRegions || !hex.state.isPainted) ? hexType.fill.hover : hexType.fill.color);
+				graphics.beginFill(hex.state.isHovered && (!settings.showHexAreas || !hex.state.isPainted) ? hexType.fill.hover : hexType.fill.color);
 				graphics.drawPolygon(hex.vertices);
 				graphics.endFill();
 			}}

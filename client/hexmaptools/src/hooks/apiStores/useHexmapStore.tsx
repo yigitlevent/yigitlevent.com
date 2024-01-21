@@ -15,7 +15,7 @@ interface HexmapState {
 
 	settings: {
 		strokeStyle: HmHexStyleStroke;
-		showInnerRegions: boolean;
+		showHexAreas: boolean;
 	};
 
 	tools: {
@@ -31,6 +31,10 @@ interface HexmapState {
 
 	setHexHover: (hexId: HmHexId, isHovered: boolean) => void;
 	setAreaHover: (areaId: HmHexAreaId, isHovered: boolean) => void;
+
+	setShowHexAreas: (show: boolean) => void;
+	changeStrokeWidth: (width: number) => void;
+	changeStrokeAlignment: (alignment: HmHexStyleStrokeAlignments) => void;
 
 	setSelectedTool: (tool: HmDrawerTools) => void;
 	setSelectedHexType: (typeId: HmHexTypeId) => void;
@@ -65,7 +69,7 @@ export const useHexmapStore = create<HexmapState>()(
 			],
 
 			settings: {
-				showInnerRegions: false,
+				showHexAreas: false,
 				strokeStyle: {
 					width: 1,
 					color: "rgba(10, 10, 10, 1.0)",
@@ -270,7 +274,26 @@ export const useHexmapStore = create<HexmapState>()(
 				}
 			},
 
-			setSelectedTool: (tool: "Pointer" | "Pan" | "Paint" | "Eyedropper"): void => {
+
+			setShowHexAreas: (show: boolean): void => {
+				set(produce<HexmapState>((state) => {
+					state.settings.showHexAreas = show;
+				}));
+			},
+
+			changeStrokeWidth: (width: number): void => {
+				set(produce<HexmapState>((state) => {
+					state.settings.strokeStyle.width = width;
+				}));
+			},
+
+			changeStrokeAlignment: (alignment: HmHexStyleStrokeAlignments): void => {
+				set(produce<HexmapState>((state) => {
+					state.settings.strokeStyle.alignment = alignment;
+				}));
+			},
+
+			setSelectedTool: (tool: HmDrawerTools): void => {
 				set(produce<HexmapState>((state) => {
 					state.tools.selectedTool = tool;
 				}));

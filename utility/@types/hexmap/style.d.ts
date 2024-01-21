@@ -1,7 +1,9 @@
+type HmHexStyleStrokeAlignments = 0 | 0.5 | 1;
+
 interface HmHexStyleStroke {
 	width: number;
 	color: RgbaColor;
-	alignment: 0 | 0.5 | 1;
+	alignment: HmHexStyleStrokeAlignments;
 }
 
 interface HmHexStyleFill {

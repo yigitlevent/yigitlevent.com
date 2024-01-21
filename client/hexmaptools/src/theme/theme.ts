@@ -7,7 +7,12 @@ declare module "@mui/joy/styles" {
 
 export const THEME = extendTheme({
 	components: {
-	},
-	colorSchemes: {
+		JoySelect: {
+			styleOverrides: {
+				listbox: () => ({
+					zIndex: 10001
+				})
+			}
+		}
 	}
 });

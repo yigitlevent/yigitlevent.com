@@ -26,10 +26,12 @@ import { CategoryItem } from "./Drawer/CategoryItem";
 import { DrawerButton } from "./Drawer/DrawerButton";
 import { ModalButton } from "./Drawer/ModalButton";
 import { PaintTool } from "./Drawer/PaintTool";
+import { Settings } from "./Drawer/Settings";
 import { UserCard } from "./Drawer/UserCard";
 import { useHexmapStore } from "../hooks/apiStores/useHexmapStore";
 import { useUserStore } from "../hooks/apiStores/useUserStore";
 import { useDrawerStore } from "../hooks/useDrawerStore";
+import { THEME } from "../theme/theme";
 
 
 interface DrawerButton {
@@ -83,12 +85,8 @@ export function Drawer(): JSX.Element {
 			element: <PaintTool />
 		},
 		{
-			title: "Settings", // map size, disable areas, map name, share button
-			items: [
-				{ title: "New", icon: AddBoxIcon, disabled: () => false },
-				{ title: "Save", icon: CloudUploadIcon, disabled: () => user === undefined },
-				{ title: "Load", icon: CloudDownloadIcon, disabled: () => user === undefined }
-			]
+			title: "Settings",
+			element: <Settings />
 		}
 	];
 
@@ -137,9 +135,14 @@ export function Drawer(): JSX.Element {
 				<Grid>
 					<AccordionGroup size="md" variant="plain">
 						{categories.map((category, categoryIndex) => (
-							<Accordion key={categoryIndex} expanded={openCategory === category.title} onChange={(_, expanded) => { setOpenCategory(expanded ? category.title : undefined); }}>
+							<Accordion
+								key={categoryIndex}
+								expanded={openCategory === category.title}
+								onChange={(_, expanded) => { setOpenCategory(expanded ? category.title : undefined); }}
+								sx={{ background: openCategory === category.title ? THEME.colorSchemes.dark.palette.background.level1 : "none" }}
+							>
 								<AccordionSummary>
-									<Typography level="title-lg">{category.title}</Typography>
+									<Typography level="h3">{category.title}</Typography>
 								</AccordionSummary>
 
 								<AccordionDetails>

@@ -1,6 +1,8 @@
-import { Button, Divider, Typography } from "@mui/joy";
 import Box from "@mui/joy/Box";
+import Button from "@mui/joy/Button";
+import Divider from "@mui/joy/Divider";
 import Grid from "@mui/joy/Grid";
+import Typography from "@mui/joy/Typography";
 
 import { useHexmapStore } from "../../hooks/apiStores/useHexmapStore";
 import { THEME } from "../../theme/theme";
