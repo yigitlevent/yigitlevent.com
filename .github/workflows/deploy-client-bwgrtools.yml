@@ -8,6 +8,7 @@ on:
       - ".github/workflows/deploy-client-bwgrtools.yml"
       - "client/bwgrtools/**"
       - "utility/**"
+      - "!utility/@types/hexmap"
 
 jobs:
   build:
