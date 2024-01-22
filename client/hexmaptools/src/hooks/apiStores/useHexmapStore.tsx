@@ -16,14 +16,16 @@ interface HexmapState {
 	areaTypes: HmAreaType[];
 
 	loadHexmap: (hexmapId?: HmHexmapId) => void;
+
 	calculateHexes: (width: number, height: number, hexRadius: number) => HmHex[];
 	calculateAreas: (hexes: [HmHexId, HmHex][]) => HmArea[];
 	calculatePoints: (point: HmPoint, radius: number) => HmPoints;
 	calculateVertices: (points: [HmPoint, HmPoint, HmPoint, HmPoint] | [HmPoint, HmPoint, HmPoint, HmPoint, HmPoint, HmPoint]) => number[];
+
 	applyHexPaint: (calculatedHexes: HmHex[], paintData: HmHex[] | HmHexResponseHexes[]) => [HmHexId, HmHex][];
 	applyAreaPaint: (calculatedAreas: HmArea[], paintData: HmArea[] | HmHexResponseAreas[]) => [HmAreaId, HmArea][];
 
-	recalculateMap: (changedValues: { width?: number; height?: number; hexRadius?: number; }) => void;
+	recalculateHexes: (changedValues: { width?: number; height?: number; hexRadius?: number; }) => void;
 	recalculateAreas: () => void;
 
 	setHexHover: (hexId: HmHexId, isHovered: boolean) => void;
@@ -310,7 +312,7 @@ export const useHexmapStore = create<HexmapState>()(
 				});
 			},
 
-			recalculateMap: (changedValues: { width?: number; height?: number; hexRadius?: number; }): void => {
+			recalculateHexes: (changedValues: { width?: number; height?: number; hexRadius?: number; }): void => {
 				const state = get();
 
 				const width = changedValues.width ? changedValues.width : state.map.settings.mapSize.width;
@@ -367,7 +369,7 @@ export const useHexmapStore = create<HexmapState>()(
 					state.map.settings.mapSize.width = width;
 				}));
 
-				get().recalculateMap({ width });
+				get().recalculateHexes({ width });
 			},
 
 			changeMapHeight: (height: number): void => {
@@ -375,7 +377,7 @@ export const useHexmapStore = create<HexmapState>()(
 					state.map.settings.mapSize.height = height;
 				}));
 
-				get().recalculateMap({ height });
+				get().recalculateHexes({ height });
 			},
 
 			changeMapHexRadius: (hexRadius: number): void => {
@@ -383,7 +385,7 @@ export const useHexmapStore = create<HexmapState>()(
 					state.map.settings.hexRadius = hexRadius;
 				}));
 
-				get().recalculateMap({ hexRadius });
+				get().recalculateHexes({ hexRadius });
 			},
 
 			changeStrokeWidth: (width: number): void => {
