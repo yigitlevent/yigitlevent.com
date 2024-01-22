@@ -28,7 +28,7 @@ import { ModalButton } from "./Drawer/ModalButton";
 import { PaintTool } from "./Drawer/PaintTool";
 import { Settings } from "./Drawer/Settings";
 import { UserCard } from "./Drawer/UserCard";
-import { useHexmapStore } from "../hooks/apiStores/useHexmapStore";
+import { useToolsStore } from "../hooks/apiStores/usetToolsStore";
 import { useUserStore } from "../hooks/apiStores/useUserStore";
 import { useDrawerStore } from "../hooks/useDrawerStore";
 import { THEME } from "../theme/theme";
@@ -59,16 +59,16 @@ interface DrawerModal {
 }
 
 export function Drawer(): JSX.Element {
+	const user = useUserStore(state => state.user);
+	const [selectedTool, setSelectedTool] = useToolsStore(state => [state.selectedTool, state.setSelectedTool]);
 	const [open, width, openCategory, setOpenCategory]
 		= useDrawerStore(state => [state.isDrawerOpen, state.drawerWidth, state.openCategory, state.setOpenCategory]);
-	const [tools, setSelectedTool] = useHexmapStore(state => [state.tools, state.setSelectedTool]);
-	const user = useUserStore(state => state.user);
 
 	const buttons: DrawerButton[] = [
-		{ title: "Pointer", callback: () => setSelectedTool("Pointer"), icon: NearMeIcon, hotkey: "v" },
+		{ title: "Select", callback: () => setSelectedTool("Select"), icon: NearMeIcon, hotkey: "v" },
 		{ title: "Pan", callback: () => setSelectedTool("Pan"), icon: PanToolIcon, hotkey: "p" },
 		{ title: "Paint", callback: () => setSelectedTool("Paint"), icon: BrushIcon, hotkey: "b" },
-		{ title: "Eyedropper", callback: () => setSelectedTool("Eyedropper"), icon: ColorizeIcon, hotkey: "i" }
+		{ title: "Eyedrop", callback: () => setSelectedTool("Eyedrop"), icon: ColorizeIcon, hotkey: "i" }
 	];
 
 	const categories: DrawerCategory[] = [
@@ -125,7 +125,7 @@ export function Drawer(): JSX.Element {
 							callback={button.callback}
 							Icon={button.icon}
 							noText
-							selected={tools.selectedTool === button.title}
+							selected={selectedTool === button.title}
 						/>
 					</Grid>
 				))}

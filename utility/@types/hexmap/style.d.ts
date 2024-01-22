@@ -1,12 +1,12 @@
-type HmHexStyleStrokeAlignments = 0 | 0.5 | 1;
+type HmSurfaceStyleStrokeAlignments = 0 | 0.5 | 1;
 
-interface HmHexStyleStroke {
+interface HmSurfaceStyleStroke {
 	width: number;
 	color: RgbaColor;
-	alignment: HmHexStyleStrokeAlignments;
+	alignment: HmSurfaceStyleStrokeAlignments;
 }
 
-interface HmHexStyleFill {
+interface HmSurfaceStyleFill {
 	color: RgbaColor,
 	hover: RgbaColor;
 }

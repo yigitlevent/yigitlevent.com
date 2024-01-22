@@ -2,7 +2,7 @@ import { PixiComponent, useApp } from "@pixi/react";
 import { Viewport as PixiViewport } from "pixi-viewport";
 import { Application, EventSystem, ICanvas, IRenderer, ISystemConstructor } from "pixi.js";
 
-import { useHexmapStore } from "../../hooks/apiStores/useHexmapStore";
+import { useToolsStore } from "../../hooks/apiStores/usetToolsStore";
 
 
 interface ViewportProps {
@@ -20,17 +20,18 @@ const PixiComponentViewport = PixiComponent("Viewport", {
 		if (!("events" in app.renderer)) (app.renderer as any).addSystem(EventSystem as unknown as ISystemConstructor<IRenderer<ICanvas>>, "events");
 
 		const viewport = new PixiViewport({
-			passiveWheel: false,
-			ticker: app.ticker,
-			events: app.renderer.events
+			//ticker: app.ticker,
+			events: app.renderer.events,
+			disableOnContextMenu: true,
+			passiveWheel: false
 		});
 
 		viewport
-			.drag({ wheel: false })
-			.wheel({ wheelZoom: true, smooth: 10 })
-			.clampZoom({ minScale: 0.2, maxScale: 2 })
+			.drag({ mouseButtons: "left" })
+			.decelerate({ friction: 0.9, bounce: 0 })
 			.pinch()
-			.decelerate({ friction: 0.9, bounce: 0 });
+			.wheel({ wheelZoom: true, smooth: 10 })
+			.clampZoom({ minScale: 0.2, maxScale: 2 });
 
 		return viewport;
 	},
@@ -43,9 +44,9 @@ const PixiComponentViewport = PixiComponent("Viewport", {
 			case "Pan":
 				viewport.pause = false;
 				break;
-			case "Pointer":
+			case "Select":
 			case "Paint":
-			case "Eyedropper":
+			case "Eyedrop":
 				viewport.pause = true;
 				break;
 		}
@@ -54,7 +55,7 @@ const PixiComponentViewport = PixiComponent("Viewport", {
 
 export function Viewport({ children }: ViewportProps): JSX.Element {
 	const app = useApp();
-	const selectedTool = useHexmapStore(state => state.tools.selectedTool);
+	const [selectedTool] = useToolsStore(state => [state.selectedTool]);
 
 	return (
 		<PixiComponentViewport app={app} selectedTool={selectedTool}>

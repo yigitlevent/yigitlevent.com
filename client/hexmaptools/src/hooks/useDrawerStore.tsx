@@ -17,7 +17,7 @@ export const useDrawerStore = create<DrawerState>()(
 		(set) => ({
 			isDrawerOpen: false,
 			drawerWidth: 240,
-			openCategory: "Settings",
+			openCategory: "Paint",
 
 			toggleDrawer: (open?: boolean) => {
 				set(produce<DrawerState>((state) => {

@@ -1,21 +1,31 @@
-/*
-export function Area({ area }: { area: HmHexArea; }): JSX.Element {
-	const [showInnerRegions, setHexHover, hexTypes, onClick, onRightClick]
-		= useHexmapStore(state => [state.showInnerRegions, state.setHexHover, state.hexTypes, state.onClick, state.onRightClick]);
+import { Graphics } from "@pixi/react";
+
+import { useHexmapStore } from "../../../hooks/apiStores/useHexmapStore";
+import { useToolsStore } from "../../../hooks/apiStores/usetToolsStore";
+
+
+export function Area({ area }: { area: HmArea; }): JSX.Element {
+	const [selectedPaintTool] = useToolsStore(state => [state.selectedPaintTool]);
+	const [map, setAreaHover, areaTypes, onAreaPointerEvent]
+		= useHexmapStore(state => [state.map, state.setAreaHover, state.areaTypes, state.onAreaPointerEvent]);
 
 	return (
 		<Graphics
-			eventMode="static"
+			eventMode={selectedPaintTool === "Area" ? "static" : "none"}
 			draw={(graphics) => {
+				const areaType = areaTypes.find(v => v.id === area.typeId) as HmAreaType;
+				const stroke = map.settings.strokeStyle;
+
 				graphics.clear();
-				if (area.style.fill) graphics.beginFill(area.state.isHovered && showInnerRegions ? area.style.fill.hoverColor : area.style.fill.color);
+				graphics.lineStyle(stroke.width, stroke.color, undefined, stroke.alignment);
+				graphics.beginFill(area.state.isHovered ? areaType.fill.hover : areaType.fill.color);
 				graphics.drawPolygon(area.vertices);
-				if (area.style.fill) graphics.endFill();
+				graphics.endFill();
 			}}
-			click={() => console.log({ name: area.name, area })}
+			pointerdown={(e: PointerEvent) => onAreaPointerEvent(e, area)}
+			pointermove={(e: PointerEvent) => onAreaPointerEvent(e, area)}
 			onmouseenter={() => setAreaHover(area.id, true)}
 			onmouseleave={() => setAreaHover(area.id, false)}
 		/>
 	);
 }
-*/

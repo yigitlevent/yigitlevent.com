@@ -1,12 +1,13 @@
-type HmHexmapId = Nominal<number, "HmHexmapId">;
+type HmHexmapId = Nominal<string, "HmHexmapId">;
 
-interface HmHexmapConstants {
+interface HmHexmapSettings {
 	mapSize: HmSize;
 	hexRadius: number;
+	strokeStyle: HmSurfaceStyleStroke;
 }
 
 interface HmHexmap {
 	id: HmHexmapId;
 	name: string;
-	constants: HmHexmapConstants;
+	settings: HmHexmapSettings;
 }

@@ -13,7 +13,7 @@ interface BwgrRulesetResponse {
 interface HmHexResponseHexmap {
 	id: HmHexmapId;
 	name: string;
-	constants: HmHexmapConstants;
+	settings: HmHexmapSettings;
 }
 
 interface HmHexResponseHexes {
@@ -24,9 +24,10 @@ interface HmHexResponseHexes {
 }
 
 interface HmHexResponseAreas {
-	id: HmHexAreaId;
+	id: HmAreaId;
 	parentHexId: HmHexId;
-	placement: HmHexAreaPlacement;
+	placement: HmAreaPlacement;
+	typeId: HmAreaTypeId;
 	name: string;
 }
 

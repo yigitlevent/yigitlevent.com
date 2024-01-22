@@ -1,42 +1,126 @@
+import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import Divider from "@mui/joy/Divider";
 import Grid from "@mui/joy/Grid";
+import IconButton from "@mui/joy/IconButton";
 import Input from "@mui/joy/Input";
 import Option from "@mui/joy/Option";
 import Select from "@mui/joy/Select";
-import Switch from "@mui/joy/Switch";
+import Stack from "@mui/joy/Stack";
+import Tooltip from "@mui/joy/Tooltip";
 import Typography from "@mui/joy/Typography";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useState } from "react";
 
 import { useHexmapStore } from "../../hooks/apiStores/useHexmapStore";
+import { THEME } from "../../theme/theme";
 
 
 export function Settings(): JSX.Element {
-	const [settings, setShowHexAreas, changeStrokeWidth, changeStrokeAlignment]
-		= useHexmapStore(state => [state.settings, state.setShowHexAreas, state.changeStrokeWidth, state.changeStrokeAlignment]);
+	const smDown = useMediaQuery(THEME.breakpoints.down("sm"));
+	const [copied, setCopied] = useState(false);
+	const [map, changeMapName, changeStrokeWidth, changeStrokeAlignment, changeMapWidth, changeMapHeight, changeMapHexRadius]
+		= useHexmapStore(state => [
+			state.map,
+			state.changeMapName, state.changeStrokeWidth, state.changeStrokeAlignment,
+			state.changeMapWidth, state.changeMapHeight, state.changeMapHexRadius
+		]);
 
 	return (
-		<Grid container columns={1} rowGap={1}>
+		<Stack rowGap={2}>
+			<Typography level="title-lg" sx={{ margin: "16px 0 4px" }}>Map</Typography>
 
-			<Grid xs={1}>
-				<Typography level="title-lg" sx={{ margin: "16px 0 4px" }}>Options</Typography>
+			<Grid container columns={2} justifyContent="space-between" alignItems="center">
+				<Typography>ID</Typography>
+
+				<Tooltip
+					title="Hexmap ID copied to the clipboard"
+					variant="solid"
+					size="sm"
+					placement={smDown ? "bottom" : "right"}
+					open={copied}
+					sx={{ zIndex: 10001 }}
+				>
+					<Input
+						size="sm"
+						variant="plain"
+						sx={{ width: "65%" }}
+						value={map.id}
+						onChange={(e) => changeStrokeWidth(parseInt(e.target.value))}
+						readOnly
+						endDecorator={
+							<IconButton
+								onClick={() => {
+									navigator.clipboard.writeText(map.id);
+									setCopied(true);
+									setTimeout(() => setCopied(false), 3000);
+								}}
+							>
+								<ContentCopyIcon />
+							</IconButton>
+						}
+					/>
+				</Tooltip>
 			</Grid>
 
-			<Grid container columns={2} justifyContent="space-between" xs={1}>
-				<Typography sx={{ display: "inline" }}>Enable Hex Areas</Typography>
+			<Grid container columns={2} justifyContent="space-between" alignItems="center">
+				<Typography>Name</Typography>
 
-				<Switch
+				<Input
 					size="sm"
-					checked={settings.showHexAreas}
-					onChange={(event) => setShowHexAreas(event.target.checked)}
+					variant="plain"
+					sx={{ width: "65%" }}
+					value={map.name}
+					onChange={(e) => changeMapName(e.target.value)}
 				/>
 			</Grid>
 
-			<Grid xs={1}>
-				<Divider />
-				<Typography level="title-lg" sx={{ margin: "16px 0 4px" }}>Style / Stroke</Typography>
+			<Grid container columns={2} justifyContent="space-between" alignItems="center">
+				<Typography>Width</Typography>
+
+				<Input
+					size="sm"
+					variant="plain"
+					type="number"
+					slotProps={{ input: { min: 1, max: 100, step: 1 } }}
+					sx={{ width: "65%" }}
+					value={map.settings.mapSize.width}
+					onChange={(e) => changeMapWidth(parseInt(e.target.value))}
+				/>
 			</Grid>
 
-			<Grid container columns={2} justifyContent="space-between" xs={1}>
-				<Typography sx={{ display: "inline" }}>Thickness</Typography>
+			<Grid container columns={2} justifyContent="space-between" alignItems="center">
+				<Typography>Height</Typography>
+
+				<Input
+					size="sm"
+					variant="plain"
+					type="number"
+					slotProps={{ input: { min: 1, max: 100, step: 1 } }}
+					sx={{ width: "65%" }}
+					value={map.settings.mapSize.height}
+					onChange={(e) => changeMapHeight(parseInt(e.target.value))}
+				/>
+			</Grid>
+
+			<Grid container columns={2} justifyContent="space-between" alignItems="center">
+				<Typography>Hex Radius</Typography>
+
+				<Input
+					size="sm"
+					variant="plain"
+					type="number"
+					slotProps={{ input: { min: 10, max: 120, step: 1 } }}
+					sx={{ width: "50%" }}
+					value={map.settings.hexRadius}
+					onChange={(e) => changeMapHexRadius(parseInt(e.target.value))}
+				/>
+			</Grid>
+
+			<Divider />
+			<Typography level="title-lg">Hex Stroke</Typography>
+
+			<Grid container columns={2} justifyContent="space-between" alignItems="center">
+				<Typography>Thickness</Typography>
 
 				<Input
 					size="sm"
@@ -44,26 +128,26 @@ export function Settings(): JSX.Element {
 					type="number"
 					slotProps={{ input: { min: 0, max: 6, step: 1 } }}
 					sx={{ width: "50%" }}
-					value={settings.strokeStyle.width}
+					value={map.settings.strokeStyle.width}
 					onChange={(e) => changeStrokeWidth(parseInt(e.target.value))}
 				/>
 			</Grid>
 
-			<Grid container columns={2} justifyContent="space-between" xs={1}>
-				<Typography sx={{ display: "inline" }}>Alignment</Typography>
+			<Grid container columns={2} justifyContent="space-between" alignItems="center">
+				<Typography>Alignment</Typography>
 
 				<Select
 					size="sm"
 					variant="plain"
 					sx={{ width: "50%" }}
-					value={settings.strokeStyle.alignment}
-					onChange={(_, a) => changeStrokeAlignment(a as HmHexStyleStrokeAlignments)}
+					value={map.settings.strokeStyle.alignment}
+					onChange={(_, a) => changeStrokeAlignment(a as HmSurfaceStyleStrokeAlignments)}
 				>
 					<Option value={0}>Inside</Option>
 					<Option value={0.5}>Center</Option>
 					<Option value={1}>Outside</Option>
 				</Select>
 			</Grid>
-		</Grid>
+		</Stack>
 	);
 }

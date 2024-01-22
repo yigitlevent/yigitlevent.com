@@ -1,7 +1,7 @@
 import { Clamp } from "@utility/Clamp";
 
 
-export function FillMaker(color: RgbaColor, change = 60): HmHexStyleFill {
+export function FillMaker(color: RgbaColor, change = 60): HmSurfaceStyleFill {
 	const startIndex = color.indexOf("(");
 	const endIndex = color.indexOf(")");
 	const sub = color.substring(startIndex + 1, endIndex).split(", ");
