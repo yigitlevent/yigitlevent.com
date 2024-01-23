@@ -106,6 +106,8 @@ export function Drawer(): JSX.Element {
 				transition: "transform 0.4s, width 0.4s",
 				zIndex: 10000,
 				width: `${width}px`,
+				height: "100vh",
+				overflow: "auto",
 				bottom: 0,
 				padding: 2,
 				display: "flex",
