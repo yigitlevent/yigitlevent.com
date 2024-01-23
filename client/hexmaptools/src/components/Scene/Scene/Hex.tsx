@@ -12,7 +12,7 @@ export function Hex({ hex }: { hex: HmHex; }): JSX.Element {
 			eventMode="static"
 			draw={(graphics) => {
 				const hexType = hexTypes.find(v => v.id === hex.typeId) as HmHexType;
-				const stroke = map.settings.strokeStyle;
+				const stroke = map.settings.hexStrokeStyle;
 
 				graphics.clear();
 				graphics.lineStyle(stroke.width, stroke.color, undefined, stroke.alignment);

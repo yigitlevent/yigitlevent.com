@@ -35,8 +35,8 @@ interface HexmapState {
 	changeMapWidth: (width: number) => void;
 	changeMapHeight: (height: number) => void;
 	changeMapHexRadius: (hexRadius: number) => void;
-	changeStrokeWidth: (width: number) => void;
-	changeStrokeAlignment: (alignment: HmSurfaceStyleStrokeAlignments) => void;
+	changeStrokeWidth: (type: "Hex" | "Area", width: number) => void;
+	changeStrokeAlignment: (type: "Hex" | "Area", alignment: HmSurfaceStyleStrokeAlignments) => void;
 
 	onHexPointerEvent: (event: PointerEvent, hex: HmHex) => void;
 	onAreaPointerEvent: (event: PointerEvent, area: HmArea) => void;
@@ -51,10 +51,15 @@ export const useHexmapStore = create<HexmapState>()(
 				settings: {
 					mapSize: { height: 1, width: 1 },
 					hexRadius: 1,
-					strokeStyle: {
+					hexStrokeStyle: {
 						width: 1,
 						color: "rgba(10, 10, 10, 1.0)",
 						alignment: 0
+					},
+					areaStrokeStyle: {
+						width: 1,
+						color: "rgba(255, 255, 255, 0.1)",
+						alignment: 0.5
 					}
 				}
 			},
@@ -89,10 +94,15 @@ export const useHexmapStore = create<HexmapState>()(
 						settings: {
 							mapSize: { width: 15, height: 15 },
 							hexRadius: 60,
-							strokeStyle: {
+							hexStrokeStyle: {
 								width: 1,
 								color: "rgba(10, 10, 10, 1.0)",
 								alignment: 0
+							},
+							areaStrokeStyle: {
+								width: 0.5,
+								color: "rgba(10, 10, 10, 0.2)",
+								alignment: 0.5
 							}
 						}
 					},
@@ -116,10 +126,15 @@ export const useHexmapStore = create<HexmapState>()(
 					settings: {
 						mapSize: hexmapResponse.map.settings.mapSize,
 						hexRadius: hexmapResponse.map.settings.hexRadius,
-						strokeStyle: {
-							width: hexmapResponse.map.settings.strokeStyle.width,
-							color: hexmapResponse.map.settings.strokeStyle.color,
-							alignment: hexmapResponse.map.settings.strokeStyle.alignment
+						hexStrokeStyle: {
+							width: hexmapResponse.map.settings.hexStrokeStyle.width,
+							color: hexmapResponse.map.settings.hexStrokeStyle.color,
+							alignment: hexmapResponse.map.settings.hexStrokeStyle.alignment
+						},
+						areaStrokeStyle: {
+							width: hexmapResponse.map.settings.areaStrokeStyle.width,
+							color: hexmapResponse.map.settings.areaStrokeStyle.color,
+							alignment: hexmapResponse.map.settings.areaStrokeStyle.alignment
 						}
 					}
 				};
@@ -388,16 +403,30 @@ export const useHexmapStore = create<HexmapState>()(
 				get().recalculateHexes({ hexRadius });
 			},
 
-			changeStrokeWidth: (width: number): void => {
-				set(produce<HexmapState>((state) => {
-					state.map.settings.strokeStyle.width = width;
-				}));
+			changeStrokeWidth: (type: "Hex" | "Area", width: number): void => {
+				if (type === "Hex") {
+					set(produce<HexmapState>((state) => {
+						state.map.settings.hexStrokeStyle.width = width;
+					}));
+				}
+				else {
+					set(produce<HexmapState>((state) => {
+						state.map.settings.areaStrokeStyle.width = width;
+					}));
+				}
 			},
 
-			changeStrokeAlignment: (alignment: HmSurfaceStyleStrokeAlignments): void => {
-				set(produce<HexmapState>((state) => {
-					state.map.settings.strokeStyle.alignment = alignment;
-				}));
+			changeStrokeAlignment: (type: "Hex" | "Area", alignment: HmSurfaceStyleStrokeAlignments): void => {
+				if (type === "Hex") {
+					set(produce<HexmapState>((state) => {
+						state.map.settings.hexStrokeStyle.alignment = alignment;
+					}));
+				}
+				else {
+					set(produce<HexmapState>((state) => {
+						state.map.settings.areaStrokeStyle.alignment = alignment;
+					}));
+				}
 			},
 
 			onHexPointerEvent: (event: PointerEvent, hex: HmHex): void => {
@@ -418,9 +447,8 @@ export const useHexmapStore = create<HexmapState>()(
 				if (selectedTool === "Paint" && selectedPaintTool === "Hex") {
 					if ((isMouse && isLeftClick) || isTouch) {
 						const selectedHexType = toolsState.hexPaintTool.selectedType;
-
 						set(produce<HexmapState>((state) => {
-							state.hexes.set(hex.id, { ...hex, typeId: selectedHexType, state: { ...hex.state, isPainted: true } });
+							state.hexes.set(hex.id, { ...hex, typeId: selectedHexType, state: { ...hex.state, isPainted: selectedHexType !== 0 } });
 						}));
 						get().recalculateAreas();
 					}
@@ -446,7 +474,7 @@ export const useHexmapStore = create<HexmapState>()(
 					if ((isMouse && isLeftClick) || isTouch) {
 						const selectedAreaType = toolsState.areaPaintTool.selectedType;
 						set(produce<HexmapState>((state) => {
-							state.areas.set(area.id, { ...area, typeId: selectedAreaType, state: { ...area.state, isPainted: true } });
+							state.areas.set(area.id, { ...area, typeId: selectedAreaType, state: { ...area.state, isPainted: selectedAreaType !== 0 } });
 						}));
 					}
 				}

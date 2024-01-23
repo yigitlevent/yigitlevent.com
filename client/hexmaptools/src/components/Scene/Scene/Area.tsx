@@ -14,7 +14,7 @@ export function Area({ area }: { area: HmArea; }): JSX.Element {
 			eventMode={selectedPaintTool === "Area" ? "static" : "none"}
 			draw={(graphics) => {
 				const areaType = areaTypes.find(v => v.id === area.typeId) as HmAreaType;
-				const stroke = map.settings.strokeStyle;
+				const stroke = map.settings.areaStrokeStyle;
 
 				graphics.clear();
 				graphics.lineStyle(stroke.width, stroke.color, undefined, stroke.alignment);

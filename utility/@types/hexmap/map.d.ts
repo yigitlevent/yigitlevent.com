@@ -3,7 +3,8 @@ type HmHexmapId = Nominal<string, "HmHexmapId">;
 interface HmHexmapSettings {
 	mapSize: HmSize;
 	hexRadius: number;
-	strokeStyle: HmSurfaceStyleStroke;
+	hexStrokeStyle: HmSurfaceStyleStroke;
+	areaStrokeStyle: HmSurfaceStyleStroke;
 }
 
 interface HmHexmap {
