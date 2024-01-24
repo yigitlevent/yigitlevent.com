@@ -6,6 +6,7 @@ import path from "path";
 export default defineConfig({
 	plugins: [react()],
 	build: {
+		target: "esnext",
 		rollupOptions: {
 			output: {
 				manualChunks(id) {
