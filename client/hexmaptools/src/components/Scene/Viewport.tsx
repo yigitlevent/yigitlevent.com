@@ -2,7 +2,7 @@ import { PixiComponent, useApp } from "@pixi/react";
 import { Viewport as PixiViewport } from "pixi-viewport";
 import { Application, EventSystem, ICanvas, IRenderer, ISystemConstructor } from "pixi.js";
 
-import { useToolsStore } from "../../hooks/apiStores/usetToolsStore";
+import { useToolsStore } from "../../hooks/featureStores/usetToolsStore";
 
 
 interface ViewportProps {

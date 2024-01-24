@@ -2,9 +2,9 @@ import { produce } from "immer";
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 
-import { useToolsStore } from "./usetToolsStore";
 import { CommonAngles } from "../../utils/Common";
 import { FillMaker } from "../../utils/FillMaker";
+import { useToolsStore } from "../featureStores/usetToolsStore";
 
 
 interface HexmapState {
@@ -15,6 +15,9 @@ interface HexmapState {
 	hexTypes: HmHexType[];
 	areaTypes: HmAreaType[];
 
+	showNames: "Hex" | "Area" | "Both" | "None";
+
+	loadSurfaceTypes: () => void;
 	loadHexmap: (hexmapId?: HmHexmapId) => void;
 
 	calculateHexes: (width: number, height: number, hexRadius: number) => HmHex[];
@@ -27,6 +30,7 @@ interface HexmapState {
 
 	recalculateHexes: (changedValues: { width?: number; height?: number; hexRadius?: number; }) => void;
 	recalculateAreas: () => void;
+	getCenter: (vertices: number[]) => HmPoint;
 
 	setHexHover: (hexId: HmHexId, isHovered: boolean) => void;
 	setAreaHover: (areaId: HmAreaId, isHovered: boolean) => void;
@@ -40,6 +44,8 @@ interface HexmapState {
 
 	onHexPointerEvent: (event: PointerEvent, hex: HmHex) => void;
 	onAreaPointerEvent: (event: PointerEvent, area: HmArea) => void;
+
+	switchShowNames: () => void;
 }
 
 export const useHexmapStore = create<HexmapState>()(
@@ -66,24 +72,163 @@ export const useHexmapStore = create<HexmapState>()(
 			hexes: new Map(),
 			areas: new Map(),
 
-			hexTypes: [
-				{ id: 0 as HmHexTypeId, name: "Empty", fill: FillMaker("rgba(25, 25, 25, 1.0)") },
-				{ id: 1 as HmHexTypeId, name: "Plains", fill: FillMaker("rgba(118, 156, 110, 1.0)") },
-				{ id: 2 as HmHexTypeId, name: "Hills", fill: FillMaker("rgba(143, 114, 81, 1.0)") },
-				{ id: 3 as HmHexTypeId, name: "Mountains", fill: FillMaker("rgba(105, 79, 48, 1.0)") },
-				{ id: 4 as HmHexTypeId, name: "Coast", fill: FillMaker("rgba(128, 185, 182, 1.0)") },
-				{ id: 5 as HmHexTypeId, name: "Sea", fill: FillMaker("rgba(92, 146, 177, 1.0)") }
-			],
+			hexTypes: [],
+			areaTypes: [],
 
-			areaTypes: [
-				{ id: 0 as HmAreaTypeId, name: "Empty", fill: FillMaker("rgba(60, 60, 60, 0.1)") },
-				{ id: 1 as HmAreaTypeId, name: "Light Forest", fill: FillMaker("rgba(135, 110, 156, 1.0)") },
-				{ id: 2 as HmAreaTypeId, name: "Medium Forest", fill: FillMaker("rgba(105, 110, 120, 1.0)") },
-				{ id: 3 as HmAreaTypeId, name: "Heavy Forest", fill: FillMaker("rgba(185, 20, 240, 1.0)") }
-			],
+			showNames: "None",
+
+			loadSurfaceTypes: () => {
+				// TODO: some loading api call
+				const surfaceTypesResponse: HmSurfaceTypesResponse = {
+					areaTypes: [
+						{
+							id: 0 as HmAreaTypeId,
+							name: "Empty",
+							category: "None",
+							fill: "rgba(60, 60, 60, 0.1)"
+						},
+						{
+							id: 1 as HmAreaTypeId,
+							name: "Ancient Ruins",
+							category: "Ruins",
+							fill: "rgba(135, 110, 156, 1.0)"
+						},
+						{
+							id: 2 as HmAreaTypeId,
+							name: "Dark Ruins",
+							category: "Ruins",
+							fill: "rgba(105, 110, 120, 1.0)"
+						},
+						{
+							id: 3 as HmAreaTypeId,
+							name: "Small Lake",
+							category: "Lakes",
+							fill: "rgba(185, 20, 240, 1.0)"
+						}
+					],
+					hexTypes: [
+						{
+							id: 0 as HmHexTypeId,
+							name: "Empty",
+							category: "None",
+							fill: "rgba(25, 25, 25, 1.0)"
+						},
+						{
+							id: 1 as HmHexTypeId,
+							name: "Plains",
+							category: "Grasslands",
+							fill: "rgba(141, 179, 137, 1.0)",
+							texture: "Hex_Fields_06_Plain"
+						},
+						{
+							id: 2 as HmHexTypeId,
+							name: "Hills",
+							category: "Grasslands",
+							fill: "rgba(141, 179, 137, 1.0)",
+							texture: "Hex_Fields_07_Hills"
+						},
+						{
+							id: 3 as HmHexTypeId,
+							name: "Mountains",
+							category: "Grasslands",
+							fill: "rgba(141, 179, 137, 1.0)",
+							texture: "Hex_Fields_08_Mountains"
+						},
+						{
+							id: 4 as HmHexTypeId,
+							name: "Forest",
+							category: "Grasslands",
+							fill: "rgba(141, 179, 137, 1.0)",
+							texture: "Hex_Fields_09_Forest1"
+						},
+						{
+							id: 5 as HmHexTypeId,
+							name: "Plains",
+							category: "Desert",
+							fill: "rgba(246, 243, 207, 1.0)",
+							texture: "Hex_Desert_06_Plain"
+						},
+						{
+							id: 6 as HmHexTypeId,
+							name: "Hills",
+							category: "Desert",
+							fill: "rgba(246, 243, 207, 1.0)",
+							texture: "Hex_Desert_07_Hills"
+						},
+						{
+							id: 7 as HmHexTypeId,
+							name: "Mountains",
+							category: "Desert",
+							fill: "rgba(246, 243, 207, 1.0)",
+							texture: "Hex_Desert_08_Mountains1"
+						},
+						{
+							id: 8 as HmHexTypeId,
+							name: "Plain",
+							category: "Snow",
+							fill: "rgba(241, 243, 248, 1.0)",
+							texture: "Hex_Snow_06_Plain"
+						},
+						{
+							id: 9 as HmHexTypeId,
+							name: "Hills",
+							category: "Snow",
+							fill: "rgba(241, 243, 248, 1.0)",
+							texture: "Hex_Snow_07_Hills"
+						},
+						{
+							id: 10 as HmHexTypeId,
+							name: "Mountains",
+							category: "Snow",
+							fill: "rgba(241, 243, 248, 1.0)",
+							texture: "Hex_Snow_08_Mountains"
+						},
+						{
+							id: 11 as HmHexTypeId,
+							name: "Forest",
+							category: "Snow",
+							fill: "rgba(241, 243, 248, 1.0)",
+							texture: "Hex_Snow_09_Forest1"
+						},
+						{
+							id: 12 as HmHexTypeId,
+							name: "Sea",
+							category: "Water",
+							fill: "rgba(187, 213, 231, 1.0)",
+							texture: "Hex_Water_00_Basic"
+						}
+					]
+				};
+
+				const hexTypes: HmHexType[] = surfaceTypesResponse.hexTypes.map(hexType => {
+					return {
+						id: hexType.id,
+						name: hexType.name,
+						category: hexType.category,
+						fill: FillMaker(hexType.fill),
+						texture: hexType.texture
+					};
+				});
+
+				const areaTypes: HmAreaType[] = surfaceTypesResponse.areaTypes.map(areaType => {
+					return {
+						id: areaType.id,
+						name: areaType.name,
+						category: areaType.category,
+						fill: FillMaker(areaType.fill),
+						texture: areaType.texture
+					};
+				});
+
+				set(produce<HexmapState>((state) => {
+					state.hexTypes = hexTypes;
+					state.areaTypes = areaTypes;
+				}));
+			},
 
 			loadHexmap: (mapId?: HmHexmapId) => {
 				const state = get();
+				state.loadSurfaceTypes();
 
 				// TODO: some loading api call
 				mapId;
@@ -93,7 +238,7 @@ export const useHexmapStore = create<HexmapState>()(
 						name: "Test Map",
 						settings: {
 							mapSize: { width: 15, height: 15 },
-							hexRadius: 60,
+							hexRadius: 120,
 							hexStrokeStyle: {
 								width: 1,
 								color: "rgba(10, 10, 10, 1.0)",
@@ -186,6 +331,8 @@ export const useHexmapStore = create<HexmapState>()(
 						const outerVert = state.calculatePoints(actualPosition, hexRadius);
 						const innerVert = state.calculatePoints(actualPosition, hexRadius / 2.5);
 
+						const vertices = state.calculateVertices([outerVert.topLeft, outerVert.topRight, outerVert.right, outerVert.bottomRight, outerVert.bottomLeft, outerVert.left]);
+
 						const hex: HmHex = {
 							id,
 							name: "",
@@ -196,7 +343,8 @@ export const useHexmapStore = create<HexmapState>()(
 								outer: outerVert,
 								inner: innerVert
 							},
-							vertices: state.calculateVertices([outerVert.topLeft, outerVert.topRight, outerVert.right, outerVert.bottomRight, outerVert.bottomLeft, outerVert.left]),
+							center: state.getCenter(vertices),
+							vertices,
 							state: {
 								isPainted: false,
 								isHovered: false
@@ -224,6 +372,7 @@ export const useHexmapStore = create<HexmapState>()(
 
 						const outerVert = parentHex.points.outer;
 						const innerVert = parentHex.points.inner;
+
 						let vertices: number[] = [];
 						switch (placement) {
 							case 1:
@@ -254,6 +403,7 @@ export const useHexmapStore = create<HexmapState>()(
 							hexId: parentHexId,
 							name: "",
 							typeId: 0 as HmAreaTypeId,
+							center: state.getCenter(vertices),
 							vertices,
 							placement,
 							state: {
@@ -289,10 +439,7 @@ export const useHexmapStore = create<HexmapState>()(
 
 			applyHexPaint: (calculatedHexes: HmHex[], paintData: HmHex[] | HmHexResponseHexes[]): [HmHexId, HmHex][] => {
 				return calculatedHexes.map(eHex => {
-					const rHex
-						= paintData
-							.filter(v => (!("state" in v) && v.typeId !== 0) || ("state" in v && (v as HmHex).state?.isPainted))
-							.find(paintHex => paintHex.id === eHex.id);
+					const rHex = paintData.find(paintHex => paintHex.id === eHex.id);
 
 					const hex: HmHex = {
 						...eHex,
@@ -309,17 +456,14 @@ export const useHexmapStore = create<HexmapState>()(
 
 			applyAreaPaint: (calculatedAreas: HmArea[], paintData: HmArea[] | HmHexResponseAreas[]): [HmAreaId, HmArea][] => {
 				return calculatedAreas.map(eArea => {
-					const rHex
-						= paintData
-							.filter(v => (!("state" in v) && v.typeId !== 0) || ("state" in v && (v as HmArea).state?.isPainted))
-							.find(paintArea => paintArea.id === eArea.id);
+					const rArea = paintData.find(paintArea => paintArea.id === eArea.id);
 
 					const area: HmArea = {
 						...eArea,
-						name: rHex ? rHex.name : "",
-						typeId: rHex ? rHex.typeId : 0 as HmAreaTypeId,
+						name: rArea ? rArea.name : "",
+						typeId: rArea ? rArea.typeId : 0 as HmAreaTypeId,
 						state: {
-							isPainted: rHex !== undefined,
+							isPainted: rArea !== undefined,
 							isHovered: false
 						}
 					};
@@ -353,6 +497,13 @@ export const useHexmapStore = create<HexmapState>()(
 				set(produce<HexmapState>((state) => {
 					state.areas = new Map(paintedAreas);
 				}));
+			},
+
+			getCenter: (vertices: number[]): HmPoint => {
+				const pointCount = vertices.length / 2;
+				const sumX = vertices.filter((_, i) => i % 2 === 0).reduce((p, c) => p + c);
+				const sumY = vertices.filter((_, i) => i % 2 === 1).reduce((p, c) => p + c);
+				return { x: sumX / pointCount, y: sumY / pointCount };
 			},
 
 			setHexHover: (hexId: HmHexId, isHovered: boolean): void => {
@@ -477,6 +628,25 @@ export const useHexmapStore = create<HexmapState>()(
 							state.areas.set(area.id, { ...area, typeId: selectedAreaType, state: { ...area.state, isPainted: selectedAreaType !== 0 } });
 						}));
 					}
+				}
+			},
+
+			switchShowNames: (): void => {
+				const state = get();
+
+				switch (state.showNames) {
+					case "None":
+						set(produce<HexmapState>((state) => { state.showNames = "Hex"; }));
+						break;
+					case "Hex":
+						set(produce<HexmapState>((state) => { state.showNames = "Area"; }));
+						break;
+					case "Area":
+						set(produce<HexmapState>((state) => { state.showNames = "Both"; }));
+						break;
+					case "Both":
+						set(produce<HexmapState>((state) => { state.showNames = "None"; }));
+						break;
 				}
 			}
 		}),

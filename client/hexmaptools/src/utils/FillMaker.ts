@@ -12,6 +12,6 @@ export function FillMaker(color: RgbaColor, change = 60): HmSurfaceStyleFill {
 
 	return {
 		color,
-		hover: `rgba(${r}, ${g}, ${b}, ${a})`
+		hover: `rgba(${r}, ${g}, ${b}, ${a * 0.5})`
 	};
 }

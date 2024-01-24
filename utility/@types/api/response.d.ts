@@ -36,3 +36,24 @@ interface HmHexmapResponse {
 	hexes: HmHexResponseHexes[];
 	areas: HmHexResponseAreas[];
 }
+
+interface HmAreaTypeResponse {
+	id: HmAreaTypeId;
+	name: string;
+	category: HmAreaTypeCategory;
+	fill: RgbaColor;
+	texture?: HmAreaTextureName;
+}
+
+interface HmHexTypeResponse {
+	id: HmHexTypeId;
+	name: string;
+	category: HmHexTypeCategory;
+	fill: RgbaColor;
+	texture?: HmHexTextureName;
+}
+
+interface HmSurfaceTypesResponse {
+	areaTypes: HmAreaTypeResponse[];
+	hexTypes: HmHexTypeResponse[];
+}

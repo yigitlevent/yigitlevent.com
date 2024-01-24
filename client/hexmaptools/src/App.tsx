@@ -1,8 +1,8 @@
 import Box from "@mui/joy/Box";
 import { useEffect } from "react";
 
+import { Controls } from "./components/Controls";
 import { Drawer } from "./components/Drawer";
-import { Header } from "./components/Header";
 import { MainBox } from "./components/MainBox";
 import { useUserStore } from "./hooks/apiStores/useUserStore";
 
@@ -18,7 +18,7 @@ export function App(): JSX.Element {
 
 	return (
 		<Box sx={{ display: "flex", minHeight: "100dvh" }}>
-			<Header />
+			<Controls />
 			<Drawer />
 			<MainBox />
 		</Box>
