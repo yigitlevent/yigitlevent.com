@@ -3,7 +3,6 @@ import { Fragment, useCallback } from "react";
 
 import { useHexmapStore } from "../../../../hooks/apiStores/useHexmapStore";
 import { useTexturesStore } from "../../../../hooks/featureStores/useTextureStore";
-import { DegreeToRadian } from "../../../../utils/AngleUtils";
 
 
 export function AreaTerrain({ area }: { area: HmArea; }): JSX.Element {
@@ -13,6 +12,13 @@ export function AreaTerrain({ area }: { area: HmArea; }): JSX.Element {
 	const texture = textures[area.type.texture];
 
 	const getAnchors = useCallback((placement: HmAreaPlacement): [number, number] => {
+		const anchor: [number, number] = [0.5, 0.5];
+		if (placement === 0) return anchor;
+		const change = 0.303;
+		return [0.5, 0.5 - change];
+	}, []);
+
+	/*const getAnchorsOld = useCallback((placement: HmAreaPlacement): [number, number] => {
 		const anchor: [number, number] = [0.5, 0.5];
 
 		if (placement === 0) return anchor;
@@ -32,7 +38,7 @@ export function AreaTerrain({ area }: { area: HmArea; }): JSX.Element {
 		else if (placement === 3 || placement === 5) anchor[1] = anchor[1] + yChange2;
 
 		return anchor;
-	}, []);
+	}, []);*/
 
 	return (
 		<Fragment>
@@ -45,6 +51,7 @@ export function AreaTerrain({ area }: { area: HmArea; }): JSX.Element {
 					y={area.coordinates.center.y}
 					width={map.settings.hexRadius * scaling}
 					height={map.settings.hexRadius * scaling}
+					angle={area.placement === 0 ? 0 : (area.placement - 1) * 60}
 				/>}
 		</Fragment>
 	);

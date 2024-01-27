@@ -7,7 +7,6 @@ import { useDrawerStore } from "../useDrawerStore";
 
 interface ToolsState {
 	selectedTool: HmDrawerTools;
-
 	selectedBiome: HmBiomeId;
 	selectedTerrain: HmTerrainId;
 
@@ -20,8 +19,6 @@ export const useToolsStore = create<ToolsState>()(
 	devtools(
 		(set) => ({
 			selectedTool: "Pan",
-			selectedPaintTool: "Hex",
-
 			selectedBiome: 0 as HmBiomeId,
 			selectedTerrain: 0 as HmTerrainId,
 
@@ -34,6 +31,9 @@ export const useToolsStore = create<ToolsState>()(
 					if (tool === "Hex Paint" || tool === "Area Paint") {
 						state.selectedTerrain = 0 as HmTerrainId;
 						drawerState.setOpenCategory(tool);
+					}
+					else {
+						drawerState.setOpenCategory("File");
 					}
 				}));
 			},

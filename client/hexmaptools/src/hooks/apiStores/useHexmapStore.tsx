@@ -55,21 +55,21 @@ export const useHexmapStore = create<HexmapState>()(
 				id: self.crypto.randomUUID() as HmHexmapId,
 				name: "",
 				settings: {
-					mapSize: { height: 0, width: 0 },
-					hexRadius: 0,
+					mapSize: { width: 15, height: 15 },
+					hexRadius: 120,
 					hexStrokeStyle: {
-						width: 0,
-						color: "rgba(0, 0, 0, 0)",
-						alignment: 0
+						width: 1.5,
+						color: "rgba(10, 10, 10, 0.3)",
+						alignment: 0.5
 					},
 					areaStrokeStyle: {
-						width: 0,
-						color: "rgba(0, 0, 0, 0)",
+						width: 0.5,
+						color: "rgba(10, 10, 10, 0.2)",
 						alignment: 0.5
 					},
 					fill: {
-						color: "rgba(0, 0, 0, 0)",
-						hover: "rgba(0, 0, 0, 0)"
+						color: "rgba(255, 255, 25, 0.0000001)",
+						hover: "rgba(255, 255, 255, 0.1)"
 					}
 				}
 			},
@@ -141,34 +141,52 @@ export const useHexmapStore = create<HexmapState>()(
 							name: "Forest",
 							type: "Area",
 							textures: [
-								"forest_full_area0",
-								"forest_full_area1",
-								"forest_full_area2",
-								"forest_full_area3",
-								"forest_full_area4",
-								"forest_full_area5",
-								"forest_full_area6",
-								"forest_outer_horizontal_area0",
-								"forest_outer_horizontal_area1",
-								"forest_outer_horizontal_area2",
-								"forest_outer_horizontal_area3",
-								"forest_outer_horizontal_area4",
-								"forest_outer_horizontal_area5",
-								"forest_outer_horizontal_area6",
-								"forest_outer_left_area0",
-								"forest_outer_left_area1",
-								"forest_outer_left_area2",
-								"forest_outer_left_area3",
-								"forest_outer_left_area4",
-								"forest_outer_left_area5",
-								"forest_outer_left_area6",
-								"forest_outer_right_area0",
-								"forest_outer_right_area1",
-								"forest_outer_right_area2",
-								"forest_outer_right_area3",
-								"forest_outer_right_area4",
-								"forest_outer_right_area5",
-								"forest_outer_right_area6"
+								"forest_0_center",
+								"forest_1_center",
+								"forest_2_center",
+								"forest_3_center",
+								"forest_4_center",
+								"forest_5_center",
+								"forest_6_center",
+								"forest_7_center",
+								"forest_8_center",
+								"forest_9_center",
+								"forest_10_center",
+								"forest_11_center",
+								"forest_12_center",
+								"forest_13_center",
+								"forest_14_center",
+								"forest_15_center",
+								"forest_16_center",
+								"forest_17_center",
+								"forest_18_center",
+								"forest_19_center",
+								"forest_20_center",
+								"forest_21_center",
+								"forest_22_center",
+								"forest_23_center",
+								"forest_24_center",
+								"forest_25_center",
+								"forest_26_center",
+								"forest_27_center",
+								"forest_28_center",
+								"forest_29_center",
+								"forest_30_center",
+								"forest_31_center",
+								"forest_32_center",
+								"forest_0_side",
+								"forest_1_side",
+								"forest_2_side",
+								"forest_3_side",
+								"forest_4_side",
+								"forest_5_side",
+								"forest_6_side",
+								"forest_7_side",
+								"forest_8_side",
+								"forest_9_side",
+								"forest_10_side",
+								"forest_11_side",
+								"forest_12_side"
 							]
 						}
 					]
@@ -202,8 +220,8 @@ export const useHexmapStore = create<HexmapState>()(
 							mapSize: { width: 15, height: 15 },
 							hexRadius: 120,
 							hexStrokeStyle: {
-								width: 0.5,
-								color: "rgba(10, 10, 10, 0.2)",
+								width: 1.5,
+								color: "rgba(10, 10, 10, 0.3)",
 								alignment: 0.5
 							},
 							areaStrokeStyle: {
@@ -619,7 +637,12 @@ export const useHexmapStore = create<HexmapState>()(
 				const getNextTexture = (terrainId: HmTerrainId, placement: HmAreaPlacement, currentTextureName: HmTextureName, backwards: boolean): HmTextureName => {
 					if (terrainId === 0) return "nothing";
 
-					const possibilities = state.terrains[terrainId].textures.filter(v => v.endsWith(`area${placement}`));
+					const ending = placement === 0 ? "center" : "side";
+					const possibilities = state.terrains[terrainId].textures.filter(v => v.endsWith(ending));
+
+					console.log(state.terrains[terrainId].textures);
+					console.log(possibilities);
+
 					if (currentTextureName === "nothing") {
 						if (!backwards) return possibilities[0];
 						else return possibilities[possibilities.length - 1];
