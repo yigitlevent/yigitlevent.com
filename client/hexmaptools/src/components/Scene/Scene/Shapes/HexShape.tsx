@@ -20,7 +20,7 @@ export function HexShape({ hex }: { hex: HmHex; }): JSX.Element {
 				graphics.drawPolygon(hex.coordinates.vertices);
 				graphics.endFill();
 			}}
-			pointerup={(e: PointerEvent) => onHexPointerEvent(e, hex)}
+			pointerdown={(e: PointerEvent) => onHexPointerEvent(e, hex)}
 			pointermove={(e: PointerEvent) => onHexPointerEvent(e, hex)}
 			onmouseenter={() => setHexHover(hex.id, true)}
 			onmouseleave={() => setHexHover(hex.id, false)}
