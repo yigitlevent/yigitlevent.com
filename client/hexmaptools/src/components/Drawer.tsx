@@ -2,9 +2,7 @@ import AddBoxIcon from "@mui/icons-material/AddBox";
 import BrushIcon from "@mui/icons-material/Brush";
 import CloudDownloadIcon from "@mui/icons-material/CloudDownload";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
-import ColorizeIcon from "@mui/icons-material/Colorize";
 import LaunchIcon from "@mui/icons-material/Launch";
-import NearMeIcon from "@mui/icons-material/NearMe";
 import PanToolIcon from "@mui/icons-material/PanTool";
 import Accordion from "@mui/joy/Accordion";
 import AccordionDetails from "@mui/joy/AccordionDetails";
@@ -28,8 +26,8 @@ import { ModalButton } from "./Drawer/ModalButton";
 import { PaintTool } from "./Drawer/PaintTool";
 import { Settings } from "./Drawer/Settings";
 import { UserCard } from "./Drawer/UserCard";
-import { useToolsStore } from "../hooks/featureStores/useToolsStore";
 import { useUserStore } from "../hooks/apiStores/useUserStore";
+import { useToolsStore } from "../hooks/featureStores/useToolsStore";
 import { useDrawerStore } from "../hooks/useDrawerStore";
 import { THEME } from "../theme/theme";
 
@@ -65,10 +63,8 @@ export function Drawer(): JSX.Element {
 		= useDrawerStore(state => [state.isDrawerOpen, state.drawerWidth, state.openCategory, state.setOpenCategory]);
 
 	const buttons: DrawerButton[] = [
-		{ title: "Select", callback: () => setSelectedTool("Select"), icon: NearMeIcon, hotkey: "v" },
 		{ title: "Pan", callback: () => setSelectedTool("Pan"), icon: PanToolIcon, hotkey: "p" },
-		{ title: "Paint", callback: () => setSelectedTool("Paint"), icon: BrushIcon, hotkey: "b" },
-		{ title: "Eyedrop", callback: () => setSelectedTool("Eyedrop"), icon: ColorizeIcon, hotkey: "i" }
+		{ title: "Paint", callback: () => setSelectedTool("Paint"), icon: BrushIcon, hotkey: "b" }
 	];
 
 	const categories: DrawerCategory[] = [
@@ -119,7 +115,7 @@ export function Drawer(): JSX.Element {
 				<Typography level="h3">Hexmap Tools</Typography>
 			</Box>
 
-			<Grid container columns={4} justifyContent="space-between">
+			<Grid container columns={4} justifyContent="space-around">
 				{buttons.map((button, index) => (
 					<Grid key={index} xs={1} sx={{ width: "min-content" }}>
 						<DrawerButton
