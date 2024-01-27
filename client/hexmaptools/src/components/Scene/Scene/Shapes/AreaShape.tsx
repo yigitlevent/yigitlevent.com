@@ -5,12 +5,12 @@ import { useToolsStore } from "../../../../hooks/featureStores/useToolsStore";
 
 
 export function AreaShape({ area }: { area: HmArea; }): JSX.Element {
-	const [selectedPaintTool] = useToolsStore(state => [state.selectedPaintTool]);
+	const [selectedTool] = useToolsStore(state => [state.selectedTool]);
 	const [map, setAreaHover, onAreaPointerEvent] = useHexmapStore(state => [state.map, state.setAreaHover, state.onAreaPointerEvent]);
 
 	return (
 		<Graphics
-			eventMode={selectedPaintTool === "Area" ? "static" : "none"}
+			eventMode={selectedTool === "Area Paint" ? "static" : "none"}
 			draw={(graphics) => {
 				const stroke = map.settings.areaStrokeStyle;
 				const fill = map.settings.fill;

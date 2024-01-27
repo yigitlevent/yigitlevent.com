@@ -44,9 +44,8 @@ const PixiComponentViewport = PixiComponent("Viewport", {
 			case "Pan":
 				viewport.pause = false;
 				break;
-			case "Select":
-			case "Paint":
-			case "Eyedrop":
+			case "Hex Paint":
+			case "Area Paint":
 				viewport.pause = true;
 				break;
 		}

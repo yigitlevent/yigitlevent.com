@@ -2,6 +2,7 @@ import AddBoxIcon from "@mui/icons-material/AddBox";
 import BrushIcon from "@mui/icons-material/Brush";
 import CloudDownloadIcon from "@mui/icons-material/CloudDownload";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import FormatPaintIcon from "@mui/icons-material/FormatPaint";
 import LaunchIcon from "@mui/icons-material/Launch";
 import PanToolIcon from "@mui/icons-material/PanTool";
 import Accordion from "@mui/joy/Accordion";
@@ -49,6 +50,7 @@ interface DrawerCategory {
 	title: HmDrawerCategories,
 	items?: DrawerCategoryItem[];
 	element?: JSX.Element;
+	disable: boolean;
 }
 
 interface DrawerModal {
@@ -64,7 +66,8 @@ export function Drawer(): JSX.Element {
 
 	const buttons: DrawerButton[] = [
 		{ title: "Pan", callback: () => setSelectedTool("Pan"), icon: PanToolIcon, hotkey: "p" },
-		{ title: "Paint", callback: () => setSelectedTool("Paint"), icon: BrushIcon, hotkey: "b" }
+		{ title: "Hex Paint", callback: () => setSelectedTool("Hex Paint"), icon: BrushIcon, hotkey: "h" },
+		{ title: "Area Paint", callback: () => setSelectedTool("Area Paint"), icon: FormatPaintIcon, hotkey: "a" }
 	];
 
 	const categories: DrawerCategory[] = [
@@ -74,15 +77,23 @@ export function Drawer(): JSX.Element {
 				{ title: "New", icon: AddBoxIcon, disabled: () => false },
 				{ title: "Save", icon: CloudUploadIcon, disabled: () => user === undefined },
 				{ title: "Load", icon: CloudDownloadIcon, disabled: () => user === undefined }
-			]
+			],
+			disable: false
 		},
 		{
-			title: "Paint",
-			element: <PaintTool />
+			title: "Hex Paint",
+			element: <PaintTool />,
+			disable: selectedTool !== "Hex Paint"
+		},
+		{
+			title: "Area Paint",
+			element: <PaintTool />,
+			disable: selectedTool !== "Area Paint"
 		},
 		{
 			title: "Settings",
-			element: <Settings />
+			element: <Settings />,
+			disable: false
 		}
 	];
 
@@ -132,35 +143,37 @@ export function Drawer(): JSX.Element {
 			<Grid container flexGrow={1} flexDirection="column" justifyContent="space-between">
 				<Grid>
 					<AccordionGroup size="md" variant="plain">
-						{categories.map((category, categoryIndex) => (
-							<Accordion
-								key={categoryIndex}
-								expanded={openCategory === category.title}
-								onChange={(_, expanded) => { setOpenCategory(expanded ? category.title : undefined); }}
-								sx={{ background: openCategory === category.title ? THEME.colorSchemes.dark.palette.background.level1 : "none" }}
-							>
-								<AccordionSummary>
-									<Typography level="h3">{category.title}</Typography>
-								</AccordionSummary>
+						{categories
+							.map((category, categoryIndex) => (
+								<Accordion
+									key={categoryIndex}
+									disabled={category.disable}
+									expanded={openCategory === category.title}
+									onChange={(_, expanded) => { setOpenCategory(expanded ? category.title : undefined); }}
+									sx={{ background: openCategory === category.title ? THEME.colorSchemes.dark.palette.background.level1 : "none" }}
+								>
+									<AccordionSummary>
+										<Typography level="h3">{category.title}</Typography>
+									</AccordionSummary>
 
-								<AccordionDetails>
-									<List size="sm">
-										{category.items
-											&& category.items.map((item, itemIndex) => (
-												<CategoryItem
-													key={itemIndex}
-													title={item.title}
-													isFirst={itemIndex === 0}
-													Icon={item.icon}
-													disabled={item.disabled}
-												/>
-											))}
+									<AccordionDetails>
+										<List size="sm">
+											{category.items
+												&& category.items.map((item, itemIndex) => (
+													<CategoryItem
+														key={itemIndex}
+														title={item.title}
+														isFirst={itemIndex === 0}
+														Icon={item.icon}
+														disabled={item.disabled}
+													/>
+												))}
 
-										{category.element}
-									</List>
-								</AccordionDetails>
-							</Accordion>
-						))}
+											{category.element}
+										</List>
+									</AccordionDetails>
+								</Accordion>
+							))}
 					</AccordionGroup>
 				</Grid>
 

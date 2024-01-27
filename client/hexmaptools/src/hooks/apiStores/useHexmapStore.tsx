@@ -577,7 +577,6 @@ export const useHexmapStore = create<HexmapState>()(
 
 				const toolsState = useToolsStore.getState();
 				const selectedTool = toolsState.selectedTool;
-				const selectedPaintTool = toolsState.selectedPaintTool;
 
 				const isMouse = event.pointerType === "mouse";
 				const isTouch = event.pointerType === "touch";
@@ -587,7 +586,7 @@ export const useHexmapStore = create<HexmapState>()(
 				//const isRightClick = event.buttons === 2;
 				//const isWheelClick = event.buttons === 4;
 
-				if (selectedTool === "Paint" && selectedPaintTool === "Hex") {
+				if (selectedTool === "Hex Paint") {
 					if ((isMouse && isLeftClick) || isTouch) {
 						set(produce<HexmapState>((state) => {
 							const biomeId = toolsState.selectedBiome;
@@ -608,7 +607,6 @@ export const useHexmapStore = create<HexmapState>()(
 				const state = get();
 				const toolsState = useToolsStore.getState();
 				const selectedTool = toolsState.selectedTool;
-				const selectedPaintTool = toolsState.selectedPaintTool;
 
 				const isMouse = event.pointerType === "mouse";
 				const isTouch = event.pointerType === "touch";
@@ -638,7 +636,7 @@ export const useHexmapStore = create<HexmapState>()(
 					}
 				};
 
-				if (selectedTool === "Paint" && selectedPaintTool === "Area") {
+				if (selectedTool === "Area Paint") {
 					if ((isMouse && (isLeftClick || isRightClick)) || isTouch) {
 						const terrainId = toolsState.selectedTerrain;
 						set(produce<HexmapState>((state) => {

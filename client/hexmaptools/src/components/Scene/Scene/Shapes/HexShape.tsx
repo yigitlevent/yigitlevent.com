@@ -5,12 +5,12 @@ import { useToolsStore } from "../../../../hooks/featureStores/useToolsStore";
 
 
 export function HexShape({ hex }: { hex: HmHex; }): JSX.Element {
-	const [selectedPaintTool] = useToolsStore(state => [state.selectedPaintTool]);
+	const [selectedTool] = useToolsStore(state => [state.selectedTool]);
 	const [map, setHexHover, onHexPointerEvent] = useHexmapStore(state => [state.map, state.setHexHover, state.onHexPointerEvent]);
 
 	return (
 		<Graphics
-			eventMode={selectedPaintTool === "Hex" ? "static" : "none"}
+			eventMode={selectedTool === "Hex Paint" ? "static" : "none"}
 			draw={(graphics) => {
 				const stroke = map.settings.hexStrokeStyle;
 				const fill = map.settings.fill;

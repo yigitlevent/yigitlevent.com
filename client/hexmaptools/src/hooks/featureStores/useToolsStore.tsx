@@ -2,16 +2,16 @@ import { produce } from "immer";
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 
+import { useDrawerStore } from "../useDrawerStore";
+
 
 interface ToolsState {
 	selectedTool: HmDrawerTools;
-	selectedPaintTool: HmPaintTool;
 
 	selectedBiome: HmBiomeId;
 	selectedTerrain: HmTerrainId;
 
 	setSelectedTool: (tool: HmDrawerTools) => void;
-	setSelectedPaintTool: (tool: HmPaintTool) => void;
 	setSelectedBiome: (biomeId: HmBiomeId) => void;
 	setSelectedTerrain: (terrainId: HmTerrainId) => void;
 }
@@ -26,16 +26,15 @@ export const useToolsStore = create<ToolsState>()(
 			selectedTerrain: 0 as HmTerrainId,
 
 			setSelectedTool: (tool: HmDrawerTools): void => {
+				const drawerState = useDrawerStore.getState();
+
 				set(produce<ToolsState>((state) => {
 					state.selectedTool = tool;
-				}));
-			},
-
-			setSelectedPaintTool: (tool: HmPaintTool): void => {
-				set(produce<ToolsState>((state) => {
-					state.selectedPaintTool = tool;
-					if (tool === "Area") state.selectedBiome = 0 as HmBiomeId;
-					state.selectedTerrain = 0 as HmTerrainId;
+					if (tool === "Area Paint") state.selectedBiome = 0 as HmBiomeId;
+					if (tool === "Hex Paint" || tool === "Area Paint") {
+						state.selectedTerrain = 0 as HmTerrainId;
+						drawerState.setOpenCategory(tool);
+					}
 				}));
 			},
 

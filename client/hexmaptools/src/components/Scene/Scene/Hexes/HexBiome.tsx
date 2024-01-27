@@ -5,14 +5,14 @@ import { useToolsStore } from "../../../../hooks/featureStores/useToolsStore";
 
 
 export function HexBiome({ hex }: { hex: HmHex; }): JSX.Element {
-	const [selectedPaintTool] = useToolsStore(state => [state.selectedPaintTool]);
+	const [selectedTool] = useToolsStore(state => [state.selectedTool]);
 	const [biomes, setHexHover, onHexPointerEvent] = useHexmapStore(state => [state.biomes, state.setHexHover, state.onHexPointerEvent]);
 
 	const hexBiome = biomes[hex.type.biomeId];
 
 	return (
 		<Graphics
-			eventMode={selectedPaintTool === "Hex" ? "static" : "none"}
+			eventMode={selectedTool === "Hex Paint" ? "static" : "none"}
 			draw={(graphics) => {
 				graphics.clear();
 				graphics.beginFill(hexBiome.fill.color);
