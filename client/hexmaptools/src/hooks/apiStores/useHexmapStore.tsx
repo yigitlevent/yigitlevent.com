@@ -4,7 +4,7 @@ import { devtools } from "zustand/middleware";
 
 import { CommonAngles } from "../../utils/Common";
 import { FillMaker } from "../../utils/FillMaker";
-import { useToolsStore } from "../featureStores/usetToolsStore";
+import { useToolsStore } from "../featureStores/useToolsStore";
 
 
 interface HexmapState {
@@ -12,8 +12,8 @@ interface HexmapState {
 	hexes: Map<HmHexId, HmHex>;
 	areas: Map<HmAreaId, HmArea>;
 
-	hexTypes: HmHexType[];
-	areaTypes: HmAreaType[];
+	biomes: HmBiome[];
+	terrains: HmTerrain[];
 
 	showNames: "Hex" | "Area" | "Both" | "None";
 
@@ -22,7 +22,7 @@ interface HexmapState {
 
 	calculateHexes: (width: number, height: number, hexRadius: number) => HmHex[];
 	calculateAreas: (hexes: [HmHexId, HmHex][]) => HmArea[];
-	calculatePoints: (point: HmPoint, radius: number) => HmPoints;
+	calculatePoints: (point: HmPoint, radius: number) => HmHexPoints;
 	calculateVertices: (points: [HmPoint, HmPoint, HmPoint, HmPoint] | [HmPoint, HmPoint, HmPoint, HmPoint, HmPoint, HmPoint]) => number[];
 
 	applyHexPaint: (calculatedHexes: HmHex[], paintData: HmHex[] | HmHexResponseHexes[]) => [HmHexId, HmHex][];
@@ -72,157 +72,115 @@ export const useHexmapStore = create<HexmapState>()(
 			hexes: new Map(),
 			areas: new Map(),
 
-			hexTypes: [],
-			areaTypes: [],
+			biomes: [],
+			terrains: [],
 
 			showNames: "None",
 
 			loadSurfaceTypes: () => {
 				// TODO: some loading api call
-				const surfaceTypesResponse: HmSurfaceTypesResponse = {
-					areaTypes: [
+				const surfaceTypesResponse: HmSurfacesResponse = {
+					biomes: [
 						{
-							id: 0 as HmAreaTypeId,
-							name: "Empty",
-							category: "None",
-							fill: "rgba(60, 60, 60, 0.1)"
+							id: 0 as HmBiomeId,
+							name: "None",
+							fill: "rgba(40, 40, 40, 1.0)"
 						},
 						{
-							id: 1 as HmAreaTypeId,
-							name: "Ancient Ruins",
-							category: "Ruins",
-							fill: "rgba(135, 110, 156, 1.0)"
+							id: 1 as HmBiomeId,
+							name: "Grasslands",
+							fill: "rgba(141, 179, 137, 1.0)"
 						},
 						{
-							id: 2 as HmAreaTypeId,
-							name: "Dark Ruins",
-							category: "Ruins",
-							fill: "rgba(105, 110, 120, 1.0)"
+							id: 2 as HmBiomeId,
+							name: "Desert",
+							fill: "rgba(246, 243, 207, 1.0)"
 						},
 						{
-							id: 3 as HmAreaTypeId,
-							name: "Small Lake",
-							category: "Lakes",
-							fill: "rgba(185, 20, 240, 1.0)"
+							id: 3 as HmBiomeId,
+							name: "Snow",
+							fill: "rgba(241, 243, 248, 1.0)"
+						},
+						{
+							id: 4 as HmBiomeId,
+							name: "Water",
+							fill: "rgba(187, 213, 231, 1.0)"
 						}
 					],
-					hexTypes: [
+					terrains: [
 						{
-							id: 0 as HmHexTypeId,
-							name: "Empty",
-							category: "None",
-							fill: "rgba(25, 25, 25, 1.0)"
+							id: 0 as HmTerrainId,
+							name: "None",
+							type: "Any",
+							textures: ["nothing"]
 						},
 						{
-							id: 1 as HmHexTypeId,
+							id: 1 as HmTerrainId,
 							name: "Plains",
-							category: "Grasslands",
-							fill: "rgba(141, 179, 137, 1.0)",
-							texture: "Hex_Fields_06_Plain"
+							type: "Hex",
+							textures: ["plains_hex"]
 						},
 						{
-							id: 2 as HmHexTypeId,
+							id: 2 as HmTerrainId,
 							name: "Hills",
-							category: "Grasslands",
-							fill: "rgba(141, 179, 137, 1.0)",
-							texture: "Hex_Fields_07_Hills"
+							type: "Hex",
+							textures: ["hills_hex"]
 						},
 						{
-							id: 3 as HmHexTypeId,
+							id: 3 as HmTerrainId,
 							name: "Mountains",
-							category: "Grasslands",
-							fill: "rgba(141, 179, 137, 1.0)",
-							texture: "Hex_Fields_08_Mountains"
+							type: "Hex",
+							textures: ["mountains_hex"]
 						},
 						{
-							id: 4 as HmHexTypeId,
+							id: 4 as HmTerrainId,
 							name: "Forest",
-							category: "Grasslands",
-							fill: "rgba(141, 179, 137, 1.0)",
-							texture: "Hex_Fields_09_Forest1"
-						},
-						{
-							id: 5 as HmHexTypeId,
-							name: "Plains",
-							category: "Desert",
-							fill: "rgba(246, 243, 207, 1.0)",
-							texture: "Hex_Desert_06_Plain"
-						},
-						{
-							id: 6 as HmHexTypeId,
-							name: "Hills",
-							category: "Desert",
-							fill: "rgba(246, 243, 207, 1.0)",
-							texture: "Hex_Desert_07_Hills"
-						},
-						{
-							id: 7 as HmHexTypeId,
-							name: "Mountains",
-							category: "Desert",
-							fill: "rgba(246, 243, 207, 1.0)",
-							texture: "Hex_Desert_08_Mountains1"
-						},
-						{
-							id: 8 as HmHexTypeId,
-							name: "Plain",
-							category: "Snow",
-							fill: "rgba(241, 243, 248, 1.0)",
-							texture: "Hex_Snow_06_Plain"
-						},
-						{
-							id: 9 as HmHexTypeId,
-							name: "Hills",
-							category: "Snow",
-							fill: "rgba(241, 243, 248, 1.0)",
-							texture: "Hex_Snow_07_Hills"
-						},
-						{
-							id: 10 as HmHexTypeId,
-							name: "Mountains",
-							category: "Snow",
-							fill: "rgba(241, 243, 248, 1.0)",
-							texture: "Hex_Snow_08_Mountains"
-						},
-						{
-							id: 11 as HmHexTypeId,
-							name: "Forest",
-							category: "Snow",
-							fill: "rgba(241, 243, 248, 1.0)",
-							texture: "Hex_Snow_09_Forest1"
-						},
-						{
-							id: 12 as HmHexTypeId,
-							name: "Sea",
-							category: "Water",
-							fill: "rgba(187, 213, 231, 1.0)",
-							texture: "Hex_Water_00_Basic"
+							type: "Area",
+							textures: [
+								"forest_full_area0",
+								"forest_full_area1",
+								"forest_full_area2",
+								"forest_full_area3",
+								"forest_full_area4",
+								"forest_full_area5",
+								"forest_full_area6",
+								"forest_outer_horizontal_area0",
+								"forest_outer_horizontal_area1",
+								"forest_outer_horizontal_area2",
+								"forest_outer_horizontal_area3",
+								"forest_outer_horizontal_area4",
+								"forest_outer_horizontal_area5",
+								"forest_outer_horizontal_area6",
+								"forest_outer_left_area0",
+								"forest_outer_left_area1",
+								"forest_outer_left_area2",
+								"forest_outer_left_area3",
+								"forest_outer_left_area4",
+								"forest_outer_left_area5",
+								"forest_outer_left_area6",
+								"forest_outer_right_area0",
+								"forest_outer_right_area1",
+								"forest_outer_right_area2",
+								"forest_outer_right_area3",
+								"forest_outer_right_area4",
+								"forest_outer_right_area5",
+								"forest_outer_right_area6"
+							]
 						}
 					]
 				};
 
-				const hexTypes: HmHexType[] = surfaceTypesResponse.hexTypes.map(hexType => {
-					return {
-						id: hexType.id,
-						name: hexType.name,
-						category: hexType.category,
-						fill: FillMaker(hexType.fill),
-						texture: hexType.texture
-					};
+				const biomes: HmBiome[] = surfaceTypesResponse.biomes.map(biome => {
+					return { id: biome.id, name: biome.name, fill: FillMaker(biome.fill) };
 				});
 
-				const areaTypes: HmAreaType[] = surfaceTypesResponse.areaTypes.map(areaType => {
-					return {
-						id: areaType.id,
-						name: areaType.name,
-						category: areaType.category,
-						fill: FillMaker(areaType.fill),
-						texture: areaType.texture
-					};
+				const terrains: HmTerrain[] = surfaceTypesResponse.terrains.map(terrain => {
+					return { id: terrain.id, name: terrain.name, type: terrain.type, textures: terrain.textures };
 				});
 
 				set(produce<HexmapState>((state) => {
-					state.hexTypes = hexTypes;
-					state.areaTypes = areaTypes;
+					state.biomes = biomes;
+					state.terrains = terrains;
 				}));
 			},
 
@@ -240,9 +198,9 @@ export const useHexmapStore = create<HexmapState>()(
 							mapSize: { width: 15, height: 15 },
 							hexRadius: 120,
 							hexStrokeStyle: {
-								width: 1,
-								color: "rgba(10, 10, 10, 1.0)",
-								alignment: 0
+								width: 0.5,
+								color: "rgba(10, 10, 10, 0.2)",
+								alignment: 0.5
 							},
 							areaStrokeStyle: {
 								width: 0.5,
@@ -252,16 +210,22 @@ export const useHexmapStore = create<HexmapState>()(
 						}
 					},
 					hexes: [
-						{ id: "0,0.5" as HmHexId, name: "Hex 1", typeId: 1 as HmHexTypeId, position: { x: 0, y: 0.5 } }
+						{ id: "0,0.5" as HmHexId, name: "Hex 1", position: { x: 0, y: 0.5 }, type: { biomeId: 2 as HmBiomeId, terrainId: 0 as HmTerrainId } },
+						{ id: "0,1.5" as HmHexId, name: "Hex 2", position: { x: 0, y: 1.5 }, type: { biomeId: 1 as HmBiomeId, terrainId: 0 as HmTerrainId } },
+						{ id: "0,-0.5" as HmHexId, name: "Hex 2", position: { x: 0, y: -0.5 }, type: { biomeId: 1 as HmBiomeId, terrainId: 0 as HmTerrainId } },
+						{ id: "1,0" as HmHexId, name: "Hex 2", position: { x: 1, y: 0 }, type: { biomeId: 1 as HmBiomeId, terrainId: 0 as HmTerrainId } },
+						{ id: "1,1" as HmHexId, name: "Hex 2", position: { x: 1, y: 1 }, type: { biomeId: 1 as HmBiomeId, terrainId: 0 as HmTerrainId } },
+						{ id: "-1,0" as HmHexId, name: "Hex 2", position: { x: -1, y: 0 }, type: { biomeId: 1 as HmBiomeId, terrainId: 0 as HmTerrainId } },
+						{ id: "-1,1" as HmHexId, name: "Hex 2", position: { x: -1, y: 1 }, type: { biomeId: 1 as HmBiomeId, terrainId: 0 as HmTerrainId } }
 					],
 					areas: [
-						{ id: "0,0.5,0" as HmAreaId, typeId: 0 as HmAreaTypeId, parentHexId: "0,0.5" as HmHexId, placement: 0, name: "Hex 0 Area 0" },
-						{ id: "0,0.5,1" as HmAreaId, typeId: 0 as HmAreaTypeId, parentHexId: "0,0.5" as HmHexId, placement: 1, name: "Hex 0 Area 1" },
-						{ id: "0,0.5,2" as HmAreaId, typeId: 0 as HmAreaTypeId, parentHexId: "0,0.5" as HmHexId, placement: 2, name: "Hex 0 Area 2" },
-						{ id: "0,0.5,3" as HmAreaId, typeId: 0 as HmAreaTypeId, parentHexId: "0,0.5" as HmHexId, placement: 3, name: "Hex 0 Area 3" },
-						{ id: "0,0.5,4" as HmAreaId, typeId: 0 as HmAreaTypeId, parentHexId: "0,0.5" as HmHexId, placement: 4, name: "Hex 0 Area 4" },
-						{ id: "0,0.5,5" as HmAreaId, typeId: 0 as HmAreaTypeId, parentHexId: "0,0.5" as HmHexId, placement: 5, name: "Hex 0 Area 5" },
-						{ id: "0,0.5,6" as HmAreaId, typeId: 0 as HmAreaTypeId, parentHexId: "0,0.5" as HmHexId, placement: 6, name: "Hex 0 Area 6" }
+						{ id: "0,0.5,0" as HmAreaId, name: "Hex 0 Area 1", hexId: "0,0.5" as HmHexId, placement: 0, type: { terrainId: 0 as HmTerrainId, texture: "nothing" } },
+						{ id: "0,0.5,1" as HmAreaId, name: "Hex 0 Area 1", hexId: "0,0.5" as HmHexId, placement: 1, type: { terrainId: 0 as HmTerrainId, texture: "nothing" } },
+						{ id: "0,0.5,2" as HmAreaId, name: "Hex 0 Area 1", hexId: "0,0.5" as HmHexId, placement: 2, type: { terrainId: 0 as HmTerrainId, texture: "nothing" } },
+						{ id: "0,0.5,3" as HmAreaId, name: "Hex 0 Area 1", hexId: "0,0.5" as HmHexId, placement: 3, type: { terrainId: 0 as HmTerrainId, texture: "nothing" } },
+						{ id: "0,0.5,4" as HmAreaId, name: "Hex 0 Area 1", hexId: "0,0.5" as HmHexId, placement: 4, type: { terrainId: 0 as HmTerrainId, texture: "nothing" } },
+						{ id: "0,0.5,5" as HmAreaId, name: "Hex 0 Area 1", hexId: "0,0.5" as HmHexId, placement: 5, type: { terrainId: 0 as HmTerrainId, texture: "nothing" } },
+						{ id: "0,0.5,6" as HmAreaId, name: "Hex 0 Area 1", hexId: "0,0.5" as HmHexId, placement: 6, type: { terrainId: 0 as HmTerrainId, texture: "nothing" } }
 					]
 				};
 
@@ -336,15 +300,20 @@ export const useHexmapStore = create<HexmapState>()(
 						const hex: HmHex = {
 							id,
 							name: "",
-							typeId: 0 as HmHexTypeId,
-							position,
-							actualPosition: actualPosition,
-							points: {
-								outer: outerVert,
-								inner: innerVert
+							type: {
+								biomeId: 0 as HmBiomeId,
+								terrainId: 0 as HmTerrainId
 							},
-							center: state.getCenter(vertices),
-							vertices,
+							coordinates: {
+								position,
+								actualPosition: actualPosition,
+								points: {
+									outer: outerVert,
+									inner: innerVert
+								},
+								center: state.getCenter(vertices),
+								vertices
+							},
 							state: {
 								isPainted: false,
 								isHovered: false
@@ -370,8 +339,8 @@ export const useHexmapStore = create<HexmapState>()(
 						const id = `${parentHex.id},${placement}` as HmAreaId;
 						const parentHexId = parentHex.id;
 
-						const outerVert = parentHex.points.outer;
-						const innerVert = parentHex.points.inner;
+						const outerVert = parentHex.coordinates.points.outer;
+						const innerVert = parentHex.coordinates.points.inner;
 
 						let vertices: number[] = [];
 						switch (placement) {
@@ -400,12 +369,17 @@ export const useHexmapStore = create<HexmapState>()(
 
 						return {
 							id,
-							hexId: parentHexId,
 							name: "",
-							typeId: 0 as HmAreaTypeId,
-							center: state.getCenter(vertices),
-							vertices,
+							hexId: parentHexId,
 							placement,
+							type: {
+								terrainId: 0 as HmTerrainId,
+								texture: "nothing"
+							},
+							coordinates: {
+								center: state.getCenter(vertices),
+								vertices
+							},
 							state: {
 								isPainted: false,
 								isHovered: false
@@ -414,7 +388,7 @@ export const useHexmapStore = create<HexmapState>()(
 					});
 			},
 
-			calculatePoints: (point: HmPoint, radius: number): HmPoints => {
+			calculatePoints: (point: HmPoint, radius: number): HmHexPoints => {
 				const getXComponent = (degree: number) => radius * Math.cos(CommonAngles[degree].radian);
 				const getYComponent = (degree: number) => radius * Math.sin(CommonAngles[degree].radian);
 
@@ -444,7 +418,10 @@ export const useHexmapStore = create<HexmapState>()(
 					const hex: HmHex = {
 						...eHex,
 						name: rHex ? rHex.name : "",
-						typeId: rHex ? rHex.typeId : 0 as HmHexTypeId,
+						type: {
+							biomeId: rHex ? rHex.type.biomeId : 0 as HmBiomeId,
+							terrainId: rHex ? rHex.type.terrainId : 0 as HmTerrainId
+						},
 						state: {
 							isPainted: rHex !== undefined,
 							isHovered: false
@@ -461,7 +438,10 @@ export const useHexmapStore = create<HexmapState>()(
 					const area: HmArea = {
 						...eArea,
 						name: rArea ? rArea.name : "",
-						typeId: rArea ? rArea.typeId : 0 as HmAreaTypeId,
+						type: {
+							terrainId: rArea ? rArea.type.terrainId : 0 as HmTerrainId,
+							texture: rArea ? rArea.type.texture : "nothing"
+						},
 						state: {
 							isPainted: rArea !== undefined,
 							isHovered: false
@@ -597,9 +577,13 @@ export const useHexmapStore = create<HexmapState>()(
 
 				if (selectedTool === "Paint" && selectedPaintTool === "Hex") {
 					if ((isMouse && isLeftClick) || isTouch) {
-						const selectedHexType = toolsState.hexPaintTool.selectedType;
 						set(produce<HexmapState>((state) => {
-							state.hexes.set(hex.id, { ...hex, typeId: selectedHexType, state: { ...hex.state, isPainted: selectedHexType !== 0 } });
+							const biomeId = toolsState.selectedBiome;
+							const terrainId = toolsState.selectedTerrain;
+							state.hexes.set(
+								hex.id,
+								{ ...hex, type: { biomeId: biomeId, terrainId: terrainId }, state: { ...hex.state, isPainted: biomeId !== 0 } }
+							);
 						}));
 						get().recalculateAreas();
 					}
@@ -609,6 +593,7 @@ export const useHexmapStore = create<HexmapState>()(
 			onAreaPointerEvent: (event: PointerEvent, area: HmArea): void => {
 				console.log("onAreaPointerEvent");
 
+				const state = get();
 				const toolsState = useToolsStore.getState();
 				const selectedTool = toolsState.selectedTool;
 				const selectedPaintTool = toolsState.selectedPaintTool;
@@ -618,14 +603,41 @@ export const useHexmapStore = create<HexmapState>()(
 
 				//const isNoClick = event.buttons === 0;
 				const isLeftClick = event.buttons === 1;
-				//const isRightClick = event.buttons === 2;
+				const isRightClick = event.buttons === 2;
 				//const isWheelClick = event.buttons === 4;
 
+				const getNextTexture = (terrainId: HmTerrainId, placement: HmAreaPlacement, currentTextureName: HmTextureName, backwards: boolean): HmTextureName => {
+					if (terrainId === 0) return "nothing";
+
+					const possibilities = state.terrains[terrainId].textures.filter(v => v.endsWith(`area${placement}`));
+					if (currentTextureName === "nothing") {
+						if (!backwards) return possibilities[0];
+						else return possibilities[possibilities.length - 1];
+					}
+
+					const currentIndex = possibilities.findIndex(v => v === currentTextureName);
+					if (!backwards) {
+						if (currentIndex === possibilities.length - 1) return possibilities[0];
+						else return possibilities[currentIndex + 1];
+					}
+					else {
+						if (currentIndex === 0) return possibilities[possibilities.length - 1];
+						else return possibilities[currentIndex - 1];
+					}
+				};
+
 				if (selectedTool === "Paint" && selectedPaintTool === "Area") {
-					if ((isMouse && isLeftClick) || isTouch) {
-						const selectedAreaType = toolsState.areaPaintTool.selectedType;
+					if ((isMouse && (isLeftClick || isRightClick)) || isTouch) {
+						const terrainId = toolsState.selectedTerrain;
 						set(produce<HexmapState>((state) => {
-							state.areas.set(area.id, { ...area, typeId: selectedAreaType, state: { ...area.state, isPainted: selectedAreaType !== 0 } });
+							state.areas.set(
+								area.id,
+								{
+									...area,
+									type: { terrainId, texture: getNextTexture(terrainId, area.placement, area.type.texture, isRightClick) },
+									state: { ...area.state, isPainted: terrainId !== 0 }
+								}
+							);
 						}));
 					}
 				}

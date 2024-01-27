@@ -7,8 +7,8 @@ export function AreaName({ area }: { area: HmArea; }): JSX.Element {
 		<Text
 			text={area.name}
 			anchor={[0.5, 0]}
-			x={area.center.x}
-			y={area.center.y + 10}
+			x={area.coordinates.center.x}
+			y={area.coordinates.center.y + 10}
 			resolution={3}
 			roundPixels
 			style={

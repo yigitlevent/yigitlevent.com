@@ -28,7 +28,7 @@ import { ModalButton } from "./Drawer/ModalButton";
 import { PaintTool } from "./Drawer/PaintTool";
 import { Settings } from "./Drawer/Settings";
 import { UserCard } from "./Drawer/UserCard";
-import { useToolsStore } from "../hooks/featureStores/usetToolsStore";
+import { useToolsStore } from "../hooks/featureStores/useToolsStore";
 import { useUserStore } from "../hooks/apiStores/useUserStore";
 import { useDrawerStore } from "../hooks/useDrawerStore";
 import { THEME } from "../theme/theme";

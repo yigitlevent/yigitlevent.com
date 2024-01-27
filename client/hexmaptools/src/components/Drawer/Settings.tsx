@@ -112,6 +112,7 @@ export function Settings(): JSX.Element {
 					sx={{ width: "50%" }}
 					value={map.settings.hexRadius}
 					onChange={(e) => changeMapHexRadius(parseInt(e.target.value))}
+					disabled
 				/>
 			</Grid>
 

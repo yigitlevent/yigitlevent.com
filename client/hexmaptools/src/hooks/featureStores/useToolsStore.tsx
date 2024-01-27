@@ -7,18 +7,13 @@ interface ToolsState {
 	selectedTool: HmDrawerTools;
 	selectedPaintTool: HmPaintTool;
 
-	hexPaintTool: {
-		selectedType: HmHexTypeId;
-	};
-
-	areaPaintTool: {
-		selectedType: HmAreaTypeId;
-	};
+	selectedBiome: HmBiomeId;
+	selectedTerrain: HmTerrainId;
 
 	setSelectedTool: (tool: HmDrawerTools) => void;
 	setSelectedPaintTool: (tool: HmPaintTool) => void;
-	setSelectedHexType: (typeId: HmHexTypeId) => void;
-	setSelectedAreaType: (typeId: HmAreaTypeId) => void;
+	setSelectedBiome: (biomeId: HmBiomeId) => void;
+	setSelectedTerrain: (terrainId: HmTerrainId) => void;
 }
 
 export const useToolsStore = create<ToolsState>()(
@@ -27,13 +22,8 @@ export const useToolsStore = create<ToolsState>()(
 			selectedTool: "Pan",
 			selectedPaintTool: "Hex",
 
-			hexPaintTool: {
-				selectedType: 0 as HmHexTypeId
-			},
-
-			areaPaintTool: {
-				selectedType: 0 as HmAreaTypeId
-			},
+			selectedBiome: 0 as HmBiomeId,
+			selectedTerrain: 0 as HmTerrainId,
 
 			setSelectedTool: (tool: HmDrawerTools): void => {
 				set(produce<ToolsState>((state) => {
@@ -44,18 +34,20 @@ export const useToolsStore = create<ToolsState>()(
 			setSelectedPaintTool: (tool: HmPaintTool): void => {
 				set(produce<ToolsState>((state) => {
 					state.selectedPaintTool = tool;
+					if (tool === "Area") state.selectedBiome = 0 as HmBiomeId;
+					state.selectedTerrain = 0 as HmTerrainId;
 				}));
 			},
 
-			setSelectedHexType: (typeId: HmHexTypeId): void => {
+			setSelectedBiome: (biomeId: HmBiomeId): void => {
 				set(produce<ToolsState>((state) => {
-					state.hexPaintTool.selectedType = typeId;
+					state.selectedBiome = biomeId;
 				}));
 			},
 
-			setSelectedAreaType: (typeId: HmAreaTypeId): void => {
+			setSelectedTerrain: (terrainId: HmTerrainId): void => {
 				set(produce<ToolsState>((state) => {
-					state.areaPaintTool.selectedType = typeId;
+					state.selectedTerrain = terrainId;
 				}));
 			}
 		}),

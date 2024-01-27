@@ -1,151 +1,62 @@
 import Box from "@mui/joy/Box";
-import Button from "@mui/joy/Button";
-import Divider from "@mui/joy/Divider";
-import Grid from "@mui/joy/Grid";
+import Option from "@mui/joy/Option";
+import Select from "@mui/joy/Select";
 import Stack from "@mui/joy/Stack";
-import Tab from "@mui/joy/Tab";
-import TabList from "@mui/joy/TabList";
-import TabPanel from "@mui/joy/TabPanel";
-import Tabs from "@mui/joy/Tabs";
 import Typography from "@mui/joy/Typography";
-import { GroupBy } from "@utility/GroupBy";
-import { Fragment } from "react";
 
 import { useHexmapStore } from "../../hooks/apiStores/useHexmapStore";
-import { useToolsStore } from "../../hooks/featureStores/usetToolsStore";
+import { useTexturesStore } from "../../hooks/featureStores/useTextureStore";
+import { useToolsStore } from "../../hooks/featureStores/useToolsStore";
 import { THEME } from "../../theme/theme";
 
 
-function HexPaintTool(): JSX.Element {
-	const [hexPaintTool, setSelectedHexType] = useToolsStore(state => [state.hexPaintTool, state.setSelectedHexType]);
-	const [hexTypes] = useHexmapStore(state => [state.hexTypes]);
+export function PaintTool(): JSX.Element {
+	const [images] = useTexturesStore(state => [state.images]);
+	const [biomes, terrains] = useHexmapStore(state => [state.biomes, state.terrains]);
+	const [selectedPaintTool, selectedBiome, selectedTerrain, setSelectedPaintTool, setSelectedBiome, setSelectedTerrain]
+		= useToolsStore(state => [state.selectedPaintTool, state.selectedBiome, state.selectedTerrain, state.setSelectedPaintTool, state.setSelectedBiome, state.setSelectedTerrain]);
 
 	return (
-		<Stack rowGap={1} flexDirection="column">
-			{hexTypes.length > 0
-				&& <Fragment>
-					<Stack rowGap={1} flexDirection="column">
-						<Typography level="body-sm">Selected:</Typography>
+		<Stack rowGap={1}>
+			<Select value={selectedPaintTool} onChange={(_, value) => setSelectedPaintTool(value as HmPaintTool)}>
+				<Option value={"Hex"}>Hex</Option>
+				<Option value={"Area"}>Area</Option>
+			</Select>
 
-						<Grid container columnGap={1}>
-							<Grid sx={{ width: "60px" }}>
-								<Box
-									sx={{
-										height: "60px",
-										width: "60px",
-										border: `1px solid ${THEME.colorSchemes.dark.palette.neutral.softActiveBg}`,
-										background: hexTypes[hexPaintTool.selectedType].fill.color
-									}}
-								/>
-							</Grid>
+			<Select disabled={selectedPaintTool === "Area"} value={selectedBiome} onChange={(_, value) => setSelectedBiome(value as HmBiomeId)}>
+				{biomes
+					.map((biome, index) => <Option key={index} value={biome.id}>{biome.name}</Option>)}
+			</Select>
 
-							<Grid xs={1}>
-								<Typography level="body-md">
-									{hexTypes[hexPaintTool.selectedType].name}
-								</Typography>
-							</Grid>
-						</Grid>
-					</Stack>
+			<Select disabled={selectedBiome === 0 && selectedPaintTool === "Hex"} value={selectedTerrain} onChange={(_, value) => setSelectedTerrain(value as HmTerrainId)}>
+				{terrains
+					.filter(terrain => terrain.type === "Any" || terrain.type === selectedPaintTool)
+					.map((terrain, index) => <Option key={index} value={terrain.id}>{terrain.name}</Option>)}
+			</Select>
 
-					<Divider />
+			{(biomes[selectedBiome] && terrains[selectedTerrain])
+				&& <Box sx={{ width: "100%" }}>
+					<Typography level="body-sm" sx={{ width: "min-content", margin: "0 auto" }}>Preview</Typography>
 
-					<Stack rowGap={1} flexDirection="column">
-						{Object.values(GroupBy(hexTypes, (item) => item.category))
-							.map((hexCategory, categoryIndex) => (
-								<Fragment key={categoryIndex}>
-									<Typography level="body-lg">{hexCategory[0].category}</Typography>
-
-									{hexCategory.map((hexType, typeIndex) => (
-										<Button
-											key={typeIndex}
-											size="sm"
-											color="neutral"
-											variant="soft"
-											onClick={() => setSelectedHexType(hexType.id)}
-										>
-											{hexType.name}
-										</Button>
-									))}
-								</Fragment>
-							))}
-					</Stack>
-				</Fragment>}
-		</Stack>
-	);
-}
-
-function AreaPaintTool(): JSX.Element {
-	const [areaPaintTool, setSelectedAreaType] = useToolsStore(state => [state.areaPaintTool, state.setSelectedAreaType]);
-	const [areaTypes] = useHexmapStore(state => [state.areaTypes]);
-
-	return (
-		<Stack rowGap={1} flexDirection="column" flexWrap="wrap">
-			<Stack rowGap={1} flexDirection="column">
-				<Typography level="body-sm">Selected:</Typography>
-
-				<Grid container columnGap={1}>
-					<Grid sx={{ width: "60px" }}>
+					<Box
+						sx={{
+							height: "120px",
+							width: "120px",
+							margin: "0 auto",
+							border: `1px solid ${THEME.colorSchemes.dark.palette.neutral.softActiveBg}`,
+							background: selectedPaintTool === "Area" ? "beige" : biomes[selectedBiome].fill.color
+						}}
+					>
 						<Box
 							sx={{
-								height: "60px",
-								width: "60px",
-								border: `1px solid ${THEME.colorSchemes.dark.palette.neutral.softActiveBg}`,
-								background: areaTypes[areaPaintTool.selectedType].fill.color
+								height: "120px",
+								width: "120px",
+								background: `no-repeat url(${images[terrains[selectedTerrain].textures[0]]}) center`,
+								backgroundSize: "contain"
 							}}
 						/>
-					</Grid>
-
-					<Grid xs={1}>
-						<Typography level="body-md">
-							{areaTypes[areaPaintTool.selectedType].name}
-						</Typography>
-					</Grid>
-				</Grid>
-			</Stack>
-
-			<Divider />
-
-			<Stack rowGap={1} flexDirection="column">
-				{Object.values(GroupBy(areaTypes, (item) => item.category))
-					.map((areaCategory, categoryIndex) => (
-						<Fragment key={categoryIndex}>
-							<Typography level="body-lg">{areaCategory[0].category}</Typography>
-
-							{areaCategory.map((areaType, typeIndex) => (
-								<Button
-									key={typeIndex}
-									size="sm"
-									color="neutral"
-									variant="soft"
-									onClick={() => setSelectedAreaType(areaType.id)}
-								>
-									{areaType.name}
-								</Button>
-							))}
-						</Fragment>
-					))}
-			</Stack>
+					</Box>
+				</Box>}
 		</Stack>
-	);
-}
-
-export function PaintTool(): JSX.Element {
-	const [selectedPaintTool, setSelectedPaintTool] = useToolsStore(state => [state.selectedPaintTool, state.setSelectedPaintTool]);
-
-	return (
-		<Tabs value={selectedPaintTool} onChange={(_, a) => setSelectedPaintTool(a as HmPaintTool)}>
-			<TabList tabFlex={1}>
-				<Tab value="Hex">Hex</Tab>
-				<Tab value="Area">Area</Tab>
-			</TabList>
-
-			<TabPanel value="Hex">
-				<HexPaintTool />
-			</TabPanel>
-
-			<TabPanel value="Area">
-				<AreaPaintTool />
-			</TabPanel>
-		</Tabs>
 	);
 }

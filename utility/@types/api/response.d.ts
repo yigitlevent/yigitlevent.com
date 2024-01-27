@@ -19,16 +19,22 @@ interface HmHexResponseHexmap {
 interface HmHexResponseHexes {
 	id: HmHexId;
 	name: string;
-	typeId: HmHexTypeId;
 	position: HmPoint;
+	type: {
+		biomeId: HmBiomeId;
+		terrainId: HmTerrainId;
+	};
 }
 
 interface HmHexResponseAreas {
 	id: HmAreaId;
-	parentHexId: HmHexId;
-	placement: HmAreaPlacement;
-	typeId: HmAreaTypeId;
 	name: string;
+	hexId: HmHexId;
+	placement: HmAreaPlacement;
+	type: {
+		terrainId: HmTerrainId;
+		texture: HmTextureName;
+	};
 }
 
 interface HmHexmapResponse {
@@ -37,23 +43,20 @@ interface HmHexmapResponse {
 	areas: HmHexResponseAreas[];
 }
 
-interface HmAreaTypeResponse {
-	id: HmAreaTypeId;
+interface HmBiomeResponse {
+	id: HmBiomeId;
 	name: string;
-	category: HmAreaTypeCategory;
 	fill: RgbaColor;
-	texture?: HmAreaTextureName;
 }
 
-interface HmHexTypeResponse {
-	id: HmHexTypeId;
+interface HmTerrainResponse {
+	id: HmTerrainId;
 	name: string;
-	category: HmHexTypeCategory;
-	fill: RgbaColor;
-	texture?: HmHexTextureName;
+	type: HmTerrainType;
+	textures: HmTextureName[];
 }
 
-interface HmSurfaceTypesResponse {
-	areaTypes: HmAreaTypeResponse[];
-	hexTypes: HmHexTypeResponse[];
+interface HmSurfacesResponse {
+	biomes: HmBiomeResponse[];
+	terrains: HmTerrainResponse[];
 }

@@ -7,8 +7,8 @@ export function HexName({ hex }: { hex: HmHex; }): JSX.Element {
 		<Text
 			text={hex.name}
 			anchor={[0.5, 0]}
-			x={hex.center.x}
-			y={hex.center.y + 10}
+			x={hex.coordinates.center.x}
+			y={hex.coordinates.center.y + 10}
 			resolution={3}
 			roundPixels
 			style={
