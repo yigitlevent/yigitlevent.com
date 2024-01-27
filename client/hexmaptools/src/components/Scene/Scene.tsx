@@ -16,7 +16,7 @@ export function Scene({ height, width }: { height: number; width: number; }): JS
 			height={height}
 			width={width}
 			style={{ display: "block", height: "100%", width: "100%" }}
-			options={{ antialias: true, backgroundAlpha: 0 }}
+			options={{ antialias: true, backgroundAlpha: 0, resolution: 2 }}
 		>
 			<Viewport>
 				{map.id.length > -1
