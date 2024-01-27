@@ -128,6 +128,6 @@ export const useTexturesStore = create<ToolsState>()(
 			images: Object.fromEntries(List),
 			textures: Object.fromEntries(Aa)
 		}),
-		{ name: "useTexturesStore" }
+		{ name: "useTexturesStore", serialize: true }
 	)
 );

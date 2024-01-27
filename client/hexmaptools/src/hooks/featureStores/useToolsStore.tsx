@@ -50,6 +50,6 @@ export const useToolsStore = create<ToolsState>()(
 				}));
 			}
 		}),
-		{ name: "useToolsStore" }
+		{ name: "useToolsStore", serialize: true }
 	)
 );

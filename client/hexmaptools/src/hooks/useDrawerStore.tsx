@@ -31,6 +31,6 @@ export const useDrawerStore = create<DrawerState>()(
 				}));
 			}
 		}),
-		{ name: "useDrawerStore" }
+		{ name: "useDrawerStore", serialize: true }
 	)
 );

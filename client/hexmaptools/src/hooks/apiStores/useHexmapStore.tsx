@@ -695,6 +695,6 @@ export const useHexmapStore = create<HexmapState>()(
 				}
 			}
 		}),
-		{ name: "useHexmapStore" }
+		{ name: "useHexmapStore", serialize: true }
 	)
 );
