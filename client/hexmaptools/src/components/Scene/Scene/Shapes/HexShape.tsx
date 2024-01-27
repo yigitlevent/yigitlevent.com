@@ -13,10 +13,11 @@ export function HexShape({ hex }: { hex: HmHex; }): JSX.Element {
 			eventMode={selectedPaintTool === "Hex" ? "static" : "none"}
 			draw={(graphics) => {
 				const stroke = map.settings.hexStrokeStyle;
+				const fill = map.settings.fill;
 
 				graphics.clear();
 				graphics.lineStyle(stroke.width, stroke.color, undefined, stroke.alignment);
-				graphics.beginFill(hex.state.isHovered ? "rgba(60, 60, 60, 0.1)" : "rgba(255, 255, 25, 0.0000001)");
+				graphics.beginFill(hex.state.isHovered ? fill.hover : fill.color);
 				graphics.drawPolygon(hex.coordinates.vertices);
 				graphics.endFill();
 			}}

@@ -5,6 +5,7 @@ interface HmHexmapSettings {
 	hexRadius: number;
 	hexStrokeStyle: HmSurfaceStyleStroke;
 	areaStrokeStyle: HmSurfaceStyleStroke;
+	fill: HmSurfaceStyleFill;
 }
 
 interface HmHexmap {

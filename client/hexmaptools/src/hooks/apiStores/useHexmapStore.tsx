@@ -55,17 +55,21 @@ export const useHexmapStore = create<HexmapState>()(
 				id: self.crypto.randomUUID() as HmHexmapId,
 				name: "",
 				settings: {
-					mapSize: { height: 1, width: 1 },
-					hexRadius: 1,
+					mapSize: { height: 0, width: 0 },
+					hexRadius: 0,
 					hexStrokeStyle: {
-						width: 1,
-						color: "rgba(10, 10, 10, 1.0)",
+						width: 0,
+						color: "rgba(0, 0, 0, 0)",
 						alignment: 0
 					},
 					areaStrokeStyle: {
-						width: 1,
-						color: "rgba(255, 255, 255, 0.1)",
+						width: 0,
+						color: "rgba(0, 0, 0, 0)",
 						alignment: 0.5
+					},
+					fill: {
+						color: "rgba(0, 0, 0, 0)",
+						hover: "rgba(0, 0, 0, 0)"
 					}
 				}
 			},
@@ -206,6 +210,10 @@ export const useHexmapStore = create<HexmapState>()(
 								width: 0.5,
 								color: "rgba(10, 10, 10, 0.2)",
 								alignment: 0.5
+							},
+							fill: {
+								color: "rgba(255, 255, 25, 0.0000001)",
+								hover: "rgba(255, 255, 255, 0.1)"
 							}
 						}
 					},
@@ -244,6 +252,10 @@ export const useHexmapStore = create<HexmapState>()(
 							width: hexmapResponse.map.settings.areaStrokeStyle.width,
 							color: hexmapResponse.map.settings.areaStrokeStyle.color,
 							alignment: hexmapResponse.map.settings.areaStrokeStyle.alignment
+						},
+						fill: {
+							color: hexmapResponse.map.settings.fill.color,
+							hover: hexmapResponse.map.settings.fill.hover
 						}
 					}
 				};
