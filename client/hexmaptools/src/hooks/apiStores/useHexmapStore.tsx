@@ -220,20 +220,20 @@ export const useHexmapStore = create<HexmapState>()(
 					hexes: [
 						{ id: "0,0.5" as HmHexId, name: "Hex 1", position: { x: 0, y: 0.5 }, type: { biomeId: 2 as HmBiomeId, terrainId: 0 as HmTerrainId } },
 						{ id: "0,1.5" as HmHexId, name: "Hex 2", position: { x: 0, y: 1.5 }, type: { biomeId: 1 as HmBiomeId, terrainId: 0 as HmTerrainId } },
-						{ id: "0,-0.5" as HmHexId, name: "Hex 2", position: { x: 0, y: -0.5 }, type: { biomeId: 1 as HmBiomeId, terrainId: 0 as HmTerrainId } },
-						{ id: "1,0" as HmHexId, name: "Hex 2", position: { x: 1, y: 0 }, type: { biomeId: 1 as HmBiomeId, terrainId: 0 as HmTerrainId } },
-						{ id: "1,1" as HmHexId, name: "Hex 2", position: { x: 1, y: 1 }, type: { biomeId: 1 as HmBiomeId, terrainId: 0 as HmTerrainId } },
-						{ id: "-1,0" as HmHexId, name: "Hex 2", position: { x: -1, y: 0 }, type: { biomeId: 1 as HmBiomeId, terrainId: 0 as HmTerrainId } },
-						{ id: "-1,1" as HmHexId, name: "Hex 2", position: { x: -1, y: 1 }, type: { biomeId: 1 as HmBiomeId, terrainId: 0 as HmTerrainId } }
+						{ id: "0,-0.5" as HmHexId, name: "Hex 3", position: { x: 0, y: -0.5 }, type: { biomeId: 1 as HmBiomeId, terrainId: 0 as HmTerrainId } },
+						{ id: "1,0" as HmHexId, name: "Hex 4", position: { x: 1, y: 0 }, type: { biomeId: 1 as HmBiomeId, terrainId: 0 as HmTerrainId } },
+						{ id: "1,1" as HmHexId, name: "Hex 5", position: { x: 1, y: 1 }, type: { biomeId: 1 as HmBiomeId, terrainId: 0 as HmTerrainId } },
+						{ id: "-1,0" as HmHexId, name: "Hex 6", position: { x: -1, y: 0 }, type: { biomeId: 1 as HmBiomeId, terrainId: 0 as HmTerrainId } },
+						{ id: "-1,1" as HmHexId, name: "Hex 7", position: { x: -1, y: 1 }, type: { biomeId: 1 as HmBiomeId, terrainId: 0 as HmTerrainId } }
 					],
 					areas: [
-						{ id: "0,0.5,0" as HmAreaId, name: "Hex 0 Area 1", hexId: "0,0.5" as HmHexId, placement: 0, type: { terrainId: 0 as HmTerrainId, texture: "nothing" } },
-						{ id: "0,0.5,1" as HmAreaId, name: "Hex 0 Area 1", hexId: "0,0.5" as HmHexId, placement: 1, type: { terrainId: 0 as HmTerrainId, texture: "nothing" } },
-						{ id: "0,0.5,2" as HmAreaId, name: "Hex 0 Area 1", hexId: "0,0.5" as HmHexId, placement: 2, type: { terrainId: 0 as HmTerrainId, texture: "nothing" } },
-						{ id: "0,0.5,3" as HmAreaId, name: "Hex 0 Area 1", hexId: "0,0.5" as HmHexId, placement: 3, type: { terrainId: 0 as HmTerrainId, texture: "nothing" } },
-						{ id: "0,0.5,4" as HmAreaId, name: "Hex 0 Area 1", hexId: "0,0.5" as HmHexId, placement: 4, type: { terrainId: 0 as HmTerrainId, texture: "nothing" } },
-						{ id: "0,0.5,5" as HmAreaId, name: "Hex 0 Area 1", hexId: "0,0.5" as HmHexId, placement: 5, type: { terrainId: 0 as HmTerrainId, texture: "nothing" } },
-						{ id: "0,0.5,6" as HmAreaId, name: "Hex 0 Area 1", hexId: "0,0.5" as HmHexId, placement: 6, type: { terrainId: 0 as HmTerrainId, texture: "nothing" } }
+						{ id: "0,0.5,0" as HmAreaId, name: "H0A0", hexId: "0,0.5" as HmHexId, placement: 0, type: { terrainId: 0 as HmTerrainId, texture: "nothing" } },
+						{ id: "0,0.5,1" as HmAreaId, name: "H0A1", hexId: "0,0.5" as HmHexId, placement: 1, type: { terrainId: 0 as HmTerrainId, texture: "nothing" } },
+						{ id: "0,0.5,2" as HmAreaId, name: "H0A2", hexId: "0,0.5" as HmHexId, placement: 2, type: { terrainId: 0 as HmTerrainId, texture: "nothing" } },
+						{ id: "0,0.5,3" as HmAreaId, name: "H0A3", hexId: "0,0.5" as HmHexId, placement: 3, type: { terrainId: 0 as HmTerrainId, texture: "nothing" } },
+						{ id: "0,0.5,4" as HmAreaId, name: "H0A4", hexId: "0,0.5" as HmHexId, placement: 4, type: { terrainId: 0 as HmTerrainId, texture: "nothing" } },
+						{ id: "0,0.5,5" as HmAreaId, name: "H0A5", hexId: "0,0.5" as HmHexId, placement: 5, type: { terrainId: 0 as HmTerrainId, texture: "nothing" } },
+						{ id: "0,0.5,6" as HmAreaId, name: "H0A6", hexId: "0,0.5" as HmHexId, placement: 6, type: { terrainId: 0 as HmTerrainId, texture: "nothing" } }
 					]
 				};
 
