@@ -1,4 +1,4 @@
-import { Resource, Texture } from "pixi.js";
+import { Texture } from "@pixi/core";
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 
@@ -73,7 +73,7 @@ const List: [HmTextureName, string][] = [
 ];
 
 // eslint-disable-next-line react-refresh/only-export-components
-const Aa: [string, Texture<Resource>][]
+const Aa: [string, Texture][]
 	= (await Promise
 		.all(List.map(input => Texture.fromURL(input[1], { resolution: 1 })))
 		.then(results => results.map((result, index) => { return [List[index][0], result]; })));
