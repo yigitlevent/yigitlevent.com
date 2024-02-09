@@ -1,6 +1,5 @@
 import { Stage, Container } from "@pixi/react";
 
-import { AreaTerrain } from "./Scene/Areas/AreaTerrain";
 import { HexBiome } from "./Scene/Hexes/HexBiome";
 import { HexTerrain } from "./Scene/Hexes/HexTerrain";
 import { Names } from "./Scene/Names";
@@ -27,7 +26,6 @@ export function Scene({ height, width }: { height: number; width: number; }): JS
 				{map.id.length > -1
 					? <Container position={[width / 2, height / 2]}>
 						{validHexes.map((keyValue, index) => <HexBiome key={index} hex={keyValue[1]} />)}
-						{validAreas.map((keyValue, index) => <AreaTerrain key={index} area={keyValue[1]} />)}
 						{validHexes.map((keyValue, index) => <HexTerrain key={index} hex={keyValue[1]} />)}
 						{validAreas.map((keyValue, index) => <AreaShape key={index} area={keyValue[1]} />)}
 						{validHexes.map((keyValue, index) => <HexShape key={index} hex={keyValue[1]} />)}

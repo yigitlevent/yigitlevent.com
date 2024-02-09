@@ -132,62 +132,57 @@ export const useHexmapStore = create<HexmapState>()(
 						},
 						{
 							id: 3 as HmTerrainId,
-							name: "Mountains",
+							name: "Mountains 2",
 							type: "Hex",
-							textures: ["mountains_hex"]
+							textures: ["mountains_2_hex"]
 						},
 						{
 							id: 4 as HmTerrainId,
 							name: "Forest",
 							type: "Area",
-							textures: [
-								"forest_0_center",
-								"forest_1_center",
-								"forest_2_center",
-								"forest_3_center",
-								"forest_4_center",
-								"forest_5_center",
-								"forest_6_center",
-								"forest_7_center",
-								"forest_8_center",
-								"forest_9_center",
-								"forest_10_center",
-								"forest_11_center",
-								"forest_12_center",
-								"forest_13_center",
-								"forest_14_center",
-								"forest_15_center",
-								"forest_16_center",
-								"forest_17_center",
-								"forest_18_center",
-								"forest_19_center",
-								"forest_20_center",
-								"forest_21_center",
-								"forest_22_center",
-								"forest_23_center",
-								"forest_24_center",
-								"forest_25_center",
-								"forest_26_center",
-								"forest_27_center",
-								"forest_28_center",
-								"forest_29_center",
-								"forest_30_center",
-								"forest_31_center",
-								"forest_32_center",
-								"forest_0_side",
-								"forest_1_side",
-								"forest_2_side",
-								"forest_3_side",
-								"forest_4_side",
-								"forest_5_side",
-								"forest_6_side",
-								"forest_7_side",
-								"forest_8_side",
-								"forest_9_side",
-								"forest_10_side",
-								"forest_11_side",
-								"forest_12_side"
-							]
+							textures: []
+						},
+						{
+							id: 5 as HmTerrainId,
+							name: "Mountains 1",
+							type: "Hex",
+							textures: ["mountains_1_hex"]
+						},
+						{
+							id: 6 as HmTerrainId,
+							name: "Mountains 3",
+							type: "Hex",
+							textures: ["mountains_3_hex"]
+						},
+						{
+							id: 7 as HmTerrainId,
+							name: "Mountains 4",
+							type: "Hex",
+							textures: ["mountains_4_hex"]
+						},
+						{
+							id: 8 as HmTerrainId,
+							name: "Mountains 5",
+							type: "Hex",
+							textures: ["mountains_5_hex"]
+						},
+						{
+							id: 9 as HmTerrainId,
+							name: "Mountains 6",
+							type: "Hex",
+							textures: ["mountains_6_hex"]
+						},
+						{
+							id: 10 as HmTerrainId,
+							name: "Mountains 7",
+							type: "Hex",
+							textures: ["mountains_7_hex"]
+						},
+						{
+							id: 11 as HmTerrainId,
+							name: "Mountains 8",
+							type: "Hex",
+							textures: ["mountains_8_hex"]
 						}
 					]
 				};
@@ -250,65 +245,65 @@ export const useHexmapStore = create<HexmapState>()(
 						{ id: "1,1" as HmHexId, name: "Hex 5", position: { "x": 1, "y": 1 }, type: { biomeId: 1 as HmBiomeId, terrainId: 0 as HmTerrainId } }
 					],
 					areas: [
-						{ id: "-2,-1.5,0" as HmAreaId, name: "", hexId: "-2,-1.5" as HmHexId, placement: 0, type: { terrainId: 4 as HmTerrainId, texture: "forest_0_center" } },
-						{ id: "-2,-1.5,1" as HmAreaId, name: "", hexId: "-2,-1.5" as HmHexId, placement: 1, type: { terrainId: 4 as HmTerrainId, texture: "forest_0_side" } },
-						{ id: "-2,-1.5,2" as HmAreaId, name: "", hexId: "-2,-1.5" as HmHexId, placement: 2, type: { terrainId: 4 as HmTerrainId, texture: "forest_0_side" } },
-						{ id: "-2,-1.5,3" as HmAreaId, name: "", hexId: "-2,-1.5" as HmHexId, placement: 3, type: { terrainId: 4 as HmTerrainId, texture: "forest_0_side" } },
-						{ id: "-2,-1.5,4" as HmAreaId, name: "", hexId: "-2,-1.5" as HmHexId, placement: 4, type: { terrainId: 4 as HmTerrainId, texture: "forest_0_side" } },
-						{ id: "-2,-1.5,5" as HmAreaId, name: "", hexId: "-2,-1.5" as HmHexId, placement: 5, type: { terrainId: 4 as HmTerrainId, texture: "forest_0_side" } },
-						{ id: "-2,-1.5,6" as HmAreaId, name: "", hexId: "-2,-1.5" as HmHexId, placement: 6, type: { terrainId: 4 as HmTerrainId, texture: "forest_0_side" } },
-						{ id: "-2,-0.5,0" as HmAreaId, name: "", hexId: "-2,-0.5" as HmHexId, placement: 0, type: { terrainId: 4 as HmTerrainId, texture: "forest_8_center" } },
-						{ id: "-2,-0.5,1" as HmAreaId, name: "", hexId: "-2,-0.5" as HmHexId, placement: 1, type: { terrainId: 4 as HmTerrainId, texture: "forest_0_side" } },
-						{ id: "-2,-0.5,2" as HmAreaId, name: "", hexId: "-2,-0.5" as HmHexId, placement: 2, type: { terrainId: 4 as HmTerrainId, texture: "forest_7_side" } },
-						{ id: "-2,-0.5,3" as HmAreaId, name: "", hexId: "-2,-0.5" as HmHexId, placement: 3, type: { terrainId: 4 as HmTerrainId, texture: "forest_8_side" } },
-						{ id: "-2,-0.5,4" as HmAreaId, name: "", hexId: "-2,-0.5" as HmHexId, placement: 4, type: { terrainId: 4 as HmTerrainId, texture: "forest_0_side" } },
-						{ id: "-2,-0.5,5" as HmAreaId, name: "", hexId: "-2,-0.5" as HmHexId, placement: 5, type: { terrainId: 4 as HmTerrainId, texture: "forest_0_side" } },
-						{ id: "-2,-0.5,6" as HmAreaId, name: "", hexId: "-2,-0.5" as HmHexId, placement: 6, type: { terrainId: 4 as HmTerrainId, texture: "forest_0_side" } },
-						{ id: "-2,0.5,0" as HmAreaId, name: "", hexId: "-2,0.5" as HmHexId, placement: 0, type: { terrainId: 4 as HmTerrainId, texture: "forest_22_center" } },
-						{ id: "-2,0.5,1" as HmAreaId, name: "", hexId: "-2,0.5" as HmHexId, placement: 1, type: { terrainId: 4 as HmTerrainId, texture: "forest_0_side" } },
-						{ id: "-2,0.5,2" as HmAreaId, name: "", hexId: "-2,0.5" as HmHexId, placement: 2, type: { terrainId: 4 as HmTerrainId, texture: "forest_7_side" } },
-						{ id: "-2,0.5,4" as HmAreaId, name: "", hexId: "-2,0.5" as HmHexId, placement: 4, type: { terrainId: 4 as HmTerrainId, texture: "forest_8_side" } },
-						{ id: "-2,0.5,5" as HmAreaId, name: "", hexId: "-2,0.5" as HmHexId, placement: 5, type: { terrainId: 4 as HmTerrainId, texture: "forest_0_side" } },
-						{ id: "-2,0.5,6" as HmAreaId, name: "", hexId: "-2,0.5" as HmHexId, placement: 6, type: { terrainId: 4 as HmTerrainId, texture: "forest_0_side" } },
-						{ id: "-1,-1,0" as HmAreaId, name: "", hexId: "-1,-1" as HmHexId, placement: 0, type: { terrainId: 4 as HmTerrainId, texture: "forest_20_center" } },
-						{ id: "-1,-1,1" as HmAreaId, name: "", hexId: "-1,-1" as HmHexId, placement: 1, type: { terrainId: 4 as HmTerrainId, texture: "forest_0_side" } },
-						{ id: "-1,-1,2" as HmAreaId, name: "", hexId: "-1,-1" as HmHexId, placement: 2, type: { terrainId: 4 as HmTerrainId, texture: "forest_0_side" } },
-						{ id: "-1,-1,3" as HmAreaId, name: "", hexId: "-1,-1" as HmHexId, placement: 3, type: { terrainId: 4 as HmTerrainId, texture: "forest_7_side" } },
-						{ id: "-1,-1,5" as HmAreaId, name: "", hexId: "-1,-1" as HmHexId, placement: 5, type: { terrainId: 4 as HmTerrainId, texture: "forest_8_side" } },
-						{ id: "-1,-1,6" as HmAreaId, name: "", hexId: "-1,-1" as HmHexId, placement: 6, type: { terrainId: 4 as HmTerrainId, texture: "forest_0_side" } },
-						{ id: "-1,0,5" as HmAreaId, name: "", hexId: "-1,0" as HmHexId, placement: 5, type: { terrainId: 4 as HmTerrainId, texture: "forest_5_side" } },
-						{ id: "-1,0,6" as HmAreaId, name: "", hexId: "-1,0" as HmHexId, placement: 6, type: { terrainId: 4 as HmTerrainId, texture: "forest_3_side" } },
-						{ id: "0,-0.5,1" as HmAreaId, name: "", hexId: "0,-0.5" as HmHexId, placement: 1, type: { terrainId: 4 as HmTerrainId, texture: "forest_1_side" } },
-						{ id: "0,-0.5,2" as HmAreaId, name: "", hexId: "0,-0.5" as HmHexId, placement: 2, type: { terrainId: 4 as HmTerrainId, texture: "forest_1_side" } },
-						{ id: "0,-0.5,3" as HmAreaId, name: "", hexId: "0,-0.5" as HmHexId, placement: 3, type: { terrainId: 4 as HmTerrainId, texture: "forest_3_side" } },
-						{ id: "0,-0.5,6" as HmAreaId, name: "", hexId: "0,-0.5" as HmHexId, placement: 6, type: { terrainId: 4 as HmTerrainId, texture: "forest_5_side" } },
-						{ id: "0,1.5,0" as HmAreaId, name: "", hexId: "0,1.5" as HmHexId, placement: 0, type: { terrainId: 4 as HmTerrainId, texture: "forest_0_center" } },
-						{ id: "0,1.5,1" as HmAreaId, name: "", hexId: "0,1.5" as HmHexId, placement: 1, type: { terrainId: 4 as HmTerrainId, texture: "forest_2_side" } },
-						{ id: "0,1.5,2" as HmAreaId, name: "", hexId: "0,1.5" as HmHexId, placement: 2, type: { terrainId: 4 as HmTerrainId, texture: "forest_4_side" } },
-						{ id: "0,1.5,3" as HmAreaId, name: "", hexId: "0,1.5" as HmHexId, placement: 3, type: { terrainId: 4 as HmTerrainId, texture: "forest_0_side" } },
-						{ id: "0,1.5,4" as HmAreaId, name: "", hexId: "0,1.5" as HmHexId, placement: 4, type: { terrainId: 4 as HmTerrainId, texture: "forest_0_side" } },
-						{ id: "0,1.5,5" as HmAreaId, name: "", hexId: "0,1.5" as HmHexId, placement: 5, type: { terrainId: 4 as HmTerrainId, texture: "forest_6_side" } },
-						{ id: "0,1.5,6" as HmAreaId, name: "", hexId: "0,1.5" as HmHexId, placement: 6, type: { terrainId: 4 as HmTerrainId, texture: "forest_2_side" } },
-						{ id: "1,-1,0" as HmAreaId, name: "", hexId: "1,-1" as HmHexId, placement: 0, type: { terrainId: 4 as HmTerrainId, texture: "forest_0_center" } },
-						{ id: "1,-1,1" as HmAreaId, name: "", hexId: "1,-1" as HmHexId, placement: 1, type: { terrainId: 4 as HmTerrainId, texture: "forest_0_side" } },
-						{ id: "1,-1,2" as HmAreaId, name: "", hexId: "1,-1" as HmHexId, placement: 2, type: { terrainId: 4 as HmTerrainId, texture: "forest_0_side" } },
-						{ id: "1,-1,3" as HmAreaId, name: "", hexId: "1,-1" as HmHexId, placement: 3, type: { terrainId: 4 as HmTerrainId, texture: "forest_0_side" } },
-						{ id: "1,-1,4" as HmAreaId, name: "", hexId: "1,-1" as HmHexId, placement: 4, type: { terrainId: 4 as HmTerrainId, texture: "forest_0_side" } },
-						{ id: "1,-1,5" as HmAreaId, name: "", hexId: "1,-1" as HmHexId, placement: 5, type: { terrainId: 4 as HmTerrainId, texture: "forest_0_side" } },
-						{ id: "1,-1,6" as HmAreaId, name: "", hexId: "1,-1" as HmHexId, placement: 6, type: { terrainId: 4 as HmTerrainId, texture: "forest_0_side" } },
-						{ id: "1,0,0" as HmAreaId, name: "", hexId: "1,0" as HmHexId, placement: 0, type: { terrainId: 4 as HmTerrainId, texture: "forest_28_center" } },
-						{ id: "1,0,1" as HmAreaId, name: "", hexId: "1,0" as HmHexId, placement: 1, type: { terrainId: 4 as HmTerrainId, texture: "forest_10_side" } },
-						{ id: "1,0,2" as HmAreaId, name: "", hexId: "1,0" as HmHexId, placement: 2, type: { terrainId: 4 as HmTerrainId, texture: "forest_0_side" } },
-						{ id: "1,0,3" as HmAreaId, name: "", hexId: "1,0" as HmHexId, placement: 3, type: { terrainId: 4 as HmTerrainId, texture: "forest_0_side" } },
-						{ id: "1,0,4" as HmAreaId, name: "", hexId: "1,0" as HmHexId, placement: 4, type: { terrainId: 4 as HmTerrainId, texture: "forest_7_side" } },
-						{ id: "1,0,6" as HmAreaId, name: "", hexId: "1,0" as HmHexId, placement: 6, type: { terrainId: 4 as HmTerrainId, texture: "forest_5_side" } },
-						{ id: "1,1,0" as HmAreaId, name: "", hexId: "1,1" as HmHexId, placement: 0, type: { terrainId: 4 as HmTerrainId, texture: "forest_0_center" } },
-						{ id: "1,1,1" as HmAreaId, name: "", hexId: "1,1" as HmHexId, placement: 1, type: { terrainId: 4 as HmTerrainId, texture: "forest_4_side" } },
-						{ id: "1,1,2" as HmAreaId, name: "", hexId: "1,1" as HmHexId, placement: 2, type: { terrainId: 4 as HmTerrainId, texture: "forest_0_side" } },
-						{ id: "1,1,3" as HmAreaId, name: "", hexId: "1,1" as HmHexId, placement: 3, type: { terrainId: 4 as HmTerrainId, texture: "forest_0_side" } },
-						{ id: "1,1,4" as HmAreaId, name: "", hexId: "1,1" as HmHexId, placement: 4, type: { terrainId: 4 as HmTerrainId, texture: "forest_0_side" } },
-						{ id: "1,1,5" as HmAreaId, name: "", hexId: "1,1" as HmHexId, placement: 5, type: { terrainId: 4 as HmTerrainId, texture: "forest_6_side" } },
-						{ id: "1,1,6" as HmAreaId, name: "", hexId: "1,1" as HmHexId, placement: 6, type: { terrainId: 4 as HmTerrainId, texture: "forest_2_side" } }
+						{ id: "-2,-1.5,0" as HmAreaId, name: "", hexId: "-2,-1.5" as HmHexId, placement: 0 },
+						{ id: "-2,-1.5,1" as HmAreaId, name: "", hexId: "-2,-1.5" as HmHexId, placement: 1 },
+						{ id: "-2,-1.5,2" as HmAreaId, name: "", hexId: "-2,-1.5" as HmHexId, placement: 2 },
+						{ id: "-2,-1.5,3" as HmAreaId, name: "", hexId: "-2,-1.5" as HmHexId, placement: 3 },
+						{ id: "-2,-1.5,4" as HmAreaId, name: "", hexId: "-2,-1.5" as HmHexId, placement: 4 },
+						{ id: "-2,-1.5,5" as HmAreaId, name: "", hexId: "-2,-1.5" as HmHexId, placement: 5 },
+						{ id: "-2,-1.5,6" as HmAreaId, name: "", hexId: "-2,-1.5" as HmHexId, placement: 6 },
+						{ id: "-2,-0.5,0" as HmAreaId, name: "", hexId: "-2,-0.5" as HmHexId, placement: 0 },
+						{ id: "-2,-0.5,1" as HmAreaId, name: "", hexId: "-2,-0.5" as HmHexId, placement: 1 },
+						{ id: "-2,-0.5,2" as HmAreaId, name: "", hexId: "-2,-0.5" as HmHexId, placement: 2 },
+						{ id: "-2,-0.5,3" as HmAreaId, name: "", hexId: "-2,-0.5" as HmHexId, placement: 3 },
+						{ id: "-2,-0.5,4" as HmAreaId, name: "", hexId: "-2,-0.5" as HmHexId, placement: 4 },
+						{ id: "-2,-0.5,5" as HmAreaId, name: "", hexId: "-2,-0.5" as HmHexId, placement: 5 },
+						{ id: "-2,-0.5,6" as HmAreaId, name: "", hexId: "-2,-0.5" as HmHexId, placement: 6 },
+						{ id: "-2,0.5,0" as HmAreaId, name: "", hexId: "-2,0.5" as HmHexId, placement: 0 },
+						{ id: "-2,0.5,1" as HmAreaId, name: "", hexId: "-2,0.5" as HmHexId, placement: 1 },
+						{ id: "-2,0.5,2" as HmAreaId, name: "", hexId: "-2,0.5" as HmHexId, placement: 2 },
+						{ id: "-2,0.5,4" as HmAreaId, name: "", hexId: "-2,0.5" as HmHexId, placement: 4 },
+						{ id: "-2,0.5,5" as HmAreaId, name: "", hexId: "-2,0.5" as HmHexId, placement: 5 },
+						{ id: "-2,0.5,6" as HmAreaId, name: "", hexId: "-2,0.5" as HmHexId, placement: 6 },
+						{ id: "-1,-1,0" as HmAreaId, name: "", hexId: "-1,-1" as HmHexId, placement: 0 },
+						{ id: "-1,-1,1" as HmAreaId, name: "", hexId: "-1,-1" as HmHexId, placement: 1 },
+						{ id: "-1,-1,2" as HmAreaId, name: "", hexId: "-1,-1" as HmHexId, placement: 2 },
+						{ id: "-1,-1,3" as HmAreaId, name: "", hexId: "-1,-1" as HmHexId, placement: 3 },
+						{ id: "-1,-1,5" as HmAreaId, name: "", hexId: "-1,-1" as HmHexId, placement: 5 },
+						{ id: "-1,-1,6" as HmAreaId, name: "", hexId: "-1,-1" as HmHexId, placement: 6 },
+						{ id: "-1,0,5" as HmAreaId, name: "", hexId: "-1,0" as HmHexId, placement: 5 },
+						{ id: "-1,0,6" as HmAreaId, name: "", hexId: "-1,0" as HmHexId, placement: 6 },
+						{ id: "0,-0.5,1" as HmAreaId, name: "", hexId: "0,-0.5" as HmHexId, placement: 1 },
+						{ id: "0,-0.5,2" as HmAreaId, name: "", hexId: "0,-0.5" as HmHexId, placement: 2 },
+						{ id: "0,-0.5,3" as HmAreaId, name: "", hexId: "0,-0.5" as HmHexId, placement: 3 },
+						{ id: "0,-0.5,6" as HmAreaId, name: "", hexId: "0,-0.5" as HmHexId, placement: 6 },
+						{ id: "0,1.5,0" as HmAreaId, name: "", hexId: "0,1.5" as HmHexId, placement: 0 },
+						{ id: "0,1.5,1" as HmAreaId, name: "", hexId: "0,1.5" as HmHexId, placement: 1 },
+						{ id: "0,1.5,2" as HmAreaId, name: "", hexId: "0,1.5" as HmHexId, placement: 2 },
+						{ id: "0,1.5,3" as HmAreaId, name: "", hexId: "0,1.5" as HmHexId, placement: 3 },
+						{ id: "0,1.5,4" as HmAreaId, name: "", hexId: "0,1.5" as HmHexId, placement: 4 },
+						{ id: "0,1.5,5" as HmAreaId, name: "", hexId: "0,1.5" as HmHexId, placement: 5 },
+						{ id: "0,1.5,6" as HmAreaId, name: "", hexId: "0,1.5" as HmHexId, placement: 6 },
+						{ id: "1,-1,0" as HmAreaId, name: "", hexId: "1,-1" as HmHexId, placement: 0 },
+						{ id: "1,-1,1" as HmAreaId, name: "", hexId: "1,-1" as HmHexId, placement: 1 },
+						{ id: "1,-1,2" as HmAreaId, name: "", hexId: "1,-1" as HmHexId, placement: 2 },
+						{ id: "1,-1,3" as HmAreaId, name: "", hexId: "1,-1" as HmHexId, placement: 3 },
+						{ id: "1,-1,4" as HmAreaId, name: "", hexId: "1,-1" as HmHexId, placement: 4 },
+						{ id: "1,-1,5" as HmAreaId, name: "", hexId: "1,-1" as HmHexId, placement: 5 },
+						{ id: "1,-1,6" as HmAreaId, name: "", hexId: "1,-1" as HmHexId, placement: 6 },
+						{ id: "1,0,0" as HmAreaId, name: "", hexId: "1,0" as HmHexId, placement: 0 },
+						{ id: "1,0,1" as HmAreaId, name: "", hexId: "1,0" as HmHexId, placement: 1 },
+						{ id: "1,0,2" as HmAreaId, name: "", hexId: "1,0" as HmHexId, placement: 2 },
+						{ id: "1,0,3" as HmAreaId, name: "", hexId: "1,0" as HmHexId, placement: 3 },
+						{ id: "1,0,4" as HmAreaId, name: "", hexId: "1,0" as HmHexId, placement: 4 },
+						{ id: "1,0,6" as HmAreaId, name: "", hexId: "1,0" as HmHexId, placement: 6 },
+						{ id: "1,1,0" as HmAreaId, name: "", hexId: "1,1" as HmHexId, placement: 0 },
+						{ id: "1,1,1" as HmAreaId, name: "", hexId: "1,1" as HmHexId, placement: 1 },
+						{ id: "1,1,2" as HmAreaId, name: "", hexId: "1,1" as HmHexId, placement: 2 },
+						{ id: "1,1,3" as HmAreaId, name: "", hexId: "1,1" as HmHexId, placement: 3 },
+						{ id: "1,1,4" as HmAreaId, name: "", hexId: "1,1" as HmHexId, placement: 4 },
+						{ id: "1,1,5" as HmAreaId, name: "", hexId: "1,1" as HmHexId, placement: 5 },
+						{ id: "1,1,6" as HmAreaId, name: "", hexId: "1,1" as HmHexId, placement: 6 }
 					]
 				};
 
@@ -525,10 +520,6 @@ export const useHexmapStore = create<HexmapState>()(
 					const area: HmArea = {
 						...eArea,
 						name: rArea ? rArea.name : "",
-						type: {
-							terrainId: rArea ? rArea.type.terrainId : 0 as HmTerrainId,
-							texture: rArea ? rArea.type.texture : "nothing"
-						},
 						state: {
 							isPainted: rArea !== undefined,
 							isHovered: false
@@ -679,7 +670,6 @@ export const useHexmapStore = create<HexmapState>()(
 			onAreaPointerEvent: (event: PointerEvent, area: HmArea): void => {
 				console.log("onAreaPointerEvent");
 
-				const state = get();
 				const toolsState = useToolsStore.getState();
 				const selectedTool = toolsState.selectedTool;
 
@@ -691,31 +681,6 @@ export const useHexmapStore = create<HexmapState>()(
 				const isRightClick = event.buttons === 2;
 				//const isWheelClick = event.buttons === 4;
 
-				const getNextTexture = (terrainId: HmTerrainId, placement: HmAreaPlacement, currentTextureName: HmTextureName, backwards: boolean): HmTextureName => {
-					if (terrainId === 0) return "nothing";
-
-					const ending = placement === 0 ? "center" : "side";
-					const possibilities = state.terrains[terrainId].textures.filter(v => v.endsWith(ending));
-
-					console.log(state.terrains[terrainId].textures);
-					console.log(possibilities);
-
-					if (currentTextureName === "nothing") {
-						if (!backwards) return possibilities[0];
-						else return possibilities[possibilities.length - 1];
-					}
-
-					const currentIndex = possibilities.findIndex(v => v === currentTextureName);
-					if (!backwards) {
-						if (currentIndex === possibilities.length - 1) return possibilities[0];
-						else return possibilities[currentIndex + 1];
-					}
-					else {
-						if (currentIndex === 0) return possibilities[possibilities.length - 1];
-						else return possibilities[currentIndex - 1];
-					}
-				};
-
 				if (selectedTool === "Area Paint") {
 					if ((isMouse && (isLeftClick || isRightClick)) || isTouch) {
 						const terrainId = toolsState.selectedTerrain;
@@ -724,7 +689,6 @@ export const useHexmapStore = create<HexmapState>()(
 								area.id,
 								{
 									...area,
-									type: { terrainId, texture: getNextTexture(terrainId, area.placement, area.type.texture, isRightClick) },
 									state: { ...area.state, isPainted: terrainId !== 0 }
 								}
 							);

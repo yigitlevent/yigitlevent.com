@@ -23,6 +23,7 @@ export function HexTerrain({ hex }: { hex: HmHex; }): JSX.Element {
 					y={hex.coordinates.center.y}
 					width={map.settings.hexRadius * scaling}
 					height={map.settings.hexRadius * scaling}
+				//filters={[new DropShadowFilter({ blur: 3, offset: { x: 0, y: 4 } })]}
 				/>}
 		</Fragment>
 	);

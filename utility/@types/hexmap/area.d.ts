@@ -7,10 +7,6 @@ interface HmArea {
 	name: string;
 	hexId: HmHexId;
 	placement: HmAreaPlacement;
-	type: {
-		terrainId: HmTerrainId;
-		texture: HmTextureName;
-	};
 	coordinates: {
 		center: HmPoint;
 		vertices: number[];
