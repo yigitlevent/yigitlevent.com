@@ -39,8 +39,6 @@ export function SpecialSkills(): JSX.Element {
 	return (
 		<Fragment>
 			{specialSkillIds.map((charSkillId, i) => {
-				console.log(special.chosenSubskills);
-
 				const skill = ruleset.getSkill(charSkillId);
 				const canSelectMultiple = skill.name === "Appropriate Weapons";
 
@@ -67,46 +65,39 @@ export function SpecialSkills(): JSX.Element {
 				else if (subskillIds) {
 					subskills = ruleset.skills.filter(s =>
 						!skills.has(s.id)
-							&& subskillIds.includes(s.id)
-							&& (s.stock === stock || (s.restriction?.onlyStock ? s.restriction.onlyStock[0] === stock[0] ? true : false : true))
-							&& s.restriction?.onlyWithAbility ? hasAttribute(s.restriction.onlyWithAbility[0]) ? true : false : true
+						&& subskillIds.includes(s.id)
+						&& (s.stock === stock || (s.restriction?.onlyStock ? s.restriction.onlyStock[0] === stock[0] ? true : false : true))
+						&& (s.restriction?.onlyWithAbility ? hasAttribute(s.restriction.onlyWithAbility[0]) ? true : false : true)
 					);
 				}
 
-				if (canSelectMultiple) {
-					return (
-						<Fragment key={i}>
-							<Autocomplete
-								value={special.chosenSubskills[skill.id].map(ruleset.getSkill)}
-								options={subskills.sort((a, b) => a.category[1].localeCompare(b.category[1]) || a.name.localeCompare(b.name))}
-								getOptionLabel={(option) => option.name}
-								groupBy={(option) => option.category[1]}
-								renderInput={(params) => <TextField {...params} label="Chosen Skills" />}
-								onChange={(_, v) => modifySkillSubskills(skill.id, v.map(v => v.id), canSelectMultiple)}
-								fullWidth
-								multiple
-							/>
-						</Fragment>
-					);
-				}
-				else {
-					return (
-						<Fragment key={i}>
-							<Autocomplete
-								value={special.chosenSubskills[skill.id].map(ruleset.getSkill)[0]}
-								options={subskills.sort((a, b) => a.category[1].localeCompare(b.category[1]) || a.name.localeCompare(b.name))}
-								getOptionLabel={(option) => option.name}
-								groupBy={(option) => option.category[1]}
-								renderInput={(params) => <TextField {...params} label="Chosen Skill" />}
-								onChange={(_, v) => modifySkillSubskills(skill.id, v ? [v.id] : null, canSelectMultiple)}
-								fullWidth
-							/>
-						</Fragment>
-					);
-				}
-
+				return (
+					<Fragment key={i}>
+						{skill.id in special.chosenSubskills
+							? canSelectMultiple
+								? <Autocomplete
+									value={special.chosenSubskills[skill.id].map(ruleset.getSkill)}
+									options={subskills.sort((a, b) => a.category[1].localeCompare(b.category[1]) || a.name.localeCompare(b.name))}
+									getOptionLabel={(option) => option.name}
+									groupBy={(option) => option.category[1]}
+									renderInput={(params) => <TextField {...params} label="Chosen Skills" />}
+									onChange={(_, v) => modifySkillSubskills(skill.id, v.map(v => v.id), canSelectMultiple)}
+									fullWidth
+									multiple
+								/>
+								: <Autocomplete
+									value={special.chosenSubskills[skill.id].map(ruleset.getSkill)[0]}
+									options={subskills.sort((a, b) => a.category[1].localeCompare(b.category[1]) || a.name.localeCompare(b.name))}
+									getOptionLabel={(option) => option.name}
+									groupBy={(option) => option.category[1]}
+									renderInput={(params) => <TextField {...params} label="Chosen Skill" />}
+									onChange={(_, v) => modifySkillSubskills(skill.id, v ? [v.id] : null, canSelectMultiple)}
+									fullWidth
+								/>
+							: null}
+					</Fragment>
+				);
 			})}
 		</Fragment>
 	);
-
 }
