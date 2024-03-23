@@ -1,16 +1,14 @@
+import Autocomplete from "@mui/material/Autocomplete";
 import Button from "@mui/material/Button";
 import Checkbox from "@mui/material/Checkbox";
 import Divider from "@mui/material/Divider";
 import FormControl from "@mui/material/FormControl";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Grid from "@mui/material/Grid";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
 import Modal from "@mui/material/Modal";
 import Paper from "@mui/material/Paper";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
-import Select from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import { Fragment, useCallback, useEffect, useState } from "react";
@@ -65,8 +63,8 @@ export function ResourceSelectionModal({ isOpen, close }: { isOpen: boolean; clo
 		setCosts({ ...newCosts });
 	}, [resource]);
 
-	const modifyResource = useCallback((resourceName: string) => {
-		const res = getStockResources().find(v => v.name === resourceName);
+	const modifyResource = useCallback((resource: BwgrResource) => {
+		const res = getStockResources().find(v => v.id === resource.id);
 		if (res) {
 			setResourceDesc("");
 			setResource(res);
@@ -135,13 +133,16 @@ export function ResourceSelectionModal({ isOpen, close }: { isOpen: boolean; clo
 				<GenericGrid columns={6} spacing={[1, 2]} center="v">
 					<Grid item xs={6}>
 						<FormControl fullWidth variant="standard">
-							<InputLabel>Resource</InputLabel>
-
-							<Select value={resource.name} onChange={(e) => modifyResource(e.target.value)}>
-								{getStockResources().map((resource, i) =>
-									<MenuItem key={i} value={resource.name}>{resource.name}</MenuItem>
-								)}
-							</Select>
+							<Autocomplete
+								value={resource}
+								options={getStockResources().sort((a, b) => a.type[1].localeCompare(b.type[1]) || a.name.localeCompare(b.name))}
+								getOptionLabel={(option) => option.name}
+								groupBy={(option) => option.type[1]}
+								renderInput={(params) => <TextField {...params} label="Chosen Resource" />}
+								onChange={(_, v) => modifyResource(v)}
+								fullWidth
+								disableClearable
+							/>
 						</FormControl>
 					</Grid>
 
