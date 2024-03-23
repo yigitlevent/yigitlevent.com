@@ -1,13 +1,20 @@
 import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 
+import { useDuelOfWitsPlannerStore } from "../../../hooks/featureStores/useDuelOfWitsPlannerStore";
 import { GetActionResolutionString } from "../../../utils/GetActionResolutionString";
 
 
-export function DuelOfWitsActionDetails({ action }: { action: BwgrDoWAction; }): JSX.Element {
+export function DuelOfWitsActionDetails({ action, volleyIndex }: { action: BwgrDoWAction; volleyIndex: number; }): JSX.Element {
+	const { deleteAction, toggleActionVisibility } = useDuelOfWitsPlannerStore();
+
 	return (
 		<Stack spacing={0} sx={{ width: "100%" }}>
+			<Typography variant="h5" sx={{ marginBottom: "8px" }}>{action.name}</Typography>
+
 			{action.tests
 				? <Box sx={{ margin: "0 0 10px" }}>
 					<b>Tests:</b>
@@ -51,6 +58,11 @@ export function DuelOfWitsActionDetails({ action }: { action: BwgrDoWAction; }):
 					{action.resolutions.map((v, i) => <Typography variant="body2" key={i}>{GetActionResolutionString(v)}</Typography>)}
 				</Box>
 				: null}
+
+			<Grid container>
+				<Button size="large" sx={{ width: "50%", padding: "16px 8px", marginTop: "8px" }} onClick={() => toggleActionVisibility(volleyIndex)}>Hide</Button>
+				<Button size="large" sx={{ width: "50%", padding: "16px 8px", marginTop: "8px" }} onClick={() => deleteAction(volleyIndex)} >Delete</Button>
+			</Grid>
 		</Stack>
 	);
 }

@@ -4,14 +4,12 @@ import { devtools } from "zustand/middleware";
 
 
 interface DuelOfWitsPlannerState {
-	volleyIndex: number;
 	actions: [undefined | BwgrDoWActionExtended, undefined | BwgrDoWActionExtended, undefined | BwgrDoWActionExtended];
-	selectedAction: string;
+	selectedAction: [string, string, string];
 
-	changeVolleyIndex: (volleyIndex: number) => void;
 	addAction: (actions: BwgrDoWAction[], volleyIndex: number, actionName: undefined | string) => void;
 	deleteAction: (volleyIndex: number) => void;
-	selectedChangeAction: (actionName: string) => void;
+	selectedChangeAction: (actionName: string, volleyIndex: number) => void;
 	toggleActionDetails: (volleyIndex: number) => void;
 	toggleActionVisibility: (volleyIndex: number) => void;
 }
@@ -19,15 +17,9 @@ interface DuelOfWitsPlannerState {
 export const useDuelOfWitsPlannerStore = create<DuelOfWitsPlannerState>()(
 	devtools(
 		(set) => ({
-			volleyIndex: 0,
 			actions: [undefined, undefined, undefined],
-			selectedAction: "Avoid the Topic",
+			selectedAction: ["Avoid the Topic", "Avoid the Topic", "Avoid the Topic"],
 
-			changeVolleyIndex: (volleyIndex: number) => {
-				set(produce<DuelOfWitsPlannerState>((state) => {
-					state.volleyIndex = volleyIndex;
-				}));
-			},
 			addAction: (actions: BwgrDoWAction[], volleyIndex: number, actionName: undefined | string) => {
 				const action: BwgrDoWActionExtended = { ...actions.find(v => v.name === actionName) as BwgrDoWAction, open: false, visible: true };
 				set(produce<DuelOfWitsPlannerState>((state) => {
@@ -47,9 +39,9 @@ export const useDuelOfWitsPlannerStore = create<DuelOfWitsPlannerState>()(
 					}) as [BwgrDoWActionExtended, BwgrDoWActionExtended, BwgrDoWActionExtended];
 				}));
 			},
-			selectedChangeAction: (actionName: string) => {
+			selectedChangeAction: (actionName: string, volleyIndex: number) => {
 				set(produce<DuelOfWitsPlannerState>((state) => {
-					state.selectedAction = actionName;
+					state.selectedAction[volleyIndex] = actionName;
 				}));
 			},
 			toggleActionDetails: (volleyIndex: number) => {
