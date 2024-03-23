@@ -1,4 +1,4 @@
-import CloseIcon from "@mui/icons-material/Close";
+import VisibilityIcon from "@mui/icons-material/Visibility";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import Divider from "@mui/material/Divider";
@@ -37,7 +37,7 @@ export function DuelOfWitsPlanner(): JSX.Element {
 										<DuelOfWitsActionDetails action={action} volleyIndex={volleyIndex} />
 									</Paper>
 									: <IconButton disableRipple sx={{ width: "100%" }} onClick={() => toggleActionVisibility(volleyIndex)}>
-										<CloseIcon sx={{ fontSize: 100 }} />
+										<VisibilityIcon sx={{ fontSize: 100 }} />
 									</IconButton>
 								: <Fragment>
 									<Select fullWidth value={selectedAction[volleyIndex]} onChange={(e) => selectedChangeAction(e.target.value, volleyIndex)}>
