@@ -18,7 +18,7 @@ import { useDuelOfWitsPlannerStore } from "../../../hooks/featureStores/useDuelO
 export function DuelOfWitsPlanner(): JSX.Element {
 	const { dowActions } = useRulesetStore();
 
-	const { actions, selectedAction, addAction, selectedChangeAction, toggleActionVisibility } = useDuelOfWitsPlannerStore();
+	const { actions, selectedAction, addAction, changeSelectedAction, toggleActionVisibility } = useDuelOfWitsPlannerStore();
 
 	return (
 		<Fragment>
@@ -40,7 +40,7 @@ export function DuelOfWitsPlanner(): JSX.Element {
 										<VisibilityIcon sx={{ fontSize: 100 }} />
 									</IconButton>
 								: <Fragment>
-									<Select fullWidth value={selectedAction[volleyIndex]} onChange={(e) => selectedChangeAction(e.target.value, volleyIndex)}>
+									<Select fullWidth value={selectedAction[volleyIndex]} onChange={(e) => changeSelectedAction(e.target.value, volleyIndex)}>
 										{dowActions.map(v => <MenuItem key={v.name} value={v.name}>{v.name}</MenuItem>)}
 									</Select>
 

@@ -18,7 +18,7 @@ import { useRangeAndCoverPlannerStore } from "../../../hooks/featureStores/useRa
 export function RangeAndCoverPlanner(): JSX.Element {
 	const { racActions } = useRulesetStore();
 
-	const { actions, selectedAction, addAction, selectedChangeAction, toggleActionVisibility } = useRangeAndCoverPlannerStore();
+	const { actions, selectedAction, addAction, changeSelectedAction, toggleActionVisibility } = useRangeAndCoverPlannerStore();
 
 	return (
 		<Fragment>
@@ -47,7 +47,7 @@ export function RangeAndCoverPlanner(): JSX.Element {
 										getOptionLabel={(option) => option.name}
 										groupBy={(option) => option.group[1]}
 										renderInput={(params) => <TextField {...params} />}
-										onChange={(_, v) => selectedChangeAction(v.name, volleyIndex)}
+										onChange={(_, v) => changeSelectedAction(v.name, volleyIndex)}
 										fullWidth
 										disableClearable
 									/>

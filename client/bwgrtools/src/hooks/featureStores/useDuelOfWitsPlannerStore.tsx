@@ -9,7 +9,7 @@ interface DuelOfWitsPlannerState {
 
 	addAction: (actions: BwgrDoWAction[], volleyIndex: number, actionName: undefined | string) => void;
 	deleteAction: (volleyIndex: number) => void;
-	selectedChangeAction: (actionName: string, volleyIndex: number) => void;
+	changeSelectedAction: (actionName: string, volleyIndex: number) => void;
 	toggleActionDetails: (volleyIndex: number) => void;
 	toggleActionVisibility: (volleyIndex: number) => void;
 }
@@ -39,7 +39,7 @@ export const useDuelOfWitsPlannerStore = create<DuelOfWitsPlannerState>()(
 					}) as [BwgrDoWActionExtended, BwgrDoWActionExtended, BwgrDoWActionExtended];
 				}));
 			},
-			selectedChangeAction: (actionName: string, volleyIndex: number) => {
+			changeSelectedAction: (actionName: string, volleyIndex: number) => {
 				set(produce<DuelOfWitsPlannerState>((state) => {
 					state.selectedAction[volleyIndex] = actionName;
 				}));
