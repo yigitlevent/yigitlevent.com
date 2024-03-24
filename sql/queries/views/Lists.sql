@@ -479,9 +479,9 @@ CREATE OR REPLACE VIEW bwgr."RangeAndCoverActionResolutionList" AS
      LEFT JOIN bwgr."RangeAndCoverActions" oa ON oa."Id" = a."OpposingActionId"
      LEFT JOIN bwgr."ActionResolutionTypes" rt ON rt."Id" = a."ResolutionTypeId"
      LEFT JOIN bwgr."Skills" s ON s."Id" = a."SkillId"
-     LEFT JOIN bwgr."Skills" os ON os."Id" = a."SkillId"
+     LEFT JOIN bwgr."Skills" os ON os."Id" = a."OpposingSkillId"
      LEFT JOIN bwgr."Abilities" ab ON ab."Id" = a."AbilityId"
-     LEFT JOIN bwgr."Abilities" oab ON ab."Id" = a."AbilityId";
+	 LEFT JOIN bwgr."Abilities" oab ON oab."Id" = a."OpposingAbilityId";
 
 ALTER TABLE bwgr."RangeAndCoverActionResolutionList"
     OWNER TO apiuser;
