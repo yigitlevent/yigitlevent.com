@@ -1,132 +1,62 @@
-import DeleteOutline from "@mui/icons-material/DeleteOutline";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import Autocomplete from "@mui/material/Autocomplete";
 import Button from "@mui/material/Button";
+import Card from "@mui/material/Card";
 import Divider from "@mui/material/Divider";
-import FormControl from "@mui/material/FormControl";
 import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
-import InputLabel from "@mui/material/InputLabel";
-import ListSubheader from "@mui/material/ListSubheader";
-import MenuItem from "@mui/material/MenuItem";
-import Select from "@mui/material/Select";
+import Paper from "@mui/material/Paper";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-import { GroupBy } from "@utility/GroupBy";
-import { Fragment, useState } from "react";
+import { Fragment } from "react";
 
 import { FightPlannerActionDetails } from "./FightActionDetails";
 import { useRulesetStore } from "../../../hooks/apiStores/useRulesetStore";
 import { useFightPlannerStore } from "../../../hooks/featureStores/useFightPlannerStore";
-import { GenericGrid } from "../../Shared/Grids";
 
 
 export function FightPlanner(): JSX.Element {
 	const { fightActions } = useRulesetStore();
-	const groupedActions = GroupBy(fightActions, a => a.group[1]);
 
-	const {
-		reflexes, volleyIndex, actions, selectedAction,
-		changeReflexes, changeVolleyIndex, addAction, deleteAction, changeSelectedAction, toggleActionDetails, toggleActionVisibility
-	} = useFightPlannerStore();
-
-	const [notification, setNotification] = useState<null | JSX.Element>(null);
+	const { actions, selectedAction, addAction, changeSelectedAction, toggleActionVisibility } = useFightPlannerStore();
 
 	return (
 		<Fragment>
-			{notification}
 			<Typography variant="h3">Fight Planner</Typography>
 
-			<GenericGrid columns={4} center>
-				<Grid item xs={4} sm={2} md={1}>
-					<TextField
-						label="Reflexes"
-						inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
-						value={reflexes}
-						onChange={(e) => changeReflexes(parseInt(e.target.value), actions, setNotification)}
-						fullWidth
-						variant="standard"
-					/>
-				</Grid>
-
-				<Grid item xs={4} sm={2} md={1}>
-					<FormControl fullWidth variant="standard">
-						<InputLabel>Volley</InputLabel>
-
-						<Select label="Volley" value={volleyIndex} onChange={(e) => changeVolleyIndex(parseInt(e.target.value as string))}>
-							<MenuItem value={0}>Volley 1</MenuItem>
-							<MenuItem value={1}>Volley 2</MenuItem>
-							<MenuItem value={2}>Volley 3</MenuItem>
-						</Select>
-					</FormControl>
-				</Grid>
-
-				<Grid item xs={4} sm={2} md={1}>
-					<FormControl fullWidth variant="standard">
-						<InputLabel>Action</InputLabel>
-
-						<Select label="Action" value={selectedAction} onChange={(e) => changeSelectedAction(e.target.value)}>
-							{Object.keys(groupedActions).map((groupKey, groupIndex) => {
-								const elements = [
-									<ListSubheader key={groupIndex}>{groupKey}</ListSubheader>,
-									Object.values(groupedActions)[groupIndex].map((action, actionIndex) =>
-										<MenuItem key={actionIndex} value={action.name}>{action.name}</MenuItem>
-									)
-								];
-								return elements;
-							})}
-						</Select>
-					</FormControl>
-				</Grid>
-
-				<Grid item xs={4} sm={2} md={1}>
-					<Button variant="outlined" size="medium" onClick={() => addAction(fightActions, volleyIndex, selectedAction, reflexes, actions, setNotification)}>Add Action</Button>
-				</Grid>
-			</GenericGrid>
-
-			<GenericGrid columns={1}>
+			<Grid container justifyContent="space-evenly" spacing={{ xs: 1, sm: 1, md: 2 }} columns={{ xs: 1, sm: 1, md: 3 }} sx={{ maxWidth: "100%", padding: "16px 0" }}>
 				{actions.map((action, volleyIndex) => (
-					<Grid item xs={1} key={volleyIndex}>
-						<Typography variant="h5" sx={{ padding: "6px 10px" }}>Volley {volleyIndex + 1}</Typography>
+					<Grid key={volleyIndex} item xs={1} sx={{ minWidth: "30%" }}>
+						<Card sx={{ padding: "10px" }}>
+							<Typography variant="h5">Volley {volleyIndex + 1}</Typography>
+							<Divider sx={{ margin: "8px 0" }} />
 
-						{action.length > 0
-							? action.map((action, actionIndex) => (
-								<Grid key={actionIndex} container columns={3} justifyContent="space-between" sx={{ padding: "10px" }}>
-									<Grid item xs={3} sm={2} md={2}>
-										<Typography variant="h6" sx={{ display: "inline-block" }}>
-											{action.visible ? action.name : "────────────────────"}
-										</Typography>
-									</Grid>
+							{action.map((action, actionIndex) => (
+								<Paper key={`${volleyIndex}-${actionIndex}`} elevation={2} sx={{ padding: "8px", marginBottom: "8px" }}>
+									{action.visible
+										? <FightPlannerActionDetails action={action} volleyIndex={volleyIndex} actionIndex={actionIndex} />
+										: <IconButton disableRipple sx={{ width: "100%" }} onClick={() => toggleActionVisibility(volleyIndex, actionIndex)}>
+											<VisibilityIcon sx={{ fontSize: 100 }} />
+										</IconButton>}
+								</Paper>
+							))}
 
-									<Grid item>
-										<IconButton size="small" sx={{ margin: "0 8px" }} onClick={() => toggleActionDetails(volleyIndex, actionIndex)}>
-											{action.open ? <KeyboardArrowDownIcon /> : <KeyboardArrowUpIcon />}
-										</IconButton>
+							<Autocomplete
+								value={(fightActions.find(v => v.name === selectedAction[volleyIndex]) as BwgrFightAction)}
+								options={[...fightActions].sort((a, b) => a.group[1].localeCompare(b.group[1]) || a.name.localeCompare(b.name))}
+								getOptionLabel={(option) => option.name}
+								groupBy={(option) => option.group[1]}
+								renderInput={(params) => <TextField {...params} />}
+								onChange={(_, v) => changeSelectedAction(v.name, volleyIndex)}
+								fullWidth
+								disableClearable
+							/>
 
-										<IconButton size="small" sx={{ margin: "0 8px" }} onClick={() => toggleActionVisibility(volleyIndex, actionIndex)}>
-											{action.visible ? <VisibilityIcon /> : <VisibilityOffIcon />}
-										</IconButton>
-
-										<IconButton size="small" sx={{ margin: "0 8px" }} onClick={() => deleteAction(volleyIndex, actionIndex)}>
-											<DeleteOutline />
-										</IconButton>
-									</Grid>
-
-									<Grid item xs={3}>
-										<Divider />
-									</Grid>
-
-									{action.visible && action.open ? <FightPlannerActionDetails action={action} /> : null}
-								</Grid>
-							)
-							)
-							: <Typography variant="body2">No action selected</Typography>}
+							<Button size="large" fullWidth sx={{ padding: "16px", margin: "16px 0 8px" }} onClick={() => addAction(fightActions, volleyIndex, selectedAction[volleyIndex])}>Add Action</Button>
+						</Card>
 					</Grid>
-				)
-				)}
-			</GenericGrid>
-		</Fragment >
+				))}
+			</Grid>
+		</Fragment>
 	);
 }
