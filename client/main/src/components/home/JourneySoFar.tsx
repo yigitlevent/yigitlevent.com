@@ -24,12 +24,12 @@ export function JourneySoFar(): JSX.Element {
 			</Typography>
 
 			<Typography sx={{ margin: "16px 0" }}>
-				After the university, I decided to go back to JavaScript. But after years of C++, having no type safety was a big problem, which almost made me quit JavaScript for good —then I discovered Typescript and React. 
+				After the university, I decided to go back to JavaScript. But after years of C++, having no type safety was a big problem, which almost made me quit JavaScript for good —then I discovered Typescript and React.
 			</Typography>
 
 			<Typography sx={{ margin: "16px 0" }}>
 				And since 2021, I have been learning F# and python (which I used to some capacity before). Learning more functional programming languages (in this case, F#) has provided an interesting perspective.
 			</Typography>
-		</Fragment >
+		</Fragment>
 	);
 }
