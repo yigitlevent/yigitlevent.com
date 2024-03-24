@@ -15,13 +15,14 @@ export function GetActionResolutionString<T>(item: BwgrActionResolution<T>): str
 	}
 
 	// Prefix
-	if (item.ability) parts.unshift(`${item.ability} `);
-	else if (item.skill) parts.unshift(`${item.skill} `);
+	if (item.ability) parts.unshift(`${item.ability[1]} `);
+	else if (item.skill) parts.unshift(`${item.skill[1]} `);
 
 	// Suffix
 	if (item.obstacle) parts.push(item.obstacle);
 	else if (item.isAgainstSkill) parts.push("Skill");
-	else if (item.opposingAbility) parts.push(item.opposingAbility);
+	else if (item.opposingSkill) parts.push(item.opposingSkill[1]);
+	else if (item.opposingAbility) parts.push(item.opposingAbility[1]);
 
 	// Suffix modifier
 	if (item.opposingModifier) parts.push(` +${item.opposingModifier}D`);
