@@ -4,14 +4,12 @@ import { devtools } from "zustand/middleware";
 
 
 interface RangeAndCoverPlannerState {
-	volleyIndex: number;
 	actions: [undefined | BwgrRaCActionExtended, undefined | BwgrRaCActionExtended, undefined | BwgrRaCActionExtended];
-	selectedAction: string;
+	selectedAction: [string, string, string];
 
-	changeVolleyIndex: (volleyIndex: number) => void;
-	addAction: (actions: BwgrRaCAction[], volleyIndex: number, actionName: string) => void;
+	addAction: (actions: BwgrRaCAction[], volleyIndex: number, actionName: undefined | string) => void;
 	deleteAction: (volleyIndex: number) => void;
-	selectedChangeAction: (actionName: string) => void;
+	selectedChangeAction: (actionName: string, volleyIndex: number) => void;
 	toggleActionDetails: (volleyIndex: number) => void;
 	toggleActionVisibility: (volleyIndex: number) => void;
 }
@@ -19,16 +17,10 @@ interface RangeAndCoverPlannerState {
 export const useRangeAndCoverPlannerStore = create<RangeAndCoverPlannerState>()(
 	devtools(
 		(set) => ({
-			volleyIndex: 0,
 			actions: [undefined, undefined, undefined],
-			selectedAction: "Close",
+			selectedAction: ["Charge", "Charge", "Charge"],
 
-			changeVolleyIndex: (volleyIndex: number) => {
-				set(produce<RangeAndCoverPlannerState>((state) => {
-					state.volleyIndex = volleyIndex;
-				}));
-			},
-			addAction: (actions: BwgrRaCAction[], volleyIndex: number, actionName: string) => {
+			addAction: (actions: BwgrRaCAction[], volleyIndex: number, actionName: undefined | string) => {
 				const action: BwgrRaCActionExtended = { ...actions.find(v => v.name === actionName) as BwgrRaCAction, open: false, visible: true };
 				set(produce<RangeAndCoverPlannerState>((state) => {
 					const newActions = state.actions;
@@ -47,9 +39,9 @@ export const useRangeAndCoverPlannerStore = create<RangeAndCoverPlannerState>()(
 					}) as [BwgrRaCActionExtended, BwgrRaCActionExtended, BwgrRaCActionExtended];
 				}));
 			},
-			selectedChangeAction: (actionName: string) => {
+			selectedChangeAction: (actionName: string, volleyIndex: number) => {
 				set(produce<RangeAndCoverPlannerState>((state) => {
-					state.selectedAction = actionName;
+					state.selectedAction[volleyIndex] = actionName;
 				}));
 			},
 			toggleActionDetails: (volleyIndex: number) => {
