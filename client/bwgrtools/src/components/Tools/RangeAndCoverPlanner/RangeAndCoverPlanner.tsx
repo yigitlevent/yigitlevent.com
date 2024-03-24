@@ -31,29 +31,28 @@ export function RangeAndCoverPlanner(): JSX.Element {
 							<Typography variant="h5">Volley {volleyIndex + 1}</Typography>
 							<Divider sx={{ margin: "8px 0" }} />
 
-							{action
-								? action.visible
-									? <Paper elevation={2} sx={{ padding: "8px" }}>
-										<RangeAndCoverActionDetails action={action} volleyIndex={volleyIndex} />
-									</Paper>
-									: <IconButton disableRipple sx={{ width: "100%" }} onClick={() => toggleActionVisibility(volleyIndex)}>
-										<VisibilityIcon sx={{ fontSize: 100 }} />
-									</IconButton>
-								: <Fragment>
+							<Paper key={volleyIndex} elevation={2} sx={{ padding: "8px", marginBottom: "8px" }}>
+								{action
+									? action.visible
+										? <RangeAndCoverActionDetails action={action} volleyIndex={volleyIndex} />
+										: <IconButton disableRipple sx={{ width: "100%" }} onClick={() => toggleActionVisibility(volleyIndex)}>
+											<VisibilityIcon sx={{ fontSize: 100 }} />
+										</IconButton>
+									: <Fragment>
+										<Autocomplete
+											value={(racActions.find(v => v.name === selectedAction[volleyIndex]) as BwgrRaCAction)}
+											options={[...racActions].sort((a, b) => a.group[1].localeCompare(b.group[1]) || a.name.localeCompare(b.name))}
+											getOptionLabel={(option) => option.name}
+											groupBy={(option) => option.group[1]}
+											renderInput={(params) => <TextField {...params} />}
+											onChange={(_, v) => changeSelectedAction(v.name, volleyIndex)}
+											fullWidth
+											disableClearable
+										/>
 
-									<Autocomplete
-										value={(racActions.find(v => v.name === selectedAction[volleyIndex]) as BwgrRaCAction)}
-										options={[...racActions].sort((a, b) => a.group[1].localeCompare(b.group[1]) || a.name.localeCompare(b.name))}
-										getOptionLabel={(option) => option.name}
-										groupBy={(option) => option.group[1]}
-										renderInput={(params) => <TextField {...params} />}
-										onChange={(_, v) => changeSelectedAction(v.name, volleyIndex)}
-										fullWidth
-										disableClearable
-									/>
-
-									<Button size="large" fullWidth sx={{ padding: "16px", margin: "16px 0 8px" }} onClick={() => addAction(racActions, volleyIndex, selectedAction[volleyIndex])}>Add Action</Button>
-								</Fragment>}
+										<Button size="large" fullWidth sx={{ padding: "16px", margin: "16px 0 8px" }} onClick={() => addAction(racActions, volleyIndex, selectedAction[volleyIndex])}>Add Action</Button>
+									</Fragment>}
+							</Paper>
 						</Card>
 					</Grid>
 				))}
