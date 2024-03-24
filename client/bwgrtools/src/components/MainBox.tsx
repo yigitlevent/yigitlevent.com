@@ -73,6 +73,6 @@ export function MainBox(): JSX.Element {
 			</Paper>
 
 			<Box sx={{ margin: "0 0 200px" }} />
-		</Container >
+		</Container>
 	);
 }

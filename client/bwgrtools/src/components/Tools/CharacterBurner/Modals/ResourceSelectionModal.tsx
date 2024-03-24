@@ -274,7 +274,7 @@ export function ResourceSelectionModal({ isOpen, close }: { isOpen: boolean; clo
 						<Button variant="outlined" size="medium" onClick={() => createResource()}>Add Resource</Button>
 					</Grid>
 				</GenericGrid>
-			</Paper >
-		</Modal >
+			</Paper>
+		</Modal>
 	);
 }

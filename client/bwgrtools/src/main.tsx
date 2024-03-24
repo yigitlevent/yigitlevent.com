@@ -18,6 +18,6 @@ ReactDOM
 				<BrowserRouter>
 					<App />
 				</BrowserRouter>
-			</ThemeProvider >
+			</ThemeProvider>
 		</StrictMode>
 	);

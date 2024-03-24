@@ -104,6 +104,6 @@ export function SkillLists(): JSX.Element {
 						Could not find any matches. Try adding more fields or changing search text or filters.
 					</Alert>}
 			</GenericGrid>
-		</Fragment >
+		</Fragment>
 	);
 }
