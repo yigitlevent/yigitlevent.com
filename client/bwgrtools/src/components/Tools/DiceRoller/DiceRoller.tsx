@@ -14,9 +14,11 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
+import { Clamp } from "@utility/Clamp";
 import { RandomNumber } from "@utility/RandomNumber";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 
+import { CalculateDiceProbability } from "../../../utils/CalculateDiceProbability";
 import { GenericGrid } from "../../Shared/Grids";
 
 
@@ -59,6 +61,7 @@ export function DiceRoller(): JSX.Element {
 	const [isOpenEnded, setIsOpenEnded] = useState(false);
 	const [isDoubleObstacle, setIsDoubleObstacle] = useState(false);
 	const [result, setResult] = useState<TestResult | undefined>(undefined);
+	const [probabilities, setProbabilities] = useState<number[]>([]);
 
 	const calculateResult = (dice: number[], usedFate: boolean) => {
 		let successes = 0;
@@ -146,6 +149,44 @@ export function DiceRoller(): JSX.Element {
 		);
 	};
 
+	const getProbabilities = () => {
+		return (
+			<Fragment>
+				{Array.from(Array(20)).map((_, i) => {
+					const probability = probabilities.at(i);
+
+					const inner
+						= probability === undefined
+							? <Typography key={i} variant="body1">0%</Typography>
+							: <Typography key={i} variant="body1">{Math.round(probability * 100)}%</Typography>;
+
+					return (
+						<Grid
+							item
+							key={i} xs={5} sm={4} md={2} lg={1}
+							sx={{
+								width: "100%",
+								padding: "8px 4px",
+								margin: "8px 0",
+								background: `hsl(0, 0%, ${probability === undefined ? 0 : probability * 50}%)`,
+								textAlign: "center",
+								border: (i + 1) === (isDoubleObstacle ? obstacle * 2 : obstacle) ? "1px solid white" : "1px solid transparent"
+							}}
+						>
+							<Typography key={i} variant="body1" sx={{ borderBottom: "1px solid white" }}>{i + 1} ob</Typography>
+							{inner}
+						</Grid>
+					);
+				})}
+			</Fragment>
+		);
+	};
+
+	useEffect(() => {
+		const shadeLetter = shade[0] as BwgrShades;
+		setProbabilities(CalculateDiceProbability(dicePool, isOpenEnded, shadeLetter));
+	}, [dicePool, isOpenEnded, shade]);
+
 	return (
 		<Fragment>
 			<Typography variant="h3">Dice Roller</Typography>
@@ -168,7 +209,7 @@ export function DiceRoller(): JSX.Element {
 						label="Dice Pool"
 						inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
 						value={dicePool}
-						onChange={e => setDicePool(parseInt(e.target.value))}
+						onChange={e => setDicePool(Clamp(parseInt(e.target.value), 1, 20))}
 						fullWidth
 						variant="standard"
 					/>
@@ -179,7 +220,7 @@ export function DiceRoller(): JSX.Element {
 						label="Obstacle"
 						inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
 						value={obstacle}
-						onChange={e => setObstacle(parseInt(e.target.value))}
+						onChange={e => setObstacle(Clamp(parseInt(e.target.value), 1, 20))}
 						fullWidth
 						variant="standard"
 					/>
@@ -205,6 +246,12 @@ export function DiceRoller(): JSX.Element {
 					<Button variant="outlined" size="medium" onClick={resolveDiceRoll}>Roll Dice</Button>
 				</Grid>
 			</GenericGrid>
+
+			<Grid item xs={3} sm={3}>
+				<Grid container columns={20} direction="row" flexWrap="wrap" sx={{ margin: "16px 0", padding: "0" }}>
+					{getProbabilities()}
+				</Grid>
+			</Grid>
 
 			{result
 				? <GenericGrid columns={3}>
