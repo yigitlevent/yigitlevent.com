@@ -56,26 +56,26 @@ export function RandomLifepathsModal({ isOpen, close }: { isOpen: boolean; close
 		const bornLPs = ruleset.lifepaths.filter(v => v.stock[0] === chosenStock.id && v.setting[0] === chosenSetting.id && v.flags.isBorn);
 		tempChosenLifepaths.push(bornLPs[RandomNumber(0, bornLPs.length - 1)]);
 
-		const maxTries = 20;
+		const maxTries = 50;
 		let tries = 0;
 
 		while (tries < maxTries && chosenAmount < lpAmount) {
-			// chosenStock, tempChosenLifepaths, maxLeads, leadsCounter, checkRulesets
+			const lastLifepath = tempChosenLifepaths[tempChosenLifepaths.length - 1];
+
 			const possibilities = FilterLifepaths({
 				rulesetLifepaths: ruleset.lifepaths,
 				stock: [chosenStock.id, chosenStock.name],
 				age: tempChosenLifepaths.reduce((p, c) => (typeof c.years === "number") ? p + c.years : p + c.years[0], 0) + leadsCounter,
 				lifepaths: tempChosenLifepaths,
-				noLeads: maxLeads < leadsCounter ? tempChosenLifepaths[tempChosenLifepaths.length - 1].setting : undefined
+				noLeads: maxLeads <= leadsCounter ? lastLifepath.setting : undefined
 			});
 
-			const chosenLP = possibilities[RandomNumber(0, possibilities.length - 1)];
+			const chosenLifepath = possibilities[RandomNumber(0, possibilities.length - 1)];
 
-			if (chosenLP.setting !== tempChosenLifepaths[tempChosenLifepaths.length - 1].setting) {
-				leadsCounter = leadsCounter + 1;
-			}
+			if (chosenLifepath.setting[0] !== lastLifepath.setting[0]) leadsCounter = leadsCounter + 1;
 
-			const isDuplicate = tempChosenLifepaths.filter(v => (v.name === chosenLP.name && v.setting === chosenLP.setting)).length > 0;
+
+			const isDuplicate = tempChosenLifepaths.filter(v => (v.name === chosenLifepath.name && v.setting === chosenLifepath.setting)).length > 0;
 			if (isDuplicate && noDuplicates) {
 				tries += 1;
 				continue;
@@ -83,7 +83,7 @@ export function RandomLifepathsModal({ isOpen, close }: { isOpen: boolean; close
 			else {
 				tries = 0;
 				chosenAmount += 1;
-				tempChosenLifepaths.push(chosenLP);
+				tempChosenLifepaths.push(chosenLifepath);
 			}
 		}
 
