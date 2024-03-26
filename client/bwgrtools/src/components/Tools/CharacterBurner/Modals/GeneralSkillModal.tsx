@@ -68,7 +68,7 @@ export function GeneralSkillModal({ isOpen, close }: { isOpen: boolean; close: (
 								options={possibleSkills.sort((a, b) => a.category[1].localeCompare(b.category[1]) || a.name.localeCompare(b.name))}
 								getOptionLabel={(option) => option.name}
 								groupBy={(option) => option.category[1]}
-								renderInput={(params) => <TextField {...params} label="ChosenBwgrSkill" />}
+								renderInput={(params) => <TextField {...params} label="Chosen Skill" />}
 								onChange={(_, v) => setChosenSkill(v)}
 								fullWidth
 								disableClearable
