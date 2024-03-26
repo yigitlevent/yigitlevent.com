@@ -24,6 +24,7 @@ type BwgrPractice = RequireOnlyOne<{
 
 interface BwgrPracticePlaced {
 	practiceId: BwgrPracticeId;
+	cellId: number;
 	name: string;
 	testType: string;
 	hours: number;
