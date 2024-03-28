@@ -35,11 +35,11 @@ export function DiceRollerProbabilities({ probabilities, isDoubleObstacle, obsta
 											border: (obIndex + 1) === (isDoubleObstacle ? obstacle * 2 : obstacle) ? "1px solid white" : "1px solid transparent"
 										}}
 									>
-										<Typography key={obIndex} variant="body1" sx={{ borderBottom: "1px solid white" }}>{obIndex + 1}ob</Typography>
+										<Typography variant="body1" sx={{ borderBottom: "1px solid white" }}>{obIndex + 1}ob</Typography>
 
 										{probability === undefined
-											? <Typography key={obIndex} variant="body1">0%</Typography>
-											: <Typography key={obIndex} variant="body1">{Math.round(probability * 100)}%</Typography>}
+											? <Typography variant="body1">0%</Typography>
+											: <Typography variant="body1">{Math.round(probability * 100)}%</Typography>}
 									</Card>
 								</Grid>
 							);
