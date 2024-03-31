@@ -24,6 +24,7 @@ jobs:
         username: ${{ secrets.USERNAME }}
         port: ${{ secrets.PORT }}
         key: ${{ secrets.SSHKEY }}
+        proxy_passphrase: ${{ secrets.PASSPHRASE }}
         source: "utility/**"
         target: ${{ secrets.SOURCEDIR }}/utility
         strip_components: 1
@@ -36,6 +37,7 @@ jobs:
         username: ${{ secrets.USERNAME }}
         port: ${{ secrets.PORT }}
         key: ${{ secrets.SSHKEY }}
+        proxy_passphrase: ${{ secrets.PASSPHRASE }}
         source: "client/bwgrtools/**"
         target: ${{ secrets.SOURCEDIR }}/client/bwgrtools-src
         strip_components: 2
@@ -48,6 +50,7 @@ jobs:
         username: ${{ secrets.USERNAME }}
         port: ${{ secrets.PORT }}
         key: ${{ secrets.SSHKEY }}
+        proxy_passphrase: ${{ secrets.PASSPHRASE }}
         script: |
           export NVM_DIR=~/.nvm
           source ~/.nvm/nvm.sh
