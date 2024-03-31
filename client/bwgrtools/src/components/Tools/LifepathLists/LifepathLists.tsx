@@ -18,9 +18,9 @@ import { GenericGrid } from "../../Shared/Grids";
 
 export function LifepathLists(): JSX.Element {
 	const { stocks, settings, lifepaths } = useRulesetStore();
-	const { searchString, searchFields, filters, setFilter, searchResults } = useSearch<BwgrLifepath>(lifepaths, ["stock", "setting"], { "stock": stocks[0].name, "setting": settings[0].name });
+	const { searchValues, setFilter, filteredList } = useSearch<BwgrLifepath>(lifepaths, ["stock", "setting"], { "stock": stocks[0].name, "setting": settings[0].name });
 
-	const [allowedSettings, setAllowedSettings] = useState(settings.filter(setting => setting.stock[1] === filters["stock"]).map(v => v.name));
+	const [allowedSettings, setAllowedSettings] = useState(settings.filter(setting => setting.stock[1] === searchValues.filters["stock"]).map(v => v.name));
 
 	const updateStock = useCallback((val: string) => {
 		const newAllowed = settings.filter(setting => setting.stock[1] === val).map(v => v.name);
@@ -37,7 +37,7 @@ export function LifepathLists(): JSX.Element {
 					<FormControl variant="standard" fullWidth>
 						<InputLabel>Stock</InputLabel>
 
-						<Select label="Stock" value={filters["stock"]} onChange={v => updateStock(v.target.value)}>
+						<Select label="Stock" value={searchValues.filters["stock"]} onChange={v => updateStock(v.target.value)}>
 							{stocks.map(v => v.name).map((v, i) => <MenuItem key={i} value={v}>{v}</MenuItem>)}
 						</Select>
 					</FormControl>
@@ -47,7 +47,7 @@ export function LifepathLists(): JSX.Element {
 					<FormControl variant="standard" fullWidth>
 						<InputLabel>Setting</InputLabel>
 
-						<Select label="Setting" value={allowedSettings.includes(filters["setting"]) ? filters["setting"] : ""} onChange={v => setFilter([{ key: "setting", value: v.target.value }])}>
+						<Select label="Setting" value={allowedSettings.includes(searchValues.filters["setting"]) ? searchValues.filters["setting"] : ""} onChange={v => setFilter([{ key: "setting", value: v.target.value }])}>
 							{allowedSettings.map((v, i) => <MenuItem key={i} value={v}>{v}</MenuItem>)}
 						</Select>
 					</FormControl>
@@ -57,7 +57,7 @@ export function LifepathLists(): JSX.Element {
 					<TextField
 						label={"Search"}
 						variant="standard"
-						value={searchString}
+						value={searchValues.text}
 						onChange={(e) => setFilter([{ key: "s", value: e.target.value }])}
 						fullWidth
 					/>
@@ -68,14 +68,14 @@ export function LifepathLists(): JSX.Element {
 						<InputLabel>Search Fields</InputLabel>
 
 						<Select
-							value={searchFields}
+							value={searchValues.fields}
 							onChange={(e) => setFilter([{ key: "sf", value: typeof e.target.value !== "string" ? e.target.value.join(",") : e.target.value }])}
 							renderValue={(selected) => selected.join(", ")}
 							multiple
 						>
 							{["Name"/*, "Leads", "Skills", "Traits"*/].map((name) => (
 								<MenuItem key={name} value={name}>
-									<Checkbox checked={searchFields.indexOf(name) > -1} />
+									<Checkbox checked={searchValues.fields.indexOf(name) > -1} />
 									<ListItemText primary={name} />
 								</MenuItem>
 							))}
@@ -85,8 +85,8 @@ export function LifepathLists(): JSX.Element {
 			</GenericGrid>
 
 			<GenericGrid columns={1} spacing={[2, 2]} center>
-				{searchResults.length > 0
-					? searchResults.map((v, i) => (
+				{filteredList.length > 0
+					? filteredList.map((v, i) => (
 						<Grid item xs={1} key={i}>
 							<LifepathBox lifepath={v} />
 						</Grid>

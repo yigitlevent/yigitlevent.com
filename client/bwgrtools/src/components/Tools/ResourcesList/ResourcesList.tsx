@@ -19,7 +19,7 @@ import { GenericGrid } from "../../Shared/Grids";
 
 export function ResourcesList(): JSX.Element {
 	const { stocks, resources, resourceTypes } = useRulesetStore();
-	const { searchString, searchFields, filters, setFilter, searchResults } = useSearch<BwgrResource>(resources, ["stock", "type"]);
+	const { searchValues, setFilter, filteredList } = useSearch<BwgrResource>(resources, ["stock", "type"]);
 
 	return (
 		<Fragment>
@@ -30,7 +30,7 @@ export function ResourcesList(): JSX.Element {
 					<FormControl variant="standard" fullWidth>
 						<InputLabel>Stock</InputLabel>
 
-						<Select label="Stock" value={filters["stock"]} onChange={v => setFilter([{ key: "stock", value: v.target.value }])}>
+						<Select label="Stock" value={searchValues.filters["stock"]} onChange={v => setFilter([{ key: "stock", value: v.target.value }])}>
 							<MenuItem value="Any">Any</MenuItem>
 							{stocks.map(v => v.name).map((v, i) => <MenuItem key={i} value={v}>{v}</MenuItem>)}
 						</Select>
@@ -41,18 +41,18 @@ export function ResourcesList(): JSX.Element {
 					<FormControl variant="standard" fullWidth>
 						<InputLabel>Type</InputLabel>
 
-						<Select label="Type" value={filters["type"]} onChange={v => setFilter([{ key: "type", value: v.target.value }])}>
+						<Select label="Type" value={searchValues.filters["type"]} onChange={v => setFilter([{ key: "type", value: v.target.value }])}>
 							<MenuItem value="Any">Any</MenuItem>
 							{resourceTypes.map((v, i) => <MenuItem key={i} value={v}>{v}</MenuItem>)}
 						</Select>
 					</FormControl>
 				</Grid>
 
-				<Grid item xs={3} sm={3} md={2}>
+				<Grid item xs={3} sm={3} md={1}>
 					<TextField
 						label={"Search"}
 						variant="standard"
-						value={searchString}
+						value={searchValues.text}
 						onChange={(e) => setFilter([{ key: "s", value: e.target.value }])}
 						fullWidth
 					/>
@@ -63,14 +63,14 @@ export function ResourcesList(): JSX.Element {
 						<InputLabel>Search Fields</InputLabel>
 
 						<Select
-							value={searchFields}
+							value={searchValues.fields}
 							onChange={(e) => setFilter([{ key: "sf", value: typeof e.target.value !== "string" ? e.target.value.join(",") : e.target.value }])}
 							renderValue={(selected) => selected.join(", ")}
 							multiple
 						>
 							{["Name"].map((name) => (
 								<MenuItem key={name} value={name}>
-									<Checkbox checked={searchFields.indexOf(name) > -1} />
+									<Checkbox checked={searchValues.fields.indexOf(name) > -1} />
 									<ListItemText primary={name} />
 								</MenuItem>
 							))}
@@ -80,8 +80,8 @@ export function ResourcesList(): JSX.Element {
 			</GenericGrid>
 
 			<GenericGrid columns={1}>
-				{searchResults.length > 0
-					? searchResults.map((resource, i) => (
+				{filteredList.length > 0
+					? filteredList.map((resource, i) => (
 						<Grid item xs={1} key={i}>
 							<Paper elevation={2} sx={{ padding: "0 12px 16px" }}>
 								<ResourceItem resource={resource} />

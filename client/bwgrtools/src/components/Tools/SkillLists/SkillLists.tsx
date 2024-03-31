@@ -19,7 +19,7 @@ import { PopoverLink } from "../../Shared/PopoverLink";
 
 export function SkillLists(): JSX.Element {
 	const { stocks, skills, skillCategories, skillTypes } = useRulesetStore();
-	const { searchString, searchFields, filters, setFilter, searchResults } = useSearch<BwgrSkill>(skills, ["stock", "category", "type"]);
+	const { searchValues, setFilter, filteredList } = useSearch<BwgrSkill>(skills, ["stock", "category", "type"]);
 
 	return (
 		<Fragment>
@@ -30,7 +30,7 @@ export function SkillLists(): JSX.Element {
 					<FormControl variant="standard" fullWidth>
 						<InputLabel>Stock</InputLabel>
 
-						<Select label="Stock" value={filters["stock"]} onChange={v => setFilter([{ key: "stock", value: v.target.value }])}>
+						<Select label="Stock" value={searchValues.filters["stock"]} onChange={v => setFilter([{ key: "stock", value: v.target.value }])}>
 							<MenuItem value="Any">Any</MenuItem>
 							{stocks.map(v => v.name).map((v, i) => <MenuItem key={i} value={v}>{v}</MenuItem>)}
 						</Select>
@@ -41,7 +41,7 @@ export function SkillLists(): JSX.Element {
 					<FormControl variant="standard" fullWidth>
 						<InputLabel>Category</InputLabel>
 
-						<Select label="Category" value={filters["category"]} onChange={v => setFilter([{ key: "category", value: v.target.value }])}>
+						<Select label="Category" value={searchValues.filters["category"]} onChange={v => setFilter([{ key: "category", value: v.target.value }])}>
 							<MenuItem value="Any">Any</MenuItem>
 							{skillCategories.map((v, i) => <MenuItem key={i} value={v}>{v}</MenuItem>)}
 						</Select>
@@ -52,7 +52,7 @@ export function SkillLists(): JSX.Element {
 					<FormControl variant="standard" fullWidth>
 						<InputLabel>Type</InputLabel>
 
-						<Select label="Type" value={filters["type"]} onChange={v => setFilter([{ key: "type", value: v.target.value }])}>
+						<Select label="Type" value={searchValues.filters["type"]} onChange={v => setFilter([{ key: "type", value: v.target.value }])}>
 							<MenuItem value="Any">Any</MenuItem>
 							{skillTypes.map((v, i) => <MenuItem key={i} value={v}>{v}</MenuItem>)}
 						</Select>
@@ -63,7 +63,7 @@ export function SkillLists(): JSX.Element {
 					<TextField
 						label={"Search"}
 						variant="standard"
-						value={searchString}
+						value={searchValues.text}
 						onChange={(e) => setFilter([{ key: "s", value: e.target.value }])}
 						fullWidth
 					/>
@@ -74,14 +74,14 @@ export function SkillLists(): JSX.Element {
 						<InputLabel>Search Fields</InputLabel>
 
 						<Select
-							value={searchFields}
+							value={searchValues.fields}
 							onChange={(e) => setFilter([{ key: "sf", value: typeof e.target.value !== "string" ? e.target.value.join(",") : e.target.value }])}
 							renderValue={(selected) => selected.join(", ")}
 							multiple
 						>
 							{["Name", "Description"].map((name) => (
 								<MenuItem key={name} value={name}>
-									<Checkbox checked={searchFields.indexOf(name) > -1} />
+									<Checkbox checked={searchValues.fields.indexOf(name) > -1} />
 									<ListItemText primary={name} />
 								</MenuItem>
 							))}
@@ -91,8 +91,8 @@ export function SkillLists(): JSX.Element {
 			</GenericGrid>
 
 			<GenericGrid spacing={[2, 2]}>
-				{searchResults.length > 0
-					? [...searchResults].sort((a, b) => a.name.localeCompare(b.name)).map((skill, i) => (
+				{filteredList.length > 0
+					? [...filteredList].sort((a, b) => a.name.localeCompare(b.name)).map((skill, i) => (
 						<Grid item key={i}>
 							<Paper elevation={2} sx={{ cursor: "pointer", padding: "2px 6px" }}>
 								<PopoverLink data={skill} />
