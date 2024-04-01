@@ -10,7 +10,7 @@ import { Fragment, useEffect, useState } from "react";
 import { DiceRollerProbabilities } from "./DiceRollerProbabilities";
 import { DiceRollerResult } from "./DiceRollerResult";
 import { CalculateDiceProbability } from "../../../utils/CalculateDiceProbability";
-import { AbilityButton } from "../../Shared/AbilityButton";
+import { AbilityButton, AbilityButtonWithArrows } from "../../Shared/AbilityButton";
 
 
 interface Tests {
@@ -110,40 +110,40 @@ export function DiceRoller(): JSX.Element {
 
 			<Grid
 				container
-				columns={10}
-				justifyContent="start"
-				alignItems="start"
+				columns={3}
 				rowGap={2}
+				justifyContent="space-between"
+				alignItems="center"
 				sx={{ margin: "16px 0 0 0" }}
 			>
-				<Grid item xs={10} sm={10} md={3}>
+				<Grid item container alignItems="center" sx={{ width: "max-content" }}>
 					<Typography sx={{ display: "inline-block", margin: "0 8px 0 0" }}>Dice Pool</Typography>
 
-					<AbilityButton
-						onClick={() => setShade(v => v === "W" ? "B" : v === "B" ? "G" : "W")}
-					>
+					<AbilityButton sx={{ height: "30px" }} onClick={() => setShade(v => v === "W" ? "B" : v === "B" ? "G" : "W")}>
 						{shade}
 					</AbilityButton>
 
-					<AbilityButton
+					<AbilityButtonWithArrows
 						onClick={() => setDicePool(v => v === 20 ? v = 1 : Clamp(v + 1, 1, 20))}
 						onContextMenu={() => setDicePool(v => Clamp(v - 1, 1, 20))}
 					>
 						{dicePool}
-					</AbilityButton>
+					</AbilityButtonWithArrows>
 
-					<Typography sx={{ display: "inline-block", margin: "0 8px 0 0" }}>vs. Ob</Typography>
+					<Typography sx={{ display: "inline-block", margin: "0 8px 0 8px" }}>vs. Ob</Typography>
 
-					<AbilityButton
+					<AbilityButtonWithArrows
 						onClick={() => setObstacle(v => v === 20 ? v = 1 : Clamp(v + 1, 1, 20))}
 						onContextMenu={() => setObstacle(v => Clamp(v - 1, 1, 20))}
 					>
 						{obstacle}
-					</AbilityButton>
+					</AbilityButtonWithArrows>
 				</Grid>
 
-				<Grid item xs={10} sm={10} md={2}>
+
+				<Grid item xs={3} sm={3} md={1}>
 					<FormControlLabel
+						label="Is Open Ended"
 						control={
 							<Switch
 								checked={isOpenEnded}
@@ -151,12 +151,11 @@ export function DiceRoller(): JSX.Element {
 								size="small"
 							/>
 						}
-						label="Is Open Ended"
+						sx={{ display: "block" }}
 					/>
-				</Grid>
 
-				<Grid item xs={10} sm={10} md={3}>
 					<FormControlLabel
+						label="Is Double Obstacle"
 						control={
 							<Switch
 								checked={isDoubleObstacle}
@@ -164,11 +163,12 @@ export function DiceRoller(): JSX.Element {
 								size="small"
 							/>
 						}
-						label="Is Double Obstacle"
+						sx={{ display: "block" }}
 					/>
 				</Grid>
 
-				<Grid item xs={10} sm={4} md={2}>
+
+				<Grid item xs={3} sm={3} md={1}>
 					<Button variant="outlined" size="medium" onClick={resolveDiceRoll}>Roll Dice</Button>
 				</Grid>
 			</Grid>
