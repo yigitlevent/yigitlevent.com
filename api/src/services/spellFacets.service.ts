@@ -13,13 +13,19 @@ export async function GetSpellFacets(): Promise<BwgrSpellFacets> {
 	const log = new Logger("GetSpellFacets Querying");
 	return Promise.all([
 		PgPool.query<BwgrSpellOriginFacet>(query1),
-		PgPool.query<BwgrSpellDurationFacet>(query2),
-		PgPool.query<BwgrSpellAreaOfEffectFacet>(query3),
-		PgPool.query<BwgrSpellElementFacet>(query4),
-		PgPool.query<BwgrSpellImpetusFacet>(query5)
+		PgPool.query<BwgrSpellElementFacet>(query2),
+		PgPool.query<BwgrSpellImpetusFacet>(query3),
+		PgPool.query<BwgrSpellDurationFacet>(query4),
+		PgPool.query<BwgrSpellAreaOfEffectFacet>(query5)
 	]).then((result): BwgrSpellFacets => {
 		log.end();
-		const res = { origins: result[0].rows, duration: result[1].rows, areaOfEffects: result[2].rows, elements: result[3].rows, impetus: result[4].rows };
+		const res = {
+			origins: result[0].rows,
+			elements: result[1].rows,
+			impetus: result[2].rows,
+			duration: result[3].rows,
+			areaOfEffects: result[4].rows
+		};
 		return res;
 	});
 }
