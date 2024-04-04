@@ -9,6 +9,7 @@ interface BwgrFacet {
 	obstacle: number;
 	actions: number;
 	resource: number;
+	subfacet?: string;
 }
 
 interface BwgrSpellOriginFacet extends BwgrFacet {
@@ -34,6 +35,16 @@ interface BwgrSpellImpetusFacet extends BwgrFacet {
 interface BwgrSpellFacets {
 	origins: BwgrSpellOriginFacet[];
 	elements: BwgrSpellElementFacet[];
+	impetus: BwgrSpellImpetusFacet[];
+	areaOfEffects: BwgrSpellAreaOfEffectFacet[];
+	duration: BwgrSpellDurationFacet[];
+}
+
+interface BwgrAltSpellFacets {
+	origins: BwgrSpellOriginFacet[];
+	primeElements: BwgrSpellElementFacet[];
+	lowerElements: BwgrSpellElementFacet[];
+	higherElements: BwgrSpellElementFacet[];
 	impetus: BwgrSpellImpetusFacet[];
 	areaOfEffects: BwgrSpellAreaOfEffectFacet[];
 	duration: BwgrSpellDurationFacet[];

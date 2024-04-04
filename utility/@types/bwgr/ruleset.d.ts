@@ -29,6 +29,7 @@ interface BwgrRulesetData {
 	lifepaths: BwgrLifepath[];
 	resources: BwgrResource[];
 	spellFacets: BwgrSpellFacets;
+	spellAltFacets: BwgrAltSpellFacets;
 	dowActions: BwgrDoWAction[];
 	racActions: BwgrRaCAction[];
 	fightActions: BwgrFightAction[];
