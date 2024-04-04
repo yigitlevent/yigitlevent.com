@@ -8,7 +8,7 @@ export async function GetAltSpellFacets(): Promise<BwgrAltSpellFacets> {
 	const query2 = `${query} from bwgr."AltSpellPrimeElementFacets";`;
 	const query3 = `${query} from bwgr."AltSpellLowerElementFacets";`;
 	const query4 = `${query} from bwgr."AltSpellHigherElementFacets";`;
-	const query5 = `${query} from bwgr."AltSpellImpetusFacets";`;
+	const query5 = `${query} from bwgr."AltSpellLawFacets";`;
 
 	const queryWithSubfacet = "select \"Id\" as \"id\", \"Name\" as \"name\", \"Obstacle\" as \"obstacle\", \"Actions\" as \"actions\", \"Resource\" as \"resource\", \"SubFacet\" as \"subfacet\"";
 	const query6 = `${queryWithSubfacet} from bwgr."AltSpellDurationFacets";`;
