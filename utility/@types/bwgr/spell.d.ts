@@ -4,6 +4,8 @@ type BwgrAreaOfEffectFacetId = Nominal<number, "BwgrAreaOfEffectFacetId">;
 type BwgrElementFacetId = Nominal<number, "BwgrElementFacetId">;
 type BwgrImpetusFacetId = Nominal<number, "BwgrImpetusFacetId">;
 
+type ElementCategories = "primeElements" | "lowerElements" | "higherElements";
+
 interface BwgrFacet {
 	name: string;
 	obstacle: number;

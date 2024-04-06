@@ -40,6 +40,7 @@ interface RulesetStore {
 	readonly resourceTypes: string[];
 
 	readonly spellFacets: BwgrSpellFacets;
+	readonly spellAltFacets: BwgrAltSpellFacets;
 
 	readonly dowActions: BwgrDoWAction[];
 	readonly racActions: BwgrRaCAction[];
@@ -108,6 +109,16 @@ export const useRulesetStore = create<RulesetStore>()(
 			spellFacets: {
 				origins: [],
 				elements: [],
+				impetus: [],
+				areaOfEffects: [],
+				duration: []
+			},
+
+			spellAltFacets: {
+				origins: [],
+				primeElements: [],
+				lowerElements: [],
+				higherElements: [],
 				impetus: [],
 				areaOfEffects: [],
 				duration: []
@@ -208,6 +219,7 @@ export const useRulesetStore = create<RulesetStore>()(
 									state.resourceTypes = [...response.data.ruleset.resources.reduce((a, v) => a.add(v.type[1]), new Set<string>())];
 
 									state.spellFacets = response.data.ruleset.spellFacets;
+									state.spellAltFacets = response.data.ruleset.spellAltFacets;
 
 									state.dowActions = response.data.ruleset.dowActions;
 									state.racActions = response.data.ruleset.racActions;

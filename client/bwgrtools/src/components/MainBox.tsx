@@ -14,6 +14,7 @@ import { DuelOfWitsPlanner } from "./Tools/DuelOfWitsPlanner/DuelOfWitsPlanner";
 import { FightPlanner } from "./Tools/FightPlanner/FightPlanner";
 import { LifepathLists } from "./Tools/LifepathLists/LifepathLists";
 import { MagicWheel } from "./Tools/MagicWheel/MagicWheel";
+import { MagicWheelAlt } from "./Tools/MagicWheel/MagicWheelAlt";
 import { PracticePlanner } from "./Tools/PracticePlanner/PracticePlanner";
 import { RangeAndCoverPlanner } from "./Tools/RangeAndCoverPlanner/RangeAndCoverPlanner";
 import { ResourcesList } from "./Tools/ResourcesList/ResourcesList";
@@ -64,6 +65,7 @@ export function MainBox(): JSX.Element {
 						<Route path="/resources" element={<ResourcesList />} />
 						<Route path="/practiceplanner" element={<PracticePlanner />} />
 						<Route path="/magicwheel" element={<MagicWheel />} />
+						<Route path="/magicwheelalt" element={<MagicWheelAlt />} />
 						<Route path="/dowplanner" element={<DuelOfWitsPlanner />} />
 						<Route path="/racplanner" element={<RangeAndCoverPlanner />} />
 						<Route path="/fightplanner" element={<FightPlanner />} />

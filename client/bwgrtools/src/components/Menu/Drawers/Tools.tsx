@@ -30,7 +30,8 @@ export function Tools({ expanded }: { expanded: boolean; }): JSX.Element {
 		["Duel of Wits Planner", "/dowplanner", QuestionAnswerOutlinedIcon],
 		["Dice Roller", "/diceroller", CasinoOutlinedIcon],
 		["Character Burner", "/characterburner", LocalFireDepartmentOutlinedIcon],
-		["Magic Wheel", "/magicwheel", AutoAwesomeOutlinedIcon]
+		["Magic Wheel", "/magicwheel", AutoAwesomeOutlinedIcon],
+		["Magic Wheel Alt", "/magicwheelalt", AutoAwesomeOutlinedIcon]
 	];
 
 	return (
