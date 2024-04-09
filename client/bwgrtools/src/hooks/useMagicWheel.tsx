@@ -2,7 +2,6 @@ import { RandomNumber } from "@utility/RandomNumber";
 import { useCallback, useEffect, useState } from "react";
 
 import { THEME } from "../theme/theme";
-import { GetWrapAroundIndex } from "../utils/GetWrapAroundIndex";
 
 
 export interface BandBlock {
@@ -17,6 +16,7 @@ export interface MagicWheelConstants {
 	canvasSize: number;
 	circleRadius: number;
 	circleOffset: number;
+	innerCircleRadius: number;
 	textOffset: number;
 	rotationSpeed: number;
 }
@@ -36,7 +36,8 @@ interface UseMagicWheelProps<T extends OneOfWheelObjects, P extends OneOfWheelOb
 export interface UseMagicWheelReturn<T extends OneOfWheelObjects, P extends OneOfWheelObjectKeys> {
 	constants: MagicWheelConstants;
 	isRotating: boolean;
-	cover: boolean;
+	facetsSet: boolean;
+	prayed: boolean;
 	elementId: BwgrElementFacetId;
 	impetusId: BwgrImpetusFacetId;
 	durationId: BwgrDurationFacetId;
@@ -44,24 +45,23 @@ export interface UseMagicWheelReturn<T extends OneOfWheelObjects, P extends OneO
 	areaOfEffectId: BwgrAreaOfEffectFacetId;
 	setTargetAmounts: (steps?: number, direction?: number) => void;
 	setIsRotating: (rotating: boolean, resetAll: boolean, bands?: Record<P, BandBlock>, facets?: T) => void;
-	setCover: React.Dispatch<React.SetStateAction<boolean>>;
 	setFacet: (facet: P, value: number) => void;
-	setForceRedraw: React.Dispatch<React.SetStateAction<ElementCategories | undefined>>;
+	setFacetsSet: React.Dispatch<React.SetStateAction<boolean>>;
+	setPrayed: React.Dispatch<React.SetStateAction<boolean>>;
+	reset: () => void;
 }
 
 export function useMagicWheel<T extends OneOfWheelObjects, P extends OneOfWheelObjectKeys>({ spellFacets, bands, context, selectedElementCategory, isAvailable, setBands }: UseMagicWheelProps<T, P>): UseMagicWheelReturn<T, P> {
-	const [constants] = useState<MagicWheelConstants>({ canvasSize: 580, circleRadius: 32, circleOffset: 90, textOffset: 100, rotationSpeed: 0.04 });
-	const [isRotating, updateIsRotating] = useState(false);
-	const [forceRedraw, setForceRedraw] = useState<ElementCategories>();
-	const [cover, setCover] = useState(false);
+	const [constants] = useState<MagicWheelConstants>({ canvasSize: 580, circleRadius: 32, circleOffset: 90, innerCircleRadius: 200, textOffset: 100, rotationSpeed: 0.04 });
+	const [isRotating, setIsRotating] = useState(true);
+	const [facetsSet, setFacetsSet] = useState(false);
+	const [prayed, setPrayed] = useState(false);
 
 	const [elementId, setElementId] = useState(0 as BwgrElementFacetId);
 	const [impetusId, setImpetusId] = useState(0 as BwgrImpetusFacetId);
 	const [durationId, setDurationId] = useState(0 as BwgrDurationFacetId);
 	const [originId, setOriginId] = useState(0 as BwgrOriginFacetId);
 	const [areaOfEffectId, setAreaOfEffectId] = useState(0 as BwgrAreaOfEffectFacetId);
-
-	const getNewId = (currentAmount: number, itemCount: number) => GetWrapAroundIndex(currentAmount, itemCount);
 
 	const setFacet = useCallback((facet: P, value?: number) => {
 		const horrible = spellFacets[facet as keyof T] as (unknown & { id: P; })[];
@@ -89,70 +89,15 @@ export function useMagicWheel<T extends OneOfWheelObjects, P extends OneOfWheelO
 				case "lowerElements":
 				case "higherElements":
 					if (facet === selectedElementCategory) setElementId((hasValue ? value : 0) as BwgrElementFacetId);
+					else if (selectedElementCategory === undefined) setElementId((hasValue ? value : 0) as BwgrElementFacetId);
 					break;
 			}
 		}
 	}, [selectedElementCategory, setBands, spellFacets]);
 
-	const setFacetsAfterRotation = useCallback((facets: T, resetAll: boolean) => {
-		(Object.keys(bands) as P[]).forEach(key => {
-			const band = bands[key];
-			setFacet(key, !resetAll ? getNewId(band.currentAmount, facets[key as keyof OneOfWheelObjects].length) : undefined);
-		});
-	}, [bands, setFacet]);
-
-	const setIsRotating = useCallback((rotating: boolean, resetAll: boolean, bands?: Record<P, BandBlock>, facets?: T) => {
-		updateIsRotating(rotating);
-		if (bands && facets && !rotating) setFacetsAfterRotation(facets, resetAll);
-	}, [setFacetsAfterRotation]);
-
-	const rotateBand = useCallback((context: CanvasRenderingContext2D, bands: Record<P, BandBlock>): void => {
-		for (const key in bands) {
-			const band = bands[key as P];
-
-			if (isAvailable(key)) {
-				const bandIndex = band.index;
-
-				const distancePerCharacter = constants.circleRadius * (bandIndex + 1) + constants.textOffset;
-				const anglePerCharacter = 8 * (1 / distancePerCharacter);
-
-				const textStartAngles = band.items.map<[string, number]>((name, itemIndex) => {
-					const initialStart = band.currentAmount * band.angle;
-					const itemMargin = itemIndex * band.angle;
-					const halfBack = anglePerCharacter + ((anglePerCharacter * name.length) / 2);
-					return [name, (initialStart + itemMargin - halfBack)];
-				});
-
-				textStartAngles.forEach(([name, startAngle]) => {
-					context.save();
-					context.translate(constants.canvasSize / 2, constants.canvasSize / 2);
-					context.rotate(startAngle);
-
-					for (let i = 0; i < name.length; i++) {
-						context.rotate(anglePerCharacter);
-						context.save();
-						context.translate(0, -1 * distancePerCharacter);
-						context.font = "14px 'Code'";
-						context.fillStyle = THEME.palette.primary.light;
-						context.fillText(name[i].toLowerCase(), 0, 0);
-						context.restore();
-					}
-
-					context.restore();
-				});
-
-				if (band.currentAmount.toFixed(1) === band.targetAmount.toFixed(1)) setBands((prevBands) => ({ ...prevBands, [key]: { ...band, currentAmount: band.targetAmount } }));
-				else if (band.currentAmount < band.targetAmount) setBands((prevBands) => ({ ...prevBands, [key]: { ...band, currentAmount: band.currentAmount + constants.rotationSpeed } }));
-				else if (band.currentAmount > band.targetAmount) setBands((prevBands) => ({ ...prevBands, [key]: { ...band, currentAmount: band.currentAmount - constants.rotationSpeed } }));
-				else setBands((prevBands) => ({ ...prevBands, [key]: { ...band, currentAmount: band.targetAmount } }));
-			}
-		}
-
-		if (isRotating && Object.values<BandBlock>(bands).every((band) => band.currentAmount === band.targetAmount)) setIsRotating(false, false, bands, spellFacets);
-	}, [isRotating, setIsRotating, spellFacets, isAvailable, constants.circleRadius, constants.textOffset, constants.canvasSize, constants.rotationSpeed, setBands]);
-
 	const setTargetAmounts = useCallback((steps?: number, direction?: number) => {
-		setIsRotating(true, false);
+		setPrayed(true);
+		setIsRotating(true);
 
 		const getRandomRotation = () =>
 			steps && direction
@@ -172,40 +117,89 @@ export function useMagicWheel<T extends OneOfWheelObjects, P extends OneOfWheelO
 			}, {} as Record<P, BandBlock>);
 
 		setBands(revisedBands);
-	}, [bands, isAvailable, setBands, setIsRotating]);
+	}, [bands, isAvailable, setBands]);
 
-	const resetStartingFacets = useCallback((facets: BwgrSpellFacets | BwgrAltSpellFacets) => {
-		setAreaOfEffectId(facets.areaOfEffects[0].id);
-		if ("elements" in facets) setElementId(facets.elements[0].id);
-		else if (selectedElementCategory) setElementId(facets[selectedElementCategory][0].id);
-		setImpetusId(facets.impetus[0].id);
-		setDurationId(facets.duration[0].id);
-		setOriginId(facets.origins[0].id);
-	}, [selectedElementCategory]);
-
-	useEffect(() => {
-		resetStartingFacets(spellFacets);
-	}, [resetStartingFacets, spellFacets]);
+	const reset = useCallback(() => {
+		setAreaOfEffectId(spellFacets.areaOfEffects[0].id);
+		if ("elements" in spellFacets) setElementId(spellFacets.elements[0].id);
+		else if (selectedElementCategory) setElementId(spellFacets[selectedElementCategory][0].id);
+		setImpetusId(spellFacets.impetus[0].id);
+		setDurationId(spellFacets.duration[0].id);
+		setOriginId(spellFacets.origins[0].id);
+		const revisedBands
+			= Object.entries<BandBlock>(bands).reduce<Record<P, BandBlock>>((acc, [key, band]) => {
+				acc[key as P] = { ...band, targetAmount: 0 };
+				return acc;
+			}, {} as Record<P, BandBlock>);
+		setBands(revisedBands);
+		setFacetsSet(false);
+		setPrayed(false);
+		setIsRotating(true);
+	}, [bands, selectedElementCategory, setBands, spellFacets]);
 
 	useEffect(() => {
 		if (context && isRotating) {
 			context.clearRect(0, 0, constants.canvasSize, constants.canvasSize);
-			rotateBand(context, bands);
-		}
-	}, [bands, constants.canvasSize, context, forceRedraw, isRotating, rotateBand, selectedElementCategory]);
 
-	useEffect(() => {
-		if (forceRedraw !== selectedElementCategory) {
-			resetStartingFacets(spellFacets);
-			setIsRotating(true, true);
-			setForceRedraw(selectedElementCategory);
+			let anim = 0;
+
+			const doRotation = () => {
+				for (const key in bands) {
+					const band = bands[key as P];
+
+					if (isAvailable(key)) {
+						const bandIndex = band.index;
+
+						const distancePerCharacter = constants.circleRadius * (bandIndex + 1) + constants.textOffset;
+						const anglePerCharacter = 8 * (1 / distancePerCharacter);
+
+						const textStartAngles = band.items.map<[string, number]>((name, itemIndex) => {
+							const initialStart = band.currentAmount * band.angle;
+							const itemMargin = itemIndex * band.angle;
+							const halfBack = anglePerCharacter + ((anglePerCharacter * name.length) / 2);
+							return [name, (initialStart + itemMargin - halfBack)];
+						});
+
+						textStartAngles.forEach(([name, startAngle]) => {
+							context.save();
+							context.translate(constants.canvasSize / 2, constants.canvasSize / 2);
+							context.rotate(startAngle);
+
+							for (let i = 0; i < name.length; i++) {
+								context.rotate(anglePerCharacter);
+								context.save();
+								context.translate(0, -1 * distancePerCharacter);
+								context.font = "14px 'Code'";
+								context.fillStyle = THEME.palette.primary.light;
+								context.fillText(name[i].toLowerCase(), 0, 0);
+								context.restore();
+							}
+
+							context.restore();
+						});
+
+						if (band.currentAmount.toFixed(1) === band.targetAmount.toFixed(1)) setBands((prevBands) => ({ ...prevBands, [key]: { ...band, currentAmount: band.targetAmount } }));
+						else if (band.currentAmount < band.targetAmount) setBands((prevBands) => ({ ...prevBands, [key]: { ...band, currentAmount: band.currentAmount + constants.rotationSpeed } }));
+						else if (band.currentAmount > band.targetAmount) setBands((prevBands) => ({ ...prevBands, [key]: { ...band, currentAmount: band.currentAmount - constants.rotationSpeed } }));
+						else setBands((prevBands) => ({ ...prevBands, [key]: { ...band, currentAmount: band.targetAmount } }));
+					}
+				}
+
+				if (isRotating && Object.values<BandBlock>(bands).every((band) => band.currentAmount === band.targetAmount)) {
+					cancelAnimationFrame(anim);
+					setIsRotating(false);
+				}
+			};
+
+			anim = requestAnimationFrame(doRotation);
 		}
-	}, [forceRedraw, resetStartingFacets, selectedElementCategory, setIsRotating, spellFacets]);
+	}, [bands, constants.canvasSize, constants.circleRadius, constants.rotationSpeed, constants.textOffset, context, isAvailable, isRotating, setBands]);
 
 	return {
 		constants,
 		isRotating,
-		cover,
+		facetsSet,
+		prayed,
 		elementId,
 		impetusId,
 		durationId,
@@ -213,8 +207,9 @@ export function useMagicWheel<T extends OneOfWheelObjects, P extends OneOfWheelO
 		areaOfEffectId,
 		setTargetAmounts,
 		setIsRotating,
-		setCover,
 		setFacet,
-		setForceRedraw
+		setFacetsSet,
+		setPrayed,
+		reset
 	};
 }
