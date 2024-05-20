@@ -1,0 +1,207 @@
+name: deploy
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/deploy.yml"
+      - "api/**"
+      - "client/**"
+      - "utility/**"
+
+jobs:
+  changes:
+    runs-on: ubuntu-latest
+
+    permissions:
+      pull-requests: read
+
+    outputs:
+      utility: ${{ steps.filter.outputs.utility }}
+      api: ${{ steps.filter.outputs.api }}
+      main: ${{ steps.filter.outputs.main }}
+      bwgrtools: ${{ steps.filter.outputs.bwgrtools }}
+      hexmaptools: ${{ steps.filter.outputs.hexmaptools }}
+
+    steps:
+      - uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            utility:
+              - 'utility/**'
+            api:
+                - 'api/**'
+            main:
+                - 'client/main/**'
+            bwgrtools:
+                - 'client/bwgrtools/**'
+            hexmaptools:
+                - 'client/hexmaptools/**'
+
+  copy-utility:
+    needs: [changes]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Clean and Copy Utility
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          port: ${{ secrets.PORT }}
+          key: ${{ secrets.SSHKEY }}
+          source: "utility/**"
+          target: ${{ secrets.SOURCEDIR }}/utility
+          strip_components: 1
+          rm: true
+
+  build-api:
+    needs: [changes, copy-utility]
+    if: ${{ needs.changes.outputs.utility == 'true' || needs.changes.outputs.api == 'true' }}
+    runs-on: ubuntu-latest
+    steps: 
+      - uses: actions/checkout@v4
+
+      - name: Clean and Copy Source
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          port: ${{ secrets.PORT }}
+          key: ${{ secrets.SSHKEY }}
+          source: "api/**"
+          target: ${{ secrets.SOURCEDIR }}/api-src
+          strip_components: 1
+          rm: true
+
+      - name: Build, Target Cleanup, Copy
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          port: ${{ secrets.PORT }}
+          key: ${{ secrets.SSHKEY }}
+          script: |
+            export NVM_DIR=~/.nvm
+            source ~/.nvm/nvm.sh
+            cd ${{ secrets.SOURCEDIR }}/api-src
+            nvm use 21.4.0
+            npm i
+            npm run build
+            sudo rm -rf ${{ secrets.TARGETDIR }}/api
+            sudo cp -R ${{ secrets.SOURCEDIR }}/api-src ${{ secrets.TARGETDIR }}/api
+            sudo pm2 restart api -s
+   
+  build-client-main:
+    needs: [changes, copy-utility]
+    if: ${{ needs.changes.outputs.utility == 'true' || needs.changes.outputs.main == 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Clean and Copy Source
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          port: ${{ secrets.PORT }}
+          key: ${{ secrets.SSHKEY }}
+          source: "client/main/**"
+          target: ${{ secrets.SOURCEDIR }}/client/main-src
+          strip_components: 2
+          rm: true
+  
+      - name: Build, Target Cleanup, Copy
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          port: ${{ secrets.PORT }}
+          key: ${{ secrets.SSHKEY }}
+          script: |
+            export NVM_DIR=~/.nvm
+            source ~/.nvm/nvm.sh
+            cd ${{ secrets.SOURCEDIR }}/client/main-src
+            nvm install node
+            nvm use node
+            npm i
+            npm run build
+            sudo rm -rf ${{ secrets.TARGETDIR }}/client/main
+            sudo cp -R ${{ secrets.SOURCEDIR }}/client/main-src/dist ${{ secrets.TARGETDIR }}/client/main
+   
+  build-client-bwgrtools:
+    needs: [changes, copy-utility]
+    if: ${{ needs.changes.outputs.utility == 'true' || needs.changes.outputs.bwgrtools == 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Clean and Copy Source
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          port: ${{ secrets.PORT }}
+          key: ${{ secrets.SSHKEY }}
+          source: "client/bwgrtools/**"
+          target: ${{ secrets.SOURCEDIR }}/client/bwgrtools-src
+          strip_components: 2
+          rm: true
+  
+      - name: Build, Target Cleanup, Copy
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          port: ${{ secrets.PORT }}
+          key: ${{ secrets.SSHKEY }}
+          script: |
+            export NVM_DIR=~/.nvm
+            source ~/.nvm/nvm.sh
+            cd ${{ secrets.SOURCEDIR }}/client/bwgrtools-src
+            nvm install node
+            nvm use node
+            npm i
+            npm run build
+            sudo rm -rf ${{ secrets.TARGETDIR }}/client/bwgrtools
+            sudo cp -R ${{ secrets.SOURCEDIR }}/client/bwgrtools-src/dist ${{ secrets.TARGETDIR }}/client/bwgrtools
+   
+  build-client-hexmaptools:
+      needs: [changes, copy-utility]
+      if: ${{ needs.changes.outputs.utility == 'true' || needs.changes.outputs.hexmaptools == 'true' }}
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v4
+
+        - name: Clean and Copy Source
+          uses: appleboy/scp-action@master
+          with:
+            host: ${{ secrets.HOST }}
+            username: ${{ secrets.USERNAME }}
+            port: ${{ secrets.PORT }}
+            key: ${{ secrets.SSHKEY }}
+            source: "client/hexmaptools/**"
+            target: ${{ secrets.SOURCEDIR }}/client/hexmaptools-src
+            strip_components: 2
+            rm: true
+
+        - name: Build, Target Cleanup, Copy
+          uses: appleboy/ssh-action@master
+          with:
+            host: ${{ secrets.HOST }}
+            username: ${{ secrets.USERNAME }}
+            port: ${{ secrets.PORT }}
+            key: ${{ secrets.SSHKEY }}
+            script: |
+              export NVM_DIR=~/.nvm
+              source ~/.nvm/nvm.sh
+              cd ${{ secrets.SOURCEDIR }}/client/hexmaptools-src
+              nvm install node
+              nvm use node
+              npm i
+              npm run build
+              sudo rm -rf ${{ secrets.TARGETDIR }}/client/hexmaptools
+              sudo cp -R ${{ secrets.SOURCEDIR }}/client/hexmaptools-src/dist ${{ secrets.TARGETDIR }}/client/hexmaptools

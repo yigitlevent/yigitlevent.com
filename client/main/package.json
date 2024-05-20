@@ -14,7 +14,7 @@
 		"url": "https://github.com/yigitlevent/yigitlevent.com/issues"
 	},
 	"scripts": {
-		"dev": "vite",
+		"dev": "vite -l warn",
 		"build": "tsc && vite build",
 		"lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
 		"lintfix": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0 --fix",

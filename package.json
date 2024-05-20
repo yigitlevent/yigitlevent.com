@@ -14,11 +14,19 @@
 		"url": "https://github.com/yigitlevent/yigitlevent.com/issues"
 	},
 	"scripts": {
-		"update": "ncu -u && npm i"
+		"update": "ncu -u && npm i",
+		"start:api": "cd api && npm run dev",
+		"start:main": "cd client/main && npm run dev",
+		"start:bwgr": "cd client/bwgrtools && npm run dev",
+		"start:hexmap": "cd client/hexmaptools && npm run dev",
+		"dev:main": "concurrently \"npm run start:api\" \"npm run start:main\" --names \"API,MAIN\" -c \"bgBlue.bold,bgMagenta.bold\"",
+		"dev:bwgr": "concurrently \"npm run start:api\" \"npm run start:bwgr\" --names \"API,BWGR\" -c \"bgBlue.bold,bgMagenta.bold\"",
+		"dev:hexmap": "concurrently \"npm run start:api\" \"npm run start:hexmap\" --names \"API,HXMP\" -c \"bgBlue.bold,bgMagenta.bold\""
 	},
 	"devDependencies": {
 		"@typescript-eslint/eslint-plugin": "^6.18.1",
 		"@typescript-eslint/parser": "^6.18.1",
+		"concurrently": "^8.2.2",
 		"eslint": "^8.56.0",
 		"eslint-plugin-import": "^2.29.1",
 		"eslint-plugin-json": "^3.1.0",
