@@ -317,7 +317,11 @@ export const useRulesetStore = create<RulesetStore>()(
 
 			toggleDataset: (ruleset: BwgrRulesetId) => {
 				set(produce<RulesetStore>((state) => {
-					if (state.chosenRulesets.includes(ruleset) && state.chosenRulesets.length > 1) {
+					if (!(state.rulesets.find(v => v.id === ruleset)?.isExpansion)) {
+						state.fetchState = "fetch-data";
+						state.chosenRulesets = [ruleset];
+					}
+					else if (state.chosenRulesets.includes(ruleset) && state.chosenRulesets.length > 1) {
 						state.fetchState = "fetch-data";
 						state.chosenRulesets = state.chosenRulesets.filter(v => v !== ruleset);
 					}
