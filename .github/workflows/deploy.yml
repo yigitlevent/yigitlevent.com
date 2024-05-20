@@ -33,13 +33,13 @@ jobs:
             utility:
               - 'utility/**'
             api:
-                - 'api/**'
+              - 'api/**'
             main:
-                - 'client/main/**'
+              - 'client/main/**'
             bwgrtools:
-                - 'client/bwgrtools/**'
+              - 'client/bwgrtools/**'
             hexmaptools:
-                - 'client/hexmaptools/**'
+              - 'client/hexmaptools/**'
 
   copy-utility:
     needs: [changes]
