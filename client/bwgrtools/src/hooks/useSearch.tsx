@@ -29,13 +29,11 @@ export function useSearch<T>(mainList: List<T>, filterKeys: string[], initialFil
 
 		const filters: { [key: string]: string; } = fKeys.reduce((a, v) => ({ ...a, [v]: "Any" }), {});
 
-		if (sf) {
-			Object.keys(filters).forEach((filterKey) => {
-				const filterValue = urlParams.get(filterKey);
-				if (filterValue) filters[filterKey] = filterValue;
-				else if (initialFilterValues) filters[filterKey] = initialFilterValues[filterKey];
-			});
-		}
+		Object.keys(filters).forEach((filterKey) => {
+			const filterValue = urlParams.get(filterKey);
+			if (filterValue) filters[filterKey] = filterValue;
+			else if (initialFilterValues) filters[filterKey] = initialFilterValues[filterKey];
+		});
 
 		return {
 			text: s ? s : "",
