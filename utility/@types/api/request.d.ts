@@ -1,6 +1,6 @@
-type UserSigninRequest = Omit<User, "id" | "username">;
+type UserSigninRequest = Omit<User, "id" | "username" | "userAccess">;
 
-type UserSignupRequest = Omit<User, "id">;
+type UserSignupRequest = Omit<User, "id" | "userAccess">;
 
 type UserForms =
 	| UserSigninRequest
