@@ -22,7 +22,6 @@ jobs:
       api: ${{ steps.filter.outputs.api }}
       main: ${{ steps.filter.outputs.main }}
       bwgrtools: ${{ steps.filter.outputs.bwgrtools }}
-      hexmaptools: ${{ steps.filter.outputs.hexmaptools }}
 
     steps:
       - uses: actions/checkout@v4
@@ -38,8 +37,6 @@ jobs:
               - 'client/main/**'
             bwgrtools:
               - 'client/bwgrtools/**'
-            hexmaptools:
-              - 'client/hexmaptools/**'
 
   copy-utility:
     needs: [changes]
@@ -170,39 +167,3 @@ jobs:
             sudo rm -rf ${{ secrets.TARGETDIR }}/client/bwgrtools
             sudo cp -R ${{ secrets.SOURCEDIR }}/client/bwgrtools-src/dist ${{ secrets.TARGETDIR }}/client/bwgrtools
    
-  build-client-hexmaptools:
-      needs: [changes, copy-utility]
-      if: ${{ needs.changes.outputs.utility == 'true' || needs.changes.outputs.hexmaptools == 'true' }}
-      runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@v4
-
-        - name: Clean and Copy Source
-          uses: appleboy/scp-action@master
-          with:
-            host: ${{ secrets.HOST }}
-            username: ${{ secrets.USERNAME }}
-            port: ${{ secrets.PORT }}
-            key: ${{ secrets.SSHKEY }}
-            source: "client/hexmaptools/**"
-            target: ${{ secrets.SOURCEDIR }}/client/hexmaptools-src
-            strip_components: 2
-            rm: true
-
-        - name: Build, Target Cleanup, Copy
-          uses: appleboy/ssh-action@master
-          with:
-            host: ${{ secrets.HOST }}
-            username: ${{ secrets.USERNAME }}
-            port: ${{ secrets.PORT }}
-            key: ${{ secrets.SSHKEY }}
-            script: |
-              export NVM_DIR=~/.nvm
-              source ~/.nvm/nvm.sh
-              cd ${{ secrets.SOURCEDIR }}/client/hexmaptools-src
-              nvm install node
-              nvm use node
-              npm i
-              npm run build
-              sudo rm -rf ${{ secrets.TARGETDIR }}/client/hexmaptools
-              sudo cp -R ${{ secrets.SOURCEDIR }}/client/hexmaptools-src/dist ${{ secrets.TARGETDIR }}/client/hexmaptools
