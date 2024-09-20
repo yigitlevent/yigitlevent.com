@@ -1,4 +1,3 @@
-import { type Mark } from "@mui/base/useSlider";
 import { Clamp } from "@utility/Clamp";
 import { produce } from "immer";
 import { Dispatch, SetStateAction } from "react";
@@ -13,7 +12,10 @@ interface PracticePlannerState {
 	days: number;
 	hours: number;
 	cells: BwgrPracticeCell[];
-	marks: Mark[];
+	marks: {
+		value: number;
+		label: string;
+	}[];
 
 	changeDays: (value: string) => void;
 	changeHours: (value: string) => void;
@@ -55,7 +57,7 @@ export const usePracticePlannerStore = create<PracticePlannerState>()(
 						const marks
 							= Array
 								.from(Array(Math.floor(state.cells.length)))
-								.map<Mark>((_, i) => ({ value: i + 1, label: `${i + 1}` }));
+								.map((_, i) => ({ value: i + 1, label: `${i + 1}` }));
 
 						if (state.cells.length < 30) state.marks = marks.filter((v, i) => i === 0 || v.value % 5 === 0);
 						else if (state.cells.length < 90) state.marks = marks.filter((v, i) => i === 0 || v.value % 10 === 0);
@@ -74,7 +76,7 @@ export const usePracticePlannerStore = create<PracticePlannerState>()(
 						const marks
 							= Array
 								.from(Array(Math.floor(state.cells.length)))
-								.map<Mark>((_, i) => ({ value: i + 1, label: `${i + 1}` }));
+								.map((_, i) => ({ value: i + 1, label: `${i + 1}` }));
 
 						if (state.cells.length < 30) state.marks = marks.filter((v, i) => i === 0 || v.value % 5 === 0);
 						else if (state.cells.length < 90) state.marks = marks.filter((v, i) => i === 0 || v.value % 10 === 0);

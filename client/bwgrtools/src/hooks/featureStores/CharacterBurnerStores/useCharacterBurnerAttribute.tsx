@@ -424,7 +424,7 @@ export const useCharacterBurnerAttributeStore = create<CharacterBurnerAttributeS
 				const newAttributeState = getAttributePoints(attribute[1]);
 
 				return {
-					shade: prevAttributeState?.shadeShifted ? "G" : "B" || newAttributeState.shade,
+					shade: prevAttributeState !== undefined ? prevAttributeState.shadeShifted ? "B" : "G" : newAttributeState.shade,
 					exponent: newAttributeState.exponent - (prevAttributeState?.shadeShifted ? 5 : 0)
 				};
 			},
