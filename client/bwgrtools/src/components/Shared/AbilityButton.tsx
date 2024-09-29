@@ -16,7 +16,7 @@ export function AbilityButton(props: ButtonProps): JSX.Element {
 			{...props}
 			size="small"
 			variant="outlined"
-			sx={{ minWidth: "30px", width: "30px", display: "inline-block", marginRight: 1, ...props.sx }}
+			sx={{ minWidth: "30px", width: "30px", display: "inline-block", marginRight: 1, padding: 0, ...props.sx }}
 			onClick={e => handle(e, props.onClick)}
 			onContextMenu={e => handle(e, props.onContextMenu)}
 		/>
