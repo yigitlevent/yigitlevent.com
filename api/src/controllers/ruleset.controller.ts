@@ -15,21 +15,33 @@ import { GetAltSpellFacets } from "../services/spellFacets.alt.service";
 import { GetSpellFacets } from "../services/spellFacets.service";
 import { GetStocks } from "../services/stocks.service";
 import { GetTraits } from "../services/traits.service";
+import { FindUserByEmail, MapUserAccess } from "../services/user.service";
 import { Logger } from "../utils/logger";
 
 
+export async function ShouldGetBurningWheelDetails(userSession?: UserSession): Promise<boolean> {
+	if (!userSession) return false;
+
+	const user = await FindUserByEmail(userSession.email);
+	if (!user) return false;
+
+	return MapUserAccess(user.UserAccessIds).includes("BurningWheel");
+}
+
 export async function GetRulesetsData(request: Request<unknown, unknown, BwgrRulesetForms>, response: Response): Promise<Response<BwgrRulesetResponse, Record<string, unknown>>> {
 	try {
+		const shouldGetDetails = await ShouldGetBurningWheelDetails(request.session?.user);
+
 		const log = new Logger("➞ GetRulesetsData", true);
 		const { rulesets } = request.body;
 
 		const abilities = await GetAbilities();
 		const stocks = await GetStocks(rulesets);
 		const settings = await GetSettings(rulesets);
-		const skills = await GetSkills(rulesets);
-		const traits = await GetTraits(rulesets);
+		const skills = await GetSkills(rulesets, shouldGetDetails);
+		const traits = await GetTraits(rulesets, shouldGetDetails);
 		const lifepaths = await GetLifepaths(rulesets);
-		const resources = await GetResources(rulesets);
+		const resources = await GetResources(rulesets, shouldGetDetails);
 		const spellFacets = await GetSpellFacets();
 		const spellAltFacets = await GetAltSpellFacets();
 		const dowActions = await GetDoWActions();

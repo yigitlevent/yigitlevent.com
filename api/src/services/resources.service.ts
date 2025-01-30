@@ -2,7 +2,7 @@ import { PgPool } from "../index";
 import { Logger } from "../utils/logger";
 
 
-export async function GetResources(rulesets: BwgrRulesetId[]): Promise<BwgrResource[]> {
+export async function GetResources(rulesets: BwgrRulesetId[], shouldGetDetails: boolean): Promise<BwgrResource[]> {
 	const convert = (re: BwgrResourceDBO[], rmd: BwgrResourceMagicDetailsDBO[], rmo: BwgrResourceMagicObstaclesDBO[]): BwgrResource[] => {
 		const log = new Logger("GetResources Conversion");
 
@@ -18,7 +18,7 @@ export async function GetResources(rulesets: BwgrRulesetId[]): Promise<BwgrResou
 			};
 
 			if (v.VariableCost) res.variableCost = true;
-			if (v.Description) res.description = v.Description;
+			if (v.Description && shouldGetDetails) res.description = v.Description;
 			v.Costs.forEach((c, i) => res.costs.push([c, v.CostDescriptions[i]]));
 			v.Modifiers.forEach((c, i) => res.modifiers.push([c, v.ModifierIsPerCosts[i], v.ModifierDescriptions[i]]));
 

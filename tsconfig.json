@@ -22,8 +22,5 @@
 		"noFallthroughCasesInSwitch": true,
 		"noErrorTruncation": true
 	},
-	"include": [
-		"@types"
-	],
 	"exclude": []
 }

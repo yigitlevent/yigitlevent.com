@@ -2,7 +2,7 @@ import { PgPool } from "../index";
 import { Logger } from "../utils/logger";
 
 
-export async function GetTraits(rulesets: BwgrRulesetId[]): Promise<BwgrTrait[]> {
+export async function GetTraits(rulesets: BwgrRulesetId[], shouldGetDetails: boolean): Promise<BwgrTrait[]> {
 	const convert = (v: BwgrTraitDBO): BwgrTrait => {
 		const r: BwgrTrait = {
 			rulesets: v.Rulesets,
@@ -14,7 +14,7 @@ export async function GetTraits(rulesets: BwgrRulesetId[]): Promise<BwgrTrait[]>
 		};
 
 		if (v.StockId !== null && v.Stock !== null) r.stock = [v.StockId, v.Stock];
-		if (v.Description !== null) r.description = v.Description;
+		if (shouldGetDetails && v.Description !== null) r.description = v.Description;
 
 		return r;
 	};

@@ -2,7 +2,7 @@ import { PgPool } from "../index";
 import { Logger } from "../utils/logger";
 
 
-export async function GetSkills(rulesets: BwgrRulesetId[]): Promise<BwgrSkill[]> {
+export async function GetSkills(rulesets: BwgrRulesetId[], shouldGetDetails: boolean): Promise<BwgrSkill[]> {
 	const convert = (v: BwgrSkillDBO): BwgrSkill => {
 		const r: BwgrSkill = {
 			rulesets: v.Rulesets,
@@ -23,8 +23,8 @@ export async function GetSkills(rulesets: BwgrRulesetId[]): Promise<BwgrSkill[]>
 
 		if (v.StockId !== null && v.Stock !== null) r.stock = [v.StockId, v.Stock];
 		if (v.RootIds.length > 0) r.roots = v.RootIds.map((rootId, index) => [rootId, v.Roots[index]]);
-		if (v.ToolDescription !== null) r.tool.description = v.ToolDescription;
-		if (v.Description !== null) r.description = v.Description;
+		if (shouldGetDetails && v.ToolDescription !== null) r.tool.description = v.ToolDescription;
+		if (shouldGetDetails && v.Description !== null) r.description = v.Description;
 		if (v.SubskillIds.length > 0) r.subskillIds = v.SubskillIds;
 		if (v.RestrictionOnlyStockId !== null && v.RestrictionOnlyStock !== null) {
 			r.restriction = { onlyStock: [v.RestrictionOnlyStockId, v.RestrictionOnlyStock] };
