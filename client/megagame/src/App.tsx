@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-import { MainBox } from "./components/MainBox";
+import { Panels } from "./components/Panels";
 import { useUserStore } from "./hooks/apiStores/useUserStore";
 
 
@@ -11,5 +11,5 @@ export function App(): React.JSX.Element {
 		if (!triedAuth) { auth(); }
 	}, [auth, triedAuth]);
 
-	return <MainBox />;
+	return <Panels />;
 }

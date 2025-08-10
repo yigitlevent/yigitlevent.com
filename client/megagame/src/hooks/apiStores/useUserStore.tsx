@@ -1,6 +1,6 @@
 import { produce } from "immer";
 import { create } from "zustand";
-import { devtools } from "zustand/middleware";
+import { devtools, persist } from "zustand/middleware";
 
 import { GenericPost } from "../../utils/GenericRequests";
 
@@ -13,12 +13,12 @@ interface UserState {
 	toggleFetching: () => void;
 	auth: () => void;
 	signup: (formData: UserSignupRequest, handleClose: (open: boolean) => void) => void;
-	signin: (formData: UserSigninRequest, handleClose: (open: boolean) => void) => void;
+	signin: (formData: UserSigninRequest, onSuccess: () => void) => void;
 	signout: () => void;
 }
 
 export const useUserStore = create<UserState>()(
-	devtools(
+	devtools(persist(
 		(set, get) => ({
 			user: undefined,
 			fetching: false,
@@ -45,10 +45,7 @@ export const useUserStore = create<UserState>()(
 							if (response.status === 200) state.setUser({ ...response.data.user });
 							else throw new Error();
 						})
-						.catch(() => {
-							state.setUser(undefined);
-							//console.error(reason);
-						})
+						.catch(() => state.setUser(undefined))
 						.finally(() => state.toggleFetching());
 				}
 			},
@@ -66,13 +63,11 @@ export const useUserStore = create<UserState>()(
 						}
 						else throw new Error();
 					})
-					.catch(reason => {
-						console.error(reason);
-					})
+					.catch(console.error)
 					.finally(() => state.toggleFetching());
 			},
 
-			signin: (formData: UserSigninRequest, handleClose: (open: boolean) => void) => {
+			signin: (formData: UserSigninRequest, onSuccess: () => void) => {
 				const state = get();
 
 				state.toggleFetching();
@@ -81,13 +76,11 @@ export const useUserStore = create<UserState>()(
 					.then(response => {
 						if (response.status === 200) {
 							state.setUser({ ...response.data.user });
-							handleClose(true);
+							onSuccess();
 						}
 						else throw new Error();
 					})
-					.catch(reason => {
-						console.error(reason);
-					})
+					.catch(console.error)
 					.finally(() => state.toggleFetching());
 			},
 
@@ -101,12 +94,10 @@ export const useUserStore = create<UserState>()(
 						if (response.status === 200) state.setUser(undefined);
 						else throw new Error();
 					})
-					.catch(reason => {
-						console.error(reason);
-					})
+					.catch(console.error)
 					.finally(() => state.toggleFetching());
 			}
 		}),
 		{ name: "useUserStore" }
-	)
+	))
 );

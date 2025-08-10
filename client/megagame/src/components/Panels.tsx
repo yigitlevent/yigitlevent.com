@@ -1,10 +1,37 @@
-import { Box, Typography } from "@mui/material";
+import { Blockquote, Box, Container } from "@mantine/core";
+import { IconInfoCircle } from "@tabler/icons-react";
+import { useEffect } from "react";
+import { Routes, Route } from "react-router-dom";
+
+import { Login } from "./Login";
+import { GamePanel } from "./Panels/GamePanel";
+import { useMegagameStore } from "../hooks/apiStores/useMegagameStore";
 
 
 export function Panels(): React.JSX.Element {
+	const { fetchState, fetchData } = useMegagameStore();
+
+	useEffect(() => {
+		if (fetchState === "fetch-data") fetchData();
+	}, [fetchData, fetchState]);
+
 	return (
-		<Box>
-			<Typography variant="h4">Panels</Typography>
-		</Box>
+		<Container strategy="block" size={500} mt="lg">
+			{fetchState === "done"
+				? <Routes>
+					<Route path="/" element={<Box>
+						<GamePanel />
+					</Box>} />
+
+					<Route path="/login" element={<Box>
+						<Login />
+					</Box>} />
+				</Routes>
+				: fetchState === "failed"
+					? <Blockquote color="red" radius="xs" iconSize={30} icon={<IconInfoCircle />} mt="xl">
+						There are no active megagames.
+					</Blockquote>
+					: <Blockquote color="yellow" radius="xs" iconSize={30} icon={<IconInfoCircle />}>Loading</Blockquote>}
+		</Container>
 	);
 }

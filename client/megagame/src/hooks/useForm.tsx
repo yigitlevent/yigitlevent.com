@@ -1,4 +1,4 @@
-import { TextField } from "@mui/material";
+import { TextInput } from "@mantine/core";
 import { produce } from "immer";
 import { useCallback, useEffect, useState } from "react";
 
@@ -9,7 +9,7 @@ interface Field {
 }
 
 interface Values {
-	[key: string]: string | number | boolean;
+	[key: string]: string | number;
 }
 
 interface UseFormReturn {
@@ -21,16 +21,16 @@ export function useForm({ fields }: { fields: Field[]; }): UseFormReturn {
 	const [components, setComponents] = useState<React.JSX.Element[]>([]);
 	const [values, setValues] = useState<Values>({});
 
-	const changeValue = useCallback((key: string, value: string | number | boolean) => {
+	const changeValue = useCallback((key: string, value: string | number) => {
 		setValues(produce(values, draft => { draft[key] = value; }));
 	}, [values]);
 
 	const createComponent = useCallback((field: Field) => {
 		return (
-			<TextField
+			<TextInput
 				label={field.label} value={values[field.label]}
 				onChange={v => changeValue(field.label, v.target.value)}
-				variant="standard" fullWidth required
+				variant="standard" required
 			/>
 		);
 	}, [changeValue, values]);
