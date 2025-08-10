@@ -22,7 +22,7 @@ jobs:
       api: ${{ steps.filter.outputs.api }}
       main: ${{ steps.filter.outputs.main }}
       bwgrtools: ${{ steps.filter.outputs.bwgrtools }}
-      dunemg: ${{ steps.filter.outputs.dunemg }}
+      megagame: ${{ steps.filter.outputs.megagame }}
 
     steps:
       - uses: actions/checkout@v4
@@ -38,8 +38,8 @@ jobs:
               - 'client/main/**'
             bwgrtools:
               - 'client/bwgrtools/**'
-            dunemg:
-              - 'client/dunemg/**'
+            megagame:
+              - 'client/megagame/**'
 
   copy-utility:
     needs: [changes]
@@ -177,9 +177,9 @@ jobs:
             sudo rm -rf ${{ secrets.TARGETDIR }}/client/bwgrtools
             sudo cp -R ${{ secrets.SOURCEDIR }}/client/bwgrtools-src/dist ${{ secrets.TARGETDIR }}/client/bwgrtools
 
-  build-client-dunemg:
+  build-client-megagame:
     needs: [changes, copy-utility]
-    if: ${{ needs.changes.outputs.utility == 'true' || needs.changes.outputs.dunemg == 'true' }}
+    if: ${{ needs.changes.outputs.utility == 'true' || needs.changes.outputs.megagame == 'true' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -192,8 +192,8 @@ jobs:
           passphrase: ${{ secrets.PASSPHRASE }}
           port: ${{ secrets.PORT }}
           key: ${{ secrets.SSHKEY }}
-          source: 'client/dunemg/**'
-          target: ${{ secrets.SOURCEDIR }}/client/dunemg-src
+          source: 'client/megagame/**'
+          target: ${{ secrets.SOURCEDIR }}/client/megagame-src
           strip_components: 2
           rm: true
 
@@ -208,10 +208,10 @@ jobs:
           script: |
             export NVM_DIR=~/.nvm
             source ~/.nvm/nvm.sh
-            cd ${{ secrets.SOURCEDIR }}/client/dunemg-src
+            cd ${{ secrets.SOURCEDIR }}/client/megagame-src
             nvm install node
             nvm use node
             npm i
             npm run build
-            sudo rm -rf ${{ secrets.TARGETDIR }}/client/dunemg
-            sudo cp -R ${{ secrets.SOURCEDIR }}/client/dunemg-src/dist ${{ secrets.TARGETDIR }}/client/dunemg
+            sudo rm -rf ${{ secrets.TARGETDIR }}/client/megagame
+            sudo cp -R ${{ secrets.SOURCEDIR }}/client/megagame-src/dist ${{ secrets.TARGETDIR }}/client/megagame

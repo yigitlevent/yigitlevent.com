@@ -56,3 +56,7 @@ interface HmSurfacesResponse {
 	biomes: HmBiomeResponse[];
 	terrains: HmTerrainResponse[];
 }
+
+interface MggmMegagameResponse {
+	megagame: Megagame;
+}

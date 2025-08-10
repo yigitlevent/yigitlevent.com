@@ -7,6 +7,7 @@ interface UserDBO {
 }
 
 type UserAccessType =
+	| "Admin"
 	| "BurningWheel";
 
 interface User {

@@ -9,3 +9,17 @@ type UserForms =
 type BwgrRulesetForms = { rulesets: BwgrRulesetId[]; };
 
 type Forms = UserForms | BwgrRulesetForms;
+
+interface SetMegagameRequest {
+	name: string;
+	start: Date;
+	end: Date;
+	cycleMinutes: number;
+	cycleName: string;
+	cycleNamePlural: string;
+	events: {
+		name: string;
+		description: string;
+		cycleInterval: number;
+	}[];
+}

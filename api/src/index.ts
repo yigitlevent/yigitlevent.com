@@ -13,6 +13,7 @@ import { CorsConfig } from "./configs/cors.config";
 import { PgConfig } from "./configs/postgres.config";
 import { SessionConfig } from "./configs/session.config";
 import bwgrRouter from "./routes/bwgr.route";
+import mggmRouter from "./routes/mggm.route";
 import userRouter from "./routes/user.route";
 
 
@@ -37,6 +38,7 @@ App.use(session({ store: SessionStore, ...SessionConfig }));
 
 App.use("/user", userRouter);
 App.use("/bwgr", bwgrRouter);
+App.use("/mggm", mggmRouter);
 
 /*
 App.get("/campaigns", CheckAuth, GetCampaigns);
