@@ -23,7 +23,7 @@ jobs:
           rm: true
 
   build-api:
-    needs: [changes, copy-utility]
+    needs: [copy-utility]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -61,7 +61,7 @@ jobs:
             sudo pm2 restart api -s
 
   build-client-main:
-    needs: [changes, copy-utility]
+    needs: [copy-utility]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -99,7 +99,7 @@ jobs:
             sudo cp -R ${{ secrets.SOURCEDIR }}/client/main-src/dist ${{ secrets.TARGETDIR }}/client/main
 
   build-client-bwgrtools:
-    needs: [changes, copy-utility]
+    needs: [copy-utility]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -137,7 +137,7 @@ jobs:
             sudo cp -R ${{ secrets.SOURCEDIR }}/client/bwgrtools-src/dist ${{ secrets.TARGETDIR }}/client/bwgrtools
 
   build-client-dunemg:
-    needs: [changes, copy-utility]
+    needs: [copy-utility]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
