@@ -72,6 +72,7 @@ jobs:
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
+          passphrase: ${{ secrets.PASSPHRASE }}
           port: ${{ secrets.PORT }}
           key: ${{ secrets.SSHKEY }}
           source: 'api/**'
@@ -84,6 +85,7 @@ jobs:
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
+          passphrase: ${{ secrets.PASSPHRASE }}
           port: ${{ secrets.PORT }}
           key: ${{ secrets.SSHKEY }}
           script: |
@@ -109,6 +111,7 @@ jobs:
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
+          passphrase: ${{ secrets.PASSPHRASE }}
           port: ${{ secrets.PORT }}
           key: ${{ secrets.SSHKEY }}
           source: 'client/main/**'
@@ -121,6 +124,7 @@ jobs:
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
+          passphrase: ${{ secrets.PASSPHRASE }}
           port: ${{ secrets.PORT }}
           key: ${{ secrets.SSHKEY }}
           script: |
@@ -146,6 +150,7 @@ jobs:
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
+          passphrase: ${{ secrets.PASSPHRASE }}
           port: ${{ secrets.PORT }}
           key: ${{ secrets.SSHKEY }}
           source: 'client/bwgrtools/**'
@@ -158,6 +163,7 @@ jobs:
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
+          passphrase: ${{ secrets.PASSPHRASE }}
           port: ${{ secrets.PORT }}
           key: ${{ secrets.SSHKEY }}
           script: |
@@ -183,6 +189,7 @@ jobs:
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
+          passphrase: ${{ secrets.PASSPHRASE }}
           port: ${{ secrets.PORT }}
           key: ${{ secrets.SSHKEY }}
           source: 'client/dunemg/**'
@@ -195,6 +202,7 @@ jobs:
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
+          passphrase: ${{ secrets.PASSPHRASE }}
           port: ${{ secrets.PORT }}
           key: ${{ secrets.SSHKEY }}
           script: |

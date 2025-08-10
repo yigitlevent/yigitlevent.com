@@ -40,7 +40,6 @@ export function MainBox(): JSX.Element {
 
 				{fetchState === "done"
 					? <Routes>
-						<Route path="/" element={<Navigate replace to="/diceroller" />} />
 						<Route path="/" element={<Timers />} />
 					</Routes>
 					: <Typography>Loading</Typography>}
