@@ -60,3 +60,7 @@ interface HmSurfacesResponse {
 interface MggmMegagameResponse {
 	megagame: Megagame;
 }
+
+interface MggmRumorsResponse {
+	rumors: Rumor[];
+}

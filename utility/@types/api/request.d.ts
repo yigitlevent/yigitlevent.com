@@ -8,8 +8,6 @@ type UserForms =
 
 type BwgrRulesetForms = { rulesets: BwgrRulesetId[]; };
 
-type Forms = UserForms | BwgrRulesetForms;
-
 interface SetMegagameRequest {
 	name: string;
 	start: Date;
@@ -23,3 +21,20 @@ interface SetMegagameRequest {
 		cycleInterval: number;
 	}[];
 }
+
+interface SetMegagameRumorRequest {
+	megagameId: MegagameId;
+	textEN: string;
+	textTR: string;
+}
+
+interface GetMegagameRumorsRequest {
+	megagameId: MegagameId;
+}
+
+type MegagameForms =
+	| GetMegagameRumorsRequest
+	| SetMegagameRequest
+	| SetMegagameRumorRequest;
+
+type Forms = UserForms | BwgrRulesetForms | MegagameForms;

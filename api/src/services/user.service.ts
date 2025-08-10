@@ -56,6 +56,9 @@ export function MapUserAccess(userAccess: number[]): UserAccessType[] {
 			case 0:
 				access.push("BurningWheel");
 				break;
+			case 1:
+				access.push("Admin");
+				break;
 		}
 	});
 
