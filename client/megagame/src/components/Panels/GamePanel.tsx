@@ -113,7 +113,7 @@ export function GamePanel(): React.JSX.Element {
 				</ActionIcon>
 			</Title>
 
-			<Paper shadow="xl" radius="xs" p="xl" bd="1px solid rgba(0,0,0,0.1)" mt="md">
+			<Paper shadow="md" radius="xs" p="xl" bd="1px solid rgba(0,0,0,0.1)" mt="md">
 				<Title order={3} mb="sm">
 					{Localisation.cycleName[lang]} {megagame.cycle.start + cycleCount} ({Localisation.cycleCount[lang](cycleCount)})
 				</Title>
@@ -123,7 +123,7 @@ export function GamePanel(): React.JSX.Element {
 				</Text>
 			</Paper>
 
-			<Paper shadow="xl" radius="xs" p="xl" bd="1px solid rgba(0,0,0,0.1)" mt="md">
+			<Paper shadow="md" radius="xs" p="xl" bd="1px solid rgba(0,0,0,0.1)" mt="md">
 				<Title order={3} mb="sm">
 					{Localisation.events[lang]}
 				</Title>
@@ -142,7 +142,7 @@ export function GamePanel(): React.JSX.Element {
 					: <Text>{Localisation.noEvents[lang]}</Text>}
 			</Paper>
 
-			<Paper shadow="xl" radius="xs" p="xl" bd="1px solid rgba(0,0,0,0.1)" mt="md">
+			<Paper shadow="md" radius="xs" p="xl" bd="1px solid rgba(0,0,0,0.1)" mt="md">
 				<Title order={3} mb="sm">
 					{Localisation.rumors[lang]}
 				</Title>
