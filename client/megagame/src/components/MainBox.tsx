@@ -11,7 +11,7 @@ import { useMegagameStore } from "../hooks/apiStores/useMegagameStore";
 import { useUserStore } from "../hooks/apiStores/useUserStore";
 
 
-export function MainBox(): JSX.Element {
+export function MainBox(): React.JSX.Element {
 	const { user } = useUserStore();
 
 	const { fetchState, fetchData } = useMegagameStore();

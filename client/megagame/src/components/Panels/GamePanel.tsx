@@ -3,7 +3,7 @@ import { Box, Typography } from "@mui/material";
 import { useMegagameStore } from "../../hooks/apiStores/useMegagameStore";
 
 
-export function GamePanel(): JSX.Element {
+export function GamePanel(): React.JSX.Element {
 	const { megagame } = useMegagameStore();
 
 
