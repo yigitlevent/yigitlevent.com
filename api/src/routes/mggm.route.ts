@@ -6,7 +6,7 @@ import { CheckAdmin } from "../middlewares/checkAdmin.middleware";
 
 const Router = express.Router();
 
-Router.get("/game", GetMegagame);
-Router.post("/game", CheckAdmin, SetMegagame);
+Router.get("/megagame", GetMegagame);
+Router.post("/megagame", CheckAdmin, SetMegagame);
 
 export default Router;
