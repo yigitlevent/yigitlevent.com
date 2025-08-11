@@ -1,5 +1,5 @@
 import { Blockquote, Box, Container } from "@mantine/core";
-import { IconInfoCircle } from "@tabler/icons-react";
+import { Camera } from "lucide-react";
 import { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 
@@ -28,10 +28,10 @@ export function Panels(): JSX.Element {
 					</Box>} />
 				</Routes>
 				: fetchState === "failed"
-					? <Blockquote color="red" radius="xs" iconSize={30} icon={<IconInfoCircle />} mt="xl">
+					? <Blockquote color="red" radius="xs" iconSize={30} icon={<Camera color="black" size={48} />} mt="xl">
 						There are no active megagames.
 					</Blockquote>
-					: <Blockquote color="yellow" radius="xs" iconSize={30} icon={<IconInfoCircle />}>Loading</Blockquote>}
+					: <Blockquote color="yellow" radius="xs" iconSize={30} icon={<Camera color="black" size={48} />}>Loading</Blockquote>}
 		</Container>
 	);
 }

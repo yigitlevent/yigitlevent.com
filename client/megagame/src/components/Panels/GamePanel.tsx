@@ -1,5 +1,5 @@
 import { Accordion, ActionIcon, Box, List, Paper, Text, ThemeIcon, Title } from "@mantine/core";
-import { IconCircleCheck, IconLanguage } from "@tabler/icons-react";
+import { Languages, Quote } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 
 import { useMegagameStore } from "../../hooks/apiStores/useMegagameStore";
@@ -109,7 +109,7 @@ export function GamePanel(): JSX.Element {
 					variant="default"
 					onClick={() => setLang(lang === "en" ? "tr" : "en")}
 				>
-					<IconLanguage />
+					<Languages color="white" size={20} />
 				</ActionIcon>
 			</Title>
 
@@ -152,8 +152,8 @@ export function GamePanel(): JSX.Element {
 						spacing="md"
 						center
 						icon={
-							<ThemeIcon color="teal" size={16} radius="xl">
-								<IconCircleCheck size={12} />
+							<ThemeIcon color="blue" size={20} radius="xl">
+								<Quote color="white" size={14} />
 							</ThemeIcon>
 						}
 					>
