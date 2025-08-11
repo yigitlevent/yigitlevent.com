@@ -2,7 +2,7 @@ import { produce } from "immer";
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 
-import { GenericGet, GenericPost } from "../../utils/GenericRequests";
+import { GenericGet, GenericPost } from "../utils/GenericRequests";
 
 
 type FetchState =
@@ -22,6 +22,9 @@ interface MegagameStore {
 	setFetchRumorsState: (fetchState: FetchState) => void;
 	fetchData: () => void;
 	fetchRumors: () => void;
+
+	createMegagame: (megagame: SetMegagameRequest) => void;
+	addRumor: (textEn: string, textTr: string) => void;
 }
 
 export const useMegagameStore = create<MegagameStore>()(
@@ -30,7 +33,7 @@ export const useMegagameStore = create<MegagameStore>()(
 			fetchState: "fetch-data",
 			fetchRumorsState: "done",
 
-			megagame: [],
+			megagame: undefined,
 			rumors: [],
 
 			setFetchState: (fetchState: FetchState) => {
@@ -100,6 +103,28 @@ export const useMegagameStore = create<MegagameStore>()(
 						setFetchRumorsState("failed");
 					});
 				}
+			},
+
+			createMegagame: (megagame: SetMegagameRequest) => {
+				GenericPost<void>("/mggm/megagame", megagame)
+					.then(response => {
+						if (response.status === 200) {
+							get().fetchData();
+						}
+						else throw new Error();
+					})
+					.catch(console.error);
+			},
+
+			addRumor: (textEN: string, textTR: string) => {
+				GenericPost<void>("/mggm/megagame/rumor", {
+					megagameId: get().megagame.id,
+					textEN,
+					textTR
+				}).then(response => {
+					if (response.status === 200) get().fetchRumors();
+					else throw new Error();
+				}).catch(console.error);
 			}
 		}),
 		{ name: "MegagameStore" }

@@ -1,14 +1,13 @@
 import { produce } from "immer";
 import { create } from "zustand";
-import { devtools, persist } from "zustand/middleware";
+import { devtools } from "zustand/middleware";
 
-import { GenericPost } from "../../utils/GenericRequests";
+import { GenericPost } from "../utils/GenericRequests";
 
 
 interface UserState {
 	user: UserSession | undefined;
 	fetching: boolean;
-	triedAuth: boolean;
 	setUser: (user: UserSession | undefined) => void;
 	toggleFetching: () => void;
 	auth: () => void;
@@ -18,11 +17,10 @@ interface UserState {
 }
 
 export const useUserStore = create<UserState>()(
-	devtools(persist(
+	devtools(
 		(set, get) => ({
 			user: undefined,
 			fetching: false,
-			triedAuth: false,
 
 			setUser: (user: UserSession | undefined) => {
 				set(produce<UserState>((state) => { state.user = user; }));
@@ -33,21 +31,17 @@ export const useUserStore = create<UserState>()(
 			},
 
 			auth: () => {
-				if (!get().triedAuth) {
-					set(produce<UserState>((state) => { state.triedAuth = true; }));
+				const state = get();
 
-					const state = get();
+				state.toggleFetching();
 
-					state.toggleFetching();
-
-					GenericPost<UserResponse>("/user/auth", null)
-						.then(response => {
-							if (response.status === 200) state.setUser({ ...response.data.user });
-							else throw new Error();
-						})
-						.catch(() => state.setUser(undefined))
-						.finally(() => state.toggleFetching());
-				}
+				GenericPost<UserResponse>("/user/auth", null)
+					.then(response => {
+						if (response.status === 200) state.setUser({ ...response.data.user });
+						else throw new Error();
+					})
+					.catch(() => state.setUser(undefined))
+					.finally(() => state.toggleFetching());
 			},
 
 			signup: (formData: UserSignupRequest, handleClose: (open: boolean) => void) => {
@@ -98,6 +92,8 @@ export const useUserStore = create<UserState>()(
 					.finally(() => state.toggleFetching());
 			}
 		}),
-		{ name: "useUserStore" }
-	))
+		{
+			name: "useUserStore"
+		}
+	)
 );

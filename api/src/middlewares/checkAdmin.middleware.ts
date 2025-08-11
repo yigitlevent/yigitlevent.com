@@ -1,8 +1,13 @@
 import { Request, Response, NextFunction } from "express";
 
+import { FindUserBySessionId, MapUserAccess } from "../services/user.service";
 
-export function CheckAdmin(request: Request, response: Response, next: NextFunction): unknown {
-	if (request.sessionID && request.session.user && request.session.user.userAccess.includes("Admin")) return next();
-	// TODO: Figure out what to do here
+
+export async function CheckAdmin(request: Request, response: Response, next: NextFunction): Promise<unknown> {
+	if (request.sessionID) {
+		const user = await FindUserBySessionId(request.sessionID);
+		if (user && MapUserAccess(user.UserAccessIds).includes("Admin")) return next();
+	}
+
 	return response.sendStatus(401);
 }

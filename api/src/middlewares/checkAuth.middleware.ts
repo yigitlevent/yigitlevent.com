@@ -1,8 +1,14 @@
 import { Request, Response, NextFunction } from "express";
 
+import { FindUserBySessionId } from "../services/user.service";
 
-export function CheckAuth(request: Request, response: Response, next: NextFunction): unknown {
-	if (request.sessionID && request.session.user) return next();
-	// TODO: Figure out what to do here
+
+export async function CheckAuth(request: Request, response: Response, next: NextFunction): Promise<unknown> {
+	if (request.sessionID) {
+		const user = await FindUserBySessionId(request.sessionID);
+		if (user) return next();
+	}
+
 	return response.sendStatus(401);
 }
+

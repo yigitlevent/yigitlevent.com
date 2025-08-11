@@ -1,6 +1,33 @@
 import { PgPool } from "../index";
 
 
+export async function FindUserBySessionId(sessionId: string): Promise<UserDBO | undefined> {
+	const query = `
+		select 
+			u."Id",
+			u."Username",
+			u."Email",
+			u."Password",
+			ARRAY(
+				SELECT ua."UserAccessTypeId"
+				FROM usr."UserAccess" ua
+				WHERE u."Id"::text = ua."UserId"::text
+			) AS "UserAccessIds"
+		from usr."Users" u
+		where u."Id" = (
+			select (us."sess"->'user'->>'id')::uuid as UserId
+			from usr."UserSessions" us
+			where us."sid" = '${sessionId}'
+			and us."expire" > now()
+			limit 1
+		);
+	`;
+
+	const data = await PgPool.query<UserDBO>(query);
+
+	if (data.rows.length > 0) return data.rows[0];
+}
+
 export async function FindUserByEmail(email: string): Promise<UserDBO | undefined> {
 	const query = `
 		select 
