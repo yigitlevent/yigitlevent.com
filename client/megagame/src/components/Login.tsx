@@ -6,7 +6,7 @@ import { ValidateEmail } from "../../../../utility/src/Validate";
 import { useUserStore } from "../hooks/apiStores/useUserStore";
 
 
-export function Login(): React.JSX.Element {
+export function Login(): JSX.Element {
 	const { fetching, signin } = useUserStore();
 
 	const navigate = useNavigate();

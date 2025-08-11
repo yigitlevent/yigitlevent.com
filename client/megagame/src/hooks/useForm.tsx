@@ -13,12 +13,12 @@ interface Values {
 }
 
 interface UseFormReturn {
-	components: React.JSX.Element[];
+	components: JSX.Element[];
 	values: Values;
 }
 
 export function useForm({ fields }: { fields: Field[]; }): UseFormReturn {
-	const [components, setComponents] = useState<React.JSX.Element[]>([]);
+	const [components, setComponents] = useState<JSX.Element[]>([]);
 	const [values, setValues] = useState<Values>({});
 
 	const changeValue = useCallback((key: string, value: string | number) => {
