@@ -18,7 +18,7 @@ interface UseFormReturn {
 }
 
 export function useForm({ fields }: { fields: Field[]; }): UseFormReturn {
-	const [components, setComponents] = useState<JSX.Element[]>([]);
+	const [components, setComponents] = useState<React.JSX.Element[]>([]);
 	const [values, setValues] = useState<Values>({});
 
 	const changeValue = useCallback((key: string, value: string | number) => {
