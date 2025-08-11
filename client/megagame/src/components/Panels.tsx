@@ -8,7 +8,7 @@ import { GamePanel } from "./Panels/GamePanel";
 import { useMegagameStore } from "../hooks/apiStores/useMegagameStore";
 
 
-export function Panels(): JSX.Element {
+export function Panels(): React.JSX.Element {
 	const { fetchState, fetchData } = useMegagameStore();
 
 	useEffect(() => {

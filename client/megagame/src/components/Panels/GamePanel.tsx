@@ -48,7 +48,7 @@ const Localisation = {
 	}
 };
 
-export function GamePanel(): JSX.Element {
+export function GamePanel(): React.JSX.Element {
 	const { megagame, rumors, fetchRumors } = useMegagameStore();
 
 	const [lang, setLang] = useState<"en" | "tr">("tr");

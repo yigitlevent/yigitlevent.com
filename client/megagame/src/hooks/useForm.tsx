@@ -13,7 +13,7 @@ interface Values {
 }
 
 interface UseFormReturn {
-	components: JSX.Element[];
+	components: React.JSX.Element[];
 	values: Values;
 }
 
