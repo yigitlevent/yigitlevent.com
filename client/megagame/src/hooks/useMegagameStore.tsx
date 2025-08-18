@@ -2,42 +2,43 @@ import { produce } from "immer";
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 
-import { GenericGet, GenericPost } from "../utils/GenericRequests";
+import { GenericDelete, GenericGet, GenericPost } from "../utils/GenericRequests";
 
 
-type FetchState =
-	| "fetch-data"
-	| "fetching-data"
+export type FetchState =
+	| "waiting"
+	| "requesting"
 	| "done"
 	| "failed";
 
 interface MegagameStore {
-	readonly fetchState: FetchState;
+	readonly fetchMegagameState: FetchState;
 	readonly fetchRumorsState: FetchState;
 
-	readonly megagame: Megagame;
+	readonly megagame: Megagame | undefined;
 	readonly rumors: Rumor[];
 
-	setFetchState: (fetchState: FetchState) => void;
+	setFetchMegagameState: (fetchState: FetchState) => void;
 	setFetchRumorsState: (fetchState: FetchState) => void;
 	fetchData: () => void;
 	fetchRumors: () => void;
 
 	createMegagame: (megagame: SetMegagameRequest) => void;
 	addRumor: (textEn: string, textTr: string) => void;
+	deleteMegagames: () => void;
 }
 
 export const useMegagameStore = create<MegagameStore>()(
 	devtools(
 		(set, get) => ({
-			fetchState: "fetch-data",
-			fetchRumorsState: "done",
+			fetchMegagameState: "waiting",
+			fetchRumorsState: "waiting",
 
 			megagame: undefined,
 			rumors: [],
 
-			setFetchState: (fetchState: FetchState) => {
-				set(produce<MegagameStore>((state) => { state.fetchState = fetchState; }));
+			setFetchMegagameState: (fetchState: FetchState) => {
+				set(produce<MegagameStore>((state) => { state.fetchMegagameState = fetchState; }));
 			},
 
 			setFetchRumorsState: (fetchState: FetchState) => {
@@ -45,86 +46,84 @@ export const useMegagameStore = create<MegagameStore>()(
 			},
 
 			fetchData: () => {
-				const fetchState = get().fetchState;
-				const setFetchState = get().setFetchState;
+				const fetchState = get().fetchMegagameState;
+				const setFetchMegagameState = get().setFetchMegagameState;
 
-				if (fetchState === "fetch-data") {
-					setFetchState("fetching-data");
+				if (fetchState === "waiting") {
+					setFetchMegagameState("requesting");
 
 					GenericGet<MggmMegagameResponse>("/mggm/megagame")
 						.then(response => {
-							if (response.status === 200) {
-								set(produce<MegagameStore>((state) => {
-									state.megagame = response.data.megagame;
-								}));
+							set(produce<MegagameStore>((state) => {
+								state.megagame = response.data.megagame;
+							}));
 
-								get().fetchRumors();
+							get().fetchRumors();
 
-								setFetchState("done");
-							}
-							else {
-								setFetchState("failed");
-								throw new Error();
-							}
+							setFetchMegagameState("done");
 						})
-						.catch(reason => {
-							console.error(reason);
-							setFetchState("failed");
-						});
+						.catch(() => setFetchMegagameState("failed"));
 				}
 			},
 
 			fetchRumors: () => {
-				const megagameId = get().megagame.id;
+				const megagameId = get().megagame?.id;
 				const fetchRumorsState = get().fetchRumorsState;
 				const setFetchRumorsState = get().setFetchRumorsState;
 
-				if (fetchRumorsState !== "fetching-data") {
-					setFetchRumorsState("fetching-data");
+				if (fetchRumorsState !== "requesting" && megagameId) {
+					setFetchRumorsState("requesting");
 
 					const request: GetMegagameRumorsRequest = {
 						megagameId: megagameId
 					};
 
-					GenericPost<MggmRumorsResponse>("/mggm/megagame/rumors", request).then(response => {
-						if (response.status === 200) {
-							set(produce<MegagameStore>((state) => {
-								state.rumors = response.data.rumors;
-							}));
+					GenericPost<MggmRumorsResponse>("/mggm/megagame/rumors", request)
+						.then(response => {
+							if (response.status === 200) {
+								set(produce<MegagameStore>((state) => {
+									state.rumors = response.data.rumors;
+								}));
 
-							setFetchRumorsState("done");
-						}
-						else {
-							setFetchRumorsState("failed");
-							throw new Error();
-						}
-					}).catch(reason => {
-						console.error(reason);
-						setFetchRumorsState("failed");
-					});
+								setFetchRumorsState("done");
+							}
+							else setFetchRumorsState("failed");
+						})
+						.catch(() => setFetchRumorsState("failed"));
 				}
 			},
 
 			createMegagame: (megagame: SetMegagameRequest) => {
 				GenericPost<void>("/mggm/megagame", megagame)
 					.then(response => {
-						if (response.status === 200) {
-							get().fetchData();
-						}
-						else throw new Error();
+						if (response.status === 200) get().fetchData();
+						else console.debug("Failed to create megagame.");
 					})
-					.catch(console.error);
+					.catch(console.debug);
 			},
 
 			addRumor: (textEN: string, textTR: string) => {
-				GenericPost<void>("/mggm/megagame/rumor", {
-					megagameId: get().megagame.id,
-					textEN,
-					textTR
-				}).then(response => {
-					if (response.status === 200) get().fetchRumors();
-					else throw new Error();
-				}).catch(console.error);
+				const megagameId = get().megagame?.id;
+
+				if (megagameId) {
+					GenericPost<void>("/mggm/megagame/rumor", { megagameId, textEN, textTR })
+						.then(response => {
+							if (response.status === 200) get().fetchRumors();
+							else throw new Error();
+						})
+						.catch(console.error);
+				}
+			},
+
+			deleteMegagames: () => {
+				GenericDelete<void>("/mggm/megagame")
+					.then(() => {
+						set(produce<MegagameStore>((state) => {
+							state.rumors = [];
+							state.megagame = undefined;
+						}));
+					})
+					.catch(console.error);
 			}
 		}),
 		{ name: "MegagameStore" }

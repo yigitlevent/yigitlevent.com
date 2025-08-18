@@ -1,6 +1,6 @@
 import { ActionIcon, Box, Title } from "@mantine/core";
 import { Languages } from "lucide-react";
-import { useState } from "react";
+import { Fragment, useState } from "react";
 
 import { Events } from "./GamePanel.Events";
 import { Rumors } from "./GamePanel.Rumors";
@@ -14,6 +14,8 @@ export function GamePanel(): React.JSX.Element {
 	const { cycleCount, countdown } = useTimer();
 
 	const [lang, setLang] = useState<"en" | "tr">("tr");
+
+	if (!megagame) return <Fragment />;
 
 	return (
 		<Box>

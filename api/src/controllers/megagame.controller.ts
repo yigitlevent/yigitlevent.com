@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 
-import { GetMegagameData, GetMegagameEventData, GetMegagameRumorData, SetMegagameData, SetMegagameRumor } from "../services/megagame.service";
+import { DeleteAllMegagames, GetMegagameData, GetMegagameEventData, GetMegagameRumorData, SetMegagameData, SetMegagameRumor } from "../services/megagame.service";
 
 
 export async function GetMegagame(request: Request, response: Response): Promise<Response<MggmMegagameResponse, Record<string, unknown>>> {
@@ -101,6 +101,19 @@ export async function SetRumor(request: Request<unknown, unknown, SetMegagameRum
 
 	try {
 		await SetMegagameRumor(megagameId, textEN, textTR);
+
+		response.status(200);
+		return response;
+	}
+	catch (e) {
+		console.error(e);
+		return response.sendStatus(403);
+	}
+}
+
+export async function DeleteMegagames(request: Request, response: Response): Promise<Response<void, Record<string, unknown>>> {
+	try {
+		await DeleteAllMegagames();
 
 		response.status(200);
 		return response;

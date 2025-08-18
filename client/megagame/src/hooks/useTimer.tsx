@@ -16,6 +16,8 @@ interface Timer {
 export const useTimer = (): Timer => {
 	const { megagame } = useMegagameStore();
 
+	if (!megagame) throw new Error("Megagame data is not available.");
+
 	const getSecondsSinceStart = useCallback(() => {
 		const start = new Date(megagame.timing.start).getTime();
 		const current = new Date();

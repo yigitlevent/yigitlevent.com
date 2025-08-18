@@ -1,4 +1,5 @@
 import { Paper, Title, Accordion, Text } from "@mantine/core";
+import { Fragment } from "react/jsx-runtime";
 
 import { useMegagameStore } from "../../hooks/useMegagameStore";
 import { Localisation } from "../../utils/Localization";
@@ -6,6 +7,8 @@ import { Localisation } from "../../utils/Localization";
 
 export function Events({ lang, cycleCount }: { lang: "en" | "tr"; cycleCount: number; }): React.JSX.Element {
 	const { megagame } = useMegagameStore();
+
+	if (!megagame) return <Fragment />;
 
 	return (
 		<Paper shadow="md" radius="xs" p="xl" bd="1px solid rgba(0,0,0,0.1)" mt="md">

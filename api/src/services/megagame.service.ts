@@ -92,3 +92,13 @@ export async function SetMegagameRumor(megagameId: MegagameId, textEN: string, t
 
 	await PgPool.query(query);
 }
+
+export async function DeleteAllMegagames(): Promise<void> {
+	const query = `
+		update mggm."Game" 
+		set "DeletedAt" = now() 
+		where "DeletedAt" is null
+	`;
+
+	await PgPool.query(query);
+}

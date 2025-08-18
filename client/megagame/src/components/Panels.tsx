@@ -1,4 +1,4 @@
-import { Blockquote, Box, Container } from "@mantine/core";
+import { Blockquote, Container } from "@mantine/core";
 import { Info } from "lucide-react";
 import { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
@@ -10,34 +10,43 @@ import { useUserStore } from "../hooks/useUserStore";
 import { AdminPanel } from "./Panels/AdminPanel";
 
 
-export function Panels(): React.JSX.Element {
-	const { user } = useUserStore();
-	const { fetchState, fetchData } = useMegagameStore();
+function ElementSwitcher() {
+	const { fetchMegagameState, fetchData } = useMegagameStore();
 
 	useEffect(() => {
-		if (fetchState === "fetch-data") fetchData();
-	}, [fetchData, fetchState]);
+		if (fetchMegagameState === "waiting") fetchData();
+	}, [fetchData, fetchMegagameState]);
+
+	const getRoute = () => {
+		switch (fetchMegagameState) {
+			case "waiting":
+			case "requesting":
+				return <Blockquote color="yellow" radius="xs" iconSize={30} icon={<Info color="orange" size={20} />}>Loading</Blockquote>;
+			case "failed":
+				return (
+					<Blockquote color="red" radius="xs" iconSize={30} icon={<Info color="red" size={20} />} mt="xl">
+						There are no active megagames.
+					</Blockquote>
+				);
+			case "done":
+				return <GamePanel />;
+		}
+	};
+
+	return getRoute();
+}
+
+export function Panels(): React.JSX.Element {
+	const { user } = useUserStore();
 
 	return (
 		<Container strategy="block" size={500} mt="lg">
-			{fetchState === "done"
-				? <Routes>
-					<Route path="/" element={<Box>
-						<GamePanel />
-					</Box>} />
-
-					<Route path="/login" element={<Box>
-						<Login />
-					</Box>} />
-				</Routes>
-				: fetchState === "failed"
-					? <Blockquote color="red" radius="xs" iconSize={30} icon={<Info color="red" size={20} />} mt="xl">
-						There are no active megagames.
-					</Blockquote>
-					: <Blockquote color="yellow" radius="xs" iconSize={30} icon={<Info color="orange" size={20} />}>Loading</Blockquote>}
-
+			<Routes>
+				<Route path="/" element={<ElementSwitcher />} />
+				<Route path="/login" element={<Login />} />
+			</Routes>
 
 			{user?.userAccess.includes("Admin") ? <AdminPanel /> : null}
-		</Container>
+		</Container >
 	);
 }

@@ -1,5 +1,5 @@
 import { Paper, Title, Text } from "@mantine/core";
-import { useCallback } from "react";
+import { Fragment, useCallback } from "react";
 
 import { useMegagameStore } from "../../hooks/useMegagameStore";
 import { Countdown } from "../../hooks/useTimer";
@@ -15,6 +15,8 @@ export function Timer({ lang, cycleCount, countdown }: { lang: "en" | "tr"; cycl
 		else if (countdown.minutes === 0 && countdown.seconds > 0) return Localisation.countdownSeconds[lang](countdown.seconds);
 		else return Localisation.countdownNewCycle[lang];
 	}, [countdown.minutes, countdown.seconds, lang]);
+
+	if (!megagame) return <Fragment />;
 
 	return (
 		<Paper shadow="md" radius="xs" p="xl" bd="1px solid rgba(0,0,0,0.1)" mt="md">
