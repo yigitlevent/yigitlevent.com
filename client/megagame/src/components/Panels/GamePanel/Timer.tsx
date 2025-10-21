@@ -1,13 +1,14 @@
 import { Paper, Title, Text } from "@mantine/core";
 import { Fragment, useCallback } from "react";
 
-import { useMegagameStore } from "../../hooks/useMegagameStore";
-import { Countdown } from "../../hooks/useTimer";
-import { Localisation } from "../../utils/Localization";
+import { useMegagameStore } from "../../../hooks/useMegagameStore";
+import { useTimer } from "../../../hooks/useTimer";
+import { Localisation } from "../../../utils/Localization";
 
 
-export function Timer({ lang, cycleCount, countdown }: { lang: "en" | "tr"; cycleCount: number; countdown: Countdown; }): React.JSX.Element {
-	const { megagame } = useMegagameStore();
+export function Timer(): React.JSX.Element {
+	const { lang, megagame } = useMegagameStore();
+	const { cycleCount, countdown } = useTimer();
 
 	const getCountdownText = useCallback(() => {
 		if (countdown.minutes > 0 && countdown.seconds > 0) return Localisation.countdownMinutesAndSeconds[lang](countdown.minutes, countdown.seconds);
@@ -24,9 +25,7 @@ export function Timer({ lang, cycleCount, countdown }: { lang: "en" | "tr"; cycl
 				{Localisation.cycleName[lang]} {megagame.cycle.start + cycleCount} ({Localisation.cycleCount[lang](cycleCount)})
 			</Title>
 
-			<Text>
-				{getCountdownText()}
-			</Text>
+			<Text>{getCountdownText()}</Text>
 		</Paper>
 	);
 }

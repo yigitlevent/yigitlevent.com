@@ -1,131 +1,165 @@
 import { produce } from "immer";
 import { create } from "zustand";
-import { devtools } from "zustand/middleware";
+import { devtools, persist } from "zustand/middleware";
 
-import { GenericDelete, GenericGet, GenericPost } from "../utils/GenericRequests";
+import { GenericDelete, GenericGet, GenericPost, GenericPut } from "../utils/GenericRequests";
 
 
 export type FetchState =
 	| "waiting"
 	| "requesting"
-	| "done"
+	| "succeded"
 	| "failed";
 
 interface MegagameStore {
 	readonly fetchMegagameState: FetchState;
-	readonly fetchRumorsState: FetchState;
+	readonly fetchQueuesState: FetchState;
 
 	readonly megagame: Megagame | undefined;
-	readonly rumors: Rumor[];
+	readonly queues: MegagameOrderQueueItems | undefined;
+
+	readonly lang: "en" | "tr";
+	readonly userType: MegagameUserType;
+	readonly userTypeId: FactionId;
+
+	setLang: (lang: "en" | "tr") => void;
+	setUserType: (userType: MegagameUserType) => void;
 
 	setFetchMegagameState: (fetchState: FetchState) => void;
-	setFetchRumorsState: (fetchState: FetchState) => void;
-	fetchData: () => void;
-	fetchRumors: () => void;
+	setFetchQueuesState: (fetchState: FetchState) => void;
+	fetchData: (changeState: boolean) => void;
+	fetchQueues: (changeState: boolean) => void;
 
-	createMegagame: (megagame: SetMegagameRequest) => void;
-	addRumor: (textEn: string, textTr: string) => void;
-	deleteMegagames: () => void;
+	resetMegagame: (megagame: ResetMegagameRequest) => void;
+	deleteDeadlineItem: (deadlineItemId: DeadlineItemId) => void;
+	createDeadlineItem: (deadlineItem: CreateMegagameDeadlineItemRequest) => void;
+
+	createNewsItem: (newsItem: CreateMegagameNewsItemRequest) => void;
+
+	deleteOrderQueueItem: (orderQueueItemId: OrderQueueItemId) => void;
+	createOrderQueueItem: (orderQueueItem: CreateOrderQueueItemRequest) => void;
+
+	getFactionNameById: (factionId: FactionId) => MegagameDuneFaction | undefined;
 }
 
 export const useMegagameStore = create<MegagameStore>()(
-	devtools(
-		(set, get) => ({
-			fetchMegagameState: "waiting",
-			fetchRumorsState: "waiting",
+	persist(
+		devtools(
+			(set, get) => ({
+				fetchMegagameState: "waiting",
+				fetchQueuesState: "waiting",
 
-			megagame: undefined,
-			rumors: [],
+				megagame: undefined,
+				queues: undefined,
 
-			setFetchMegagameState: (fetchState: FetchState) => {
-				set(produce<MegagameStore>((state) => { state.fetchMegagameState = fetchState; }));
-			},
+				userType: "Guest",
+				userTypeId: "",
 
-			setFetchRumorsState: (fetchState: FetchState) => {
-				set(produce<MegagameStore>((state) => { state.fetchRumorsState = fetchState; }));
-			},
+				lang: "tr",
 
-			fetchData: () => {
-				const fetchState = get().fetchMegagameState;
-				const setFetchMegagameState = get().setFetchMegagameState;
+				setLang: (lang: "en" | "tr") => {
+					set(produce<MegagameStore>((state) => { state.lang = lang; }));
+				},
 
-				if (fetchState === "waiting") {
-					setFetchMegagameState("requesting");
+				setUserType: (userType: MegagameUserType) => {
+					set(produce<MegagameStore>((state) => {
+						state.userType = userType;
 
-					GenericGet<MggmMegagameResponse>("/mggm/megagame")
-						.then(response => {
-							set(produce<MegagameStore>((state) => {
-								state.megagame = response.data.megagame;
-							}));
+						const megagame = get().megagame;
+						if (megagame) {
+							if (userType === "Guest") state.userTypeId = "" as FactionId;
+							else state.userTypeId = megagame.factions.find(faction => faction.name === userType)?.id || "" as FactionId;
+						}
+					}));
+				},
 
-							get().fetchRumors();
+				setFetchMegagameState: (fetchState: FetchState) => {
+					set(produce<MegagameStore>((state) => { state.fetchMegagameState = fetchState; }));
+				},
 
-							setFetchMegagameState("done");
-						})
-						.catch(() => setFetchMegagameState("failed"));
-				}
-			},
+				setFetchQueuesState: (fetchState: FetchState) => {
+					set(produce<MegagameStore>((state) => { state.fetchQueuesState = fetchState; }));
+				},
 
-			fetchRumors: () => {
-				const megagameId = get().megagame?.id;
-				const fetchRumorsState = get().fetchRumorsState;
-				const setFetchRumorsState = get().setFetchRumorsState;
+				fetchData: (changeState: boolean) => {
+					const fetchState = get().fetchMegagameState;
+					const setFetchMegagameState = get().setFetchMegagameState;
 
-				if (fetchRumorsState !== "requesting" && megagameId) {
-					setFetchRumorsState("requesting");
+					if (fetchState !== "requesting") {
+						if (changeState) setFetchMegagameState("requesting");
 
-					const request: GetMegagameRumorsRequest = {
-						megagameId: megagameId
-					};
-
-					GenericPost<MggmRumorsResponse>("/mggm/megagame/rumors", request)
-						.then(response => {
-							if (response.status === 200) {
+						GenericGet<MggmMegagameResponse>("/mggm/megagame")
+							.then(response => {
 								set(produce<MegagameStore>((state) => {
-									state.rumors = response.data.rumors;
+									state.megagame = response.data.megagame;
 								}));
 
-								setFetchRumorsState("done");
-							}
-							else setFetchRumorsState("failed");
-						})
-						.catch(() => setFetchRumorsState("failed"));
+								setFetchMegagameState("succeded");
+							})
+							.catch(() => setFetchMegagameState("failed"));
+					}
+				},
+
+				fetchQueues: (changeState: boolean) => {
+					const megagameId = get().megagame?.id;
+					const fetchState = get().fetchQueuesState;
+					const setFetchQueuesState = get().setFetchQueuesState;
+
+					if (fetchState !== "requesting" && megagameId) {
+						if (changeState) setFetchQueuesState("requesting");
+
+						GenericGet<MggmOrderQueueItemsResponse>(`/mggm/megagame/order-queues/${megagameId}`)
+							.then(response => {
+								set(produce<MegagameStore>((state) => {
+									state.queues = response.data.queues;
+								}));
+
+								setFetchQueuesState("succeded");
+							})
+							.catch(() => setFetchQueuesState("failed"));
+					}
+				},
+
+				resetMegagame: (megagame: ResetMegagameRequest) => {
+					GenericPut(`/mggm/megagame/reset/${megagame.megagameId}`, null)
+						.finally(() => {
+							get().fetchData(true);
+							get().fetchQueues(true);
+						});
+				},
+
+				createDeadlineItem: (deadlineItem: CreateMegagameDeadlineItemRequest) => {
+					GenericPost("/mggm/megagame/deadline-item", deadlineItem)
+						.finally(() => get().fetchData(false));
+				},
+
+				deleteDeadlineItem: (deadlineItemId: DeadlineItemId) => {
+					GenericDelete(`/mggm/megagame/deadline-item/${deadlineItemId}`)
+						.finally(() => get().fetchData(false));
+				},
+
+				createNewsItem: (newsItem: CreateMegagameNewsItemRequest) => {
+					GenericPost("/mggm/megagame/news-item", newsItem)
+						.finally(() => get().fetchData(false));
+				},
+
+				deleteOrderQueueItem: (orderQueueItemId: OrderQueueItemId) => {
+					GenericDelete(`/mggm/megagame/order-queue-item/${orderQueueItemId}`)
+						.finally(() => get().fetchQueues(false));
+				},
+
+				createOrderQueueItem: (orderQueueItem: CreateOrderQueueItemRequest) => {
+					GenericPost("/mggm/megagame/order-queue-item", orderQueueItem)
+						.finally(() => get().fetchQueues(false));
+				},
+
+				getFactionNameById: (factionId: FactionId): MegagameDuneFaction | undefined => {
+					const megagame = get().megagame;
+					if (!megagame) return undefined;
+					return megagame.factions.find(faction => faction.id === factionId)?.name;
 				}
-			},
-
-			createMegagame: (megagame: SetMegagameRequest) => {
-				GenericPost<void>("/mggm/megagame", megagame)
-					.then(response => {
-						if (response.status === 200) get().fetchData();
-						else console.debug("Failed to create megagame.");
-					})
-					.catch(console.debug);
-			},
-
-			addRumor: (textEN: string, textTR: string) => {
-				const megagameId = get().megagame?.id;
-
-				if (megagameId) {
-					GenericPost<void>("/mggm/megagame/rumor", { megagameId, textEN, textTR })
-						.then(response => {
-							if (response.status === 200) get().fetchRumors();
-							else throw new Error();
-						})
-						.catch(console.error);
-				}
-			},
-
-			deleteMegagames: () => {
-				GenericDelete<void>("/mggm/megagame")
-					.then(() => {
-						set(produce<MegagameStore>((state) => {
-							state.rumors = [];
-							state.megagame = undefined;
-						}));
-					})
-					.catch(console.error);
-			}
-		}),
+			})
+		),
 		{ name: "MegagameStore" }
 	)
 );

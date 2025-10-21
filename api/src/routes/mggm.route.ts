@@ -1,15 +1,29 @@
 import express from "express";
 
-import { DeleteMegagames, GetMegagame, GetRumors, SetMegagame, SetRumor } from "../controllers/megagame.controller";
+import {
+	GetMegagame,
+	ResetMegagame,
+	CreateMegagameDeadlineItem,
+	CreateMegagameNewsItem,
+	GetMegagameOrderQueue,
+	DeleteMegagameOrderQueueItem,
+	CreateMegagameOrderQueueItem,
+	DeleteMegagameDeadlineItem
+} from "../controllers/megagame.controller";
 import { CheckAdmin } from "../middlewares/checkAdmin.middleware";
 
 
 const Router = express.Router();
 
 Router.get("/megagame", GetMegagame);
-Router.post("/megagame", CheckAdmin, SetMegagame);
-Router.delete("/megagame", CheckAdmin, DeleteMegagames);
-Router.post("/megagame/rumors", GetRumors);
-Router.post("/megagame/rumor", CheckAdmin, SetRumor);
+Router.put("/megagame/reset/:megagameId", CheckAdmin, ResetMegagame);
+
+Router.post("/megagame/deadline-item", CheckAdmin, CreateMegagameDeadlineItem);
+Router.delete("/megagame/deadline-item/:deadlineItemId", CheckAdmin, DeleteMegagameDeadlineItem);
+Router.post("/megagame/news-item", CreateMegagameNewsItem);
+
+Router.get("/megagame/order-queues/:megagameId", GetMegagameOrderQueue);
+Router.delete("/megagame/order-queue-item/:orderQueueItemId", DeleteMegagameOrderQueueItem);
+Router.post("/megagame/order-queue-item", CreateMegagameOrderQueueItem);
 
 export default Router;

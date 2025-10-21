@@ -5,15 +5,14 @@ export async function GetMegagameData(): Promise<MegagameDBO | undefined> {
 	const query = `
 		select 
 			g."Id", 
-			g."Start", 
-			g."End", 
+			g."StartAt", 
+			g."EndAt", 
 			g."Name", 
-			g."Type", 
 			g."CycleStart", 
 			g."CycleMinutes"
 		from mggm."Game" g
-		where g."End" > now()
-		and g."Start" < now()
+		where g."EndAt" > now()
+		and g."StartAt" < now()
 		and g."DeletedAt" is null
 		order by g."CreatedAt" desc
 		limit 1
@@ -24,81 +23,204 @@ export async function GetMegagameData(): Promise<MegagameDBO | undefined> {
 	if (data.rows.length > 0) return data.rows[0];
 }
 
-export async function GetMegagameEventData(gameId: Guid): Promise<MegagameEventDBO[] | undefined> {
+export async function GetFactionsData(megagameId: MegagameId): Promise<MegagameFactionDBO[] | undefined> {
 	const query = `
 		select 
-			ge."Id", 
-			ge."NameEN", 
-			ge."NameTR", 
-			ge."DescriptionEN", 
-			ge."DescriptionTR", 
-			ge."CycleInterval"
-		from mggm."GameEvent" ge
-		where ge."GameId" = '${gameId}'
+			f."Id", 
+			f."Name",
+			f."FactionCode"
+		from mggm."Faction" f
+		where f."MegagameId" = '${megagameId}'
+		and f."DeletedAt" is null
+		order by f."CreatedAt" asc
 	`;
 
-	const data = await PgPool.query<MegagameEventDBO>(query);
+	const data = await PgPool.query<MegagameFactionDBO>(query);
 
 	if (data.rows.length > 0) return data.rows;
 }
 
-export async function GetMegagameRumorData(gameId: MegagameId): Promise<MegagameRumorDBO[]> {
+export async function GetOrderTypesData(megagameId: MegagameId): Promise<MegagameOrderTypeDBO[] | undefined> {
 	const query = `
 		select 
-			ge."Id", 
-			ge."TextEN", 
-			ge."TextTR"
-		from mggm."GameRumors" ge
-		where ge."GameId" = '${gameId}'
-		order by ge."CreatedAt" desc
-		limit 10
+			o."Id", 
+			o."Name"
+		from mggm."OrderType" o
+		where o."MegagameId" = '${megagameId}'
+		and o."DeletedAt" is null
+		order by o."CreatedAt" asc
 	`;
 
-	const data = await PgPool.query<MegagameRumorDBO>(query);
+	const data = await PgPool.query<MegagameOrderTypeDBO>(query);
+
+	if (data.rows.length > 0) return data.rows;
+}
+
+export async function ResetMegagameData(megagameId: MegagameId): Promise<void> {
+	async function deleteDeadlineItemsData(megagameId: MegagameId): Promise<void> {
+		const query = `
+			update mggm."DeadlineItem" 
+			set "DeletedAt" = now() 
+			where "MegagameId" = '${megagameId}'
+			and "DeletedAt" is null
+		`;
+
+		await PgPool.query(query);
+	}
+
+	async function deleteNewsItemsData(megagameId: MegagameId): Promise<void> {
+		const query = `
+			update mggm."NewsItem" 
+			set "DeletedAt" = now() 
+			where "MegagameId" = '${megagameId}'
+			and "DeletedAt" is null
+		`;
+
+		await PgPool.query(query);
+	}
+
+	async function deleteOrderQueueItemsData(megagameId: MegagameId): Promise<void> {
+		const query = `
+			update mggm."OrderQueueItem" 
+			set "DeletedAt" = now() 
+			where "MegagameId" = '${megagameId}'
+			and "DeletedAt" is null
+		`;
+
+		await PgPool.query(query);
+	}
+
+	deleteDeadlineItemsData(megagameId);
+	deleteNewsItemsData(megagameId);
+	deleteOrderQueueItemsData(megagameId);
+
+	const query = `
+		update mggm."Game" 
+		set
+			"StartAt" = now(),
+			"EndAt" = now() + interval '10 hour',
+			"UpdatedAt" = now()
+		where "Id" = '${megagameId}'
+		and "DeletedAt" is null
+	`;
+
+	await PgPool.query(query);
+}
+
+export async function GetDeadlineItemsData(megagameId: MegagameId): Promise<MegagameDeadlineItemDBO[] | undefined> {
+	const query = `
+		select 
+			g."Id", 
+			g."Type", 
+			g."DeadlineAt"
+		from mggm."DeadlineItem" g
+		where g."MegagameId" = '${megagameId}'
+		and g."DeletedAt" is null
+		order by g."CreatedAt" asc
+	`;
+
+	const data = await PgPool.query<MegagameDeadlineItemDBO>(query);
+
+	if (data.rows.length > 0) return data.rows;
+}
+
+export async function DeleteDeadlineItemsData(deadlineItemId: DeadlineItemId): Promise<void> {
+	const query = `
+		update mggm."DeadlineItem" 
+		set "DeletedAt" = now() 
+		where "Id" = '${deadlineItemId}'
+		and "DeletedAt" is null
+	`;
+
+	await PgPool.query(query);
+}
+
+export async function CreateDeadlineItemData(createDeadlineItemRequest: CreateMegagameDeadlineItemRequest): Promise<void> {
+	const { megagameId, type, deadline } = createDeadlineItemRequest;
+
+	const query = `
+		insert into mggm."DeadlineItem"("MegagameId", "Type", "DeadlineAt")
+		values ('${megagameId}', '${type}', '${deadline}')
+	`;
+
+	await PgPool.query(query);
+}
+
+export async function GetNewsItemsData(megagameId: MegagameId): Promise<MegagameNewsDBO[] | undefined> {
+	const query = `
+		select 
+			n."Id",
+			n."FactionId",
+			n."Text"
+		from mggm."NewsItem" n
+		where n."MegagameId" = '${megagameId}'
+		and n."DeletedAt" is null
+		order by n."CreatedAt" desc
+		limit 50
+	`;
+
+	const data = await PgPool.query<MegagameNewsDBO>(query);
+
+	if (data.rows.length > 0) return data.rows;
+}
+
+export async function CreateNewsItemData(createNewsItemRequest: CreateMegagameNewsItemRequest): Promise<void> {
+	const { megagameId, factionId, text } = createNewsItemRequest;
+
+	const query = `
+		insert into mggm."NewsItem"("MegagameId", "FactionId", "Text")
+		values ('${megagameId}', '${factionId}', '${text}')
+	`;
+
+	await PgPool.query(query);
+}
+
+export async function GetOrderQueueData(megagameId: MegagameId): Promise<MegagameOrderQueueItemDBO[]> {
+	const query = `
+		select *
+		from (
+			select 
+				o."Id",
+				o."FactionId",
+				o."OrderTypeId",
+				o."CreatedAt",
+				row_number() over (partition by o."OrderTypeId" order by o."CreatedAt" desc) as rn
+			from mggm."OrderQueueItem" o
+			join mggm."Faction" f
+				on f."Id" = o."FactionId"
+			where o."MegagameId" = '${megagameId}'
+			  and o."DeletedAt" is null
+			order by o."CreatedAt" asc
+		) a
+		where a."rn" < 51
+	`;
+
+	const data = await PgPool.query<MegagameOrderQueueItemDBO>(query);
 
 	return data.rows;
 }
 
-export async function SetMegagameDataEvents(megagameId: MegagameId, events: SetMegagameRequestEvent[]): Promise<void> {
+export async function DeleteOrderQueueItemData(orderQueueItemId: OrderQueueItemId): Promise<void> {
 	const query = `
-		insert into mggm."GameEvent"("GameId", "NameEN", "NameTR", "DescriptionEN", "DescriptionTR", "CycleInterval")
-		values ${events.map(event => `('${megagameId}', '${event.name.en}', '${event.name.tr}', '${event.description.en}', '${event.description.tr}', ${event.cycleInterval})`).join(", ")}
-	`;
-
-	await PgPool.query(query);
-}
-
-export async function SetMegagameData(setMegagameRequest: SetMegagameRequest): Promise<void> {
-	const { name, type, timing, cycle, events } = setMegagameRequest;
-
-	const query = `
-		insert into mggm."Game"("Start", "End", "Name", "Type", "CycleStart", "CycleMinutes")
-		values ('${timing.start.replace("+00", "+03")}', '${timing.end.replace("+00", "+03")}', '${name}', '${type}', ${cycle.start}, ${cycle.minutes})
-	`;
-
-	await PgPool.query(query);
-
-	if (events && events.length > 0) {
-		const megagameId = await PgPool.query<{ Id: MegagameId; }>("select g.\"Id\" from mggm.\"Game\" g where g.\"DeletedAt\" is null order by g.\"CreatedAt\" desc limit 1");
-		await SetMegagameDataEvents(megagameId.rows[0].Id, events);
-	}
-}
-
-export async function SetMegagameRumor(megagameId: MegagameId, textEN: string, textTR: string): Promise<void> {
-	const query = `
-		insert into mggm."GameRumors"("GameId", "TextEN", "TextTR")
-		values ('${megagameId}', '${textEN}', '${textTR}')
-	`;
-
-	await PgPool.query(query);
-}
-
-export async function DeleteAllMegagames(): Promise<void> {
-	const query = `
-		update mggm."Game" 
+		update mggm."OrderQueueItem" 
 		set "DeletedAt" = now() 
-		where "DeletedAt" is null
+		where "Id" = '${orderQueueItemId}'
+		and "DeletedAt" is null
 	`;
 
 	await PgPool.query(query);
+}
+
+export async function CreateOrderQueueItemData(createOrderQueueItemRequest: CreateOrderQueueItemRequest): Promise<boolean> {
+	const { megagameId, factionId, orderTypeId } = createOrderQueueItemRequest;
+
+	const query = `
+		insert into mggm."OrderQueueItem"("MegagameId", "FactionId", "OrderTypeId")
+		values ('${megagameId}', '${factionId}', '${orderTypeId}')
+	`;
+
+	const result = await PgPool.query(query);
+
+	if (result.rowCount && result.rowCount > 0) return true;
+	return false;
 }

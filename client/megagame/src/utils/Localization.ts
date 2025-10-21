@@ -7,22 +7,6 @@ export const Localisation = {
 		en: (count: number): string => `Cycle ${count}`,
 		tr: (count: number): string => `Döngü ${count}`
 	},
-	noEvents: {
-		en: "No events this year.",
-		tr: "Bu yıl olay yok."
-	},
-	events: {
-		en: "Events",
-		tr: "Olaylar"
-	},
-	noRumors: {
-		en: "No rumors.",
-		tr: "Söylenti yok."
-	},
-	rumors: {
-		en: "Rumors",
-		tr: "Söylentiler"
-	},
 	countdownMinutesAndSeconds: {
 		en: (minutes: number, seconds: number): string => `${minutes} minutes and ${seconds} seconds until next cycle.`,
 		tr: (minutes: number, seconds: number): string => `${minutes} dakika ve ${seconds} saniye sonra yeni döngü başlayacak.`
@@ -38,5 +22,69 @@ export const Localisation = {
 	countdownNewCycle: {
 		en: "New cycle started.",
 		tr: "Yeni döngü başladı."
+	},
+	noNewsItems: {
+		en: "No news available.",
+		tr: "Mevcut haber yok."
+	},
+	newsItems: {
+		en: "News",
+		tr: "Haberler"
+	},
+	addNewsItem: {
+		en: "Add News Item",
+		tr: "Haber Öğesi Ekle"
+	},
+	enterNewsText: {
+		en: "Enter news text...",
+		tr: "Haber metnini girin..."
+	},
+	enterQueue: {
+		en: "Enter Order Queue",
+		tr: "Emir Kuyruğuna Gir"
+	},
+	queues: {
+		en: "Order Queues",
+		tr: "Emir Kuyrukları"
+	},
+	noQueueItemsFound: {
+		en: "No queue items found.",
+		tr: "Kuyruk öğesi bulunamadı."
+	},
+	yourPositionInQueue: {
+		en: "Position",
+		tr: "Sıra"
+	},
+	lawProposalDeadline: {
+		en: "Law Proposal voting deadline",
+		tr: "Yasa tasarısı oylama sonu"
+	},
+	enterFactionCode: {
+		en: "Enter faction code...",
+		tr: "Fraksiyon kodunu girin..."
+	},
+	submit: {
+		en: "Submit",
+		tr: "Gönder"
+	},
+	invalidFactionCode: {
+		en: "Invalid faction code.",
+		tr: "Geçersiz fraksiyon kodu."
+	},
+	factionSelection: {
+		en: "Faction Selection",
+		tr: "Fraksiyon Seçimi"
+	},
+	loading: {
+		en: "Loading...",
+		tr: "Yükleniyor..."
+	},
+	failedToFetchMegagameData: {
+		en: "Failed to fetch megagame data.",
+		tr: "Megagame verileri alınamadı."
+	},
+	deadlinePassed: {
+		en: "Deadline Passed",
+		tr: "Son Tarih Geçti"
 	}
 };

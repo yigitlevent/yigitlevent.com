@@ -1,52 +1,30 @@
-import { Blockquote, Container } from "@mantine/core";
-import { Info } from "lucide-react";
+import { Container } from "@mantine/core";
 import { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 
-import { Login } from "./Login";
+import { AdminPanel } from "./Panels/AdminPanel";
 import { GamePanel } from "./Panels/GamePanel";
 import { useMegagameStore } from "../hooks/useMegagameStore";
-import { useUserStore } from "../hooks/useUserStore";
-import { AdminPanel } from "./Panels/AdminPanel";
 
 
-function ElementSwitcher() {
+export function Panels(): React.JSX.Element {
 	const { fetchMegagameState, fetchData } = useMegagameStore();
 
 	useEffect(() => {
-		if (fetchMegagameState === "waiting") fetchData();
+		if (fetchMegagameState === "waiting") fetchData(true);
 	}, [fetchData, fetchMegagameState]);
 
-	const getRoute = () => {
-		switch (fetchMegagameState) {
-			case "waiting":
-			case "requesting":
-				return <Blockquote color="yellow" radius="xs" iconSize={30} icon={<Info color="orange" size={20} />}>Loading</Blockquote>;
-			case "failed":
-				return (
-					<Blockquote color="red" radius="xs" iconSize={30} icon={<Info color="red" size={20} />} mt="xl">
-						There are no active megagames.
-					</Blockquote>
-				);
-			case "done":
-				return <GamePanel />;
-		}
-	};
-
-	return getRoute();
-}
-
-export function Panels(): React.JSX.Element {
-	const { user } = useUserStore();
+	useEffect(() => {
+		const i = setInterval(() => fetchData(false), 15000);
+		return () => clearInterval(i);
+	}, [fetchData]);
 
 	return (
 		<Container strategy="block" size={500} mt="lg">
 			<Routes>
-				<Route path="/" element={<ElementSwitcher />} />
-				<Route path="/login" element={<Login />} />
+				<Route path="/" element={<GamePanel />} />
+				<Route path="/admin" element={<AdminPanel />} />
 			</Routes>
-
-			{user?.userAccess.includes("Admin") ? <AdminPanel /> : null}
 		</Container >
 	);
 }

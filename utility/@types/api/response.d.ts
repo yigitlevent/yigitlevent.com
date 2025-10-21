@@ -61,6 +61,6 @@ interface MggmMegagameResponse {
 	megagame: Megagame;
 }
 
-interface MggmRumorsResponse {
-	rumors: Rumor[];
+interface MggmOrderQueueItemsResponse {
+	queues: MegagameOrderQueueItems;
 }

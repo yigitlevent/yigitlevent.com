@@ -1,6 +1,19 @@
 import { Request, Response } from "express";
 
-import { DeleteAllMegagames, GetMegagameData, GetMegagameEventData, GetMegagameRumorData, SetMegagameData, SetMegagameRumor } from "../services/megagame.service";
+import {
+	GetMegagameData,
+	ResetMegagameData,
+	GetDeadlineItemsData,
+	CreateDeadlineItemData,
+	GetNewsItemsData,
+	CreateNewsItemData,
+	GetOrderQueueData,
+	DeleteOrderQueueItemData,
+	CreateOrderQueueItemData,
+	GetFactionsData,
+	GetOrderTypesData,
+	DeleteDeadlineItemsData
+} from "../services/megagame.service";
 
 
 export async function GetMegagame(request: Request, response: Response): Promise<Response<MggmMegagameResponse, Record<string, unknown>>> {
@@ -12,32 +25,49 @@ export async function GetMegagame(request: Request, response: Response): Promise
 			return response.json({ error: "Megagame data not found" });
 		}
 
-		const eventData = await GetMegagameEventData(data.Id);
+		const factions = await GetFactionsData(data.Id);
+		const orderTypes = await GetOrderTypesData(data.Id);
+		const deadlineItems = await GetDeadlineItemsData(data.Id);
+		const newsItems = await GetNewsItemsData(data.Id);
 
 		const megagame: Megagame = {
-			id: data.Id as unknown as MegagameId,
+			id: data.Id,
 			name: data.Name,
-			type: data.Type as "dune" | "wod",
 			timing: {
-				start: new Date(data.Start),
-				end: new Date(data.End)
+				start: new Date(data.StartAt),
+				end: new Date(data.EndAt)
 			},
 			cycle: {
 				start: data.CycleStart,
 				minutes: data.CycleMinutes
 			},
-			events: eventData?.map(event => ({
-				id: event.Id as unknown as MegagameEventId,
-				name: {
-					en: event.NameEN,
-					tr: event.NameTR
-				},
-				description: {
-					en: event.DescriptionEN,
-					tr: event.DescriptionTR
-				},
-				cycleInterval: event.CycleInterval
-			})) || []
+			factions: factions?.map(faction => {
+				return {
+					id: faction.Id,
+					name: faction.Name,
+					factionCode: faction.FactionCode
+				};
+			}) || [],
+			orderTypes: orderTypes?.map(orderType => {
+				return {
+					id: orderType.Id,
+					name: orderType.Name
+				};
+			}) || [],
+			deadlineItems: deadlineItems?.map(deadlineItem => {
+				return {
+					id: deadlineItem.Id,
+					type: deadlineItem.Type,
+					deadlineAt: new Date(deadlineItem.DeadlineAt)
+				};
+			}) || [],
+			news: newsItems?.map(newsItem => {
+				return {
+					id: newsItem.Id,
+					factionId: newsItem.FactionId,
+					text: newsItem.Text
+				};
+			}) || []
 		};
 
 		const responseData: MggmMegagameResponse = { megagame };
@@ -51,26 +81,91 @@ export async function GetMegagame(request: Request, response: Response): Promise
 	}
 }
 
-export async function GetRumors(request: Request<unknown, unknown, GetMegagameRumorsRequest>, response: Response): Promise<Response<MggmRumorsResponse, Record<string, unknown>>> {
-	const { megagameId } = request.body;
+export async function ResetMegagame(request: Request, response: Response): Promise<Response> {
+	const megagameId = request.params.megagameId as MegagameId;
 
 	try {
-		const rumors = await GetMegagameRumorData(megagameId);
+		await ResetMegagameData(megagameId);
+		response.status(204);
+		return response.send();
+	}
+	catch (e) {
+		console.error(e);
+		return response.sendStatus(403);
+	}
+}
 
-		if (rumors === undefined) {
+export async function CreateMegagameDeadlineItem(request: Request<unknown, unknown, CreateMegagameDeadlineItemRequest>, response: Response): Promise<Response> {
+	try {
+		await CreateDeadlineItemData(request.body);
+		response.status(201);
+		return response.send();
+	}
+	catch (e) {
+		console.error(e);
+		return response.sendStatus(403);
+	}
+}
+
+export async function DeleteMegagameDeadlineItem(request: Request, response: Response): Promise<Response> {
+	const deadlineItemId = request.params.deadlineItemId as DeadlineItemId;
+
+	try {
+		await DeleteDeadlineItemsData(deadlineItemId);
+		response.status(201);
+		return response.send();
+	}
+	catch (e) {
+		console.error(e);
+		return response.sendStatus(403);
+	}
+}
+
+export async function CreateMegagameNewsItem(request: Request<unknown, unknown, CreateMegagameNewsItemRequest>, response: Response): Promise<Response> {
+	const createMegagameNewsItemRequest = request.body;
+
+	try {
+		await CreateNewsItemData(createMegagameNewsItemRequest);
+		response.status(201);
+		return response.send();
+	}
+	catch (e) {
+		console.error(e);
+		return response.sendStatus(403);
+	}
+}
+
+export async function GetMegagameOrderQueue(request: Request, response: Response): Promise<Response> {
+	const megagameId = request.params.megagameId as MegagameId;
+
+	try {
+		const orderQueueItems = await GetOrderQueueData(megagameId);
+		const orderTypes = await GetOrderTypesData(megagameId);
+
+		if (orderTypes === undefined) {
 			response.status(404);
-			return response.json({ error: "Rumors not found" });
+			return response.json({ error: "Megagame order types not found" });
 		}
 
-		const responseData: MggmRumorsResponse = {
-			rumors: rumors.map(rumor => ({
-				id: rumor.Id,
-				text: {
-					en: rumor.TextEN,
-					tr: rumor.TextTR
-				}
-			}))
-		};
+		const getTime = (dateStr: string): number => new Date(dateStr).getTime();
+		const sortedList = orderQueueItems.sort((a, b) => getTime(a.CreatedAt) - getTime(b.CreatedAt));
+
+		const grouped: MegagameOrderQueueItems = {};
+
+		for (const orderType of orderTypes) {
+			grouped[orderType.Id] = [];
+		}
+
+		for (const itemIndex in sortedList) {
+			const item = sortedList[itemIndex];
+
+			grouped[item.OrderTypeId].push({
+				id: item.Id,
+				factionId: item.FactionId
+			});
+		}
+
+		const responseData: MggmOrderQueueItemsResponse = { queues: grouped };
 
 		response.status(200);
 		return response.json(responseData);
@@ -81,14 +176,13 @@ export async function GetRumors(request: Request<unknown, unknown, GetMegagameRu
 	}
 }
 
-export async function SetMegagame(request: Request<unknown, unknown, SetMegagameRequest>, response: Response): Promise<Response<BwgrRulesetResponse, Record<string, unknown>>> {
-	const setMegagameRequest = request.body;
+export async function DeleteMegagameOrderQueueItem(request: Request, response: Response): Promise<Response> {
+	const orderQueueItemId = request.params.orderQueueItemId as OrderQueueItemId;
 
 	try {
-		await SetMegagameData(setMegagameRequest);
-
-		response.status(200);
-		return response;
+		await DeleteOrderQueueItemData(orderQueueItemId);
+		response.status(201);
+		return response.send();
 	}
 	catch (e) {
 		console.error(e);
@@ -96,27 +190,19 @@ export async function SetMegagame(request: Request<unknown, unknown, SetMegagame
 	}
 }
 
-export async function SetRumor(request: Request<unknown, unknown, SetMegagameRumorRequest>, response: Response): Promise<Response<void, Record<string, unknown>>> {
-	const { megagameId, textEN, textTR } = request.body;
+export async function CreateMegagameOrderQueueItem(request: Request<unknown, unknown, CreateOrderQueueItemRequest>, response: Response): Promise<Response> {
+	const createOrderQueueItemRequest = request.body;
 
 	try {
-		await SetMegagameRumor(megagameId, textEN, textTR);
+		const success = await CreateOrderQueueItemData(createOrderQueueItemRequest);
 
-		response.status(200);
-		return response;
-	}
-	catch (e) {
-		console.error(e);
-		return response.sendStatus(403);
-	}
-}
+		if (!success) {
+			response.status(400);
+			return response.json({ error: "Failed to create order queue item" });
+		}
 
-export async function DeleteMegagames(request: Request, response: Response): Promise<Response<void, Record<string, unknown>>> {
-	try {
-		await DeleteAllMegagames();
-
-		response.status(200);
-		return response;
+		response.status(201);
+		return response.send();
 	}
 	catch (e) {
 		console.error(e);

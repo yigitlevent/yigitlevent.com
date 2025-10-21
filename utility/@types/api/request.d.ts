@@ -8,45 +8,37 @@ type UserForms =
 
 type BwgrRulesetForms = { rulesets: BwgrRulesetId[]; };
 
-interface SetMegagameRequestEvent {
-	name: {
-		en: string;
-		tr: string;
-	};
-	description: {
-		en: string;
-		tr: string;
-	};
-	cycleInterval: number;
-}
-
-interface SetMegagameRequest {
-	name: string;
-	type: "dune" | "wod";
-	timing: {
-		start: string;
-		end: string;
-	};
-	cycle: {
-		start: number;
-		minutes: number;
-	};
-	events: SetMegagameRequestEvent[];
-}
-
-interface SetMegagameRumorRequest {
+interface ResetMegagameRequest {
 	megagameId: MegagameId;
-	textEN: string;
-	textTR: string;
 }
 
-interface GetMegagameRumorsRequest {
+interface GetMegagameDeadlineItemsRequest {
 	megagameId: MegagameId;
+}
+
+interface CreateMegagameDeadlineItemRequest {
+	megagameId: MegagameId;
+	type: string;
+	deadline: string;
+}
+
+interface CreateMegagameNewsItemRequest {
+	megagameId: MegagameId;
+	factionId: FactionId;
+	text: string;
+}
+
+interface CreateOrderQueueItemRequest {
+	megagameId: MegagameId;
+	factionId: FactionId;
+	orderTypeId: OrderTypeId;
 }
 
 type MegagameForms =
-	| GetMegagameRumorsRequest
-	| SetMegagameRequest
-	| SetMegagameRumorRequest;
+	| ResetMegagameRequest
+	| GetMegagameDeadlineItemsRequest
+	| CreateMegagameDeadlineItemRequest
+	| CreateMegagameNewsItemRequest
+	| CreateOrderQueueItemRequest;
 
 type Forms = UserForms | BwgrRulesetForms | MegagameForms;
