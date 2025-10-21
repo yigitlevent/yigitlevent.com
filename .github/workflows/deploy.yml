@@ -92,7 +92,7 @@ jobs:
             export NVM_DIR=~/.nvm
             source ~/.nvm/nvm.sh
             cd ${{ secrets.SOURCEDIR }}/api-src
-            nvm use 21.4.0
+            nvm use node
             npm i
             npm run build
             sudo rm -rf ${{ secrets.TARGETDIR }}/api
