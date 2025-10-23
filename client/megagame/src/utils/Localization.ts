@@ -55,9 +55,9 @@ export const Localisation = {
 		en: "Position",
 		tr: "Sıra"
 	},
-	lawProposalDeadline: {
-		en: "Law Proposal voting deadline",
-		tr: "Yasa tasarısı oylama sonu"
+	deadline: {
+		en: "Voting deadline",
+		tr: "Oylama sonu"
 	},
 	enterFactionCode: {
 		en: "Enter faction code...",
@@ -86,5 +86,9 @@ export const Localisation = {
 	deadlinePassed: {
 		en: "Deadline Passed",
 		tr: "Son Tarih Geçti"
+	},
+	events: {
+		en: "Events",
+		tr: "Olaylar"
 	}
 };

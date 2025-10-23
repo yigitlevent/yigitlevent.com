@@ -9,6 +9,7 @@ interface UserState {
 	user: UserSession | undefined;
 	fetching: boolean;
 	setUser: (user: UserSession | undefined) => void;
+	isAdmin: () => boolean;
 	toggleFetching: () => void;
 	auth: () => void;
 	signup: (formData: UserSignupRequest, handleClose: (open: boolean) => void) => void;
@@ -24,6 +25,10 @@ export const useUserStore = create<UserState>()(
 
 			setUser: (user: UserSession | undefined) => {
 				set(produce<UserState>((state) => { state.user = user; }));
+			},
+
+			isAdmin: (): boolean => {
+				return get().user?.userAccess.includes("Admin") || false;
 			},
 
 			toggleFetching: () => {

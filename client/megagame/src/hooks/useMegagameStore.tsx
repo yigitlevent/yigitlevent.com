@@ -2,7 +2,7 @@ import { produce } from "immer";
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
 
-import { GenericDelete, GenericGet, GenericPost, GenericPut } from "../utils/GenericRequests";
+import { GenericDelete, GenericGet, GenericPost } from "../utils/GenericRequests";
 
 
 export type FetchState =
@@ -17,6 +17,7 @@ interface MegagameStore {
 
 	readonly megagame: Megagame | undefined;
 	readonly queues: MegagameOrderQueueItems | undefined;
+	readonly events: Record<string, boolean> | undefined;
 
 	readonly lang: "en" | "tr";
 	readonly userType: MegagameUserType;
@@ -39,6 +40,9 @@ interface MegagameStore {
 	deleteOrderQueueItem: (orderQueueItemId: OrderQueueItemId) => void;
 	createOrderQueueItem: (orderQueueItem: CreateOrderQueueItemRequest) => void;
 
+	setEventState: (eventType: string, state: boolean) => void;
+	resetEventStates: () => void;
+
 	getFactionNameById: (factionId: FactionId) => MegagameDuneFaction | undefined;
 }
 
@@ -51,6 +55,7 @@ export const useMegagameStore = create<MegagameStore>()(
 
 				megagame: undefined,
 				queues: undefined,
+				events: undefined,
 
 				userType: "Guest",
 				userTypeId: "",
@@ -92,7 +97,14 @@ export const useMegagameStore = create<MegagameStore>()(
 							.then(response => {
 								set(produce<MegagameStore>((state) => {
 									state.megagame = response.data.megagame;
+									if (!state.events) {
+										state.events = response.data.megagame.events.reduce<Record<string, boolean>>((acc, event) => {
+											acc[event.type] = false;
+											return acc;
+										}, {});
+									}
 								}));
+
 
 								setFetchMegagameState("succeded");
 							})
@@ -121,7 +133,7 @@ export const useMegagameStore = create<MegagameStore>()(
 				},
 
 				resetMegagame: (megagame: ResetMegagameRequest) => {
-					GenericPut(`/mggm/megagame/reset/${megagame.megagameId}`, null)
+					GenericPost("/mggm/megagame/reset", megagame)
 						.finally(() => {
 							get().fetchData(true);
 							get().fetchQueues(true);
@@ -151,6 +163,23 @@ export const useMegagameStore = create<MegagameStore>()(
 				createOrderQueueItem: (orderQueueItem: CreateOrderQueueItemRequest) => {
 					GenericPost("/mggm/megagame/order-queue-item", orderQueueItem)
 						.finally(() => get().fetchQueues(false));
+				},
+
+				setEventState: (eventType: string, state: boolean) => {
+					set(produce<MegagameStore>((store) => {
+						if (!store.events) store.events = {};
+						store.events[eventType] = state;
+					}));
+				},
+
+				resetEventStates: () => {
+					set(produce<MegagameStore>((store) => {
+						if (store.events) {
+							for (const eventType in store.events) {
+								store.events[eventType] = false;
+							}
+						}
+					}));
 				},
 
 				getFactionNameById: (factionId: FactionId): MegagameDuneFaction | undefined => {

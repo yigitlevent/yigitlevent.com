@@ -12,7 +12,8 @@ import {
 	CreateOrderQueueItemData,
 	GetFactionsData,
 	GetOrderTypesData,
-	DeleteDeadlineItemsData
+	DeleteDeadlineItemsData,
+	GetEventItemsData
 } from "../services/megagame.service";
 
 
@@ -25,10 +26,11 @@ export async function GetMegagame(request: Request, response: Response): Promise
 			return response.json({ error: "Megagame data not found" });
 		}
 
-		const factions = await GetFactionsData(data.Id);
-		const orderTypes = await GetOrderTypesData(data.Id);
+		const factions = await GetFactionsData();
+		const orderTypes = await GetOrderTypesData();
 		const deadlineItems = await GetDeadlineItemsData(data.Id);
 		const newsItems = await GetNewsItemsData(data.Id);
+		const eventItems = await GetEventItemsData(data.Id);
 
 		const megagame: Megagame = {
 			id: data.Id,
@@ -67,6 +69,12 @@ export async function GetMegagame(request: Request, response: Response): Promise
 					factionId: newsItem.FactionId,
 					text: newsItem.Text
 				};
+			}) || [],
+			events: eventItems?.map(eventItem => {
+				return {
+					cycleInterval: eventItem.CycleInterval,
+					type: eventItem.Type
+				};
 			}) || []
 		};
 
@@ -81,12 +89,10 @@ export async function GetMegagame(request: Request, response: Response): Promise
 	}
 }
 
-export async function ResetMegagame(request: Request, response: Response): Promise<Response> {
-	const megagameId = request.params.megagameId as MegagameId;
-
+export async function ResetMegagame(request: Request<unknown, unknown, ResetMegagameRequest>, response: Response): Promise<Response> {
 	try {
-		await ResetMegagameData(megagameId);
-		response.status(204);
+		await ResetMegagameData(request.body);
+		response.status(201);
 		return response.send();
 	}
 	catch (e) {
@@ -140,7 +146,7 @@ export async function GetMegagameOrderQueue(request: Request, response: Response
 
 	try {
 		const orderQueueItems = await GetOrderQueueData(megagameId);
-		const orderTypes = await GetOrderTypesData(megagameId);
+		const orderTypes = await GetOrderTypesData();
 
 		if (orderTypes === undefined) {
 			response.status(404);

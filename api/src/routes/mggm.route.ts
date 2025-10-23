@@ -16,7 +16,7 @@ import { CheckAdmin } from "../middlewares/checkAdmin.middleware";
 const Router = express.Router();
 
 Router.get("/megagame", GetMegagame);
-Router.put("/megagame/reset/:megagameId", CheckAdmin, ResetMegagame);
+Router.post("/megagame/reset", CheckAdmin, ResetMegagame);
 
 Router.post("/megagame/deadline-item", CheckAdmin, CreateMegagameDeadlineItem);
 Router.delete("/megagame/deadline-item/:deadlineItemId", CheckAdmin, DeleteMegagameDeadlineItem);

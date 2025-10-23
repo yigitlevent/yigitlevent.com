@@ -88,24 +88,15 @@ export function TitleWithActions({ openModal }: { openModal: () => void; }): Rea
 	);
 }
 
-function FactionBox(): React.JSX.Element {
-	const { userType } = useMegagameStore();
-
-	return (
-		<Fragment>
-			<Title order={3} style={{ marginTop: 20 }}>{userType}</Title>
-		</Fragment>
-	);
-}
-
 export function GamePanel(): React.JSX.Element {
 	const { lang, fetchMegagameState } = useMegagameStore();
 	const [opened, { open: openModal, close: closeModal }] = useDisclosure(false);
+	const { userType } = useMegagameStore();
 
 	return (
 		<Box>
 			<TitleWithActions openModal={openModal} />
-			<FactionBox />
+			<Title order={2} my="md">{userType}</Title>
 
 			{fetchMegagameState === "waiting" || fetchMegagameState === "requesting"
 				? <Blockquote color="yellow" radius="xs" iconSize={30} icon={<Info color="orange" size={20} />}>{Localisation.loading[lang]}</Blockquote>

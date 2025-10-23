@@ -23,7 +23,7 @@ function OrderQueueTitle({ orderType, orderQueueIndexes }: { orderType: Megagame
 
 function OrderQueuePanelList({ orderType }: { orderType: MegagameOrderType; }): React.JSX.Element {
 	const { lang, queues, userType, deleteOrderQueueItem, getFactionNameById } = useMegagameStore();
-	const { user } = useUserStore();
+	const { isAdmin } = useUserStore();
 
 	return (
 		<Fragment>
@@ -33,7 +33,7 @@ function OrderQueuePanelList({ orderType }: { orderType: MegagameOrderType; }): 
 						<List.Item key={order.id}>
 							{getFactionNameById(order.factionId)}
 
-							{userType === getFactionNameById(order.factionId) || user?.userAccess.includes("Admin")
+							{userType === getFactionNameById(order.factionId) || isAdmin()
 								? <ActionIcon
 									ml="sm"
 									variant="subtle"
@@ -48,7 +48,7 @@ function OrderQueuePanelList({ orderType }: { orderType: MegagameOrderType; }): 
 					)
 					)}
 				</List>
-				: <span>{Localisation.noQueueItemsFound[lang]}</span>}
+				: <Text>{Localisation.noQueueItemsFound[lang]}</Text>}
 		</Fragment>
 	);
 }
@@ -114,18 +114,16 @@ export function OrderQueues(): React.JSX.Element {
 	}, [fetchQueues, fetchQueuesState]);
 
 	useEffect(() => {
-		const i = setInterval(() => fetchQueues(false), 15000);
+		const i = setInterval(() => fetchQueues(false), 10000);
 		return () => clearInterval(i);
 	}, [fetchQueues]);
 
-
 	return (
 		<Paper shadow="md" radius="xs" p="xl" bd="1px solid rgba(0,0,0,0.1)" mt="md">
-			<Title order={3} mb="sm">{Localisation.queues[lang]}</Title>
+			<Title order={2} mb="md">{Localisation.queues[lang]}</Title>
 
 			{<Accordion variant="separated" radius="xs" chevronIconSize={20}>
-				{megagame?.orderTypes.map(orderType =>
-					<OrderQueue key={orderType.id} orderType={orderType} />)}
+				{megagame?.orderTypes.map(orderType => <OrderQueue key={orderType.id} orderType={orderType} />)}
 			</Accordion>}
 		</Paper>
 	);

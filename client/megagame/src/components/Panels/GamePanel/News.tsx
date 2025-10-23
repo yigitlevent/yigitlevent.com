@@ -76,7 +76,7 @@ export function News(): React.JSX.Element {
 
 	return (
 		<Paper shadow="md" radius="xs" p="xl" bd="1px solid rgba(0,0,0,0.1)" mt="md">
-			<Title order={3} mb="sm">
+			<Title order={2} mb="md">
 				{Localisation.newsItems[lang]}
 			</Title>
 

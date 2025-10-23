@@ -44,6 +44,11 @@ interface MegagameNewsDBO {
 	Text: string;
 }
 
+interface MegagameEventDBO {
+	CycleInterval: number;
+	Type: string;
+}
+
 interface MegagameOrderQueueItemDBO {
 	Id: OrderQueueItemId;
 	FactionId: FactionId;
@@ -83,6 +88,11 @@ interface MegagameOrderQueueItems {
 	[key: string]: MegagameOrderQueueItem[];
 }
 
+interface MegagameEvent {
+	cycleInterval: number;
+	type: string;
+}
+
 interface Megagame {
 	id: MegagameId;
 	name: string;
@@ -98,6 +108,7 @@ interface Megagame {
 	orderTypes: MegagameOrderType[];
 	deadlineItems: MegagameDeadlineItem[];
 	news: MegagameNewsItem[];
+	events: MegagameEvent[];
 }
 
 type MegagameUserType =

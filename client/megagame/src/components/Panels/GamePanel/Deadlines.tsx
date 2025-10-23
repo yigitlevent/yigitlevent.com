@@ -1,4 +1,4 @@
-import { Blockquote, ActionIcon } from "@mantine/core";
+import { Blockquote, ActionIcon, Title } from "@mantine/core";
 import { CircleSlash, Info } from "lucide-react";
 import { Fragment } from "react";
 
@@ -10,7 +10,7 @@ import { Localisation } from "../../../utils/Localization";
 
 export function Deadline(): React.JSX.Element {
 	const { lang, megagame, deleteDeadlineItem } = useMegagameStore();
-	const { user } = useUserStore();
+	const { isAdmin } = useUserStore();
 	const { deadlines } = useDeadlineTimer();
 
 	if (!megagame) return <Fragment />;
@@ -30,9 +30,10 @@ export function Deadline(): React.JSX.Element {
 						icon={<Info color={d.deadlinePassed ? "red" : "yellow"} size={20} />}
 						style={{ marginTop: 15 }}
 					>
-						{Localisation.lawProposalDeadline[lang]}: {d.deadlinePassed ? Localisation.deadlinePassed[lang] : `${d.minutes}:${d.seconds}`}
+						<Title order={4}>{deadline.type}</Title>
+						{Localisation.deadline[lang]}: {d.deadlinePassed ? Localisation.deadlinePassed[lang] : `${d.minutes}:${d.seconds}`}
 
-						{user && user.userAccess.includes("Admin")
+						{isAdmin()
 							? <ActionIcon
 								ml="sm"
 								variant="subtle"

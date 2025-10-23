@@ -9,7 +9,12 @@ type UserForms =
 type BwgrRulesetForms = { rulesets: BwgrRulesetId[]; };
 
 interface ResetMegagameRequest {
-	megagameId: MegagameId;
+	startAt: string;
+	endAt: string;
+	name: string;
+	cycleStart: number;
+	cycleMinutes: number;
+	events: MegagameEvent[];
 }
 
 interface GetMegagameDeadlineItemsRequest {
