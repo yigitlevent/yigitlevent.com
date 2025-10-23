@@ -2,7 +2,7 @@ import bcrypt from "bcrypt";
 import { Request, Response } from "express";
 
 import { PgPool } from "../index";
-import { FindUserByEmail, MapUserAccess, UpdateUserLastSignInAt } from "../services/user.service";
+import { FindUserByEmail, UpdateUserLastSignInAt } from "../services/user.service";
 
 
 export async function UserAuth(request: Request, response: Response): Promise<Response<unknown, Record<string, unknown>>> {
@@ -20,7 +20,7 @@ export async function UserSignUp(request: Request<unknown, unknown, UserSignupRe
 
 		const user = data.rows[0];
 
-		request.session.user = { id: user.Id, username: user.Username, email: user.Email, userAccess: MapUserAccess(user.UserAccessIds) };
+		request.session.user = { id: user.Id, username: user.Username, email: user.Email, userAccess: user.UserAccess };
 		response.status(200);
 		return response.json({ user: request.session.user });
 	}
@@ -42,7 +42,7 @@ export async function UserSignIn(request: Request<unknown, unknown, UserSigninRe
 
 			UpdateUserLastSignInAt(user.Id);
 
-			request.session.user = { id: user.Id, username: user.Username, email: user.Email, userAccess: MapUserAccess(user.UserAccessIds) };
+			request.session.user = { id: user.Id, username: user.Username, email: user.Email, userAccess: user.UserAccess };
 			response.status(200);
 			return response.json({ user: request.session.user });
 		}

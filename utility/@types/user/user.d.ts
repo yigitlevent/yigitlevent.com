@@ -1,21 +1,19 @@
+type UserAccess = Nominal<string, "UserAccess">;
+
 interface UserDBO {
-	Id: Guid;
+	Id: UserId;
 	Username: string;
 	Email: string;
 	Password: string;
-	UserAccessIds: number[];
+	UserAccess: UserAccess[];
 }
 
-type UserAccessType =
-	| "Admin"
-	| "BurningWheel";
-
 interface User {
-	id: Guid;
+	id: UserId;
 	username: string;
 	email: string;
 	password: string;
-	userAccess: UserAccessType[];
+	userAccess: UserAccess[];
 }
 
 type UserSession = Omit<User, "password">;

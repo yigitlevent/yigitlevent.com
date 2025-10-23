@@ -10,7 +10,7 @@ import { Localisation } from "../../../utils/Localization";
 
 function EventsList({ cycleCount }: { cycleCount: number; }): React.JSX.Element {
 	const { lang, megagame, events, setEventState } = useMegagameStore();
-	const { isAdmin } = useUserStore();
+	const { hasAccess } = useUserStore();
 
 	if (!megagame || !events) return <Fragment />;
 
@@ -31,7 +31,7 @@ function EventsList({ cycleCount }: { cycleCount: number; }): React.JSX.Element 
 			>
 				{relevantEventItems.map((eventItem, index) => (
 					<List.Item key={index}>
-						{(isAdmin())
+						{hasAccess("Megagame Moderator" as UserAccess)
 							? <Checkbox
 								label={eventItem.type}
 								color="yellow"

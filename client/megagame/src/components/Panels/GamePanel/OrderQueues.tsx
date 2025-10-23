@@ -23,7 +23,7 @@ function OrderQueueTitle({ orderType, orderQueueIndexes }: { orderType: Megagame
 
 function OrderQueuePanelList({ orderType }: { orderType: MegagameOrderType; }): React.JSX.Element {
 	const { lang, queues, userType, deleteOrderQueueItem, getFactionNameById } = useMegagameStore();
-	const { isAdmin } = useUserStore();
+	const { hasAccess } = useUserStore();
 
 	return (
 		<Fragment>
@@ -33,7 +33,7 @@ function OrderQueuePanelList({ orderType }: { orderType: MegagameOrderType; }): 
 						<List.Item key={order.id}>
 							{getFactionNameById(order.factionId)}
 
-							{userType === getFactionNameById(order.factionId) || isAdmin()
+							{userType === getFactionNameById(order.factionId) || hasAccess("Megagame Moderator" as UserAccess)
 								? <ActionIcon
 									ml="sm"
 									variant="subtle"

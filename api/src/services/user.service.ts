@@ -8,11 +8,15 @@ export async function FindUserBySessionId(sessionId: string): Promise<UserDBO | 
 			u."Username",
 			u."Email",
 			u."Password",
-			ARRAY(
-				SELECT ua."UserAccessTypeId"
-				FROM usr."UserAccess" ua
-				WHERE u."Id"::text = ua."UserId"::text
-			) AS "UserAccessIds"
+			array( 
+				select uat."Name"
+				from usr."UserAccessTypes" uat
+				where uat."Id" = (
+					select ua."UserAccessTypeId"
+					from usr."UserAccess" ua
+					where u."Id"::text = ua."UserId"::text
+				)
+			) as "UserAccess"
 		from usr."Users" u
 		where u."Id" = (
 			select (us."sess"->'user'->>'id')::uuid as UserId
@@ -25,6 +29,8 @@ export async function FindUserBySessionId(sessionId: string): Promise<UserDBO | 
 
 	const data = await PgPool.query<UserDBO>(query);
 
+	console.log(data.rows);
+
 	if (data.rows.length > 0) return data.rows[0];
 }
 
@@ -35,11 +41,15 @@ export async function FindUserByEmail(email: string): Promise<UserDBO | undefine
 			u."Username",
 			u."Email",
 			u."Password",
-			ARRAY( 
-				SELECT ua."UserAccessTypeId"
-				FROM usr."UserAccess" ua
-				WHERE u."Id"::text = ua."UserId"::text
-			) AS "UserAccessIds"
+			array( 
+				select uat."Name"
+				from usr."UserAccessTypes" uat
+				where uat."Id" = (
+					select ua."UserAccessTypeId"
+					from usr."UserAccess" ua
+					where u."Id"::text = ua."UserId"::text
+				)
+			) as "UserAccess"
 		from usr."Users" u
 		where u."Email" = '${email}';
 	`;
@@ -56,11 +66,15 @@ export async function FindUserByUsername(username: string): Promise<UserDBO | bo
 			u."Username",
 			u."Email",
 			u."Password",
-			ARRAY( 
-				SELECT ua."UserAccessTypeId"
-				FROM usr."UserAccess" ua
-				WHERE u."Id"::text = ua."UserId"::text
-			) AS "UserAccessIds"
+			array( 
+				select uat."Name"
+				from usr."UserAccessTypes" uat
+				where uat."Id" = (
+					select ua."UserAccessTypeId"
+					from usr."UserAccess" ua
+					where u."Id"::text = ua."UserId"::text
+				)
+			) as "UserAccess"
 		from usr."Users" u
 		where u."Username" = '${username}';
 	`;
@@ -73,21 +87,4 @@ export async function FindUserByUsername(username: string): Promise<UserDBO | bo
 
 export async function UpdateUserLastSignInAt(userId: string): Promise<void> {
 	PgPool.query(`update usr."Users" set "LastSigninAt" = (to_timestamp(${Date.now()} / 1000.0)) where "Id" = '${userId}';`);
-}
-
-export function MapUserAccess(userAccess: number[]): UserAccessType[] {
-	const access: UserAccessType[] = [];
-
-	userAccess.forEach((id) => {
-		switch (id) {
-			case 0:
-				access.push("BurningWheel");
-				break;
-			case 1:
-				access.push("Admin");
-				break;
-		}
-	});
-
-	return access;
 }

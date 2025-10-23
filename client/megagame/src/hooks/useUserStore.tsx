@@ -6,10 +6,12 @@ import { GenericPost } from "../utils/GenericRequests";
 
 
 interface UserState {
-	user: UserSession | undefined;
 	fetching: boolean;
+
+	user: UserSession | undefined;
 	setUser: (user: UserSession | undefined) => void;
-	isAdmin: () => boolean;
+	hasAccess: (userAccess: UserAccess) => boolean;
+
 	toggleFetching: () => void;
 	auth: () => void;
 	signup: (formData: UserSignupRequest, handleClose: (open: boolean) => void) => void;
@@ -20,15 +22,14 @@ interface UserState {
 export const useUserStore = create<UserState>()(
 	devtools(
 		(set, get) => ({
-			user: undefined,
 			fetching: false,
 
+			user: undefined,
 			setUser: (user: UserSession | undefined) => {
 				set(produce<UserState>((state) => { state.user = user; }));
 			},
-
-			isAdmin: (): boolean => {
-				return get().user?.userAccess.includes("Admin") || false;
+			hasAccess: (userAccess: UserAccess): boolean => {
+				return get().user?.userAccess.includes(userAccess) || false;
 			},
 
 			toggleFetching: () => {

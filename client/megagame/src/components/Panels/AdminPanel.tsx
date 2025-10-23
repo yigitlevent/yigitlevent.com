@@ -31,13 +31,13 @@ export function TitleWithActions(): React.JSX.Element {
 }
 
 export function AdminPanel(): React.JSX.Element {
-	const { user } = useUserStore();
+	const { hasAccess } = useUserStore();
 
 	return (
 		<Box>
 			<TitleWithActions />
 
-			{user
+			{hasAccess("Megagame Moderator" as UserAccess)
 				? <Fragment>
 					<DuneActions />
 					<GenericActions />

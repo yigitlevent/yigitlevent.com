@@ -10,7 +10,7 @@ import { Localisation } from "../../../utils/Localization";
 
 export function Deadline(): React.JSX.Element {
 	const { lang, megagame, deleteDeadlineItem } = useMegagameStore();
-	const { isAdmin } = useUserStore();
+	const { hasAccess } = useUserStore();
 	const { deadlines } = useDeadlineTimer();
 
 	if (!megagame) return <Fragment />;
@@ -33,7 +33,7 @@ export function Deadline(): React.JSX.Element {
 						<Title order={4}>{deadline.type}</Title>
 						{Localisation.deadline[lang]}: {d.deadlinePassed ? Localisation.deadlinePassed[lang] : `${d.minutes}:${d.seconds}`}
 
-						{isAdmin()
+						{hasAccess("Megagame Moderator" as UserAccess)
 							? <ActionIcon
 								ml="sm"
 								variant="subtle"
