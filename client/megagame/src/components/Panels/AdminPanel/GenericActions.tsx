@@ -18,12 +18,12 @@ function ResetMegagame(): React.JSX.Element {
 	const [cycleStart, setCycleStart] = useState<number>(10195);
 	const [cycleMinutes, setCycleMinutes] = useState<number>(10);
 	const [events, setEvents] = useState<MegagameEvent[]>([
-		{ cycleInterval: 1, type: "Spice Harvesting" },
-		{ cycleInterval: 1, type: "Spice Blow" },
-		{ cycleInterval: 1, type: "Check Deadlines" },
-		{ cycleInterval: 2, type: "Storm Movement" },
-		{ cycleInterval: 4, type: "CHOAM Dividens" },
-		{ cycleInterval: 6, type: "Spacing Guild Bribe" }
+		{ cycleInterval: 1, type: "Spice toplama" },
+		{ cycleInterval: 1, type: "Spice yaratımı" },
+		{ cycleInterval: 1, type: "Yasa oylama sonu kontrolü" },
+		{ cycleInterval: 2, type: "Fırtına hareketleri" },
+		{ cycleInterval: 4, type: "CHOAM kar payları" },
+		{ cycleInterval: 6, type: "Spacing Guild rüşveti" }
 	]);
 
 	return (

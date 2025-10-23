@@ -58,7 +58,7 @@ function SpiceBlow(): React.JSX.Element {
 					setCreatedSpiceBlows(spiceBlows.sort((a, b) => a.regionCode.localeCompare(b.regionCode)));
 				}}
 			>
-				Create Spice Blows
+				Generate Spice Blows
 			</Button>
 
 			{createdSpiceBlows.length > 0
@@ -146,7 +146,7 @@ function StormMovement(): React.JSX.Element {
 					setRandomStormMovements(Array.from(selectedRegions).sort());
 				}}
 			>
-				Create Spice Blows
+				Generate Storm Movements
 			</Button>
 
 			{randomStormMovements.length > 0
