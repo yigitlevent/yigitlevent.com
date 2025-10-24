@@ -90,5 +90,21 @@ export const Localisation = {
 	events: {
 		en: "Events",
 		tr: "Olaylar"
+	},
+	rulebooks: {
+		en: "Rulebooks",
+		tr: "Kural Kitapları"
+	},
+	admin: {
+		en: "Admin",
+		tr: "Yönetim"
+	},
+	gamePage: {
+		en: "Game Page",
+		tr: "Oyun Sayfası"
+	},
+	chosenFaction: {
+		en: "Faction",
+		tr: "Faction"
 	}
 };

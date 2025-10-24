@@ -57,10 +57,9 @@ export const useMegagameStore = create<MegagameStore>()(
 				queues: undefined,
 				events: undefined,
 
+				lang: "tr",
 				userType: "Guest",
 				userTypeId: "",
-
-				lang: "tr",
 
 				setLang: (lang: "en" | "tr") => {
 					set(produce<MegagameStore>((state) => { state.lang = lang; }));
