@@ -95,14 +95,14 @@ module.exports = {
 		"@typescript-eslint/no-unsafe-enum-comparison": "error",
 		"@typescript-eslint/explicit-module-boundary-types": "error",
 		"@typescript-eslint/no-duplicate-enum-values": "error",
-		"@typescript-eslint/no-unused-vars": ["warn", { vars: "all", args: "after-used" }],
+		"@typescript-eslint/no-unused-vars": ["warn", { vars: "all", destructuredArrayIgnorePattern: "^_", args: "after-used" }],
 		"@typescript-eslint/naming-convention": [
 			"error",
 			{ selector: "default", format: ["camelCase"] },
 
 			{ selector: "variable", modifiers: ["exported"], filter: { regex: "^use", match: true }, format: ["camelCase"] },
 			{ selector: "variable", modifiers: ["global"], format: ["PascalCase"] },
-			{ selector: "variable", format: ["camelCase"] },
+			{ selector: "variable", format: ["camelCase"], leadingUnderscore: "allow" },
 
 			{ selector: "function", modifiers: ["exported"], filter: { regex: "^use", match: true }, format: ["camelCase"] },
 			{ selector: "function", modifiers: ["global"], format: ["PascalCase"] },
