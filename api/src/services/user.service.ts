@@ -86,5 +86,5 @@ export async function FindUserByUsername(username: string): Promise<UserDBO | bo
 }
 
 export async function UpdateUserLastSignInAt(userId: string): Promise<void> {
-	PgPool.query(`update usr."Users" set "LastSigninAt" = (to_timestamp(${Date.now()} / 1000.0)) where "Id" = '${userId}';`);
+	await PgPool.query(`update usr."Users" set "LastSigninAt" = (to_timestamp(${Date.now().toString()} / 1000.0)) where "Id" = '${userId}';`);
 }

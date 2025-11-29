@@ -42,10 +42,10 @@ export async function GetResources(rulesets: BwgrRulesetId[]): Promise<BwgrResou
 					mdet.areaOfEffectDetails.modifier = [mDetails.AreaOfEffectModifierId, mDetails.AreaofEffectModifier];
 				}
 
-				if (mDetails.Element1Id !== null && mDetails.Element1) mdet.elements.push([mDetails.Element1Id, mDetails.Element1]);
+				if (mDetails.Element1) mdet.elements.push([mDetails.Element1Id, mDetails.Element1]);
 				if (mDetails.Element2Id !== null && mDetails.Element2) mdet.elements.push([mDetails.Element2Id, mDetails.Element2]);
 				if (mDetails.Element3Id !== null && mDetails.Element3) mdet.elements.push([mDetails.Element3Id, mDetails.Element3]);
-				if (mDetails.Impetus1Id !== null && mDetails.Impetus1) mdet.impetus.push([mDetails.Impetus1Id, mDetails.Impetus1]);
+				if (mDetails.Impetus1) mdet.impetus.push([mDetails.Impetus1Id, mDetails.Impetus1]);
 				if (mDetails.Impetus2Id !== null && mDetails.Impetus2) mdet.impetus.push([mDetails.Impetus2Id, mDetails.Impetus2]);
 
 				const mObs = rmo.filter(a => a.ResourceId === v.Id);
@@ -55,10 +55,10 @@ export async function GetResources(rulesets: BwgrRulesetId[]): Promise<BwgrResou
 						if (mo.Obstacle) obsDet.obstacle = mo.Obstacle;
 						else if (mo.ObstacleAbility1Id !== null || mo.ObstacleAbility1 !== null || mo.ObstacleAbility2Id !== null || mo.ObstacleAbility2 !== null) {
 							obsDet.abilities = [];
-							if (obsDet.abilities && mo.ObstacleAbility1Id !== null && mo.ObstacleAbility1 !== null) {
+							if (obsDet.abilities.length > 0 && mo.ObstacleAbility1Id !== null && mo.ObstacleAbility1 !== null) {
 								obsDet.abilities.push([mo.ObstacleAbility1Id, mo.ObstacleAbility1]);
 							}
-							if (obsDet.abilities && mo.ObstacleAbility2Id !== null && mo.ObstacleAbility2 !== null) {
+							if (obsDet.abilities.length > 0 && mo.ObstacleAbility2Id !== null && mo.ObstacleAbility2 !== null) {
 								obsDet.abilities.push([mo.ObstacleAbility2Id, mo.ObstacleAbility2]);
 							}
 						}

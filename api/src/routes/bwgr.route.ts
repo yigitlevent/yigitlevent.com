@@ -8,4 +8,5 @@ const Router = express.Router();
 Router.get("/ruleset/list", GetRulesetsList);
 Router.post("/ruleset/data", GetRulesetsData);
 
+// eslint-disable-next-line import/no-default-export
 export default Router;

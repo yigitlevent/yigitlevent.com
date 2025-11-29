@@ -40,8 +40,8 @@ export async function GetRaCActions(): Promise<BwgrRaCAction[]> {
 					if (res.Obstacle) actionRes.obstacle = res.Obstacle;
 					if (res.OpposingModifier) actionRes.opposingModifier = res.OpposingModifier;
 
-					if (res.SkillId !== null && res.Skill !== null) actionRes.skill = [res.SkillId, res.Skill];
-					if (res.AbilityId !== null && res.Ability !== null) actionRes.ability = [res.AbilityId, res.Ability];
+					if (res.SkillId !== null) actionRes.skill = [res.SkillId, res.Skill];
+					if (res.AbilityId !== null) actionRes.ability = [res.AbilityId, res.Ability];
 					if (res.OpposingSkillId !== null && res.OpposingSkill) actionRes.opposingSkill = [res.OpposingSkillId, res.OpposingSkill];
 					if (res.OpposingAbilityId !== null && res.OpposingAbility) actionRes.opposingAbility = [res.OpposingAbilityId, res.OpposingAbility];
 

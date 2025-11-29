@@ -38,7 +38,7 @@ export async function GetLifepaths(rulesets: BwgrRulesetId[]): Promise<BwgrLifep
 			if (v.SkillIds.length > 0) lp.skills = v.SkillIds;
 			if (v.TraitIds.length > 0) lp.traits = v.TraitIds;
 
-			if (v.CompanionName && v.CompanionGivesSkills && v.CompanionSettingIds) {
+			if (v.CompanionName && v.CompanionGivesSkills && v.CompanionSettingIds.length > 0) {
 				lp.companion = {
 					name: v.CompanionName,
 					givesSkills: v.CompanionGivesSkills,
@@ -62,48 +62,55 @@ export async function GetLifepaths(rulesets: BwgrRulesetId[]): Promise<BwgrLifep
 						items: []
 					};
 
-					const items: BwgrLifepathRequirementItem[] = lri.filter(a => a.RequirementId === vrb.Id).map(vrbi => {
-						const rbi = {
-							logicType: [vrbi.RequirementTypeId, vrbi.RequirementType] as [id: LogicTypeId, name: string]
-						};
-
-						if (vrbi.RequirementType === "UNIQUE") return { ...rbi, isUnique: true };
-						else if (vrbi.RequirementType === "SETTINGENTRY") return { ...rbi, isSettingEntry: true };
-						else if (vrbi.RequirementType === "LPINDEX") {
-							if (vrbi.Min) return { ...rbi, minLpIndex: vrbi.Min };
-							else return { ...rbi, maxLpIndex: vrbi.Max as number };
-						}
-						else if (vrbi.RequirementType === "YEARS") {
-							if (vrbi.Min) return { ...rbi, minYears: vrbi.Min };
-							else return { ...rbi, maxYears: vrbi.Max as number };
-						}
-						else if (vrbi.RequirementType === "FEMALE") return { ...rbi, gender: "Female" };
-						else if (vrbi.RequirementType === "MALE") return { ...rbi, gender: "Male" };
-						else if (vrbi.RequirementType === "OLDESTBY") return { ...rbi, oldestBy: vrbi.Max as number };
-						else if (vrbi.RequirementType === "ATTRIBUTE" && vrbi.AttributeId && vrbi.Attribute) {
-							const atr: BwgrLifepathRequirementItem = {
-								...rbi,
-								attribute: [vrbi.AttributeId, vrbi.Attribute] as [id: BwgrAbilityId, name: string],
-								forCompanion: vrbi.ForCompanion
+					const items: BwgrLifepathRequirementItem[] = lri
+						.filter(a => a.RequirementId === vrb.Id)
+						.map(vrbi => {
+							const rbi = {
+								logicType: [vrbi.RequirementTypeId, vrbi.RequirementType] as [id: LogicTypeId, name: string]
 							};
-							if (vrbi.Min) atr.min = vrbi.Min;
-							if (vrbi.Max) atr.max = vrbi.Max;
-							return atr;
-						}
-						else if (vrbi.RequirementType === "SKILL" && vrbi.SkillId && vrbi.Skill) {
-							return { ...rbi, skill: [vrbi.SkillId, vrbi.Skill], forCompanion: vrbi.ForCompanion };
-						}
-						else if (vrbi.RequirementType === "TRAIT" && vrbi.TraitId && vrbi.Trait) {
-							return { ...rbi, trait: [vrbi.TraitId, vrbi.Trait], forCompanion: vrbi.ForCompanion };
-						}
-						else if (vrbi.RequirementType === "LIFEPATH" && vrbi.LifepathId && vrbi.Lifepath) {
-							return { ...rbi, lifepath: [vrbi.LifepathId, vrbi.Lifepath as string], forCompanion: vrbi.ForCompanion };
-						}
-						else if (vrbi.RequirementType === "SETTING" && vrbi.SettingId && vrbi.Setting) {
-							return { ...rbi, setting: [vrbi.SettingId, vrbi.Setting as string], forCompanion: vrbi.ForCompanion };
-						}
-						else throw new Error(`unidentified requirement block item type: ${vrbi.RequirementType}`);
-					});
+
+							if (vrbi.RequirementType === "UNIQUE") return { ...rbi, isUnique: true };
+							else if (vrbi.RequirementType === "SETTINGENTRY") return { ...rbi, isSettingEntry: true };
+							else if (vrbi.RequirementType === "LPINDEX") {
+								if (vrbi.Min) return { ...rbi, minLpIndex: vrbi.Min };
+								if (!vrbi.Max) throw new Error("max value must be set for LPINDEX requirement type");
+								return { ...rbi, maxLpIndex: vrbi.Max };
+							}
+							else if (vrbi.RequirementType === "YEARS") {
+								if (vrbi.Min) return { ...rbi, minYears: vrbi.Min };
+								if (!vrbi.Max) throw new Error("max value must be set for YEARS requirement type");
+								return { ...rbi, maxYears: vrbi.Max };
+							}
+							else if (vrbi.RequirementType === "FEMALE") return { ...rbi, gender: "Female" };
+							else if (vrbi.RequirementType === "MALE") return { ...rbi, gender: "Male" };
+							else if (vrbi.RequirementType === "OLDESTBY") {
+								if (!vrbi.Max) throw new Error("max value must be set for OLDESTBY requirement type");
+								return { ...rbi, oldestBy: vrbi.Max };
+							}
+							else if (vrbi.RequirementType === "ATTRIBUTE" && vrbi.AttributeId && vrbi.Attribute) {
+								const atr: BwgrLifepathRequirementItem = {
+									...rbi,
+									attribute: [vrbi.AttributeId, vrbi.Attribute] as [id: BwgrAbilityId, name: string],
+									forCompanion: vrbi.ForCompanion
+								};
+								if (vrbi.Min) atr.min = vrbi.Min;
+								if (vrbi.Max) atr.max = vrbi.Max;
+								return atr;
+							}
+							else if (vrbi.RequirementType === "SKILL" && vrbi.SkillId && vrbi.Skill) {
+								return { ...rbi, skill: [vrbi.SkillId, vrbi.Skill], forCompanion: vrbi.ForCompanion };
+							}
+							else if (vrbi.RequirementType === "TRAIT" && vrbi.TraitId && vrbi.Trait) {
+								return { ...rbi, trait: [vrbi.TraitId, vrbi.Trait], forCompanion: vrbi.ForCompanion };
+							}
+							else if (vrbi.RequirementType === "LIFEPATH" && vrbi.LifepathId && vrbi.Lifepath) {
+								return { ...rbi, lifepath: [vrbi.LifepathId, vrbi.Lifepath], forCompanion: vrbi.ForCompanion };
+							}
+							else if (vrbi.RequirementType === "SETTING" && vrbi.SettingId && vrbi.Setting) {
+								return { ...rbi, setting: [vrbi.SettingId, vrbi.Setting], forCompanion: vrbi.ForCompanion };
+							}
+							else throw new Error(`unidentified requirement block item type: ${vrbi.RequirementType}`);
+						});
 
 					rb.items = items;
 

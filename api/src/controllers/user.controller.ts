@@ -5,7 +5,7 @@ import { PgPool } from "../index";
 import { FindUserByEmail, UpdateUserLastSignInAt } from "../services/user.service";
 
 
-export async function UserAuth(request: Request, response: Response): Promise<Response<unknown, Record<string, unknown>>> {
+export function UserAuth(request: Request, response: Response): Response<unknown, Record<string, unknown>> {
 	return response.json({ user: request.session.user });
 }
 
@@ -40,7 +40,7 @@ export async function UserSignIn(request: Request<unknown, unknown, UserSigninRe
 			const matches = bcrypt.compareSync(password, user.Password);
 			if (!matches) throw new Error("invalid password");
 
-			UpdateUserLastSignInAt(user.Id);
+			await UpdateUserLastSignInAt(user.Id);
 
 			request.session.user = { id: user.Id, username: user.Username, email: user.Email, userAccess: user.UserAccess };
 			response.status(200);
@@ -55,7 +55,7 @@ export async function UserSignIn(request: Request<unknown, unknown, UserSigninRe
 	}
 }
 
-export async function UserSignOut(request: Request, response: Response): Promise<Response<unknown, Record<string, unknown>>> {
+export function UserSignOut(request: Request, response: Response): Response<unknown, Record<string, unknown>> {
 	try {
 		request.session.destroy(() => { /* console.warning("session destroyed") */ });
 		response.clearCookie("connect.sid");

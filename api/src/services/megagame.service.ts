@@ -112,8 +112,8 @@ export async function ResetMegagameData(resetMegagameRequest: ResetMegagameReque
 				'${resetMegagameRequest.startAt}', 
 				'${resetMegagameRequest.endAt}', 
 				'${resetMegagameRequest.name}', 
-				${resetMegagameRequest.cycleStart}, 
-				${resetMegagameRequest.cycleMinutes}
+				${resetMegagameRequest.cycleStart.toString()}, 
+				${resetMegagameRequest.cycleMinutes.toString()}
 			)
 			returning "Id"
 		`;
@@ -124,7 +124,7 @@ export async function ResetMegagameData(resetMegagameRequest: ResetMegagameReque
 
 	async function insertEventData(megagameId: MegagameId): Promise<void> {
 		const values = resetMegagameRequest.events.map(event => {
-			return `('${megagameId}', ${event.cycleInterval}, '${event.type}')`;
+			return `('${megagameId}', ${event.cycleInterval.toString()}, '${event.type}')`;
 		}).join(", ");
 
 		const query = `

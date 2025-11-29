@@ -13,4 +13,5 @@ Router.post("/signup", Validator(SignUpValidators), UserSignUp);
 Router.post("/signin", Validator(SignInValidators), UserSignIn);
 Router.post("/signout", UserSignOut);
 
+// eslint-disable-next-line import/no-default-export
 export default Router;

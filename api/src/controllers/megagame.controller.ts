@@ -49,33 +49,33 @@ export async function GetMegagame(request: Request, response: Response): Promise
 					name: faction.Name,
 					factionCode: faction.FactionCode
 				};
-			}) || [],
+			}) ?? [],
 			orderTypes: orderTypes?.map(orderType => {
 				return {
 					id: orderType.Id,
 					name: orderType.Name
 				};
-			}) || [],
+			}) ?? [],
 			deadlineItems: deadlineItems?.map(deadlineItem => {
 				return {
 					id: deadlineItem.Id,
 					type: deadlineItem.Type,
 					deadlineAt: new Date(deadlineItem.DeadlineAt)
 				};
-			}) || [],
+			}) ?? [],
 			news: newsItems?.map(newsItem => {
 				return {
 					id: newsItem.Id,
 					factionId: newsItem.FactionId,
 					text: newsItem.Text
 				};
-			}) || [],
+			}) ?? [],
 			events: eventItems?.map(eventItem => {
 				return {
 					cycleInterval: eventItem.CycleInterval,
 					type: eventItem.Type
 				};
-			}) || []
+			}) ?? []
 		};
 
 		const responseData: MggmMegagameResponse = { megagame };
@@ -162,9 +162,7 @@ export async function GetMegagameOrderQueue(request: Request, response: Response
 			grouped[orderType.Id] = [];
 		}
 
-		for (const itemIndex in sortedList) {
-			const item = sortedList[itemIndex];
-
+		for (const item of sortedList) {
 			grouped[item.OrderTypeId].push({
 				id: item.Id,
 				factionId: item.FactionId

@@ -25,4 +25,5 @@ Router.get("/megagame/order-queues/:megagameId", GetMegagameOrderQueue);
 Router.delete("/megagame/order-queue-item/:orderQueueItemId", DeleteMegagameOrderQueueItem);
 Router.post("/megagame/order-queue-item", CreateMegagameOrderQueueItem);
 
+// eslint-disable-next-line import/no-default-export
 export default Router;

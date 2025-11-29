@@ -10,7 +10,7 @@ export function Validator(validations: ValidationChain[]) {
 		}
 
 		const errors = validationResult(req);
-		if (errors.isEmpty()) return next();
+		if (errors.isEmpty()) { next(); return; }
 
 		res.status(400).json({ errors: errors.array() });
 	};

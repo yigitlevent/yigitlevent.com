@@ -8,7 +8,6 @@ import session from "express-session";
 import morgan from "morgan";
 import Pg from "pg";
 
-import { PORT } from "./configs/constants.config";
 import { CorsConfig } from "./configs/cors.config";
 import { PgConfig } from "./configs/postgres.config";
 import { SessionConfig } from "./configs/session.config";
@@ -24,7 +23,7 @@ const SessionStore = new (pgsimple(session))({
 	pool: PgPool,
 	schemaName: "usr",
 	tableName: "UserSessions",
-	errorLog: (e) => console.error(e)
+	errorLog: (e) => { console.error(e); }
 });
 
 App.use(morgan("combined", {
@@ -84,4 +83,6 @@ DELETE /campaign -- delete a campaign
 DELETE /campaign/journal -- delete a campaign journal entry
 */
 
-App.listen(PORT, () => console.info(`App started on port ${PORT}`));
+const PORT = process.env.API_PORT as unknown as string;
+
+App.listen(PORT, () => { console.info(`App started on port ${PORT}`); });

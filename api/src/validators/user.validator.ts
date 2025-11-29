@@ -25,9 +25,9 @@ export const SignUpValidators = [
 		.isAscii().withMessage("invalid characters in username").bail()
 		.isString().withMessage("password must be string").bail()
 		.trim().escape()
-		.custom(async username => {
+		.custom(async (username: string) => {
 			const user = await FindUserByUsername(username);
-			if (user) return Promise.reject("email already in use");
+			if (user) return Promise.reject(new Error("email already in use"));
 		}),
 	body("email")
 		.exists().withMessage("email is required").bail()
@@ -35,9 +35,9 @@ export const SignUpValidators = [
 		.isEmail().withMessage("invalid email address").bail()
 		.normalizeEmail()
 		.trim().escape()
-		.custom(async username => {
+		.custom(async (username: string) => {
 			const user = await FindUserByUsername(username);
-			if (user) return Promise.reject("username already in use");
+			if (user) return Promise.reject(new Error("username already in use"));
 		}),
 	body("password")
 		.exists().withMessage("password is required").bail()

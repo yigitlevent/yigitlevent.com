@@ -1,10 +1,10 @@
 import { SessionOptions } from "express-session";
 
-import { IsDev, SECRET } from "./constants.config";
+import { IsDev } from "./constants.config";
 
 
 export const SessionConfig: SessionOptions = {
-	secret: SECRET,
+	secret: process.env.API_SECRET as unknown as string,
 	saveUninitialized: false,
 	resave: false,
 	proxy: !IsDev,
