@@ -29,18 +29,18 @@ export function SignInOut(): React.JSX.Element {
 			if (!ValidateEmail(sanitizedValue)) setEmailError("Pclease enter a valid email.");
 			else setEmailError(undefined);
 		}
-		else if (type === "password") {
+		else {
 			setPassword(sanitizedValue);
 		}
 	}, []);
 
-	const handleSignin = () => {
+	const handleSignin = (): void => {
 		if (email.length === 0) setEmailError("Please enter your email.");
 
 		if (password.length === 0) setPasswordError("Please enter your password.");
 		else setPasswordError(undefined);
 
-		if (isFilled && !hasErrors) signin({ email, password }, () => navigate("/"));
+		if (isFilled && !hasErrors) signin({ email, password }, () => void navigate("/"));
 	};
 
 	return (
@@ -55,7 +55,7 @@ export function SignInOut(): React.JSX.Element {
 						fullWidth
 						onClick={() => {
 							signout();
-							navigate("/");
+							void navigate("/");
 						}}
 					>
 						Sign out
@@ -67,7 +67,7 @@ export function SignInOut(): React.JSX.Element {
 						placeholder="Enter your email"
 						required
 						value={email}
-						onChange={v => changeValue("email", v.currentTarget.value)}
+						onChange={v => { changeValue("email", v.currentTarget.value); }}
 						error={emailError}
 					/>
 
@@ -76,7 +76,7 @@ export function SignInOut(): React.JSX.Element {
 						placeholder="Enter your password"
 						required
 						value={password}
-						onChange={v => changeValue("password", v.currentTarget.value)}
+						onChange={v => { changeValue("password", v.currentTarget.value); }}
 						error={passwordError}
 						visible={showPass}
 						onVisibilityChange={setShowPass}

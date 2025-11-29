@@ -16,8 +16,8 @@ export function Panels(): React.JSX.Element {
 	}, [fetchData, fetchMegagameState]);
 
 	useEffect(() => {
-		const i = setInterval(() => fetchData(false), 10000);
-		return () => clearInterval(i);
+		const i = setInterval(() => { fetchData(false); }, 10000);
+		return () => { clearInterval(i); };
 	}, [fetchData]);
 
 	return (

@@ -39,7 +39,7 @@ function EventsList({ cycleCount }: { cycleCount: number; }): React.JSX.Element 
 								ml="4px"
 								style={{ position: "relative", top: 4 }}
 								checked={events[eventItem.type] || false}
-								onChange={event => setEventState(eventItem.type, event.target.checked)}
+								onChange={event => { setEventState(eventItem.type, event.target.checked); }}
 							/>
 							: <Text>{eventItem.type}</Text>}
 					</List.Item>

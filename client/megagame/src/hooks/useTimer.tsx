@@ -47,7 +47,7 @@ export const useTimer = (): Timer => {
 			setCountdown(getMinutesAndSecondsUntilNextCycle());
 		}, 100);
 
-		return () => clearInterval(i);
+		return () => { clearInterval(i); };
 	}, [getCycleCount, getMinutesAndSecondsUntilNextCycle]);
 
 	return {

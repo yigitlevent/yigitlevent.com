@@ -1,22 +1,18 @@
-import "@mantine/core/styles.css";
-import "@mantine/dates/styles.css";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 import { Panels } from "./components/Panels";
 import { useUserStore } from "./hooks/useUserStore";
 
 
 export function App(): React.JSX.Element {
-	const { auth } = useUserStore();
-
-	const [triedAuth, setTriedAuth] = useState(false);
+	const { triedAuth, auth, setTriedAuth } = useUserStore();
 
 	useEffect(() => {
 		if (!triedAuth) {
 			setTriedAuth(true);
 			auth();
 		}
-	}, [auth, triedAuth]);
+	}, [auth, setTriedAuth, triedAuth]);
 
 	return <Panels />;
 }

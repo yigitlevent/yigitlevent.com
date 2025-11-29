@@ -31,8 +31,8 @@ export const useDeadlineTimer = (): Timer => {
 			return {
 				id: item.id,
 				deadlinePassed: remainingMs <= 0,
-				minutes: minutes > 9 ? `${minutes}` : `0${minutes}`,
-				seconds: seconds > 9 ? `${seconds}` : `0${seconds}`
+				minutes: minutes > 9 ? minutes.toString() : `0${minutes.toString()}`,
+				seconds: seconds > 9 ? seconds.toString() : `0${seconds.toString()}`
 			};
 		});
 	}, [megagame]);
@@ -40,8 +40,8 @@ export const useDeadlineTimer = (): Timer => {
 	const [deadlines, setDeadlines] = useState<DeadlineCountdown[]>(getDeadlineCountdowns());
 
 	useEffect(() => {
-		const i = setInterval(() => setDeadlines(getDeadlineCountdowns()), 100);
-		return () => clearInterval(i);
+		const i = setInterval(() => { setDeadlines(getDeadlineCountdowns()); }, 100);
+		return () => { clearInterval(i); };
 	}, [getDeadlineCountdowns]);
 
 	return { deadlines };

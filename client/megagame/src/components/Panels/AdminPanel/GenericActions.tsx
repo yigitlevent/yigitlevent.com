@@ -35,7 +35,7 @@ function ResetMegagame(): React.JSX.Element {
 				label="Megagame Name"
 				mb="xs"
 				value={name}
-				onChange={(event) => setName(event.currentTarget.value)}
+				onChange={(event) => { setName(event.currentTarget.value); }}
 			/>
 
 			<DateTimePicker
@@ -43,7 +43,7 @@ function ResetMegagame(): React.JSX.Element {
 				label="Start Datetime"
 				mb="xs"
 				value={startAt}
-				onChange={date => setStartAt(date as string + `+${timeZoneHours}`)}
+				onChange={date => { if (date) setStartAt(date + `+${timeZoneHours}`); }}
 			/>
 
 			<DateTimePicker
@@ -51,7 +51,7 @@ function ResetMegagame(): React.JSX.Element {
 				label="End Datetime"
 				mb="xs"
 				value={endAt}
-				onChange={date => setEndAt(date as string + `+${timeZoneHours}`)}
+				onChange={date => { if (date) setEndAt(date + `+${timeZoneHours}`); }}
 			/>
 
 			<NumberInput
@@ -59,7 +59,7 @@ function ResetMegagame(): React.JSX.Element {
 				label="Cycle Start"
 				mb="xs"
 				value={cycleStart}
-				onChange={newValue => setCycleStart(Number(newValue))}
+				onChange={newValue => { setCycleStart(Number(newValue)); }}
 			/>
 
 			<NumberInput
@@ -67,7 +67,7 @@ function ResetMegagame(): React.JSX.Element {
 				label="Cycle Duration (minutes)"
 				mb="xs"
 				value={cycleMinutes}
-				onChange={newValue => setCycleMinutes(Number(newValue))}
+				onChange={newValue => { setCycleMinutes(Number(newValue)); }}
 			/>
 
 			<Divider my="sm" />
@@ -169,7 +169,7 @@ function AddDeadline(): React.JSX.Element {
 				label="Deadline Type"
 				mb="xs"
 				value={deadlineType}
-				onChange={(event) => setDeadlineType(event.currentTarget.value)}
+				onChange={(event) => { setDeadlineType(event.currentTarget.value); }}
 			/>
 
 			<Button

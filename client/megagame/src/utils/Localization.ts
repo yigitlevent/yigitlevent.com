@@ -4,20 +4,20 @@ export const Localisation = {
 		tr: "Yıl"
 	},
 	cycleCount: {
-		en: (count: number): string => `Cycle ${count}`,
-		tr: (count: number): string => `Döngü ${count}`
+		en: (count: number): string => `Cycle ${count.toString()}`,
+		tr: (count: number): string => `Döngü ${count.toString()}`
 	},
 	countdownMinutesAndSeconds: {
-		en: (minutes: number, seconds: number): string => `${minutes} minutes and ${seconds} seconds until next cycle.`,
-		tr: (minutes: number, seconds: number): string => `${minutes} dakika ve ${seconds} saniye sonra yeni döngü başlayacak.`
+		en: (minutes: number, seconds: number): string => `${minutes.toString()} minutes and ${seconds.toString()} seconds until next cycle.`,
+		tr: (minutes: number, seconds: number): string => `${minutes.toString()} dakika ve ${seconds.toString()} saniye sonra yeni döngü başlayacak.`
 	},
 	countdownMinutes: {
-		en: (minutes: number): string => `${minutes} minutes until next cycle.`,
-		tr: (minutes: number): string => `${minutes} dakika sonra yeni döngü başlayacak.`
+		en: (minutes: number): string => `${minutes.toString()} minutes until next cycle.`,
+		tr: (minutes: number): string => `${minutes.toString()} dakika sonra yeni döngü başlayacak.`
 	},
 	countdownSeconds: {
-		en: (seconds: number): string => `${seconds} seconds until next cycle.`,
-		tr: (seconds: number): string => `${seconds} saniye sonra yeni döngü başlayacak.`
+		en: (seconds: number): string => `${seconds.toString()} seconds until next cycle.`,
+		tr: (seconds: number): string => `${seconds.toString()} saniye sonra yeni döngü başlayacak.`
 	},
 	countdownNewCycle: {
 		en: "New cycle started.",

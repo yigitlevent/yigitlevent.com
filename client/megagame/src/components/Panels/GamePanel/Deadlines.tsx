@@ -39,7 +39,7 @@ export function Deadline(): React.JSX.Element {
 								variant="subtle"
 								color="red"
 								style={{ margin: "-1px 0 0 5px", display: "block", float: "right" }}
-								onClick={() => deleteDeadlineItem(deadline.id)}
+								onClick={() => { deleteDeadlineItem(deadline.id); }}
 							>
 								<CircleSlash color="red" size={20} />
 							</ActionIcon>

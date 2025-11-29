@@ -23,7 +23,7 @@ function SpiceBlow(): React.JSX.Element {
 				label="Spice Blow Count"
 				mb="xs"
 				value={spiceBlowCount}
-				onChange={newValue => setSpiceBlowCount(Number(newValue))}
+				onChange={newValue => { setSpiceBlowCount(Number(newValue)); }}
 			/>
 
 			<NumberInput
@@ -31,7 +31,7 @@ function SpiceBlow(): React.JSX.Element {
 				mb="xs"
 				leftSection={<Text>1D</Text>}
 				value={spiceBlowAmount}
-				onChange={newValue => setSpiceBlowAmount(Number(newValue))}
+				onChange={newValue => { setSpiceBlowAmount(Number(newValue)); }}
 			/>
 
 			<Button
@@ -119,14 +119,14 @@ function StormMovement(): React.JSX.Element {
 				mb="xs"
 				leftSection={<Text>1D</Text>}
 				value={coriolisStormMaxMove}
-				onChange={newValue => setCoriolisStormMaxMove(Number(newValue))}
+				onChange={newValue => { setCoriolisStormMaxMove(Number(newValue)); }}
 			/>
 
 			<NumberInput
 				label="Random Storm Count"
 				mb="xs"
 				value={randomStormCount}
-				onChange={newValue => setRandomStormCount(Number(newValue))}
+				onChange={newValue => { setRandomStormCount(Number(newValue)); }}
 			/>
 
 			<Button

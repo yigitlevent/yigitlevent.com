@@ -19,7 +19,7 @@ export function FactionSelectionModalContent({ closeModal }: { closeModal: () =>
 			<TextInput
 				placeholder={Localisation.enterFactionCode[lang]}
 				value={factionCode}
-				onChange={(event) => setFactionCode(event.currentTarget.value)}
+				onChange={(event) => { setFactionCode(event.currentTarget.value); }}
 				error={error}
 			/>
 
@@ -71,7 +71,7 @@ export function Titlebox(): React.JSX.Element {
 						ml="md"
 						variant="default"
 						style={{ float: "right", margin: "10px 0" }}
-						onClick={() => setLang(lang === "en" ? "tr" : "en")}
+						onClick={() => { setLang(lang === "en" ? "tr" : "en"); }}
 					>
 						<Languages color="white" size={20} />
 					</ActionIcon>
@@ -80,7 +80,7 @@ export function Titlebox(): React.JSX.Element {
 						ml="md"
 						variant="default"
 						style={{ float: "right", margin: "10px 0" }}
-						onClick={() => navigate("/admin")}
+						onClick={() => void navigate("/admin")}
 						disabled={location.pathname === "/admin"}
 					>
 						<Shield color="white" size={20} />
@@ -90,7 +90,7 @@ export function Titlebox(): React.JSX.Element {
 						ml="md"
 						variant="default"
 						style={{ float: "right", margin: "10px 0" }}
-						onClick={() => navigate("/rules")}
+						onClick={() => void navigate("/rules")}
 						disabled={location.pathname === "/rules"}
 					>
 						<BookText color="white" size={20} />
@@ -100,7 +100,7 @@ export function Titlebox(): React.JSX.Element {
 						ml="md"
 						variant="default"
 						style={{ float: "right", margin: "10px 0" }}
-						onClick={() => navigate("/")}
+						onClick={() => void navigate("/")}
 						disabled={location.pathname === "/"}
 					>
 						<DicesIcon color="white" size={20} />
@@ -110,7 +110,7 @@ export function Titlebox(): React.JSX.Element {
 						ml="md"
 						variant="default"
 						style={{ float: "right", margin: "10px 0" }}
-						onClick={() => modal.open()}
+						onClick={() => { modal.open(); }}
 					>
 						<Users color="white" size={20} />
 					</ActionIcon>

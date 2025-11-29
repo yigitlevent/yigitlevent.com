@@ -7,12 +7,14 @@ import { GenericPost } from "../utils/GenericRequests";
 
 interface UserState {
 	fetching: boolean;
+	triedAuth: boolean;
 
 	user: UserSession | undefined;
 	setUser: (user: UserSession | undefined) => void;
+	toggleFetching: () => void;
+	setTriedAuth: (value: boolean) => void;
 	hasAccess: (userAccess: UserAccess) => boolean;
 
-	toggleFetching: () => void;
 	auth: () => void;
 	signup: (formData: UserSignupRequest, handleClose: (open: boolean) => void) => void;
 	signin: (formData: UserSigninRequest, onSuccess: () => void) => void;
@@ -23,18 +25,13 @@ export const useUserStore = create<UserState>()(
 	devtools(
 		(set, get) => ({
 			fetching: false,
+			triedAuth: false,
 
 			user: undefined,
-			setUser: (user: UserSession | undefined) => {
-				set(produce<UserState>((state) => { state.user = user; }));
-			},
-			hasAccess: (userAccess: UserAccess): boolean => {
-				return get().user?.userAccess.includes(userAccess) || false;
-			},
-
-			toggleFetching: () => {
-				set(produce<UserState>((state) => { state.fetching = !state.fetching; }));
-			},
+			setUser: (user: UserSession | undefined) => { set(produce<UserState>((state) => { state.user = user; })); },
+			toggleFetching: () => { set(produce<UserState>((state) => { state.fetching = !state.fetching; })); },
+			setTriedAuth: (value: boolean) => { set(produce<UserState>((state) => { state.triedAuth = value; })); },
+			hasAccess: (userAccess: UserAccess): boolean => { return get().user?.userAccess.includes(userAccess) ?? false; },
 
 			auth: () => {
 				const state = get();
@@ -46,8 +43,8 @@ export const useUserStore = create<UserState>()(
 						if (response.status === 200) state.setUser({ ...response.data.user });
 						else throw new Error();
 					})
-					.catch(() => state.setUser(undefined))
-					.finally(() => state.toggleFetching());
+					.catch(() => { state.setUser(undefined); })
+					.finally(() => { state.toggleFetching(); });
 			},
 
 			signup: (formData: UserSignupRequest, handleClose: (open: boolean) => void) => {
@@ -64,7 +61,7 @@ export const useUserStore = create<UserState>()(
 						else throw new Error();
 					})
 					.catch(console.error)
-					.finally(() => state.toggleFetching());
+					.finally(() => { state.toggleFetching(); });
 			},
 
 			signin: (formData: UserSigninRequest, onSuccess: () => void) => {
@@ -81,7 +78,7 @@ export const useUserStore = create<UserState>()(
 						else throw new Error();
 					})
 					.catch(console.error)
-					.finally(() => state.toggleFetching());
+					.finally(() => { state.toggleFetching(); });
 			},
 
 			signout: () => {
@@ -95,7 +92,7 @@ export const useUserStore = create<UserState>()(
 						else throw new Error();
 					})
 					.catch(console.error)
-					.finally(() => state.toggleFetching());
+					.finally(() => { state.toggleFetching(); });
 			}
 		}),
 		{

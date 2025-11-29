@@ -30,7 +30,12 @@
 	},
 	"include": [
 		"src",
-		"../../utility"
+		"../../utility",
+		"./public/**/*.json",
+		"eslint.config.mjs"
+	],
+	"exclude": [
+		"node_modules"
 	],
 	"references": [
 		{

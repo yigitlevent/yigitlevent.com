@@ -72,7 +72,7 @@ export const useMegagameStore = create<MegagameStore>()(
 						const megagame = get().megagame;
 						if (megagame) {
 							if (userType === "Guest") state.userTypeId = "" as FactionId;
-							else state.userTypeId = megagame.factions.find(faction => faction.name === userType)?.id || "" as FactionId;
+							else state.userTypeId = megagame.factions.find(faction => faction.name === userType)?.id ?? "" as FactionId;
 						}
 					}));
 				},
@@ -96,18 +96,16 @@ export const useMegagameStore = create<MegagameStore>()(
 							.then(response => {
 								set(produce<MegagameStore>((state) => {
 									state.megagame = response.data.megagame;
-									if (!state.events) {
-										state.events = response.data.megagame.events.reduce<Record<string, boolean>>((acc, event) => {
-											acc[event.type] = false;
-											return acc;
-										}, {});
-									}
+									state.events ??= response.data.megagame.events.reduce<Record<string, boolean>>((acc, event) => {
+										acc[event.type] = false;
+										return acc;
+									}, {});
 								}));
 
 
 								setFetchMegagameState("succeded");
 							})
-							.catch(() => setFetchMegagameState("failed"));
+							.catch(() => { setFetchMegagameState("failed"); });
 					}
 				},
 
@@ -127,12 +125,13 @@ export const useMegagameStore = create<MegagameStore>()(
 
 								setFetchQueuesState("succeded");
 							})
-							.catch(() => setFetchQueuesState("failed"));
+							.catch(() => { setFetchQueuesState("failed"); });
 					}
 				},
 
 				resetMegagame: (megagame: ResetMegagameRequest) => {
 					GenericPost("/mggm/megagame/reset", megagame)
+						.catch((e: unknown) => { console.error("Failed to reset megagame:", e); })
 						.finally(() => {
 							get().fetchData(true);
 							get().fetchQueues(true);
@@ -141,32 +140,37 @@ export const useMegagameStore = create<MegagameStore>()(
 
 				createDeadlineItem: (deadlineItem: CreateMegagameDeadlineItemRequest) => {
 					GenericPost("/mggm/megagame/deadline-item", deadlineItem)
-						.finally(() => get().fetchData(false));
+						.catch((e: unknown) => { console.error("Failed to reset megagame:", e); })
+						.finally(() => { get().fetchData(false); });
 				},
 
 				deleteDeadlineItem: (deadlineItemId: DeadlineItemId) => {
 					GenericDelete(`/mggm/megagame/deadline-item/${deadlineItemId}`)
-						.finally(() => get().fetchData(false));
+						.catch((e: unknown) => { console.error("Failed to reset megagame:", e); })
+						.finally(() => { get().fetchData(false); });
 				},
 
 				createNewsItem: (newsItem: CreateMegagameNewsItemRequest) => {
 					GenericPost("/mggm/megagame/news-item", newsItem)
-						.finally(() => get().fetchData(false));
+						.catch((e: unknown) => { console.error("Failed to reset megagame:", e); })
+						.finally(() => { get().fetchData(false); });
 				},
 
 				deleteOrderQueueItem: (orderQueueItemId: OrderQueueItemId) => {
 					GenericDelete(`/mggm/megagame/order-queue-item/${orderQueueItemId}`)
-						.finally(() => get().fetchQueues(false));
+						.catch((e: unknown) => { console.error("Failed to reset megagame:", e); })
+						.finally(() => { get().fetchQueues(false); });
 				},
 
 				createOrderQueueItem: (orderQueueItem: CreateOrderQueueItemRequest) => {
 					GenericPost("/mggm/megagame/order-queue-item", orderQueueItem)
-						.finally(() => get().fetchQueues(false));
+						.catch((e: unknown) => { console.error("Failed to reset megagame:", e); })
+						.finally(() => { get().fetchQueues(false); });
 				},
 
 				setEventState: (eventType: string, state: boolean) => {
 					set(produce<MegagameStore>((store) => {
-						if (!store.events) store.events = {};
+						store.events ??= {};
 						store.events[eventType] = state;
 					}));
 				},

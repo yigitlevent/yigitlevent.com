@@ -11,7 +11,7 @@ function NewsList(): React.JSX.Element {
 
 	return (
 		<Fragment>
-			{megagame && megagame?.news.length > 0
+			{megagame && megagame.news.length > 0
 				? <List
 					spacing="md"
 					center
@@ -40,7 +40,7 @@ function AddNewsForm(): React.JSX.Element {
 
 	return (
 		<Fragment>
-			{userType === "Bene Gesserit" || userType === "Bene Tleliaxu" || userType === "Spacing Guild"
+			{megagame && (userType === "Bene Gesserit" || userType === "Bene Tleliaxu" || userType === "Spacing Guild")
 				? <Fragment>
 					<Divider my="md" />
 
@@ -61,7 +61,7 @@ function AddNewsForm(): React.JSX.Element {
 						color="yellow"
 						fullWidth
 						style={{ marginTop: 5 }}
-						onClick={() => createNewsItem({ megagameId: megagame!.id, factionId: userTypeId, text: newsText })}
+						onClick={() => { createNewsItem({ megagameId: megagame.id, factionId: userTypeId, text: newsText }); }}
 					>
 						{Localisation.addNewsItem[lang]}
 					</Button>

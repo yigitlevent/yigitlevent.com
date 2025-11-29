@@ -39,7 +39,7 @@ function OrderQueuePanelList({ orderType }: { orderType: MegagameOrderType; }): 
 									variant="subtle"
 									color="red"
 									style={{ margin: "-1px 0 0 5px", display: "block", float: "right" }}
-									onClick={() => deleteOrderQueueItem(order.id)}
+									onClick={() => { deleteOrderQueueItem(order.id); }}
 								>
 									<CircleSlash color="red" size={20} />
 								</ActionIcon>
@@ -67,9 +67,9 @@ function OrderQueuePanelQueueButton({ orderType, orderQueueIndexes }: { orderTyp
 					fullWidth
 					style={{ marginTop: 15 }}
 					onClick={() => {
-						if (!userTypeId) return;
+						if (!userTypeId || !megagame) return;
 						createOrderQueueItem({
-							megagameId: megagame!.id,
+							megagameId: megagame.id,
 							factionId: userTypeId,
 							orderTypeId: orderType.id
 						});
@@ -114,8 +114,8 @@ export function OrderQueues(): React.JSX.Element {
 	}, [fetchQueues, fetchQueuesState]);
 
 	useEffect(() => {
-		const i = setInterval(() => fetchQueues(false), 10000);
-		return () => clearInterval(i);
+		const i = setInterval(() => { fetchQueues(false); }, 10000);
+		return () => { clearInterval(i); };
 	}, [fetchQueues]);
 
 	return (
