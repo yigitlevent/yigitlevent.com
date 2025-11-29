@@ -51,7 +51,7 @@ interface BwgrSkill {
 	};
 	description?: string;
 	restriction?: {
-		onlyStock: [id: BwgrStockId, name: string];
+		onlyStock?: [id: BwgrStockId, name: string];
 		onlyWithAbility?: [id: BwgrAbilityId, name: string];
 		onlyAtBurn?: boolean;
 	};
