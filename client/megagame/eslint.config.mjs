@@ -6,7 +6,7 @@ import pImport from "eslint-plugin-import";
 import pReact from "eslint-plugin-react";
 import pReactHooks from "eslint-plugin-react-hooks";
 import pReactRefresh from "eslint-plugin-react-refresh";
-import pJson from "eslint-plugin-json";
+import pJson from 'eslint-plugin-json';
 
 
 export default [
