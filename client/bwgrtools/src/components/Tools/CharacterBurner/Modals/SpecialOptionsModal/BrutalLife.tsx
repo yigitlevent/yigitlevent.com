@@ -12,7 +12,7 @@ import { useCharacterBurnerMiscStore } from "../../../../../hooks/featureStores/
 import { BlockTraitPopover } from "../../BlockText";
 
 
-export function BrutalLife(): JSX.Element {
+export function BrutalLife(): React.JSX.Element {
 	const ruleset = useRulesetStore();
 	const { stock } = useCharacterBurnerBasicsStore();
 	const { lifepaths } = useCharacterBurnerLifepathStore();
@@ -60,21 +60,21 @@ export function BrutalLife(): JSX.Element {
 						const traitId = special.stock.brutalLifeTraits[i];
 						return (
 							<Fragment key={i}>
-								<Grid item xs={1}>
+								<Grid size={{ xs: 1 }}>
 									<Typography variant="h6" sx={{ display: "inline-block" }}>{GetOrdinalSuffix(i + 5)} Lifepath: {v.name}</Typography>
 								</Grid>
 
-								<Grid item xs={2}>
+								<Grid size={{ xs: 2 }}>
 									{traitId
 										? traitId === "No Trait"
 											? <Typography sx={{ margin: "6px 0 0 8px" }}>No Trait</Typography>
 											: <BlockTraitPopover trait={traitId} />
-										: <Button variant="outlined" size="small" onClick={() => rollBrutalLife(i + 5)}>Roll</Button>}
+										: <Button variant="outlined" size="small" onClick={() => { rollBrutalLife(i + 5); }}>Roll</Button>}
 								</Grid>
 							</Fragment>
 						);
 					})
-					: <Grid item xs={3}>
+					: <Grid size={{ xs: 3 }}>
 						<Alert severity="info">
 							Orc character only needs to roll for Brutal Life after 5th lifepath.
 						</Alert>

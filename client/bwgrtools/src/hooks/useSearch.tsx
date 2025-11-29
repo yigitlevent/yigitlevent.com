@@ -8,7 +8,7 @@ type List<T> = (T & { rulesets: BwgrRulesetId[]; })[];
 interface SearchValues {
 	text: string;
 	fields: string[];
-	filters: { [key: string]: string; };
+	filters: Record<string, string>;
 }
 
 interface SearchReturn<T> {
@@ -17,7 +17,7 @@ interface SearchReturn<T> {
 	filteredList: List<T>;
 }
 
-export function useSearch<T>(mainList: List<T>, filterKeys: string[], initialFilterValues?: { [key: string]: string; }): SearchReturn<T> {
+export function useSearch<T>(mainList: List<T>, filterKeys: string[], initialFilterValues?: Record<string, string>): SearchReturn<T> {
 	const [urlParams, setUrlParams] = useSearchParams();
 
 	const [originalList] = useState(mainList);
@@ -27,7 +27,7 @@ export function useSearch<T>(mainList: List<T>, filterKeys: string[], initialFil
 		const s = urlParams.get("s");
 		const sf = urlParams.get("sf");
 
-		const filters: { [key: string]: string; } = fKeys.reduce((a, v) => ({ ...a, [v]: "Any" }), {});
+		const filters: Record<string, string> = fKeys.reduce((a, v) => ({ ...a, [v]: "Any" }), {});
 
 		Object.keys(filters).forEach((filterKey) => {
 			const filterValue = urlParams.get(filterKey);
@@ -36,7 +36,7 @@ export function useSearch<T>(mainList: List<T>, filterKeys: string[], initialFil
 		});
 
 		return {
-			text: s ? s : "",
+			text: s ?? "",
 			fields: sf ? sf.split(",") : ["Name"],
 			filters
 		};
@@ -45,7 +45,7 @@ export function useSearch<T>(mainList: List<T>, filterKeys: string[], initialFil
 	const [searchValues, setSearchValues] = useState<SearchValues>(applyInitialFilterValues(filterKeys));
 
 	const applySearchValues = useCallback((filtersToApply: { key: string; value: string; }[]) => {
-		const newSearchValues: SearchValues = JSON.parse(JSON.stringify(searchValues));
+		const newSearchValues = JSON.parse(JSON.stringify(searchValues)) as SearchValues;
 
 		filtersToApply.forEach(filter => {
 			if (filter.key === "s") {
@@ -71,16 +71,16 @@ export function useSearch<T>(mainList: List<T>, filterKeys: string[], initialFil
 		setSearchValues({ ...newSearchValues });
 	}, [searchValues, setUrlParams, urlParams]);
 
-	const search = useCallback(() => {
-		new Promise((resolve) => {
+	const search = useCallback(async () => {
+		await new Promise((resolve) => {
 			let result = originalList;
 
 			Object.keys(searchValues.filters).forEach((filterKey) => {
 				const filterValue = searchValues.filters[filterKey];
 				if (filterValue !== "Any") {
 					result = result.filter(v => {
-						const itemValue = (v as never)[filterKey];
-						if (itemValue) return itemValue[1] === searchValues.filters[filterKey];
+						const itemValue = (v as never)[filterKey] as unknown[] | undefined;
+						if (itemValue && itemValue.length > 0) return itemValue[1] === searchValues.filters[filterKey];
 						return false;
 					});
 				}
@@ -99,16 +99,20 @@ export function useSearch<T>(mainList: List<T>, filterKeys: string[], initialFil
 
 			setFilteredList(result);
 			resolve(true);
-		});
+		}).catch((e: unknown) => { console.error(e); });
 	}, [originalList, searchValues.fields, searchValues.filters, searchValues.text]);
 
 	useEffect(() => {
 		const hasFilters = !Object.values(searchValues.filters).every(v => v === "Any");
 		const hasText = searchValues.text.length > 2;
 
-		const delay = setTimeout(() => (hasFilters || hasText) ? search() : setFilteredList(originalList), 800);
-		return () => clearTimeout(delay);
+		const delay = setTimeout(() => {
+			if (hasFilters || hasText) { void search(); }
+			else { setFilteredList(originalList); }
+		}, 800);
+		return () => { clearTimeout(delay); };
 	}, [originalList, search, searchValues.filters, searchValues.text.length]);
 
 	return { searchValues, setFilter: applySearchValues, filteredList };
 }
+

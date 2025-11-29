@@ -14,7 +14,7 @@ import { useCharacterBurnerSkillStore } from "../../../../hooks/featureStores/Ch
 import { GenericGrid } from "../../../Shared/Grids";
 
 
-export function GeneralSkillModal({ isOpen, close }: { isOpen: boolean; close: () => void; }): JSX.Element {
+export function GeneralSkillModal({ isOpen, close }: { isOpen: boolean; close: () => void; }): React.JSX.Element {
 	const ruleset = useRulesetStore();
 	const { stock } = useCharacterBurnerBasicsStore();
 	const { skills, addGeneralSkill } = useCharacterBurnerSkillStore();
@@ -23,14 +23,14 @@ export function GeneralSkillModal({ isOpen, close }: { isOpen: boolean; close: (
 	const [possibleSkills, setPossibleSkills] = useState<BwgrSkill[]>([]);
 	const [chosenSkill, setChosenSkill] = useState<BwgrSkill>();
 
-	const addNewSkill = () => {
+	const addNewSkill = (): void => {
 		if (chosenSkill) {
 			addGeneralSkill(chosenSkill);
 			close();
 		}
 	};
 
-	const getRestrictionString = (skill: BwgrSkill) => {
+	const getRestrictionString = (skill: BwgrSkill): string | null => {
 		if (skill.restriction) {
 			const rest = [];
 			if (skill.restriction.onlyStock) rest.push(`Only ${skill.restriction.onlyStock[1]}.`);
@@ -58,18 +58,18 @@ export function GeneralSkillModal({ isOpen, close }: { isOpen: boolean; close: (
 	}, [possibleSkills]);
 
 	return (
-		<Modal open={isOpen} onClose={() => close()}>
+		<Modal open={isOpen} onClose={() => { close(); }}>
 			<Paper sx={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", maxWidth: "800px", width: "100%", padding: "0 24px 24px", border: "none", overflow: "auto" }}>
 				<GenericGrid columns={1} spacing={[2, 2]} center>
 					{chosenSkill
-						? <Grid item xs={1}>
+						? <Grid size={{ xs: 1 }}>
 							<Autocomplete
 								value={chosenSkill}
 								options={possibleSkills.sort((a, b) => a.category[1].localeCompare(b.category[1]) || a.name.localeCompare(b.name))}
 								getOptionLabel={(option) => option.name}
 								groupBy={(option) => option.category[1]}
 								renderInput={(params) => <TextField {...params} label="Chosen Skill" />}
-								onChange={(_, v) => setChosenSkill(v)}
+								onChange={(_, v) => { setChosenSkill(v); }}
 								fullWidth
 								disableClearable
 							/>
@@ -77,33 +77,33 @@ export function GeneralSkillModal({ isOpen, close }: { isOpen: boolean; close: (
 						: null}
 
 					{chosenSkill
-						? <Grid item xs={1}>
+						? <Grid size={{ xs: 1 }}>
 							<Grid container spacing={1} columns={2}>
-								<Grid item xs={2}>
+								<Grid size={{ xs: 2 }}>
 									<Typography variant="h6">{chosenSkill.name}</Typography>
 								</Grid>
 
-								<Grid item xs={2} md={1}>
+								<Grid size={{ xs: 2, md: 1 }}>
 									{chosenSkill.roots
 										? <Typography variant="caption">Root: {chosenSkill.roots.join("/")}</Typography>
 										: null}
 								</Grid>
 
-								<Grid item xs={2} md={1}>
+								<Grid size={{ xs: 2, md: 1 }}>
 									<Typography variant="caption">Type: {chosenSkill.type[1]}</Typography>
 								</Grid>
 
-								<Grid item xs={2}>
+								<Grid size={{ xs: 2 }}>
 									<Typography variant="caption">Tools: {chosenSkill.tool.tool} {chosenSkill.tool.description}</Typography>
 								</Grid>
 
-								<Grid item xs={2}>
+								<Grid size={{ xs: 2 }}>
 									{chosenSkill.restriction
 										? <Typography variant="caption">Restrictions: {getRestrictionString(chosenSkill)}</Typography>
 										: null}
 								</Grid>
 
-								<Grid item xs={2}>
+								<Grid size={{ xs: 2 }}>
 									{chosenSkill.description
 										? chosenSkill.description.split("<br>").map(v => <Typography key={v} variant="body2">{v}</Typography>)
 										: null}
@@ -112,7 +112,7 @@ export function GeneralSkillModal({ isOpen, close }: { isOpen: boolean; close: (
 						</Grid>
 						: null}
 
-					<Grid item xs={1}>
+					<Grid size={{ xs: 1 }}>
 						<Button variant="outlined" size="medium" onClick={addNewSkill} fullWidth>AddBwgrSkill</Button>
 					</Grid>
 				</GenericGrid>

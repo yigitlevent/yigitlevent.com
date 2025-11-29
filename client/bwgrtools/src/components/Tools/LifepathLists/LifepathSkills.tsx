@@ -6,7 +6,7 @@ import { useRulesetStore } from "../../../hooks/apiStores/useRulesetStore";
 import { PopoverLink } from "../../Shared/PopoverLink";
 
 
-export function LifepathSkills({ lifepath }: { lifepath: BwgrLifepath; }): JSX.Element {
+export function LifepathSkills({ lifepath }: { lifepath: BwgrLifepath; }): React.JSX.Element {
 	const { getSkill } = useRulesetStore();
 
 	const hasGeneralSkill = lifepath.pools.generalSkillPool !== 0;
@@ -16,12 +16,7 @@ export function LifepathSkills({ lifepath }: { lifepath: BwgrLifepath; }): JSX.E
 
 	const lifepathSkills
 		= lifepath.skills
-			? lifepath.skills
-				.map(skillId => {
-					const skill = getSkill(skillId);
-					if (skill) return skill;
-					else throw new Error(`Skill of SkillId '${skillId}' cannot be found.`);
-				})
+			? lifepath.skills.map(skillId => getSkill(skillId))
 			: undefined;
 
 	return (
@@ -32,7 +27,7 @@ export function LifepathSkills({ lifepath }: { lifepath: BwgrLifepath; }): JSX.E
 				? <span>{lifepath.pools.generalSkillPool}{(lifepath.pools.generalSkillPool > 1) ? "pts: " : "pt: "}</span>
 				: null}
 
-			{hasGeneralSkill && generalSkill
+			{hasGeneralSkill
 				? <Paper elevation={2} sx={{ cursor: "pointer", padding: "0 4px", margin: "0 0 0 2px", width: "max-content", display: "inline-block" }}>
 					<PopoverLink data={generalSkill} />
 				</Paper>

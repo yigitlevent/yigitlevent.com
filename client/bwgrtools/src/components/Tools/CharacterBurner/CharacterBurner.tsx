@@ -24,7 +24,7 @@ import { useCharacterBurnerSkillStore } from "../../../hooks/featureStores/Chara
 import { useCharacterBurnerTraitStore } from "../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerTrait";
 
 
-export function CharacterBurner(): JSX.Element {
+export function CharacterBurner(): React.JSX.Element {
 	const { stock } = useCharacterBurnerBasicsStore();
 	const { lifepaths, updateAvailableLifepaths } = useCharacterBurnerLifepathStore();
 	const { skills } = useCharacterBurnerSkillStore();
@@ -33,8 +33,8 @@ export function CharacterBurner(): JSX.Element {
 
 	const [currentModal, setCurrentModal] = useState<BwgrCharacterBurnerModals | null>(null);
 
-	const openModal = (name: BwgrCharacterBurnerModals) => setCurrentModal(name);
-	const closeModals = () => setCurrentModal(null);
+	const openModal = (name: BwgrCharacterBurnerModals): void => { setCurrentModal(name); };
+	const closeModals = (): void => { setCurrentModal(null); };
 
 	useEffect(() => {
 		updateAvailableLifepaths();

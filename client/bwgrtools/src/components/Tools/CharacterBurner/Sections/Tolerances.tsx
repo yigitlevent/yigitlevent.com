@@ -14,7 +14,7 @@ import { useCharacterBurnerStatStore } from "../../../../hooks/featureStores/Cha
 import { GenericGrid } from "../../../Shared/Grids";
 
 
-export function Tolerances(): JSX.Element {
+export function Tolerances(): React.JSX.Element {
 	const { stats } = useCharacterBurnerStatStore();
 	const { getTolerances } = useCharacterBurnerMiscStore();
 
@@ -26,11 +26,11 @@ export function Tolerances(): JSX.Element {
 
 	return (
 		<GenericGrid columns={16} spacing={[0, 1]} center extraBottomMargin>
-			<Grid item xs={16}>
+			<Grid size={{ xs: 16 }}>
 				<Typography variant="h4">Tolerances</Typography>
 			</Grid>
 
-			<Grid item xs={16}>
+			<Grid size={{ xs: 16 }}>
 				<TableContainer component={Paper}>
 					<Table size="small">
 						<TableHead>

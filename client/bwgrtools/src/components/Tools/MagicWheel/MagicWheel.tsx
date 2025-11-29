@@ -14,7 +14,7 @@ import { BandBlock, useMagicWheel } from "../../../hooks/useMagicWheel";
 import { GenericGrid } from "../../Shared/Grids";
 
 
-export function MagicWheel(): JSX.Element {
+export function MagicWheel(): React.JSX.Element {
 	const { isFontLoaded } = useFontLoading(codeFont);
 
 	const wrapperRef = createRef<HTMLDivElement>();
@@ -36,11 +36,12 @@ export function MagicWheel(): JSX.Element {
 	const magicWheel = useMagicWheel<BwgrSpellFacets, keyof BwgrSpellFacets>({ spellFacets, bands, context, setBands, isAvailable: () => true });
 
 	useEffect(() => {
-		if (wrapperRef && wrapperRef.current) setSize(window.getComputedStyle(wrapperRef.current).width);
+		if (wrapperRef.current) setSize(window.getComputedStyle(wrapperRef.current).width);
 	}, [wrapperRef]);
 
 	useEffect(() => {
-		setContext(canvasRef.current?.getContext("2d") as CanvasRenderingContext2D);
+		const context = canvasRef.current?.getContext("2d");
+		if (context) setContext(context);
 	}, [canvasRef]);
 
 	return (
@@ -59,7 +60,7 @@ export function MagicWheel(): JSX.Element {
 							? <Button
 								variant="outlined"
 								disabled={magicWheel.isRotating}
-								onClick={() => magicWheel.reset()}
+								onClick={() => { magicWheel.reset(); }}
 								fullWidth
 							>
 								Try again
@@ -67,13 +68,13 @@ export function MagicWheel(): JSX.Element {
 							: <Button
 								variant="outlined"
 								disabled={magicWheel.isRotating}
-								onClick={() => magicWheel.setTargetAmounts()}
+								onClick={() => { magicWheel.setTargetAmounts(); }}
 								fullWidth
 							>
 								Pray to the Lady Luck
 							</Button>}
 
-						<Grid item xs={1}>
+						<Grid size={{ xs: 1 }}>
 							<div
 								ref={wrapperRef}
 								style={{

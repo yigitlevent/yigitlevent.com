@@ -86,7 +86,7 @@ const ChecklistSteps: { label: string, description: string[]; }[] = [
 	}
 ];
 
-export function Checklist({ expanded }: { expanded: boolean; }): JSX.Element {
+export function Checklist({ expanded }: { expanded: boolean; }): React.JSX.Element {
 	const { stock, concept, gender, name, beliefs, instincts } = useCharacterBurnerBasicsStore();
 	const { lifepaths, getEitherPool, getMentalPool, getPhysicalPool } = useCharacterBurnerLifepathStore();
 	const { stats } = useCharacterBurnerStatStore();
@@ -152,7 +152,7 @@ export function Checklist({ expanded }: { expanded: boolean; }): JSX.Element {
 				? <Stepper activeStep={activeStep} orientation="vertical">
 					{ChecklistSteps.map((step, i) => (
 						<Step key={i} expanded>
-							<StepLabel StepIconComponent={StepIcon}>
+							<StepLabel slots={{ stepIcon: StepIcon }}>
 								<Typography variant="body1" sx={{ marginBottom: "4px" }} color={activeStep !== i ? "gray" : undefined}>{step.label}</Typography>
 							</StepLabel>
 

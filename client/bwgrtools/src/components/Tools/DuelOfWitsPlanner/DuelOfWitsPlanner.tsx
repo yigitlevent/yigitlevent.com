@@ -15,7 +15,7 @@ import { useRulesetStore } from "../../../hooks/apiStores/useRulesetStore";
 import { useDuelOfWitsPlannerStore } from "../../../hooks/featureStores/useDuelOfWitsPlannerStore";
 
 
-export function DuelOfWitsPlanner(): JSX.Element {
+export function DuelOfWitsPlanner(): React.JSX.Element {
 	const { dowActions } = useRulesetStore();
 
 	const { actions, selectedAction, addAction, changeSelectedAction, toggleActionVisibility } = useDuelOfWitsPlannerStore();
@@ -26,7 +26,7 @@ export function DuelOfWitsPlanner(): JSX.Element {
 
 			<Grid container justifyContent="space-evenly" spacing={{ xs: 1, sm: 1, md: 2 }} columns={{ xs: 1, sm: 1, md: 3 }} sx={{ maxWidth: "100%", padding: "16px 0" }}>
 				{actions.map((action, volleyIndex) => (
-					<Grid key={volleyIndex} item xs={1} sx={{ minWidth: "30%" }}>
+					<Grid key={volleyIndex} size={{ xs: 1 }} sx={{ minWidth: "30%" }}>
 						<Card sx={{ padding: "10px" }}>
 							<Typography variant="h5">Volley {volleyIndex + 1}</Typography>
 							<Divider sx={{ margin: "8px 0" }} />
@@ -35,15 +35,15 @@ export function DuelOfWitsPlanner(): JSX.Element {
 								{action
 									? action.visible
 										? <DuelOfWitsActionDetails action={action} volleyIndex={volleyIndex} />
-										: <IconButton disableRipple sx={{ width: "100%" }} onClick={() => toggleActionVisibility(volleyIndex)}>
+										: <IconButton disableRipple sx={{ width: "100%" }} onClick={() => { toggleActionVisibility(volleyIndex); }}>
 											<VisibilityIcon sx={{ fontSize: 100 }} />
 										</IconButton>
 									: <Fragment>
-										<Select fullWidth value={selectedAction[volleyIndex]} onChange={(e) => changeSelectedAction(e.target.value, volleyIndex)}>
+										<Select fullWidth value={selectedAction[volleyIndex]} onChange={(e) => { changeSelectedAction(e.target.value, volleyIndex); }}>
 											{dowActions.map(v => <MenuItem key={v.name} value={v.name}>{v.name}</MenuItem>)}
 										</Select>
 
-										<Button size="large" fullWidth sx={{ padding: "16px", margin: "16px 0 8px" }} onClick={() => addAction(dowActions, volleyIndex, selectedAction[volleyIndex])}>Add Action</Button>
+										<Button size="large" fullWidth sx={{ padding: "16px", margin: "16px 0 8px" }} onClick={() => { addAction(dowActions, volleyIndex, selectedAction[volleyIndex]); }}>Add Action</Button>
 									</Fragment>}
 							</Paper>
 						</Card>

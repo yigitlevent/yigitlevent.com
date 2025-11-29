@@ -25,7 +25,7 @@ export function GetActionResolutionString<T>(item: BwgrActionResolution<T>): str
 	else if (item.opposingAbility) parts.push(item.opposingAbility[1]);
 
 	// Suffix modifier
-	if (item.opposingModifier) parts.push(` +${item.opposingModifier}D`);
+	if (item.opposingModifier) parts.push(` +${item.opposingModifier.toString()}D`);
 
 	return `${item.opposingAction[1]}: ${parts.join("")}`;
 }

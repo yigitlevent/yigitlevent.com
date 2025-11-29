@@ -25,7 +25,7 @@ import { useUserStore } from "../hooks/apiStores/useUserStore";
 import { THEME } from "../theme/theme";
 
 
-export function MainBox(): JSX.Element {
+export function MainBox(): React.JSX.Element {
 	const { user } = useUserStore();
 	const { fetchState, fetchList, fetchData } = useRulesetStore();
 	const matches = useMediaQuery(THEME.breakpoints.down("sm"));
@@ -44,7 +44,7 @@ export function MainBox(): JSX.Element {
 				<Typography variant="h2">BWGR Tools</Typography>
 			</Box>
 
-			<Grid item>
+			<Grid>
 				<Box sx={{ textAlign: "right" }}>{user ? `welcome, ${user.username}` : null}</Box>
 			</Grid>
 

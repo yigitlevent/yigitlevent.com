@@ -11,13 +11,13 @@ function ResolveRequirementBlockItem(item: BwgrLifepathRequirementItem): string 
 	else if ("isSettingEntry" in item) return "If character leads into this setting, this lifepath must be chosen as the first one in this setting.";
 	else if ("minLpIndex" in item) return `This can be selected as the ${GetOrdinalSuffix(item.minLpIndex)} lifepath or higher.`;
 	else if ("maxLpIndex" in item) return `This can be selected as the ${GetOrdinalSuffix(item.maxLpIndex)} lifepath or lower.`;
-	else if ("minYears" in item) return `Character must be at least ${item.minYears} years old.`;
-	else if ("maxYears" in item) return `Character must be at most ${item.maxYears} years old.`;
+	else if ("minYears" in item) return `Character must be at least ${item.minYears.toString()} years old.`;
+	else if ("maxYears" in item) return `Character must be at most ${item.maxYears.toString()} years old.`;
 	else if ("gender" in item) return `Character must be a ${item.gender.toLowerCase()}.`;
-	else if ("oldestBy" in item) return `Character must be oldest in the party by ${item.oldestBy}.`;
+	else if ("oldestBy" in item) return `Character must be oldest in the party by ${item.oldestBy.toString()}.`;
 	else if ("attribute" in item) {
-		if (item.min) return `${subject} must have at least a ${item.min} of ${item.attribute[1]} attribute.`;
-		else if (item.max) return `${subject} must have at most a ${item.max} of ${item.attribute[1]} attribute.`;
+		if (item.min) return `${subject} must have at least a ${item.min.toString()} of ${item.attribute[1]} attribute.`;
+		else if (item.max) return `${subject} must have at most a ${item.max.toString()} of ${item.attribute[1]} attribute.`;
 		else return `${subject} must have ${item.attribute[1]} attribute.`;
 	}
 	else if ("skill" in item) return `${subject} must have ${item.skill[1]} skill.`;
@@ -25,25 +25,25 @@ function ResolveRequirementBlockItem(item: BwgrLifepathRequirementItem): string 
 	else if ("lifepath" in item) return `${subject} must have ${item.lifepath[1]} lifepath.`;
 	else if ("setting" in item) return `${subject} must have ${item.setting[1]} setting.`;
 	else if ("question" in item) return `Answer for ${item.question[1]} must be yes.`;
-	else throw new Error(`Unidentified requirement block item: ${item}`);
+	else throw new Error(`Unidentified requirement block item: ${item as string}`);
 }
 
 function BlockTitle(logicType: string, fulfillmentAmount: number): string {
-	const fa = fulfillmentAmount > 1 ? ` ${fulfillmentAmount} times` : "";
+	const fa = fulfillmentAmount > 1 ? ` ${fulfillmentAmount.toString()} times` : "";
 
 	switch (logicType) {
-		case "AND":
-			return `All of the following must be true${fa}:`;
-		case "OR":
-			return `At least one of the following must be true${fa}:`;
-		case "NOT":
-			return `None of the following must be true${fa}:`;
-		default:
-			throw new Error(`Unidentified requirement block logic type: ${logicType}`);
+	case "AND":
+		return `All of the following must be true${fa}:`;
+	case "OR":
+		return `At least one of the following must be true${fa}:`;
+	case "NOT":
+		return `None of the following must be true${fa}:`;
+	default:
+		throw new Error(`Unidentified requirement block logic type: ${logicType}`);
 	}
 }
 
-function ResolveRequirementBlocks(requirementBlocks: BwgrLifepathRequirementBlock[]): JSX.Element {
+function ResolveRequirementBlocks(requirementBlocks: BwgrLifepathRequirementBlock[]): React.JSX.Element {
 	const parentLogic = requirementBlocks.every(v => v.mustFulfill) ? "AND" : "OR";
 
 	const hasOneBlock = requirementBlocks.length === 1;
@@ -66,7 +66,7 @@ function ResolveRequirementBlocks(requirementBlocks: BwgrLifepathRequirementBloc
 	);
 }
 
-export function LifepathRequirements({ lifepath }: { lifepath: BwgrLifepath; }): JSX.Element {
+export function LifepathRequirements({ lifepath }: { lifepath: BwgrLifepath; }): React.JSX.Element {
 	return (
 		<Fragment>
 			<b>Requirements:</b>

@@ -10,7 +10,7 @@ import { useCharacterBurnerLifepathStore } from "../../../../../hooks/featureSto
 import { useCharacterBurnerMiscStore } from "../../../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerMisc";
 
 
-export function HuntingGround(): JSX.Element {
+export function HuntingGround(): React.JSX.Element {
 	const { stock } = useCharacterBurnerBasicsStore();
 	const { lifepaths } = useCharacterBurnerLifepathStore();
 	const { special, setHuntingGround } = useCharacterBurnerMiscStore();
@@ -45,14 +45,16 @@ export function HuntingGround(): JSX.Element {
 		<Fragment>
 			{stock[1] === "Great Wolf"
 				? <Fragment>
-					<Grid item xs={1}>
+					<Grid size={{ xs: 1 }}>
 						<Typography variant="h5" sx={{ display: "inline-block" }}>Hunting Ground</Typography>
 					</Grid>
 
-					<Grid item xs={2}>
+					<Grid size={{ xs: 2 }}>
 						{special.stock.huntingGround
 							? <Typography>{special.stock.huntingGround}</Typography>
-							: <Button variant="outlined" size="small" onClick={() => rollTerritory()} disabled={special.stock.huntingGround !== undefined}>Roll</Button>}
+							: <Fragment>—</Fragment>}
+
+						<Button variant="outlined" size="small" onClick={() => { rollTerritory(); }} disabled={special.stock.huntingGround !== undefined}>Roll</Button>
 					</Grid>
 				</Fragment>
 				: null}

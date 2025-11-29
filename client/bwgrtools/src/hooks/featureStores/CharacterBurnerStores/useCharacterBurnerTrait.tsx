@@ -1,3 +1,4 @@
+import { UniqueArray } from "@utility/UniqueArray";
 import { produce } from "immer";
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
@@ -5,11 +6,10 @@ import { devtools } from "zustand/middleware";
 import { useCharacterBurnerBasicsStore } from "./useCharacterBurnerBasics";
 import { useCharacterBurnerLifepathStore } from "./useCharacterBurnerLifepath";
 import { useCharacterBurnerMiscStore } from "./useCharacterBurnerMisc";
-import { UniqueArray } from "@utility/UniqueArray";
 import { useRulesetStore } from "../../apiStores/useRulesetStore";
 
 
-export type CharacterBurnerTraitState = {
+export interface CharacterBurnerTraitState {
 	traits: UniqueArray<BwgrTraitId, BwgrCharacterTrait>;
 
 	reset: () => void;
@@ -30,7 +30,7 @@ export type CharacterBurnerTraitState = {
 	 * @remarks TODO: Repated lifepaths should be checked to determine the mandatory-ness.
 	**/
 	updateTraits: () => void;
-};
+}
 
 export const useCharacterBurnerTraitStore = create<CharacterBurnerTraitState>()(
 	devtools(
@@ -67,7 +67,7 @@ export const useCharacterBurnerTraitStore = create<CharacterBurnerTraitState>()(
 
 			getTraitPools: (lifepaths?: BwgrLifepath[]): BwgrPoints => {
 				const { getTrait } = useRulesetStore.getState();
-				const lps = lifepaths || useCharacterBurnerLifepathStore.getState().lifepaths;
+				const lps = lifepaths ?? useCharacterBurnerLifepathStore.getState().lifepaths;
 				const state = get();
 
 				const tTotal = lps.reduce((pv, cv) => pv + cv.pools.traitPool, 0);
@@ -76,7 +76,10 @@ export const useCharacterBurnerTraitStore = create<CharacterBurnerTraitState>()(
 				state.traits.forEach(trait => {
 					if (trait.isOpen) {
 						if (trait.type === "Mandatory" || trait.type === "Lifepath") tSpent += 1;
-						else if (trait.type === "General") tSpent += getTrait(trait.id).cost;
+						else if (trait.type === "General") {
+							const rulesetTrait = getTrait(trait.id);
+							tSpent += rulesetTrait.cost;
+						}
 					}
 				});
 

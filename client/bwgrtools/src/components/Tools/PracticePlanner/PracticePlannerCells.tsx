@@ -14,24 +14,24 @@ import { useRulesetStore } from "../../../hooks/apiStores/useRulesetStore";
 import { usePracticePlannerStore } from "../../../hooks/featureStores/usePracticePlannerStore";
 
 
-function Placed({ placed, practiceIndex, cellIndex }: { placed: BwgrPracticePlaced; practiceIndex: number; cellIndex: number; }): JSX.Element {
+function Placed({ placed, practiceIndex, cellIndex }: { placed: BwgrPracticePlaced; practiceIndex: number; cellIndex: number; }): React.JSX.Element {
 	const { getPractice } = useRulesetStore();
 	const { deletePractice } = usePracticePlannerStore();
 
 	const practice = getPractice(placed.practiceId);
 
-	const text = `${practice.ability ? practice.ability[1] : practice.skillType[1]}, ${placed.testType}, ${placed.hours}hr${placed.hours > 1 ? "s" : ""}`;
+	const text = `${practice.ability ? practice.ability[1] : practice.skillType[1]}, ${placed.testType}, ${placed.hours.toString()}hr${placed.hours > 1 ? "s" : ""}`;
 
 	return (
 		<Paper elevation={2} sx={{ padding: "2px 4px" }}>
 			<Typography variant="body1" sx={{ display: "inline", marginRight: "8px" }}>{placed.name}</Typography>
 			<Typography variant="caption">{text}</Typography>
-			<IconButton size="small" sx={{ float: "right" }} onClick={() => deletePractice(cellIndex, practiceIndex)}><DeleteOutlineIcon fontSize="small" /></IconButton>
+			<IconButton size="small" sx={{ float: "right" }} onClick={() => { deletePractice(cellIndex, practiceIndex); }}><DeleteOutlineIcon fontSize="small" /></IconButton>
 		</Paper>
 	);
 }
 
-function PracticePlannerCell({ cell, cellIndex, setNotification }: { cell: BwgrPracticeCell; cellIndex: number; setNotification: (value: React.SetStateAction<JSX.Element | null>) => void; }): JSX.Element {
+function PracticePlannerCell({ cell, cellIndex, setNotification }: { cell: BwgrPracticeCell; cellIndex: number; setNotification: (value: React.SetStateAction<React.JSX.Element | null>) => void; }): React.JSX.Element {
 	const { cells, deleteCell, changeCellHour } = usePracticePlannerStore();
 
 	return (
@@ -39,13 +39,13 @@ function PracticePlannerCell({ cell, cellIndex, setNotification }: { cell: BwgrP
 			<Stack spacing={0}>
 				<Typography>
 					Day {cellIndex + 1}
-					<IconButton size="small" sx={{ float: "right" }} onClick={() => deleteCell(cellIndex)}><DeleteOutlineIcon fontSize="small" /></IconButton>
-					<IconButton size="small" sx={{ float: "right" }} onClick={() => changeCellHour(cellIndex, -1, cells, setNotification)}><RemoveCircleOutlineIcon fontSize="small" /></IconButton>
-					<IconButton size="small" sx={{ float: "right" }} onClick={() => changeCellHour(cellIndex, 1, cells, setNotification)}><AddCircleOutlineIcon fontSize="small" /></IconButton>
+					<IconButton size="small" sx={{ float: "right" }} onClick={() => { deleteCell(cellIndex); }}><DeleteOutlineIcon fontSize="small" /></IconButton>
+					<IconButton size="small" sx={{ float: "right" }} onClick={() => { changeCellHour(cellIndex, -1, cells, setNotification); }}><RemoveCircleOutlineIcon fontSize="small" /></IconButton>
+					<IconButton size="small" sx={{ float: "right" }} onClick={() => { changeCellHour(cellIndex, 1, cells, setNotification); }}><AddCircleOutlineIcon fontSize="small" /></IconButton>
 				</Typography>
 
 				<Box sx={{ margin: "0 5px 0" }}>
-					{[...Array(cell.maxHours)].map((_, ii) => {
+					{[...Array<number>(cell.maxHours)].map((_, ii) => {
 						const filled = (cell.placed.length > 0 ? cell.placed.map(v => v.hours).reduce((pv, cv) => pv + cv) : 0);
 						return (
 							<StopIcon
@@ -68,7 +68,7 @@ function PracticePlannerCell({ cell, cellIndex, setNotification }: { cell: BwgrP
 	);
 }
 
-export function PracticePlannerCells({ setNotification }: { setNotification: (value: React.SetStateAction<JSX.Element | null>) => void; }): JSX.Element {
+export function PracticePlannerCells({ setNotification }: { setNotification: (value: React.SetStateAction<React.JSX.Element | null>) => void; }): React.JSX.Element {
 	const { cells } = usePracticePlannerStore();
 
 	return (

@@ -1,14 +1,14 @@
-import { createRef, useEffect, useState } from "react";
+import { createRef, useEffect } from "react";
 
 import burningwheel from "../../../assets/images/burningwheel.png";
 import { MagicWheelConstants } from "../../../hooks/useMagicWheel";
 
 
-export function FrontCanvas({ constants }: { constants: MagicWheelConstants; }): JSX.Element {
+export function FrontCanvas({ constants }: { constants: MagicWheelConstants; }): React.JSX.Element {
 	const canvasRef = createRef<HTMLCanvasElement>();
-	const [context, setContext] = useState<CanvasRenderingContext2D>();
-
 	useEffect(() => {
+		const context = canvasRef.current?.getContext("2d");
+
 		if (context) {
 			context.clearRect(0, 0, constants.canvasSize, constants.canvasSize);
 
@@ -36,11 +36,7 @@ export function FrontCanvas({ constants }: { constants: MagicWheelConstants; }):
 			});
 			img.src = burningwheel;
 		}
-	}, [context, constants.canvasSize, constants.innerCircleRadius, constants.circleOffset, constants.circleRadius]);
-
-	useEffect(() => {
-		setContext(canvasRef.current?.getContext("2d") as CanvasRenderingContext2D);
-	}, [canvasRef]);
+	}, [canvasRef, constants.canvasSize, constants.innerCircleRadius, constants.circleOffset, constants.circleRadius]);
 
 	return (
 		<canvas

@@ -13,15 +13,15 @@ export function CalculateDiceProbability(poolSize: number, openEnded: boolean, s
 
 	let success = 4;
 	switch (shade) {
-		case "B":
-			success = 4;
-			break;
-		case "G":
-			success = 3;
-			break;
-		case "W":
-			success = 2;
-			break;
+	case "B":
+		success = 4;
+		break;
+	case "G":
+		success = 3;
+		break;
+	case "W":
+		success = 2;
+		break;
 	}
 
 	let successes: number[] = rolls.map(roll => roll.filter(r => r >= success).length);
@@ -32,7 +32,7 @@ export function CalculateDiceProbability(poolSize: number, openEnded: boolean, s
 		successes = successes.map((success, index) => success + additionalSuccesses[index]);
 	}
 
-	const freqCount: number[] = Array(Math.max(...successes) + 1).fill(0);
+	const freqCount = Array(Math.max(...successes) + 1).fill(0) as number[];
 	successes.forEach(success => freqCount[success]++);
 
 	const result

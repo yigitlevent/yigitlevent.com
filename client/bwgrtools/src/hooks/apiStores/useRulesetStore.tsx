@@ -145,7 +145,7 @@ export const useRulesetStore = create<RulesetStore>()(
 						}
 						else throw new Error();
 					})
-					.catch(reason => console.error(reason));
+					.catch((reason: unknown) => { console.error(reason); });
 			},
 
 			fetchData: () => {
@@ -236,7 +236,7 @@ export const useRulesetStore = create<RulesetStore>()(
 								throw new Error();
 							}
 						})
-						.catch(reason => {
+						.catch((reason: unknown) => {
 							console.error(reason);
 							setFetchState("failed");
 						});
@@ -245,8 +245,8 @@ export const useRulesetStore = create<RulesetStore>()(
 
 			serveResult<T>(row: T[], error: [id: unknown, msg: string]): Readonly<T> {
 				if (row.length === 1) return row[0];
-				else if (row.length > 1) throw new Error(`Found multiple ${error[1]} rows with ${typeof error[0] === "string" ? "name" : "id"} '${error[0]}'`);
-				else throw new Error(`Could not find any ${error[1]} with ${typeof error[0] === "string" ? "name" : "id"} '${error[0]}'`);
+				else if (row.length > 1) throw new Error(`Found multiple ${error[1]} rows with ${typeof error[0] === "string" ? "name" : "id"} '${error[0] as string}'`);
+				else throw new Error(`Could not find any ${error[1]} with ${typeof error[0] === "string" ? "name" : "id"} '${error[0] as string}'`);
 			},
 
 			getAbility(search: BwgrAbilityId | string) {

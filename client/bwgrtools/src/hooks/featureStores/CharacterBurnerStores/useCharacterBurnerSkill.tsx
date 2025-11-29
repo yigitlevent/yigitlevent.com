@@ -1,3 +1,5 @@
+import { Average } from "@utility/Average";
+import { UniqueArray } from "@utility/UniqueArray";
 import { produce } from "immer";
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
@@ -6,11 +8,9 @@ import { useCharacterBurnerAttributeStore } from "./useCharacterBurnerAttribute"
 import { useCharacterBurnerLifepathStore } from "./useCharacterBurnerLifepath";
 import { useCharacterBurnerStatStore } from "./useCharacterBurnerStat";
 import { useRulesetStore } from "../../apiStores/useRulesetStore";
-import { Average } from "@utility/Average";
-import { UniqueArray } from "@utility/UniqueArray";
 
 
-export type CharacterBurnerSkillState = {
+export interface CharacterBurnerSkillState {
 	skills: UniqueArray<BwgrSkillId, BwgrCharacterSkill>;
 
 	reset: () => void;
@@ -32,7 +32,7 @@ export type CharacterBurnerSkillState = {
 	 * @remarks TODO: Repated lifepaths should be checked to determine the mandatory-ness.
 	**/
 	updateSkills: () => void;
-};
+}
 
 export const useCharacterBurnerSkillStore = create<CharacterBurnerSkillState>()(
 	devtools(
@@ -108,7 +108,7 @@ export const useCharacterBurnerSkillStore = create<CharacterBurnerSkillState>()(
 
 			getSkillPools: (lifepaths?: BwgrLifepath[]): { general: BwgrPoints; lifepath: BwgrPoints; } => {
 				const state = get();
-				const lps = lifepaths || useCharacterBurnerLifepathStore.getState().lifepaths;
+				const lps = lifepaths ?? useCharacterBurnerLifepathStore.getState().lifepaths;
 
 				const gpTotal = lps.reduce((pv, cv) => pv + cv.pools.generalSkillPool, 0);
 				const lpTotal = lps.reduce((pv, cv) => pv + cv.pools.lifepathSkillPool, 0);
@@ -123,8 +123,8 @@ export const useCharacterBurnerSkillStore = create<CharacterBurnerSkillState>()(
 						gpRemaining -= skill.advancement.general;
 					}
 					else {
-						if (skill.isOpen === "double") (lpRemaining > 0) ? lpRemaining -= 2 : lpRemaining -= 2;
-						else if (skill.isOpen === "yes") (lpRemaining > 0) ? lpRemaining -= 1 : lpRemaining -= 1;
+						if (skill.isOpen === "double") lpRemaining -= 2;
+						else if (skill.isOpen === "yes") lpRemaining -= 1;
 						lpRemaining -= skill.advancement.lifepath;
 						gpRemaining -= skill.advancement.general;
 					}
@@ -148,7 +148,8 @@ export const useCharacterBurnerSkillStore = create<CharacterBurnerSkillState>()(
 				let exponent = 0;
 
 				if (charSkill && hasSkillOpen(skillId)) {
-					const skillRoots = ruleset.getSkill(skillId).roots;
+					const rulesetSkill = ruleset.getSkill(skillId);
+					const skillRoots = rulesetSkill.roots;
 
 					if (skillRoots) {
 						const rootShades = skillRoots.map(s => {

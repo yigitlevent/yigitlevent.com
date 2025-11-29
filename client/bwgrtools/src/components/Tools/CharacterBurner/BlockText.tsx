@@ -13,9 +13,9 @@ interface BlockTextProps {
 	hasLeftPadding?: boolean;
 }
 
-export function BlockText({ text, hasLeftPadding }: BlockTextProps): JSX.Element {
+export function BlockText({ text, hasLeftPadding }: BlockTextProps): React.JSX.Element {
 	return (
-		<Grid item>
+		<Grid>
 			<Typography sx={{ paddingLeft: hasLeftPadding ? "10px" : undefined, paddingTop: "3px" }}>{text}</Typography>
 		</Grid>
 	);
@@ -32,11 +32,13 @@ interface BlockSkillPopoverProps {
 	deleteCallback?: () => void;
 }
 
-export function BlockSkillPopover({ skill, checkbox, deleteCallback }: BlockSkillPopoverProps): JSX.Element {
+export function BlockSkillPopover({ skill, checkbox, deleteCallback }: BlockSkillPopoverProps): React.JSX.Element {
 	const { getSkill } = useRulesetStore();
 
+	const rulesetSkill = getSkill(skill[0]);
+
 	return (
-		<Grid item>
+		<Grid>
 			{checkbox
 				? <Checkbox
 					checked={checkbox.checked}
@@ -48,7 +50,7 @@ export function BlockSkillPopover({ skill, checkbox, deleteCallback }: BlockSkil
 				: null}
 
 			<Typography sx={{ cursor: "pointer", display: "inline-block", margin: "6px 0 0 8px" }}>
-				<PopoverLink data={getSkill(skill[0])} />
+				<PopoverLink data={rulesetSkill} />
 			</Typography>
 
 			{deleteCallback
@@ -70,11 +72,13 @@ interface BlockTraitPopoverProps {
 	deleteCallback?: () => void;
 }
 
-export function BlockTraitPopover({ trait, checkbox, deleteCallback }: BlockTraitPopoverProps): JSX.Element {
+export function BlockTraitPopover({ trait, checkbox, deleteCallback }: BlockTraitPopoverProps): React.JSX.Element {
 	const { getTrait } = useRulesetStore();
 
+	const rulesetTrait = getTrait(trait[0]);
+
 	return (
-		<Grid item>
+		<Grid>
 			{checkbox
 				? <Checkbox
 					checked={checkbox.checked}
@@ -85,7 +89,7 @@ export function BlockTraitPopover({ trait, checkbox, deleteCallback }: BlockTrai
 				: null}
 
 			<Typography sx={{ cursor: "pointer", display: "inline-block", margin: "6px 0 0 8px" }}>
-				<PopoverLink data={getTrait(trait[0])} />
+				<PopoverLink data={rulesetTrait} />
 			</Typography>
 
 			{deleteCallback

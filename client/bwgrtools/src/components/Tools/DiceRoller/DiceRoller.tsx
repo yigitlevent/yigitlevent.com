@@ -13,9 +13,7 @@ import { CalculateDiceProbability } from "../../../utils/CalculateDiceProbabilit
 import { AbilityButton, AbilityButtonWithArrows } from "../../Shared/AbilityButton";
 
 
-interface Tests {
-	[key: number]: { routineMaxObstacle: number; };
-}
+type Tests = Record<number, { routineMaxObstacle: number; }>;
 
 const Tests: Tests = {
 	2: { routineMaxObstacle: 1 },
@@ -48,7 +46,7 @@ export interface TestResult {
 }
 
 
-export function DiceRoller(): JSX.Element {
+export function DiceRoller(): React.JSX.Element {
 	const [shade, setShade] = useState<BwgrShades>("B");
 	const [dicePool, setDicePool] = useState(1);
 	const [obstacle, setObstacle] = useState(1);
@@ -65,7 +63,7 @@ export function DiceRoller(): JSX.Element {
 					? "Routine"
 					: "Difficult";
 
-	const calculateResult = (dice: number[], usedFate: boolean) => {
+	const calculateResult = (dice: number[], usedFate: boolean): void => {
 		let successes = 0;
 		let failures = 0;
 
@@ -77,14 +75,14 @@ export function DiceRoller(): JSX.Element {
 		setResult({ dice, successes, failures, test: testType, usedFate });
 	};
 
-	const rerollFailure = (dice: number[]) => {
+	const rerollFailure = (dice: number[]): void => {
 		const tempDice = [...dice];
 		const index = tempDice.findIndex(v => (shade === "B" && v < 4) || (shade === "G" && v < 3) || (shade === "W" && v < 2));
 		tempDice[index] = RandomNumber(1, 6);
 		calculateResult(tempDice.sort((a, b) => b - a), true);
 	};
 
-	const rerollSixes = (dice: number[], spendingFate: boolean) => {
+	const rerollSixes = (dice: number[], spendingFate: boolean): void => {
 		const rerolled: number[][] = [];
 		if (isOpenEnded || spendingFate) {
 			rerolled.push(dice.filter(v => v === 6).map(() => RandomNumber(1, 6)));
@@ -95,8 +93,8 @@ export function DiceRoller(): JSX.Element {
 		calculateResult([...dice, ...rerolled.flat()].sort((a, b) => b - a), spendingFate);
 	};
 
-	const resolveDiceRoll = () => {
-		rerollSixes([...Array(dicePool)].map(() => RandomNumber(1, 6)), false);
+	const resolveDiceRoll = (): void => {
+		rerollSixes([...Array<number>(dicePool)].map(() => RandomNumber(1, 6)), false);
 	};
 
 	useEffect(() => {
@@ -116,16 +114,16 @@ export function DiceRoller(): JSX.Element {
 				alignItems="center"
 				sx={{ margin: "16px 0 0 0" }}
 			>
-				<Grid item container alignItems="center" sx={{ width: "max-content" }}>
+				<Grid container alignItems="center" sx={{ width: "max-content" }}>
 					<Typography sx={{ display: "inline-block", margin: "0 8px 0 0" }}>Dice Pool</Typography>
 
-					<AbilityButton sx={{ height: "30px" }} onClick={() => setShade(v => v === "W" ? "B" : v === "B" ? "G" : "W")}>
+					<AbilityButton sx={{ height: "30px" }} onClick={() => { setShade(v => v === "W" ? "B" : v === "B" ? "G" : "W"); }}>
 						{shade}
 					</AbilityButton>
 
 					<AbilityButtonWithArrows
-						onClick={() => setDicePool(v => v === 20 ? v = 1 : Clamp(v + 1, 1, 20))}
-						onContextMenu={() => setDicePool(v => Clamp(v - 1, 1, 20))}
+						onClick={() => { setDicePool(v => v === 20 ? v = 1 : Clamp(v + 1, 1, 20)); }}
+						onContextMenu={() => { setDicePool(v => Clamp(v - 1, 1, 20)); }}
 					>
 						{dicePool}
 					</AbilityButtonWithArrows>
@@ -133,21 +131,21 @@ export function DiceRoller(): JSX.Element {
 					<Typography sx={{ display: "inline-block", margin: "0 8px 0 8px" }}>vs. Ob</Typography>
 
 					<AbilityButtonWithArrows
-						onClick={() => setObstacle(v => v === 20 ? v = 1 : Clamp(v + 1, 1, 20))}
-						onContextMenu={() => setObstacle(v => Clamp(v - 1, 1, 20))}
+						onClick={() => { setObstacle(v => v === 20 ? v = 1 : Clamp(v + 1, 1, 20)); }}
+						onContextMenu={() => { setObstacle(v => Clamp(v - 1, 1, 20)); }}
 					>
 						{obstacle}
 					</AbilityButtonWithArrows>
 				</Grid>
 
 
-				<Grid item xs={3} sm={3} md={1}>
+				<Grid size={{ xs: 3, sm: 3, md: 1 }}>
 					<FormControlLabel
 						label="Is Open Ended"
 						control={
 							<Switch
 								checked={isOpenEnded}
-								onChange={(_, v) => setIsOpenEnded(v)}
+								onChange={(_, v) => { setIsOpenEnded(v); }}
 								size="small"
 							/>
 						}
@@ -159,7 +157,7 @@ export function DiceRoller(): JSX.Element {
 						control={
 							<Switch
 								checked={isDoubleObstacle}
-								onChange={(_, v) => setIsDoubleObstacle(v)}
+								onChange={(_, v) => { setIsDoubleObstacle(v); }}
 								size="small"
 							/>
 						}
@@ -168,7 +166,7 @@ export function DiceRoller(): JSX.Element {
 				</Grid>
 
 
-				<Grid item xs={3} sm={3} md={1}>
+				<Grid size={{ xs: 3, sm: 3, md: 1 }}>
 					<Button variant="outlined" size="medium" onClick={resolveDiceRoll}>Roll Dice</Button>
 				</Grid>
 			</Grid>

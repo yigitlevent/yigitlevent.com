@@ -19,7 +19,7 @@ import { useUserStore } from "../../../hooks/apiStores/useUserStore";
 import { GenericGrid } from "../../Shared/Grids";
 
 
-export function Signup({ open, handleClose }: { open: boolean; handleClose: (open: boolean) => void; }): JSX.Element {
+export function Signup({ open, handleClose }: { open: boolean; handleClose: (open: boolean) => void; }): React.JSX.Element {
 	const { fetching, signup } = useUserStore();
 
 	const [username, setUsername] = useState("");
@@ -54,14 +54,14 @@ export function Signup({ open, handleClose }: { open: boolean; handleClose: (ope
 			if (!ValidatePassword(sanitizedValue)) setPasswordError("Password must be between 8 and 64 characters, with at least one letter and one number.");
 			else setPasswordError(undefined);
 		}
-		else if (type === "passwordRepeat") {
+		else {
 			setPasswordRepeat(sanitizedValue);
 			if (password !== sanitizedValue) setPasswordRepeatError("Passwords don't match.");
 			else setPasswordRepeatError(undefined);
 		}
 	}, [password]);
 
-	const handleSignup = () => {
+	const handleSignup = (): void => {
 		if (username.length === 0) setUsernameError("Please enter an username.");
 		if (email.length === 0) setEmailError("Please enter an email.");
 		if (password.length === 0) setPasswordError("Please enter a password.");
@@ -75,37 +75,37 @@ export function Signup({ open, handleClose }: { open: boolean; handleClose: (ope
 				<Typography variant="h3">Sign up</Typography>
 
 				<GenericGrid columns={1} spacing={[3, 0]} center="c">
-					<Grid item xs={1}>
+					<Grid size={{ xs: 1 }}>
 						<TextField
 							label="Username" variant="standard" fullWidth required
 							value={username}
-							onChange={v => changeValue("username", v.target.value)}
+							onChange={v => { changeValue("username", v.target.value); }}
 							error={usernameError !== undefined}
 							helperText={usernameError}
 						/>
 					</Grid>
 
-					<Grid item xs={1}>
+					<Grid size={{ xs: 1 }}>
 						<TextField
 							label="Email" variant="standard" fullWidth required
 							value={email}
-							onChange={v => changeValue("email", v.target.value)}
+							onChange={v => { changeValue("email", v.target.value); }}
 							error={emailError !== undefined}
 							helperText={emailError}
 						/>
 					</Grid>
 
-					<Grid item xs={1}>
+					<Grid size={{ xs: 1 }}>
 						<FormControl variant="standard" fullWidth required>
 							<InputLabel>Password</InputLabel>
 
 							<Input
 								type={showPass ? "text" : "password"}
-								value={password} onChange={v => changeValue("password", v.target.value)}
+								value={password} onChange={v => { changeValue("password", v.target.value); }}
 								error={passwordError !== undefined}
 								endAdornment={
 									<InputAdornment position="end">
-										<IconButton onClick={() => setShowPass(v => !v)}>
+										<IconButton onClick={() => { setShowPass(v => !v); }}>
 											{showPass ? <VisibilityOff /> : <Visibility />}
 										</IconButton>
 									</InputAdornment>
@@ -116,18 +116,18 @@ export function Signup({ open, handleClose }: { open: boolean; handleClose: (ope
 						</FormControl>
 					</Grid>
 
-					<Grid item xs={1}>
+					<Grid size={{ xs: 1 }}>
 						<TextField
 							label="Password Repeat" variant="standard" fullWidth required
-							value={passwordRepeat} onChange={v => changeValue("passwordRepeat", v.target.value)}
+							value={passwordRepeat} onChange={v => { changeValue("passwordRepeat", v.target.value); }}
 							type={showPass ? "text" : "password"}
 							error={passwordRepeatError !== undefined}
 							helperText={passwordRepeatError}
 						/>
 					</Grid>
 
-					<Grid item>
-						<Button variant="outlined" onClick={() => handleSignup()} disabled={!isFilled || hasErrors || fetching}>Sign up</Button>
+					<Grid>
+						<Button variant="outlined" onClick={() => { handleSignup(); }} disabled={!isFilled || hasErrors || fetching}>Sign up</Button>
 					</Grid>
 				</GenericGrid>
 			</Paper>

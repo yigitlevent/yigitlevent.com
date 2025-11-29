@@ -12,7 +12,7 @@ import { LifepathBox } from "../../LifepathLists/LifepathBox";
 
 
 // TODO: random lifepath selection: "Choose Lifepaths" or "Random Lifepaths"
-export function LifepathSelectionModal({ isOpen, close }: { isOpen: boolean; close: () => void; }): JSX.Element {
+export function LifepathSelectionModal({ isOpen, close }: { isOpen: boolean; close: () => void; }): React.JSX.Element {
 	const { availableLifepaths, lifepaths, addLifepath, removeLastLifepath } = useCharacterBurnerLifepathStore();
 
 	const [disabled, setDisabled] = useState(false);
@@ -32,34 +32,34 @@ export function LifepathSelectionModal({ isOpen, close }: { isOpen: boolean; clo
 	}, [availableLifepaths]);
 
 	return (
-		<Modal open={isOpen} onClose={() => close()}>
+		<Modal open={isOpen} onClose={() => { close(); }}>
 			<Paper sx={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", maxWidth: "1000px", width: "100%", padding: "0 24px 24px", border: "none", overflow: "auto" }}>
 				<GenericGrid columns={5} spacing={[2, 2]} center>
-					<Grid item xs={5} sm={3} md={3}>
+					<Grid size={{ xs: 5, sm: 3, md: 3 }}>
 						<Autocomplete
 							value={chosen}
 							options={available}
 							getOptionLabel={(option) => option.name}
 							groupBy={(option) => option.setting[1]}
 							renderInput={(params) => <TextField {...params} label="Lifepath" variant="standard" fullWidth />}
-							onChange={(_, v) => setChosen(v)}
+							onChange={(_, v) => { setChosen(v); }}
 							fullWidth
 							disableClearable
 							disabled={disabled}
 						/>
 					</Grid>
 
-					<Grid item xs={5} sm={1} md={1}>
-						<Button variant="outlined" size="medium" onClick={() => handle(chosen)} fullWidth disabled={disabled}>Add Lifepath</Button>
+					<Grid size={{ xs: 5, sm: 1, md: 1 }}>
+						<Button variant="outlined" size="medium" onClick={() => { handle(chosen); }} fullWidth disabled={disabled}>Add Lifepath</Button>
 					</Grid>
 
-					<Grid item xs={5} sm={1} md={1}>
-						<Button variant="outlined" size="medium" onClick={() => handle()} fullWidth disabled={disabled}>Remove Lifepath</Button>
+					<Grid size={{ xs: 5, sm: 1, md: 1 }}>
+						<Button variant="outlined" size="medium" onClick={() => { handle(); }} fullWidth disabled={disabled}>Remove Lifepath</Button>
 					</Grid>
 
 					<Fragment>
 						{lifepaths.map((lp, i) => (
-							<Grid key={i} item xs={5}>
+							<Grid key={i} size={{ xs: 5 }}>
 								<LifepathBox lifepath={lp} />
 							</Grid>
 						))}

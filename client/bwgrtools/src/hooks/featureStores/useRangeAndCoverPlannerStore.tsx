@@ -21,7 +21,9 @@ export const useRangeAndCoverPlannerStore = create<RangeAndCoverPlannerState>()(
 			selectedAction: ["Charge", "Charge", "Charge"],
 
 			addAction: (actions: BwgrRaCAction[], volleyIndex: number, actionName: undefined | string) => {
-				const action: BwgrRaCActionExtended = { ...actions.find(v => v.name === actionName) as BwgrRaCAction, open: false, visible: true };
+				const actionMaybe = actions.find(v => v.name === actionName);
+				if (!actionMaybe) return;
+				const action: BwgrRaCActionExtended = { ...actionMaybe, open: false, visible: true };
 				set(produce<RangeAndCoverPlannerState>((state) => {
 					const newActions = state.actions;
 					state.actions = newActions.map((v, i) => {

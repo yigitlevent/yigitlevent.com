@@ -17,8 +17,8 @@ interface FilterLifepathsProps {
 }
 
 export function FilterLifepaths({ rulesetLifepaths, stock, age, lifepaths, gender, attributes, hasAttribute, hasSkillOpen, hasTraitOpen, hasSetting, hasQuestionTrue, noLeads }: FilterLifepathsProps): BwgrLifepath[] {
-	const checkLifepath = (id: BwgrLifepathId) => lifepaths.findIndex(lp => lp.id === id);
-	const countLifepath = (id: BwgrLifepathId) => lifepaths.filter(lp => lp.id === id).length;
+	const checkLifepath = (id: BwgrLifepathId): number => lifepaths.findIndex(lp => lp.id === id);
+	const countLifepath = (id: BwgrLifepathId): number => lifepaths.filter(lp => lp.id === id).length;
 
 	const checkRequirementBlock = (lifepath: BwgrLifepath, block: BwgrLifepathRequirementBlock): boolean => {
 		const itemResults = block.items.map((item): boolean => {
@@ -59,12 +59,12 @@ export function FilterLifepaths({ rulesetLifepaths, stock, age, lifepaths, gende
 				if (hasQuestionTrue) return hasQuestionTrue(item.question[0]);
 				else return true;
 			}
-			else throw new Error(`Unidentified requirement block item: ${item.logicType}`);
+			else throw new Error(`Unidentified requirement block item: ${item.logicType.toString()}`);
 		});
 
-		if (block.logicType[1] === "OR") return itemResults.some(v => v === true);
-		else if (block.logicType[1] === "AND") return itemResults.every(v => v === true);
-		else if (block.logicType[1] === "NOT") return !itemResults.every(v => v === false);
+		if (block.logicType[1] === "OR") return itemResults.some(v => v);
+		else if (block.logicType[1] === "AND") return itemResults.every(v => v);
+		else if (block.logicType[1] === "NOT") return !itemResults.every(v => !v);
 		return false;
 	};
 
@@ -77,7 +77,7 @@ export function FilterLifepaths({ rulesetLifepaths, stock, age, lifepaths, gende
 
 		possibleLifepaths
 			= possibleSettingIds
-				.map(settingId => rulesetLifepaths.filter(x => stock[0] === x.stock[0] && x.setting[0] === settingId && x.flags.isBorn === false))
+				.map(settingId => rulesetLifepaths.filter(x => stock[0] === x.stock[0] && x.setting[0] === settingId && !x.flags.isBorn))
 				.flat()
 				.filter(lifepath => {
 					if (lifepath.requirements) {

@@ -1,3 +1,4 @@
+import { Clamp } from "@utility/Clamp";
 import { produce } from "immer";
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
@@ -5,11 +6,10 @@ import { devtools } from "zustand/middleware";
 import { useCharacterBurnerLifepathStore } from "./useCharacterBurnerLifepath";
 import { useCharacterBurnerMiscStore } from "./useCharacterBurnerMisc";
 import { useCharacterBurnerSkillStore } from "./useCharacterBurnerSkill";
-import { Clamp } from "@utility/Clamp";
 
 
-export type CharacterBurnerStatState = {
-	stats: { [key: string]: BwgrStatData; };
+export interface CharacterBurnerStatState {
+	stats: Record<string, BwgrStatData>;
 
 	reset: () => void;
 
@@ -17,7 +17,7 @@ export type CharacterBurnerStatState = {
 
 	shiftStatShade: (statName: string) => void;
 	modifyStatExponent: (statName: string, decrease?: boolean) => void;
-};
+}
 
 export const useCharacterBurnerStatStore = create<CharacterBurnerStatState>()(
 	devtools(

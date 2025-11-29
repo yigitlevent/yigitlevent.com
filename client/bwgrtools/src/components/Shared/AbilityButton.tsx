@@ -5,8 +5,8 @@ import Button, { ButtonProps } from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 
 
-export function AbilityButton(props: ButtonProps): JSX.Element {
-	const handle = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, callback?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void) => {
+export function AbilityButton(props: ButtonProps): React.JSX.Element {
+	const handle = (e: React.MouseEvent<HTMLButtonElement>, callback?: (event: React.MouseEvent<HTMLButtonElement>) => void): void => {
 		e.preventDefault();
 		if (callback) callback(e);
 	};
@@ -16,16 +16,16 @@ export function AbilityButton(props: ButtonProps): JSX.Element {
 			{...props}
 			size="small"
 			variant="outlined"
-			sx={{ minWidth: "30px", width: "30px", display: "inline-block", marginRight: 1, padding: 0, ...props.sx }}
-			onClick={e => handle(e, props.onClick)}
-			onContextMenu={e => handle(e, props.onContextMenu)}
+			sx={{ minWidth: "30px", width: "30px", display: "inline-block", marginRight: 1, padding: 0 }}
+			onClick={e => { handle(e, props.onClick); }}
+			onContextMenu={e => { handle(e, props.onContextMenu); }}
 		/>
 	);
 }
 
 
-export function AbilityButtonWithArrows(props: ButtonProps): JSX.Element {
-	const handle = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, callback?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void) => {
+export function AbilityButtonWithArrows(props: ButtonProps): React.JSX.Element {
+	const handle = (e: React.MouseEvent<HTMLButtonElement>, callback?: (event: React.MouseEvent<HTMLButtonElement>) => void): void => {
 		e.preventDefault();
 		if (callback) callback(e);
 	};
@@ -38,7 +38,7 @@ export function AbilityButtonWithArrows(props: ButtonProps): JSX.Element {
 				gridTemplateRows: "30px auto 30px"
 			}}
 		>
-			<IconButton onClick={e => handle(e, props.onClick)}>
+			<IconButton onClick={e => { handle(e, props.onClick); }}>
 				<ArrowDropUpIcon />
 			</IconButton>
 
@@ -46,12 +46,12 @@ export function AbilityButtonWithArrows(props: ButtonProps): JSX.Element {
 				{...props}
 				size="small"
 				variant="outlined"
-				sx={{ minWidth: "30px", width: "30px", display: "inline-block", marginRight: 1, ...props.sx }}
-				onClick={e => handle(e, props.onClick)}
-				onContextMenu={e => handle(e, props.onContextMenu)}
+				sx={{ minWidth: "30px", width: "30px", display: "inline-block", marginRight: 1 }}
+				onClick={e => { handle(e, props.onClick); }}
+				onContextMenu={e => { handle(e, props.onContextMenu); }}
 			/>
 
-			<IconButton onClick={e => handle(e, props.onContextMenu)}>
+			<IconButton onClick={e => { handle(e, props.onContextMenu); }}>
 				<ArrowDropDownIcon />
 			</IconButton>
 		</Box>

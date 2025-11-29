@@ -18,7 +18,7 @@ import { RouteButton } from "./RouteButton";
 import { DrawerBox } from "../../Shared/DrawerBox";
 
 
-export function Tools({ expanded }: { expanded: boolean; }): JSX.Element {
+export function Tools({ expanded }: { expanded: boolean; }): React.JSX.Element {
 	const items: [string, string, typeof SvgIcon][] = [
 		["Lifepaths List", "/lifepaths", Fingerprint],
 		["Skills List", "/skills", GroupWorkOutlinedIcon],

@@ -15,7 +15,7 @@ import { useRulesetStore } from "../../../hooks/apiStores/useRulesetStore";
 import { useRangeAndCoverPlannerStore } from "../../../hooks/featureStores/useRangeAndCoverPlannerStore";
 
 
-export function RangeAndCoverPlanner(): JSX.Element {
+export function RangeAndCoverPlanner(): React.JSX.Element {
 	const { racActions } = useRulesetStore();
 
 	const { actions, selectedAction, addAction, changeSelectedAction, toggleActionVisibility } = useRangeAndCoverPlannerStore();
@@ -26,7 +26,7 @@ export function RangeAndCoverPlanner(): JSX.Element {
 
 			<Grid container justifyContent="space-evenly" spacing={{ xs: 1, sm: 1, md: 2 }} columns={{ xs: 1, sm: 1, md: 3 }} sx={{ maxWidth: "100%", padding: "16px 0" }}>
 				{actions.map((action, volleyIndex) => (
-					<Grid key={volleyIndex} item xs={1} sx={{ minWidth: "30%" }}>
+					<Grid key={volleyIndex} size={{ xs: 1 }} sx={{ minWidth: "30%" }}>
 						<Card sx={{ padding: "10px" }}>
 							<Typography variant="h5">Volley {volleyIndex + 1}</Typography>
 							<Divider sx={{ margin: "8px 0" }} />
@@ -35,22 +35,22 @@ export function RangeAndCoverPlanner(): JSX.Element {
 								{action
 									? action.visible
 										? <RangeAndCoverActionDetails action={action} volleyIndex={volleyIndex} />
-										: <IconButton disableRipple sx={{ width: "100%" }} onClick={() => toggleActionVisibility(volleyIndex)}>
+										: <IconButton disableRipple sx={{ width: "100%" }} onClick={() => { toggleActionVisibility(volleyIndex); }}>
 											<VisibilityIcon sx={{ fontSize: 100 }} />
 										</IconButton>
 									: <Fragment>
 										<Autocomplete
-											value={(racActions.find(v => v.name === selectedAction[volleyIndex]) as BwgrRaCAction)}
+											value={(racActions.find(v => v.name === selectedAction[volleyIndex]))}
 											options={[...racActions].sort((a, b) => a.group[1].localeCompare(b.group[1]) || a.name.localeCompare(b.name))}
 											getOptionLabel={(option) => option.name}
 											groupBy={(option) => option.group[1]}
 											renderInput={(params) => <TextField {...params} />}
-											onChange={(_, v) => changeSelectedAction(v.name, volleyIndex)}
+											onChange={(_, v) => { changeSelectedAction(v.name, volleyIndex); }}
 											fullWidth
 											disableClearable
 										/>
 
-										<Button size="large" fullWidth sx={{ padding: "16px", margin: "16px 0 8px" }} onClick={() => addAction(racActions, volleyIndex, selectedAction[volleyIndex])}>Add Action</Button>
+										<Button size="large" fullWidth sx={{ padding: "16px", margin: "16px 0 8px" }} onClick={() => { addAction(racActions, volleyIndex, selectedAction[volleyIndex]); }}>Add Action</Button>
 									</Fragment>}
 							</Paper>
 						</Card>

@@ -8,23 +8,23 @@ import { useCharacterBurnerMiscStore } from "../../../../hooks/featureStores/Cha
 import { GenericGrid } from "../../../Shared/Grids";
 
 
-export function Beliefs(): JSX.Element {
+export function Beliefs(): React.JSX.Element {
 	const { limits } = useCharacterBurnerMiscStore();
 	const { beliefs, setBelief } = useCharacterBurnerBasicsStore();
 
 	return (
 		<GenericGrid columns={6} center extraBottomMargin>
-			<Grid item xs={4}>
+			<Grid size={{ xs: 4 }}>
 				<Typography variant="h4">Beliefs</Typography>
 			</Grid>
 
 			<Fragment>
 				{beliefs.slice(0, limits.beliefs).map((v, i) => (
-					<Grid key={i} item xs={6}>
+					<Grid key={i} size={{ xs: 6 }}>
 						<TextField
-							label={i !== 3 ? `Belief ${i + 1}` : beliefs[3].name}
+							label={i !== 3 ? `Belief ${(i + 1).toString()}` : beliefs[3].name}
 							value={v.belief}
-							onChange={(e) => setBelief(i, e.target.value)}
+							onChange={(e) => { setBelief(i, e.target.value); }}
 							fullWidth
 							variant="standard"
 						/>

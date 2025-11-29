@@ -9,7 +9,7 @@ import { Link as RouterLink, LinkProps as RouterLinkProps, useLocation } from "r
 import { THEME } from "../../../theme/theme";
 
 
-export function RouteButton({ title, route, Icon }: { title: string; route: string; Icon: typeof SvgIcon; }): JSX.Element {
+export function RouteButton({ title, route, Icon }: { title: string; route: string; Icon: typeof SvgIcon; }): React.JSX.Element {
 	const location = useLocation();
 
 	const renderLink = useMemo(() => forwardRef<HTMLAnchorElement, Omit<RouterLinkProps, "to">>(function link(itemProps, ref) {

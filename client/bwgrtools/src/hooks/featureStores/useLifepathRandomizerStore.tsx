@@ -4,7 +4,6 @@ import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 
 
-
 interface LifepathRandomizerState {
 	stock: BwgrStockId | "Random";
 	setting: BwgrSettingId | "Random";

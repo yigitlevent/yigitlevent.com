@@ -24,13 +24,13 @@ interface DiceRollerResultProps {
 	rerollSixes: (dice: number[], spendingFate: boolean) => void;
 }
 
-export function DiceRollerResult({ result, shade, isDoubleObstacle, isOpenEnded, obstacle, rerollFailure, rerollSixes }: DiceRollerResultProps): JSX.Element {
-	const getResultText = (testResult: TestResult) => {
+export function DiceRollerResult({ result, shade, isDoubleObstacle, isOpenEnded, obstacle, rerollFailure, rerollSixes }: DiceRollerResultProps): React.JSX.Element {
+	const getResultText = (testResult: TestResult): string => {
 		const actualObstacle = (isDoubleObstacle) ? obstacle * 2 : obstacle;
 		return (testResult.successes > actualObstacle)
-			? `Success with a margin of ${testResult.successes - actualObstacle}.`
+			? `Success with a margin of ${(testResult.successes - actualObstacle).toString()}.`
 			: (testResult.successes < actualObstacle)
-				? `Failure with a margin of ${actualObstacle - testResult.successes}.`
+				? `Failure with a margin of ${(actualObstacle - testResult.successes).toString()}.`
 				: "Tie.";
 	};
 
@@ -41,12 +41,12 @@ export function DiceRollerResult({ result, shade, isDoubleObstacle, isOpenEnded,
 					<Divider sx={{ margin: "10px 0 0 " }}>Result</Divider>
 
 					<GenericGrid columns={3}>
-						<Grid item xs={3} sm={1}>
+						<Grid size={{ xs: 3, sm: 1 }}>
 							<Typography variant="h6">Result</Typography>
 							<Typography>{getResultText(result)}</Typography>
 						</Grid>
 
-						<Grid item xs={3} sm={1}>
+						<Grid size={{ xs: 3, sm: 1 }}>
 							{<Fragment>
 								<Typography variant="h6">Dice</Typography>
 
@@ -63,15 +63,15 @@ export function DiceRollerResult({ result, shade, isDoubleObstacle, isOpenEnded,
 							</Fragment>}
 
 							{!isOpenEnded && result.dice.includes(6) && !result.usedFate
-								? <Button variant="outlined" size="medium" onClick={() => rerollSixes(result.dice, true)} sx={{ margin: "24px 0 0" }}>Reroll sixes using Fate</Button>
+								? <Button variant="outlined" size="medium" onClick={() => { rerollSixes(result.dice, true); }} sx={{ margin: "24px 0 0" }}>Reroll sixes using Fate</Button>
 								: null}
 
 							{isOpenEnded && result.failures > 0 && !result.usedFate
-								? <Button variant="outlined" size="medium" onClick={() => rerollFailure(result.dice)} sx={{ margin: "6px 0 0" }}>Reroll a single failure using Fate</Button>
+								? <Button variant="outlined" size="medium" onClick={() => { rerollFailure(result.dice); }} sx={{ margin: "6px 0 0" }}>Reroll a single failure using Fate</Button>
 								: null}
 						</Grid>
 
-						<Grid item xs={3} sm={1}>
+						<Grid size={{ xs: 3, sm: 1 }}>
 							<Typography variant="h6">Test</Typography>
 							<Typography>{result.test}</Typography>
 						</Grid>

@@ -1,6 +1,6 @@
 import { TextField } from "@mui/material";
 import { produce } from "immer";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 
 
 interface Field {
@@ -8,17 +8,14 @@ interface Field {
 	type: "Text";
 }
 
-interface Values {
-	[key: string]: string | number | boolean;
-}
+type Values = Record<string, string | number | boolean>;
 
 interface UseFormReturn {
-	components: JSX.Element[];
+	components: React.JSX.Element[];
 	values: Values;
 }
 
 export function useForm({ fields }: { fields: Field[]; }): UseFormReturn {
-	const [components, setComponents] = useState<JSX.Element[]>([]);
 	const [values, setValues] = useState<Values>({});
 
 	const changeValue = useCallback((key: string, value: string | number | boolean) => {
@@ -29,17 +26,15 @@ export function useForm({ fields }: { fields: Field[]; }): UseFormReturn {
 		return (
 			<TextField
 				label={field.label} value={values[field.label]}
-				onChange={v => changeValue(field.label, v.target.value)}
+				onChange={v => { changeValue(field.label, v.target.value); }}
 				variant="standard" fullWidth required
 			/>
 		);
 	}, [changeValue, values]);
 
-	useEffect(() => {
-		if (components.length === 0) {
-			setComponents(fields.map(createComponent));
-		}
-	}, [components.length, createComponent, fields]);
+	const components = useMemo(() => {
+		return fields.map(createComponent);
+	}, [fields, createComponent]);
 
 	return { components, values };
 }

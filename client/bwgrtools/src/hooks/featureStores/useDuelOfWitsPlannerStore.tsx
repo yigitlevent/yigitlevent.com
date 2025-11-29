@@ -21,7 +21,9 @@ export const useDuelOfWitsPlannerStore = create<DuelOfWitsPlannerState>()(
 			selectedAction: ["Avoid the Topic", "Avoid the Topic", "Avoid the Topic"],
 
 			addAction: (actions: BwgrDoWAction[], volleyIndex: number, actionName: undefined | string) => {
-				const action: BwgrDoWActionExtended = { ...actions.find(v => v.name === actionName) as BwgrDoWAction, open: false, visible: true };
+				const actionMaybe = actions.find(v => v.name === actionName);
+				if (!actionMaybe) return;
+				const action: BwgrDoWActionExtended = { ...actionMaybe, open: false, visible: true };
 				set(produce<DuelOfWitsPlannerState>((state) => {
 					const newActions = state.actions;
 					state.actions = newActions.map((v, i) => {

@@ -8,41 +8,36 @@ import { LifepathTraits } from "./LifepathTraits";
 import { useRulesetStore } from "../../../hooks/apiStores/useRulesetStore";
 
 
-export function LifepathBox({ lifepath }: { lifepath: BwgrLifepath; }): JSX.Element {
+export function LifepathBox({ lifepath }: { lifepath: BwgrLifepath; }): React.JSX.Element {
 	const { getSetting } = useRulesetStore();
 
-	const getYears = (l: BwgrLifepath) => {
+	const getYears = (l: BwgrLifepath): string => {
 		const years = typeof l.years === "number"
-			? `${l.years}${l.years > 1 ? "yrs" : "yr"}`
+			? `${l.years.toString()}${l.years > 1 ? "yrs" : "yr"}`
 			: l.years.join("-") + "yrs";
 		return years;
 	};
 
-	const getResources = (l: BwgrLifepath) => {
-		const rps = `${l.pools.resourcePoints}${l.pools.resourcePoints > 1 ? "rps" : "rp"}`;
+	const getResources = (l: BwgrLifepath): string => {
+		const rps = `${l.pools.resourcePoints.toString()}${l.pools.resourcePoints > 1 ? "rps" : "rp"}`;
 		return rps;
 	};
 
-	const getStatPools = (l: BwgrLifepath) => {
+	const getStatPools = (l: BwgrLifepath): string => {
 		const statPoolsString = [];
 
 		if (l.pools.eitherStatPool === 0 && l.pools.mentalStatPool === 0 && l.pools.physicalStatPool === 0) statPoolsString.push("—");
-		else if (l.pools.eitherStatPool !== 0) statPoolsString.push(`${(l.pools.eitherStatPool > 0) ? "+" : ""}${l.pools.eitherStatPool}M/P`);
+		else if (l.pools.eitherStatPool !== 0) statPoolsString.push(`${(l.pools.eitherStatPool > 0) ? "+" : ""}${l.pools.eitherStatPool.toString()}M/P`);
 		else {
-			if (l.pools.mentalStatPool !== 0) statPoolsString.push(`${(l.pools.mentalStatPool > 0) ? "+" : ""}${l.pools.mentalStatPool}M`);
-			if (l.pools.physicalStatPool !== 0) statPoolsString.push(`${(l.pools.physicalStatPool > 0) ? "+" : ""}${l.pools.physicalStatPool}P`);
+			if (l.pools.mentalStatPool !== 0) statPoolsString.push(`${(l.pools.mentalStatPool > 0) ? "+" : ""}${l.pools.mentalStatPool.toString()}M`);
+			if (l.pools.physicalStatPool !== 0) statPoolsString.push(`${(l.pools.physicalStatPool > 0) ? "+" : ""}${l.pools.physicalStatPool.toString()}P`);
 		}
 		return statPoolsString.join(", ");
 	};
 
-	const getLeads = (l: BwgrLifepath) => {
+	const getLeads = (l: BwgrLifepath): string => {
 		const leads = (l.leads && l.leads.length > 0)
-			? l.leads
-				.map(settingId => {
-					const s = getSetting(settingId);
-					if (s) return s.nameShort;
-					else throw new Error(`Setting of LeadId '${settingId}' cannot be found.`);
-				})
+			? l.leads.map(settingId => getSetting(settingId).nameShort)
 			: ["—"];
 
 		return leads.join(", ");
@@ -50,50 +45,50 @@ export function LifepathBox({ lifepath }: { lifepath: BwgrLifepath; }): JSX.Elem
 
 	return (
 		<Grid container rowSpacing={0} columnSpacing={0} columns={18}>
-			<Grid item lg={6} md={12} sm={18} xs={18}>
+			<Grid size={{ lg: 6, md: 12, sm: 18, xs: 18 }}>
 				<Paper elevation={3} square sx={{ padding: "2px 6px 4px" }}>
 					<Typography variant="body1">{lifepath.name}</Typography>
 				</Paper>
 			</Grid>
 
-			<Grid item lg={1} md={2} sm={6} xs={6}>
+			<Grid size={{ lg: 1, md: 2, sm: 6, xs: 6 }}>
 				<Paper elevation={3} square sx={{ padding: "2px 6px 4px" }}>
 					<Typography variant="caption">{getYears(lifepath)}</Typography>
 				</Paper>
 			</Grid>
 
-			<Grid item lg={1} md={2} sm={6} xs={6}>
+			<Grid size={{ lg: 1, md: 2, sm: 6, xs: 6 }}>
 				<Paper elevation={3} square sx={{ padding: "2px 6px 4px" }}>
 					<Typography variant="caption">{getResources(lifepath)}</Typography>
 				</Paper>
 			</Grid>
 
-			<Grid item lg={1} md={2} sm={6} xs={6}>
+			<Grid size={{ lg: 1, md: 2, sm: 6, xs: 6 }}>
 				<Paper elevation={3} square sx={{ padding: "2px 6px 4px" }}>
 					<Typography variant="caption">{getStatPools(lifepath)}</Typography>
 				</Paper>
 			</Grid>
 
-			<Grid item lg={9} md={18} sm={18} xs={18}>
+			<Grid size={{ lg: 9, md: 18, sm: 18, xs: 18 }}>
 				<Paper elevation={3} square sx={{ padding: "2px 6px 4px" }}>
 					<Typography variant="caption">{getLeads(lifepath)}</Typography>
 				</Paper>
 			</Grid>
 
-			<Grid item md={16}>
+			<Grid size={{ md: 16 }}>
 				<Typography variant="caption">
 					<LifepathSkills lifepath={lifepath} />
 				</Typography>
 			</Grid>
 
-			<Grid item md={16}>
+			<Grid size={{ md: 16 }}>
 				<Typography variant="caption">
 					<LifepathTraits lifepath={lifepath} />
 				</Typography>
 			</Grid>
 
 			{lifepath.requirements
-				? <Grid item md={16}>
+				? <Grid size={{ md: 16 }}>
 					<Typography variant="caption">
 						<LifepathRequirements lifepath={lifepath} />
 					</Typography>

@@ -14,7 +14,7 @@ import { useCharacterBurnerTraitStore } from "./useCharacterBurnerTrait";
 import { useRulesetStore } from "../../apiStores/useRulesetStore";
 
 
-export type CharacterBurnerAttributeState = {
+export interface CharacterBurnerAttributeState {
 	attributes: UniqueArray<BwgrAbilityId, BwgrCharacterAttribute>;
 
 	reset: () => void;
@@ -48,7 +48,7 @@ export type CharacterBurnerAttributeState = {
 	 * @remarks TODO: Preserve shades.
 	**/
 	updateAttributes: () => void;
-};
+}
 
 export const useCharacterBurnerAttributeStore = create<CharacterBurnerAttributeState>()(
 	devtools(
@@ -231,7 +231,7 @@ export const useCharacterBurnerAttributeStore = create<CharacterBurnerAttributeS
 				if (lifepathsToCheck.some(v => hasLifepathByName(v))) bonus += 1;
 				if (lifepathsToCheck2.some(v => hasLifepathByName(v))) bonus += 1;
 				if (lifepathsToCheck3.some(v => hasLifepathByName(v))) bonus += 1;
-				bonus += knowsLament ? 0 : 1;
+				bonus += knowsLament.length > 0 ? 0 : 1;
 
 				if (hasQuestionTrueByName("TRAGEDY")) bonus += 1;
 				if (hasQuestionTrueByName("OUTSIDER")) bonus += 1;
@@ -244,7 +244,7 @@ export const useCharacterBurnerAttributeStore = create<CharacterBurnerAttributeS
 
 				if (isSpite) {
 					const traitsToCheck = ["Slayer", "Exile", "Feral", "Murderous", "Saturnine", "Femme Fatale/Homme Fatal", "Cold", "Bitter"];
-					if (traitsToCheck.some(v => traits.filter(t => t.name === v && t.isOpen))) bonus += 1;
+					if (traitsToCheck.some(v => traits.filter(t => t.name === v && t.isOpen).length > 0)) bonus += 1;
 					const bitterReminders = Object.values(resources).filter(v => v.name === "Bitter Reminder");
 					bonus += bitterReminders.length > 0 ? Math.floor(bitterReminders.map(v => v.cost).reduce((a, b) => a + b) / 10) : 0;
 
@@ -292,15 +292,15 @@ export const useCharacterBurnerAttributeStore = create<CharacterBurnerAttributeS
 				const perception = getStat("Perception");
 				const will = getStat("Will");
 
-				let bonus = special.stock.brutalLifeTraits.filter(v => v !== undefined && v !== null).length;
+				let bonus = special.stock.brutalLifeTraits.filter(v => v !== undefined).length;
 				if (hasQuestionTrueByName("WOUND")) bonus += 1;
 				if (hasQuestionTrueByName("TORTURE")) bonus += 1;
 				if (hasQuestionTrueByName("SLAVE")) bonus += 1;
 				if (hasQuestionTrueByName("FRATRICIDE")) bonus += 1;
 				if (hasQuestionTrueByName("HOBGOBLIN")) bonus += 1;
-				if (will.exponent <= 2) bonus + 1;
-				if (steel.exponent >= 5) bonus + 1;
-				if (perception.exponent >= 6) bonus + 1;
+				if (will.exponent <= 2) bonus += 1;
+				if (steel.exponent >= 5) bonus += 1;
+				if (perception.exponent >= 6) bonus += 1;
 
 				return { shade: "B", exponent: bonus };
 			},
@@ -384,39 +384,39 @@ export const useCharacterBurnerAttributeStore = create<CharacterBurnerAttributeS
 
 				const getAttributePoints = (attributeName: string): BwgrAbilityPoints => {
 					switch (attributeName) {
-						case "Mortal Wound":
-							return state.getMortalWound();
-						case "Reflexes":
-							return state.getReflexes();
-						case "Health":
-							return state.getHealth();
-						case "Steel":
-							return state.getSteel();
-						case "Hesitation":
-							return state.getHesitation();
-						case "Greed":
-							return state.getGreed();
-						case "Grief":
-						case "Spite":
-							return state.getGriefOrSpite(attribute[1] === "Spite");
-						case "Faith":
-							return state.getFaith();
-						case "Faith in Dead Gods":
-							return state.getFaithInDeadGods();
-						case "Hatred":
-							return state.getHatred();
-						case "Void Embrace":
-							return state.getVoidEmbrace();
-						case "Ancestral Taint":
-							return state.getAncestralTaint();
-						case "Corruption":
-							return state.getCorruption();
-						case "Resources":
-							return state.getResources();
-						case "Circles":
-							return state.getCircles();
-						default:
-							throw `Unhandled Attribute: ${attributeName}`;
+					case "Mortal Wound":
+						return state.getMortalWound();
+					case "Reflexes":
+						return state.getReflexes();
+					case "Health":
+						return state.getHealth();
+					case "Steel":
+						return state.getSteel();
+					case "Hesitation":
+						return state.getHesitation();
+					case "Greed":
+						return state.getGreed();
+					case "Grief":
+					case "Spite":
+						return state.getGriefOrSpite(attribute[1] === "Spite");
+					case "Faith":
+						return state.getFaith();
+					case "Faith in Dead Gods":
+						return state.getFaithInDeadGods();
+					case "Hatred":
+						return state.getHatred();
+					case "Void Embrace":
+						return state.getVoidEmbrace();
+					case "Ancestral Taint":
+						return state.getAncestralTaint();
+					case "Corruption":
+						return state.getCorruption();
+					case "Resources":
+						return state.getResources();
+					case "Circles":
+						return state.getCircles();
+					default:
+						throw new Error(`Unhandled Attribute: ${attributeName}`);
 					}
 				};
 
@@ -442,7 +442,7 @@ export const useCharacterBurnerAttributeStore = create<CharacterBurnerAttributeS
 				const { hasTraitOpen } = useCharacterBurnerTraitStore.getState();
 				const { getAttribute } = get();
 
-				const characterAttributes: UniqueArray<BwgrAbilityId, BwgrCharacterAttribute> = new UniqueArray(
+				const characterAttributes = new UniqueArray<BwgrAbilityId, BwgrCharacterAttribute>(
 					abilities
 						.filter(ability => ability.abilityType[1].endsWith("Attribute"))
 						.map(ability => {

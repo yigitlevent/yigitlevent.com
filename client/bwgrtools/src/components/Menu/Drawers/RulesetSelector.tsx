@@ -10,14 +10,14 @@ import { useRulesetStore } from "../../../hooks/apiStores/useRulesetStore";
 import { DrawerBox } from "../../Shared/DrawerBox";
 
 
-export function RulesetSelector({ expanded }: { expanded: boolean; }): JSX.Element {
+export function RulesetSelector({ expanded }: { expanded: boolean; }): React.JSX.Element {
 	const { rulesets, checkRulesets, checkExactRulesets, toggleDataset } = useRulesetStore();
 
 	return (
 		<DrawerBox title={"Datasets"} expanded={expanded}>
 			{rulesets.filter(ruleset => !ruleset.isExpansion).map((ruleset, i) => (
 				<List key={i} disablePadding>
-					<ListItemButton onClick={() => toggleDataset(ruleset.id)}>
+					<ListItemButton onClick={() => { toggleDataset(ruleset.id); }}>
 						<ListItemIcon sx={{ margin: 0 }}>
 							{checkRulesets([ruleset.id]) ? <CheckIcon color="success" /> : <CloseIcon color="error" />}
 						</ListItemIcon>
@@ -36,7 +36,7 @@ export function RulesetSelector({ expanded }: { expanded: boolean; }): JSX.Eleme
 
 								return (
 									expansion
-										? <ListItemButton key={ii} onClick={() => toggleDataset(expansion.id)} disabled={!checkRulesets([ruleset.id])}>
+										? <ListItemButton key={ii} onClick={() => { toggleDataset(expansion.id); }} disabled={!checkRulesets([ruleset.id])}>
 											<ListItemIcon sx={{ margin: 0 }}>
 												{checkExactRulesets([ruleset.id, expansion.id]) ? <CheckIcon color="success" /> : <CloseIcon color="error" />}
 											</ListItemIcon>

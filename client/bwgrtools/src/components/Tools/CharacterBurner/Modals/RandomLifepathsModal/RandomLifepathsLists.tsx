@@ -7,7 +7,7 @@ import { useRulesetStore } from "../../../../../hooks/apiStores/useRulesetStore"
 import { PopoverLink } from "../../../../Shared/PopoverLink";
 
 
-export function RandomLifepathsLists({ chosenLifepaths }: { chosenLifepaths: BwgrLifepath[]; }): JSX.Element {
+export function RandomLifepathsLists({ chosenLifepaths }: { chosenLifepaths: BwgrLifepath[]; }): React.JSX.Element {
 	const { getSkill, getTrait } = useRulesetStore();
 
 	const mandatorySkills = new UniqueArray(chosenLifepaths.map(lp => lp.skills ? [getSkill(lp.skills[0])] : []).flat());
@@ -18,7 +18,7 @@ export function RandomLifepathsLists({ chosenLifepaths }: { chosenLifepaths: Bwg
 
 	return (
 		<Grid container columns={1} spacing={1}>
-			<Grid item xs={1}>
+			<Grid size={{ xs: 1 }}>
 				Mandatory Skills:
 				{mandatorySkills.length > 0
 					? mandatorySkills.map((skill, i) => (
@@ -30,7 +30,7 @@ export function RandomLifepathsLists({ chosenLifepaths }: { chosenLifepaths: Bwg
 					: <Box sx={{ padding: "0 4px", display: "inline-block" }}>—</Box>}
 			</Grid>
 
-			<Grid item xs={1}>
+			<Grid size={{ xs: 1 }}>
 				Skills:
 				{lifepathSkills.length > 0
 					? lifepathSkills.map((skill, i) => (
@@ -42,7 +42,7 @@ export function RandomLifepathsLists({ chosenLifepaths }: { chosenLifepaths: Bwg
 					: <Box sx={{ padding: "0 4px", display: "inline-block" }}>—</Box>}
 			</Grid>
 
-			<Grid item xs={1}>
+			<Grid size={{ xs: 1 }}>
 				Mandatory Traits:
 				{mandatoryTraits.length > 0
 					? mandatoryTraits.map((trait, i) => (
@@ -54,7 +54,7 @@ export function RandomLifepathsLists({ chosenLifepaths }: { chosenLifepaths: Bwg
 					: <Box sx={{ padding: "0 4px", display: "inline-block" }}>—</Box>}
 			</Grid>
 
-			<Grid item xs={1}>
+			<Grid size={{ xs: 1 }}>
 				Traits:
 				{lifepathTraits.length > 0
 					? lifepathTraits.map((trait, i) => (

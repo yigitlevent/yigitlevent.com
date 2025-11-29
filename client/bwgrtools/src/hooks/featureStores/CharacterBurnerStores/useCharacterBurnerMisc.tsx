@@ -1,3 +1,5 @@
+import { Average } from "@utility/Average";
+import { Clamp } from "@utility/Clamp";
 import { produce } from "immer";
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
@@ -7,11 +9,9 @@ import { useCharacterBurnerBasicsStore } from "./useCharacterBurnerBasics";
 import { useCharacterBurnerStatStore } from "./useCharacterBurnerStat";
 import { useCharacterBurnerTraitStore } from "./useCharacterBurnerTrait";
 import { useRulesetStore } from "../../apiStores/useRulesetStore";
-import { Clamp } from "@utility/Clamp";
-import { Average } from "@utility/Average";
 
 
-export type CharacterBurnerMiscState = {
+export interface CharacterBurnerMiscState {
 	special: BwgrCharacterSpecial;
 	questions: BwgrCharacterQuestion[];
 	limits: BwgrCharacterStockLimits;
@@ -35,7 +35,7 @@ export type CharacterBurnerMiscState = {
 
 	getTolerances: () => string[];
 	refreshTraitEffects: () => void;
-};
+}
 
 export const useCharacterBurnerMiscStore = create<CharacterBurnerMiscState>()(
 	devtools(
@@ -118,7 +118,7 @@ export const useCharacterBurnerMiscStore = create<CharacterBurnerMiscState>()(
 
 			modifyCompanionLifepath: (companionName: string, companionLifepathId: BwgrLifepathId): void => {
 				set(produce<CharacterBurnerMiscState>((state) => {
-					state.special.companionLifepath[companionName] === companionLifepathId;
+					state.special.companionLifepath[companionName] = companionLifepathId;
 				}));
 			},
 
@@ -154,10 +154,11 @@ export const useCharacterBurnerMiscStore = create<CharacterBurnerMiscState>()(
 			},
 
 			resetSkillSubskills: (skillIds: BwgrSkillId[]): void => {
-				skillIds.forEach(skillId =>
+				skillIds.forEach(skillId => {
 					set(produce<CharacterBurnerMiscState>((state) => {
 						state.special.chosenSubskills[skillId] = [];
-					}))
+					}));
+				}
 				);
 			},
 
@@ -249,7 +250,7 @@ export const useCharacterBurnerMiscStore = create<CharacterBurnerMiscState>()(
 				const power = getStat("Power");
 				const forte = getStat("Forte");
 
-				const ptgs: string[] = Array(16).fill("—");
+				const ptgs = Array(16).fill("—") as string[];
 
 				const maxDistance = Math.ceil(forte.exponent / 2);
 

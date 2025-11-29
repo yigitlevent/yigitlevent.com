@@ -3,8 +3,8 @@ import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 
 import { useCharacterBurnerMiscStore } from "./useCharacterBurnerMisc";
-import { FilterLifepaths } from "../../../utils/FilterLifepaths";
 import { Pairwise } from "../../../../../../utility/src/Pairwise";
+import { FilterLifepaths } from "../../../utils/FilterLifepaths";
 import { useRulesetStore } from "../../apiStores/useRulesetStore";
 import { useCharacterBurnerAttributeStore } from "../CharacterBurnerStores/useCharacterBurnerAttribute";
 import { useCharacterBurnerBasicsStore } from "../CharacterBurnerStores/useCharacterBurnerBasics";
@@ -13,7 +13,7 @@ import { useCharacterBurnerStatStore } from "../CharacterBurnerStores/useCharact
 import { useCharacterBurnerTraitStore } from "../CharacterBurnerStores/useCharacterBurnerTrait";
 
 
-export type CharacterBurnerLifepathState = {
+export interface CharacterBurnerLifepathState {
 	availableLifepaths: BwgrLifepath[];
 	lifepaths: BwgrLifepath[];
 
@@ -35,7 +35,7 @@ export type CharacterBurnerLifepathState = {
 	getEitherPool: (lifepaths?: BwgrLifepath[]) => BwgrPoints;
 
 	updateAvailableLifepaths: () => BwgrLifepath[];
-};
+}
 
 export const useCharacterBurnerLifepathStore = create<CharacterBurnerLifepathState>()(
 	devtools(
@@ -96,18 +96,18 @@ export const useCharacterBurnerLifepathStore = create<CharacterBurnerLifepathSta
 
 			getAge: (lifepaths?: BwgrLifepath[]): number => {
 				const state = get();
-				const lps = (lifepaths || state.lifepaths);
+				const lps = (lifepaths ?? state.lifepaths);
 
 				if (lps.length === 0) return 0;
 
 				// TODO: Special lifepaths should matter here
-				const yrs = lps.map(v => v.years).filter(v => typeof v === "number") as number[];
+				const yrs = lps.map(v => v.years).filter(v => typeof v === "number");
 				const sum = yrs.reduce((prev, curr) => prev + curr);
 				return sum + get().getLeadCount();
 			},
 
 			getMentalPool: (lifepaths?: BwgrLifepath[]): BwgrPoints => {
-				const lps = lifepaths || get().lifepaths;
+				const lps = lifepaths ?? get().lifepaths;
 				const { getAgePool } = useCharacterBurnerBasicsStore.getState();
 				const { stats } = useCharacterBurnerStatStore.getState();
 
@@ -125,7 +125,7 @@ export const useCharacterBurnerLifepathStore = create<CharacterBurnerLifepathSta
 			},
 
 			getPhysicalPool: (lifepaths?: BwgrLifepath[]): BwgrPoints => {
-				const lps = lifepaths || get().lifepaths;
+				const lps = lifepaths ?? get().lifepaths;
 				const { getAgePool } = useCharacterBurnerBasicsStore.getState();
 				const { stats } = useCharacterBurnerStatStore.getState();
 
@@ -143,7 +143,7 @@ export const useCharacterBurnerLifepathStore = create<CharacterBurnerLifepathSta
 			},
 
 			getEitherPool: (lifepaths?: BwgrLifepath[]): BwgrPoints => {
-				const lps = lifepaths || get().lifepaths;
+				const lps = lifepaths ?? get().lifepaths;
 				const { stats } = useCharacterBurnerStatStore.getState();
 
 				const total = lps.length > 0 ? lps.map(lp => lp.pools.eitherStatPool).reduce((pv, cv) => pv + cv) : 0;

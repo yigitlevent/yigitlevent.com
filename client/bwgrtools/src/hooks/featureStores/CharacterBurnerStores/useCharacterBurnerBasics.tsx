@@ -11,7 +11,7 @@ import { useCharacterBurnerTraitStore } from "./useCharacterBurnerTrait";
 import { useRulesetStore } from "../../apiStores/useRulesetStore";
 
 
-export type CharacterBurnerBasicsState = {
+export interface CharacterBurnerBasicsState {
 	name: string;
 	concept: string;
 	gender: "Male" | "Female";
@@ -30,7 +30,7 @@ export type CharacterBurnerBasicsState = {
 	setInstinct: (index: number, instinct: string) => void;
 
 	getAgePool: () => { minAge: number; mentalPool: number; physicalPool: number; };
-};
+}
 
 export const useCharacterBurnerBasicsStore = create<CharacterBurnerBasicsState>()(
 	devtools(
@@ -114,7 +114,8 @@ export const useCharacterBurnerBasicsStore = create<CharacterBurnerBasicsState>(
 
 				const age = getAge();
 				if (age === 0) return { minAge: 0, mentalPool: 0, physicalPool: 0 };
-				const agePool = getStock(stock[0]).agePool;
+				const stockMaybe = getStock(stock[0]);
+				const agePool = stockMaybe.agePool;
 				return agePool.filter(a => age > a.minAge).reduce((pv, cv) => pv.minAge < cv.minAge ? pv : cv);
 			}
 		}),

@@ -3,7 +3,7 @@ import { SxProps, Theme } from "@mui/material/styles";
 
 
 interface GenericGridProps {
-	children: JSX.Element | JSX.Element[] | null | (null | JSX.Element)[];
+	children: React.JSX.Element | null | (null | React.JSX.Element)[];
 	columns?: number;
 	center?: boolean | "h" | "v" | "c" | "l";
 	spacing?: [row: 0 | 1 | 2 | 3, column: 0 | 1 | 2 | 3];
@@ -12,15 +12,15 @@ interface GenericGridProps {
 	extraBottomMargin?: boolean;
 }
 
-export function GenericGrid({ children, columns, center, spacing, sx, hasBackground, extraBottomMargin }: GenericGridProps): JSX.Element {
-	let centered: { [key: string]: string; } = {};
+export function GenericGrid({ children, columns, center, spacing, hasBackground, extraBottomMargin }: GenericGridProps): React.JSX.Element {
+	let centered: Record<string, string> = {};
 	if (center === true) centered = { justifyContent: "space-between", alignItems: "center" };
 	else if (center === "h") centered = { justifyContent: "space-between" };
 	else if (center === "v") centered = { alignItems: "center" };
 	else if (center === "c") centered = { justifyContent: "center", alignItems: "center", flexflow: "row" };
 	else if (center === "l") centered = { justifyContent: "start", alignItems: "center", flexflow: "row" };
 
-	const bg: { [key: string]: string | number; } = {};
+	const bg: Record<string, string | number> = {};
 	if (hasBackground) {
 		bg.background = "#353535";
 		if (typeof hasBackground === "number") bg.borderRadius = hasBackground;
@@ -36,8 +36,7 @@ export function GenericGrid({ children, columns, center, spacing, sx, hasBackgro
 				marginTop: 1,
 				marginBottom: extraBottomMargin ? 4 : 0,
 				paddingBottom: hasBackground ? 1 : undefined,
-				...bg,
-				...sx
+				...bg
 			}}
 			{...centered}
 		>

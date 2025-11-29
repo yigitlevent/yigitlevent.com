@@ -8,23 +8,23 @@ import { useCharacterBurnerMiscStore } from "../../../../hooks/featureStores/Cha
 import { GenericGrid } from "../../../Shared/Grids";
 
 
-export function Instincts(): JSX.Element {
+export function Instincts(): React.JSX.Element {
 	const { limits } = useCharacterBurnerMiscStore();
 	const { instincts, setInstinct } = useCharacterBurnerBasicsStore();
 
 	return (
 		<GenericGrid columns={6} center extraBottomMargin>
-			<Grid item xs={4}>
+			<Grid size={{ xs: 4 }}>
 				<Typography variant="h4">Instincts</Typography>
 			</Grid>
 
 			<Fragment>
 				{instincts.slice(0, limits.instincts).map((v, i) => (
-					<Grid key={i} item xs={6}>
+					<Grid key={i} size={{ xs: 6 }}>
 						<TextField
-							label={i !== 3 ? `Instinct ${i + 1}` : instincts[3].name}
+							label={i !== 3 ? `Instinct ${(i + 1).toString()}` : instincts[3].name}
 							value={v.instinct}
-							onChange={(e) => setInstinct(i, e.target.value)}
+							onChange={(e) => { setInstinct(i, e.target.value); }}
 							fullWidth
 							variant="standard"
 						/>

@@ -23,22 +23,23 @@ import { GenericGrid } from "../../../Shared/Grids";
 
 interface SelectedCost {
 	baseCost: number;
-	modifiers: {
-		[key: string]: {
-			cost: number | `${number}/per`;
-			selected: boolean;
-		};
-	};
+	modifiers: Record<string, {
+		cost: number | `${string}/per`;
+		selected: boolean;
+	}>;
 }
 
-export function ResourceSelectionModal({ isOpen, close }: { isOpen: boolean; close: () => void; }): JSX.Element {
+export function ResourceSelectionModal({ isOpen, close }: { isOpen: boolean; close: () => void; }): React.JSX.Element {
 	const { stock } = useCharacterBurnerBasicsStore();
 	const ruleset = useRulesetStore();
 	const { getResourcePools, addResource } = useCharacterBurnerResourceStore();
 
 	const resourcePool = getResourcePools();
 
-	const [resource, setResource] = useState<BwgrResource>(ruleset.resources.filter(x => x.stock[0] === stock[0])[0] as BwgrResource);
+	const rulesetResource = ruleset.resources.find(x => x.stock[0] === stock[0]);
+	if (!rulesetResource) throw new Error("No resources found for the selected stock.");
+
+	const [resource, setResource] = useState<BwgrResource>(rulesetResource);
 	const [resourceDesc, setResourceDesc] = useState("");
 	const [costs, setCosts] = useState<SelectedCost>();
 	const [numberOfWeapons, setNumberOfWeapons] = useState(1);
@@ -53,12 +54,9 @@ export function ResourceSelectionModal({ isOpen, close }: { isOpen: boolean; clo
 		if (resource.variableCost) newCosts.baseCost = 0;
 		else newCosts.baseCost = resource.costs[0][0];
 
-		if (resource.modifiers) {
-			for (const key in resource.modifiers) {
-				const modifiers = resource.modifiers[key];
-				newCosts.modifiers[resource.modifiers[key][2]] = { cost: modifiers[1] ? `${modifiers[0]}/per` : modifiers[0], selected: false };
-			}
-		}
+		resource.modifiers.forEach((modifiers) => {
+			newCosts.modifiers[modifiers[2]] = { cost: modifiers[1] ? `${modifiers[0].toString()}/per` : modifiers[0], selected: false };
+		});
 
 		setCosts({ ...newCosts });
 	}, [resource]);
@@ -85,17 +83,17 @@ export function ResourceSelectionModal({ isOpen, close }: { isOpen: boolean; clo
 	}, [costs]);
 
 	const getModifiers = useCallback((costs: SelectedCost) => {
-		const modifiers: [string, number | `${number}/per`][] = Object.keys(costs.modifiers).filter(v => costs.modifiers[v].selected).map(v => [v, costs.modifiers[v].cost]);
+		const modifiers: [string, number | `${string}/per`][] = Object.keys(costs.modifiers).filter(v => costs.modifiers[v].selected).map(v => [v, costs.modifiers[v].cost]);
 		return modifiers;
 	}, []);
 
-	const getTotalCost = useCallback((modifiers: [string, number | `${number}/per`][]) => {
+	const getTotalCost = useCallback((modifiers: [string, number | `${string}/per`][]) => {
 		if (costs) {
 			let totalCost = costs.baseCost;
 			const modifierCosts = modifiers.map(v => v[1]);
 			if (modifierCosts.length > 0) {
-				for (const key in modifiers) {
-					const modCost = modifiers[key][1];
+				for (const modifier of modifiers) {
+					const modCost = modifier[1];
 					if (typeof modCost === "number") totalCost += modCost;
 					else if (typeof modCost === "string") totalCost += numberOfWeapons * parseInt(modCost.split("/")[0]);
 				}
@@ -128,10 +126,10 @@ export function ResourceSelectionModal({ isOpen, close }: { isOpen: boolean; clo
 	}, [resource, resetCosts, numberOfWeapons]);
 
 	return (
-		<Modal open={isOpen} onClose={() => close()}>
+		<Modal open={isOpen} onClose={() => { close(); }}>
 			<Paper sx={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", maxWidth: "800px", width: "100%", maxHeight: "100svh", padding: "0 24px 24px", border: "none", overflow: "auto" }}>
 				<GenericGrid columns={6} spacing={[1, 2]} center="v">
-					<Grid item xs={6}>
+					<Grid size={{ xs: 6 }}>
 						<FormControl fullWidth variant="standard">
 							<Autocomplete
 								value={resource}
@@ -139,30 +137,30 @@ export function ResourceSelectionModal({ isOpen, close }: { isOpen: boolean; clo
 								getOptionLabel={(option) => option.name}
 								groupBy={(option) => option.type[1]}
 								renderInput={(params) => <TextField {...params} label="Chosen Resource" />}
-								onChange={(_, v) => modifyResource(v)}
+								onChange={(_, v) => { modifyResource(v); }}
 								fullWidth
 								disableClearable
 							/>
 						</FormControl>
 					</Grid>
 
-					<Grid item xs={6}>
+					<Grid size={{ xs: 6 }}>
 						<Divider>Type: {resource.type}</Divider>
 					</Grid>
 
 					{resource.costs.length === 1
-						? <Grid item xs={6} sm={2}>
+						? <Grid size={{ xs: 6, sm: 2 }}>
 							<Typography variant="body2">Cost: {resource.costs[0][1]}</Typography>
 						</Grid>
 						: null}
 
-					{resource.magical && resource.magical.obstacleDetails
+					{resource.magical?.obstacleDetails
 						? <Fragment>
-							<Grid item xs={6} sm={2}>
+							<Grid size={{ xs: 6, sm: 2 }}>
 								<Typography variant="body2">Obstacle: {GetObstacleString(resource, resource.magical.obstacleDetails)}</Typography>
 							</Grid>
 
-							<Grid item xs={6} sm={2}>
+							<Grid size={{ xs: 6, sm: 2 }}>
 								<Typography variant="body2">Actions: {resource.magical.actions}</Typography>
 							</Grid>
 						</Fragment>
@@ -170,30 +168,30 @@ export function ResourceSelectionModal({ isOpen, close }: { isOpen: boolean; clo
 
 					{resource.magical
 						? <Fragment>
-							<Grid item xs={6} sm={2}>
+							<Grid size={{ xs: 6, sm: 2 }}>
 								<Typography variant="body2">Origin: {resource.magical.origin}</Typography>
 							</Grid>
 
-							<Grid item xs={6} sm={2}>
+							<Grid size={{ xs: 6, sm: 2 }}>
 								<Typography variant="body2">Element: {resource.magical.elements.join("/")}</Typography>
 							</Grid>
 
-							<Grid item xs={6} sm={2}>
+							<Grid size={{ xs: 6, sm: 2 }}>
 								<Typography variant="body2">Duration: {resource.magical.duration}</Typography>
 							</Grid>
 
-							<Grid item xs={6} sm={4}>
+							<Grid size={{ xs: 6, sm: 4 }}>
 								<Typography variant="body2">Area of Effect: {resource.magical.areaOfEffect}</Typography>
 							</Grid>
 
-							<Grid item xs={6} sm={2}>
+							<Grid size={{ xs: 6, sm: 2 }}>
 								<Typography variant="body2">Impetus: {resource.magical.impetus.join("/")}</Typography>
 							</Grid>
 						</Fragment>
 						: null}
 
 					{resource.description
-						? <Grid item xs={6}>
+						? <Grid size={{ xs: 6 }}>
 							{resource.description.split("<br>").map((v, i) => {
 								if (resource.magical && i === 0) return <Typography key={i} variant="subtitle2">{v}</Typography>;
 								return <Typography key={i} variant="body2">{v}</Typography>;
@@ -202,19 +200,20 @@ export function ResourceSelectionModal({ isOpen, close }: { isOpen: boolean; clo
 						: null}
 
 					{costs && resource.costs.length > 1
-						? <Grid item xs={6}>
+						? <Grid size={{ xs: 6 }}>
 							<Typography variant="h6">Cost</Typography>
 
-							<RadioGroup value={costs.baseCost} onChange={(_, v) => changeCost(parseInt(v))}>
-								{resource.costs.map((v, i) =>
-									<FormControlLabel key={i} label={`${v[1]} (${v[0]}rps)`} value={v[0]} control={<Radio />} />
-								)}
+							<RadioGroup value={costs.baseCost} onChange={(_, v) => { changeCost(parseInt(v)); }}>
+								{resource.costs.map((v, i) => {
+									if (!v[1]) return null;
+									return <FormControlLabel key={i} label={`${v[1]} (${v[0].toString()}rps)`} value={v[0]} control={<Radio />} />;
+								})}
 							</RadioGroup>
 						</Grid>
 						: null}
 
 					{costs && resource.variableCost
-						? <Grid item xs={6}>
+						? <Grid size={{ xs: 6 }}>
 							<Typography sx={{ display: "inline", margin: "0 8px 0 0" }}>Cost</Typography>
 
 							<AbilityButton
@@ -226,19 +225,19 @@ export function ResourceSelectionModal({ isOpen, close }: { isOpen: boolean; clo
 						</Grid>
 						: null}
 
-					{costs && resource.modifiers
+					{costs
 						? <Fragment>
-							<Grid item xs={6}>
+							<Grid size={{ xs: 6 }}>
 								<Typography variant="h6">Modifiers</Typography>
 							</Grid>
 
 							{resource.modifiers.map((v, i) =>
 								(v[2] in costs.modifiers)
-									? <Grid item key={i} xs={2}>
+									? <Grid key={i} size={{ xs: 2 }}>
 										<FormControlLabel
-											label={`${v[2]} (${v[0]}rps)`}
+											label={`${v[2]} (${v[0].toString()}rps)`}
 											checked={costs.modifiers[v[2]].selected}
-											onChange={() => changeModifier(v[2])}
+											onChange={() => { changeModifier(v[2]); }}
 											control={<Checkbox />}
 										/>
 									</Grid>
@@ -247,8 +246,8 @@ export function ResourceSelectionModal({ isOpen, close }: { isOpen: boolean; clo
 						</Fragment>
 						: null}
 
-					{costs && resource.modifiers && resource.modifiers.some(v => typeof v[1] === "string")
-						? <Grid item xs={6}>
+					{costs && resource.modifiers.some(v => typeof v[1] === "string")
+						? <Grid size={{ xs: 6 }}>
 							<Typography variant="h6">Number of Weapons</Typography>
 
 							<AbilityButton
@@ -260,18 +259,18 @@ export function ResourceSelectionModal({ isOpen, close }: { isOpen: boolean; clo
 						</Grid>
 						: null}
 
-					<Grid item xs={6}>
-						<TextField label="Add description (optional)" variant="standard" value={resourceDesc} onChange={e => setResourceDesc(e.target.value)} fullWidth />
+					<Grid size={{ xs: 6 }}>
+						<TextField label="Add description (optional)" variant="standard" value={resourceDesc} onChange={e => { setResourceDesc(e.target.value); }} fullWidth />
 					</Grid>
 
 					{costs
-						? <Grid item>
+						? <Grid>
 							<Typography sx={{ marginTop: 2, marginBottom: 2 }}>Total Cost: {getTotalCost(getModifiers(costs))}</Typography>
 						</Grid>
 						: null}
 
-					<Grid item>
-						<Button variant="outlined" size="medium" onClick={() => createResource()}>Add Resource</Button>
+					<Grid>
+						<Button variant="outlined" size="medium" onClick={() => { createResource(); }}>Add Resource</Button>
 					</Grid>
 				</GenericGrid>
 			</Paper>

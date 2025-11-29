@@ -49,7 +49,7 @@ export const useUserStore = create<UserState>()(
 							state.setUser(undefined);
 							//console.error(reason);
 						})
-						.finally(() => state.toggleFetching());
+						.finally(() => { state.toggleFetching(); });
 				}
 			},
 
@@ -66,10 +66,8 @@ export const useUserStore = create<UserState>()(
 						}
 						else throw new Error();
 					})
-					.catch(reason => {
-						console.error(reason);
-					})
-					.finally(() => state.toggleFetching());
+					.catch((reason: unknown) => { console.error(reason); })
+					.finally(() => { state.toggleFetching(); });
 			},
 
 			signin: (formData: UserSigninRequest, handleClose: (open: boolean) => void) => {
@@ -85,10 +83,8 @@ export const useUserStore = create<UserState>()(
 						}
 						else throw new Error();
 					})
-					.catch(reason => {
-						console.error(reason);
-					})
-					.finally(() => state.toggleFetching());
+					.catch((reason: unknown) => { console.error(reason); })
+					.finally(() => { state.toggleFetching(); });
 			},
 
 			signout: () => {
@@ -101,10 +97,8 @@ export const useUserStore = create<UserState>()(
 						if (response.status === 200) state.setUser(undefined);
 						else throw new Error();
 					})
-					.catch(reason => {
-						console.error(reason);
-					})
-					.finally(() => state.toggleFetching());
+					.catch((reason: unknown) => { console.error(reason); })
+					.finally(() => { state.toggleFetching(); });
 			}
 		}),
 		{ name: "useUserStore" }

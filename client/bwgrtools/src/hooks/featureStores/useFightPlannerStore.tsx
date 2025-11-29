@@ -21,7 +21,9 @@ export const useFightPlannerStore = create<FightPlannerState>()(
 			selectedAction: ["No Action", "No Action", "No Action"],
 
 			addAction: (actions: BwgrFightAction[], volleyIndex: number, actionName: undefined | string) => {
-				const action: BwgrFightActionExtended = { ...actions.find(v => v.name === actionName) as BwgrFightAction, open: false, visible: true };
+				const actionMaybe = actions.find(v => v.name === actionName);
+				if (!actionMaybe) return;
+				const action: BwgrFightActionExtended = { ...actionMaybe, open: false, visible: true };
 				set(produce<FightPlannerState>((state) => {
 					const newActions = state.actions;
 					state.actions = newActions.map((v, i) => {

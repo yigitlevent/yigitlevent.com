@@ -5,8 +5,8 @@ import { devtools } from "zustand/middleware";
 import { useCharacterBurnerLifepathStore } from "./useCharacterBurnerLifepath";
 
 
-export type CharacterBurnerResourceState = {
-	resources: { [key: Guid]: BwgrCharacterResource; };
+export interface CharacterBurnerResourceState {
+	resources: Record<Guid, BwgrCharacterResource>;
 
 	reset: () => void;
 
@@ -15,7 +15,7 @@ export type CharacterBurnerResourceState = {
 	addResource: (resource: BwgrCharacterResource) => void;
 	removeResource: (guid: Guid) => void;
 	editResourceDescription: (guid: Guid, description: string) => void;
-};
+}
 
 export const useCharacterBurnerResourceStore = create<CharacterBurnerResourceState>()(
 	devtools(
@@ -32,7 +32,7 @@ export const useCharacterBurnerResourceStore = create<CharacterBurnerResourceSta
 				const spending = Object.values(get().resources).map(v => v.cost).reduce((p, v) => p += v, 0);
 
 				const state = useCharacterBurnerLifepathStore.getState();
-				const lps = lifepaths || state.lifepaths;
+				const lps = lifepaths ?? state.lifepaths;
 				// TODO: Special lifepaths should matter here
 				const totalRps = lps.map(v => v.pools.resourcePoints).reduce((pv, cv) => pv + cv, 0);
 

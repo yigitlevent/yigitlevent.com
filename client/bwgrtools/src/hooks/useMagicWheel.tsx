@@ -64,7 +64,7 @@ export function useMagicWheel<T extends OneOfWheelObjects, P extends OneOfWheelO
 	const [areaOfEffectId, setAreaOfEffectId] = useState(0 as BwgrAreaOfEffectFacetId);
 
 	const setFacet = useCallback((facet: P, value?: number) => {
-		const horrible = spellFacets[facet as keyof T] as (unknown & { id: P; })[];
+		const horrible = spellFacets[facet as keyof T] as (T & { id: P; })[];
 		const facetIndex = horrible.findIndex(v => (v.id as unknown as number) === value);
 		const hasValue = value !== undefined;
 
@@ -72,25 +72,25 @@ export function useMagicWheel<T extends OneOfWheelObjects, P extends OneOfWheelO
 			setBands((prevBands) => ({ ...prevBands, [facet]: { ...prevBands[facet], targetAmount: -facetIndex } }));
 
 			switch (facet) {
-				case "areaOfEffects":
-					setAreaOfEffectId((hasValue ? value : 0) as BwgrAreaOfEffectFacetId);
-					break;
-				case "duration":
-					setDurationId((hasValue ? value : 0) as BwgrDurationFacetId);
-					break;
-				case "impetus":
-					setImpetusId((hasValue ? value : 0) as BwgrImpetusFacetId);
-					break;
-				case "origins":
-					setOriginId((hasValue ? value : 0) as BwgrOriginFacetId);
-					break;
-				case "elements":
-				case "primeElements":
-				case "lowerElements":
-				case "higherElements":
-					if (facet === selectedElementCategory) setElementId((hasValue ? value : 0) as BwgrElementFacetId);
-					else if (selectedElementCategory === undefined) setElementId((hasValue ? value : 0) as BwgrElementFacetId);
-					break;
+			case "areaOfEffects":
+				setAreaOfEffectId((hasValue ? value : 0) as BwgrAreaOfEffectFacetId);
+				break;
+			case "duration":
+				setDurationId((hasValue ? value : 0) as BwgrDurationFacetId);
+				break;
+			case "impetus":
+				setImpetusId((hasValue ? value : 0) as BwgrImpetusFacetId);
+				break;
+			case "origins":
+				setOriginId((hasValue ? value : 0) as BwgrOriginFacetId);
+				break;
+			case "elements":
+			case "primeElements":
+			case "lowerElements":
+			case "higherElements":
+				if (facet === selectedElementCategory) setElementId((hasValue ? value : 0) as BwgrElementFacetId);
+				else if (selectedElementCategory === undefined) setElementId((hasValue ? value : 0) as BwgrElementFacetId);
+				break;
 			}
 		}
 	}, [selectedElementCategory, setBands, spellFacets]);
@@ -99,12 +99,12 @@ export function useMagicWheel<T extends OneOfWheelObjects, P extends OneOfWheelO
 		setPrayed(true);
 		setIsRotating(true);
 
-		const getRandomRotation = () =>
+		const getRandomRotation = (): number =>
 			steps && direction
 				? steps * direction
 				: ((Math.random() > 0.5) ? 1 : -1) * RandomNumber(1, 6);
 
-		const getTarget = (band: BandBlock) => {
+		const getTarget = (band: BandBlock): number => {
 			const rand = getRandomRotation();
 			return band.targetAmount + rand;
 		};
@@ -137,63 +137,65 @@ export function useMagicWheel<T extends OneOfWheelObjects, P extends OneOfWheelO
 		setIsRotating(true);
 	}, [bands, selectedElementCategory, setBands, spellFacets]);
 
+	const doRotation = useCallback((anim: number): void => {
+		if (context) {
+			for (const key in bands) {
+				const band = bands[key as P];
+
+				if (isAvailable(key)) {
+					const bandIndex = band.index;
+
+					const distancePerCharacter = constants.circleRadius * (bandIndex + 1) + constants.textOffset;
+					const anglePerCharacter = 8 * (1 / distancePerCharacter);
+
+					const textStartAngles = band.items.map<[string, number]>((name, itemIndex) => {
+						const initialStart = band.currentAmount * band.angle;
+						const itemMargin = itemIndex * band.angle;
+						const halfBack = anglePerCharacter + ((anglePerCharacter * name.length) / 2);
+						return [name, (initialStart + itemMargin - halfBack)];
+					});
+
+					textStartAngles.forEach(([name, startAngle]) => {
+						context.save();
+						context.translate(constants.canvasSize / 2, constants.canvasSize / 2);
+						context.rotate(startAngle);
+
+						for (const [_, char] of Array.from(name).entries()) {
+							context.rotate(anglePerCharacter);
+							context.save();
+							context.translate(0, -1 * distancePerCharacter);
+							context.font = "14px 'Code'";
+							context.fillStyle = THEME.palette.primary.light;
+							context.fillText(char.toLowerCase(), 0, 0);
+							context.restore();
+						}
+
+						context.restore();
+					});
+
+					if (band.currentAmount.toFixed(1) === band.targetAmount.toFixed(1)) setBands((prevBands) => ({ ...prevBands, [key]: { ...band, currentAmount: band.targetAmount } }));
+					else if (band.currentAmount < band.targetAmount) setBands((prevBands) => ({ ...prevBands, [key]: { ...band, currentAmount: band.currentAmount + constants.rotationSpeed } }));
+					else if (band.currentAmount > band.targetAmount) setBands((prevBands) => ({ ...prevBands, [key]: { ...band, currentAmount: band.currentAmount - constants.rotationSpeed } }));
+					else setBands((prevBands) => ({ ...prevBands, [key]: { ...band, currentAmount: band.targetAmount } }));
+				}
+			}
+
+			if (isRotating && Object.values<BandBlock>(bands).every((band) => band.currentAmount === band.targetAmount)) {
+				cancelAnimationFrame(anim);
+				setIsRotating(false);
+			}
+		}
+	}, [bands, constants.canvasSize, constants.circleRadius, constants.rotationSpeed, constants.textOffset, isAvailable, isRotating, context, setBands]);
+
 	useEffect(() => {
+		let anim = 0;
+
 		if (context && isRotating) {
 			context.clearRect(0, 0, constants.canvasSize, constants.canvasSize);
-
-			let anim = 0;
-
-			const doRotation = () => {
-				for (const key in bands) {
-					const band = bands[key as P];
-
-					if (isAvailable(key)) {
-						const bandIndex = band.index;
-
-						const distancePerCharacter = constants.circleRadius * (bandIndex + 1) + constants.textOffset;
-						const anglePerCharacter = 8 * (1 / distancePerCharacter);
-
-						const textStartAngles = band.items.map<[string, number]>((name, itemIndex) => {
-							const initialStart = band.currentAmount * band.angle;
-							const itemMargin = itemIndex * band.angle;
-							const halfBack = anglePerCharacter + ((anglePerCharacter * name.length) / 2);
-							return [name, (initialStart + itemMargin - halfBack)];
-						});
-
-						textStartAngles.forEach(([name, startAngle]) => {
-							context.save();
-							context.translate(constants.canvasSize / 2, constants.canvasSize / 2);
-							context.rotate(startAngle);
-
-							for (let i = 0; i < name.length; i++) {
-								context.rotate(anglePerCharacter);
-								context.save();
-								context.translate(0, -1 * distancePerCharacter);
-								context.font = "14px 'Code'";
-								context.fillStyle = THEME.palette.primary.light;
-								context.fillText(name[i].toLowerCase(), 0, 0);
-								context.restore();
-							}
-
-							context.restore();
-						});
-
-						if (band.currentAmount.toFixed(1) === band.targetAmount.toFixed(1)) setBands((prevBands) => ({ ...prevBands, [key]: { ...band, currentAmount: band.targetAmount } }));
-						else if (band.currentAmount < band.targetAmount) setBands((prevBands) => ({ ...prevBands, [key]: { ...band, currentAmount: band.currentAmount + constants.rotationSpeed } }));
-						else if (band.currentAmount > band.targetAmount) setBands((prevBands) => ({ ...prevBands, [key]: { ...band, currentAmount: band.currentAmount - constants.rotationSpeed } }));
-						else setBands((prevBands) => ({ ...prevBands, [key]: { ...band, currentAmount: band.targetAmount } }));
-					}
-				}
-
-				if (isRotating && Object.values<BandBlock>(bands).every((band) => band.currentAmount === band.targetAmount)) {
-					cancelAnimationFrame(anim);
-					setIsRotating(false);
-				}
-			};
-
-			anim = requestAnimationFrame(doRotation);
+			const dr = doRotation.bind(null, anim);
+			anim = requestAnimationFrame(dr);
 		}
-	}, [bands, constants.canvasSize, constants.circleRadius, constants.rotationSpeed, constants.textOffset, context, isAvailable, isRotating, setBands]);
+	}, [bands, constants.canvasSize, constants.circleRadius, constants.rotationSpeed, constants.textOffset, isAvailable, isRotating, context, setBands, doRotation]);
 
 	return {
 		constants,

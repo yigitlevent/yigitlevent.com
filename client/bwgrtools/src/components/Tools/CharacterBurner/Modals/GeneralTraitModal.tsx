@@ -14,7 +14,7 @@ import { useCharacterBurnerTraitStore } from "../../../../hooks/featureStores/Ch
 import { GenericGrid } from "../../../Shared/Grids";
 
 
-export function GeneralTraitModal({ isOpen, close }: { isOpen: boolean; close: () => void; }): JSX.Element {
+export function GeneralTraitModal({ isOpen, close }: { isOpen: boolean; close: () => void; }): React.JSX.Element {
 	const ruleset = useRulesetStore();
 	const { stock } = useCharacterBurnerBasicsStore();
 	const { traits, addGeneralTrait, getTraitPools } = useCharacterBurnerTraitStore();
@@ -23,7 +23,7 @@ export function GeneralTraitModal({ isOpen, close }: { isOpen: boolean; close: (
 	const [possibleTraits, setPossibleTraits] = useState<BwgrTrait[]>([]);
 	const [chosenTrait, setChosenTrait] = useState<BwgrTrait>();
 
-	const addNewTrait = () => {
+	const addNewTrait = (): void => {
 		if (chosenTrait) {
 			addGeneralTrait(chosenTrait);
 			close();
@@ -48,18 +48,18 @@ export function GeneralTraitModal({ isOpen, close }: { isOpen: boolean; close: (
 	}, [possibleTraits]);
 
 	return (
-		<Modal open={isOpen} onClose={() => close()}>
+		<Modal open={isOpen} onClose={() => { close(); }}>
 			<Paper sx={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", maxWidth: "800px", width: "100%", padding: "0 24px 24px", border: "none", overflow: "auto" }}>
 				<GenericGrid columns={1} spacing={[2, 2]} center>
 					{chosenTrait
-						? <Grid item xs={1}>
+						? <Grid size={{ xs: 1 }}>
 							<Autocomplete
 								value={chosenTrait}
 								options={possibleTraits.sort((a, b) => a.category[1].localeCompare(b.category[1]) || a.name.localeCompare(b.name))}
 								getOptionLabel={(option) => option.name}
 								groupBy={(option) => option.category[1]}
 								renderInput={(params) => <TextField {...params} label="Chosen Trait" />}
-								onChange={(_, v) => setChosenTrait(v)}
+								onChange={(_, v) => { setChosenTrait(v); }}
 								fullWidth
 								disableClearable
 							/>
@@ -67,31 +67,31 @@ export function GeneralTraitModal({ isOpen, close }: { isOpen: boolean; close: (
 						: null}
 
 					{chosenTrait
-						? <Grid item xs={1}>
+						? <Grid size={{ xs: 1 }}>
 							<Grid container spacing={1} columns={3}>
-								<Grid item xs={3}>
+								<Grid size={{ xs: 3 }}>
 									<Typography variant="h6">{chosenTrait.name}</Typography>
 								</Grid>
 
-								<Grid item sm={3} md={1}>
+								<Grid size={{ sm: 3, md: 1 }}>
 									<Typography variant="caption">Type: {chosenTrait.type[1]}</Typography>
 								</Grid>
 
 								{chosenTrait.cost !== 0
-									? <Grid item sm={3} md={1}>
+									? <Grid size={{ sm: 3, md: 1 }}>
 										<Typography variant="caption">
 											Cost: {chosenTrait.cost}
 										</Typography>
 									</Grid>
 									: null}
 
-								<Grid item sm={3} md={1}>
+								<Grid size={{ sm: 3, md: 1 }}>
 									{chosenTrait.stock
 										? <Typography variant="caption">Stock: {chosenTrait.stock}</Typography>
 										: null}
 								</Grid>
 
-								<Grid item xs={3}>
+								<Grid size={{ xs: 3 }}>
 									{chosenTrait.description
 										? chosenTrait.description.split("<br>").map(v => <Typography key={v} variant="body2" sx={{ textIndent: "8px" }}>{v}</Typography>)
 										: null}
@@ -100,7 +100,7 @@ export function GeneralTraitModal({ isOpen, close }: { isOpen: boolean; close: (
 						</Grid>
 						: null}
 
-					<Grid item xs={1}>
+					<Grid size={{ xs: 1 }}>
 						<Button variant="outlined" size="medium" onClick={addNewTrait} fullWidth>Add Trait</Button>
 					</Grid>
 				</GenericGrid>

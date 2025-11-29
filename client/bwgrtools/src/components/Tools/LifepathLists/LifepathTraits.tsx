@@ -6,21 +6,16 @@ import { useRulesetStore } from "../../../hooks/apiStores/useRulesetStore";
 import { PopoverLink } from "../../Shared/PopoverLink";
 
 
-export function LifepathTraits({ lifepath }: { lifepath: BwgrLifepath; }): JSX.Element {
+export function LifepathTraits({ lifepath }: { lifepath: BwgrLifepath; }): React.JSX.Element {
 	const { getTrait } = useRulesetStore();
 
 	const lifepathTraits
 		= lifepath.traits
-			? lifepath.traits
-				.map(traitId => {
-					const trait = getTrait(traitId);
-					if (trait) return trait;
-					else throw new Error(`Trait of TraitId '${traitId}' cannot be found.`);
-				})
+			? lifepath.traits.map(traitId => getTrait(traitId))
 			: undefined;
 
 
-	const text = `${lifepath.pools.traitPool}${lifepath.pools.traitPool > 1 ? "pts: " : "pt: "}`;
+	const text = `${lifepath.pools.traitPool.toString()}${lifepath.pools.traitPool > 1 ? "pts: " : "pt: "}`;
 
 	return (
 		<Fragment>

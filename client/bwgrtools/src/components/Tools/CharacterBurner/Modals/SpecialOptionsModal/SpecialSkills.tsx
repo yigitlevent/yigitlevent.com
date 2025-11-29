@@ -10,7 +10,7 @@ import { useCharacterBurnerMiscStore } from "../../../../../hooks/featureStores/
 import { useCharacterBurnerSkillStore } from "../../../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerSkill";
 
 
-export function SpecialSkills(): JSX.Element {
+export function SpecialSkills(): React.JSX.Element {
 	const ruleset = useRulesetStore();
 	const { stock } = useCharacterBurnerBasicsStore();
 	const { skills } = useCharacterBurnerSkillStore();
@@ -20,11 +20,12 @@ export function SpecialSkills(): JSX.Element {
 
 	const getSpecialSkillIds = useCallback((characterSkills: UniqueArray<BwgrSkillId, BwgrCharacterSkill>): BwgrSkillId[] => {
 		return characterSkills
-			.filter(charSkill =>
-				charSkill.name === "Any Skill"
-				|| charSkill.name === "Any Wise"
-				|| ruleset.getSkill(charSkill.id).subskillIds !== undefined
-			)
+			.filter(charSkill => {
+				const rulesetSkill = ruleset.getSkill(charSkill.id);
+				return charSkill.name === "Any Skill"
+					|| charSkill.name === "Any Wise"
+					|| rulesetSkill.subskillIds !== undefined;
+			})
 			.map(charSkill => charSkill.id);
 	}, [ruleset]);
 
@@ -81,7 +82,7 @@ export function SpecialSkills(): JSX.Element {
 									getOptionLabel={(option) => option.name}
 									groupBy={(option) => option.category[1]}
 									renderInput={(params) => <TextField {...params} label="Chosen Skills" />}
-									onChange={(_, v) => modifySkillSubskills(skill.id, v.map(v => v.id), canSelectMultiple)}
+									onChange={(_, v) => { modifySkillSubskills(skill.id, v.map(v => v.id), canSelectMultiple); }}
 									fullWidth
 									multiple
 								/>
@@ -91,7 +92,7 @@ export function SpecialSkills(): JSX.Element {
 									getOptionLabel={(option) => option.name}
 									groupBy={(option) => option.category[1]}
 									renderInput={(params) => <TextField {...params} label="Chosen Skill" />}
-									onChange={(_, v) => modifySkillSubskills(skill.id, v ? [v.id] : null, canSelectMultiple)}
+									onChange={(_, v) => { modifySkillSubskills(skill.id, v ? [v.id] : null, canSelectMultiple); }}
 									fullWidth
 								/>
 							: null}

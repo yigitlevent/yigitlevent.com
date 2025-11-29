@@ -8,7 +8,7 @@ import { useRangeAndCoverPlannerStore } from "../../../hooks/featureStores/useRa
 import { GetActionResolutionString } from "../../../utils/GetActionResolutionString";
 
 
-export function RangeAndCoverActionDetails({ action, volleyIndex }: { action: BwgrRaCAction; volleyIndex: number; }): JSX.Element {
+export function RangeAndCoverActionDetails({ action, volleyIndex }: { action: BwgrRaCAction; volleyIndex: number; }): React.JSX.Element {
 	const { deleteAction, toggleActionVisibility } = useRangeAndCoverPlannerStore();
 
 	return (
@@ -71,8 +71,8 @@ export function RangeAndCoverActionDetails({ action, volleyIndex }: { action: Bw
 				: null}
 
 			<Grid container>
-				<Button size="large" sx={{ width: "50%", padding: "16px 8px", marginTop: "8px" }} onClick={() => toggleActionVisibility(volleyIndex)}>Hide</Button>
-				<Button size="large" sx={{ width: "50%", padding: "16px 8px", marginTop: "8px" }} onClick={() => deleteAction(volleyIndex)} >Delete</Button>
+				<Button size="large" sx={{ width: "50%", padding: "16px 8px", marginTop: "8px" }} onClick={() => { toggleActionVisibility(volleyIndex); }}>Hide</Button>
+				<Button size="large" sx={{ width: "50%", padding: "16px 8px", marginTop: "8px" }} onClick={() => { deleteAction(volleyIndex); }} >Delete</Button>
 			</Grid>
 		</Stack>
 	);

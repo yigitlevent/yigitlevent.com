@@ -7,7 +7,7 @@ import { useCharacterBurnerSkillStore } from "../../../../../hooks/featureStores
 import { useCharacterBurnerTraitStore } from "../../../../../hooks/featureStores/CharacterBurnerStores/useCharacterBurnerTrait";
 
 
-export function RandomLifepathsBasics({ chosenLifepaths }: { chosenLifepaths: BwgrLifepath[]; }): JSX.Element {
+export function RandomLifepathsBasics({ chosenLifepaths }: { chosenLifepaths: BwgrLifepath[]; }): React.JSX.Element {
 	const { getAge, getMentalPool, getPhysicalPool, getEitherPool } = useCharacterBurnerLifepathStore();
 	const { getResourcePools } = useCharacterBurnerResourceStore();
 	const { getSkillPools } = useCharacterBurnerSkillStore();
@@ -23,27 +23,27 @@ export function RandomLifepathsBasics({ chosenLifepaths }: { chosenLifepaths: Bw
 
 	return (
 		<Grid container columns={2}>
-			<Grid item xs={1}>
+			<Grid size={{ xs: 1 }}>
 				<Typography variant="caption">Years: {age}</Typography>
 			</Grid>
 
-			<Grid item xs={1}>
+			<Grid size={{ xs: 1 }}>
 				<Typography variant="caption">Resources: {resourcePoints.total}</Typography>
 			</Grid>
 
-			<Grid item xs={1}>
+			<Grid size={{ xs: 1 }}>
 				<Typography variant="caption">Stats: {mentalPool.total}M, {physicalPool.total}P, {eitherPool.total}M/P</Typography>
 			</Grid>
 
-			<Grid item xs={1}>
+			<Grid size={{ xs: 1 }}>
 				<Typography variant="caption">Trait Points: {traitPools.total}</Typography>
 			</Grid>
 
-			<Grid item xs={1}>
+			<Grid size={{ xs: 1 }}>
 				<Typography variant="caption">General Skill Points: {skillPools.general.total}</Typography>
 			</Grid>
 
-			<Grid item xs={1}>
+			<Grid size={{ xs: 1 }}>
 				<Typography variant="caption">Lifepath Skill Points: {skillPools.lifepath.total}</Typography>
 			</Grid>
 		</Grid>

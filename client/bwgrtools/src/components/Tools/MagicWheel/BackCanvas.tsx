@@ -1,15 +1,18 @@
-import { createRef, useCallback, useEffect, useState } from "react";
+import { createRef, useCallback, useEffect } from "react";
 
 import { MagicWheelConstants } from "../../../hooks/useMagicWheel";
 import { THEME } from "../../../theme/theme";
 
 
-export function BackCanvas({ constants }: { constants: MagicWheelConstants; }): JSX.Element {
+export function BackCanvas({ constants }: { constants: MagicWheelConstants; }): React.JSX.Element {
 	const canvasRef = createRef<HTMLCanvasElement>();
-	const [context, setContext] = useState<CanvasRenderingContext2D>();
 
 	const drawCircles = useCallback((): void => {
+		const context = canvasRef.current?.getContext("2d");
+
 		if (context) {
+			context.clearRect(0, 0, constants.canvasSize, constants.canvasSize);
+
 			context.fillStyle = THEME.palette.grey[900];
 
 			for (let i = 6; i >= 1; i--) {
@@ -19,18 +22,11 @@ export function BackCanvas({ constants }: { constants: MagicWheelConstants; }): 
 				context.fill();
 			}
 		}
-	}, [context, constants.canvasSize, constants.circleOffset, constants.circleRadius]);
+	}, [canvasRef, constants.canvasSize, constants.circleOffset, constants.circleRadius]);
 
 	useEffect(() => {
-		if (context) {
-			context.clearRect(0, 0, constants.canvasSize, constants.canvasSize);
-			drawCircles();
-		}
-	}, [context, drawCircles, constants.canvasSize]);
-
-	useEffect(() => {
-		setContext(canvasRef.current?.getContext("2d") as CanvasRenderingContext2D);
-	}, [canvasRef]);
+		drawCircles();
+	}, [drawCircles, constants.canvasSize]);
 
 	return (
 		<canvas

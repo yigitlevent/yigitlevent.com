@@ -7,14 +7,14 @@ import Typography from "@mui/material/Typography";
 import { useDrawerStore } from "../../hooks/useDrawerStore";
 
 
-export function DrawerBox({ children, title, expanded }: { children: React.ReactNode; title: string; expanded: boolean; }): JSX.Element {
+export function DrawerBox({ children, title, expanded }: { children: React.ReactNode; title: string; expanded: boolean; }): React.JSX.Element {
 	const { toggleDrawer } = useDrawerStore();
 
 	return (
 		<Drawer
 			anchor={"right"}
 			open={expanded}
-			onClose={() => toggleDrawer()}
+			onClose={() => { toggleDrawer(); }}
 		>
 			<Card variant="outlined" sx={{ overflow: "auto", position: "fixed", width: "350px", maxWidth: "calc(100svw - 32px)", height: "calc(100svh - 118px)", maxHeight: "calc(100svh - 118px)", bottom: "16px", right: "16px", zIndex: 100000 }}>
 				<Box sx={{ padding: "12px 16px 36px" }}>

@@ -10,7 +10,7 @@ import { Fragment } from "react";
 import { usePracticePlannerStore } from "../../../hooks/featureStores/usePracticePlannerStore";
 
 
-export function PracticePlannerTimetable(): JSX.Element {
+export function PracticePlannerTimetable(): React.JSX.Element {
 	const { days, hours, cells, changeDays, changeHours, addCells } = usePracticePlannerStore();
 
 	return (
@@ -20,34 +20,34 @@ export function PracticePlannerTimetable(): JSX.Element {
 			<Stack direction="row" spacing={2} justifyContent="center" sx={{ margin: "16px 0 32px 0" }}>
 				<TextField
 					label="Number of Days"
-					inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
+					slotProps={{ htmlInput: { inputMode: "numeric", pattern: "[0-9]*" } }}
 					value={days}
-					onChange={e => changeDays(e.target.value)}
+					onChange={e => { changeDays(e.target.value); }}
 					variant="standard"
 				/>
 
 				<TextField
 					label="Hours per Day"
-					inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
+					slotProps={{ htmlInput: { inputMode: "numeric", pattern: "[0-9]*" } }}
 					value={hours}
-					onChange={e => changeHours(e.target.value)}
+					onChange={e => { changeHours(e.target.value); }}
 					variant="standard"
 				/>
 
-				<Button variant="outlined" onClick={() => addCells(days, hours)}>Add Days</Button>
+				<Button variant="outlined" onClick={() => { addCells(days, hours); }}>Add Days</Button>
 			</Stack>
 
 			<Stack direction="row" flexWrap="nowrap" justifyContent="start" alignItems="start" sx={{ maxWidth: "100%", overflow: "auto", padding: "0 0 16px 0" }}>
 				{cells.map((cell, cellIndex) => (
-					<Grid key={cellIndex} item sx={{ padding: "32px 0 0 0", margin: "0 -8px 0 0" }}>
+					<Grid key={cellIndex} sx={{ padding: "32px 0 0 0", margin: "0 -8px 0 0" }}>
 						<Typography
 							variant="caption"
 							sx={{ display: "block", transform: "rotate(-90deg)", margin: "0 -48px -8px 8px", height: "20px", width: "60px", transformOrigin: "left center" }}
 						>
-							{cellIndex === 0 || cellIndex === cells.length - 1 || (cellIndex + 1) % 5 === 0 ? `Day ${cellIndex + 1}` : ""}
+							{cellIndex === 0 || cellIndex === cells.length - 1 || (cellIndex + 1) % 5 === 0 ? `Day ${(cellIndex + 1).toString()}` : ""}
 						</Typography>
 
-						{[...Array(cell.maxHours)].map((_, ii) => {
+						{[...Array<number>(cell.maxHours)].map((_, ii) => {
 							const filled = (cell.placed.length > 0 ? cell.placed.map(v => v.hours).reduce((pv, cv) => pv + cv) : 0);
 							return (
 								<StopIcon

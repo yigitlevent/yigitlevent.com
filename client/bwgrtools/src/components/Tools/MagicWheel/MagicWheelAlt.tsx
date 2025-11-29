@@ -2,7 +2,6 @@ import Button from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import { GroupBy } from "@utility/GroupBy";
 import { createRef, Fragment, useEffect, useState } from "react";
 
 import { BackCanvas } from "./BackCanvas";
@@ -15,7 +14,7 @@ import { BandBlock, useMagicWheel } from "../../../hooks/useMagicWheel";
 import { GenericGrid } from "../../Shared/Grids";
 
 
-export function MagicWheelAlt(): JSX.Element {
+export function MagicWheelAlt(): React.JSX.Element {
 	const { isFontLoaded } = useFontLoading(codeFont);
 
 	const wrapperRef = createRef<HTMLDivElement>();
@@ -26,9 +25,8 @@ export function MagicWheelAlt(): JSX.Element {
 	const [selectedElementCategory, setSelectedElementCategory] = useState<ElementCategories>("primeElements");
 
 	const { spellAltFacets } = useRulesetStore();
-
-	const altDurationFacets = GroupBy(spellAltFacets.duration, v => v.name);
-	const altAreaOfEffectFacets = GroupBy(spellAltFacets.areaOfEffects, v => v.name);
+	const altDurationFacets = Object.groupBy(spellAltFacets.duration, v => v.name) as Record<string, BwgrSpellDurationFacet[]>;
+	const altAreaOfEffectFacets = Object.groupBy(spellAltFacets.areaOfEffects, v => v.name) as Record<string, BwgrSpellAreaOfEffectFacet[]>;
 	const [spellFacets] = useState<BwgrAltSpellFacets>({
 		lowerElements: spellAltFacets.lowerElements,
 		primeElements: spellAltFacets.primeElements,
@@ -65,11 +63,12 @@ export function MagicWheelAlt(): JSX.Element {
 	const magicWheel = useMagicWheel<BwgrAltSpellFacets, keyof BwgrAltSpellFacets>({ spellFacets, bands, context, selectedElementCategory, setBands, isAvailable: key => !key.toLowerCase().includes("element") || selectedElementCategory === key });
 
 	useEffect(() => {
-		if (wrapperRef && wrapperRef.current) setSize(window.getComputedStyle(wrapperRef.current).width);
+		if (wrapperRef.current) setSize(window.getComputedStyle(wrapperRef.current).width);
 	}, [wrapperRef]);
 
 	useEffect(() => {
-		setContext(canvasRef.current?.getContext("2d") as CanvasRenderingContext2D);
+		const context = canvasRef.current?.getContext("2d");
+		if (context) setContext(context);
 	}, [canvasRef]);
 
 	return (
@@ -90,7 +89,7 @@ export function MagicWheelAlt(): JSX.Element {
 							? <Button
 								variant="outlined"
 								disabled={magicWheel.isRotating}
-								onClick={() => magicWheel.reset()}
+								onClick={() => { magicWheel.reset(); }}
 								fullWidth
 							>
 								Try again
@@ -98,13 +97,13 @@ export function MagicWheelAlt(): JSX.Element {
 							: <Button
 								variant="outlined"
 								disabled={magicWheel.isRotating}
-								onClick={() => magicWheel.setTargetAmounts()}
+								onClick={() => { magicWheel.setTargetAmounts(); }}
 								fullWidth
 							>
 								Pray to the Lady Luck
 							</Button>}
 
-						<Grid item xs={1}>
+						<Grid size={{ xs: 1 }}>
 							<div
 								ref={wrapperRef}
 								style={{

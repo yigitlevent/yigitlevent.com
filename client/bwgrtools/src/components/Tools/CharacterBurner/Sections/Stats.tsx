@@ -10,7 +10,7 @@ import { GenericGrid } from "../../../Shared/Grids";
 import { BlockText } from "../BlockText";
 
 
-export function Stats(): JSX.Element {
+export function Stats(): React.JSX.Element {
 	const { abilities } = useRulesetStore();
 	const { getMentalPool, getPhysicalPool, getEitherPool } = useCharacterBurnerLifepathStore();
 	const { shiftStatShade, modifyStatExponent, getStat } = useCharacterBurnerStatStore();
@@ -19,17 +19,17 @@ export function Stats(): JSX.Element {
 	const physical = getPhysicalPool();
 	const either = getEitherPool();
 
-	const mentalText = `Mental Pool / Total: ${mental.total}, Remaining: ${mental.remaining}`;
-	const physicalText = `Physical Pool / Total: ${physical.total}, Remaining: ${physical.remaining}`;
-	const eitherText = `Either Pool / Total: ${either.total}, Remaining: ${either.remaining}`;
+	const mentalText = `Mental Pool / Total: ${mental.total.toString()}, Remaining: ${mental.remaining.toString()}`;
+	const physicalText = `Physical Pool / Total: ${physical.total.toString()}, Remaining: ${physical.remaining.toString()}`;
+	const eitherText = `Either Pool / Total: ${either.total.toString()}, Remaining: ${either.remaining.toString()}`;
 
 	return (
 		<GenericGrid columns={6} center spacing={[0, 2]} sx={{ marginTop: 3 }} extraBottomMargin>
-			<Grid item xs={6}>
+			<Grid size={{ xs: 6 }}>
 				<Typography variant="h4">Stats</Typography>
 			</Grid>
 
-			<Grid item xs={6}>
+			<Grid size={{ xs: 6 }}>
 				<Typography>{mentalText}</Typography>
 				<Typography>{physicalText}</Typography>
 				<Typography>{eitherText}</Typography>
@@ -42,13 +42,13 @@ export function Stats(): JSX.Element {
 					.map((v, i) => {
 						const stat = getStat(v.name);
 						return (
-							<Grid key={i} item xs={6} sm={3} md={2}>
+							<Grid key={i} size={{ xs: 6, sm: 3, md: 2 }}>
 								<GenericGrid columns={5} center="h" hasBackground={1}>
 									<BlockText text={v.name} hasLeftPadding />
 
-									<Grid item>
-										<AbilityButton name={v.name} onClick={() => shiftStatShade(v.name)}>{stat.shade}</AbilityButton>
-										<AbilityButton name={v.name} onClick={() => modifyStatExponent(v.name)} onContextMenu={() => modifyStatExponent(v.name, true)}>{stat.exponent}</AbilityButton>
+									<Grid>
+										<AbilityButton name={v.name} onClick={() => { shiftStatShade(v.name); }}>{stat.shade}</AbilityButton>
+										<AbilityButton name={v.name} onClick={() => { modifyStatExponent(v.name); }} onContextMenu={() => { modifyStatExponent(v.name, true); }}>{stat.exponent}</AbilityButton>
 									</Grid>
 								</GenericGrid>
 							</Grid>

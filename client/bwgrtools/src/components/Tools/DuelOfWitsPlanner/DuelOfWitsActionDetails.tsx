@@ -8,7 +8,7 @@ import { useDuelOfWitsPlannerStore } from "../../../hooks/featureStores/useDuelO
 import { GetActionResolutionString } from "../../../utils/GetActionResolutionString";
 
 
-export function DuelOfWitsActionDetails({ action, volleyIndex }: { action: BwgrDoWAction; volleyIndex: number; }): JSX.Element {
+export function DuelOfWitsActionDetails({ action, volleyIndex }: { action: BwgrDoWAction; volleyIndex: number; }): React.JSX.Element {
 	const { deleteAction, toggleActionVisibility } = useDuelOfWitsPlannerStore();
 
 	return (
@@ -60,8 +60,8 @@ export function DuelOfWitsActionDetails({ action, volleyIndex }: { action: BwgrD
 				: null}
 
 			<Grid container>
-				<Button size="large" sx={{ width: "50%", padding: "16px 8px", marginTop: "8px" }} onClick={() => toggleActionVisibility(volleyIndex)}>Hide</Button>
-				<Button size="large" sx={{ width: "50%", padding: "16px 8px", marginTop: "8px" }} onClick={() => deleteAction(volleyIndex)} >Delete</Button>
+				<Button size="large" sx={{ width: "50%", padding: "16px 8px", marginTop: "8px" }} onClick={() => { toggleActionVisibility(volleyIndex); }}>Hide</Button>
+				<Button size="large" sx={{ width: "50%", padding: "16px 8px", marginTop: "8px" }} onClick={() => { deleteAction(volleyIndex); }} >Delete</Button>
 			</Grid>
 		</Stack>
 	);

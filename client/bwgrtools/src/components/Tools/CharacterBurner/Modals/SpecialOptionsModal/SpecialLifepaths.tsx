@@ -10,7 +10,7 @@ import { useCharacterBurnerMiscStore } from "../../../../../hooks/featureStores/
 import { AbilityButton } from "../../../../Shared/AbilityButton";
 
 
-export function SpecialLifepaths(): JSX.Element {
+export function SpecialLifepaths(): React.JSX.Element {
 	const ruleset = useRulesetStore();
 	const { lifepaths } = useCharacterBurnerLifepathStore();
 
@@ -31,17 +31,17 @@ export function SpecialLifepaths(): JSX.Element {
 				.map((lifepath, i) => {
 					if (Array.isArray(lifepath.years)) {
 						const years = lifepath.years;
-						const chosenYears = special.variableAge?.[lifepath.id];
+						const chosenYears = special.variableAge[lifepath.id];
 						return (
 							<Fragment key={i}>
-								<Grid item xs={1}>
+								<Grid size={{ xs: 1 }}>
 									<Typography>{lifepath.name} years</Typography>
 								</Grid>
 
-								<Grid item xs={2}>
+								<Grid size={{ xs: 2 }}>
 									<AbilityButton
-										onClick={() => modifyVariableAge(lifepath.id, chosenYears ? chosenYears + 1 : 1, years)}
-										onContextMenu={() => modifyVariableAge(lifepath.id, chosenYears ? chosenYears - 1 : 1, years)}
+										onClick={() => { modifyVariableAge(lifepath.id, chosenYears ? chosenYears + 1 : 1, years); }}
+										onContextMenu={() => { modifyVariableAge(lifepath.id, chosenYears ? chosenYears - 1 : 1, years); }}
 									>
 										{chosenYears}
 									</AbilityButton>
@@ -54,22 +54,22 @@ export function SpecialLifepaths(): JSX.Element {
 
 			{lifepaths // companion gives skills
 				.map((lifepath, i) => {
-					if (lifepath.companion && lifepath.companion.givesSkills) {
+					if (lifepath.companion?.givesSkills) {
 						const compationName = lifepath.companion.name;
 
 						return (
 							<Fragment key={i}>
-								<Grid item xs={1}>
+								<Grid size={{ xs: 1 }}>
 									<Typography>{lifepath.name} {compationName} lifepath</Typography>
 								</Grid>
 
-								<Grid item xs={2}>
+								<Grid size={{ xs: 2 }}>
 									<Autocomplete
 										value={{ id: special.companionLifepath[compationName], label: compationName }}
 										options={possibleLifepaths}
 										getOptionLabel={(option) => option.label}
 										renderInput={(params) => <TextField {...params} label={`${compationName}'s Lifepath`} />}
-										onChange={(_, v) => modifyCompanionSkills(v.id, ruleset.getLifepath(v.id).skills)}
+										onChange={(_, v) => { modifyCompanionSkills(v.id, ruleset.getLifepath(v.id).skills); }}
 										fullWidth
 										disableClearable
 										size="small"
@@ -78,7 +78,7 @@ export function SpecialLifepaths(): JSX.Element {
 							</Fragment>
 						);
 					}
-					else null;
+					else return null;
 				})}
 		</Fragment>
 	);

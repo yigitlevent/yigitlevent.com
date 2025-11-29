@@ -15,21 +15,21 @@ import { useUserStore } from "../../hooks/apiStores/useUserStore";
 import { useDrawerStore, DrawerNames } from "../../hooks/useDrawerStore";
 
 
-function DrawerIconButton({ title, icon, onClick }: { title: string; icon: JSX.Element; onClick: () => void; }): JSX.Element {
+function DrawerIconButton({ title, icon, onClick }: { title: string; icon: React.JSX.Element; onClick: () => void; }): React.JSX.Element {
 	return (
-		<Grid item>
+		<Grid>
 			<Paper variant="outlined" sx={{ padding: "4px 4px" }}>
-				<IconButton title={title} onClick={() => onClick()}>{icon}</IconButton>
+				<IconButton title={title} onClick={() => { onClick(); }}>{icon}</IconButton>
 			</Paper>
 		</Grid>
 	);
 }
 
-export function MenuButtons({ openSignin, openSignup }: { openSignin: () => void; openSignup: () => void; }): JSX.Element {
+export function MenuButtons({ openSignin, openSignup }: { openSignin: () => void; openSignup: () => void; }): React.JSX.Element {
 	const { user, signout } = useUserStore();
 	const { toggleDrawer } = useDrawerStore();
 
-	const buttons: { title: DrawerNames, icon: JSX.Element; authOnly: boolean; }[] = [
+	const buttons: { title: DrawerNames, icon: React.JSX.Element; authOnly: boolean; }[] = [
 		{ title: "Tools", icon: <ListAltOutlinedIcon color="primary" />, authOnly: false },
 		{ title: "Datasets", icon: <DatasetOutlinedIcon color="primary" />, authOnly: false },
 		{ title: "Checklist", icon: <FactCheckOutlinedIcon color="primary" />, authOnly: false },
@@ -38,7 +38,7 @@ export function MenuButtons({ openSignin, openSignup }: { openSignin: () => void
 
 	return (
 		<Grid container spacing={1} alignItems="center" justifySelf="end">
-			<Grid item>
+			<Grid>
 				<Box sx={{ textAlign: "right" }}>{user ? `welcome, ${user.username}` : null}</Box>
 			</Grid>
 
@@ -51,7 +51,7 @@ export function MenuButtons({ openSignin, openSignup }: { openSignin: () => void
 
 			{buttons.reverse()
 				.filter(v => !v.authOnly || user)
-				.map((v, i) => <DrawerIconButton key={i} title={v.title} icon={v.icon} onClick={() => toggleDrawer(v.title)} />)}
+				.map((v, i) => <DrawerIconButton key={i} title={v.title} icon={v.icon} onClick={() => { toggleDrawer(v.title); }} />)}
 		</Grid>
 	);
 }

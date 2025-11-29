@@ -8,7 +8,7 @@ import { useFightPlannerStore } from "../../../hooks/featureStores/useFightPlann
 import { GetActionResolutionString } from "../../../utils/GetActionResolutionString";
 
 
-export function FightPlannerActionDetails({ action, volleyIndex, actionIndex }: { action: BwgrFightAction; volleyIndex: number; actionIndex: number; }): JSX.Element {
+export function FightPlannerActionDetails({ action, volleyIndex, actionIndex }: { action: BwgrFightAction; volleyIndex: number; actionIndex: number; }): React.JSX.Element {
 	const { deleteAction, toggleActionVisibility } = useFightPlannerStore();
 
 	return (
@@ -72,8 +72,8 @@ export function FightPlannerActionDetails({ action, volleyIndex, actionIndex }: 
 				: null}
 
 			<Grid container>
-				<Button size="large" sx={{ width: "50%", padding: "16px 8px", marginTop: "8px" }} onClick={() => toggleActionVisibility(volleyIndex, actionIndex)}>Hide</Button>
-				<Button size="large" sx={{ width: "50%", padding: "16px 8px", marginTop: "8px" }} onClick={() => deleteAction(volleyIndex, actionIndex)} >Delete</Button>
+				<Button size="large" sx={{ width: "50%", padding: "16px 8px", marginTop: "8px" }} onClick={() => { toggleActionVisibility(volleyIndex, actionIndex); }}>Hide</Button>
+				<Button size="large" sx={{ width: "50%", padding: "16px 8px", marginTop: "8px" }} onClick={() => { deleteAction(volleyIndex, actionIndex); }} >Delete</Button>
 			</Grid>
 		</Stack>
 	);

@@ -1,15 +1,18 @@
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material/styles";
 import { StrictMode } from "react";
-import ReactDOM from "react-dom/client";
+import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 
 import { App } from "./App";
 import { THEME } from "./theme/theme";
 
 
-ReactDOM
-	.createRoot(document.getElementById("root") as HTMLElement)
+const Root = document.getElementById("root");
+
+if (!Root) throw new Error("Root element not found");
+
+createRoot(Root)
 	.render(
 		<StrictMode>
 			<ThemeProvider theme={THEME}>
