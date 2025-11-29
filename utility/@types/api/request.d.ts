@@ -6,7 +6,7 @@ type UserForms =
 	| UserSigninRequest
 	| UserSignupRequest;
 
-type BwgrRulesetForms = { rulesets: BwgrRulesetId[]; };
+interface BwgrRulesetForms { rulesets: BwgrRulesetId[]; }
 
 interface ResetMegagameRequest {
 	startAt: string;

@@ -18,7 +18,7 @@ export class UniqueArray<K, T> {
 	**/
 	constructor(newArray?: UniqueArrayItem<K, T>[]) {
 		if (newArray) {
-			const remade: UniqueArrayItem<K, T>[] = JSON.parse(JSON.stringify(newArray));
+			const remade: UniqueArrayItem<K, T>[] = JSON.parse(JSON.stringify(newArray)) as UniqueArrayItem<K, T>[];
 			remade.forEach(v => this.add(v));
 		}
 	}
@@ -45,7 +45,7 @@ export class UniqueArray<K, T> {
 	 * @param item - `UniqueArrayItem<K, T>`
 	 * @returns `UniqueArray<K, T>`
 	**/
-	add(item: UniqueArrayItem<K, T>): UniqueArray<K, T> {
+	add(item: UniqueArrayItem<K, T>): this {
 		const index = this.findIndex(item.id);
 		if (index !== undefined && index >= 0) this.values[index] = item;
 		else this.values.push(item);
@@ -57,7 +57,7 @@ export class UniqueArray<K, T> {
 	 * @param id - `K`
 	 * @returns `UniqueArray<K, T>`
 	**/
-	remove(id: K): UniqueArray<K, T> {
+	remove(id: K): this {
 		const index = this.findIndex(id);
 		if (index !== undefined && index >= 0) this.values.splice(index, 1);
 		return this;
@@ -94,7 +94,7 @@ export class UniqueArray<K, T> {
 	 * Empties the underlying array.
 	 * @returns `UniqueArray<K, T>`
 	**/
-	clear(): UniqueArray<K, T> {
+	clear(): this {
 		this.values = [];
 		return this;
 	}
@@ -173,7 +173,7 @@ export class UniqueArray<K, T> {
 	 * @returns `void`.
 	**/
 	forEach(callback: (value: UniqueArrayItem<K, T>, index: number, array: UniqueArrayItem<K, T>[]) => void): void {
-		return this.values.forEach(callback);
+		this.values.forEach(callback);
 	}
 
 	/**

@@ -41,10 +41,10 @@ interface BwgrCharacterSpecialStock {
 
 interface BwgrCharacterSpecial {
 	stock: BwgrCharacterSpecialStock;
-	companionLifepath: { [key: string]: BwgrLifepathId; };
-	variableAge: { [key: BwgrLifepathId]: number; };
-	companionSkills: { [key: string]: BwgrSkillId[]; };
-	chosenSubskills: { [key: BwgrSkillId]: BwgrSkillId[]; };
+	companionLifepath: Record<string, BwgrLifepathId>;
+	variableAge: Record<BwgrLifepathId, number>;
+	companionSkills: Record<string, BwgrSkillId[]>;
+	chosenSubskills: Record<BwgrSkillId, BwgrSkillId[]>;
 }
 
 interface BwgrCharacterStockLimits {
@@ -69,12 +69,12 @@ interface BwgrStatData {
 	eitherPoolSpent: { shade: number; exponent: number; };
 }
 
-type BwgrCharacterQuestion = {
+interface BwgrCharacterQuestion {
 	id: BwgrQuestionId;
 	name: string;
 	question: string;
 	answer: boolean;
-};
+}
 
 type BwgrCharacterTraitEffect =
 	| { roundUp: BwgrAbilityId; }
@@ -108,7 +108,7 @@ interface BwgrBurningCharacter {
 		lifepaths: BwgrLifepath[];
 	};
 	stats: {
-		stats: { [key: string]: BwgrStatData; };
+		stats: Record<string, BwgrStatData>;
 	};
 	skills: {
 		skills: BwgrCharacterSkill[];
@@ -120,7 +120,7 @@ interface BwgrBurningCharacter {
 		attributes: BwgrCharacterAttribute[];
 	};
 	resources: {
-		resources: { [key: Guid]: BwgrCharacterResource; };
+		resources: Record<Guid, BwgrCharacterResource>;
 	};
 	misc: {
 		special: BwgrCharacterSpecial;

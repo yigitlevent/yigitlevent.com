@@ -84,9 +84,7 @@ interface MegagameOrderQueueItem {
 	factionId: FactionId;
 }
 
-interface MegagameOrderQueueItems {
-	[key: string]: MegagameOrderQueueItem[];
-}
+type MegagameOrderQueueItems = Record<string, MegagameOrderQueueItem[]>;
 
 interface MegagameEvent {
 	cycleInterval: number;
