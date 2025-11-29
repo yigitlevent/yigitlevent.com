@@ -2,7 +2,7 @@ import Typography from "@mui/material/Typography";
 import { Fragment } from "react";
 
 
-export function JourneySoFar(): JSX.Element {
+export function JourneySoFar(): React.JSX.Element {
 	return (
 		<Fragment>
 			<Typography variant="h6">journey so far</Typography>

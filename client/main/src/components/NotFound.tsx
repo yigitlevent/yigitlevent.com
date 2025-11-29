@@ -1,3 +1,3 @@
-export function NotFound(): JSX.Element {
+export function NotFound(): React.JSX.Element {
 	return (<div />);
 }

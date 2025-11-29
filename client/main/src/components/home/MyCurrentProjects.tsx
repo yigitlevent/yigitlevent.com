@@ -4,10 +4,10 @@ import Typography from "@mui/material/Typography";
 import { Fragment } from "react";
 
 
-export function MyCurrentProjects(): JSX.Element {
+export function MyCurrentProjects(): React.JSX.Element {
 	return (
 		<Fragment>
-			<Grid item xs={2} md={1}>
+			<Grid size={{ xs: 2, md: 1 }}>
 				<Typography variant="h6">
 					<Link href="https://yigitlevent.com" sx={{ textDecoration: "none" }}>yigitlevent.com</Link>
 				</Typography>
@@ -17,7 +17,7 @@ export function MyCurrentProjects(): JSX.Element {
 				</Typography>
 			</Grid>
 
-			<Grid item xs={2} md={1}>
+			<Grid size={{ xs: 2, md: 1 }}>
 				<Typography variant="h6">
 					<Link href="https://bwgrtools.yigitlevent.com" sx={{ textDecoration: "none" }}>BWGR Tools</Link>
 				</Typography>

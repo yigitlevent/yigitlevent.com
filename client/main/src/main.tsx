@@ -8,7 +8,7 @@ import { THEME } from "./theme/theme";
 
 
 ReactDOM
-	.createRoot(document.getElementById("root") as HTMLElement)
+	.createRoot(document.getElementById("root")!)
 	.render(
 		<StrictMode>
 			<ThemeProvider theme={THEME}>

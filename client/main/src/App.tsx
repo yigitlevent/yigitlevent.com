@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 import { Home } from "./components/Home";
 
 
-export function App(): JSX.Element {
+export function App(): React.JSX.Element {
 	if (import.meta.env.MODE === "development") console.debug("This is a debug build.");
 
 	return (

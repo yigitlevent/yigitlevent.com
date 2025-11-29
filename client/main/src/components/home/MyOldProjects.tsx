@@ -4,10 +4,10 @@ import Typography from "@mui/material/Typography";
 import { Fragment } from "react";
 
 
-export function MyOldProjects(): JSX.Element {
+export function MyOldProjects(): React.JSX.Element {
 	return (
 		<Fragment>
-			<Grid item xs={2} md={1}>
+			<Grid size={{ xs: 2, md: 1 }}>
 				<Typography variant="h6">
 					<Link href="https://github.com/yigitlevent/tersh-boilerplate" sx={{ textDecoration: "none" }}>TERSH Boilerplate</Link>
 				</Typography>
@@ -17,7 +17,7 @@ export function MyOldProjects(): JSX.Element {
 				</Typography>
 			</Grid>
 
-			<Grid item xs={2} md={1}>
+			<Grid size={{ xs: 2, md: 1 }}>
 				<Typography variant="h6">
 					<Link href="https://github.com/yigitlevent/easy-dictionary" sx={{ textDecoration: "none" }}>Easy Dictionary</Link>
 				</Typography>
@@ -27,7 +27,7 @@ export function MyOldProjects(): JSX.Element {
 				</Typography>
 			</Grid>
 
-			<Grid item xs={2} md={1}>
+			<Grid size={{ xs: 2, md: 1 }}>
 				<Typography variant="h6">
 					<Link href="https://github.com/yigitlevent/autarkis" sx={{ textDecoration: "none" }}>Autarkis</Link>
 				</Typography>
@@ -37,7 +37,7 @@ export function MyOldProjects(): JSX.Element {
 				</Typography>
 			</Grid>
 
-			<Grid item xs={2} md={1}>
+			<Grid size={{ xs: 2, md: 1 }}>
 				<Typography variant="h6">
 					<Link href="https://github.com/yigitlevent/eshaton" sx={{ textDecoration: "none" }}>Eshaton</Link>
 				</Typography>

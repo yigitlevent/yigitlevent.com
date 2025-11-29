@@ -10,7 +10,7 @@ import { MyOldProjects } from "./home/MyOldProjects";
 import { Skills } from "./home/Skills";
 
 
-export function Home(): JSX.Element {
+export function Home(): React.JSX.Element {
 	return (
 		<Fragment>
 			<Box sx={{ padding: "10px 20px" }}>
@@ -19,11 +19,11 @@ export function Home(): JSX.Element {
 
 			<Paper sx={{ padding: "10px 20px 16px", margin: "0 0 16px" }}>
 				<Grid container columns={4} rowSpacing={3} columnSpacing={4}>
-					<Grid item xs={4} md={3}>
+					<Grid size={{ xs: 4, md: 3 }}>
 						<JourneySoFar />
 					</Grid>
 
-					<Grid item xs={4} md={1}>
+					<Grid size={{ xs: 4, md: 1 }}>
 						<Skills />
 					</Grid>
 				</Grid>

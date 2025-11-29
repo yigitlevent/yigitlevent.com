@@ -3,7 +3,7 @@ import Typography from "@mui/material/Typography";
 import { Fragment } from "react";
 
 
-export function Skills(): JSX.Element {
+export function Skills(): React.JSX.Element {
 	const skills = [
 		{ name: "js/ts", things: ["frontend, desktop apps, backend", "react, redux, zustand, immer, electron, axios, and more"] },
 		{ name: "f#", things: ["simulations, data analysis", "fsharp.data, fsharp.stats, plotly.net, ml.net, and more"] },
