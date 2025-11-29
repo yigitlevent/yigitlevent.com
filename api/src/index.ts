@@ -23,7 +23,7 @@ const SessionStore = new (pgsimple(session))({
 	pool: PgPool,
 	schemaName: "usr",
 	tableName: "UserSessions",
-	errorLog: (e) => { console.error(e); }
+	errorLog: e => { console.error(e); }
 });
 
 App.use(morgan("combined", {
@@ -52,24 +52,24 @@ GET /campaign -- get all details of a campaign
 GET /campaign/players -- get basic details of all players for a given campaign
 GET /campaign/player -- get all details of a player for a given campaign
 
-POST /campaign/invite 
+POST /campaign/invite
 	-- invite a player to your campaign
-	-- can't invite a player that is already invited 
+	-- can't invite a player that is already invited
 	-- can't invite a player that is already in the campaign
 
-POST /campaign/kick 
+POST /campaign/kick
 	-- remove a player from your campaign
 
-POST /player/invite/accept 
+POST /player/invite/accept
 	-- accept a campaign invitation
 	-- delete campaign invitation
 	-- add campaignplayers entry
 
-POST /player/invite/reject 
+POST /player/invite/reject
 	-- reject a campaign invitation
 	-- delete campaign invitation
 
-POST /player/leave 
+POST /player/leave
 	-- leave a campaign that you are already in
 	-- delete campaignplayers entry
 

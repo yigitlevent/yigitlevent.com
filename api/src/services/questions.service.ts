@@ -4,7 +4,6 @@ import { Logger } from "../utils/logger";
 
 export async function GetQuestions(): Promise<BwgrQuestion[]> {
 	const convert = (v: BwgrQuestionDBO): BwgrQuestion => {
-
 		const r: BwgrQuestion = {
 			id: v.Id,
 			name: v.Name,

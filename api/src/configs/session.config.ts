@@ -8,7 +8,7 @@ export const SessionConfig: SessionOptions = {
 	saveUninitialized: false,
 	resave: false,
 	proxy: !IsDev,
-	//rolling: true,
+	// rolling: true,
 	cookie: {
 		secure: !IsDev,
 		httpOnly: !IsDev,

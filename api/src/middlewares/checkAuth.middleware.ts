@@ -11,4 +11,3 @@ export async function CheckAuth(request: Request, response: Response, next: Next
 
 	return response.sendStatus(401);
 }
-

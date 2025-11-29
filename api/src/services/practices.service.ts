@@ -4,7 +4,6 @@ import { Logger } from "../utils/logger";
 
 export async function GetPractices(): Promise<BwgrPractice[]> {
 	const convert = (v: BwgrPracticeDBO): BwgrPractice => {
-
 		if (v.Ability !== null && v.AbilityId !== null) {
 			return {
 				id: v.Id,

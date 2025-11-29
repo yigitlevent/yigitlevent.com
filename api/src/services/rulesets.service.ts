@@ -4,7 +4,6 @@ import { Logger } from "../utils/logger";
 
 export async function GetRulesets(): Promise<BwgrRuleset[]> {
 	const convert = (v: BwgrRulesetDBO): BwgrRuleset => {
-
 		const r: BwgrRuleset = {
 			id: v.Id,
 			name: v.Name,

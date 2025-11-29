@@ -2,6 +2,7 @@ import globals from "globals";
 import eslint from "@eslint/js";
 import { globalIgnores } from "eslint/config";
 import tsEslint from "typescript-eslint";
+import pStylistic from '@stylistic/eslint-plugin';
 import pImport from "eslint-plugin-import";
 import pJson from "eslint-plugin-json";
 
@@ -10,6 +11,7 @@ export default [
 	eslint.configs.recommended,
 	...tsEslint.configs.strictTypeChecked,
 	...tsEslint.configs.stylisticTypeChecked,
+	pStylistic.configs.recommended,
 	pImport.flatConfigs.typescript,
 
 	globalIgnores([
@@ -94,25 +96,48 @@ export default [
 
 			"eqeqeq": "error",
 			"no-debugger": "warn",
-			"eol-last": ["error", "always"],
 			"prefer-const": "error",
-			"no-mixed-spaces-and-tabs": "error",
-			"linebreak-style": "off",
-			"operator-linebreak": ["error", "before"],
-			"quotes": ["error", "double"],
-			"semi": ["error", "always"],
-			"indent": "off",
 			"no-empty": "off",
 			"no-empty-function": "off",
 			"no-unused-vars": "off",
 			"no-cond-assign": "error",
-			"comma-dangle": "off",
-			"no-multi-spaces": "error",
-			"no-multiple-empty-lines": "error",
-			"no-multiple-empty-lines": ["error", { max: 2, maxBOF: 0 }],
 
-			"@/comma-dangle": "error",
-			"@/indent": ["error", "tab"],
+			"@stylistic/arrow-parens": ["error", "as-needed"],
+			"@stylistic/no-extra-parens": "error",
+			"@stylistic/no-multi-spaces": "error",
+			"@stylistic/operator-linebreak": ["error", "before"],
+			"@stylistic/linebreak-style": "off",
+			"@stylistic/semi": ["error", "always"],
+			"@stylistic/no-extra-semi": "error",
+			"@stylistic/no-mixed-spaces-and-tabs": "error",
+			"@stylistic/eol-last": ["error", "always"],
+			"@stylistic/max-statements-per-line": "off",
+			"@stylistic/quotes": ["error", "double"],
+			"@stylistic/no-multiple-empty-lines": ["error", { max: 2, maxBOF: 0 }],
+			"@stylistic/no-tabs": "off",
+			"@stylistic/comma-dangle": ["error", "never"],
+			"@stylistic/jsx-indent-props": ["error", "tab"],
+			"@stylistic/indent": ["error", "tab"],
+			"@stylistic/member-delimiter-style": [
+				"error", {
+					"multiline": {
+						"delimiter": "semi",
+						"requireLast": true
+					},
+					"singleline": {
+						"delimiter": "semi",
+						"requireLast": true
+					},
+					"overrides": {
+						"interface": {
+							"multiline": {
+								"delimiter": "semi",
+								"requireLast": true
+							}
+						}
+					}
+				}
+			],
 
 			"@typescript-eslint/no-explicit-any": "error",
 			"@typescript-eslint/no-inferrable-types": "error",
@@ -139,7 +164,8 @@ export default [
 				{ selector: "method", format: ["camelCase"] },
 				{ selector: "enumMember", format: ["PascalCase"] },
 				{ selector: "typeLike", format: ["PascalCase"] },
-				{ selector: "import", format: null }],
+				{ selector: "import", format: null }
+			],
 		}
 	}
 ]
