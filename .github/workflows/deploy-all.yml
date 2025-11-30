@@ -173,3 +173,41 @@ jobs:
             npm run build
             sudo rm -rf ${{ secrets.TARGETDIR }}/client/megagame
             sudo cp -R ${{ secrets.SOURCEDIR }}/client/megagame-src/dist ${{ secrets.TARGETDIR }}/client/megagame
+
+  build-client-livingspace:
+    needs: [copy-utility]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Clean and Copy Source
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          passphrase: ${{ secrets.PASSPHRASE }}
+          port: ${{ secrets.PORT }}
+          key: ${{ secrets.SSHKEY }}
+          source: 'client/livingspace/**'
+          target: ${{ secrets.SOURCEDIR }}/client/livingspace-src
+          strip_components: 2
+          rm: true
+
+      - name: Build, Target Cleanup, Copy
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          passphrase: ${{ secrets.PASSPHRASE }}
+          port: ${{ secrets.PORT }}
+          key: ${{ secrets.SSHKEY }}
+          script: |
+            export NVM_DIR=~/.nvm
+            source ~/.nvm/nvm.sh
+            cd ${{ secrets.SOURCEDIR }}/client/livingspace-src
+            nvm install node
+            nvm use node
+            npm i
+            npm run build
+            sudo rm -rf ${{ secrets.TARGETDIR }}/client/livingspace
+            sudo cp -R ${{ secrets.SOURCEDIR }}/client/livingspace-src/dist ${{ secrets.TARGETDIR }}/client/livingspace

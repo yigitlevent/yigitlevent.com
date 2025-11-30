@@ -92,19 +92,22 @@ export const tsNodeRules = {
 	}],
 
 	"eqeqeq": "error",
-	"no-debugger": "warn",
 	"prefer-const": "error",
 	"no-empty": "error",
+	"no-cond-assign": "error",
+	"no-debugger": "warn",
 	"no-empty-function": "off",
 	"no-unused-vars": "off",
-	"no-cond-assign": "error",
 	"indent": "off",
 
+	"@stylistic/curly-newline": ["error", { "consistent": true }],
+	"@stylistic/brace-style": ["error", "stroustrup", { "allowSingleLine": true }],
+	"@stylistic/block-spacing": "error",
 	"@stylistic/indent-binary-ops": ["error", "tab"],
 	"@stylistic/arrow-parens": ["error", "as-needed"],
 	"@stylistic/no-extra-parens": "error",
 	"@stylistic/no-multi-spaces": "error",
-	"@stylistic/operator-linebreak": ["error", "before"],
+	"@stylistic/operator-linebreak": ["error", "before", { "overrides": { "=": "after" } }],
 	"@stylistic/linebreak-style": "off",
 	"@stylistic/semi": ["error", "always"],
 	"@stylistic/no-extra-semi": "error",
@@ -118,6 +121,10 @@ export const tsNodeRules = {
 	"@stylistic/comma-dangle": ["error", "never"],
 	"@stylistic/jsx-indent-props": ["error", "tab"],
 	"@stylistic/indent": ["error", "tab", { "SwitchCase": 1 }],
+	"@stylistic/type-generic-spacing": ["error"],
+	"@stylistic/type-named-tuple-spacing": ["error"],
+	"@stylistic/nonblock-statement-body-position": ["error", "beside"],
+	"@stylistic/no-whitespace-before-property": "error",
 	"@stylistic/member-delimiter-style": [
 		"error", {
 			"multiline": {

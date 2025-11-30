@@ -126,9 +126,9 @@ export function Checklist({ expanded }: { expanded: boolean; }): React.JSX.Eleme
 		const remainingTraitPoints = getTraitPools().remaining;
 		const remainingResourcePoints = getResourcePools().remaining;
 
-		const stockSpecificFulfilled
-			= !(stock[1] === "Orc" && special.stock.brutalLifeTraits.length < lifepaths.length - 5)
-				&& !(stock[1] === "Great Wolf" && special.stock.huntingGround === undefined);
+		const stockSpecificFulfilled =
+			!(stock[1] === "Orc" && special.stock.brutalLifeTraits.length < lifepaths.length - 5)
+			&& !(stock[1] === "Great Wolf" && special.stock.huntingGround === undefined);
 
 		if (concept === "") setActiveStep(0);
 		else if (lifepaths.length === 0) setActiveStep(1);

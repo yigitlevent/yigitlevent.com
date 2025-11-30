@@ -189,8 +189,8 @@ export const useCharacterBurnerMiscStore = create<CharacterBurnerMiscState>()(
 				const { hasAttribute } = useCharacterBurnerAttributeStore.getState();
 				const { questions } = get();
 
-				const newQuestions: BwgrCharacterQuestion[]
-					= ruleset.questions
+				const newQuestions: BwgrCharacterQuestion[] =
+					ruleset.questions
 						.filter(v => {
 							const attrIds = [];
 							if (v.attributes?.[0]?.[0]) attrIds.push(v.attributes[0][0]);
@@ -254,8 +254,8 @@ export const useCharacterBurnerMiscStore = create<CharacterBurnerMiscState>()(
 
 				const maxDistance = Math.ceil(forte.exponent / 2);
 
-				const mortalWound
-					= traitEffects.some(x => "roundUp" in x && x.roundUp === "Mortal Wound") ? Math.ceil(Average([power.exponent, forte.exponent])) + 6 : Math.floor(Average([power.exponent, forte.exponent])) + 6;
+				const mortalWound =
+					traitEffects.some(x => "roundUp" in x && x.roundUp === "Mortal Wound") ? Math.ceil(Average([power.exponent, forte.exponent])) + 6 : Math.floor(Average([power.exponent, forte.exponent])) + 6;
 
 				let traumatic = mortalWound - 1;
 				let severe = mortalWound - 2;

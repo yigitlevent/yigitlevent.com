@@ -5,11 +5,11 @@ import { devtools, persist } from "zustand/middleware";
 import { GenericDelete, GenericGet, GenericPost } from "../utils/GenericRequests";
 
 
-export type FetchState
-	= | "waiting"
-		| "requesting"
-		| "succeded"
-		| "failed";
+export type FetchState =
+	| "waiting"
+	| "requesting"
+	| "succeded"
+	| "failed";
 
 interface MegagameStore {
 	readonly fetchMegagameState: FetchState;

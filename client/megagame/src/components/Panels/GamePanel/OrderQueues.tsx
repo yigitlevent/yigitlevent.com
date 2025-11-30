@@ -90,8 +90,8 @@ function OrderQueuePanelQueueButton({ orderType, orderQueueIndexes }: { orderTyp
 function OrderQueue({ orderType }: { orderType: MegagameOrderType; }): React.JSX.Element {
 	const { queues, userType, userTypeId } = useMegagameStore();
 
-	const orderQueueIndexes
-		= queues && userType !== "Guest" ? Object.keys(queues).reduce<Record<OrderTypeId, number>>((acc, orderTypeId) => {
+	const orderQueueIndexes =
+		queues && userType !== "Guest" ? Object.keys(queues).reduce<Record<OrderTypeId, number>>((acc, orderTypeId) => {
 			const index = queues[orderTypeId].findIndex(order => order.factionId === userTypeId);
 			acc[orderTypeId as OrderTypeId] = index;
 			return acc;

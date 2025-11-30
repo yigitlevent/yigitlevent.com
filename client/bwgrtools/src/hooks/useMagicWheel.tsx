@@ -107,8 +107,8 @@ export function useMagicWheel<T extends OneOfWheelObjects, P extends OneOfWheelO
 			return band.targetAmount + rand;
 		};
 
-		const revisedBands
-			= Object.entries<BandBlock>(bands).reduce<Record<P, BandBlock>>((acc, [key, band]) => {
+		const revisedBands =
+			Object.entries<BandBlock>(bands).reduce<Record<P, BandBlock>>((acc, [key, band]) => {
 				if (!isAvailable(key)) acc[key as P] = { ...band, targetAmount: band.currentAmount };
 				else acc[key as P] = { ...band, targetAmount: getTarget(band) };
 				return acc;
@@ -124,8 +124,8 @@ export function useMagicWheel<T extends OneOfWheelObjects, P extends OneOfWheelO
 		setImpetusId(spellFacets.impetus[0].id);
 		setDurationId(spellFacets.duration[0].id);
 		setOriginId(spellFacets.origins[0].id);
-		const revisedBands
-			= Object.entries<BandBlock>(bands).reduce<Record<P, BandBlock>>((acc, [key, band]) => {
+		const revisedBands =
+			Object.entries<BandBlock>(bands).reduce<Record<P, BandBlock>>((acc, [key, band]) => {
 				acc[key as P] = { ...band, targetAmount: 0 };
 				return acc;
 			}, {} as Record<P, BandBlock>);

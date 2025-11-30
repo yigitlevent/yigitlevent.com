@@ -35,8 +35,8 @@ export function CalculateDiceProbability(poolSize: number, openEnded: boolean, s
 	const freqCount = Array(Math.max(...successes) + 1).fill(0) as number[];
 	successes.forEach(success => freqCount[success]++);
 
-	const result
-		= freqCount
+	const result =
+		freqCount
 			.reverse()
 			.map((_, index, arr) =>
 				arr

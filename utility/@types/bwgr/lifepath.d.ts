@@ -63,22 +63,22 @@ interface BwgrLifepathRequirementBlockItemDBO {
 	Attribute: string | null;
 }
 
-type BwgrLifepathRequirementItem
-	= { logicType: [id: LogicTypeId, name: string]; }
-		& ({ isUnique: true; }
-			| { isSettingEntry: true; }
-			| { minLpIndex: number; }
-			| { maxLpIndex: number; }
-			| { minYears: number; }
-			| { maxYears: number; }
-			| { gender: "Male" | "Female"; }
-			| { oldestBy: number; }
-			| { attribute: [id: BwgrAbilityId, name: string]; min?: number; max?: number; forCompanion: boolean; }
-			| { skill: [id: BwgrSkillId, name: string]; forCompanion: boolean; }
-			| { trait: [id: BwgrTraitId, name: string]; forCompanion: boolean; }
-			| { lifepath: [id: BwgrLifepathId, name: string]; forCompanion: boolean; }
-			| { setting: [id: BwgrSettingId, name: string]; forCompanion: boolean; }
-			| { question: [id: BwgrQuestionId, name: string]; });
+type BwgrLifepathRequirementItem =
+	{ logicType: [id: LogicTypeId, name: string]; }
+	& ({ isUnique: true; }
+		| { isSettingEntry: true; }
+		| { minLpIndex: number; }
+		| { maxLpIndex: number; }
+		| { minYears: number; }
+		| { maxYears: number; }
+		| { gender: "Male" | "Female"; }
+		| { oldestBy: number; }
+		| { attribute: [id: BwgrAbilityId, name: string]; min?: number; max?: number; forCompanion: boolean; }
+		| { skill: [id: BwgrSkillId, name: string]; forCompanion: boolean; }
+		| { trait: [id: BwgrTraitId, name: string]; forCompanion: boolean; }
+		| { lifepath: [id: BwgrLifepathId, name: string]; forCompanion: boolean; }
+		| { setting: [id: BwgrSettingId, name: string]; forCompanion: boolean; }
+		| { question: [id: BwgrQuestionId, name: string]; });
 
 interface BwgrLifepathRequirementBlock {
 	logicType: [id: LogicTypeId, name: string];

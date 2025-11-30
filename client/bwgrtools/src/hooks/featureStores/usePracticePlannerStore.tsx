@@ -54,8 +54,8 @@ export const usePracticePlannerStore = create<PracticePlannerState>()(
 					state.cells = newCells;
 
 					if (state.cells.length > 0) {
-						const marks
-							= Array
+						const marks =
+							Array
 								.from(Array(Math.floor(state.cells.length)))
 								.map((_, i) => ({ value: i + 1, label: (i + 1).toString() }));
 
@@ -73,8 +73,8 @@ export const usePracticePlannerStore = create<PracticePlannerState>()(
 					state.cells = newCells;
 
 					if (state.cells.length > 0) {
-						const marks
-							= Array
+						const marks =
+							Array
 								.from(Array(Math.floor(state.cells.length)))
 								.map((_, i) => ({ value: i + 1, label: (i + 1).toString() }));
 

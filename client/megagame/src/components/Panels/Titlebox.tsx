@@ -53,8 +53,8 @@ export function Titlebox(): React.JSX.Element {
 	const navigate = useNavigate();
 	const location = useLocation();
 
-	const page
-		= location.pathname === "/rules" ? Localisation.rulebooks[lang] : location.pathname === "/admin" ? Localisation.admin[lang] : Localisation.gamePage[lang];
+	const page =
+		location.pathname === "/rules" ? Localisation.rulebooks[lang] : location.pathname === "/admin" ? Localisation.admin[lang] : Localisation.gamePage[lang];
 
 
 	return (

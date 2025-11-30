@@ -9,8 +9,8 @@ import { PopoverLink } from "../../Shared/PopoverLink";
 export function LifepathTraits({ lifepath }: { lifepath: BwgrLifepath; }): React.JSX.Element {
 	const { getTrait } = useRulesetStore();
 
-	const lifepathTraits
-		= lifepath.traits ? lifepath.traits.map(traitId => getTrait(traitId)) : undefined;
+	const lifepathTraits =
+		lifepath.traits ? lifepath.traits.map(traitId => getTrait(traitId)) : undefined;
 
 
 	const text = `${lifepath.pools.traitPool.toString()}${lifepath.pools.traitPool > 1 ? "pts: " : "pt: "}`;

@@ -115,8 +115,8 @@ export const useCharacterBurnerLifepathStore = create<CharacterBurnerLifepathSta
 				const lifepathPool = lps.length > 0 ? lps.map(lp => lp.pools.mentalStatPool).reduce((pv, cv) => pv + cv) : 0;
 				const total = stockAgePool + lifepathPool;
 
-				const spent
-					= Object.values(stats)
+				const spent =
+					Object.values(stats)
 						.filter(s => s.poolType === "Mental")
 						.map((v): number => v.mainPoolSpent.shade + v.mainPoolSpent.exponent)
 						.reduce((pv, cv) => pv + cv);
@@ -133,8 +133,8 @@ export const useCharacterBurnerLifepathStore = create<CharacterBurnerLifepathSta
 				const lifepathPool = lps.length > 0 ? lps.map(lp => lp.pools.physicalStatPool).reduce((pv, cv) => pv + cv) : 0;
 				const total = stockAgePool + lifepathPool;
 
-				const spent
-					= Object.values(stats)
+				const spent =
+					Object.values(stats)
 						.filter(s => s.poolType === "Physical")
 						.map((v): number => v.mainPoolSpent.shade + v.mainPoolSpent.exponent)
 						.reduce((pv, cv) => pv + cv);
@@ -147,8 +147,8 @@ export const useCharacterBurnerLifepathStore = create<CharacterBurnerLifepathSta
 				const { stats } = useCharacterBurnerStatStore.getState();
 
 				const total = lps.length > 0 ? lps.map(lp => lp.pools.eitherStatPool).reduce((pv, cv) => pv + cv) : 0;
-				const spent
-					= Object.values(stats)
+				const spent =
+					Object.values(stats)
 						.map((v): number => v.eitherPoolSpent.shade + v.eitherPoolSpent.exponent)
 						.reduce((pv, cv) => pv + cv);
 

@@ -22,11 +22,11 @@ export function Basics({ openModal }: { openModal: (name: BwgrCharacterBurnerMod
 
 	const hasSpecialStock = (stock[1] === "Orc" && lifepaths.length > 4) || (stock[1] === "Great Wolf" && lifepaths.length > 0);
 
-	const hasSpecialLifepath
-		= lifepaths.some(lifepath => Array.isArray(lifepath.years) || (lifepath.companion?.givesSkills));
+	const hasSpecialLifepath =
+		lifepaths.some(lifepath => Array.isArray(lifepath.years) || (lifepath.companion?.givesSkills));
 
-	const hasSpecialSkills
-		= skills.filter(charSkill => { return charSkill.name === "Any Skill" || charSkill.name === "Any Wise" || ruleset.getSkill(charSkill.id).subskillIds !== undefined; }).length > 0;
+	const hasSpecialSkills =
+		skills.filter(charSkill => { return charSkill.name === "Any Skill" || charSkill.name === "Any Wise" || ruleset.getSkill(charSkill.id).subskillIds !== undefined; }).length > 0;
 
 	const disableSpecialOptionsModal = !hasSpecialStock && !hasSpecialLifepath && !hasSpecialSkills;
 

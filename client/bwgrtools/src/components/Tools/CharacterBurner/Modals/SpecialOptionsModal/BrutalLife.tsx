@@ -19,8 +19,8 @@ export function BrutalLife(): React.JSX.Element {
 	const { special, addBrutalLifeTrait } = useCharacterBurnerMiscStore();
 
 	const rollBrutalLife = useCallback((lifepathNumber: number) => {
-		const isBrutal
-			= (lifepathNumber < 10) ? RandomNumber(1, 6) <= 4 : RandomNumber(1, 6) <= 2;
+		const isBrutal =
+			(lifepathNumber < 10) ? RandomNumber(1, 6) <= 4 : RandomNumber(1, 6) <= 2;
 
 		let traitToAdd: [id: BwgrTraitId, name: string] | "No Trait" | undefined = "No Trait";
 

@@ -55,8 +55,8 @@ export function DiceRoller(): React.JSX.Element {
 	const [result, setResult] = useState<TestResult | undefined>(undefined);
 	const [probabilities, setProbabilities] = useState<number[]>([]);
 
-	const testType
-		= (dicePool === 1 && obstacle === 1) ? "Routine or Difficult" : (obstacle > dicePool) ? "Challenging" : (obstacle <= Tests[dicePool].routineMaxObstacle) ? "Routine" : "Difficult";
+	const testType =
+		(dicePool === 1 && obstacle === 1) ? "Routine or Difficult" : (obstacle > dicePool) ? "Challenging" : (obstacle <= Tests[dicePool].routineMaxObstacle) ? "Routine" : "Difficult";
 
 	const calculateResult = (dice: number[], usedFate: boolean): void => {
 		let successes = 0;

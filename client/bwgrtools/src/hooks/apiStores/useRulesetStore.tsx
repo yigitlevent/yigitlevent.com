@@ -5,13 +5,13 @@ import { devtools } from "zustand/middleware";
 import { GenericGet, GenericPost } from "../../utils/GenericRequests";
 
 
-type FetchState
-	= | "fetch-full"
-		| "fetching-list"
-		| "fetch-data"
-		| "fetching-data"
-		| "done"
-		| "failed";
+type FetchState =
+	| "fetch-full"
+	| "fetching-list"
+	| "fetch-data"
+	| "fetching-data"
+	| "done"
+	| "failed";
 
 // TODO: research index key signatures to see if there is a workaround
 interface RulesetStore {
@@ -186,8 +186,8 @@ export const useRulesetStore = create<RulesetStore>()(
 									state.traitCategories = traitCategories;
 									state.traitTypes = traitTypes;
 
-									state.lifepaths
-										= response.data.ruleset.lifepaths
+									state.lifepaths =
+										response.data.ruleset.lifepaths
 											.map(lifepath => {
 												const lp = { ...lifepath };
 												if (lifepath.leads) lp.leads = lifepath.leads.filter(leadId => settings.some(x => x.id === leadId));
@@ -195,8 +195,8 @@ export const useRulesetStore = create<RulesetStore>()(
 												if (lifepath.traits) lp.traits = lifepath.traits.filter(traitId => traits.some(x => x.id === traitId));
 
 												if (lp.requirements) {
-													lp.requirements
-														= lp.requirements
+													lp.requirements =
+														lp.requirements
 															.map(rb => {
 																return {
 																	...rb,

@@ -14,8 +14,8 @@ export function LifepathSkills({ lifepath }: { lifepath: BwgrLifepath; }): React
 
 	const generalSkill = getSkill("General");
 
-	const lifepathSkills
-		= lifepath.skills ? lifepath.skills.map(skillId => getSkill(skillId)) : undefined;
+	const lifepathSkills =
+		lifepath.skills ? lifepath.skills.map(skillId => getSkill(skillId)) : undefined;
 
 	return (
 		<Fragment>

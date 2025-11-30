@@ -75,8 +75,8 @@ export function FilterLifepaths({ rulesetLifepaths, stock, age, lifepaths, gende
 		const lastLifepath = lifepaths[lifepaths.length - 1];
 		const possibleSettingIds = lastLifepath.leads ? [lastLifepath.setting[0], ...lastLifepath.leads] : [lastLifepath.setting[0]];
 
-		possibleLifepaths
-			= possibleSettingIds
+		possibleLifepaths =
+			possibleSettingIds
 				.map(settingId => rulesetLifepaths.filter(x => stock[0] === x.stock[0] && x.setting[0] === settingId && !x.flags.isBorn))
 				.flat()
 				.filter(lifepath => {

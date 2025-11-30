@@ -76,11 +76,11 @@ interface BwgrCharacterQuestion {
 	answer: boolean;
 }
 
-type BwgrCharacterTraitEffect
-	= | { roundUp: BwgrAbilityId; }
-		| { roundUp: "Mortal Wound"; }
-		| { callOn: BwgrAbilityId; }
-		| { callOn: BwgrSkillId; };
+type BwgrCharacterTraitEffect =
+	| { roundUp: BwgrAbilityId; }
+	| { roundUp: "Mortal Wound"; }
+	| { callOn: BwgrAbilityId; }
+	| { callOn: BwgrSkillId; };
 
 type BwgrHuntingGroundsList = "Waste" | "Marginal" | "Typical" | "Plentiful" | "Untouched";
 

@@ -49,8 +49,8 @@ export function MagicWheelAlt(): React.JSX.Element {
 				})
 	});
 
-	const [bands, setBands]
-		= useState<Record<keyof BwgrAltSpellFacets, BandBlock>>({
+	const [bands, setBands] =
+		useState<Record<keyof BwgrAltSpellFacets, BandBlock>>({
 			origins: { index: 0, angle: 2 * Math.PI / spellFacets.origins.length, currentAmount: 0, targetAmount: 0, items: spellFacets.origins.map(v => v.name) },
 			duration: { index: 1, angle: 2 * Math.PI / spellFacets.duration.length, currentAmount: 0, targetAmount: 0, items: spellFacets.duration.map(v => v.name) },
 			impetus: { index: 2, angle: 2 * Math.PI / spellFacets.impetus.length, currentAmount: 0, targetAmount: 0, items: spellFacets.impetus.map(v => v.name) },
