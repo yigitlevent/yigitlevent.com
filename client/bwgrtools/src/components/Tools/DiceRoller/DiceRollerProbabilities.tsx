@@ -12,7 +12,7 @@ export function DiceRollerProbabilities({ probabilities, isDoubleObstacle, obsta
 
 			<Grid size={{ xs: 3, sm: 3 }}>
 				<Grid container columns={20} direction="row" flexWrap="wrap" sx={{ padding: "0" }}>
-					{<Fragment>
+					<Fragment>
 						{Array.from(Array(20)).map((_, obIndex) => {
 							const probability = probabilities.at(obIndex);
 
@@ -31,16 +31,22 @@ export function DiceRollerProbabilities({ probabilities, isDoubleObstacle, obsta
 											border: (obIndex + 1) === (isDoubleObstacle ? obstacle * 2 : obstacle) ? "1px solid white" : "1px solid transparent"
 										}}
 									>
-										<Typography variant="body1" sx={{ borderBottom: "1px solid white" }}>{obIndex + 1}ob</Typography>
+										<Typography variant="body1" sx={{ borderBottom: "1px solid white" }}>
+											{obIndex + 1}
+											ob
+										</Typography>
 
-										{probability === undefined
-											? <Typography variant="body1">0%</Typography>
-											: <Typography variant="body1">{Math.round(probability * 100)}%</Typography>}
+										{probability === undefined ? <Typography variant="body1">0%</Typography> : (
+											<Typography variant="body1">
+												{Math.round(probability * 100)}
+												%
+											</Typography>
+										)}
 									</Card>
 								</Grid>
 							);
 						})}
-					</Fragment>}
+					</Fragment>
 				</Grid>
 			</Grid>
 		</Fragment>

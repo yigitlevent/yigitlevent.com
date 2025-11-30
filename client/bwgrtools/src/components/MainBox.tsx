@@ -51,12 +51,10 @@ export function MainBox(): React.JSX.Element {
 			<Menu bottom={matches} />
 
 			<Paper sx={{ padding: "10px 20px" }}>
-				{fetchState === "failed"
-					? <Typography>Data fetching failed.</Typography>
-					: null}
+				{fetchState === "failed" ? <Typography>Data fetching failed.</Typography> : null}
 
-				{fetchState === "done"
-					? <Routes>
+				{fetchState === "done" ? (
+					<Routes>
 						<Route path="/" element={<Navigate replace to="/diceroller" />} />
 						<Route path="/diceroller" element={<DiceRoller />} />
 						<Route path="/lifepaths" element={<LifepathLists />} />
@@ -71,7 +69,7 @@ export function MainBox(): React.JSX.Element {
 						<Route path="/fightplanner" element={<FightPlanner />} />
 						<Route path="/characterburner" element={<CharacterBurner />} />
 					</Routes>
-					: <Typography>Loading</Typography>}
+				) : <Typography>Loading</Typography>}
 			</Paper>
 
 			<Box sx={{ margin: "0 0 200px" }} />

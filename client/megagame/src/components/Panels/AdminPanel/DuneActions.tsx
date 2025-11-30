@@ -61,9 +61,9 @@ function SpiceBlow(): React.JSX.Element {
 				Generate Spice Blows
 			</Button>
 
-			{createdSpiceBlows.length > 0
-				? <Blockquote
-					color={"yellow"}
+			{createdSpiceBlows.length > 0 ? (
+				<Blockquote
+					color="yellow"
 					radius="xs"
 					iconSize={30}
 					icon={<Info color="yellow" size={20} />}
@@ -73,11 +73,17 @@ function SpiceBlow(): React.JSX.Element {
 
 					<List>
 						{createdSpiceBlows.map((spiceBlow, index) => (
-							<List.Item key={index}>{spiceBlow.amount} spice at {spiceBlow.regionCode}</List.Item>
+							<List.Item key={index}>
+								{spiceBlow.amount}
+								{" "}
+								spice at
+								{" "}
+								{spiceBlow.regionCode}
+							</List.Item>
 						))}
 					</List>
 				</Blockquote>
-				: null}
+			) : null}
 		</Paper>
 	);
 }
@@ -149,9 +155,9 @@ function StormMovement(): React.JSX.Element {
 				Generate Storm Movements
 			</Button>
 
-			{randomStormMovements.length > 0
-				? <Blockquote
-					color={"yellow"}
+			{randomStormMovements.length > 0 ? (
+				<Blockquote
+					color="yellow"
 					radius="xs"
 					iconSize={30}
 					icon={<Info color="yellow" size={20} />}
@@ -160,14 +166,22 @@ function StormMovement(): React.JSX.Element {
 					<Title order={4}>Storm Movements</Title>
 
 					<List>
-						<List.Item>Coriolis Storms move {coriolisStormMovement} space(s)</List.Item>
+						<List.Item>
+							Coriolis Storms move
+							{coriolisStormMovement}
+							{" "}
+							space(s)
+						</List.Item>
 
 						{randomStormMovements.map((regionCode, index) => (
-							<List.Item key={index}>Random Storm at {regionCode}</List.Item>
+							<List.Item key={index}>
+								Random Storm at
+								{regionCode}
+							</List.Item>
 						))}
 					</List>
 				</Blockquote>
-				: null}
+			) : null}
 		</Paper>
 	);
 }

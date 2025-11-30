@@ -16,7 +16,7 @@ interface FightPlannerState {
 
 export const useFightPlannerStore = create<FightPlannerState>()(
 	devtools(
-		(set) => ({
+		set => ({
 			actions: [[], [], []],
 			selectedAction: ["No Action", "No Action", "No Action"],
 
@@ -24,7 +24,7 @@ export const useFightPlannerStore = create<FightPlannerState>()(
 				const actionMaybe = actions.find(v => v.name === actionName);
 				if (!actionMaybe) return;
 				const action: BwgrFightActionExtended = { ...actionMaybe, open: false, visible: true };
-				set(produce<FightPlannerState>((state) => {
+				set(produce<FightPlannerState>(state => {
 					const newActions = state.actions;
 					state.actions = newActions.map((v, i) => {
 						if (i === volleyIndex) { return [...v, action]; }
@@ -33,7 +33,7 @@ export const useFightPlannerStore = create<FightPlannerState>()(
 				}));
 			},
 			deleteAction: (volleyIndex: number, actionIndex: number) => {
-				set(produce<FightPlannerState>((state) => {
+				set(produce<FightPlannerState>(state => {
 					const newActions = state.actions;
 					state.actions = newActions.map((v, i) => {
 						if (i === volleyIndex) { return v.filter((_, ii) => ii !== actionIndex); }
@@ -42,12 +42,12 @@ export const useFightPlannerStore = create<FightPlannerState>()(
 				}));
 			},
 			changeSelectedAction: (actionName: string, volleyIndex: number) => {
-				set(produce<FightPlannerState>((state) => {
+				set(produce<FightPlannerState>(state => {
 					state.selectedAction[volleyIndex] = actionName;
 				}));
 			},
 			toggleActionDetails: (volleyIndex: number, actionIndex: number) => {
-				set(produce<FightPlannerState>((state) => {
+				set(produce<FightPlannerState>(state => {
 					const newActions = state.actions;
 					state.actions = newActions.map((v, i) => {
 						if (i === volleyIndex) {
@@ -61,7 +61,7 @@ export const useFightPlannerStore = create<FightPlannerState>()(
 				}));
 			},
 			toggleActionVisibility: (volleyIndex: number, actionIndex: number) => {
-				set(produce<FightPlannerState>((state) => {
+				set(produce<FightPlannerState>(state => {
 					const newActions = state.actions;
 					state.actions = newActions.map((v, i) => {
 						if (i === volleyIndex) {

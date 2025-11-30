@@ -16,7 +16,7 @@ interface DuelOfWitsPlannerState {
 
 export const useDuelOfWitsPlannerStore = create<DuelOfWitsPlannerState>()(
 	devtools(
-		(set) => ({
+		set => ({
 			actions: [undefined, undefined, undefined],
 			selectedAction: ["Avoid the Topic", "Avoid the Topic", "Avoid the Topic"],
 
@@ -24,7 +24,7 @@ export const useDuelOfWitsPlannerStore = create<DuelOfWitsPlannerState>()(
 				const actionMaybe = actions.find(v => v.name === actionName);
 				if (!actionMaybe) return;
 				const action: BwgrDoWActionExtended = { ...actionMaybe, open: false, visible: true };
-				set(produce<DuelOfWitsPlannerState>((state) => {
+				set(produce<DuelOfWitsPlannerState>(state => {
 					const newActions = state.actions;
 					state.actions = newActions.map((v, i) => {
 						if (i === volleyIndex) return action;
@@ -33,7 +33,7 @@ export const useDuelOfWitsPlannerStore = create<DuelOfWitsPlannerState>()(
 				}));
 			},
 			deleteAction: (volleyIndex: number) => {
-				set(produce<DuelOfWitsPlannerState>((state) => {
+				set(produce<DuelOfWitsPlannerState>(state => {
 					const newActions = state.actions;
 					state.actions = newActions.map((v, i) => {
 						if (i === volleyIndex) return undefined;
@@ -42,12 +42,12 @@ export const useDuelOfWitsPlannerStore = create<DuelOfWitsPlannerState>()(
 				}));
 			},
 			changeSelectedAction: (actionName: string, volleyIndex: number) => {
-				set(produce<DuelOfWitsPlannerState>((state) => {
+				set(produce<DuelOfWitsPlannerState>(state => {
 					state.selectedAction[volleyIndex] = actionName;
 				}));
 			},
 			toggleActionDetails: (volleyIndex: number) => {
-				set(produce<DuelOfWitsPlannerState>((state) => {
+				set(produce<DuelOfWitsPlannerState>(state => {
 					const newActions = state.actions;
 					state.actions = newActions.map((v, i) => {
 						if (v && i === volleyIndex) { return { ...v, open: !v.open }; }
@@ -56,13 +56,12 @@ export const useDuelOfWitsPlannerStore = create<DuelOfWitsPlannerState>()(
 				}));
 			},
 			toggleActionVisibility: (volleyIndex: number) => {
-				set(produce<DuelOfWitsPlannerState>((state) => {
+				set(produce<DuelOfWitsPlannerState>(state => {
 					const newActions = state.actions;
 					state.actions = newActions.map((v, i) => {
 						if (v && i === volleyIndex) { return { ...v, visible: !v.visible }; }
 						return v;
 					}) as [BwgrDoWActionExtended, BwgrDoWActionExtended, BwgrDoWActionExtended];
-
 				}));
 			}
 		}),

@@ -37,15 +37,16 @@ export function ResourceItem({ resource }: { resource: BwgrResource; }): React.J
 			</Grid>
 
 			<Grid size={{ xs: resource.magical ? 1 : 3 }}>
-				{resource.variableCost
-					? <Typography variant="body2">variable</Typography>
-					: resource.costs.every(v => v[1])
-						? resource.costs.map((res, i) =>
-							<Typography variant="body2" key={i}>Resources: {res[0]}{res[0] > 1 ? "rps" : "rp"}</Typography>
-						)
-						: resource.costs.map((res, i) =>
-							<Typography variant="body2" key={i}>{getText(res)}</Typography>
-						)}
+				{resource.variableCost ? <Typography variant="body2">variable</Typography> : resource.costs.every(v => v[1]) ? resource.costs.map((res, i) => (
+					<Typography variant="body2" key={i}>
+						Resources:
+						{res[0]}
+						{res[0] > 1 ? "rps" : "rp"}
+					</Typography>
+				)
+				) : resource.costs.map((res, i) =>
+					<Typography variant="body2" key={i}>{getText(res)}</Typography>
+				)}
 			</Grid>
 
 			<Grid size={{ xs: resource.magical ? 1 : 3 }}>
@@ -54,50 +55,71 @@ export function ResourceItem({ resource }: { resource: BwgrResource; }): React.J
 				)}
 			</Grid>
 
-			{resource.magical
-				? <Fragment>
+			{resource.magical ? (
+				<Fragment>
 					<Grid size={{ xs: 1 }}>
-						<Typography variant="body2">Actions: {resource.magical.doActionsMultiply ? "x" : ""}{resource.magical.actions}</Typography>
+						<Typography variant="body2">
+							Actions:
+							{resource.magical.doActionsMultiply ? "x" : ""}
+							{resource.magical.actions}
+						</Typography>
 					</Grid>
 				</Fragment>
-				: null}
+			) : null}
 
-			{resource.magical?.obstacleDetails
-				? <Grid size={{ xs: 3 }}>
-					<Typography variant="body2">Obstacles: {GetObstacleString(resource, resource.magical.obstacleDetails)}</Typography>
+			{resource.magical?.obstacleDetails ? (
+				<Grid size={{ xs: 3 }}>
+					<Typography variant="body2">
+						Obstacles:
+						{GetObstacleString(resource, resource.magical.obstacleDetails)}
+					</Typography>
 				</Grid>
-				: null}
+			) : null}
 
-			{resource.magical
-				? <Fragment>
+			{resource.magical ? (
+				<Fragment>
 					<Grid size={{ xs: 3 }}><Divider /></Grid>
 
 					<Grid size={{ xs: 1 }}>
-						<Typography variant="body2">Origin: {resource.magical.origin[1]}</Typography>
+						<Typography variant="body2">
+							Origin:
+							{resource.magical.origin[1]}
+						</Typography>
 					</Grid>
 
 					<Grid size={{ xs: 1 }}>
-						<Typography variant="body2">Element: {resource.magical.elements.map(x => x[1]).join("/")}</Typography>
+						<Typography variant="body2">
+							Element:
+							{resource.magical.elements.map(x => x[1]).join("/")}
+						</Typography>
 					</Grid>
 
 					<Grid size={{ xs: 1 }}>
-						<Typography variant="body2">Duration: {resource.magical.duration[1]}</Typography>
+						<Typography variant="body2">
+							Duration:
+							{resource.magical.duration[1]}
+						</Typography>
 					</Grid>
 
 					<Grid size={{ xs: 1 }}>
-						<Typography variant="body2">Area of Effect: {resource.magical.areaOfEffect[1]}
+						<Typography variant="body2">
+							Area of Effect:
+							{resource.magical.areaOfEffect[1]}
 							{resource.magical.areaOfEffectDetails?.unit || resource.magical.areaOfEffectDetails?.modifier ? getAreaOfEffectDetails(resource.magical.areaOfEffectDetails) : ""}
 						</Typography>
 					</Grid>
 
 					<Grid size={{ xs: 1 }}>
-						<Typography variant="body2">Impetus: {resource.magical.impetus.map(x => x[1]).join("/")}</Typography>
+						<Typography variant="body2">
+							Impetus:
+							{resource.magical.impetus.map(x => x[1]).join("/")}
+						</Typography>
 					</Grid>
 				</Fragment>
-				: null}
+			) : null}
 
-			{resource.description
-				? <Fragment>
+			{resource.description ? (
+				<Fragment>
 					<Grid size={{ xs: 3 }}><Divider /></Grid>
 
 					<Grid size={{ xs: 3 }}>
@@ -107,7 +129,7 @@ export function ResourceItem({ resource }: { resource: BwgrResource; }): React.J
 						})}
 					</Grid>
 				</Fragment>
-				: null}
+			) : null}
 		</GenericGrid>
 	);
 }

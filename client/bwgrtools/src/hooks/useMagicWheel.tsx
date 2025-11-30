@@ -69,28 +69,28 @@ export function useMagicWheel<T extends OneOfWheelObjects, P extends OneOfWheelO
 		const hasValue = value !== undefined;
 
 		if (facetIndex > -1) {
-			setBands((prevBands) => ({ ...prevBands, [facet]: { ...prevBands[facet], targetAmount: -facetIndex } }));
+			setBands(prevBands => ({ ...prevBands, [facet]: { ...prevBands[facet], targetAmount: -facetIndex } }));
 
 			switch (facet) {
-			case "areaOfEffects":
-				setAreaOfEffectId((hasValue ? value : 0) as BwgrAreaOfEffectFacetId);
-				break;
-			case "duration":
-				setDurationId((hasValue ? value : 0) as BwgrDurationFacetId);
-				break;
-			case "impetus":
-				setImpetusId((hasValue ? value : 0) as BwgrImpetusFacetId);
-				break;
-			case "origins":
-				setOriginId((hasValue ? value : 0) as BwgrOriginFacetId);
-				break;
-			case "elements":
-			case "primeElements":
-			case "lowerElements":
-			case "higherElements":
-				if (facet === selectedElementCategory) setElementId((hasValue ? value : 0) as BwgrElementFacetId);
-				else if (selectedElementCategory === undefined) setElementId((hasValue ? value : 0) as BwgrElementFacetId);
-				break;
+				case "areaOfEffects":
+					setAreaOfEffectId((hasValue ? value : 0) as BwgrAreaOfEffectFacetId);
+					break;
+				case "duration":
+					setDurationId((hasValue ? value : 0) as BwgrDurationFacetId);
+					break;
+				case "impetus":
+					setImpetusId((hasValue ? value : 0) as BwgrImpetusFacetId);
+					break;
+				case "origins":
+					setOriginId((hasValue ? value : 0) as BwgrOriginFacetId);
+					break;
+				case "elements":
+				case "primeElements":
+				case "lowerElements":
+				case "higherElements":
+					if (facet === selectedElementCategory) setElementId((hasValue ? value : 0) as BwgrElementFacetId);
+					else if (selectedElementCategory === undefined) setElementId((hasValue ? value : 0) as BwgrElementFacetId);
+					break;
 			}
 		}
 	}, [selectedElementCategory, setBands, spellFacets]);
@@ -100,9 +100,7 @@ export function useMagicWheel<T extends OneOfWheelObjects, P extends OneOfWheelO
 		setIsRotating(true);
 
 		const getRandomRotation = (): number =>
-			steps && direction
-				? steps * direction
-				: ((Math.random() > 0.5) ? 1 : -1) * RandomNumber(1, 6);
+			steps && direction ? steps * direction : ((Math.random() > 0.5) ? 1 : -1) * RandomNumber(1, 6);
 
 		const getTarget = (band: BandBlock): number => {
 			const rand = getRandomRotation();
@@ -173,14 +171,14 @@ export function useMagicWheel<T extends OneOfWheelObjects, P extends OneOfWheelO
 						context.restore();
 					});
 
-					if (band.currentAmount.toFixed(1) === band.targetAmount.toFixed(1)) setBands((prevBands) => ({ ...prevBands, [key]: { ...band, currentAmount: band.targetAmount } }));
-					else if (band.currentAmount < band.targetAmount) setBands((prevBands) => ({ ...prevBands, [key]: { ...band, currentAmount: band.currentAmount + constants.rotationSpeed } }));
-					else if (band.currentAmount > band.targetAmount) setBands((prevBands) => ({ ...prevBands, [key]: { ...band, currentAmount: band.currentAmount - constants.rotationSpeed } }));
-					else setBands((prevBands) => ({ ...prevBands, [key]: { ...band, currentAmount: band.targetAmount } }));
+					if (band.currentAmount.toFixed(1) === band.targetAmount.toFixed(1)) setBands(prevBands => ({ ...prevBands, [key]: { ...band, currentAmount: band.targetAmount } }));
+					else if (band.currentAmount < band.targetAmount) setBands(prevBands => ({ ...prevBands, [key]: { ...band, currentAmount: band.currentAmount + constants.rotationSpeed } }));
+					else if (band.currentAmount > band.targetAmount) setBands(prevBands => ({ ...prevBands, [key]: { ...band, currentAmount: band.currentAmount - constants.rotationSpeed } }));
+					else setBands(prevBands => ({ ...prevBands, [key]: { ...band, currentAmount: band.targetAmount } }));
 				}
 			}
 
-			if (isRotating && Object.values<BandBlock>(bands).every((band) => band.currentAmount === band.targetAmount)) {
+			if (isRotating && Object.values<BandBlock>(bands).every(band => band.currentAmount === band.targetAmount)) {
 				cancelAnimationFrame(anim);
 				setIsRotating(false);
 			}

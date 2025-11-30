@@ -44,7 +44,7 @@ export const useCharacterBurnerTraitStore = create<CharacterBurnerTraitState>()(
 			},
 
 			openTrait: (traitId: BwgrTraitId): void => {
-				set(produce<CharacterBurnerTraitState>((state) => {
+				set(produce<CharacterBurnerTraitState>(state => {
 					// TODO: Check remaining counts, use either pool too
 					const charTrait = state.traits.find(traitId);
 					if (charTrait) {
@@ -56,11 +56,11 @@ export const useCharacterBurnerTraitStore = create<CharacterBurnerTraitState>()(
 
 			addGeneralTrait: (trait: BwgrTrait): void => {
 				const charTrait: BwgrCharacterTrait = { id: trait.id, name: trait.name, isOpen: false, type: "General" };
-				set(produce<CharacterBurnerTraitState>((state) => { state.traits = new UniqueArray(state.traits.add(charTrait).items); }));
+				set(produce<CharacterBurnerTraitState>(state => { state.traits = new UniqueArray(state.traits.add(charTrait).items); }));
 			},
 
 			removeGeneralTrait: (traitId: BwgrTraitId): void => {
-				set(produce<CharacterBurnerTraitState>((state) => {
+				set(produce<CharacterBurnerTraitState>(state => {
 					state.traits = new UniqueArray(state.traits.remove(traitId).items);
 				}));
 			},
@@ -137,7 +137,7 @@ export const useCharacterBurnerTraitStore = create<CharacterBurnerTraitState>()(
 						if (characterTraits.existsAny("id", trait.id) === 0) characterTraits.add(trait);
 					});
 
-				set(produce<CharacterBurnerTraitState>((state) => {
+				set(produce<CharacterBurnerTraitState>(state => {
 					state.traits = characterTraits;
 				}));
 

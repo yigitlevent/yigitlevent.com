@@ -56,18 +56,13 @@ export function DiceRoller(): React.JSX.Element {
 	const [probabilities, setProbabilities] = useState<number[]>([]);
 
 	const testType
-		= (dicePool === 1 && obstacle === 1)
-			? "Routine or Difficult"
-			: (obstacle > dicePool) ? "Challenging"
-				: (obstacle <= Tests[dicePool].routineMaxObstacle)
-					? "Routine"
-					: "Difficult";
+		= (dicePool === 1 && obstacle === 1) ? "Routine or Difficult" : (obstacle > dicePool) ? "Challenging" : (obstacle <= Tests[dicePool].routineMaxObstacle) ? "Routine" : "Difficult";
 
 	const calculateResult = (dice: number[], usedFate: boolean): void => {
 		let successes = 0;
 		let failures = 0;
 
-		dice.forEach((v) => {
+		dice.forEach(v => {
 			if ((shade === "B" && v > 3) || (shade === "G" && v > 2) || (shade === "W" && v > 1)) successes += 1;
 			else failures += 1;
 		});
@@ -142,25 +137,25 @@ export function DiceRoller(): React.JSX.Element {
 				<Grid size={{ xs: 3, sm: 3, md: 1 }}>
 					<FormControlLabel
 						label="Is Open Ended"
-						control={
+						control={(
 							<Switch
 								checked={isOpenEnded}
 								onChange={(_, v) => { setIsOpenEnded(v); }}
 								size="small"
 							/>
-						}
+						)}
 						sx={{ display: "block" }}
 					/>
 
 					<FormControlLabel
 						label="Is Double Obstacle"
-						control={
+						control={(
 							<Switch
 								checked={isDoubleObstacle}
 								onChange={(_, v) => { setIsDoubleObstacle(v); }}
 								size="small"
 							/>
-						}
+						)}
 						sx={{ display: "block" }}
 					/>
 				</Grid>
@@ -173,6 +168,6 @@ export function DiceRoller(): React.JSX.Element {
 
 			<DiceRollerProbabilities probabilities={probabilities} isDoubleObstacle={isDoubleObstacle} obstacle={obstacle} />
 			<DiceRollerResult result={result} shade={shade} isDoubleObstacle={isDoubleObstacle} isOpenEnded={isOpenEnded} obstacle={obstacle} rerollFailure={rerollFailure} rerollSixes={rerollSixes} />
-		</Fragment >
+		</Fragment>
 	);
 }

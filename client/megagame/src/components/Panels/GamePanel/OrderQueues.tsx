@@ -14,9 +14,14 @@ function OrderQueueTitle({ orderType, orderQueueIndexes }: { orderType: Megagame
 		<Accordion.Control>
 			{orderType.name}
 
-			{orderQueueIndexes[orderType.id] !== -1 && userType !== "Guest"
-				? <Text style={{ float: "right" }}>{Localisation.yourPositionInQueue[lang]}: {orderQueueIndexes[orderType.id] + 1}</Text>
-				: null}
+			{orderQueueIndexes[orderType.id] !== -1 && userType !== "Guest" ? (
+				<Text style={{ float: "right" }}>
+					{Localisation.yourPositionInQueue[lang]}
+					:
+					{" "}
+					{orderQueueIndexes[orderType.id] + 1}
+				</Text>
+			) : null}
 		</Accordion.Control>
 	);
 }
@@ -27,14 +32,14 @@ function OrderQueuePanelList({ orderType }: { orderType: MegagameOrderType; }): 
 
 	return (
 		<Fragment>
-			{queues && orderType.id in queues && queues[orderType.id].length > 0
-				? <List type="ordered">
+			{queues && orderType.id in queues && queues[orderType.id].length > 0 ? (
+				<List type="ordered">
 					{queues[orderType.id].map(order => (
 						<List.Item key={order.id}>
 							{getFactionNameById(order.factionId)}
 
-							{userType === getFactionNameById(order.factionId) || hasAccess("Megagame Moderator" as UserAccess)
-								? <ActionIcon
+							{userType === getFactionNameById(order.factionId) || hasAccess("Megagame Moderator" as UserAccess) ? (
+								<ActionIcon
 									ml="sm"
 									variant="subtle"
 									color="red"
@@ -43,12 +48,12 @@ function OrderQueuePanelList({ orderType }: { orderType: MegagameOrderType; }): 
 								>
 									<CircleSlash color="red" size={20} />
 								</ActionIcon>
-								: null}
+							) : null}
 						</List.Item>
 					)
 					)}
 				</List>
-				: <Text>{Localisation.noQueueItemsFound[lang]}</Text>}
+			) : <Text>{Localisation.noQueueItemsFound[lang]}</Text>}
 		</Fragment>
 	);
 }
@@ -60,24 +65,24 @@ function OrderQueuePanelQueueButton({ orderType, orderQueueIndexes }: { orderTyp
 		<Fragment>
 			{userType !== "Guest"
 				&& !(userType === "Bene Gesserit" || userType === "Bene Tleliaxu" || userType === "Spacing Guild")
-				&& orderQueueIndexes[orderType.id] === -1
-				? <Button
-					variant="subtle"
-					color="yellow"
-					fullWidth
-					style={{ marginTop: 15 }}
-					onClick={() => {
-						if (!userTypeId || !megagame) return;
-						createOrderQueueItem({
-							megagameId: megagame.id,
-							factionId: userTypeId,
-							orderTypeId: orderType.id
-						});
-					}}
-				>
-					{Localisation.enterQueue[lang]}
-				</Button>
-				: null}
+				&& orderQueueIndexes[orderType.id] === -1 ? (
+					<Button
+						variant="subtle"
+						color="yellow"
+						fullWidth
+						style={{ marginTop: 15 }}
+						onClick={() => {
+							if (!userTypeId || !megagame) return;
+							createOrderQueueItem({
+								megagameId: megagame.id,
+								factionId: userTypeId,
+								orderTypeId: orderType.id
+							});
+						}}
+					>
+						{Localisation.enterQueue[lang]}
+					</Button>
+				) : null}
 		</Fragment>
 	);
 }
@@ -86,13 +91,11 @@ function OrderQueue({ orderType }: { orderType: MegagameOrderType; }): React.JSX
 	const { queues, userType, userTypeId } = useMegagameStore();
 
 	const orderQueueIndexes
-		= queues && userType !== "Guest"
-			? Object.keys(queues).reduce<Record<OrderTypeId, number>>((acc, orderTypeId) => {
-				const index = queues[orderTypeId].findIndex(order => order.factionId === userTypeId);
-				acc[orderTypeId as OrderTypeId] = index;
-				return acc;
-			}, {})
-			: {};
+		= queues && userType !== "Guest" ? Object.keys(queues).reduce<Record<OrderTypeId, number>>((acc, orderTypeId) => {
+			const index = queues[orderTypeId].findIndex(order => order.factionId === userTypeId);
+			acc[orderTypeId as OrderTypeId] = index;
+			return acc;
+		}, {}) : {};
 
 	return (
 		<Accordion.Item key={orderType.id} value={orderType.id}>
@@ -122,9 +125,9 @@ export function OrderQueues(): React.JSX.Element {
 		<Paper shadow="md" radius="xs" p="xl" bd="1px solid rgba(0,0,0,0.1)" mt="md">
 			<Title order={2} mb="md">{Localisation.queues[lang]}</Title>
 
-			{<Accordion variant="separated" radius="xs" chevronIconSize={20}>
+			<Accordion variant="separated" radius="xs" chevronIconSize={20}>
 				{megagame?.orderTypes.map(orderType => <OrderQueue key={orderType.id} orderType={orderType} />)}
-			</Accordion>}
+			</Accordion>
 		</Paper>
 	);
 }

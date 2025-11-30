@@ -27,17 +27,13 @@ interface DiceRollerResultProps {
 export function DiceRollerResult({ result, shade, isDoubleObstacle, isOpenEnded, obstacle, rerollFailure, rerollSixes }: DiceRollerResultProps): React.JSX.Element {
 	const getResultText = (testResult: TestResult): string => {
 		const actualObstacle = (isDoubleObstacle) ? obstacle * 2 : obstacle;
-		return (testResult.successes > actualObstacle)
-			? `Success with a margin of ${(testResult.successes - actualObstacle).toString()}.`
-			: (testResult.successes < actualObstacle)
-				? `Failure with a margin of ${(actualObstacle - testResult.successes).toString()}.`
-				: "Tie.";
+		return (testResult.successes > actualObstacle) ? `Success with a margin of ${(testResult.successes - actualObstacle).toString()}.` : (testResult.successes < actualObstacle) ? `Failure with a margin of ${(actualObstacle - testResult.successes).toString()}.` : "Tie.";
 	};
 
 	return (
 		<Fragment>
-			{result
-				? <Fragment>
+			{result ? (
+				<Fragment>
 					<Divider sx={{ margin: "10px 0 0 " }}>Result</Divider>
 
 					<GenericGrid columns={3}>
@@ -47,7 +43,7 @@ export function DiceRollerResult({ result, shade, isDoubleObstacle, isOpenEnded,
 						</Grid>
 
 						<Grid size={{ xs: 3, sm: 1 }}>
-							{<Fragment>
+							<Fragment>
 								<Typography variant="h6">Dice</Typography>
 
 								<Typography>
@@ -55,20 +51,15 @@ export function DiceRollerResult({ result, shade, isDoubleObstacle, isOpenEnded,
 										if (v === 1) return <LooksOneIcon key={i} color="error" sx={{ margin: "0 0 -6px" }} />;
 										else if (v === 2) return <LooksTwoIcon key={i} color={(shade === "White") ? "success" : "error"} sx={{ margin: "0 0 -6px" }} />;
 										else if (v === 3) return <Looks3Icon key={i} color={(shade === "Gray") ? "success" : "error"} sx={{ margin: "0 0 -6px" }} />;
-										else if (v === 4) return <Looks4Icon key={i} color={"success"} sx={{ margin: "0 0 -6px" }} />;
-										else if (v === 5) return <Looks5Icon key={i} color={"success"} sx={{ margin: "0 0 -6px" }} />;
-										else return <Looks6Icon key={i} color={"success"} sx={{ margin: "0 0 -6px" }} />;
+										else if (v === 4) return <Looks4Icon key={i} color="success" sx={{ margin: "0 0 -6px" }} />;
+										else if (v === 5) return <Looks5Icon key={i} color="success" sx={{ margin: "0 0 -6px" }} />;
+										else return <Looks6Icon key={i} color="success" sx={{ margin: "0 0 -6px" }} />;
 									})}
 								</Typography>
-							</Fragment>}
+							</Fragment>
 
-							{!isOpenEnded && result.dice.includes(6) && !result.usedFate
-								? <Button variant="outlined" size="medium" onClick={() => { rerollSixes(result.dice, true); }} sx={{ margin: "24px 0 0" }}>Reroll sixes using Fate</Button>
-								: null}
-
-							{isOpenEnded && result.failures > 0 && !result.usedFate
-								? <Button variant="outlined" size="medium" onClick={() => { rerollFailure(result.dice); }} sx={{ margin: "6px 0 0" }}>Reroll a single failure using Fate</Button>
-								: null}
+							{!isOpenEnded && result.dice.includes(6) && !result.usedFate ? <Button variant="outlined" size="medium" onClick={() => { rerollSixes(result.dice, true); }} sx={{ margin: "24px 0 0" }}>Reroll sixes using Fate</Button> : null}
+							{isOpenEnded && result.failures > 0 && !result.usedFate ? <Button variant="outlined" size="medium" onClick={() => { rerollFailure(result.dice); }} sx={{ margin: "6px 0 0" }}>Reroll a single failure using Fate</Button> : null}
 						</Grid>
 
 						<Grid size={{ xs: 3, sm: 1 }}>
@@ -77,7 +68,7 @@ export function DiceRollerResult({ result, shade, isDoubleObstacle, isOpenEnded,
 						</Grid>
 					</GenericGrid>
 				</Fragment>
-				: null}
+			) : null}
 		</Fragment>
 	);
 }

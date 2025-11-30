@@ -49,14 +49,14 @@ export function CharacterBurner(): React.JSX.Element {
 			{traits.length > 0 ? <Traits openModal={openModal} /> : null}
 			{attributes.length > 0 ? <Attributes /> : null}
 
-			{lifepaths.length > 0
-				? <Fragment>
+			{lifepaths.length > 0 ? (
+				<Fragment>
 					<Resources openModal={openModal} />
 					<Tolerances />
 					<Beliefs />
 					<Instincts />
 				</Fragment>
-				: null}
+			) : null}
 
 
 			<LifepathSelectionModal isOpen={currentModal === "lp"} close={closeModals} />

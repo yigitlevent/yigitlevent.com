@@ -113,9 +113,9 @@ export function Traits({ openModal }: { openModal: (name: BwgrCharacterBurnerMod
 				<Typography>{text}</Typography>
 			</Grid>
 
-			{/*<Grid size={{ xs: 6, sm: 1 }}>
+			{/* <Grid size={{ xs: 6, sm: 1 }}>
 				<Button variant="outlined" size="small" onClick={() => setOpen(true)} fullWidth>Add General Trait</Button>
-			</Grid>*/}
+			</Grid> */}
 
 			{traits.existsAny("type", "Common") > 0 ? <CommonTraitsBlock /> : null}
 			{traits.existsAny("type", "Mandatory") > 0 ? <MandatoryTraitsBlock /> : null}

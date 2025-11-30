@@ -28,25 +28,29 @@ export function FightPlanner(): React.JSX.Element {
 				{actions.map((action, volleyIndex) => (
 					<Grid key={volleyIndex} size={{ xs: 1 }} sx={{ minWidth: "30%" }}>
 						<Card sx={{ padding: "10px" }}>
-							<Typography variant="h5">Volley {volleyIndex + 1}</Typography>
+							<Typography variant="h5">
+								Volley
+								{volleyIndex + 1}
+							</Typography>
+
 							<Divider sx={{ margin: "8px 0" }} />
 
 							{action.map((action, actionIndex) => (
 								<Paper key={`${volleyIndex.toString()}-${actionIndex.toString()}`} elevation={2} sx={{ padding: "8px", marginBottom: "8px" }}>
-									{action.visible
-										? <FightPlannerActionDetails action={action} volleyIndex={volleyIndex} actionIndex={actionIndex} />
-										: <IconButton disableRipple sx={{ width: "100%" }} onClick={() => { toggleActionVisibility(volleyIndex, actionIndex); }}>
+									{action.visible ? <FightPlannerActionDetails action={action} volleyIndex={volleyIndex} actionIndex={actionIndex} /> : (
+										<IconButton disableRipple sx={{ width: "100%" }} onClick={() => { toggleActionVisibility(volleyIndex, actionIndex); }}>
 											<VisibilityIcon sx={{ fontSize: 100 }} />
-										</IconButton>}
+										</IconButton>
+									)}
 								</Paper>
 							))}
 
 							<Autocomplete
 								value={fightActions.find(v => v.name === selectedAction[volleyIndex])}
 								options={[...fightActions].sort((a, b) => a.group[1].localeCompare(b.group[1]) || a.name.localeCompare(b.name))}
-								getOptionLabel={(option) => option.name}
-								groupBy={(option) => option.group[1]}
-								renderInput={(params) => <TextField {...params} />}
+								getOptionLabel={option => option.name}
+								groupBy={option => option.group[1]}
+								renderInput={params => <TextField {...params} />}
 								onChange={(_, v) => { changeSelectedAction(v.name, volleyIndex); }}
 								fullWidth
 								disableClearable

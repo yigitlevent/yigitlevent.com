@@ -67,7 +67,7 @@ export const useCharacterBurnerSkillStore = create<CharacterBurnerSkillState>()(
 						skill.advancement = { general: 0, lifepath: 0 };
 					}
 
-					set(produce<CharacterBurnerSkillState>((state) => {
+					set(produce<CharacterBurnerSkillState>(state => {
 						state.skills = new UniqueArray(state.skills.add(skill).items);
 					}));
 				}
@@ -77,7 +77,7 @@ export const useCharacterBurnerSkillStore = create<CharacterBurnerSkillState>()(
 				const skill = get().skills.find(skillId);
 
 				if (skill && skill.isOpen !== "no") {
-					set(produce<CharacterBurnerSkillState>((state) => {
+					set(produce<CharacterBurnerSkillState>(state => {
 						if (decrease) {
 							const hasGeneralSpending = skill.advancement.general > 0;
 							const hasLifepathSpending = skill.advancement.lifepath > 0;
@@ -97,11 +97,11 @@ export const useCharacterBurnerSkillStore = create<CharacterBurnerSkillState>()(
 
 			addGeneralSkill: (skill: BwgrSkill): void => {
 				const charSkill: BwgrCharacterSkill = { id: skill.id, name: skill.name, isOpen: "no", type: "General", isSpecial: skill.subskillIds ? true : false, advancement: { general: 0, lifepath: 0 } };
-				set(produce<CharacterBurnerSkillState>((state) => { state.skills = new UniqueArray(state.skills.add(charSkill).items); }));
+				set(produce<CharacterBurnerSkillState>(state => { state.skills = new UniqueArray(state.skills.add(charSkill).items); }));
 			},
 
 			removeGeneralSkill: (skillId: BwgrSkillId): void => {
-				set(produce<CharacterBurnerSkillState>((state) => {
+				set(produce<CharacterBurnerSkillState>(state => {
 					state.skills = new UniqueArray(state.skills.remove(skillId).items);
 				}));
 			},
@@ -206,7 +206,7 @@ export const useCharacterBurnerSkillStore = create<CharacterBurnerSkillState>()(
 					.filter(skill => skill.type === "General")
 					.forEach(skill => { if (characterSkills.existsAny("id", skill.id) === 0) characterSkills.add(skill); });
 
-				set(produce<CharacterBurnerSkillState>((state) => {
+				set(produce<CharacterBurnerSkillState>(state => {
 					state.skills = characterSkills;
 				}));
 			}

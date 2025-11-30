@@ -8,7 +8,7 @@ import { Notification } from "../../components/Shared/Notification";
 
 
 interface PracticePlannerState {
-	nextId: number,
+	nextId: number;
 	days: number;
 	hours: number;
 	cells: BwgrPracticeCell[];
@@ -36,19 +36,19 @@ export const usePracticePlannerStore = create<PracticePlannerState>()(
 			marks: [],
 
 			changeDays: (value: string) => {
-				set(produce<PracticePlannerState>((state) => {
+				set(produce<PracticePlannerState>(state => {
 					state.days = Clamp(value === "" ? 0 : parseInt(value), 1, 999);
 				}));
 			},
 
 			changeHours: (value: string) => {
-				set(produce<PracticePlannerState>((state) => {
+				set(produce<PracticePlannerState>(state => {
 					state.hours = Clamp(value === "" ? 0 : parseInt(value), 1, 24);
 				}));
 			},
 
 			addCells: (days: number, hours: number) => {
-				set(produce<PracticePlannerState>((state) => {
+				set(produce<PracticePlannerState>(state => {
 					const newCells = [...state.cells];
 					newCells.push(...[...Array<number>(days)].map(() => { return { maxHours: hours, remaining: hours, placed: [] }; }));
 					state.cells = newCells;
@@ -67,7 +67,7 @@ export const usePracticePlannerStore = create<PracticePlannerState>()(
 			},
 
 			deleteCell: (cellIndex: number) => {
-				set(produce<PracticePlannerState>((state) => {
+				set(produce<PracticePlannerState>(state => {
 					const newCells = state.cells;
 					newCells.splice(cellIndex, 1);
 					state.cells = newCells;
@@ -90,7 +90,7 @@ export const usePracticePlannerStore = create<PracticePlannerState>()(
 					setNotification(<Notification text="Cannot reduce hours from day. It is used by practices." severity="error" onClose={() => { setNotification(null); }} />);
 				}
 				else {
-					set(produce<PracticePlannerState>((state) => {
+					set(produce<PracticePlannerState>(state => {
 						const newCells = state.cells;
 						state.cells = newCells.map((v, i) => {
 							if (i === cellIndex && ((v.maxHours < 24 && change > 0) || (v.maxHours > 1 && change < 0))) {
@@ -127,7 +127,7 @@ export const usePracticePlannerStore = create<PracticePlannerState>()(
 						}
 					}
 
-					set(produce<PracticePlannerState>((state) => {
+					set(produce<PracticePlannerState>(state => {
 						state.nextId = nextId + 1 as BwgrPracticeId;
 
 						state.cells = [...state.cells].map((v, i) => {
@@ -145,7 +145,7 @@ export const usePracticePlannerStore = create<PracticePlannerState>()(
 			},
 
 			deletePractice: (cellIndex: number, practiceIndex: number) => {
-				set(produce<PracticePlannerState>((state) => {
+				set(produce<PracticePlannerState>(state => {
 					const newCells = state.cells;
 
 					state.cells = newCells.map((v, i) => {

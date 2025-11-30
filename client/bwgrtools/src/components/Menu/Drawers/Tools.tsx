@@ -35,7 +35,7 @@ export function Tools({ expanded }: { expanded: boolean; }): React.JSX.Element {
 	];
 
 	return (
-		<DrawerBox title={"Tools"} expanded={expanded}>
+		<DrawerBox title="Tools" expanded={expanded}>
 			<List disablePadding>
 				{items.map((item, i) => {
 					return (

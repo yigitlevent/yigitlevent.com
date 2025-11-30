@@ -5,13 +5,13 @@ import { devtools } from "zustand/middleware";
 import { GenericGet, GenericPost } from "../../utils/GenericRequests";
 
 
-type FetchState =
-	| "fetch-full"
-	| "fetching-list"
-	| "fetch-data"
-	| "fetching-data"
-	| "done"
-	| "failed";
+type FetchState
+	= | "fetch-full"
+		| "fetching-list"
+		| "fetch-data"
+		| "fetching-data"
+		| "done"
+		| "failed";
 
 // TODO: research index key signatures to see if there is a workaround
 interface RulesetStore {
@@ -125,7 +125,7 @@ export const useRulesetStore = create<RulesetStore>()(
 			},
 
 			setFetchState: (fetchState: FetchState) => {
-				set(produce<RulesetStore>((state) => { state.fetchState = fetchState; }));
+				set(produce<RulesetStore>(state => { state.fetchState = fetchState; }));
 			},
 
 			fetchList: () => {
@@ -135,7 +135,7 @@ export const useRulesetStore = create<RulesetStore>()(
 				GenericGet<BwgrRulesetsResponse>("/bwgr/ruleset/list")
 					.then(response => {
 						if (response.status === 200) {
-							set(produce<RulesetStore>((state) => {
+							set(produce<RulesetStore>(state => {
 								state.rulesets = response.data.rulesets;
 								state.chosenRulesets = [response.data.rulesets[0].id];
 							}));
@@ -171,7 +171,7 @@ export const useRulesetStore = create<RulesetStore>()(
 								const traitCategories = [...response.data.ruleset.traits.reduce((a, v) => a.add(v.category[1]), new Set<string>())];
 								const traitTypes = [...response.data.ruleset.traits.reduce((a, v) => a.add(v.type[1]), new Set<string>())];
 
-								set(produce<RulesetStore>((state) => {
+								set(produce<RulesetStore>(state => {
 									state.abilities = abilities;
 									state.abilityTypes = abilityTypes;
 
@@ -316,7 +316,7 @@ export const useRulesetStore = create<RulesetStore>()(
 			},
 
 			toggleDataset: (ruleset: BwgrRulesetId) => {
-				set(produce<RulesetStore>((state) => {
+				set(produce<RulesetStore>(state => {
 					if (!(state.rulesets.find(v => v.id === ruleset)?.isExpansion)) {
 						state.fetchState = "fetch-data";
 						state.chosenRulesets = [ruleset];

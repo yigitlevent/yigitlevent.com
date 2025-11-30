@@ -23,7 +23,7 @@ export const useCharacterBurnerResourceStore = create<CharacterBurnerResourceSta
 			resources: {},
 
 			reset: () => {
-				set(produce<CharacterBurnerResourceState>((state) => {
+				set(produce<CharacterBurnerResourceState>(state => {
 					state.resources = {};
 				}));
 			},
@@ -40,19 +40,19 @@ export const useCharacterBurnerResourceStore = create<CharacterBurnerResourceSta
 			},
 
 			addResource: (resource: BwgrCharacterResource) => {
-				set(produce<CharacterBurnerResourceState>((state) => {
+				set(produce<CharacterBurnerResourceState>(state => {
 					state.resources[self.crypto.randomUUID() as Guid] = resource;
 				}));
 			},
 
 			removeResource: (guid: Guid) => {
-				set(produce<CharacterBurnerResourceState>((state) => {
+				set(produce<CharacterBurnerResourceState>(state => {
 					delete state.resources[guid];
 				}));
 			},
 
 			editResourceDescription: (guid: Guid, description: string) => {
-				set(produce<CharacterBurnerResourceState>((state) => {
+				set(produce<CharacterBurnerResourceState>(state => {
 					state.resources[guid].description = description;
 				}));
 			}

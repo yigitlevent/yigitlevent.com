@@ -18,7 +18,7 @@ import { GenericGrid } from "../../Shared/Grids";
 
 export function LifepathLists(): React.JSX.Element {
 	const { stocks, settings, lifepaths } = useRulesetStore();
-	const { searchValues, setFilter, filteredList } = useSearch<BwgrLifepath>(lifepaths, ["stock", "setting"], { "stock": stocks[0].name, "setting": settings[0].name });
+	const { searchValues, setFilter, filteredList } = useSearch<BwgrLifepath>(lifepaths, ["stock", "setting"], { stock: stocks[0].name, setting: settings[0].name });
 
 	const [allowedSettings, setAllowedSettings] = useState(settings.filter(setting => setting.stock[1] === searchValues.filters.stock).map(v => v.name));
 
@@ -55,10 +55,10 @@ export function LifepathLists(): React.JSX.Element {
 
 				<Grid size={{ xs: 4, sm: 2, md: 2 }}>
 					<TextField
-						label={"Search"}
+						label="Search"
 						variant="standard"
 						value={searchValues.text}
-						onChange={(e) => { setFilter([{ key: "s", value: e.target.value }]); }}
+						onChange={e => { setFilter([{ key: "s", value: e.target.value }]); }}
 						fullWidth
 					/>
 				</Grid>
@@ -69,11 +69,11 @@ export function LifepathLists(): React.JSX.Element {
 
 						<Select
 							value={searchValues.fields}
-							onChange={(e) => { setFilter([{ key: "sf", value: typeof e.target.value !== "string" ? e.target.value.join(",") : e.target.value }]); }}
-							renderValue={(selected) => selected.join(", ")}
+							onChange={e => { setFilter([{ key: "sf", value: typeof e.target.value !== "string" ? e.target.value.join(",") : e.target.value }]); }}
+							renderValue={selected => selected.join(", ")}
 							multiple
 						>
-							{["Name"/*, "Leads", "Skills", "Traits"*/].map((name) => (
+							{["Name"/* , "Leads", "Skills", "Traits" */].map(name => (
 								<MenuItem key={name} value={name}>
 									<Checkbox checked={searchValues.fields.includes(name)} />
 									<ListItemText primary={name} />
@@ -85,14 +85,12 @@ export function LifepathLists(): React.JSX.Element {
 			</GenericGrid>
 
 			<GenericGrid columns={1} spacing={[2, 2]} center>
-				{filteredList.length > 0
-					? filteredList.map((v, i) => (
-						<Grid size={{ xs: 1 }} key={i}>
-							<LifepathBox lifepath={v} />
-						</Grid>
-					)
-					)
-					: <Alert severity="warning" sx={{ width: "100%", maxWidth: "600px", margin: "12px auto" }}>Could not find any matches. Try adding more fields or changing search text.</Alert>}
+				{filteredList.length > 0 ? filteredList.map((v, i) => (
+					<Grid size={{ xs: 1 }} key={i}>
+						<LifepathBox lifepath={v} />
+					</Grid>
+				)
+				) : <Alert severity="warning" sx={{ width: "100%", maxWidth: "600px", margin: "12px auto" }}>Could not find any matches. Try adding more fields or changing search text.</Alert>}
 			</GenericGrid>
 		</Fragment>
 	);

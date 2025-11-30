@@ -33,7 +33,10 @@ export function MyOldProjects(): React.JSX.Element {
 				</Typography>
 
 				<Typography>
-					This was another tabletop game utility, this time for VtR 5e. It included character generation utilities and a database connection via supabase. There also was a companion project to this, <Link href="https://github.com/yigitlevent/autarkis-bot" sx={{ textDecoration: "none" }}>Autarkis Bot</Link>, which was a discord bot that rolled dice and such.
+					This was another tabletop game utility, this time for VtR 5e. It included character generation utilities and a database connection via supabase. There also was a companion project to this,
+					{" "}
+					<Link href="https://github.com/yigitlevent/autarkis-bot" sx={{ textDecoration: "none" }}>Autarkis Bot</Link>
+					, which was a discord bot that rolled dice and such.
 				</Typography>
 			</Grid>
 

@@ -35,7 +35,11 @@ export function SpecialLifepaths(): React.JSX.Element {
 						return (
 							<Fragment key={i}>
 								<Grid size={{ xs: 1 }}>
-									<Typography>{lifepath.name} years</Typography>
+									<Typography>
+										{lifepath.name}
+										{" "}
+										years
+									</Typography>
 								</Grid>
 
 								<Grid size={{ xs: 2 }}>
@@ -60,15 +64,21 @@ export function SpecialLifepaths(): React.JSX.Element {
 						return (
 							<Fragment key={i}>
 								<Grid size={{ xs: 1 }}>
-									<Typography>{lifepath.name} {compationName} lifepath</Typography>
+									<Typography>
+										{lifepath.name}
+										{" "}
+										{compationName}
+										{" "}
+										lifepath
+									</Typography>
 								</Grid>
 
 								<Grid size={{ xs: 2 }}>
 									<Autocomplete
 										value={{ id: special.companionLifepath[compationName], label: compationName }}
 										options={possibleLifepaths}
-										getOptionLabel={(option) => option.label}
-										renderInput={(params) => <TextField {...params} label={`${compationName}'s Lifepath`} />}
+										getOptionLabel={option => option.label}
+										renderInput={params => <TextField {...params} label={`${compationName}'s Lifepath`} />}
 										onChange={(_, v) => { modifyCompanionSkills(v.id, ruleset.getLifepath(v.id).skills); }}
 										fullWidth
 										disableClearable

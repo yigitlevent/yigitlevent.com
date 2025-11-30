@@ -117,9 +117,9 @@ export function Skills({ openModal }: { openModal: (name: BwgrCharacterBurnerMod
 				<Typography>{lifepathText}</Typography>
 			</Grid>
 
-			{/*<Grid xs={6} sm={1}>
+			{/* <Grid xs={6} sm={1}>
 				<Button variant="outlined" size="small" onClick={() => setOpen(true)} fullWidth>Add General Skill</Button>
-			</Grid>*/}
+			</Grid> */}
 
 			{skills.existsAny("type", "Mandatory") > 0 ? <MandatorySkills /> : null}
 			{skills.existsAny("type", "Lifepath") > 0 ? <LifepathSkills /> : null}

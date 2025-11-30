@@ -75,57 +75,59 @@ export function MagicWheelAlt(): React.JSX.Element {
 		<Fragment>
 			<Typography variant="h3">Magic Wheel</Typography>
 
-			{!magicWheel.facetsSet
-				? <FacetControls
+			{!magicWheel.facetsSet ? (
+				<FacetControls
 					magicWheel={magicWheel}
 					spellFacets={spellFacets}
 					setFacetsSet={magicWheel.setFacetsSet}
 					selectedElementCategory={selectedElementCategory}
 					setSelectedElementCategory={setSelectedElementCategory}
 				/>
-				: isFontLoaded
-					? <GenericGrid columns={1} center="c">
-						{magicWheel.prayed
-							? <Button
-								variant="outlined"
-								disabled={magicWheel.isRotating}
-								onClick={() => { magicWheel.reset(); }}
-								fullWidth
-							>
-								Try again
-							</Button>
-							: <Button
-								variant="outlined"
-								disabled={magicWheel.isRotating}
-								onClick={() => { magicWheel.setTargetAmounts(); }}
-								fullWidth
-							>
-								Pray to the Lady Luck
-							</Button>}
+			) : isFontLoaded ? (
+				<GenericGrid columns={1} center="c">
+					{magicWheel.prayed ? (
+						<Button
+							variant="outlined"
+							disabled={magicWheel.isRotating}
+							onClick={() => { magicWheel.reset(); }}
+							fullWidth
+						>
+							Try again
+						</Button>
+					) : (
+						<Button
+							variant="outlined"
+							disabled={magicWheel.isRotating}
+							onClick={() => { magicWheel.setTargetAmounts(); }}
+							fullWidth
+						>
+							Pray to the Lady Luck
+						</Button>
+					)}
 
-						<Grid size={{ xs: 1 }}>
-							<div
-								ref={wrapperRef}
-								style={{
-									maxWidth: "100%",
-									width: (size === "0px") ? "580px" : size,
-									height: (size === "0px") ? "580px" : size,
-									position: "relative",
-									margin: "0 auto",
-									zIndex: 100
-								}}
-							>
-								<BackCanvas constants={magicWheel.constants} />
+					<Grid size={{ xs: 1 }}>
+						<div
+							ref={wrapperRef}
+							style={{
+								maxWidth: "100%",
+								width: (size === "0px") ? "580px" : size,
+								height: (size === "0px") ? "580px" : size,
+								position: "relative",
+								margin: "0 auto",
+								zIndex: 100
+							}}
+						>
+							<BackCanvas constants={magicWheel.constants} />
 
-								<canvas ref={canvasRef} height={magicWheel.constants.canvasSize} width={magicWheel.constants.canvasSize} style={{ position: "absolute", left: 0, top: 0, zIndex: 102, width: "100%" }}>
-									Your browser does not support canvas.
-								</canvas>
+							<canvas ref={canvasRef} height={magicWheel.constants.canvasSize} width={magicWheel.constants.canvasSize} style={{ position: "absolute", left: 0, top: 0, zIndex: 102, width: "100%" }}>
+								Your browser does not support canvas.
+							</canvas>
 
-								<FrontCanvas constants={magicWheel.constants} />
-							</div>
-						</Grid>
-					</GenericGrid>
-					: <CircularProgress />}
+							<FrontCanvas constants={magicWheel.constants} />
+						</div>
+					</Grid>
+				</GenericGrid>
+			) : <CircularProgress />}
 		</Fragment>
 	);
 }

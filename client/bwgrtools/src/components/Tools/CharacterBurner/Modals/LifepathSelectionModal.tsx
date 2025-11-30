@@ -39,9 +39,9 @@ export function LifepathSelectionModal({ isOpen, close }: { isOpen: boolean; clo
 						<Autocomplete
 							value={chosen}
 							options={available}
-							getOptionLabel={(option) => option.name}
-							groupBy={(option) => option.setting[1]}
-							renderInput={(params) => <TextField {...params} label="Lifepath" variant="standard" fullWidth />}
+							getOptionLabel={option => option.name}
+							groupBy={option => option.setting[1]}
+							renderInput={params => <TextField {...params} label="Lifepath" variant="standard" fullWidth />}
 							onChange={(_, v) => { setChosen(v); }}
 							fullWidth
 							disableClearable

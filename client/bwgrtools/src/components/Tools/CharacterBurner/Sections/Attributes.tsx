@@ -16,8 +16,8 @@ function Attribute({ attribute }: { attribute: UniqueArrayItem<BwgrAbilityId, Bw
 
 	return (
 		<Fragment>
-			{attribute.hasShade
-				? <AbilityButton
+			{attribute.hasShade ? (
+				<AbilityButton
 					name={attribute.name}
 					disabled={attributeDetails.exponent < 6}
 					onClick={() => { shiftAttributeShade(attribute.id); }}
@@ -25,7 +25,7 @@ function Attribute({ attribute }: { attribute: UniqueArrayItem<BwgrAbilityId, Bw
 				>
 					{attributeDetails.shade}
 				</AbilityButton>
-				: null}
+			) : null}
 
 			<AbilityButton name={attribute.name} disabled>
 				{attributeDetails.exponent}

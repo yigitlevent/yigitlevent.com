@@ -70,7 +70,7 @@ interface BwgrResourceMagicDetails {
 	duration: [id: BwgrDurationFacetId, name: string];
 	areaOfEffect: [id: BwgrAreaOfEffectFacetId, name: string];
 	areaOfEffectDetails?: {
-		unit?: [id: DistanceUnitId, name: string],
+		unit?: [id: DistanceUnitId, name: string];
 		modifier?: [id: UnitModifierId, name: string];
 	};
 	elements: [id: BwgrElementFacetId, name: string][];

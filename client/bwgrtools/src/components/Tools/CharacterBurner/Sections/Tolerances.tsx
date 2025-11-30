@@ -37,14 +37,15 @@ export function Tolerances(): React.JSX.Element {
 							<TableRow>
 								{Array.from(Array(16).keys()).map(v => (
 									<TableCell key={v} sx={{ textAlign: "center" }}>
-										B{v + 1}
+										B
+										{v + 1}
 									</TableCell>
 								))}
 							</TableRow>
 						</TableHead>
 
 						<TableBody>
-							<TableRow sx={{ margin: "8px 0 0", "&:last-child td": { border: 0 } }}>
+							<TableRow sx={{ "margin": "8px 0 0", "&:last-child td": { border: 0 } }}>
 								{tolerances.map((tolerance, i) => (
 									<TableCell key={i} component="td" scope="row" sx={{ textAlign: "center" }}>
 										{tolerance}

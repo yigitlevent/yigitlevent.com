@@ -36,8 +36,8 @@ export function FacetControls<T extends OneOfWheelObjects, P extends OneOfWheelO
 				</FormControl>
 			</Grid>
 
-			{selectedElementCategory && setSelectedElementCategory && selectedElementCategory in spellFacets
-				? <Fragment>
+			{selectedElementCategory && setSelectedElementCategory && selectedElementCategory in spellFacets ? (
+				<Fragment>
 					<Grid size={{ xs: columnCount, sm: 2, md: 1 }}>
 						<FormControl fullWidth variant="standard">
 							<InputLabel>Element Category</InputLabel>
@@ -68,7 +68,8 @@ export function FacetControls<T extends OneOfWheelObjects, P extends OneOfWheelO
 						</FormControl>
 					</Grid>
 				</Fragment>
-				: <Grid size={{ xs: columnCount, sm: 2, md: 1 }}>
+			) : (
+				<Grid size={{ xs: columnCount, sm: 2, md: 1 }}>
 					<FormControl fullWidth variant="standard">
 						<InputLabel>Element</InputLabel>
 
@@ -81,7 +82,8 @@ export function FacetControls<T extends OneOfWheelObjects, P extends OneOfWheelO
 								.map(v => { return <MenuItem key={v.name} value={v.id as unknown as string}>{v.name}</MenuItem>; })}
 						</Select>
 					</FormControl>
-				</Grid>}
+				</Grid>
+			)}
 
 
 			<Grid size={{ xs: columnCount, sm: 2, md: 1 }}>

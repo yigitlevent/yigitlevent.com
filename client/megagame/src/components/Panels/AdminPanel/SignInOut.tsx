@@ -47,8 +47,8 @@ export function SignInOut(): React.JSX.Element {
 		<Paper shadow="md" radius="xs" p="xl" bd="1px solid rgba(0,0,0,0.1)" mt="md">
 			<Title order={2} mb="md">Sign in/out</Title>
 
-			{user
-				? <Stack>
+			{user ? (
+				<Stack>
 					<Button
 						variant="light"
 						color="yellow"
@@ -61,7 +61,8 @@ export function SignInOut(): React.JSX.Element {
 						Sign out
 					</Button>
 				</Stack>
-				: <Stack>
+			) : (
+				<Stack>
 					<TextInput
 						label="Email"
 						placeholder="Enter your email"
@@ -90,7 +91,8 @@ export function SignInOut(): React.JSX.Element {
 					>
 						Sign in
 					</Button>
-				</Stack>}
-		</Paper >
+				</Stack>
+			)}
+		</Paper>
 	);
 }

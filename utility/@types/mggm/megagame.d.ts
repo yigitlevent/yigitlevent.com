@@ -5,12 +5,12 @@ type DeadlineItemId = Nominal<string, "DeadlineItemId">;
 type NewsItemId = Nominal<string, "NewsItemId">;
 type OrderQueueItemId = Nominal<string, "OrderQueueItemId">;
 
-type MegagameDuneFaction =
-	| "Bene Gesserit" | "Bene Tleliaxu" | "Spacing Guild"
-	| "Sietch Tabr" | "Sietch Habbanya" | "Sietch Tuek"
-	| "House Corrino" | "House Atreides" | "House Harkonnen"
-	| "House Moritani" | "House Ecaz" | "House Richese"
-	| "House Fenring" | "House Ordos" | "House Ginaz";
+type MegagameDuneFaction
+	= | "Bene Gesserit" | "Bene Tleliaxu" | "Spacing Guild"
+		| "Sietch Tabr" | "Sietch Habbanya" | "Sietch Tuek"
+		| "House Corrino" | "House Atreides" | "House Harkonnen"
+		| "House Moritani" | "House Ecaz" | "House Richese"
+		| "House Fenring" | "House Ordos" | "House Ginaz";
 
 interface MegagameDBO {
 	Id: MegagameId;
@@ -109,6 +109,6 @@ interface Megagame {
 	events: MegagameEvent[];
 }
 
-type MegagameUserType =
-	"Guest"
-	| MegagameDuneFaction;
+type MegagameUserType
+	= "Guest"
+		| MegagameDuneFaction;

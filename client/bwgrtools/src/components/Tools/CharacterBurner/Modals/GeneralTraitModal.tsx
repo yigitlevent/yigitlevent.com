@@ -51,54 +51,60 @@ export function GeneralTraitModal({ isOpen, close }: { isOpen: boolean; close: (
 		<Modal open={isOpen} onClose={() => { close(); }}>
 			<Paper sx={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", maxWidth: "800px", width: "100%", padding: "0 24px 24px", border: "none", overflow: "auto" }}>
 				<GenericGrid columns={1} spacing={[2, 2]} center>
-					{chosenTrait
-						? <Grid size={{ xs: 1 }}>
+					{chosenTrait ? (
+						<Grid size={{ xs: 1 }}>
 							<Autocomplete
 								value={chosenTrait}
 								options={possibleTraits.sort((a, b) => a.category[1].localeCompare(b.category[1]) || a.name.localeCompare(b.name))}
-								getOptionLabel={(option) => option.name}
-								groupBy={(option) => option.category[1]}
-								renderInput={(params) => <TextField {...params} label="Chosen Trait" />}
+								getOptionLabel={option => option.name}
+								groupBy={option => option.category[1]}
+								renderInput={params => <TextField {...params} label="Chosen Trait" />}
 								onChange={(_, v) => { setChosenTrait(v); }}
 								fullWidth
 								disableClearable
 							/>
 						</Grid>
-						: null}
+					) : null}
 
-					{chosenTrait
-						? <Grid size={{ xs: 1 }}>
+					{chosenTrait ? (
+						<Grid size={{ xs: 1 }}>
 							<Grid container spacing={1} columns={3}>
 								<Grid size={{ xs: 3 }}>
 									<Typography variant="h6">{chosenTrait.name}</Typography>
 								</Grid>
 
 								<Grid size={{ sm: 3, md: 1 }}>
-									<Typography variant="caption">Type: {chosenTrait.type[1]}</Typography>
+									<Typography variant="caption">
+										Type:
+										{chosenTrait.type[1]}
+									</Typography>
 								</Grid>
 
-								{chosenTrait.cost !== 0
-									? <Grid size={{ sm: 3, md: 1 }}>
+								{chosenTrait.cost !== 0 ? (
+									<Grid size={{ sm: 3, md: 1 }}>
 										<Typography variant="caption">
-											Cost: {chosenTrait.cost}
+											Cost:
+											{" "}
+											{chosenTrait.cost}
 										</Typography>
 									</Grid>
-									: null}
+								) : null}
 
 								<Grid size={{ sm: 3, md: 1 }}>
-									{chosenTrait.stock
-										? <Typography variant="caption">Stock: {chosenTrait.stock}</Typography>
-										: null}
+									{chosenTrait.stock ? (
+										<Typography variant="caption">
+											Stock:
+											{chosenTrait.stock}
+										</Typography>
+									) : null}
 								</Grid>
 
 								<Grid size={{ xs: 3 }}>
-									{chosenTrait.description
-										? chosenTrait.description.split("<br>").map(v => <Typography key={v} variant="body2" sx={{ textIndent: "8px" }}>{v}</Typography>)
-										: null}
+									{chosenTrait.description ? chosenTrait.description.split("<br>").map(v => <Typography key={v} variant="body2" sx={{ textIndent: "8px" }}>{v}</Typography>) : null}
 								</Grid>
 							</Grid>
 						</Grid>
-						: null}
+					) : null}
 
 					<Grid size={{ xs: 1 }}>
 						<Button variant="outlined" size="medium" onClick={addNewTrait} fullWidth>Add Trait</Button>

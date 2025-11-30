@@ -62,7 +62,10 @@ export function Signin({ open, handleClose }: { open: boolean; handleClose: (ope
 				<GenericGrid columns={1} spacing={[3, 0]} center="c">
 					<Grid size={{ xs: 1 }}>
 						<TextField
-							label="Email" variant="standard" fullWidth required
+							label="Email"
+							variant="standard"
+							fullWidth
+							required
 							value={email}
 							onChange={v => { changeValue("email", v.target.value); }}
 							error={emailError !== undefined}
@@ -76,14 +79,15 @@ export function Signin({ open, handleClose }: { open: boolean; handleClose: (ope
 
 							<Input
 								type={showPass ? "text" : "password"}
-								value={password} onChange={v => { changeValue("password", v.target.value); }}
-								endAdornment={
+								value={password}
+								onChange={v => { changeValue("password", v.target.value); }}
+								endAdornment={(
 									<InputAdornment position="end">
 										<IconButton onClick={() => { setShowPass(v => !v); }}>
 											{showPass ? <VisibilityOff /> : <Visibility />}
 										</IconButton>
 									</InputAdornment>
-								}
+								)}
 							/>
 
 							<FormHelperText error>{passwordError}</FormHelperText>

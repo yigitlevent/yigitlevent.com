@@ -32,14 +32,14 @@ function BlockTitle(logicType: string, fulfillmentAmount: number): string {
 	const fa = fulfillmentAmount > 1 ? ` ${fulfillmentAmount.toString()} times` : "";
 
 	switch (logicType) {
-	case "AND":
-		return `All of the following must be true${fa}:`;
-	case "OR":
-		return `At least one of the following must be true${fa}:`;
-	case "NOT":
-		return `None of the following must be true${fa}:`;
-	default:
-		throw new Error(`Unidentified requirement block logic type: ${logicType}`);
+		case "AND":
+			return `All of the following must be true${fa}:`;
+		case "OR":
+			return `At least one of the following must be true${fa}:`;
+		case "NOT":
+			return `None of the following must be true${fa}:`;
+		default:
+			throw new Error(`Unidentified requirement block logic type: ${logicType}`);
 	}
 }
 
@@ -71,15 +71,13 @@ export function LifepathRequirements({ lifepath }: { lifepath: BwgrLifepath; }):
 		<Fragment>
 			<b>Requirements:</b>
 
-			{lifepath.requirements
-				? <Box>
+			{lifepath.requirements ? (
+				<Box>
 					<Typography variant="body3">{ResolveRequirementBlocks(lifepath.requirements)}</Typography>
 				</Box>
-				: null}
+			) : null}
 
-			{lifepath.requirementsText
-				? lifepath.requirementsText.split("<br>").map((text, textIndex) => <Typography key={textIndex} variant="body2">{text}</Typography>)
-				: null}
+			{lifepath.requirementsText ? lifepath.requirementsText.split("<br>").map((text, textIndex) => <Typography key={textIndex} variant="body2">{text}</Typography>) : null}
 		</Fragment>
 	);
 }

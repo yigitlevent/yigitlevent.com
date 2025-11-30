@@ -23,23 +23,23 @@ export const useCharacterBurnerStatStore = create<CharacterBurnerStatState>()(
 	devtools(
 		(set, get) => ({
 			stats: {
-				"Will": { poolType: "Mental", shadeShifted: false, mainPoolSpent: { shade: 0, exponent: 0 }, eitherPoolSpent: { shade: 0, exponent: 0 } },
-				"Perception": { poolType: "Mental", shadeShifted: false, mainPoolSpent: { shade: 0, exponent: 0 }, eitherPoolSpent: { shade: 0, exponent: 0 } },
-				"Power": { poolType: "Physical", shadeShifted: false, mainPoolSpent: { shade: 0, exponent: 0 }, eitherPoolSpent: { shade: 0, exponent: 0 } },
-				"Agility": { poolType: "Physical", shadeShifted: false, mainPoolSpent: { shade: 0, exponent: 0 }, eitherPoolSpent: { shade: 0, exponent: 0 } },
-				"Forte": { poolType: "Physical", shadeShifted: false, mainPoolSpent: { shade: 0, exponent: 0 }, eitherPoolSpent: { shade: 0, exponent: 0 } },
-				"Speed": { poolType: "Physical", shadeShifted: false, mainPoolSpent: { shade: 0, exponent: 0 }, eitherPoolSpent: { shade: 0, exponent: 0 } }
+				Will: { poolType: "Mental", shadeShifted: false, mainPoolSpent: { shade: 0, exponent: 0 }, eitherPoolSpent: { shade: 0, exponent: 0 } },
+				Perception: { poolType: "Mental", shadeShifted: false, mainPoolSpent: { shade: 0, exponent: 0 }, eitherPoolSpent: { shade: 0, exponent: 0 } },
+				Power: { poolType: "Physical", shadeShifted: false, mainPoolSpent: { shade: 0, exponent: 0 }, eitherPoolSpent: { shade: 0, exponent: 0 } },
+				Agility: { poolType: "Physical", shadeShifted: false, mainPoolSpent: { shade: 0, exponent: 0 }, eitherPoolSpent: { shade: 0, exponent: 0 } },
+				Forte: { poolType: "Physical", shadeShifted: false, mainPoolSpent: { shade: 0, exponent: 0 }, eitherPoolSpent: { shade: 0, exponent: 0 } },
+				Speed: { poolType: "Physical", shadeShifted: false, mainPoolSpent: { shade: 0, exponent: 0 }, eitherPoolSpent: { shade: 0, exponent: 0 } }
 			},
 
 			reset: (): void => {
 				set({
 					stats: {
-						"Will": { poolType: "Mental", shadeShifted: false, mainPoolSpent: { shade: 0, exponent: 0 }, eitherPoolSpent: { shade: 0, exponent: 0 } },
-						"Perception": { poolType: "Mental", shadeShifted: false, mainPoolSpent: { shade: 0, exponent: 0 }, eitherPoolSpent: { shade: 0, exponent: 0 } },
-						"Power": { poolType: "Physical", shadeShifted: false, mainPoolSpent: { shade: 0, exponent: 0 }, eitherPoolSpent: { shade: 0, exponent: 0 } },
-						"Agility": { poolType: "Physical", shadeShifted: false, mainPoolSpent: { shade: 0, exponent: 0 }, eitherPoolSpent: { shade: 0, exponent: 0 } },
-						"Forte": { poolType: "Physical", shadeShifted: false, mainPoolSpent: { shade: 0, exponent: 0 }, eitherPoolSpent: { shade: 0, exponent: 0 } },
-						"Speed": { poolType: "Physical", shadeShifted: false, mainPoolSpent: { shade: 0, exponent: 0 }, eitherPoolSpent: { shade: 0, exponent: 0 } }
+						Will: { poolType: "Mental", shadeShifted: false, mainPoolSpent: { shade: 0, exponent: 0 }, eitherPoolSpent: { shade: 0, exponent: 0 } },
+						Perception: { poolType: "Mental", shadeShifted: false, mainPoolSpent: { shade: 0, exponent: 0 }, eitherPoolSpent: { shade: 0, exponent: 0 } },
+						Power: { poolType: "Physical", shadeShifted: false, mainPoolSpent: { shade: 0, exponent: 0 }, eitherPoolSpent: { shade: 0, exponent: 0 } },
+						Agility: { poolType: "Physical", shadeShifted: false, mainPoolSpent: { shade: 0, exponent: 0 }, eitherPoolSpent: { shade: 0, exponent: 0 } },
+						Forte: { poolType: "Physical", shadeShifted: false, mainPoolSpent: { shade: 0, exponent: 0 }, eitherPoolSpent: { shade: 0, exponent: 0 } },
+						Speed: { poolType: "Physical", shadeShifted: false, mainPoolSpent: { shade: 0, exponent: 0 }, eitherPoolSpent: { shade: 0, exponent: 0 } }
 					}
 				});
 			},
@@ -54,7 +54,7 @@ export const useCharacterBurnerStatStore = create<CharacterBurnerStatState>()(
 			shiftStatShade: (statName: string): void => {
 				const { getMentalPool, getEitherPool, getPhysicalPool } = useCharacterBurnerLifepathStore.getState();
 
-				set(produce<CharacterBurnerStatState>((state) => {
+				set(produce<CharacterBurnerStatState>(state => {
 					const stat = state.stats[statName];
 					const newIsShifted = !state.stats[statName].shadeShifted;
 
@@ -83,7 +83,7 @@ export const useCharacterBurnerStatStore = create<CharacterBurnerStatState>()(
 				const { limits } = useCharacterBurnerMiscStore.getState();
 				const { getMentalPool, getEitherPool, getPhysicalPool } = useCharacterBurnerLifepathStore.getState();
 
-				set(produce<CharacterBurnerStatState>((state) => {
+				set(produce<CharacterBurnerStatState>(state => {
 					const stat = state.stats[statName];
 					const potentialExponent = stat.mainPoolSpent.exponent + (decrease ? -1 : 1);
 					const stockLimit = limits.stats[statName].max;

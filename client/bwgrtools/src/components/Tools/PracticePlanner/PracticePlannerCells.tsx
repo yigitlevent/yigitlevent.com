@@ -38,7 +38,9 @@ function PracticePlannerCell({ cell, cellIndex, setNotification }: { cell: BwgrP
 		<Paper elevation={3} sx={{ padding: "5px 10px", margin: "10px 10px 10px" }}>
 			<Stack spacing={0}>
 				<Typography>
-					Day {cellIndex + 1}
+					Day
+					{" "}
+					{cellIndex + 1}
 					<IconButton size="small" sx={{ float: "right" }} onClick={() => { deleteCell(cellIndex); }}><DeleteOutlineIcon fontSize="small" /></IconButton>
 					<IconButton size="small" sx={{ float: "right" }} onClick={() => { changeCellHour(cellIndex, -1, cells, setNotification); }}><RemoveCircleOutlineIcon fontSize="small" /></IconButton>
 					<IconButton size="small" sx={{ float: "right" }} onClick={() => { changeCellHour(cellIndex, 1, cells, setNotification); }}><AddCircleOutlineIcon fontSize="small" /></IconButton>

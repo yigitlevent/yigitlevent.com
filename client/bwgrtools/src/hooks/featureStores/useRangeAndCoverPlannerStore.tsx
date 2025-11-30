@@ -16,7 +16,7 @@ interface RangeAndCoverPlannerState {
 
 export const useRangeAndCoverPlannerStore = create<RangeAndCoverPlannerState>()(
 	devtools(
-		(set) => ({
+		set => ({
 			actions: [undefined, undefined, undefined],
 			selectedAction: ["Charge", "Charge", "Charge"],
 
@@ -24,7 +24,7 @@ export const useRangeAndCoverPlannerStore = create<RangeAndCoverPlannerState>()(
 				const actionMaybe = actions.find(v => v.name === actionName);
 				if (!actionMaybe) return;
 				const action: BwgrRaCActionExtended = { ...actionMaybe, open: false, visible: true };
-				set(produce<RangeAndCoverPlannerState>((state) => {
+				set(produce<RangeAndCoverPlannerState>(state => {
 					const newActions = state.actions;
 					state.actions = newActions.map((v, i) => {
 						if (i === volleyIndex) return action;
@@ -33,7 +33,7 @@ export const useRangeAndCoverPlannerStore = create<RangeAndCoverPlannerState>()(
 				}));
 			},
 			deleteAction: (volleyIndex: number) => {
-				set(produce<RangeAndCoverPlannerState>((state) => {
+				set(produce<RangeAndCoverPlannerState>(state => {
 					const newActions = state.actions;
 					state.actions = newActions.map((v, i) => {
 						if (i === volleyIndex) return undefined;
@@ -42,12 +42,12 @@ export const useRangeAndCoverPlannerStore = create<RangeAndCoverPlannerState>()(
 				}));
 			},
 			changeSelectedAction: (actionName: string, volleyIndex: number) => {
-				set(produce<RangeAndCoverPlannerState>((state) => {
+				set(produce<RangeAndCoverPlannerState>(state => {
 					state.selectedAction[volleyIndex] = actionName;
 				}));
 			},
 			toggleActionDetails: (volleyIndex: number) => {
-				set(produce<RangeAndCoverPlannerState>((state) => {
+				set(produce<RangeAndCoverPlannerState>(state => {
 					const newActions = state.actions;
 					state.actions = newActions.map((v, i) => {
 						if (v && i === volleyIndex) { return { ...v, open: !v.open }; }
@@ -56,7 +56,7 @@ export const useRangeAndCoverPlannerStore = create<RangeAndCoverPlannerState>()(
 				}));
 			},
 			toggleActionVisibility: (volleyIndex: number) => {
-				set(produce<RangeAndCoverPlannerState>((state) => {
+				set(produce<RangeAndCoverPlannerState>(state => {
 					const newActions = state.actions;
 					state.actions = newActions.map((v, i) => {
 						if (v && i === volleyIndex) { return { ...v, visible: !v.visible }; }

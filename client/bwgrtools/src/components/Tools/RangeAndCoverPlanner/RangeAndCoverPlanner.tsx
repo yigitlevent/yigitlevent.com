@@ -28,30 +28,34 @@ export function RangeAndCoverPlanner(): React.JSX.Element {
 				{actions.map((action, volleyIndex) => (
 					<Grid key={volleyIndex} size={{ xs: 1 }} sx={{ minWidth: "30%" }}>
 						<Card sx={{ padding: "10px" }}>
-							<Typography variant="h5">Volley {volleyIndex + 1}</Typography>
+							<Typography variant="h5">
+								Volley
+								{volleyIndex + 1}
+							</Typography>
+
 							<Divider sx={{ margin: "8px 0" }} />
 
 							<Paper key={volleyIndex} elevation={2} sx={{ padding: "8px", marginBottom: "8px" }}>
-								{action
-									? action.visible
-										? <RangeAndCoverActionDetails action={action} volleyIndex={volleyIndex} />
-										: <IconButton disableRipple sx={{ width: "100%" }} onClick={() => { toggleActionVisibility(volleyIndex); }}>
-											<VisibilityIcon sx={{ fontSize: 100 }} />
-										</IconButton>
-									: <Fragment>
+								{action ? action.visible ? <RangeAndCoverActionDetails action={action} volleyIndex={volleyIndex} /> : (
+									<IconButton disableRipple sx={{ width: "100%" }} onClick={() => { toggleActionVisibility(volleyIndex); }}>
+										<VisibilityIcon sx={{ fontSize: 100 }} />
+									</IconButton>
+								) : (
+									<Fragment>
 										<Autocomplete
 											value={(racActions.find(v => v.name === selectedAction[volleyIndex]))}
 											options={[...racActions].sort((a, b) => a.group[1].localeCompare(b.group[1]) || a.name.localeCompare(b.name))}
-											getOptionLabel={(option) => option.name}
-											groupBy={(option) => option.group[1]}
-											renderInput={(params) => <TextField {...params} />}
+											getOptionLabel={option => option.name}
+											groupBy={option => option.group[1]}
+											renderInput={params => <TextField {...params} />}
 											onChange={(_, v) => { changeSelectedAction(v.name, volleyIndex); }}
 											fullWidth
 											disableClearable
 										/>
 
 										<Button size="large" fullWidth sx={{ padding: "16px", margin: "16px 0 8px" }} onClick={() => { addAction(racActions, volleyIndex, selectedAction[volleyIndex]); }}>Add Action</Button>
-									</Fragment>}
+									</Fragment>
+								)}
 							</Paper>
 						</Card>
 					</Grid>

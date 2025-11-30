@@ -84,7 +84,7 @@ export const useCharacterBurnerMiscStore = create<CharacterBurnerMiscState>()(
 					attributes: 9
 				};
 
-				set(produce<CharacterBurnerMiscState>((state) => {
+				set(produce<CharacterBurnerMiscState>(state => {
 					state.special = {
 						stock: { brutalLifeTraits: [], huntingGround: undefined },
 						companionLifepath: {},
@@ -117,20 +117,20 @@ export const useCharacterBurnerMiscStore = create<CharacterBurnerMiscState>()(
 			},
 
 			modifyCompanionLifepath: (companionName: string, companionLifepathId: BwgrLifepathId): void => {
-				set(produce<CharacterBurnerMiscState>((state) => {
+				set(produce<CharacterBurnerMiscState>(state => {
 					state.special.companionLifepath[companionName] = companionLifepathId;
 				}));
 			},
 
 			modifyVariableAge: (lifepathId: BwgrLifepathId, age: number, minmax: number[]): void => {
-				set(produce<CharacterBurnerMiscState>((state) => {
+				set(produce<CharacterBurnerMiscState>(state => {
 					state.special.variableAge[lifepathId] = Clamp(age, minmax[0], minmax[1]);
 				}));
 			},
 
 			modifyCompanionSkills: (companionLifepathId: BwgrLifepathId, skills: BwgrSkillId[] | undefined): void => {
 				if (skills) {
-					set(produce<CharacterBurnerMiscState>((state) => {
+					set(produce<CharacterBurnerMiscState>(state => {
 						state.special.companionSkills[companionLifepathId] = skills;
 					}));
 				}
@@ -140,12 +140,12 @@ export const useCharacterBurnerMiscStore = create<CharacterBurnerMiscState>()(
 				const prev = get().special.chosenSubskills[skillId];
 
 				if (canSelectMultiple && subskillIds) {
-					set(produce<CharacterBurnerMiscState>((state) => {
+					set(produce<CharacterBurnerMiscState>(state => {
 						state.special.chosenSubskills[skillId] = [...subskillIds];
 					}));
 				}
 				else {
-					set(produce<CharacterBurnerMiscState>((state) => {
+					set(produce<CharacterBurnerMiscState>(state => {
 						if (subskillIds === null) state.special.chosenSubskills[skillId] = [];
 						else if (prev.includes(subskillIds[0])) state.special.chosenSubskills[skillId] = [];
 						else state.special.chosenSubskills[skillId] = [subskillIds[0]];
@@ -155,7 +155,7 @@ export const useCharacterBurnerMiscStore = create<CharacterBurnerMiscState>()(
 
 			resetSkillSubskills: (skillIds: BwgrSkillId[]): void => {
 				skillIds.forEach(skillId => {
-					set(produce<CharacterBurnerMiscState>((state) => {
+					set(produce<CharacterBurnerMiscState>(state => {
 						state.special.chosenSubskills[skillId] = [];
 					}));
 				}
@@ -163,14 +163,14 @@ export const useCharacterBurnerMiscStore = create<CharacterBurnerMiscState>()(
 			},
 
 			addBrutalLifeTrait: (traitId: [id: BwgrTraitId, name: string] | "No Trait") => {
-				set(produce<CharacterBurnerMiscState>((state) => {
+				set(produce<CharacterBurnerMiscState>(state => {
 					const prev = state.special.stock.brutalLifeTraits;
 					state.special.stock.brutalLifeTraits = [...prev, traitId];
 				}));
 			},
 
 			setHuntingGround: (huntingGround: BwgrHuntingGroundsList) => {
-				set(produce<CharacterBurnerMiscState>((state) => {
+				set(produce<CharacterBurnerMiscState>(state => {
 					state.special.stock.huntingGround = huntingGround;
 				}));
 			},
@@ -178,7 +178,7 @@ export const useCharacterBurnerMiscStore = create<CharacterBurnerMiscState>()(
 			switchQuestion: (id: BwgrQuestionId): void => {
 				const index = get().questions.findIndex(v => v.id === id);
 
-				set(produce<CharacterBurnerMiscState>((state) => {
+				set(produce<CharacterBurnerMiscState>(state => {
 					const prev = state.questions[index];
 					state.questions[index] = { ...prev, answer: !prev.answer };
 				}));
@@ -209,7 +209,7 @@ export const useCharacterBurnerMiscStore = create<CharacterBurnerMiscState>()(
 							};
 						});
 
-				set(produce<CharacterBurnerMiscState>((state) => {
+				set(produce<CharacterBurnerMiscState>(state => {
 					state.questions = newQuestions;
 				}));
 			},
@@ -225,21 +225,21 @@ export const useCharacterBurnerMiscStore = create<CharacterBurnerMiscState>()(
 			refreshTraitEffects: () => {
 				const { hasTraitOpenByName } = useCharacterBurnerTraitStore.getState();
 
-				set(produce<CharacterBurnerMiscState>((state) => {
+				set(produce<CharacterBurnerMiscState>(state => {
 					state.traitEffects = [];
 
 					// EXTRA BELIEF/INSTINCT TRAITS
-					// TODO: call-on trait effects 
+					// TODO: call-on trait effects
 
 					// CALL-ON
-					// TODO: call-on trait effects 
+					// TODO: call-on trait effects
 
 					// GENERAL DIE
-					// TODO: die trait effects 
+					// TODO: die trait effects
 					if (hasTraitOpenByName("Tough")) state.traitEffects.push({ roundUp: "Mortal Wound" });
 
 					// GENERAL MONSTROUS
-					// TODO: monstrous trait effects 
+					// TODO: monstrous trait effects
 				}));
 			},
 
@@ -255,9 +255,7 @@ export const useCharacterBurnerMiscStore = create<CharacterBurnerMiscState>()(
 				const maxDistance = Math.ceil(forte.exponent / 2);
 
 				const mortalWound
-					= traitEffects.some(x => "roundUp" in x && x.roundUp === "Mortal Wound")
-						? Math.ceil(Average([power.exponent, forte.exponent])) + 6
-						: Math.floor(Average([power.exponent, forte.exponent])) + 6;
+					= traitEffects.some(x => "roundUp" in x && x.roundUp === "Mortal Wound") ? Math.ceil(Average([power.exponent, forte.exponent])) + 6 : Math.floor(Average([power.exponent, forte.exponent])) + 6;
 
 				let traumatic = mortalWound - 1;
 				let severe = mortalWound - 2;

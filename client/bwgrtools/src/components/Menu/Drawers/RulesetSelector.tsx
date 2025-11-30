@@ -14,7 +14,7 @@ export function RulesetSelector({ expanded }: { expanded: boolean; }): React.JSX
 	const { rulesets, checkRulesets, checkExactRulesets, toggleDataset } = useRulesetStore();
 
 	return (
-		<DrawerBox title={"Datasets"} expanded={expanded}>
+		<DrawerBox title="Datasets" expanded={expanded}>
 			{rulesets.filter(ruleset => !ruleset.isExpansion).map((ruleset, i) => (
 				<List key={i} disablePadding>
 					<ListItemButton onClick={() => { toggleDataset(ruleset.id); }}>
@@ -23,35 +23,29 @@ export function RulesetSelector({ expanded }: { expanded: boolean; }): React.JSX
 						</ListItemIcon>
 
 						<ListItemText primary={ruleset.name} sx={{ margin: "0 0 2px -10px" }} />
-
-						{ruleset.isOfficial
-							? <CheckCircleOutlineIcon titleAccess="Official" fontSize="small" />
-							: null}
+						{ruleset.isOfficial ? <CheckCircleOutlineIcon titleAccess="Official" fontSize="small" /> : null}
 					</ListItemButton>
 
-					{ruleset.expansionIds
-						? <List disablePadding sx={{ marginLeft: 4 }}>
+					{ruleset.expansionIds ? (
+						<List disablePadding sx={{ marginLeft: 4 }}>
 							{ruleset.expansionIds.map((expansionId, ii) => {
 								const expansion = rulesets.find(v => v.id === expansionId);
 
 								return (
-									expansion
-										? <ListItemButton key={ii} onClick={() => { toggleDataset(expansion.id); }} disabled={!checkRulesets([ruleset.id])}>
+									expansion ? (
+										<ListItemButton key={ii} onClick={() => { toggleDataset(expansion.id); }} disabled={!checkRulesets([ruleset.id])}>
 											<ListItemIcon sx={{ margin: 0 }}>
 												{checkExactRulesets([ruleset.id, expansion.id]) ? <CheckIcon color="success" /> : <CloseIcon color="error" />}
 											</ListItemIcon>
 
 											<ListItemText primary={expansion.name} sx={{ margin: "0 0 2px -10px" }} />
-
-											{ruleset.isOfficial
-												? <CheckCircleOutlineIcon titleAccess="Official" fontSize="small" />
-												: null}
+											{ruleset.isOfficial ? <CheckCircleOutlineIcon titleAccess="Official" fontSize="small" /> : null}
 										</ListItemButton>
-										: null
+									) : null
 								);
 							})}
 						</List>
-						: null}
+					) : null}
 				</List>
 			)
 			)}

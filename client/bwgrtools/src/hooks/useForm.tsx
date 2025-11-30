@@ -25,9 +25,12 @@ export function useForm({ fields }: { fields: Field[]; }): UseFormReturn {
 	const createComponent = useCallback((field: Field) => {
 		return (
 			<TextField
-				label={field.label} value={values[field.label]}
+				label={field.label}
+				value={values[field.label]}
 				onChange={v => { changeValue(field.label, v.target.value); }}
-				variant="standard" fullWidth required
+				variant="standard"
+				fullWidth
+				required
 			/>
 		);
 	}, [changeValue, values]);

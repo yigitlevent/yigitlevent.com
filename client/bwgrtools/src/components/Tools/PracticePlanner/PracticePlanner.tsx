@@ -72,11 +72,9 @@ export function PracticePlanner(): React.JSX.Element {
 					<Autocomplete
 						value={practiceType}
 						options={practices}
-						getOptionLabel={(option) =>
-							option.ability
-								? `${option.ability[1]} - ${option.cycle.toString()}m, R: ${option.routine.toString()}h, D: ${option.difficult.toString()}h, C: ${option.challenging.toString()}h`
-								: `${option.skillType[1]} - ${option.cycle.toString()}m, R: ${option.routine.toString()}h, D: ${option.difficult.toString()}h, C: ${option.challenging.toString()}h`}
-						renderInput={(params) => <TextField {...params} variant="standard" />}
+						getOptionLabel={option =>
+							option.ability ? `${option.ability[1]} - ${option.cycle.toString()}m, R: ${option.routine.toString()}h, D: ${option.difficult.toString()}h, C: ${option.challenging.toString()}h` : `${option.skillType[1]} - ${option.cycle.toString()}m, R: ${option.routine.toString()}h, D: ${option.difficult.toString()}h, C: ${option.challenging.toString()}h`}
+						renderInput={params => <TextField {...params} variant="standard" />}
 						onChange={(_, v) => { setPracticeType(v); }}
 						disableClearable
 						disabled={cells.length < 1}
@@ -86,17 +84,17 @@ export function PracticePlanner(): React.JSX.Element {
 				<Grid size={{ xs: 10, sm: 4, md: 3 }}>
 					<InputLabel>Name</InputLabel>
 
-					{possibleSkills && typeof practiceName !== "string"
-						? <Autocomplete
+					{possibleSkills && typeof practiceName !== "string" ? (
+						<Autocomplete
 							value={practiceName}
 							options={possibleSkills}
-							getOptionLabel={(option) => option.name}
-							renderInput={(params) => <TextField {...params} variant="standard" />}
+							getOptionLabel={option => option.name}
+							renderInput={params => <TextField {...params} variant="standard" />}
 							onChange={(_, v) => { setPracticeName(v); }}
 							disableClearable
 							disabled={cells.length < 1}
 						/>
-						: <TextField variant="standard" defaultValue={practiceName} disabled />}
+					) : <TextField variant="standard" defaultValue={practiceName} disabled />}
 				</Grid>
 
 				<Grid size={{ xs: 10, sm: 4, md: 3 }}>
@@ -106,12 +104,12 @@ export function PracticePlanner(): React.JSX.Element {
 						fullWidth
 						variant="standard"
 						value={testType}
-						onChange={(e) => { setTestType(e.target.value); }}
+						onChange={e => { setTestType(e.target.value); }}
 						disabled={cells.length < 1}
 					>
-						<MenuItem value={"Routine"}>Routine</MenuItem>
-						<MenuItem value={"Difficult"}>Difficult</MenuItem>
-						<MenuItem value={"Challenging"}>Challenging</MenuItem>
+						<MenuItem value="Routine">Routine</MenuItem>
+						<MenuItem value="Difficult">Difficult</MenuItem>
+						<MenuItem value="Challenging">Challenging</MenuItem>
 					</Select>
 				</Grid>
 

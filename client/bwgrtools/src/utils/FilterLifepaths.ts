@@ -34,7 +34,7 @@ export function FilterLifepaths({ rulesetLifepaths, stock, age, lifepaths, gende
 				if (gender) return item.gender === gender;
 				else return true;
 			}
-			else if ("oldestBy" in item) return true; // TODO: Implementable only by having the campaign 
+			else if ("oldestBy" in item) return true; // TODO: Implementable only by having the campaign
 			else if (attributes && "attribute" in item) {
 				const exp = attributes.find(item.attribute[0])?.exponent;
 				if (item.min) return exp ? exp >= item.min : false;

@@ -7,6 +7,6 @@ interface HmSurfaceStyleStroke {
 }
 
 interface HmSurfaceStyleFill {
-	color: RgbaColor,
+	color: RgbaColor;
 	hover: RgbaColor;
 }

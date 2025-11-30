@@ -12,9 +12,7 @@ export function LifepathBox({ lifepath }: { lifepath: BwgrLifepath; }): React.JS
 	const { getSetting } = useRulesetStore();
 
 	const getYears = (l: BwgrLifepath): string => {
-		const years = typeof l.years === "number"
-			? `${l.years.toString()}${l.years > 1 ? "yrs" : "yr"}`
-			: l.years.join("-") + "yrs";
+		const years = typeof l.years === "number" ? `${l.years.toString()}${l.years > 1 ? "yrs" : "yr"}` : l.years.join("-") + "yrs";
 		return years;
 	};
 
@@ -36,9 +34,7 @@ export function LifepathBox({ lifepath }: { lifepath: BwgrLifepath; }): React.JS
 	};
 
 	const getLeads = (l: BwgrLifepath): string => {
-		const leads = (l.leads && l.leads.length > 0)
-			? l.leads.map(settingId => getSetting(settingId).nameShort)
-			: ["—"];
+		const leads = (l.leads && l.leads.length > 0) ? l.leads.map(settingId => getSetting(settingId).nameShort) : ["—"];
 
 		return leads.join(", ");
 	};
@@ -87,13 +83,13 @@ export function LifepathBox({ lifepath }: { lifepath: BwgrLifepath; }): React.JS
 				</Typography>
 			</Grid>
 
-			{lifepath.requirements
-				? <Grid size={{ md: 16 }}>
+			{lifepath.requirements ? (
+				<Grid size={{ md: 16 }}>
 					<Typography variant="caption">
 						<LifepathRequirements lifepath={lifepath} />
 					</Typography>
 				</Grid>
-				: null}
+			) : null}
 		</Grid>
 	);
 }

@@ -38,7 +38,7 @@ export function Stats(): React.JSX.Element {
 			<Fragment>
 				{abilities
 					.filter(a => a.abilityType[1].includes("Stat"))
-					.sort(((pv, cv) => (pv.id as unknown as number) - (cv.id as unknown as number)))
+					.sort((pv, cv) => (pv.id as unknown as number) - (cv.id as unknown as number))
 					.map((v, i) => {
 						const stat = getStat(v.name);
 						return (

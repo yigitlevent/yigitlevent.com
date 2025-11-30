@@ -31,10 +31,12 @@ export function Deadline(): React.JSX.Element {
 						style={{ marginTop: 15 }}
 					>
 						<Title order={4}>{deadline.type}</Title>
-						{Localisation.deadline[lang]}: {d.deadlinePassed ? Localisation.deadlinePassed[lang] : `${d.minutes}:${d.seconds}`}
+						{Localisation.deadline[lang]}
+						:
+						{d.deadlinePassed ? Localisation.deadlinePassed[lang] : `${d.minutes}:${d.seconds}`}
 
-						{hasAccess("Megagame Moderator" as UserAccess)
-							? <ActionIcon
+						{hasAccess("Megagame Moderator" as UserAccess) ? (
+							<ActionIcon
 								ml="sm"
 								variant="subtle"
 								color="red"
@@ -43,7 +45,7 @@ export function Deadline(): React.JSX.Element {
 							>
 								<CircleSlash color="red" size={20} />
 							</ActionIcon>
-							: null}
+						) : null}
 					</Blockquote>
 				);
 			})}

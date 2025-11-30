@@ -17,7 +17,8 @@ export function RulesPanel(): React.JSX.Element {
 					<Button
 						component="a"
 						href="/rulebooks/Dune Megagame Rules [en].pdf"
-						target="_blank" rel="noopener noreferrer"
+						target="_blank"
+						rel="noopener noreferrer"
 						variant="light"
 						color="yellow"
 					>
@@ -27,7 +28,8 @@ export function RulesPanel(): React.JSX.Element {
 					<Button
 						component="a"
 						href="/rulebooks/Dune Megagame Rules [tr].pdf"
-						target="_blank" rel="noopener noreferrer"
+						target="_blank"
+						rel="noopener noreferrer"
 						variant="light"
 						color="yellow"
 					>

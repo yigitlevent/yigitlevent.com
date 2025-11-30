@@ -20,50 +20,42 @@ export function RandomLifepathsLists({ chosenLifepaths }: { chosenLifepaths: Bwg
 		<Grid container columns={1} spacing={1}>
 			<Grid size={{ xs: 1 }}>
 				Mandatory Skills:
-				{mandatorySkills.length > 0
-					? mandatorySkills.map((skill, i) => (
-						<Paper key={i} elevation={2} sx={{ cursor: "pointer", padding: "0 4px", margin: "3px 3px 0", width: "max-content", display: "inline-block" }}>
-							<PopoverLink data={skill} />
-						</Paper>
-					)
-					)
-					: <Box sx={{ padding: "0 4px", display: "inline-block" }}>—</Box>}
+				{mandatorySkills.length > 0 ? mandatorySkills.map((skill, i) => (
+					<Paper key={i} elevation={2} sx={{ cursor: "pointer", padding: "0 4px", margin: "3px 3px 0", width: "max-content", display: "inline-block" }}>
+						<PopoverLink data={skill} />
+					</Paper>
+				)
+				) : <Box sx={{ padding: "0 4px", display: "inline-block" }}>—</Box>}
 			</Grid>
 
 			<Grid size={{ xs: 1 }}>
 				Skills:
-				{lifepathSkills.length > 0
-					? lifepathSkills.map((skill, i) => (
-						<Paper key={i} elevation={2} sx={{ cursor: "pointer", padding: "0 4px", margin: "3px 3px 0", width: "max-content", display: "inline-block" }}>
-							<PopoverLink data={skill} />
-						</Paper>
-					)
-					)
-					: <Box sx={{ padding: "0 4px", display: "inline-block" }}>—</Box>}
+				{lifepathSkills.length > 0 ? lifepathSkills.map((skill, i) => (
+					<Paper key={i} elevation={2} sx={{ cursor: "pointer", padding: "0 4px", margin: "3px 3px 0", width: "max-content", display: "inline-block" }}>
+						<PopoverLink data={skill} />
+					</Paper>
+				)
+				) : <Box sx={{ padding: "0 4px", display: "inline-block" }}>—</Box>}
 			</Grid>
 
 			<Grid size={{ xs: 1 }}>
 				Mandatory Traits:
-				{mandatoryTraits.length > 0
-					? mandatoryTraits.map((trait, i) => (
-						<Paper key={i} elevation={2} sx={{ cursor: "pointer", padding: "0 4px", margin: "3px 3px 0", width: "max-content", display: "inline-block" }}>
-							<PopoverLink data={trait} />
-						</Paper>
-					)
-					)
-					: <Box sx={{ padding: "0 4px", display: "inline-block" }}>—</Box>}
+				{mandatoryTraits.length > 0 ? mandatoryTraits.map((trait, i) => (
+					<Paper key={i} elevation={2} sx={{ cursor: "pointer", padding: "0 4px", margin: "3px 3px 0", width: "max-content", display: "inline-block" }}>
+						<PopoverLink data={trait} />
+					</Paper>
+				)
+				) : <Box sx={{ padding: "0 4px", display: "inline-block" }}>—</Box>}
 			</Grid>
 
 			<Grid size={{ xs: 1 }}>
 				Traits:
-				{lifepathTraits.length > 0
-					? lifepathTraits.map((trait, i) => (
-						<Paper key={i} elevation={2} sx={{ cursor: "pointer", padding: "0 4px", margin: "3px 3px 0", width: "max-content", display: "inline-block" }}>
-							<PopoverLink data={trait} />
-						</Paper>
-					)
-					)
-					: <Box sx={{ padding: "0 4px", display: "inline-block" }}>—</Box>}
+				{lifepathTraits.length > 0 ? lifepathTraits.map((trait, i) => (
+					<Paper key={i} elevation={2} sx={{ cursor: "pointer", padding: "0 4px", margin: "3px 3px 0", width: "max-content", display: "inline-block" }}>
+						<PopoverLink data={trait} />
+					</Paper>
+				)
+				) : <Box sx={{ padding: "0 4px", display: "inline-block" }}>—</Box>}
 			</Grid>
 		</Grid>
 	);

@@ -74,28 +74,28 @@ export function SpecialSkills(): React.JSX.Element {
 
 				return (
 					<Fragment key={i}>
-						{skill.id in special.chosenSubskills
-							? canSelectMultiple
-								? <Autocomplete
-									value={special.chosenSubskills[skill.id].map(ruleset.getSkill)}
-									options={subskills.sort((a, b) => a.category[1].localeCompare(b.category[1]) || a.name.localeCompare(b.name))}
-									getOptionLabel={(option) => option.name}
-									groupBy={(option) => option.category[1]}
-									renderInput={(params) => <TextField {...params} label="Chosen Skills" />}
-									onChange={(_, v) => { modifySkillSubskills(skill.id, v.map(v => v.id), canSelectMultiple); }}
-									fullWidth
-									multiple
-								/>
-								: <Autocomplete
-									value={special.chosenSubskills[skill.id].map(ruleset.getSkill)[0]}
-									options={subskills.sort((a, b) => a.category[1].localeCompare(b.category[1]) || a.name.localeCompare(b.name))}
-									getOptionLabel={(option) => option.name}
-									groupBy={(option) => option.category[1]}
-									renderInput={(params) => <TextField {...params} label="Chosen Skill" />}
-									onChange={(_, v) => { modifySkillSubskills(skill.id, v ? [v.id] : null, canSelectMultiple); }}
-									fullWidth
-								/>
-							: null}
+						{skill.id in special.chosenSubskills ? canSelectMultiple ? (
+							<Autocomplete
+								value={special.chosenSubskills[skill.id].map(ruleset.getSkill)}
+								options={subskills.sort((a, b) => a.category[1].localeCompare(b.category[1]) || a.name.localeCompare(b.name))}
+								getOptionLabel={option => option.name}
+								groupBy={option => option.category[1]}
+								renderInput={params => <TextField {...params} label="Chosen Skills" />}
+								onChange={(_, v) => { modifySkillSubskills(skill.id, v.map(v => v.id), canSelectMultiple); }}
+								fullWidth
+								multiple
+							/>
+						) : (
+							<Autocomplete
+								value={special.chosenSubskills[skill.id].map(ruleset.getSkill)[0]}
+								options={subskills.sort((a, b) => a.category[1].localeCompare(b.category[1]) || a.name.localeCompare(b.name))}
+								getOptionLabel={option => option.name}
+								groupBy={option => option.category[1]}
+								renderInput={params => <TextField {...params} label="Chosen Skill" />}
+								onChange={(_, v) => { modifySkillSubskills(skill.id, v ? [v.id] : null, canSelectMultiple); }}
+								fullWidth
+							/>
+						) : null}
 					</Fragment>
 				);
 			})}

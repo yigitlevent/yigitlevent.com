@@ -2,8 +2,8 @@ export type UniqueArrayItem<K, T> = { id: K; } & T;
 
 
 /**
- * UniqueArray collection can only store objects that has an `id` property. 
- * It uses this `id` property to force uniqueness of its elements. 
+ * UniqueArray collection can only store objects that has an `id` property.
+ * It uses this `id` property to force uniqueness of its elements.
  * Keys of this collections is the type of the `id` property.
  * @param newArray - Optional. Array of objects.
 **/
@@ -11,8 +11,8 @@ export class UniqueArray<K, T> {
 	private values: UniqueArrayItem<K, T>[] = [];
 
 	/**
-	 * UniqueArray collection can only store objects that has an `id` property. 
-	 * It uses this `id` property to force uniqueness of its elements. 
+	 * UniqueArray collection can only store objects that has an `id` property.
+	 * It uses this `id` property to force uniqueness of its elements.
 	 * Keys of this collections is the type of the `id` property.
 	 * @param newArray - Optional. Array of objects.
 	**/

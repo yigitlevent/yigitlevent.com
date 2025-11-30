@@ -24,7 +24,7 @@ export function Instincts(): React.JSX.Element {
 						<TextField
 							label={i !== 3 ? `Instinct ${(i + 1).toString()}` : instincts[3].name}
 							value={v.instinct}
-							onChange={(e) => { setInstinct(i, e.target.value); }}
+							onChange={e => { setInstinct(i, e.target.value); }}
 							fullWidth
 							variant="standard"
 						/>

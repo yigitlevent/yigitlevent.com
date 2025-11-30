@@ -17,8 +17,8 @@ export interface CharacterBurnerBasicsState {
 	gender: "Male" | "Female";
 	stock: [id: BwgrStockId, name: string];
 
-	beliefs: { name: string, belief: string; }[];
-	instincts: { name: string, instinct: string; }[];
+	beliefs: { name: string; belief: string; }[];
+	instincts: { name: string; instinct: string; }[];
 
 	setName: (name: string) => void;
 	setConcept: (concept: string) => void;
@@ -96,13 +96,13 @@ export const useCharacterBurnerBasicsStore = create<CharacterBurnerBasicsState>(
 			},
 
 			setBelief: (index: number, belief: string): void => {
-				set(produce<CharacterBurnerBasicsState>((state) => {
+				set(produce<CharacterBurnerBasicsState>(state => {
 					state.beliefs[index].belief = belief;
 				}));
 			},
 
 			setInstinct: (index: number, instinct: string): void => {
-				set(produce<CharacterBurnerBasicsState>((state) => {
+				set(produce<CharacterBurnerBasicsState>(state => {
 					state.instincts[index].instinct = instinct;
 				}));
 			},

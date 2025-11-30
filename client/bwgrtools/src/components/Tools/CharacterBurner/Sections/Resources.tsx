@@ -27,7 +27,12 @@ export function Resources({ openModal }: { openModal: (name: BwgrCharacterBurner
 			</Grid>
 
 			<Grid size={{ xs: 6, sm: 5 }}>
-				<Typography>Total Points: {resourcePools.total}, Remaining: {resourcePools.remaining}</Typography>
+				<Typography>
+					Total Points:
+					{resourcePools.total}
+					, Remaining:
+					{resourcePools.remaining}
+				</Typography>
 			</Grid>
 
 			<Grid size={{ xs: 6, sm: 1 }}>
@@ -41,13 +46,17 @@ export function Resources({ openModal }: { openModal: (name: BwgrCharacterBurner
 							<AccordionSummary
 								expandIcon={<ArrowForwardIosSharp sx={{ fontSize: "0.9em" }} />}
 								sx={{
-									flexDirection: "row-reverse",
+									"flexDirection": "row-reverse",
 									"& .MuiAccordionSummary-content": { margin: "0" },
 									"& .MuiAccordionSummary-expandIconWrapper.Mui-expanded": { transform: "rotate(90deg)" }
 								}}
 							>
 								<Typography sx={{ fontSize: "18px", margin: "0 0 0 12px" }}>
-									{resources[resourceKey].name} ({resources[resourceKey].cost}rps)
+									{resources[resourceKey].name}
+									{" "}
+									(
+									{resources[resourceKey].cost}
+									rps)
 								</Typography>
 
 								<IconButton color="primary" onClick={() => { removeResource(resourceKey); }} sx={{ position: "absolute", right: "0", margin: "2px 12px 0 0", padding: 0 }}>
@@ -62,14 +71,20 @@ export function Resources({ openModal }: { openModal: (name: BwgrCharacterBurner
 									</Grid>
 
 									<Grid size={{ xs: 2 }}>
-										<Typography variant="body2">Type: {resources[resourceKey].type[1]}</Typography>
+										<Typography variant="body2">
+											Type:
+											{resources[resourceKey].type[1]}
+										</Typography>
 									</Grid>
 
-									{resources[resourceKey].modifiers.length > 0
-										? <Grid size={{ xs: 2 }}>
-											<Typography variant="body2">Modifiers: {resources[resourceKey].modifiers.join(", ")}</Typography>
+									{resources[resourceKey].modifiers.length > 0 ? (
+										<Grid size={{ xs: 2 }}>
+											<Typography variant="body2">
+												Modifiers:
+												{resources[resourceKey].modifiers.join(", ")}
+											</Typography>
 										</Grid>
-										: null}
+									) : null}
 
 									<Grid size={{ xs: 2 }}>
 										<TextField

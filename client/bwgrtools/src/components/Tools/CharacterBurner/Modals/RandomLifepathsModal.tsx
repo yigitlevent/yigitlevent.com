@@ -103,13 +103,13 @@ export function RandomLifepathsModal({ isOpen, close }: { isOpen: boolean; close
 	return (
 		<Modal open={isOpen} onClose={() => { close(); }}>
 			<Paper sx={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", maxWidth: "800px", width: "100%", padding: "0 24px 24px", border: "none", overflow: "auto" }}>
-				{<GenericGrid columns={7} center>
+				<GenericGrid columns={7} center>
 					<Grid size={{ xs: 7, sm: 3, md: 2 }}>
 						<FormControl fullWidth variant="standard">
 							<InputLabel>Stock</InputLabel>
 
 							<Select label="Stock" value={stock} onChange={e => { changeStock(e.target.value); }}>
-								<MenuItem key={"Random"} value={"Random"}>Random</MenuItem>
+								<MenuItem key="Random" value="Random">Random</MenuItem>
 								{ruleset.stocks.map(v => { return <MenuItem key={v.name} value={v.id}>{v.name}</MenuItem>; })}
 							</Select>
 						</FormControl>
@@ -163,15 +163,15 @@ export function RandomLifepathsModal({ isOpen, close }: { isOpen: boolean; close
 					<Grid size={{ xs: 7 }}>
 						<Button variant="outlined" onClick={() => { createRandom(); }} fullWidth>Generate Random Character</Button>
 					</Grid>
-				</GenericGrid>}
+				</GenericGrid>
 
-				{chosenLifepaths.length > 0
-					? <GenericGrid columns={2}>
-						{triedTooMuch
-							? <Grid size={{ xs: 2 }}>
+				{chosenLifepaths.length > 0 ? (
+					<GenericGrid columns={2}>
+						{triedTooMuch ? (
+							<Grid size={{ xs: 2 }}>
 								<Alert severity="warning">There might be lifepaths missing because of the chosen options.</Alert>
 							</Grid>
-							: <Fragment />}
+						) : <Fragment />}
 
 						<Grid size={{ xs: 2, md: 1 }}>
 							<Divider sx={{ margin: "0 0 6px" }}>
@@ -179,8 +179,14 @@ export function RandomLifepathsModal({ isOpen, close }: { isOpen: boolean; close
 							</Divider>
 
 							<Stack spacing={2}>
-								{chosenLifepaths.map((v, i) =>
-									<Paper key={i}>{i + 1}. {`${v.setting[1]}➞${v.name}`}</Paper>
+								{chosenLifepaths.map((v, i) => (
+									<Paper key={i}>
+										{i + 1}
+										.
+										{" "}
+										{`${v.setting[1]}➞${v.name}`}
+									</Paper>
+								)
 								)}
 							</Stack>
 
@@ -203,7 +209,7 @@ export function RandomLifepathsModal({ isOpen, close }: { isOpen: boolean; close
 							<Button variant="outlined" onClick={() => { transferCharacter(); }} fullWidth>I like this Character</Button>
 						</Grid>
 					</GenericGrid>
-					: null}
+				) : null}
 			</Paper>
 		</Modal>
 	);

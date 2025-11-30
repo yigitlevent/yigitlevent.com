@@ -51,7 +51,7 @@ export const useCharacterBurnerLifepathStore = create<CharacterBurnerLifepathSta
 			},
 
 			addLifepath: (lifepath: BwgrLifepath): void => {
-				set(produce<CharacterBurnerLifepathState>((state) => { state.lifepaths.push(lifepath); }));
+				set(produce<CharacterBurnerLifepathState>(state => { state.lifepaths.push(lifepath); }));
 				get().updateAvailableLifepaths();
 				useCharacterBurnerStatStore.getState().reset();
 				useCharacterBurnerSkillStore.getState().updateSkills();
@@ -61,7 +61,7 @@ export const useCharacterBurnerLifepathStore = create<CharacterBurnerLifepathSta
 			},
 
 			removeLastLifepath: (): void => {
-				set(produce<CharacterBurnerLifepathState>((state) => {
+				set(produce<CharacterBurnerLifepathState>(state => {
 					state.lifepaths = state.lifepaths.slice(0, state.lifepaths.length - 1);
 				}));
 				get().updateAvailableLifepaths();
@@ -182,7 +182,7 @@ export const useCharacterBurnerLifepathStore = create<CharacterBurnerLifepathSta
 
 				if (onlyReturn) return possibleLifepaths;
 
-				set(produce<CharacterBurnerLifepathState>((state) => { state.availableLifepaths = possibleLifepaths; }));
+				set(produce<CharacterBurnerLifepathState>(state => { state.availableLifepaths = possibleLifepaths; }));
 				return possibleLifepaths;
 			}
 		}),

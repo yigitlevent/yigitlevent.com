@@ -7,7 +7,7 @@ export function useFontLoading(font: string): { isFontLoaded: boolean; } {
 	useEffect(() => {
 		if (!isFontLoaded) {
 			(new FontFace("Code", `url(${font})`)).load().then(
-				(font) => { document.fonts.add(font); setIsFontLoaded(true); },
+				font => { document.fonts.add(font); setIsFontLoaded(true); },
 				console.error
 			);
 		}

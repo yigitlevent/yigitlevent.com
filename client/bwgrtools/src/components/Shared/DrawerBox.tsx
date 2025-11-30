@@ -12,7 +12,7 @@ export function DrawerBox({ children, title, expanded }: { children: React.React
 
 	return (
 		<Drawer
-			anchor={"right"}
+			anchor="right"
 			open={expanded}
 			onClose={() => { toggleDrawer(); }}
 		>

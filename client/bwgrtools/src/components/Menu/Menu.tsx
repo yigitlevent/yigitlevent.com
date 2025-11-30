@@ -39,7 +39,7 @@ export function Menu({ bottom }: { bottom: boolean; }): React.JSX.Element {
 	const [signinOpen, setSigninOpen] = useState(false);
 	const [signupOpen, setSignupOpen] = useState(false);
 
-	const buttons: { title: DrawerNames, icon: React.JSX.Element; authOnly: boolean; }[] = [
+	const buttons: { title: DrawerNames; icon: React.JSX.Element; authOnly: boolean; }[] = [
 		{ title: "Tools", icon: <ListAltOutlinedIcon color="primary" />, authOnly: false },
 		{ title: "Datasets", icon: <DatasetOutlinedIcon color="primary" />, authOnly: false },
 		{ title: "Checklist", icon: <FactCheckOutlinedIcon color="primary" />, authOnly: false },
@@ -53,12 +53,12 @@ export function Menu({ bottom }: { bottom: boolean; }): React.JSX.Element {
 
 	return (
 		<Grid container alignItems="center" justifyContent={bottom ? "center" : "end"} sx={bottom ? style : undefined}>
-			{user
-				? <DrawerIconButton title={"Sign out"} icon={<LogoutOutlinedIcon color="primary" />} onClick={signout} />
-				: <Fragment>
-					<DrawerIconButton title={"Sign in"} icon={<LoginOutlinedIcon color="primary" />} onClick={() => { setSigninOpen(true); }} />
-					<DrawerIconButton title={"Sign up"} icon={<OpenInBrowserOutlinedIcon color="primary" />} onClick={() => { setSignupOpen(true); }} />
-				</Fragment>}
+			{user ? <DrawerIconButton title="Sign out" icon={<LogoutOutlinedIcon color="primary" />} onClick={signout} /> : (
+				<Fragment>
+					<DrawerIconButton title="Sign in" icon={<LoginOutlinedIcon color="primary" />} onClick={() => { setSigninOpen(true); }} />
+					<DrawerIconButton title="Sign up" icon={<OpenInBrowserOutlinedIcon color="primary" />} onClick={() => { setSignupOpen(true); }} />
+				</Fragment>
+			)}
 
 			{buttons.reverse()
 				.filter(v => !v.authOnly || user)
@@ -69,7 +69,7 @@ export function Menu({ bottom }: { bottom: boolean; }): React.JSX.Element {
 			<Tools expanded={drawer === "Tools"} />
 			<RulesetSelector expanded={drawer === "Datasets"} />
 			<Checklist expanded={drawer === "Checklist"} />
-			{/*<MyThings expanded={drawer === "My Things"} />*/}
+			{/* <MyThings expanded={drawer === "My Things"} /> */}
 		</Grid>
 	);
 }

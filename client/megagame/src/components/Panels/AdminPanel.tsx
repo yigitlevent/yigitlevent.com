@@ -15,12 +15,12 @@ export function AdminPanel(): React.JSX.Element {
 		<Box>
 			<Titlebox />
 
-			{hasAccess("Megagame Moderator" as UserAccess)
-				? <Fragment>
+			{hasAccess("Megagame Moderator" as UserAccess) ? (
+				<Fragment>
 					<DuneActions />
 					<GenericActions />
 				</Fragment>
-				: null}
+			) : null}
 
 			<SignInOut />
 		</Box>

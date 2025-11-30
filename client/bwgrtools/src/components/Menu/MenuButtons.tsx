@@ -29,7 +29,7 @@ export function MenuButtons({ openSignin, openSignup }: { openSignin: () => void
 	const { user, signout } = useUserStore();
 	const { toggleDrawer } = useDrawerStore();
 
-	const buttons: { title: DrawerNames, icon: React.JSX.Element; authOnly: boolean; }[] = [
+	const buttons: { title: DrawerNames; icon: React.JSX.Element; authOnly: boolean; }[] = [
 		{ title: "Tools", icon: <ListAltOutlinedIcon color="primary" />, authOnly: false },
 		{ title: "Datasets", icon: <DatasetOutlinedIcon color="primary" />, authOnly: false },
 		{ title: "Checklist", icon: <FactCheckOutlinedIcon color="primary" />, authOnly: false },
@@ -42,12 +42,12 @@ export function MenuButtons({ openSignin, openSignup }: { openSignin: () => void
 				<Box sx={{ textAlign: "right" }}>{user ? `welcome, ${user.username}` : null}</Box>
 			</Grid>
 
-			{user
-				? <DrawerIconButton title={"Sign out"} icon={<LogoutOutlinedIcon color="primary" />} onClick={signout} />
-				: <Fragment>
-					<DrawerIconButton title={"Sign in"} icon={<LoginOutlinedIcon color="primary" />} onClick={openSignin} />
-					<DrawerIconButton title={"Sign up"} icon={<OpenInBrowserOutlinedIcon color="primary" />} onClick={openSignup} />
-				</Fragment>}
+			{user ? <DrawerIconButton title="Sign out" icon={<LogoutOutlinedIcon color="primary" />} onClick={signout} /> : (
+				<Fragment>
+					<DrawerIconButton title="Sign in" icon={<LoginOutlinedIcon color="primary" />} onClick={openSignin} />
+					<DrawerIconButton title="Sign up" icon={<OpenInBrowserOutlinedIcon color="primary" />} onClick={openSignup} />
+				</Fragment>
+			)}
 
 			{buttons.reverse()
 				.filter(v => !v.authOnly || user)

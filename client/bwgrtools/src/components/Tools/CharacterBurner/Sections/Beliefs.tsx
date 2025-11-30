@@ -24,7 +24,7 @@ export function Beliefs(): React.JSX.Element {
 						<TextField
 							label={i !== 3 ? `Belief ${(i + 1).toString()}` : beliefs[3].name}
 							value={v.belief}
-							onChange={(e) => { setBelief(i, e.target.value); }}
+							onChange={e => { setBelief(i, e.target.value); }}
 							fullWidth
 							variant="standard"
 						/>

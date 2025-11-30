@@ -17,25 +17,22 @@ export function GamePanel(): React.JSX.Element {
 	return (
 		<Box>
 			<Titlebox />
+			{fetchMegagameState === "waiting" || fetchMegagameState === "requesting" ? <Blockquote color="yellow" radius="xs" iconSize={30} icon={<Info color="orange" size={20} />}>{Localisation.loading[lang]}</Blockquote> : null}
 
-			{fetchMegagameState === "waiting" || fetchMegagameState === "requesting"
-				? <Blockquote color="yellow" radius="xs" iconSize={30} icon={<Info color="orange" size={20} />}>{Localisation.loading[lang]}</Blockquote>
-				: null}
-
-			{fetchMegagameState === "failed"
-				? <Blockquote color="red" radius="xs" iconSize={30} icon={<Info color="red" size={20} />} mt="xl">
+			{fetchMegagameState === "failed" ? (
+				<Blockquote color="red" radius="xs" iconSize={30} icon={<Info color="red" size={20} />} mt="xl">
 					{Localisation.failedToFetchMegagameData[lang]}
 				</Blockquote>
-				: null}
+			) : null}
 
-			{fetchMegagameState === "succeded"
-				? <Fragment>
+			{fetchMegagameState === "succeded" ? (
+				<Fragment>
 					<Timer />
 					<Deadline />
 					<News />
 					<OrderQueues />
 				</Fragment>
-				: null}
+			) : null}
 		</Box>
 	);
 }

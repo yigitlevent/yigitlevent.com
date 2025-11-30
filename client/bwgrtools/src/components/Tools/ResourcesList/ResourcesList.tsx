@@ -50,10 +50,10 @@ export function ResourcesList(): React.JSX.Element {
 
 				<Grid size={{ xs: 3, sm: 3, md: 1 }}>
 					<TextField
-						label={"Search"}
+						label="Search"
 						variant="standard"
 						value={searchValues.text}
-						onChange={(e) => { setFilter([{ key: "s", value: e.target.value }]); }}
+						onChange={e => { setFilter([{ key: "s", value: e.target.value }]); }}
 						fullWidth
 					/>
 				</Grid>
@@ -64,11 +64,11 @@ export function ResourcesList(): React.JSX.Element {
 
 						<Select
 							value={searchValues.fields}
-							onChange={(e) => { setFilter([{ key: "sf", value: typeof e.target.value !== "string" ? e.target.value.join(",") : e.target.value }]); }}
-							renderValue={(selected) => selected.join(", ")}
+							onChange={e => { setFilter([{ key: "sf", value: typeof e.target.value !== "string" ? e.target.value.join(",") : e.target.value }]); }}
+							renderValue={selected => selected.join(", ")}
 							multiple
 						>
-							{["Name"].map((name) => (
+							{["Name"].map(name => (
 								<MenuItem key={name} value={name}>
 									<Checkbox checked={searchValues.fields.includes(name)} />
 									<ListItemText primary={name} />
@@ -80,16 +80,14 @@ export function ResourcesList(): React.JSX.Element {
 			</GenericGrid>
 
 			<GenericGrid columns={1}>
-				{filteredList.length > 0
-					? filteredList.map((resource, i) => (
-						<Grid size={{ xs: 1 }} key={i}>
-							<Paper elevation={2} sx={{ padding: "0 12px 16px" }}>
-								<ResourceItem resource={resource} />
-							</Paper>
-						</Grid>
-					)
-					)
-					: <Alert severity="warning" sx={{ width: "100%", maxWidth: "600px", margin: "12px auto" }}>Could not find any matches. Try adding more fields or changing search text.</Alert>}
+				{filteredList.length > 0 ? filteredList.map((resource, i) => (
+					<Grid size={{ xs: 1 }} key={i}>
+						<Paper elevation={2} sx={{ padding: "0 12px 16px" }}>
+							<ResourceItem resource={resource} />
+						</Paper>
+					</Grid>
+				)
+				) : <Alert severity="warning" sx={{ width: "100%", maxWidth: "600px", margin: "12px auto" }}>Could not find any matches. Try adding more fields or changing search text.</Alert>}
 			</GenericGrid>
 		</Fragment>
 	);

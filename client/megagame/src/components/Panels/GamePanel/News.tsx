@@ -11,25 +11,30 @@ function NewsList(): React.JSX.Element {
 
 	return (
 		<Fragment>
-			{megagame && megagame.news.length > 0
-				? <List
+			{megagame && megagame.news.length > 0 ? (
+				<List
 					spacing="md"
 					center
-					icon={
+					icon={(
 						<ThemeIcon variant="light" color="yellow" size="md" radius="sm">
 							<Quote size={14} />
 						</ThemeIcon>
-					}
+					)}
 				>
 					{megagame.news.map(news => (
 						<List.Item key={news.id}>
-							<span style={{ fontWeight: "bold" }}>{getFactionNameById(news.factionId)}: </span>
+							<span style={{ fontWeight: "bold" }}>
+								{getFactionNameById(news.factionId)}
+								:
+								{" "}
+							</span>
+
 							<span>{news.text}</span>
 						</List.Item>
 					)
 					)}
 				</List>
-				: <Text>{Localisation.noNewsItems[lang]}</Text>}
+			) : <Text>{Localisation.noNewsItems[lang]}</Text>}
 		</Fragment>
 	);
 }
@@ -40,8 +45,8 @@ function AddNewsForm(): React.JSX.Element {
 
 	return (
 		<Fragment>
-			{megagame && (userType === "Bene Gesserit" || userType === "Bene Tleliaxu" || userType === "Spacing Guild")
-				? <Fragment>
+			{megagame && (userType === "Bene Gesserit" || userType === "Bene Tleliaxu" || userType === "Spacing Guild") ? (
+				<Fragment>
 					<Divider my="md" />
 
 					<Textarea
@@ -51,7 +56,7 @@ function AddNewsForm(): React.JSX.Element {
 						maxRows={4}
 						style={{ marginTop: 15 }}
 						value={newsText}
-						onChange={(event) => {
+						onChange={event => {
 							if (event.currentTarget.value.length < 1000) setNewsText(event.currentTarget.value);
 						}}
 					/>
@@ -66,7 +71,7 @@ function AddNewsForm(): React.JSX.Element {
 						{Localisation.addNewsItem[lang]}
 					</Button>
 				</Fragment>
-				: null}
+			) : null}
 		</Fragment>
 	);
 }

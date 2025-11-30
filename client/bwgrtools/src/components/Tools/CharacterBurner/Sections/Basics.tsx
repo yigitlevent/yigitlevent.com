@@ -33,16 +33,16 @@ export function Basics({ openModal }: { openModal: (name: BwgrCharacterBurnerMod
 	return (
 		<GenericGrid columns={12} center extraBottomMargin>
 			<Grid size={{ xs: 12 }}>
-				<TextField label="Name" value={name} onChange={(e) => { setName(e.target.value); }} fullWidth variant="standard" />
+				<TextField label="Name" value={name} onChange={e => { setName(e.target.value); }} fullWidth variant="standard" />
 			</Grid>
 
 			<Grid size={{ xs: 12 }}>
-				<TextField label="Concept" value={concept} onChange={(e) => { setConcept(e.target.value); }} fullWidth variant="standard" />
+				<TextField label="Concept" value={concept} onChange={e => { setConcept(e.target.value); }} fullWidth variant="standard" />
 			</Grid>
 
 			<Grid size={{ xs: 12, sm: 4 }}>
 				<Autocomplete
-					renderInput={(params) => <TextField {...params} label="Stock" variant="standard" fullWidth />}
+					renderInput={params => <TextField {...params} label="Stock" variant="standard" fullWidth />}
 					options={ruleset.stocks.map(v => [v.id, v.name] as [id: BwgrStockId, name: string])}
 					getOptionLabel={v => v[1]}
 					isOptionEqualToValue={(o, v) => o[0] === v[0] && o[1] === v[1]}
@@ -56,7 +56,7 @@ export function Basics({ openModal }: { openModal: (name: BwgrCharacterBurnerMod
 				<Autocomplete
 					value={gender}
 					options={["Male", "Female"]}
-					renderInput={(params) => <TextField {...params} label="Gender" variant="standard" fullWidth />}
+					renderInput={params => <TextField {...params} label="Gender" variant="standard" fullWidth />}
 					onChange={(_, v) => { setGender(v as "Male" | "Female"); }}
 					fullWidth
 					disableClearable

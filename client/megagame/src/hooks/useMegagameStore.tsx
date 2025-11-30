@@ -5,11 +5,11 @@ import { devtools, persist } from "zustand/middleware";
 import { GenericDelete, GenericGet, GenericPost } from "../utils/GenericRequests";
 
 
-export type FetchState =
-	| "waiting"
-	| "requesting"
-	| "succeded"
-	| "failed";
+export type FetchState
+	= | "waiting"
+		| "requesting"
+		| "succeded"
+		| "failed";
 
 interface MegagameStore {
 	readonly fetchMegagameState: FetchState;
@@ -62,11 +62,11 @@ export const useMegagameStore = create<MegagameStore>()(
 				userTypeId: "",
 
 				setLang: (lang: "en" | "tr") => {
-					set(produce<MegagameStore>((state) => { state.lang = lang; }));
+					set(produce<MegagameStore>(state => { state.lang = lang; }));
 				},
 
 				setUserType: (userType: MegagameUserType) => {
-					set(produce<MegagameStore>((state) => {
+					set(produce<MegagameStore>(state => {
 						state.userType = userType;
 
 						const megagame = get().megagame;
@@ -78,11 +78,11 @@ export const useMegagameStore = create<MegagameStore>()(
 				},
 
 				setFetchMegagameState: (fetchState: FetchState) => {
-					set(produce<MegagameStore>((state) => { state.fetchMegagameState = fetchState; }));
+					set(produce<MegagameStore>(state => { state.fetchMegagameState = fetchState; }));
 				},
 
 				setFetchQueuesState: (fetchState: FetchState) => {
-					set(produce<MegagameStore>((state) => { state.fetchQueuesState = fetchState; }));
+					set(produce<MegagameStore>(state => { state.fetchQueuesState = fetchState; }));
 				},
 
 				fetchData: (changeState: boolean) => {
@@ -94,7 +94,7 @@ export const useMegagameStore = create<MegagameStore>()(
 
 						GenericGet<MggmMegagameResponse>("/mggm/megagame")
 							.then(response => {
-								set(produce<MegagameStore>((state) => {
+								set(produce<MegagameStore>(state => {
 									state.megagame = response.data.megagame;
 									state.events ??= response.data.megagame.events.reduce<Record<string, boolean>>((acc, event) => {
 										acc[event.type] = false;
@@ -119,7 +119,7 @@ export const useMegagameStore = create<MegagameStore>()(
 
 						GenericGet<MggmOrderQueueItemsResponse>(`/mggm/megagame/order-queues/${megagameId}`)
 							.then(response => {
-								set(produce<MegagameStore>((state) => {
+								set(produce<MegagameStore>(state => {
 									state.queues = response.data.queues;
 								}));
 
@@ -169,14 +169,14 @@ export const useMegagameStore = create<MegagameStore>()(
 				},
 
 				setEventState: (eventType: string, state: boolean) => {
-					set(produce<MegagameStore>((store) => {
+					set(produce<MegagameStore>(store => {
 						store.events ??= {};
 						store.events[eventType] = state;
 					}));
 				},
 
 				resetEventStates: () => {
-					set(produce<MegagameStore>((store) => {
+					set(produce<MegagameStore>(store => {
 						if (store.events) {
 							for (const eventType in store.events) {
 								store.events[eventType] = false;

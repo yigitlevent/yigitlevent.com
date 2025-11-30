@@ -27,6 +27,6 @@ export function Panels(): React.JSX.Element {
 				<Route path="/rules" element={<RulesPanel />} />
 				<Route path="/admin" element={<AdminPanel />} />
 			</Routes>
-		</Container >
+		</Container>
 	);
 }

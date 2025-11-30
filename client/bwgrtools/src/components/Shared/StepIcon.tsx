@@ -6,9 +6,9 @@ import { styled } from "@mui/material/styles";
 
 const QontoStepIconRoot = styled("div")<{ ownerState: { active?: boolean; }; }>(
 	({ theme }) => ({
-		display: "flex",
-		height: 22,
-		alignItems: "center",
+		"display": "flex",
+		"height": 22,
+		"alignItems": "center",
 		"& .QontoStepIcon-completedIcon": {
 			color: theme.palette.success.main,
 			zIndex: 1,
@@ -37,11 +37,7 @@ export function StepIcon(props: StepIconProps): React.JSX.Element {
 
 	return (
 		<QontoStepIconRoot ownerState={{ active }} className={className}>
-			{completed
-				? <CheckIcon className="QontoStepIcon-completedIcon" />
-				: active
-					? <div className="QontoStepIcon-circle" />
-					: <CloseIcon className="QontoStepIcon-nextIcon" />}
+			{completed ? <CheckIcon className="QontoStepIcon-completedIcon" /> : active ? <div className="QontoStepIcon-circle" /> : <CloseIcon className="QontoStepIcon-nextIcon" />}
 		</QontoStepIconRoot>
 	);
 }

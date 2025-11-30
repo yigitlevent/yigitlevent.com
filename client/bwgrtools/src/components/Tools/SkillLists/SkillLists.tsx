@@ -61,10 +61,10 @@ export function SkillLists(): React.JSX.Element {
 
 				<Grid size={{ xs: 3, sm: 3, md: 2 }}>
 					<TextField
-						label={"Search"}
+						label="Search"
 						variant="standard"
 						value={searchValues.text}
-						onChange={(e) => { setFilter([{ key: "s", value: e.target.value }]); }}
+						onChange={e => { setFilter([{ key: "s", value: e.target.value }]); }}
 						fullWidth
 					/>
 				</Grid>
@@ -75,11 +75,11 @@ export function SkillLists(): React.JSX.Element {
 
 						<Select
 							value={searchValues.fields}
-							onChange={(e) => { setFilter([{ key: "sf", value: typeof e.target.value !== "string" ? e.target.value.join(",") : e.target.value }]); }}
-							renderValue={(selected) => selected.join(", ")}
+							onChange={e => { setFilter([{ key: "sf", value: typeof e.target.value !== "string" ? e.target.value.join(",") : e.target.value }]); }}
+							renderValue={selected => selected.join(", ")}
 							multiple
 						>
-							{["Name", "Description"].map((name) => (
+							{["Name", "Description"].map(name => (
 								<MenuItem key={name} value={name}>
 									<Checkbox checked={searchValues.fields.includes(name)} />
 									<ListItemText primary={name} />
@@ -91,18 +91,18 @@ export function SkillLists(): React.JSX.Element {
 			</GenericGrid>
 
 			<GenericGrid spacing={[2, 2]}>
-				{filteredList.length > 0
-					? [...filteredList].sort((a, b) => a.name.localeCompare(b.name)).map((skill, i) => (
-						<Grid key={i}>
-							<Paper elevation={2} sx={{ cursor: "pointer", padding: "2px 6px" }}>
-								<PopoverLink data={skill} />
-							</Paper>
-						</Grid>
-					)
-					)
-					: <Alert severity="warning" sx={{ width: "100%", maxWidth: "600px", margin: "12px auto" }}>
+				{filteredList.length > 0 ? [...filteredList].sort((a, b) => a.name.localeCompare(b.name)).map((skill, i) => (
+					<Grid key={i}>
+						<Paper elevation={2} sx={{ cursor: "pointer", padding: "2px 6px" }}>
+							<PopoverLink data={skill} />
+						</Paper>
+					</Grid>
+				)
+				) : (
+					<Alert severity="warning" sx={{ width: "100%", maxWidth: "600px", margin: "12px auto" }}>
 						Could not find any matches. Try adding more fields or changing search text or filters.
-					</Alert>}
+					</Alert>
+				)}
 			</GenericGrid>
 		</Fragment>
 	);

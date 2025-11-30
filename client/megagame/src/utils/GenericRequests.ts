@@ -5,7 +5,7 @@ const ViteApiURL = import.meta.env.VITE_API_URL as string;
 
 function GetURL(path: string): string {
 	return `${ViteApiURL}${path}`;
-};
+}
 
 function GetConfig<T>(): AxiosRequestConfig<T> {
 	return {

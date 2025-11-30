@@ -24,27 +24,50 @@ export function RandomLifepathsBasics({ chosenLifepaths }: { chosenLifepaths: Bw
 	return (
 		<Grid container columns={2}>
 			<Grid size={{ xs: 1 }}>
-				<Typography variant="caption">Years: {age}</Typography>
+				<Typography variant="caption">
+					Years:
+					{age}
+				</Typography>
 			</Grid>
 
 			<Grid size={{ xs: 1 }}>
-				<Typography variant="caption">Resources: {resourcePoints.total}</Typography>
+				<Typography variant="caption">
+					Resources:
+					{resourcePoints.total}
+				</Typography>
 			</Grid>
 
 			<Grid size={{ xs: 1 }}>
-				<Typography variant="caption">Stats: {mentalPool.total}M, {physicalPool.total}P, {eitherPool.total}M/P</Typography>
+				<Typography variant="caption">
+					Stats:
+					{mentalPool.total}
+					M,
+					{physicalPool.total}
+					P,
+					{eitherPool.total}
+					M/P
+				</Typography>
 			</Grid>
 
 			<Grid size={{ xs: 1 }}>
-				<Typography variant="caption">Trait Points: {traitPools.total}</Typography>
+				<Typography variant="caption">
+					Trait Points:
+					{traitPools.total}
+				</Typography>
 			</Grid>
 
 			<Grid size={{ xs: 1 }}>
-				<Typography variant="caption">General Skill Points: {skillPools.general.total}</Typography>
+				<Typography variant="caption">
+					General Skill Points:
+					{skillPools.general.total}
+				</Typography>
 			</Grid>
 
 			<Grid size={{ xs: 1 }}>
-				<Typography variant="caption">Lifepath Skill Points: {skillPools.lifepath.total}</Typography>
+				<Typography variant="caption">
+					Lifepath Skill Points:
+					{skillPools.lifepath.total}
+				</Typography>
 			</Grid>
 		</Grid>
 	);

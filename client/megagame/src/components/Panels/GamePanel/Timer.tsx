@@ -31,8 +31,8 @@ function EventsList({ cycleCount }: { cycleCount: number; }): React.JSX.Element 
 			>
 				{relevantEventItems.map((eventItem, index) => (
 					<List.Item key={index}>
-						{hasAccess("Megagame Moderator" as UserAccess)
-							? <Checkbox
+						{hasAccess("Megagame Moderator" as UserAccess) ? (
+							<Checkbox
 								label={eventItem.type}
 								color="yellow"
 								variant="outline"
@@ -41,7 +41,7 @@ function EventsList({ cycleCount }: { cycleCount: number; }): React.JSX.Element 
 								checked={events[eventItem.type] || false}
 								onChange={event => { setEventState(eventItem.type, event.target.checked); }}
 							/>
-							: <Text>{eventItem.type}</Text>}
+						) : <Text>{eventItem.type}</Text>}
 					</List.Item>
 				))}
 			</List>
@@ -70,7 +70,13 @@ export function Timer(): React.JSX.Element {
 	return (
 		<Paper shadow="md" radius="xs" p="xl" bd="1px solid rgba(0,0,0,0.1)" mt="md">
 			<Title order={2} mb="md">
-				{Localisation.cycleName[lang]} {megagame.cycle.start + cycleCount} ({Localisation.cycleCount[lang](cycleCount)})
+				{Localisation.cycleName[lang]}
+				{" "}
+				{megagame.cycle.start + cycleCount}
+				{" "}
+				(
+				{Localisation.cycleCount[lang](cycleCount)}
+				)
 			</Title>
 
 			<Text>{getCountdownText()}</Text>

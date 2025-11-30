@@ -30,26 +30,26 @@ export const useLifepathRandomizerStore = create<LifepathRandomizerState>()(
 			minLifepaths: 5,
 
 			changeStock: (stock: BwgrStockId | "Random") => {
-				set(produce<LifepathRandomizerState>((state) => { state.stock = stock; }));
+				set(produce<LifepathRandomizerState>(state => { state.stock = stock; }));
 			},
 
 			changeMaxLeads: (value: string) => {
-				set(produce<LifepathRandomizerState>((state) => {
+				set(produce<LifepathRandomizerState>(state => {
 					state.maxLeads = Clamp(value === "" ? 0 : parseInt(value), 0, 20);
 				}));
 			},
 			changeMaxLifepaths: (value: string) => {
-				set(produce<LifepathRandomizerState>((state) => {
+				set(produce<LifepathRandomizerState>(state => {
 					state.maxLifepaths = Clamp(value === "" ? 0 : parseInt(value), 0, 20);
 				}));
 			},
 			changeMinLifepaths: (value: string) => {
-				set(produce<LifepathRandomizerState>((state) => {
+				set(produce<LifepathRandomizerState>(state => {
 					state.minLifepaths = Clamp(value === "" ? 0 : parseInt(value), 0, get().maxLifepaths);
 				}));
 			},
 			toggleNoDuplicates: () => {
-				set(produce<LifepathRandomizerState>((state) => {
+				set(produce<LifepathRandomizerState>(state => {
 					state.noDuplicates = !state.noDuplicates;
 				}));
 			}

@@ -35,7 +35,7 @@ function ResetMegagame(): React.JSX.Element {
 				label="Megagame Name"
 				mb="xs"
 				value={name}
-				onChange={(event) => { setName(event.currentTarget.value); }}
+				onChange={event => { setName(event.currentTarget.value); }}
 			/>
 
 			<DateTimePicker
@@ -169,7 +169,7 @@ function AddDeadline(): React.JSX.Element {
 				label="Deadline Type"
 				mb="xs"
 				value={deadlineType}
-				onChange={(event) => { setDeadlineType(event.currentTarget.value); }}
+				onChange={event => { setDeadlineType(event.currentTarget.value); }}
 			/>
 
 			<Button

@@ -12,11 +12,11 @@ interface DrawerState {
 
 export const useDrawerStore = create<DrawerState>()(
 	devtools(
-		(set) => ({
+		set => ({
 			drawer: undefined,
 
 			toggleDrawer: (drawer?: DrawerNames) => {
-				set(produce<DrawerState>((state) => {
+				set(produce<DrawerState>(state => {
 					if (state.drawer === drawer) state.drawer = undefined;
 					else state.drawer = drawer;
 				}));

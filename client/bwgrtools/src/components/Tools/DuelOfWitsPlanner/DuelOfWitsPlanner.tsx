@@ -28,23 +28,27 @@ export function DuelOfWitsPlanner(): React.JSX.Element {
 				{actions.map((action, volleyIndex) => (
 					<Grid key={volleyIndex} size={{ xs: 1 }} sx={{ minWidth: "30%" }}>
 						<Card sx={{ padding: "10px" }}>
-							<Typography variant="h5">Volley {volleyIndex + 1}</Typography>
+							<Typography variant="h5">
+								Volley
+								{volleyIndex + 1}
+							</Typography>
+
 							<Divider sx={{ margin: "8px 0" }} />
 
 							<Paper key={volleyIndex} elevation={2} sx={{ padding: "8px", marginBottom: "8px" }}>
-								{action
-									? action.visible
-										? <DuelOfWitsActionDetails action={action} volleyIndex={volleyIndex} />
-										: <IconButton disableRipple sx={{ width: "100%" }} onClick={() => { toggleActionVisibility(volleyIndex); }}>
-											<VisibilityIcon sx={{ fontSize: 100 }} />
-										</IconButton>
-									: <Fragment>
-										<Select fullWidth value={selectedAction[volleyIndex]} onChange={(e) => { changeSelectedAction(e.target.value, volleyIndex); }}>
+								{action ? action.visible ? <DuelOfWitsActionDetails action={action} volleyIndex={volleyIndex} /> : (
+									<IconButton disableRipple sx={{ width: "100%" }} onClick={() => { toggleActionVisibility(volleyIndex); }}>
+										<VisibilityIcon sx={{ fontSize: 100 }} />
+									</IconButton>
+								) : (
+									<Fragment>
+										<Select fullWidth value={selectedAction[volleyIndex]} onChange={e => { changeSelectedAction(e.target.value, volleyIndex); }}>
 											{dowActions.map(v => <MenuItem key={v.name} value={v.name}>{v.name}</MenuItem>)}
 										</Select>
 
 										<Button size="large" fullWidth sx={{ padding: "16px", margin: "16px 0 8px" }} onClick={() => { addAction(dowActions, volleyIndex, selectedAction[volleyIndex]); }}>Add Action</Button>
-									</Fragment>}
+									</Fragment>
+								)}
 							</Paper>
 						</Card>
 					</Grid>

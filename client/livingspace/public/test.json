@@ -1,0 +1,19 @@
+{
+	"id": 1,
+	"name": "John Doe",
+	"email": "john.doe@example.com", // test
+	"age": 30,
+	"isActive": true,
+	"address": {
+		"street": "123 Main St",
+		"city": "New York",
+		"zipCode": "10001"
+	},
+	"hobbies": [
+		"reading",
+		"gaming",
+		"cooking"
+	],
+	"score": 85.5,
+	"lastLogin": "2024-01-15T10:30:00Z"
+}

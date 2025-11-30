@@ -20,7 +20,7 @@ import { useCharacterBurnerTraitStore } from "../../../hooks/featureStores/Chara
 import { DrawerBox } from "../../Shared/DrawerBox";
 
 
-const ChecklistSteps: { label: string, description: string[]; }[] = [
+const ChecklistSteps: { label: string; description: string[]; }[] = [
 	{
 		label: "Write character concept",
 		description: [
@@ -128,7 +128,7 @@ export function Checklist({ expanded }: { expanded: boolean; }): React.JSX.Eleme
 
 		const stockSpecificFulfilled
 			= !(stock[1] === "Orc" && special.stock.brutalLifeTraits.length < lifepaths.length - 5)
-			&& !(stock[1] === "Great Wolf" && special.stock.huntingGround === undefined);
+				&& !(stock[1] === "Great Wolf" && special.stock.huntingGround === undefined);
 
 		if (concept === "") setActiveStep(0);
 		else if (lifepaths.length === 0) setActiveStep(1);
@@ -145,11 +145,11 @@ export function Checklist({ expanded }: { expanded: boolean; }): React.JSX.Eleme
 		getEitherPool, getMentalPool, getPhysicalPool, getResourcePools, getSkillPools, getTraitPools]);
 
 	return (
-		<DrawerBox title={"Checklist"} expanded={expanded}>
+		<DrawerBox title="Checklist" expanded={expanded}>
 			<Button variant="outlined" size="medium" fullWidth onClick={exportChar}>Export</Button>
 
-			{location.pathname === "/characterburner"
-				? <Stepper activeStep={activeStep} orientation="vertical">
+			{location.pathname === "/characterburner" ? (
+				<Stepper activeStep={activeStep} orientation="vertical">
 					{ChecklistSteps.map((step, i) => (
 						<Step key={i} expanded>
 							<StepLabel slots={{ stepIcon: StepIcon }}>
@@ -167,9 +167,11 @@ export function Checklist({ expanded }: { expanded: boolean; }): React.JSX.Eleme
 						</Step>
 					))}
 				</Stepper>
-				: <Typography>
+			) : (
+				<Typography>
 					Checklist is only available when using the Character Burner tool.
-				</Typography>}
+				</Typography>
+			)}
 		</DrawerBox>
 	);
 }

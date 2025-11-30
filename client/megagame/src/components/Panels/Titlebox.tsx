@@ -19,7 +19,7 @@ export function FactionSelectionModalContent({ closeModal }: { closeModal: () =>
 			<TextInput
 				placeholder={Localisation.enterFactionCode[lang]}
 				value={factionCode}
-				onChange={(event) => { setFactionCode(event.currentTarget.value); }}
+				onChange={event => { setFactionCode(event.currentTarget.value); }}
 				error={error}
 			/>
 
@@ -54,9 +54,7 @@ export function Titlebox(): React.JSX.Element {
 	const location = useLocation();
 
 	const page
-		= location.pathname === "/rules" ? Localisation.rulebooks[lang]
-			: location.pathname === "/admin" ? Localisation.admin[lang]
-				: Localisation.gamePage[lang];
+		= location.pathname === "/rules" ? Localisation.rulebooks[lang] : location.pathname === "/admin" ? Localisation.admin[lang] : Localisation.gamePage[lang];
 
 
 	return (
@@ -119,7 +117,13 @@ export function Titlebox(): React.JSX.Element {
 
 			<Box style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
 				<Title order={5}>{page}</Title>
-				<Text>{Localisation.chosenFaction[lang]}: {userType}</Text>
+
+				<Text>
+					{Localisation.chosenFaction[lang]}
+					:
+					{" "}
+					{userType}
+				</Text>
 			</Box>
 
 			<Modal opened={opened} onClose={modal.close} title={Localisation.factionSelection[lang]} centered>

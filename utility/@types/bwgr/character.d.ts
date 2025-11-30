@@ -51,20 +51,20 @@ interface BwgrCharacterStockLimits {
 	beliefs: number;
 	instincts: number;
 	stats: {
-		[key: string]: { min: number, max: number; };
-		Will: { min: number, max: number; };
-		Perception: { min: number, max: number; };
-		Power: { min: number, max: number; };
-		Agility: { min: number, max: number; };
-		Forte: { min: number, max: number; };
-		Speed: { min: number, max: number; };
+		[key: string]: { min: number; max: number; };
+		Will: { min: number; max: number; };
+		Perception: { min: number; max: number; };
+		Power: { min: number; max: number; };
+		Agility: { min: number; max: number; };
+		Forte: { min: number; max: number; };
+		Speed: { min: number; max: number; };
 	};
 	attributes: number;
 }
 
 interface BwgrStatData {
-	poolType: "Mental" | "Physical",
-	shadeShifted: boolean,
+	poolType: "Mental" | "Physical";
+	shadeShifted: boolean;
 	mainPoolSpent: { shade: number; exponent: number; };
 	eitherPoolSpent: { shade: number; exponent: number; };
 }
@@ -76,11 +76,11 @@ interface BwgrCharacterQuestion {
 	answer: boolean;
 }
 
-type BwgrCharacterTraitEffect =
-	| { roundUp: BwgrAbilityId; }
-	| { roundUp: "Mortal Wound"; }
-	| { callOn: BwgrAbilityId; }
-	| { callOn: BwgrSkillId; };
+type BwgrCharacterTraitEffect
+	= | { roundUp: BwgrAbilityId; }
+		| { roundUp: "Mortal Wound"; }
+		| { callOn: BwgrAbilityId; }
+		| { callOn: BwgrSkillId; };
 
 type BwgrHuntingGroundsList = "Waste" | "Marginal" | "Typical" | "Plentiful" | "Untouched";
 
@@ -101,8 +101,8 @@ interface BwgrBurningCharacter {
 		concept: string;
 		gender: "Male" | "Female";
 		stock: [id: BwgrStockId, name: string];
-		beliefs: { name: string, belief: string; }[];
-		instincts: { name: string, instinct: string; }[];
+		beliefs: { name: string; belief: string; }[];
+		instincts: { name: string; instinct: string; }[];
 	};
 	lifepaths: {
 		lifepaths: BwgrLifepath[];

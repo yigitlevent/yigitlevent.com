@@ -20,9 +20,7 @@ export function BrutalLife(): React.JSX.Element {
 
 	const rollBrutalLife = useCallback((lifepathNumber: number) => {
 		const isBrutal
-			= (lifepathNumber < 10)
-				? RandomNumber(1, 6) <= 4
-				: RandomNumber(1, 6) <= 2;
+			= (lifepathNumber < 10) ? RandomNumber(1, 6) <= 4 : RandomNumber(1, 6) <= 2;
 
 		let traitToAdd: [id: BwgrTraitId, name: string] | "No Trait" | undefined = "No Trait";
 
@@ -54,32 +52,32 @@ export function BrutalLife(): React.JSX.Element {
 
 	return (
 		<Fragment>
-			{stock[1] === "Orc"
-				? lifepaths.length > 4
-					? lifepaths.slice(4).map((v, i) => {
-						const traitId = special.stock.brutalLifeTraits[i];
-						return (
-							<Fragment key={i}>
-								<Grid size={{ xs: 1 }}>
-									<Typography variant="h6" sx={{ display: "inline-block" }}>{GetOrdinalSuffix(i + 5)} Lifepath: {v.name}</Typography>
-								</Grid>
+			{stock[1] === "Orc" ? lifepaths.length > 4 ? lifepaths.slice(4).map((v, i) => {
+				const traitId = special.stock.brutalLifeTraits[i];
+				return (
+					<Fragment key={i}>
+						<Grid size={{ xs: 1 }}>
+							<Typography variant="h6" sx={{ display: "inline-block" }}>
+								{GetOrdinalSuffix(i + 5)}
+								{" "}
+								Lifepath:
+								{" "}
+								{v.name}
+							</Typography>
+						</Grid>
 
-								<Grid size={{ xs: 2 }}>
-									{traitId
-										? traitId === "No Trait"
-											? <Typography sx={{ margin: "6px 0 0 8px" }}>No Trait</Typography>
-											: <BlockTraitPopover trait={traitId} />
-										: <Button variant="outlined" size="small" onClick={() => { rollBrutalLife(i + 5); }}>Roll</Button>}
-								</Grid>
-							</Fragment>
-						);
-					})
-					: <Grid size={{ xs: 3 }}>
-						<Alert severity="info">
-							Orc character only needs to roll for Brutal Life after 5th lifepath.
-						</Alert>
-					</Grid>
-				: null}
+						<Grid size={{ xs: 2 }}>
+							{traitId ? traitId === "No Trait" ? <Typography sx={{ margin: "6px 0 0 8px" }}>No Trait</Typography> : <BlockTraitPopover trait={traitId} /> : <Button variant="outlined" size="small" onClick={() => { rollBrutalLife(i + 5); }}>Roll</Button>}
+						</Grid>
+					</Fragment>
+				);
+			}) : (
+				<Grid size={{ xs: 3 }}>
+					<Alert severity="info">
+						Orc character only needs to roll for Brutal Life after 5th lifepath.
+					</Alert>
+				</Grid>
+			) : null}
 		</Fragment>
 	);
 }

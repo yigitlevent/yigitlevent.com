@@ -77,7 +77,10 @@ export function Signup({ open, handleClose }: { open: boolean; handleClose: (ope
 				<GenericGrid columns={1} spacing={[3, 0]} center="c">
 					<Grid size={{ xs: 1 }}>
 						<TextField
-							label="Username" variant="standard" fullWidth required
+							label="Username"
+							variant="standard"
+							fullWidth
+							required
 							value={username}
 							onChange={v => { changeValue("username", v.target.value); }}
 							error={usernameError !== undefined}
@@ -87,7 +90,10 @@ export function Signup({ open, handleClose }: { open: boolean; handleClose: (ope
 
 					<Grid size={{ xs: 1 }}>
 						<TextField
-							label="Email" variant="standard" fullWidth required
+							label="Email"
+							variant="standard"
+							fullWidth
+							required
 							value={email}
 							onChange={v => { changeValue("email", v.target.value); }}
 							error={emailError !== undefined}
@@ -101,15 +107,16 @@ export function Signup({ open, handleClose }: { open: boolean; handleClose: (ope
 
 							<Input
 								type={showPass ? "text" : "password"}
-								value={password} onChange={v => { changeValue("password", v.target.value); }}
+								value={password}
+								onChange={v => { changeValue("password", v.target.value); }}
 								error={passwordError !== undefined}
-								endAdornment={
+								endAdornment={(
 									<InputAdornment position="end">
 										<IconButton onClick={() => { setShowPass(v => !v); }}>
 											{showPass ? <VisibilityOff /> : <Visibility />}
 										</IconButton>
 									</InputAdornment>
-								}
+								)}
 							/>
 
 							<FormHelperText error>{passwordError}</FormHelperText>
@@ -118,8 +125,12 @@ export function Signup({ open, handleClose }: { open: boolean; handleClose: (ope
 
 					<Grid size={{ xs: 1 }}>
 						<TextField
-							label="Password Repeat" variant="standard" fullWidth required
-							value={passwordRepeat} onChange={v => { changeValue("passwordRepeat", v.target.value); }}
+							label="Password Repeat"
+							variant="standard"
+							fullWidth
+							required
+							value={passwordRepeat}
+							onChange={v => { changeValue("passwordRepeat", v.target.value); }}
 							type={showPass ? "text" : "password"}
 							error={passwordRepeatError !== undefined}
 							helperText={passwordRepeatError}

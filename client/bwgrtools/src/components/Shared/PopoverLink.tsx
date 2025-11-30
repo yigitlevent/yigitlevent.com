@@ -22,29 +22,42 @@ function SkillPop({ skill }: { skill: BwgrSkill; }): React.JSX.Element {
 				<Typography variant="h6">{skill.name}</Typography>
 			</Grid>
 
-			{skill.roots
-				? <Grid size={{ xs: 2, md: 1 }}>
-					<Typography variant="caption">Root: {skill.roots.map(v => v[1]).join("/")}</Typography>
+			{skill.roots ? (
+				<Grid size={{ xs: 2, md: 1 }}>
+					<Typography variant="caption">
+						Root:
+						{skill.roots.map(v => v[1]).join("/")}
+					</Typography>
 				</Grid>
-				: null}
+			) : null}
 
 			<Grid size={{ xs: 2, md: 1 }}>
-				<Typography variant="caption">Type: {skill.type[1]}</Typography>
+				<Typography variant="caption">
+					Type:
+					{skill.type[1]}
+				</Typography>
 			</Grid>
 
 			<Grid size={{ xs: 2 }}>
-				<Typography variant="caption">Tools: {skill.tool.tool}{skill.tool.description ? ` ${skill.tool.description}` : ""}</Typography>
+				<Typography variant="caption">
+					Tools:
+					{skill.tool.tool}
+					{skill.tool.description ? ` ${skill.tool.description}` : ""}
+				</Typography>
 			</Grid>
 
 			<Grid size={{ xs: 2 }}>
-				<Typography variant="caption">Restrictions: {GetSkillRestrictionString(skill)}</Typography>
+				<Typography variant="caption">
+					Restrictions:
+					{GetSkillRestrictionString(skill)}
+				</Typography>
 			</Grid>
 
-			{skill.description
-				? <Grid size={{ xs: 2 }}>
+			{skill.description ? (
+				<Grid size={{ xs: 2 }}>
 					{skill.description.split("<br>").map(v => <Typography key={v} variant="body2">{v}</Typography>)}
 				</Grid>
-				: null}
+			) : null}
 		</Grid>
 	);
 }
@@ -57,30 +70,40 @@ function TraitPop({ trait }: { trait: BwgrTrait; }): React.JSX.Element {
 			</Grid>
 
 			<Grid size={{ sm: 3, md: 1 }}>
-				<Typography variant="caption">Type: {trait.type[1]}</Typography>
+				<Typography variant="caption">
+					Type:
+					{trait.type[1]}
+				</Typography>
 			</Grid>
 
-			{trait.cost !== 0
-				? <Grid size={{ sm: 3, md: 1 }}>
+			{trait.cost !== 0 ? (
+				<Grid size={{ sm: 3, md: 1 }}>
 					<Typography variant="caption">
-						Cost: {trait.cost}
+						Cost:
+						{" "}
+						{trait.cost}
 					</Typography>
 				</Grid>
-				: null}
+			) : null}
 
-			{trait.stock
-				? <Grid size={{ sm: 3, md: 1 }}>
-					<Typography variant="caption">Stock: {trait.stock[1]}</Typography>
+			{trait.stock ? (
+				<Grid size={{ sm: 3, md: 1 }}>
+					<Typography variant="caption">
+						Stock:
+						{trait.stock[1]}
+					</Typography>
 				</Grid>
-				: <Grid size={{ sm: 3, md: 1 }}>
+			) : (
+				<Grid size={{ sm: 3, md: 1 }}>
 					<Typography variant="caption">Stock: Any</Typography>
-				</Grid>}
+				</Grid>
+			)}
 
-			{trait.description
-				? <Grid size={{ xs: 3 }}>
+			{trait.description ? (
+				<Grid size={{ xs: 3 }}>
 					{trait.description.split("<br>").map(v => <Typography key={v} variant="body2" sx={{ textIndent: "8px" }}>{v}</Typography>)}
 				</Grid>
-				: null}
+			) : null}
 		</Grid>
 	);
 }

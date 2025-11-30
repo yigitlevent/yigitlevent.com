@@ -25,16 +25,16 @@ export const useUserStore = create<UserState>()(
 			triedAuth: false,
 
 			setUser: (user: UserSession | undefined) => {
-				set(produce<UserState>((state) => { state.user = user; }));
+				set(produce<UserState>(state => { state.user = user; }));
 			},
 
 			toggleFetching: () => {
-				set(produce<UserState>((state) => { state.fetching = !state.fetching; }));
+				set(produce<UserState>(state => { state.fetching = !state.fetching; }));
 			},
 
 			auth: () => {
 				if (!get().triedAuth) {
-					set(produce<UserState>((state) => { state.triedAuth = true; }));
+					set(produce<UserState>(state => { state.triedAuth = true; }));
 
 					const state = get();
 
@@ -47,7 +47,7 @@ export const useUserStore = create<UserState>()(
 						})
 						.catch(() => {
 							state.setUser(undefined);
-							//console.error(reason);
+							// console.error(reason);
 						})
 						.finally(() => { state.toggleFetching(); });
 				}

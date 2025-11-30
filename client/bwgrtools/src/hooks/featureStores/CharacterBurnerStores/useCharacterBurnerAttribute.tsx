@@ -62,7 +62,7 @@ export const useCharacterBurnerAttributeStore = create<CharacterBurnerAttributeS
 			},
 
 			shiftAttributeShade: (attributeId: BwgrAbilityId): void => {
-				set(produce<CharacterBurnerAttributeState>((state) => {
+				set(produce<CharacterBurnerAttributeState>(state => {
 					const charAttribute = state.attributes.find(attributeId);
 					if (charAttribute) {
 						charAttribute.shadeShifted = !charAttribute.shadeShifted;
@@ -384,39 +384,39 @@ export const useCharacterBurnerAttributeStore = create<CharacterBurnerAttributeS
 
 				const getAttributePoints = (attributeName: string): BwgrAbilityPoints => {
 					switch (attributeName) {
-					case "Mortal Wound":
-						return state.getMortalWound();
-					case "Reflexes":
-						return state.getReflexes();
-					case "Health":
-						return state.getHealth();
-					case "Steel":
-						return state.getSteel();
-					case "Hesitation":
-						return state.getHesitation();
-					case "Greed":
-						return state.getGreed();
-					case "Grief":
-					case "Spite":
-						return state.getGriefOrSpite(attribute[1] === "Spite");
-					case "Faith":
-						return state.getFaith();
-					case "Faith in Dead Gods":
-						return state.getFaithInDeadGods();
-					case "Hatred":
-						return state.getHatred();
-					case "Void Embrace":
-						return state.getVoidEmbrace();
-					case "Ancestral Taint":
-						return state.getAncestralTaint();
-					case "Corruption":
-						return state.getCorruption();
-					case "Resources":
-						return state.getResources();
-					case "Circles":
-						return state.getCircles();
-					default:
-						throw new Error(`Unhandled Attribute: ${attributeName}`);
+						case "Mortal Wound":
+							return state.getMortalWound();
+						case "Reflexes":
+							return state.getReflexes();
+						case "Health":
+							return state.getHealth();
+						case "Steel":
+							return state.getSteel();
+						case "Hesitation":
+							return state.getHesitation();
+						case "Greed":
+							return state.getGreed();
+						case "Grief":
+						case "Spite":
+							return state.getGriefOrSpite(attribute[1] === "Spite");
+						case "Faith":
+							return state.getFaith();
+						case "Faith in Dead Gods":
+							return state.getFaithInDeadGods();
+						case "Hatred":
+							return state.getHatred();
+						case "Void Embrace":
+							return state.getVoidEmbrace();
+						case "Ancestral Taint":
+							return state.getAncestralTaint();
+						case "Corruption":
+							return state.getCorruption();
+						case "Resources":
+							return state.getResources();
+						case "Circles":
+							return state.getCircles();
+						default:
+							throw new Error(`Unhandled Attribute: ${attributeName}`);
 					}
 				};
 
@@ -469,7 +469,7 @@ export const useCharacterBurnerAttributeStore = create<CharacterBurnerAttributeS
 							else return [];
 						}).flat());
 
-				set(produce<CharacterBurnerAttributeState>((state) => {
+				set(produce<CharacterBurnerAttributeState>(state => {
 					state.attributes = characterAttributes;
 				}));
 			}

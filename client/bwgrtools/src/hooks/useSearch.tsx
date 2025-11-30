@@ -12,8 +12,8 @@ interface SearchValues {
 }
 
 interface SearchReturn<T> {
-	searchValues: SearchValues,
-	setFilter: (filtersToApply: { key: string; value: string; }[]) => void,
+	searchValues: SearchValues;
+	setFilter: (filtersToApply: { key: string; value: string; }[]) => void;
 	filteredList: List<T>;
 }
 
@@ -29,7 +29,7 @@ export function useSearch<T>(mainList: List<T>, filterKeys: string[], initialFil
 
 		const filters: Record<string, string> = fKeys.reduce((a, v) => ({ ...a, [v]: "Any" }), {});
 
-		Object.keys(filters).forEach((filterKey) => {
+		Object.keys(filters).forEach(filterKey => {
 			const filterValue = urlParams.get(filterKey);
 			if (filterValue) filters[filterKey] = filterValue;
 			else if (initialFilterValues) filters[filterKey] = initialFilterValues[filterKey];
@@ -72,10 +72,10 @@ export function useSearch<T>(mainList: List<T>, filterKeys: string[], initialFil
 	}, [searchValues, setUrlParams, urlParams]);
 
 	const search = useCallback(async () => {
-		await new Promise((resolve) => {
+		await new Promise(resolve => {
 			let result = originalList;
 
-			Object.keys(searchValues.filters).forEach((filterKey) => {
+			Object.keys(searchValues.filters).forEach(filterKey => {
 				const filterValue = searchValues.filters[filterKey];
 				if (filterValue !== "Any") {
 					result = result.filter(v => {

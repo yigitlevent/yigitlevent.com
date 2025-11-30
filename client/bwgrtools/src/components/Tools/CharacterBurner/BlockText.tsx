@@ -39,25 +39,25 @@ export function BlockSkillPopover({ skill, checkbox, deleteCallback }: BlockSkil
 
 	return (
 		<Grid>
-			{checkbox
-				? <Checkbox
+			{checkbox ? (
+				<Checkbox
 					checked={checkbox.checked}
 					disabled={checkbox.disabled}
 					onChange={checkbox.onChange}
 					onClick={checkbox.onClick}
 					sx={{ margin: "0 0 4px 0", padding: "0" }}
 				/>
-				: null}
+			) : null}
 
 			<Typography sx={{ cursor: "pointer", display: "inline-block", margin: "6px 0 0 8px" }}>
 				<PopoverLink data={rulesetSkill} />
 			</Typography>
 
-			{deleteCallback
-				? <IconButton color="primary" onClick={deleteCallback} sx={{ padding: 0, margin: "0 0 2px 6px" }}>
+			{deleteCallback ? (
+				<IconButton color="primary" onClick={deleteCallback} sx={{ padding: 0, margin: "0 0 2px 6px" }}>
 					<DeleteIcon />
 				</IconButton>
-				: null}
+			) : null}
 		</Grid>
 	);
 }
@@ -79,24 +79,24 @@ export function BlockTraitPopover({ trait, checkbox, deleteCallback }: BlockTrai
 
 	return (
 		<Grid>
-			{checkbox
-				? <Checkbox
+			{checkbox ? (
+				<Checkbox
 					checked={checkbox.checked}
 					disabled={checkbox.disabled}
 					onChange={checkbox.onClick}
 					sx={{ margin: "0 0 4px 0", padding: "0" }}
 				/>
-				: null}
+			) : null}
 
 			<Typography sx={{ cursor: "pointer", display: "inline-block", margin: "6px 0 0 8px" }}>
 				<PopoverLink data={rulesetTrait} />
 			</Typography>
 
-			{deleteCallback
-				? <IconButton color="primary" onClick={deleteCallback} sx={{ padding: 0, margin: "0 0 2px 6px" }}>
+			{deleteCallback ? (
+				<IconButton color="primary" onClick={deleteCallback} sx={{ padding: 0, margin: "0 0 2px 6px" }}>
 					<DeleteIcon />
 				</IconButton>
-				: null}
+			) : null}
 		</Grid>
 	);
 }

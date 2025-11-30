@@ -61,56 +61,68 @@ export function GeneralSkillModal({ isOpen, close }: { isOpen: boolean; close: (
 		<Modal open={isOpen} onClose={() => { close(); }}>
 			<Paper sx={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", maxWidth: "800px", width: "100%", padding: "0 24px 24px", border: "none", overflow: "auto" }}>
 				<GenericGrid columns={1} spacing={[2, 2]} center>
-					{chosenSkill
-						? <Grid size={{ xs: 1 }}>
+					{chosenSkill ? (
+						<Grid size={{ xs: 1 }}>
 							<Autocomplete
 								value={chosenSkill}
 								options={possibleSkills.sort((a, b) => a.category[1].localeCompare(b.category[1]) || a.name.localeCompare(b.name))}
-								getOptionLabel={(option) => option.name}
-								groupBy={(option) => option.category[1]}
-								renderInput={(params) => <TextField {...params} label="Chosen Skill" />}
+								getOptionLabel={option => option.name}
+								groupBy={option => option.category[1]}
+								renderInput={params => <TextField {...params} label="Chosen Skill" />}
 								onChange={(_, v) => { setChosenSkill(v); }}
 								fullWidth
 								disableClearable
 							/>
 						</Grid>
-						: null}
+					) : null}
 
-					{chosenSkill
-						? <Grid size={{ xs: 1 }}>
+					{chosenSkill ? (
+						<Grid size={{ xs: 1 }}>
 							<Grid container spacing={1} columns={2}>
 								<Grid size={{ xs: 2 }}>
 									<Typography variant="h6">{chosenSkill.name}</Typography>
 								</Grid>
 
 								<Grid size={{ xs: 2, md: 1 }}>
-									{chosenSkill.roots
-										? <Typography variant="caption">Root: {chosenSkill.roots.join("/")}</Typography>
-										: null}
+									{chosenSkill.roots ? (
+										<Typography variant="caption">
+											Root:
+											{chosenSkill.roots.join("/")}
+										</Typography>
+									) : null}
 								</Grid>
 
 								<Grid size={{ xs: 2, md: 1 }}>
-									<Typography variant="caption">Type: {chosenSkill.type[1]}</Typography>
+									<Typography variant="caption">
+										Type:
+										{chosenSkill.type[1]}
+									</Typography>
 								</Grid>
 
 								<Grid size={{ xs: 2 }}>
-									<Typography variant="caption">Tools: {chosenSkill.tool.tool} {chosenSkill.tool.description}</Typography>
+									<Typography variant="caption">
+										Tools:
+										{chosenSkill.tool.tool}
+										{" "}
+										{chosenSkill.tool.description}
+									</Typography>
 								</Grid>
 
 								<Grid size={{ xs: 2 }}>
-									{chosenSkill.restriction
-										? <Typography variant="caption">Restrictions: {getRestrictionString(chosenSkill)}</Typography>
-										: null}
+									{chosenSkill.restriction ? (
+										<Typography variant="caption">
+											Restrictions:
+											{getRestrictionString(chosenSkill)}
+										</Typography>
+									) : null}
 								</Grid>
 
 								<Grid size={{ xs: 2 }}>
-									{chosenSkill.description
-										? chosenSkill.description.split("<br>").map(v => <Typography key={v} variant="body2">{v}</Typography>)
-										: null}
+									{chosenSkill.description ? chosenSkill.description.split("<br>").map(v => <Typography key={v} variant="body2">{v}</Typography>) : null}
 								</Grid>
 							</Grid>
 						</Grid>
-						: null}
+					) : null}
 
 					<Grid size={{ xs: 1 }}>
 						<Button variant="outlined" size="medium" onClick={addNewSkill} fullWidth>AddBwgrSkill</Button>
