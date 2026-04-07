@@ -24,7 +24,7 @@ export function RangeAndCoverPlanner(): React.JSX.Element {
 		<Fragment>
 			<Typography variant="h3">Range and Cover Planner</Typography>
 
-			<Grid container justifyContent="space-evenly" spacing={{ xs: 1, sm: 1, md: 2 }} columns={{ xs: 1, sm: 1, md: 3 }} sx={{ maxWidth: "100%", padding: "16px 0" }}>
+			<Grid container spacing={{ xs: 1, sm: 1, md: 2 }} columns={{ xs: 1, sm: 1, md: 3 }} sx={{ maxWidth: "100%", padding: "16px 0", justifyContent: "space-evenly" }}>
 				{actions.map((action, volleyIndex) => (
 					<Grid key={volleyIndex} size={{ xs: 1 }} sx={{ minWidth: "30%" }}>
 						<Card sx={{ padding: "10px" }}>

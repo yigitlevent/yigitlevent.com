@@ -23,7 +23,7 @@ export function PracticePlannerTimetableSummary(): React.JSX.Element {
 					})
 					.sort((a, b) => a.days - b.days)
 					.map((v, i) => (
-						<Grid size={{ xs: 3, sm: 2, md: 1 }} key={i} flexGrow={1}>
+						<Grid size={{ xs: 3, sm: 2, md: 1 }} key={i} sx={{ flexGrow: 1 }}>
 							<Paper key={i} elevation={3} sx={{ margin: "8px", padding: "8px 16px" }}>
 								<Typography key={i}>
 									{v.name}

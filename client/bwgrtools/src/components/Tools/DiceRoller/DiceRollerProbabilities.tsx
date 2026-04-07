@@ -11,7 +11,7 @@ export function DiceRollerProbabilities({ probabilities, isDoubleObstacle, obsta
 			<Divider sx={{ margin: "10px 0 0 " }}>Probabilities</Divider>
 
 			<Grid size={{ xs: 3, sm: 3 }}>
-				<Grid container columns={20} direction="row" flexWrap="wrap" sx={{ padding: "0" }}>
+				<Grid container columns={20} direction="row" sx={{ padding: "0", flexWrap: "wrap" }}>
 					<Fragment>
 						{Array.from(Array(20)).map((_, obIndex) => {
 							const probability = probabilities.at(obIndex);

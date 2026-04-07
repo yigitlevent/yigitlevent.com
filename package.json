@@ -18,15 +18,13 @@
 		"start:api": "cd api && npm run dev",
 		"start:main": "cd client/main && npm run dev",
 		"start:bwgr": "cd client/bwgrtools && npm run dev",
-		"start:hexmap": "cd client/hexmaptools && npm run dev",
 		"start:megagame": "cd client/megagame && npm run dev",
 		"dev:main": "concurrently \"npm run start:api\" \"npm run start:main\" --names \"API,MAIN\" -c \"bgBlue.bold,bgMagenta.bold\"",
 		"dev:bwgr": "concurrently \"npm run start:api\" \"npm run start:bwgr\" --names \"API,BWGR\" -c \"bgBlue.bold,bgMagenta.bold\"",
-		"dev:hexmap": "concurrently \"npm run start:api\" \"npm run start:hexmap\" --names \"API,HXMP\" -c \"bgBlue.bold,bgMagenta.bold\"",
 		"dev:megagame": "concurrently \"npm run start:api\" \"npm run start:megagame\" --names \"API,MGGM\" -c \"bgBlue.bold,bgMagenta.bold\""
 	},
 	"devDependencies": {
-		"@stylistic/eslint-plugin": "^5.6.1",
+		"@stylistic/eslint-plugin": "^5.10.0",
 		"concurrently": "^9.2.1",
 		"eslint": "^9.39.1",
 		"eslint-import-resolver-custom-alias": "^1.3.2",
@@ -35,6 +33,6 @@
 		"eslint-plugin-react": "^7.37.5",
 		"eslint-plugin-react-hooks": "^7.0.1",
 		"eslint-plugin-react-refresh": "^0.4.24",
-		"typescript-eslint": "^8.48.0"
+		"typescript-eslint": "^8.58.0"
 	}
 }

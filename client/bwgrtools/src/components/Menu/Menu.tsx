@@ -52,7 +52,7 @@ export function Menu({ bottom }: { bottom: boolean; }): React.JSX.Element {
 	};
 
 	return (
-		<Grid container alignItems="center" justifyContent={bottom ? "center" : "end"} sx={bottom ? style : undefined}>
+		<Grid container sx={bottom ? { ...style, alignItems: "center", justifyContent: "center" } : { alignItems: "center", justifyContent: "end" }}>
 			{user ? <DrawerIconButton title="Sign out" icon={<LogoutOutlinedIcon color="primary" />} onClick={signout} /> : (
 				<Fragment>
 					<DrawerIconButton title="Sign in" icon={<LoginOutlinedIcon color="primary" />} onClick={() => { setSigninOpen(true); }} />

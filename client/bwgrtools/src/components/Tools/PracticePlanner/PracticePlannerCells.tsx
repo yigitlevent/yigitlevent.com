@@ -1,6 +1,4 @@
-import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
-import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
-import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
+import { AddCircleOutlined, DeleteOutlined, RemoveCircleOutlined } from "@mui/icons-material";
 import StopIcon from "@mui/icons-material/Stop";
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
@@ -26,7 +24,7 @@ function Placed({ placed, practiceIndex, cellIndex }: { placed: BwgrPracticePlac
 		<Paper elevation={2} sx={{ padding: "2px 4px" }}>
 			<Typography variant="body1" sx={{ display: "inline", marginRight: "8px" }}>{placed.name}</Typography>
 			<Typography variant="caption">{text}</Typography>
-			<IconButton size="small" sx={{ float: "right" }} onClick={() => { deletePractice(cellIndex, practiceIndex); }}><DeleteOutlineIcon fontSize="small" /></IconButton>
+			<IconButton size="small" sx={{ float: "right" }} onClick={() => { deletePractice(cellIndex, practiceIndex); }}><DeleteOutlined fontSize="small" /></IconButton>
 		</Paper>
 	);
 }
@@ -41,9 +39,9 @@ function PracticePlannerCell({ cell, cellIndex, setNotification }: { cell: BwgrP
 					Day
 					{" "}
 					{cellIndex + 1}
-					<IconButton size="small" sx={{ float: "right" }} onClick={() => { deleteCell(cellIndex); }}><DeleteOutlineIcon fontSize="small" /></IconButton>
-					<IconButton size="small" sx={{ float: "right" }} onClick={() => { changeCellHour(cellIndex, -1, cells, setNotification); }}><RemoveCircleOutlineIcon fontSize="small" /></IconButton>
-					<IconButton size="small" sx={{ float: "right" }} onClick={() => { changeCellHour(cellIndex, 1, cells, setNotification); }}><AddCircleOutlineIcon fontSize="small" /></IconButton>
+					<IconButton size="small" sx={{ float: "right" }} onClick={() => { deleteCell(cellIndex); }}><DeleteOutlined fontSize="small" /></IconButton>
+					<IconButton size="small" sx={{ float: "right" }} onClick={() => { changeCellHour(cellIndex, -1, cells, setNotification); }}><RemoveCircleOutlined fontSize="small" /></IconButton>
+					<IconButton size="small" sx={{ float: "right" }} onClick={() => { changeCellHour(cellIndex, 1, cells, setNotification); }}><AddCircleOutlined fontSize="small" /></IconButton>
 				</Typography>
 
 				<Box sx={{ margin: "0 5px 0" }}>

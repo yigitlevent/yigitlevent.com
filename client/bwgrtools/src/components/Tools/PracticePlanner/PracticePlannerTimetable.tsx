@@ -17,7 +17,7 @@ export function PracticePlannerTimetable(): React.JSX.Element {
 		<Fragment>
 			<Divider sx={{ margin: "10px 0 0 " }}>Timetable</Divider>
 
-			<Stack direction="row" spacing={2} justifyContent="center" sx={{ margin: "16px 0 32px 0" }}>
+			<Stack direction="row" spacing={2} sx={{ margin: "16px 0 32px 0", justifyContent: "center" }}>
 				<TextField
 					label="Number of Days"
 					slotProps={{ htmlInput: { inputMode: "numeric", pattern: "[0-9]*" } }}
@@ -37,7 +37,7 @@ export function PracticePlannerTimetable(): React.JSX.Element {
 				<Button variant="outlined" onClick={() => { addCells(days, hours); }}>Add Days</Button>
 			</Stack>
 
-			<Stack direction="row" flexWrap="nowrap" justifyContent="start" alignItems="start" sx={{ maxWidth: "100%", overflow: "auto", padding: "0 0 16px 0" }}>
+			<Stack direction="row" sx={{ maxWidth: "100%", overflow: "auto", padding: "0 0 16px 0", flexWrap: "nowrap", justifyContent: "start", alignItems: "start" }}>
 				{cells.map((cell, cellIndex) => (
 					<Grid key={cellIndex} sx={{ padding: "32px 0 0 0", margin: "0 -8px 0 0" }}>
 						<Typography

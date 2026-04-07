@@ -65,7 +65,7 @@ export function PracticePlanner(): React.JSX.Element {
 			<Typography variant="h3">Practice Planner</Typography>
 			<Divider sx={{ margin: "10px 0 0 " }}>Inscribe Practice</Divider>
 
-			<Grid container columns={12} justifyContent="space-between" alignItems="center" sx={{ margin: "0 0 16px 0" }}>
+			<Grid container columns={12} sx={{ margin: "0 0 16px 0", justifyContent: "space-between", alignItems: "center" }}>
 				<Grid size={{ xs: 10, sm: 4, md: 3 }}>
 					<InputLabel>Practice Type</InputLabel>
 

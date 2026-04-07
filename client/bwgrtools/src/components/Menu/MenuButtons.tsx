@@ -37,7 +37,7 @@ export function MenuButtons({ openSignin, openSignup }: { openSignin: () => void
 	];
 
 	return (
-		<Grid container spacing={1} alignItems="center" justifySelf="end">
+		<Grid container spacing={1} sx={{ alignItems: "center", justifyContent: "end" }}>
 			<Grid>
 				<Box sx={{ textAlign: "right" }}>{user ? `welcome, ${user.username}` : null}</Box>
 			</Grid>

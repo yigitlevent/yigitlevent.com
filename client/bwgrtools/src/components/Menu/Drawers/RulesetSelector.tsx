@@ -1,5 +1,5 @@
+import { CheckCircleOutlined } from "@mui/icons-material";
 import CheckIcon from "@mui/icons-material/Check";
-import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import CloseIcon from "@mui/icons-material/Close";
 import List from "@mui/material/List";
 import ListItemButton from "@mui/material/ListItemButton";
@@ -23,7 +23,7 @@ export function RulesetSelector({ expanded }: { expanded: boolean; }): React.JSX
 						</ListItemIcon>
 
 						<ListItemText primary={ruleset.name} sx={{ margin: "0 0 2px -10px" }} />
-						{ruleset.isOfficial ? <CheckCircleOutlineIcon titleAccess="Official" fontSize="small" /> : null}
+						{ruleset.isOfficial ? <CheckCircleOutlined titleAccess="Official" fontSize="small" /> : null}
 					</ListItemButton>
 
 					{ruleset.expansionIds ? (
@@ -39,7 +39,7 @@ export function RulesetSelector({ expanded }: { expanded: boolean; }): React.JSX
 											</ListItemIcon>
 
 											<ListItemText primary={expansion.name} sx={{ margin: "0 0 2px -10px" }} />
-											{ruleset.isOfficial ? <CheckCircleOutlineIcon titleAccess="Official" fontSize="small" /> : null}
+											{ruleset.isOfficial ? <CheckCircleOutlined titleAccess="Official" fontSize="small" /> : null}
 										</ListItemButton>
 									) : null
 								);

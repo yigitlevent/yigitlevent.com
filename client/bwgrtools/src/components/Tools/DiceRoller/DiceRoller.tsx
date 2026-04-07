@@ -101,15 +101,8 @@ export function DiceRoller(): React.JSX.Element {
 		<Fragment>
 			<Typography variant="h3">Dice Roller</Typography>
 
-			<Grid
-				container
-				columns={3}
-				rowGap={2}
-				justifyContent="space-between"
-				alignItems="center"
-				sx={{ margin: "16px 0 0 0" }}
-			>
-				<Grid container alignItems="center" sx={{ width: "max-content" }}>
+			<Grid container columns={3} sx={{ margin: "16px 0 0 0", justifyContent: "space-between", alignItems: "center", rowGap: 2 }}>
+				<Grid container sx={{ width: "max-content", alignItems: "center" }}>
 					<Typography sx={{ display: "inline-block", margin: "0 8px 0 0" }}>Dice Pool</Typography>
 
 					<AbilityButton sx={{ height: "30px" }} onClick={() => { setShade(v => v === "W" ? "B" : v === "B" ? "G" : "W"); }}>
