@@ -18,8 +18,7 @@
 		"build": "tsc && vite build",
 		"lint": "eslint ../eslint.config.node.mjs --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
 		"lintfix": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0 --fix",
-		"preview": "vite preview",
-		"update": "ncu -u && npm i"
+		"preview": "vite preview"
 	},
 	"dependencies": {
 		"@emotion/react": "^11.14.0",

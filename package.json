@@ -14,7 +14,6 @@
 		"url": "https://github.com/yigitlevent/yigitlevent.com/issues"
 	},
 	"scripts": {
-		"update": "ncu -i && npm i",
 		"start:api": "cd api && npm run dev",
 		"start:main": "cd client/main && npm run dev",
 		"start:bwgr": "cd client/bwgrtools && npm run dev",
