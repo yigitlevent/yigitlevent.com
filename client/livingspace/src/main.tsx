@@ -3,7 +3,6 @@ import "@mantine/core/styles.css";
 import "@mantine/dates/styles.css";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
 
 import { App } from "./App";
 
@@ -26,9 +25,7 @@ createRoot(Root)
 	.render(
 		<StrictMode>
 			<MantineProvider defaultColorScheme="dark" theme={Theme}>
-				<BrowserRouter>
-					<App />
-				</BrowserRouter>
+				<App />
 			</MantineProvider>
 		</StrictMode>
 	);
