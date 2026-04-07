@@ -1,5 +1,3 @@
-import { Request, Response } from "express";
-
 import { GetAbilities } from "../services/abilities.service";
 import { GetDoWActions } from "../services/dowActions.service";
 import { GetFightActions } from "../services/fightActions.service";
@@ -17,8 +15,10 @@ import { GetStocks } from "../services/stocks.service";
 import { GetTraits } from "../services/traits.service";
 import { Logger } from "../utils/logger";
 
+import type { Request, Response } from "express";
 
-export async function GetRulesetsData(request: Request<unknown, unknown, BwgrRulesetForms>, response: Response): Promise<Response<BwgrRulesetResponse, Record<string, unknown>>> {
+
+export async function GetRulesetsData(request: Request<unknown, unknown, BwgrRulesetForms>, response: Response): Promise<Response<BwgrRulesetResponse>> {
 	try {
 		const log = new Logger("➞ GetRulesetsData", true);
 		const { rulesets } = request.body;
@@ -50,7 +50,7 @@ export async function GetRulesetsData(request: Request<unknown, unknown, BwgrRul
 	}
 }
 
-export async function GetRulesetsList(request: Request, response: Response): Promise<Response<BwgrRulesetsResponse, Record<string, unknown>>> {
+export async function GetRulesetsList(request: Request, response: Response): Promise<Response<BwgrRulesetsResponse>> {
 	try {
 		const data = await GetRulesets();
 

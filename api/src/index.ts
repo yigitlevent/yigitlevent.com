@@ -16,14 +16,49 @@ import mggmRouter from "./routes/mggm.route";
 import userRouter from "./routes/user.route";
 
 
+function CreatePgPool(): Pg.Pool {
+	try {
+		return new Pg.Pool(PgConfig);
+	}
+	catch (e) {
+		console.error("Failed to create Postgres pool:", e);
+		process.exit(1);
+	}
+}
+
+async function CheckDbPool(): Promise<void> {
+	const client = await PgPool.connect();
+	try {
+		await client.query("SELECT 1");
+	}
+	finally {
+		client.release();
+	}
+}
+
 export const App = express();
-export const PgPool = new Pg.Pool(PgConfig);
+export const PgPool = CreatePgPool();
+
+PgPool.on("error", err => {
+	console.error("Unexpected error on idle Postgres client:", err);
+	process.exit(1);
+});
+
+CheckDbPool()
+	.then(() => {
+		console.info("Postgres pool is healthy");
+		App.listen(PORT, () => { console.info(`App started on port ${PORT}`); });
+	})
+	.catch((error: unknown) => {
+		console.error("Postgres pool health check failed:", error);
+		process.exit(1);
+	});
 
 const SessionStore = new (pgsimple(session))({
 	pool: PgPool,
 	schemaName: "usr",
 	tableName: "UserSessions",
-	errorLog: e => { console.error(e); }
+	errorLog: (error: unknown) => { console.error(error); }
 });
 
 App.use(morgan("combined", {

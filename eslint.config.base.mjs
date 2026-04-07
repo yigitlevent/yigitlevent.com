@@ -157,6 +157,8 @@ export const tsNodeRules = {
 	"@typescript-eslint/no-unused-vars": ["warn", { vars: "all", destructuredArrayIgnorePattern: "^_", args: "after-used" }],
 	"@typescript-eslint/explicit-function-return-type": ["error", { allowExpressions: true, allowTypedFunctionExpressions: true }],
 	"@typescript-eslint/explicit-module-boundary-types": "error",
+	"@typescript-eslint/no-unnecessary-type-parameters": "off",
+	"@typescript-eslint/consistent-type-imports": ["error", { prefer: "type-imports", disallowTypeAnnotations: false }],
 	"@typescript-eslint/naming-convention": [
 		"error",
 		{ selector: "default", format: ["camelCase"] },
@@ -168,7 +170,7 @@ export const tsNodeRules = {
 		{ selector: "property", format: null },
 		{ selector: "property", types: ["array", "boolean", "function", "string"], format: ["camelCase", "snake_case", "PascalCase"] },
 		{ selector: "classProperty", types: ["number"], format: ["camelCase"], leadingUnderscore: "allow" },
-		{ selector: "property", types: ["string", "boolean"], filter: { regex: "^Access-Control-.*", match: true }, format: null },
+		{ selector: "property", types: ["string", "boolean"], filter: { regex: "^(Access-Control-Allow-Origin|Content-Type)*", match: true }, format: null },
 		{ selector: "method", format: ["camelCase"] },
 		{ selector: "enumMember", format: ["PascalCase"] },
 		{ selector: "typeLike", format: ["PascalCase"] },

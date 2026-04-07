@@ -1,5 +1,3 @@
-import { Request, Response } from "express";
-
 import {
 	GetMegagameData,
 	ResetMegagameData,
@@ -16,8 +14,10 @@ import {
 	GetEventItemsData
 } from "../services/megagame.service";
 
+import type { Request, Response } from "express";
 
-export async function GetMegagame(request: Request, response: Response): Promise<Response<MggmMegagameResponse, Record<string, unknown>>> {
+
+export async function GetMegagame(request: Request, response: Response): Promise<Response<MggmMegagameResponse>> {
 	try {
 		const data = await GetMegagameData();
 

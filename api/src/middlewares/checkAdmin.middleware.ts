@@ -1,6 +1,6 @@
-import { Request, Response, NextFunction } from "express";
-
 import { FindUserBySessionId } from "../services/user.service";
+
+import type { Request, Response, NextFunction } from "express";
 
 
 export async function CheckAdmin(request: Request, response: Response, next: NextFunction): Promise<unknown> {

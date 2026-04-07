@@ -1,5 +1,7 @@
-import { Request, Response, NextFunction } from "express";
-import { validationResult, ValidationChain } from "express-validator";
+import { validationResult } from "express-validator";
+
+import type { Request, Response, NextFunction } from "express";
+import type { ValidationChain } from "express-validator";
 
 
 export function Validator(validations: ValidationChain[]) {

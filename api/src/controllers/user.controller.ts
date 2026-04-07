@@ -1,15 +1,17 @@
 import bcrypt from "bcrypt";
-import { Request, Response } from "express";
+
 
 import { PgPool } from "../index";
 import { FindUserByEmail, UpdateUserLastSignInAt } from "../services/user.service";
 
+import type { Request, Response } from "express";
 
-export function UserAuth(request: Request, response: Response): Response<unknown, Record<string, unknown>> {
+
+export function UserAuth(request: Request, response: Response): Response<unknown> {
 	return response.json({ user: request.session.user });
 }
 
-export async function UserSignUp(request: Request<unknown, unknown, UserSignupRequest>, response: Response<UserResponse>): Promise<Response<UserResponse, Record<string, unknown>>> {
+export async function UserSignUp(request: Request<unknown, unknown, UserSignupRequest>, response: Response<UserResponse>): Promise<Response<UserResponse>> {
 	const { username, email, password } = request.body;
 
 	try {
@@ -30,7 +32,7 @@ export async function UserSignUp(request: Request<unknown, unknown, UserSignupRe
 	}
 }
 
-export async function UserSignIn(request: Request<unknown, unknown, UserSigninRequest>, response: Response<UserResponse>): Promise<Response<UserResponse, Record<string, unknown>>> {
+export async function UserSignIn(request: Request<unknown, unknown, UserSigninRequest>, response: Response<UserResponse>): Promise<Response<UserResponse>> {
 	const { email, password } = request.body;
 
 	try {
@@ -55,7 +57,7 @@ export async function UserSignIn(request: Request<unknown, unknown, UserSigninRe
 	}
 }
 
-export function UserSignOut(request: Request, response: Response): Response<unknown, Record<string, unknown>> {
+export function UserSignOut(request: Request, response: Response): Response<unknown> {
 	try {
 		request.session.destroy(() => { /* console.warning("session destroyed") */ });
 		response.clearCookie("connect.sid");

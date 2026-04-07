@@ -1,6 +1,6 @@
-import { CorsOptions } from "cors";
-
 import { IsDev } from "./constants.config";
+
+import type { CorsOptions } from "cors";
 
 
 export const CorsConfig: CorsOptions = {

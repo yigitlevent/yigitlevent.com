@@ -1,6 +1,6 @@
-import { SessionOptions } from "express-session";
-
 import { IsDev } from "./constants.config";
+
+import type { SessionOptions } from "express-session";
 
 
 export const SessionConfig: SessionOptions = {
