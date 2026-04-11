@@ -1,80 +1,89 @@
-import Image from "next/image";
+"use client";
 
-import type { JSX } from "react";
+import { Box, Container, Grid, Paper, SimpleGrid, Space, Stack, Text, Title } from "@mantine/core";
+
+import { JourneySoFar } from "./(routes)/home/JourneySoFar";
+import { MyCurrentProjects } from "./(routes)/home/MyCurrentProjects";
+import { MyOldProjects } from "./(routes)/home/MyOldProjects";
+import { Skills } from "./(routes)/home/Skills";
+
+import type { CSSProperties, ReactNode } from "react";
 
 
-export default function Home(): JSX.Element {
+function Section({ title, children }: { title: string; children: ReactNode; }): React.JSX.Element {
+  const sectionStyle: CSSProperties = {
+    background: "linear-gradient(180deg, rgba(30,58,95,0.92), rgba(15,23,42,0.96))",
+    borderColor: "rgba(156,163,175,0.24)"
+  };
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
+    <Stack gap="sm">
+      <Title order={2} tt="lowercase" px="xs">{title}</Title>
 
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
+      <Paper
+        withBorder
+        radius={0}
+        p={{ base: "md", md: "lg" }}
+        style={sectionStyle}
+      >
+        {children}
+      </Paper>
+    </Stack>
+  );
+}
 
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to
-            {" "}
+export default function Home(): React.JSX.Element {
+  const heroStyle: CSSProperties = {
+    background: "radial-gradient(circle at 15% 15%, rgba(125,211,252,0.28), transparent 45%), linear-gradient(135deg, rgba(30,58,95,0.94), rgba(15,23,42,0.96))",
+    border: "1px solid rgba(148,163,184,0.24)"
+  };
 
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>
+  return (
+    <Container size="xl" py={{ base: "lg", md: "xl" }}>
+      <Stack gap="xl">
+        <Paper
+          radius={0}
+          p={{ base: "lg", md: "xl" }}
+          style={heroStyle}
+        >
+          <Stack gap="xs">
+            <Text size="sm" tt="uppercase" fw={700} c="blue.1" style={{ letterSpacing: "0.08em" }}>
+              personal playground
+            </Text>
 
-            {" "}
-            or the
-            {" "}
+            <Title order={1} tt="lowercase" style={{ lineHeight: 1.05 }}>yigit levent.com</Title>
+            <Text c="gray.3" maw={660}>my unnecessarily complicated website, now with a cleaner reading flow and better section rhythm.</Text>
+          </Stack>
+        </Paper>
 
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>
+        <Section title="me">
+          <Grid>
+            <Grid.Col span={{ base: 12, lg: 8 }}>
+              <JourneySoFar />
+            </Grid.Col>
 
-            {" "}
-            center.
-          </p>
-        </div>
+            <Grid.Col span={{ base: 12, lg: 4 }}>
+              <Skills />
+            </Grid.Col>
+          </Grid>
+        </Section>
 
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
+        <SimpleGrid cols={{ base: 1, md: 2 }} spacing="lg" verticalSpacing="lg">
+          <Box>
+            <Section title="my current projects">
+              <MyCurrentProjects />
+            </Section>
+          </Box>
 
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+          <Box>
+            <Section title="my old projects">
+              <MyOldProjects />
+            </Section>
+          </Box>
+        </SimpleGrid>
+
+        <Space h={120} />
+      </Stack>
+    </Container>
   );
 }
