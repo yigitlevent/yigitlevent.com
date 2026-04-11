@@ -43,7 +43,7 @@ jobs:
             sudo mkdir -p ${{ secrets.TARGETDIR }}/yl
             cd ${{ secrets.SOURCEDIR }}/yl-src
             nvm use node
-            npm ci --omit=dev
+            npm i
             npm run build
             sudo cp -r ${{ secrets.SOURCEDIR }}/yl-src/* ${{ secrets.TARGETDIR }}/yl/
             sudo pm2 delete yl || true
