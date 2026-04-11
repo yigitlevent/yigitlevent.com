@@ -14,18 +14,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Copy Source to Server
-        uses: appleboy/scp-action@master
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          passphrase: ${{ secrets.PASSPHRASE }}
-          port: ${{ secrets.PORT }}
-          key: ${{ secrets.SSHKEY }}
-          source: "/**"
-          target: ${{ secrets.SOURCEDIR }}/yl-src
-          rm: true
-
       - name: Build, Install, and Deploy
         uses: appleboy/ssh-action@master
         with:
@@ -35,18 +23,10 @@ jobs:
           port: ${{ secrets.PORT }}
           key: ${{ secrets.SSHKEY }}
           script: |
-            export NVM_DIR=~/.nvm
-            source ~/.nvm/nvm.sh
-            sudo rm -rf ${{ secrets.SOURCEDIR }}/yl-src
-            sudo rm -rf ${{ secrets.TARGETDIR }}/yl
-            sudo mkdir -p ${{ secrets.SOURCEDIR }}/yl-src
-            sudo mkdir -p ${{ secrets.TARGETDIR }}/yl
-            cd ${{ secrets.SOURCEDIR }}/yl-src
-            nvm use node
-            npm i
+            nvm use stable
+            pm2 stop yl
+            cd ${{ secrets.SOURCEDIR }}/yigitlevent.com
+            git pull origin main
+            npm install
             npm run build
-            sudo cp -r ${{ secrets.SOURCEDIR }}/yl-src/* ${{ secrets.TARGETDIR }}/yl/
-            sudo pm2 delete yl || true
-            cd ${{ secrets.TARGETDIR }}/yl
-            sudo pm2 start "npm start" --name yl --cwd ${{ secrets.TARGETDIR }}/yl --update-env
-            sudo pm2 save
+            pm2 restart yl
