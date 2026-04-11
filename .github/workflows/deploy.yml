@@ -96,7 +96,7 @@ jobs:
             npm i
             npm run build
             sudo rm -rf ${{ secrets.TARGETDIR }}/api
-            sudo cp -R ${{ secrets.SOURCEDIR }}/api-src ${{ secrets.TARGETDIR }}/api
+            sudo cp -R ${{ secrets.SOURCEDIR }}/api/dist ${{ secrets.TARGETDIR }}/api
             sudo pm2 restart api -s
 
   build-client-main:
