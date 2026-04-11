@@ -11,10 +11,7 @@ function GetURL(path: string): string {
 
 function GetConfig<T>(): AxiosRequestConfig<T> {
 	return {
-		withCredentials: false,
-		headers: {
-			"Access-Control-Allow-Origin": ViteApiURL
-		}
+		withCredentials: false
 	};
 }
 
@@ -22,10 +19,7 @@ export async function GenericGet<T>(path: Routes): Promise<{ data: T; }> {
 	console.log({ ViteApiURL });
 
 	const response = await fetch(GetURL(path), {
-		method: "GET",
-		headers: {
-			"Access-Control-Allow-Origin": ViteApiURL
-		}
+		method: "GET"
 	});
 
 	if (!response.ok) {
@@ -41,7 +35,6 @@ export async function GenericPost<T>(path: Routes, formData: Forms | null): Prom
 	const response = await fetch(GetURL(path), {
 		method: "POST",
 		headers: {
-			"Access-Control-Allow-Origin": ViteApiURL,
 			"Content-Type": "application/json"
 		},
 		body: formData ? JSON.stringify(formData) : null

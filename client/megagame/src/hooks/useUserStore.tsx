@@ -39,10 +39,7 @@ export const useUserStore = create<UserState>()(
 				state.toggleFetching();
 
 				GenericPost<UserResponse>("/user/auth", null)
-					.then(response => {
-						if (response.status === 200) state.setUser({ ...response.data.user });
-						else throw new Error();
-					})
+					.then(response => { state.setUser({ ...response.data.user }); })
 					.catch(() => { state.setUser(undefined); })
 					.finally(() => { state.toggleFetching(); });
 			},
@@ -54,11 +51,8 @@ export const useUserStore = create<UserState>()(
 
 				GenericPost<UserResponse>("/user/signup", formData)
 					.then(response => {
-						if (response.status === 200) {
-							state.setUser({ ...response.data.user });
-							handleClose(true);
-						}
-						else throw new Error();
+						state.setUser({ ...response.data.user });
+						handleClose(true);
 					})
 					.catch(console.error)
 					.finally(() => { state.toggleFetching(); });
@@ -71,11 +65,8 @@ export const useUserStore = create<UserState>()(
 
 				GenericPost<UserResponse>("/user/signin", formData)
 					.then(response => {
-						if (response.status === 200) {
-							state.setUser({ ...response.data.user });
-							onSuccess();
-						}
-						else throw new Error();
+						state.setUser({ ...response.data.user });
+						onSuccess();
 					})
 					.catch(console.error)
 					.finally(() => { state.toggleFetching(); });
@@ -87,10 +78,7 @@ export const useUserStore = create<UserState>()(
 				state.toggleFetching();
 
 				GenericPost("/user/signout", null)
-					.then(response => {
-						if (response.status === 200) state.setUser(undefined);
-						else throw new Error();
-					})
+					.then(() => { state.setUser(undefined); })
 					.catch(console.error)
 					.finally(() => { state.toggleFetching(); });
 			}
