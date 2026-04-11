@@ -27,9 +27,9 @@ jobs:
             export NVM_DIR=~/.nvm
             source ~/.nvm/nvm.sh
             nvm use stable
-            pm2 stop yl
+            pm2 stop yl -s
             cd ${{ secrets.SOURCEDIR }}/yigitlevent.com
             git pull origin main
             npm install
             npm run build
-            pm2 restart yl
+            pm2 restart yl -s
