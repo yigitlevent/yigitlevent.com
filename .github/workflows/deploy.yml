@@ -5,10 +5,10 @@ on:
     branches:
       - main
     paths:
-      - '.github/workflows/deploy.yml'
-      - 'api/**'
-      - 'client/**'
-      - 'utility/**'
+      - ".github/workflows/deploy.yml"
+      - "api/**"
+      - "client/**"
+      - "utility/**"
 
 jobs:
   changes:
@@ -55,7 +55,7 @@ jobs:
           passphrase: ${{ secrets.PASSPHRASE }}
           port: ${{ secrets.PORT }}
           key: ${{ secrets.SSHKEY }}
-          source: 'utility/**'
+          source: "utility/**"
           target: ${{ secrets.SOURCEDIR }}/utility
           strip_components: 1
           rm: true
@@ -75,7 +75,7 @@ jobs:
           passphrase: ${{ secrets.PASSPHRASE }}
           port: ${{ secrets.PORT }}
           key: ${{ secrets.SSHKEY }}
-          source: 'api/**'
+          source: "api/**"
           target: ${{ secrets.SOURCEDIR }}/api-src
           strip_components: 1
           rm: true
@@ -93,11 +93,16 @@ jobs:
             source ~/.nvm/nvm.sh
             cd ${{ secrets.SOURCEDIR }}/api-src
             nvm use node
-            npm i
+            npm ci --omit=dev
             npm run build
             sudo rm -rf ${{ secrets.TARGETDIR }}/api
-            sudo cp -R ${{ secrets.SOURCEDIR }}/api/dist ${{ secrets.TARGETDIR }}/api
-            sudo pm2 restart api -s
+            sudo mkdir -p ${{ secrets.TARGETDIR }}/api
+            sudo cp -R ${{ secrets.SOURCEDIR }}/api-src/dist ${{ secrets.TARGETDIR }}/api/dist
+            sudo cp -R ${{ secrets.SOURCEDIR }}/api-src/node_modules ${{ secrets.TARGETDIR }}/api/node_modules
+            sudo pm2 delete api || true
+            cd ${{ secrets.TARGETDIR }}/api
+            sudo pm2 start dist/api/src/index.js --name api --cwd ${{ secrets.TARGETDIR }}/api --update-env
+            sudo pm2 status api
 
   build-client-main:
     needs: [changes, copy-utility]
@@ -114,7 +119,7 @@ jobs:
           passphrase: ${{ secrets.PASSPHRASE }}
           port: ${{ secrets.PORT }}
           key: ${{ secrets.SSHKEY }}
-          source: 'client/main/**'
+          source: "client/main/**"
           target: ${{ secrets.SOURCEDIR }}/client/main-src
           strip_components: 2
           rm: true
@@ -153,7 +158,7 @@ jobs:
           passphrase: ${{ secrets.PASSPHRASE }}
           port: ${{ secrets.PORT }}
           key: ${{ secrets.SSHKEY }}
-          source: 'client/bwgrtools/**'
+          source: "client/bwgrtools/**"
           target: ${{ secrets.SOURCEDIR }}/client/bwgrtools-src
           strip_components: 2
           rm: true
@@ -192,7 +197,7 @@ jobs:
           passphrase: ${{ secrets.PASSPHRASE }}
           port: ${{ secrets.PORT }}
           key: ${{ secrets.SSHKEY }}
-          source: 'client/megagame/**'
+          source: "client/megagame/**"
           target: ${{ secrets.SOURCEDIR }}/client/megagame-src
           strip_components: 2
           rm: true
