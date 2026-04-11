@@ -5,8 +5,8 @@ on:
     branches:
       - main
     paths:
-      - '.github/workflows/deploy.yml'
-      - '*'
+      - ".github/workflows/deploy.yml"
+      - "*"
 
 jobs:
   build-and-deploy:
@@ -22,8 +22,8 @@ jobs:
           passphrase: ${{ secrets.PASSPHRASE }}
           port: ${{ secrets.PORT }}
           key: ${{ secrets.SSHKEY }}
-          source: '.,!node_modules,!.next,!.git,!dist'
-          target: ${{ secrets.SOURCEDIR }}/nextjs-src
+          source: ".,!node_modules,!.next,!.git,!dist"
+          target: ${{ secrets.SOURCEDIR }}/yl-src
           rm: true
 
       - name: Build, Install, and Deploy
