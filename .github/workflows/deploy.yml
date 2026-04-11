@@ -7,6 +7,7 @@ on:
     paths:
       - ".github/workflows/deploy.yml"
       - "*"
+  workflow_dispatch:
 
 jobs:
   build-and-deploy:
@@ -23,6 +24,8 @@ jobs:
           port: ${{ secrets.PORT }}
           key: ${{ secrets.SSHKEY }}
           script: |
+            export NVM_DIR=~/.nvm
+            source ~/.nvm/nvm.sh
             nvm use stable
             pm2 stop yl
             cd ${{ secrets.SOURCEDIR }}/yigitlevent.com
