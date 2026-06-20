@@ -4,22 +4,24 @@ import type { JSX } from "react";
 
 
 export function MyCurrentProjects(): JSX.Element {
+  const appUrl = (process.env.NEXT_PUBLIC_APP_URL ?? "https://yigitlevent.com").replace(/\/$/, "");
+
   const projects = [
     {
       name: "yigitlevent.com",
-      href: "https://yigitlevent.com",
+      href: appUrl,
       body: "This is my sysadmin, devops, backend, and frontend project. I wanted to overcomplicate things to learn more about server administration, Linux, and deployment flows."
     },
     {
       name: "BWGR Tools",
-      href: "https://yigitlevent.com/bwgrtools",
+      href: `${appUrl}/bwgr`,
       body: "A new iteration of one of my oldest projects: utilities for Burning Wheel Gold. The plan is to integrate this with the API for a better user experience."
-    },
-    {
-      name: "Megagame",
-      href: "https://yigitlevent.com/megagame",
-      body: "A project for a megagame management tool. I haven't started development on this yet, but the plan is to have a platform for megagame organizers to manage their games and for players to view game information and schedules."
     }
+    /* {
+      name: "Megagame",
+      href: `${appUrl}/megagame`,
+      body: "A project for a megagame management tool. I haven't started development on this yet, but the plan is to have a platform for megagame organizers to manage their games and for players to view game information and schedules."
+    } */
   ];
 
   return (

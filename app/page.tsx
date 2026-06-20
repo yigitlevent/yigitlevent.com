@@ -2,10 +2,10 @@
 
 import { Box, Container, Grid, Paper, SimpleGrid, Space, Stack, Text, Title } from "@mantine/core";
 
-import { JourneySoFar } from "./(routes)/home/JourneySoFar";
-import { MyCurrentProjects } from "./(routes)/home/MyCurrentProjects";
-import { MyOldProjects } from "./(routes)/home/MyOldProjects";
-import { Skills } from "./(routes)/home/Skills";
+import { JourneySoFar } from "@/app/(routes)/home/JourneySoFar";
+import { MyCurrentProjects } from "@/app/(routes)/home/MyCurrentProjects";
+import { MyOldProjects } from "@/app/(routes)/home/MyOldProjects";
+import { Skills } from "@/app/(routes)/home/Skills";
 
 import type { CSSProperties, ReactNode } from "react";
 

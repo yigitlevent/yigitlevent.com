@@ -3,7 +3,7 @@ import "@mantine/core/styles.css";
 
 import type { Metadata } from "next";
 
-import "./globals.css";
+import "@/app/globals.css";
 
 
 // eslint-disable-next-line @typescript-eslint/naming-convention, react-refresh/only-export-components

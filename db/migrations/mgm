@@ -1,0 +1,180 @@
+-- Table: mggm.DeadlineItem
+
+-- DROP TABLE IF EXISTS mggm."DeadlineItem";
+
+CREATE TABLE IF NOT EXISTS mggm."DeadlineItem"
+(
+    "Id" uuid NOT NULL DEFAULT gen_random_uuid(),
+    "MegagameId" uuid NOT NULL,
+    "Type" character varying(256) COLLATE pg_catalog."default" NOT NULL,
+    "DeadlineAt" timestamp with time zone NOT NULL,
+    "CreatedAt" timestamp with time zone NOT NULL DEFAULT now(),
+    "UpdatedAt" timestamp with time zone,
+    "DeletedAt" timestamp with time zone,
+    CONSTRAINT "DeadlineItem_pkey" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_GAMEID_DEADLINEITEM" FOREIGN KEY ("MegagameId")
+        REFERENCES mggm."Game" ("Id") MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS mggm."DeadlineItem"
+    OWNER to apiuser;
+
+	-- Table: mggm.EventItem
+
+-- DROP TABLE IF EXISTS mggm."EventItem";
+
+CREATE TABLE IF NOT EXISTS mggm."EventItem"
+(
+    "Id" uuid NOT NULL DEFAULT gen_random_uuid(),
+    "MegagameId" uuid NOT NULL,
+    "CycleInterval" integer NOT NULL,
+    "Type" character varying(256) COLLATE pg_catalog."default" NOT NULL,
+    "CreatedAt" timestamp with time zone NOT NULL DEFAULT now(),
+    "DeletedAt" timestamp with time zone,
+    CONSTRAINT "EventItem_pkey" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_GAMEID_EVENTITEM" FOREIGN KEY ("MegagameId")
+        REFERENCES mggm."Game" ("Id") MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS mggm."EventItem"
+    OWNER to apiuser;
+
+	-- Table: mggm.Faction
+
+-- DROP TABLE IF EXISTS mggm."Faction";
+
+CREATE TABLE IF NOT EXISTS mggm."Faction"
+(
+    "Id" uuid NOT NULL DEFAULT gen_random_uuid(),
+    "Name" character varying(256) COLLATE pg_catalog."default" NOT NULL,
+    "FactionCode" character varying(256) COLLATE pg_catalog."default" NOT NULL,
+    "CreatedAt" timestamp with time zone NOT NULL DEFAULT now(),
+    "UpdatedAt" timestamp with time zone,
+    "DeletedAt" timestamp with time zone,
+    CONSTRAINT "Faction_pkey" PRIMARY KEY ("Id")
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS mggm."Faction"
+    OWNER to apiuser;
+
+	-- Table: mggm.Game
+
+-- DROP TABLE IF EXISTS mggm."Game";
+
+CREATE TABLE IF NOT EXISTS mggm."Game"
+(
+    "Id" uuid NOT NULL DEFAULT gen_random_uuid(),
+    "StartAt" timestamp with time zone NOT NULL,
+    "EndAt" timestamp with time zone NOT NULL,
+    "Name" character varying(256) COLLATE pg_catalog."default" NOT NULL,
+    "CycleStart" integer NOT NULL,
+    "CycleMinutes" integer NOT NULL,
+    "CreatedAt" timestamp with time zone NOT NULL DEFAULT now(),
+    "UpdatedAt" timestamp with time zone,
+    "DeletedAt" timestamp with time zone,
+    CONSTRAINT "Game_pkey" PRIMARY KEY ("Id")
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS mggm."Game"
+    OWNER to apiuser;
+
+	-- Table: mggm.NewsItem
+
+-- DROP TABLE IF EXISTS mggm."NewsItem";
+
+CREATE TABLE IF NOT EXISTS mggm."NewsItem"
+(
+    "Id" uuid NOT NULL DEFAULT gen_random_uuid(),
+    "MegagameId" uuid NOT NULL,
+    "FactionId" uuid NOT NULL,
+    "Text" character varying(1024) COLLATE pg_catalog."default" NOT NULL,
+    "CreatedAt" timestamp with time zone NOT NULL DEFAULT now(),
+    "UpdatedAt" timestamp with time zone,
+    "DeletedAt" timestamp with time zone,
+    CONSTRAINT "FK_FACTIONID_NEWS" FOREIGN KEY ("FactionId")
+        REFERENCES mggm."Faction" ("Id") MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT "FK_GAMEID_NEWS" FOREIGN KEY ("MegagameId")
+        REFERENCES mggm."Game" ("Id") MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS mggm."NewsItem"
+    OWNER to apiuser;
+
+	-- Table: mggm.OrderQueueItem
+
+-- DROP TABLE IF EXISTS mggm."OrderQueueItem";
+
+CREATE TABLE IF NOT EXISTS mggm."OrderQueueItem"
+(
+    "Id" uuid NOT NULL DEFAULT gen_random_uuid(),
+    "MegagameId" uuid NOT NULL,
+    "FactionId" uuid NOT NULL,
+    "OrderTypeId" uuid NOT NULL,
+    "CreatedAt" timestamp with time zone NOT NULL DEFAULT now(),
+    "UpdatedAt" timestamp with time zone,
+    "DeletedAt" timestamp with time zone,
+    CONSTRAINT "OrderQueueItem_pkey" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_FACTIONID_ORDERQUEUEITEM" FOREIGN KEY ("FactionId")
+        REFERENCES mggm."Faction" ("Id") MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT "FK_GAMEID_ORDERQUEUEITEM" FOREIGN KEY ("MegagameId")
+        REFERENCES mggm."Game" ("Id") MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT "FK_ORDERTYPEID_ORDERQUEUEITEM" FOREIGN KEY ("OrderTypeId")
+        REFERENCES mggm."OrderType" ("Id") MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS mggm."OrderQueueItem"
+    OWNER to apiuser;
+-- Index: UX_OrderQueueItem_Megagame_Faction_OrderType_Active
+
+-- DROP INDEX IF EXISTS mggm."UX_OrderQueueItem_Megagame_Faction_OrderType_Active";
+
+CREATE UNIQUE INDEX IF NOT EXISTS "UX_OrderQueueItem_Megagame_Faction_OrderType_Active"
+    ON mggm."OrderQueueItem" USING btree
+    ("MegagameId" ASC NULLS LAST, "FactionId" ASC NULLS LAST, "OrderTypeId" ASC NULLS LAST)
+    WITH (fillfactor=100, deduplicate_items=True)
+    TABLESPACE pg_default
+    WHERE "DeletedAt" IS NULL;
+
+	-- Table: mggm.OrderType
+
+-- DROP TABLE IF EXISTS mggm."OrderType";
+
+CREATE TABLE IF NOT EXISTS mggm."OrderType"
+(
+    "Id" uuid NOT NULL DEFAULT gen_random_uuid(),
+    "Name" character varying(256) COLLATE pg_catalog."default" NOT NULL,
+    "CreatedAt" timestamp with time zone NOT NULL DEFAULT now(),
+    "DeletedAt" timestamp with time zone,
+    CONSTRAINT "OrderType_pkey" PRIMARY KEY ("Id")
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS mggm."OrderType"
+    OWNER to apiuser;

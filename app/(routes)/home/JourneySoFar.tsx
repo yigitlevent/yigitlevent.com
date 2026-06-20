@@ -1,4 +1,4 @@
-import { Blockquote, Stack, Text, Title } from "@mantine/core";
+import { Stack, Text, Title } from "@mantine/core";
 
 import type { JSX } from "react";
 

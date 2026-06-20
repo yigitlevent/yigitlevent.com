@@ -16,6 +16,7 @@ export const globalIgnoresConfig = globalIgnores([
   "out/**",
   "build/**",
   "next-env.d.ts",
+  "types/db.d.ts",
   "**/node_modules/**/*",
   "**/dist",
   "**/build",
@@ -101,7 +102,7 @@ export const rules = {
   "@stylistic/curly-newline": ["error", { "consistent": true }],
   "@stylistic/brace-style": ["error", "stroustrup", { "allowSingleLine": true }],
   "@stylistic/block-spacing": "error",
-  "@stylistic/indent-binary-ops": ["error", "tab"],
+  "@stylistic/indent-binary-ops": ["error", 2],
   "@stylistic/arrow-parens": ["error", "as-needed"],
   "@stylistic/no-extra-parens": "error",
   "@stylistic/no-multi-spaces": "error",
@@ -216,6 +217,13 @@ export default defineConfig([
     languageOptions: {
       parserOptions: {
         projectService: true
+      }
+    },
+    settings: {
+      "import/resolver": {
+        node: {
+          extensions: [".js", ".jsx", ".ts", ".tsx", ".d.ts"]
+        }
       }
     }
   },
