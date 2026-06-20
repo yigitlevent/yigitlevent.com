@@ -1,3 +1,0 @@
-interface HmViewportEvent {
-	mousePosition: HmPoint;
-}
